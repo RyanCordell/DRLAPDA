@@ -1,0 +1,59 @@
+// We don't need garbage from other categories or pages to leak.
+PDA_Wipe();
+
+switch(PDA_Local.page)
+{
+    case 1: PDA_PrintHeader("PDA_CLASS_HEADER1", 5); break;
+    case 2: PDA_PrintHeader("PDA_CLASS_HEADER2", 0); break;
+}
+    
+PDAButton P1 = PDA_CreateTab(50, "1", "PTAB", PDA_RectX + 0.1 + (12.0 * 0), PDA_RectY + 1.1, 12, 12);
+PDAButton P2 = PDA_CreateTab(51, "2", "PTAB", PDA_RectX + 0.1 + (12.0 * 1), PDA_RectY + 1.1, 12, 12);
+
+PDA_InitButton(P1, true, 1, "");
+PDA_InitButton(P2, true, 2, "");
+
+PDA_SetupBounds();
+
+// Concatenate things together depending on player class. Used to retrieve class specific info.
+if(GetActorclass(0) != "None")
+{
+    str PDA_Class_Name_Printer, PDA_Class_Ability_Printer, PDA_Class_Story_Printer, PDA_Class_Story_Height;
+    int PDA_Class_TrimValue = 0;
+    
+    DisplayIcon(DRLA_ClassIcon[PlayerClass(PlayerNumber())], PDA_INFOID, PDA_RectWidth + 5.2, (PDA_ScrollableHeight) +5.1, 0, 0.45);
+
+    if(CheckInventory("DRPGDRLAActive"))
+        PDA_Class_TrimValue = 3;
+    else
+        PDA_Class_TrimValue = 0;
+
+        PDA_Class_Name_Printer    = StrParam("PDA_CLASS_%s:_NAME", StrTrim(GetActorClass(0),0,PDA_Class_TrimValue));
+        PDA_Class_Ability_Printer = StrParam("PDA_CLASS_%s:_ABILITIES", StrTrim(GetActorClass(0),0,PDA_Class_TrimValue));
+        PDA_Class_Story_Printer   = StrParam("PDA_CLASS_%s:_STORY", StrTrim(GetActorClass(0),0,PDA_Class_TrimValue));
+        PDA_Class_Story_Height    = StrParam("PDA_CLASS_%s:_HEIGHT", StrTrim(GetActorClass(0),0,PDA_Class_TrimValue));
+
+    // Class perks
+    if(PDA_Local.page == 1)
+    {
+        PDA_SetScrollLimit(20);
+        HudMessage("\cd%l:\c-\n\n%l:",
+                    PDA_Class_Name_Printer,
+                    PDA_Class_Ability_Printer;
+                    HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, (PDA_RectX) + 10.1, PDA_Local.scrollingy + 20.1 + (20.0 * 1), 0);
+    }
+    // Class backstory
+    if(PDA_Local.page == 2)
+    {
+        PDA_SetScrollLimit(-1 * batoi(strParam("%l:", PDA_Class_Story_Height)));
+        PDA_SetScrollArrows2(-1 * batoi(strParam("%l:", PDA_Class_Story_Height)), PDA_RectWidth + 60.0, PDA_ScrollableHeight + 90.0);
+
+        HudMessage("\cd%l:\c-\n\n%l:",
+                    PDA_Class_Name_Printer,
+                    PDA_Class_Story_Printer;
+                    HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, (PDA_RectX) + 10.1, PDA_Local.scrollingy + 20.1 + (20.0 * 1), 0);
+    }
+}
+// Get rid of it once we're done.
+PDA_UnsetScrollWindow();
+

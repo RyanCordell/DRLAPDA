@@ -1,0 +1,217 @@
+[enu default]
+
+//==============================================================================================================================================================================
+//						ITEMS
+
+PDA_ITEMS_UNKNOWN_NAME =
+	"\cdWat\c-\n";
+PDA_ITEMS_UNKNOWN_DESC =
+	"\ccu wot m8\c-";
+
+// page 1
+PDA_ITEMS_CLIP_ICON = "PDACLIP";
+PDA_ITEMS_CLIP_NAME = "\cdMagazine\c-\n";
+PDA_ITEMS_CLIP_DESC =
+	"\ccA loaded magazine for your bullet-spraying weaponry. Conveniently is always the right calibre for whatever gun you are using.\c-";
+
+PDA_ITEMS_SHELL_ICON = "PDASHELL";
+PDA_ITEMS_SHELL_NAME = "\cdShotgun Shells\c-\n";
+PDA_ITEMS_SHELL_DESC =
+	"\ccA bunch of standard-issue shotgun shells, ready to be blasted out of whatever boomstick you happen to have on you.\c-";
+
+PDA_ITEMS_ROCKET_ICON = "PDAROCKE";
+PDA_ITEMS_ROCKET_NAME = "\cdRocket\c-\n";
+PDA_ITEMS_ROCKET_DESC =
+	"\ccA self propelled rocket, ideal for unleashing on groups of enemies, or single badass soon-to-be corpses.\c-";
+
+PDA_ITEMS_CELL_ICON = "PDACELL";
+PDA_ITEMS_CELL_NAME = "\cdCell\c-\n";
+PDA_ITEMS_CELL_DESC =
+	"\ccSmall containers, holding huge amounts of raw power for their size. Use these to unleash plasma hell on your foes.\c-";
+
+PDA_ITEMS_CLIPBOX_ICON = "PDACLIPB";
+PDA_ITEMS_CLIPBOX_NAME = "\cdAmmo Box\c-\n";
+PDA_ITEMS_CLIPBOX_DESC =
+	"\ccA box filled to the brim with context sensitive ammo. You no longer question how you always get whatever ammo you need from them.\c-";
+
+PDA_ITEMS_SHELLBOX_ICON = "PDASHELB";
+PDA_ITEMS_SHELLBOX_NAME = "\cdShell Box\c-\n";
+PDA_ITEMS_SHELLBOX_DESC =
+	"\ccA small box of shotgun fuel. Always a welcome sight in this demon-infested hellhole.\c-";
+
+PDA_ITEMS_ROCKETBOX_ICON = "PDAROCKB";
+PDA_ITEMS_ROCKETBOX_NAME = "\cdRocket Crate\c-\n";
+PDA_ITEMS_ROCKETBOX_DESC =
+	"\ccA heavy box of the UAC's finest explosive projectiles. Make some demons into mush for me, would you?\c-";
+
+PDA_ITEMS_CELLPACK_ICON = "PDACELLP";
+PDA_ITEMS_CELLPACK_NAME = "\cdCell Pack\c-\n";
+PDA_ITEMS_CELLPACK_DESC =
+	"\ccThe UAC recommends handling their high-density Cell Battery Packs with care, as the amount of energy they contain is staggering. BFG time, anyone?\c-";
+
+// page 2    
+PDA_ITEMS_STIMPACK_ICON = "PDASTIM";
+PDA_ITEMS_STIMPACK_NAME = "\cdStimpack\c-\n";
+PDA_ITEMS_STIMPACK_DESC =
+	"\ccHeals 10 points of health. Do not ingest.\c-";
+
+PDA_ITEMS_MEDIKIT_ICON = "PDAMEDI";
+PDA_ITEMS_MEDIKIT_NAME = "\cdMedikit\c-\n";
+PDA_ITEMS_MEDIKIT_DESC =
+	"\ccHeals 25 points of health. Will not heal your pride after you got your ass handed to you by an imp.\c-";
+	
+PDA_ITEMS_ARMOR_ICON = "PDAARMOR";
+PDA_ITEMS_ARMOR_NAME = "\cdArmors\c-\n";
+PDA_ITEMS_ARMOR_DESC =
+	"\ccEverything from little crappy vests to full enviromental powersuits, armor is designed to make you not die when attacked.\c-";
+
+PDA_ITEMS_BOOTS_ICON = "PDABOOTS";
+PDA_ITEMS_BOOTS_NAME = "\cdBoots\c-\n";
+PDA_ITEMS_BOOTS_DESC =
+	"\ccBoots protect you from all kinds of floor-based enviromental hazards. They do not protect you from your suicidal tendencies.\c-";
+
+PDA_ITEMS_BERSERK_ICON = "PDABERSE";
+PDA_ITEMS_BERSERK_NAME = "\cdBerserk Pack\c-\n";
+PDA_ITEMS_BERSERK_DESC =
+	"\ccPacked full of UAC's Berserk stimulants, these hugely increase your melee damage, and give you a large temporary resistance to all damage.\c-";
+
+PDA_ITEMS_RADSUIT_ICON = "PDARADSU";
+PDA_ITEMS_RADSUIT_NAME = "\cdRadiation Shielding Suit\c-\n";
+PDA_ITEMS_RADSUIT_DESC =
+	"\ccUAC's standard hazmat suit, able to withstand all kinds of radiation, toxicity, even extreme heat and electricity.\c-";
+
+PDA_ITEMS_LIGHTAMP_ICON = "PDALIGHT";
+PDA_ITEMS_LIGHTAMP_NAME = "\cdLite-Amp Goggles\c-\n";
+PDA_ITEMS_LIGHTAMP_DESC =
+	"\ccHigh-tech goggles that take the smallest amounts of light, and uses it to average out and amplify what you can see.\c-";
+
+PDA_ITEMS_BLURSPHERE_ICON = "PDABLURS";
+PDA_ITEMS_BLURSPHERE_NAME = "\cdBlursphere\c-\n";
+PDA_ITEMS_BLURSPHERE_DESC =
+	"\ccA headache-inducing sphere artifact. Causes you to become transparent and throws off enemy aim. Any silenced weapon will deal 4x damage while you are invisible.\c-";
+
+// page 3
+PDA_ITEMS_HEALTHBONUS_ICON = "PDABON1A";
+PDA_ITEMS_HEALTHBONUS_NAME = "\cdHealth Potion\c-\n";
+PDA_ITEMS_HEALTHBONUS_DESC =
+	"\ccA small blue bottle of some mysterious liquid. Not very tasty, and doesn't do much for you, but it can heal you beyond your normal limits...\c-";
+
+PDA_ITEMS_ARMORBONUS_ICON = "PDABON2A";
+PDA_ITEMS_ARMORBONUS_NAME = "\cdArmor Shard\c-\n";
+PDA_ITEMS_ARMORBONUS_DESC =
+	"\ccA mysterious artifact that repairs your armor upon contacting it. It can only repair normal armors, not shields or other strange armors.\c-";
+
+PDA_ITEMS_SOULSPHERE_ICON = "PDASOUL";
+PDA_ITEMS_SOULSPHERE_NAME = "\cdSoul Sphere\c-\n";
+PDA_ITEMS_SOULSPHERE_DESC =
+	"\ccAn orb of pure vitality, capable of charging you full of life energy, even beyond your normal capacity.\c-";
+
+PDA_ITEMS_MEGASPHERE_ICON = "PDAMEGA";
+PDA_ITEMS_MEGASPHERE_NAME = "\cdMega Sphere\c-\n";
+PDA_ITEMS_MEGASPHERE_DESC =
+	"\ccAnother of Hell's spheres, infusing whoever touches it with vast amounts of vitality and even restoring their armor to full durability! It'll even reset your Armor Special cooldowns!\c-";
+
+PDA_ITEMS_INVULNERABILITYSPHERE_ICON = "PDAINVUL";
+PDA_ITEMS_INVULNERABILITYSPHERE_NAME = "\cdInvulnerability Sphere\c-\n";
+PDA_ITEMS_INVULNERABILITYSPHERE_DESC =
+	"\ccA powerful sphere artifact that bestows complete immunity to damage upon whoever touches it.\c-";
+
+PDA_ITEMS_SUPPLYCRATE_ICON = "PDASUPPL";
+PDA_ITEMS_SUPPLYCRATE_NAME = "\cdSupply Crate\c-\n";
+PDA_ITEMS_SUPPLYCRATE_DESC =
+	"\ccA crate containing two random items. Shoot to see what's inside!\nIf you have part of a set, you might find the other part in here.\c-";
+
+PDA_ITEMS_BACKPACK_ICON = "PDABPAK";
+PDA_ITEMS_BACKPACK_NAME = "\cdBackpack\c-\n";
+PDA_ITEMS_BACKPACK_DESC =
+	"\ccDoubles your ammo capacity, and how many phase devices, skulls and armors/boots you can carry.\c-";
+
+PDA_ITEMS_KEYS_ICON = "PDARCARD";
+PDA_ITEMS_KEYS_NAME = "\cdKeys\c-\n";
+PDA_ITEMS_KEYS_DESC =
+	"\ccComes in high-tech fancy biometric cards, or in unholy glowing stone skulls. Either way, they unlock things because reasons.\c-";
+
+// page 4
+PDA_ITEMS_COMPUTERMAP_ICON = "PDACMAP";
+PDA_ITEMS_COMPUTERMAP_NAME = "\cdComputer Map\c-\n";
+PDA_ITEMS_COMPUTERMAP_DESC =
+	"\ccContains detailed schematics of the surrounding area, even secret item caches!\c-";
+
+PDA_ITEMS_TRACKINGMAP_ICON = "PDATMAP";
+PDA_ITEMS_TRACKINGMAP_NAME = "\cdTracking Map\c-\n";
+PDA_ITEMS_TRACKINGMAP_DESC =
+	"\ccA computer that can give your PDA permissions to uplink to a nearby UAC sensor system.\nAll aspects of the map are revealed, even enemies and items!\c-";
+
+PDA_ITEMS_BLUEPRINTCOMPUTER_ICON = "PDABCOM";
+PDA_ITEMS_BLUEPRINTCOMPUTER_NAME = "\cdBlueprint Computer\c-\n";
+PDA_ITEMS_BLUEPRINTCOMPUTER_DESC =
+	"\ccLoaded with specifications on a random assembly. These will be loaded into the PDA, and there they'll stay!\c-";
+    
+PDA_ITEMS_BACKPACKS_ICON = "PDABPAKX";
+PDA_ITEMS_BACKPACKS_NAME = "\cdSpecial Backpacks\c-\n";
+PDA_ITEMS_BACKPACKS_DESC =
+	"\ccSpecial Backpacks enhance or customize your ammo carrying capacity, or grant additional benefits.\c-\n"
+    "\ccTo pick up a Special Backpack, press \cdUSE\cc on it, rather than walk over it.\c-\n";
+
+PDA_ITEMS_BULKMODPACK_ICON = "PDABMOD";
+PDA_ITEMS_BULKMODPACK_NAME = "\cdBulk Modpack\c-\n";
+PDA_ITEMS_BULKMODPACK_DESC =
+	"\ccIncreases either magazine size, amount of pellets, or base damage.\c-";
+	
+PDA_ITEMS_POWERMODPACK_ICON = "PDAPMOD";
+PDA_ITEMS_POWERMODPACK_NAME = "\cdPower Modpack\c-\n";
+PDA_ITEMS_POWERMODPACK_DESC =
+	"\ccIncreases either weapon damage, damage randomization, or AOE damage.\c-";
+	
+PDA_ITEMS_AGILITYMODPACK_ICON = "PDAAMOD";
+PDA_ITEMS_AGILITYMODPACK_NAME = "\cdAgility Modpack\c-\n";
+PDA_ITEMS_AGILITYMODPACK_DESC =
+	"\ccIncreases either accuracy, projectile speed, or melee range\nHas a habit of appearing everywhere.\c-";
+	
+PDA_ITEMS_TECHNICALMODPACK_ICON = "PDATMOD";
+PDA_ITEMS_TECHNICALMODPACK_NAME = "\cdTechnical Modpack\c-\n";
+PDA_ITEMS_TECHNICALMODPACK_DESC =
+	"\ccIncreases either weapon reload speed, or increases weapon switch speed.\c-";
+    
+// page 5
+PDA_ITEMS_SNIPERMODPACK_ICON = "PDASMOD";
+PDA_ITEMS_SNIPERMODPACK_NAME = "\cdSniper Modpack\c-\n";
+PDA_ITEMS_SNIPERMODPACK_DESC =
+	"\ccIncreases either accuracy significantly, or accelerates projectiles constantly.\nHas a special effect on Unique+ weapons.\c-";
+	
+PDA_ITEMS_FIRESTORMMODPACK_ICON = "PDAFMOD";
+PDA_ITEMS_FIRESTORMMODPACK_NAME = "\cdFirestorm Modpack\c-\n";
+PDA_ITEMS_FIRESTORMMODPACK_DESC =
+	"\ccIncreases either fire rate, AOE radius, or point-blank shotgun damage + knockback.\nHas a special effect on Unique+ weapons.\c-";
+	
+PDA_ITEMS_NANOMODPACK_ICOM = "PDANMOD";
+PDA_ITEMS_NANOMODPACK_NAME = "\cdNano Modpack\c-\n";
+PDA_ITEMS_NANOMODPACK_DESC =
+	"\ccSlowly regenerates weapon ammo when they're idle.\nHas a special effect on Unique+ weapons.\c-";
+	
+PDA_ITEMS_ONYXMODPACK_ICON = "PDAOMOD";
+PDA_ITEMS_ONYXMODPACK_NAME = "\cdOnyx Modpack\c-\n";
+PDA_ITEMS_ONYXMODPACK_DESC =
+	"\ccReinforces an armor to the Nth degree, making it indestructible. Only works on Standard, Exotic or Superior armors, and with many exceptions.\c-";
+	
+PDA_ITEMS_ARMORMODPACK_ICON = "PDAARMRM";
+PDA_ITEMS_ARMORMODPACK_NAME = "\cdArmor Modpack\c-\n";
+PDA_ITEMS_ARMORMODPACK_DESC =
+	"\ccAllows you to reconfigure \cdSecurity\cc, \chCombat \ccor \cgCommando \cctype armors into one of the other two types.\c-";
+	
+PDA_ITEMS_DEMONARTIFACT_ICON = "PDADARTI";
+PDA_ITEMS_DEMONARTIFACT_NAME = "\cdDemonic Artifact\c-\n";
+PDA_ITEMS_DEMONARTIFACT_DESC =
+	"\ccOnly a fool would mess with such creations. It's possible they can enhance Demonic weaponry, but misuse can result in \ca[ERROR: DATA CORRUPTED]\n";
+   
+PDA_ITEMS_SKULLS_ICON = "PDASKULL";
+PDA_ITEMS_SKULLS_NAME = "\cdSkulls\c-\n";
+PDA_ITEMS_SKULLS_DESC =
+	"\ccStrange skulls filled with unholy power. It seems these artifacts react strangely with the bodies of the dead...\c-";
+
+PDA_ITEMS_PHASEDEVICES_ICON = "PDAPHASE";
+PDA_ITEMS_PHASEDEVICES_NAME = "\cdPhase Devices\c-\n";
+PDA_ITEMS_PHASEDEVICES_DESC =
+	"\ccCompact teleport devices, used to teleport to safety or to other players.\c-";
+    
+//EOF

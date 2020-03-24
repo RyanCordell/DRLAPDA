@@ -1,0 +1,87 @@
+
+PDA_Local.pagemax = 3;
+
+PDA_Wipe();
+
+int scrollOffset;
+
+switch(PDA_Local.page)
+{
+    case 1:
+        PDA_PrintHeader("PDA_ASSEMBLY_BASIC_NAME", -30);
+        scrollOffset = PDA_Local.maxassembliesper * -5;
+        PDA_Local.maxassembliesper = DRLA_BASICMAX;
+        PDA_Local.assemblyOffset = 0;
+        PDA_Local.tiercolor = "\c[BB]";
+        break;
+    case 2:
+        PDA_PrintHeader("PDA_ASSEMBLY_ADVANCED_NAME", -30);
+        scrollOffset = PDA_Local.maxassembliesper * -5;
+        PDA_Local.maxassembliesper = DRLA_ADVANCEDMAX;
+        PDA_Local.assemblyOffset = DRLA_BASICMAX;
+        PDA_Local.tiercolor = "\c[AB]";
+        break;
+    case 3:
+        PDA_PrintHeader("PDA_ASSEMBLY_MASTER_NAME", -30);
+        scrollOffset = PDA_Local.maxassembliesper * -6;
+        PDA_Local.maxassembliesper = DRLA_MASTERMAX;
+        PDA_Local.assemblyOffset = DRLA_BASICMAX+DRLA_ADVANCEDMAX;
+        PDA_Local.tiercolor = "\c[MB]";
+        break;
+    default:
+        Print(s:"how da fuk");
+        break;
+}
+
+PDAButton P1 = PDA_CreateTab(50, "1", "PTAB", PDA_RectX + 0.1 + (12.0 * 0), PDA_RectY + 1.1, 12, 12);
+PDAButton P2 = PDA_CreateTab(51, "2", "PTAB", PDA_RectX + 0.1 + (12.0 * 1), PDA_RectY + 1.1, 12, 12);
+PDAButton P3 = PDA_CreateTab(52, "3", "PTAB", PDA_RectX + 0.1 + (12.0 * 2), PDA_RectY + 1.1, 12, 12);
+
+PDA_InitButton(P1, true, 1, "");
+PDA_InitButton(P2, true, 2, "");
+PDA_InitButton(P3, true, 3, "");
+
+//PDA_SetScrollWindow (scrollOffset);
+
+int id;
+str icon = "\n";
+str assFormatter = "\n";
+float x = PDA_RectX + 0.1, y;
+const int width = 180, height = 7;
+str assemblyCallback = "\n";
+str tooltip = "\n";
+
+PDA_SetupBounds();
+
+SetFont("STAT_MNO");
+
+PDA_SetScrollLimit  (scrollOffset);
+PDA_SetScrollArrows2(scrollOffset, PDA_RectWidth + 60.0, PDA_ScrollableHeight + 90.0);
+    
+switch(PDA_Local.page)
+{
+    default:
+        for(int assemblyIndex = 0; assemblyIndex < PDA_Local.maxassembliesper; assemblyIndex++)
+        {
+            id = PDA_ASSEMBLYIDRANGE + assemblyIndex;
+            y = PDA_Local.scrollingy + 30.1 + (12.0 * assemblyIndex);
+            icon = strParam("%l:",strParam("%s:_ICON", DRLA_Assemblies[assemblyIndex + PDA_Local.assemblyOffset][1]));
+            assFormatter = strParam("%s:%l:", PDA_Local.tiercolor, DRLA_Assemblies[assemblyIndex + PDA_Local.assemblyOffset][1]);
+            assemblyCallback = DRLA_Assemblies[assemblyIndex + PDA_Local.assemblyOffset][1];
+            tooltip = strParam("%l:",strParam("%s:_REQ", DRLA_Assemblies[assemblyIndex + PDA_Local.assemblyOffset][1]));
+            
+            if(PDA_CheckPlayer1Inventory(DRLA_Assemblies[assemblyIndex + PDA_Local.assemblyOffset][0]) || CheckInventory(DRLA_Assemblies[assemblyIndex + PDA_Local.assemblyOffset][0]))
+            {
+                PDAButton button = PDA_CreateAssemblyButton(id, icon, assFormatter, x, y, width, height, assemblyCallback, tooltip);
+                PDA_InitButton(button, false, PDA_ASSEMBLY_DETAIL, "");
+            }
+            else
+            { 
+                PDAButton button = PDA_CreateAssemblyButton(id, "PDAUNK", strParam(l:"PDA_ASSEMBLY_UNKNOWN"), x, y, width, height, "", "???");
+            }
+        }
+        break;
+}
+
+PDA_DefaultFont();
+PDA_UnsetScrollWindow();

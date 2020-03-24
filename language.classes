@@ -1,0 +1,203 @@
+[enu default]
+
+PDA_CLASS_DOOMRLMARINE_NAME =
+	"Marine";
+PDA_CLASS_DOOMRLMARINE_ABILITIES =
+	"\c[Green]PERK:\n"
+	"\c[Gold](Ammochain)\c- Rapidfire weaponry only consumes 1 ammo per 4 shots, or 1 ammo per burst, depending on the weapon.\n\n"
+	"\c[Green]PASSIVE:\n"
+	"Powerups last 50% longer, give increased firerate while active.\n\n";
+PDA_CLASS_DOOMRLMARINE_STORY =
+	"\c[Yellow]\"...It's loud. I like this new gun.\"\n\n"
+
+	"\c-The 'buddabuddabudda' of a chaingun is music to your ears, and you're always making sure your metal beasts "
+	"are cleaned and well-fed with ammo.\n\n"
+	"As a result, you start the game with a Chaingun ready to use and you \c[Green]spend 75% less ammo per magazine when "
+	"firing a rapid-fire weapon\c-, or only \c[Green]one ammo per burst on a burst weapon.\c-\n\n"
+	"In addition, \c[Green]powerups\c- like the Radsuit and Light Amplification Goggles \c[Green]last longer when you use them.\c- "
+	"They also \c[Green]increase the firerate of rapidfire weapons\c- while they're active.\n";
+PDA_CLASS_DOOMRLMARINE_HEIGHT = 
+    "0";
+
+
+PDA_CLASS_DOOMRLSCOUT_NAME =
+	"Scout";
+PDA_CLASS_DOOMRLSCOUT_ABILITIES =
+	"\c[Green]PERK:\n"
+	"\c[Gold](Sharpshooter)\c- Pistol weapons do between 8x to 3x damage, based on their firerate, faster weapons dealing less. Non rapid pistols have halved spread.\n\n"
+	"\c[Green]PASSIVE:\n"
+	"Runs 10% faster and jumps 10% higher. Always has computer map. Can double jump in the air at the cost of Stamina.\n\n";
+PDA_CLASS_DOOMRLSCOUT_STORY =
+	"\c[Yellow]\"It's all about the reflexes. Demon pops out, blow their head off, simple. Don't need a BFG for that.\"\n\n"
+
+	"\c-Any good Scout learns to pack light, and you're no exception. You trained the most with pistols in the Academy, and became "
+	"best in your class in small-arms marksmanship, able to pick out the vitals on a target and fire with deadly precision.\n\n"
+	"As a result, you deal as much as \c[Red]8x\cc the base damage\c- when firing one-handed pistols and SMGs, scaling down "
+	"to \c[Green]3x\c- depending on the respective weapon's rate of fire.\n\n"
+	"In addition, you're \c[Green]twice as accurate when firing most pistols\c-, but this accuracy bonus does not carry over "
+	"to rapid-fire weapons.\n\n"
+	"Your superior intel means you start each area with a \c[Green]map already in your PDA\c-, and your athleticism translates into "
+	"a \c[Green]10% boost to your movement speed. \c-\nYou can also \c[Green]jump in midair\c- at the cost of some \c[Pink]Stamina\c-, "
+	"thanks to your leg-mounted boosters.";
+PDA_CLASS_DOOMRLSCOUT_HEIGHT =
+    "50";
+
+
+PDA_CLASS_DOOMRLTECHNICIAN_NAME =
+	"Technician";
+PDA_CLASS_DOOMRLTECHNICIAN_ABILITIES =
+	"\c[Green]PERK:\n"
+	"\c[Gold](Scavenger)\c- Can turn exotic rarity or higher weapons into modpacks. Can also remove a mod from weapons that have been modded, but destroys the weapon. Scavenging a modpack will also slightly repair your armor.\n\n"
+	"\c[Green]PASSIVE:\n"
+	"Computer maps function as tracking maps. Can carry up to 8 modpacks instead of 4. Has various bonuses to mechanically related things.\n\n";
+PDA_CLASS_DOOMRLTECHNICIAN_STORY =
+	"\c[Yellow]\"Oooh...! This is...! I've got to see inside this!\"\n\n"
+
+	"\c-You trained as a combat engineer, but the demonic invasion cut short your aspirations to work on the best tech "
+	"the UAC had to offer. \n\nYou're still peerless at disassembling and putting back together just about anything, "
+    "though, and as a result, you can break down any but the most basic of weaponry into modpacks, as well as using the "
+	"scraps to repair your armor. \n\nYou'll start off the game with a random weapon you happened to have on the workbench, "
+	"instead of a Pistol, and your technician's cargo jacket allows you to \c[Green]carry eight modpacks\c-, even starting "
+	"off with one already on you. \n\nYour augmented reality \c[Green]goggles will identify and highlight weapons\c- by "
+	"projecting a beam of light at their location, color-coded to their respective rarity level. \n\n"
+	"Last but certainly not least, assemblies benefit from your optimizations;\n"
+	"Basic assemblies deal \c[Green]10%\cc more damage, \n"
+	"Advanced assemblies deal \c[Yellow]25%\c- more damage, \n"
+	"and Master assemblies deal a whopping \c[Red]50%\cc additional damage\c- when you wield them.";
+PDA_CLASS_DOOMRLTECHNICIAN_HEIGHT =
+    "60";
+
+PDA_CLASS_DOOMRLRENEGADE_NAME =
+	"Renegade";
+PDA_CLASS_DOOMRLRENEGADE_ABILITIES =
+	"\c[Green]PERK:\n"
+	"\c[Gold](Shellshock)\c- Shoots an extra 50% more pellets, rounded up, with any attack that fires more than one shot in non-fixed pattern.\n\n"
+	"\c[Green]PASSIVE:\n"
+	"Can switch weapons instantly. Armor has 50% more protection, up to a max of 80%. Picking up shell ammo gives him a free shot with any shotgun.\n\n";
+PDA_CLASS_DOOMRLRENEGADE_STORY =
+	"\c[Yellow]\"Aaagh.\"\n\n"
+			
+	"\c-The ability to pummel a target with a hail of lead seems to speak to you like no other weapon could, and as a result, "
+	"shotguns are your weapon of choice. \n\nYou start off with a Shotgun already on you, and with a natural gift for handling "
+	"them, you can work the most out of every shell you put in, \c[Green]firing 50% more pellets with each shot\c-.\n\n"
+	"You can also \c[Green]swap weapons out instantly\c-, shotgun or otherwise.\n\n"
+	"Picking up \c[Yellow]shotgun shells\c- will give you a free shot for any shotgun, but you can only store one at a time.\n\n"
+	"Finally, you're quite handy at reinforcing armor, granting many types of armor with a \c[Green]protection bonus of as much "
+	"as 50% of the base protection stat. \c-\n\nYou aren't able to reinforce all armors; some advanced high-tech shields, "
+	"for example, cannot be improved in this fashion. \nAlso note that with armors that do recieve a bonus, the combination of "
+	"base protection and bonus protection will not exceed \c[Yellow]80%.\c- \n"
+	"Any armor with a base protection stat of \c[Yellow]80%\c- or higher recieves no bonus.";
+PDA_CLASS_DOOMRLRENEGADE_HEIGHT =
+    "60";
+
+PDA_CLASS_DOOMRLDEMOLITIONIST_NAME =
+	"Demolitionist";
+PDA_CLASS_DOOMRLDEMOLITIONIST_ABILITIES =
+	"\c[Green]PERK:\n"
+	"\c[Gold](Fireangel)\c- Immune to splash damage.\n\n"
+	"\c[Green]PASSIVE:\n"
+	"Uses half ammo, rounded down on all non shell-based weapons. When his armor breaks, he drops explosives everywhere.\n\n";
+PDA_CLASS_DOOMRLDEMOLITIONIST_STORY =
+	"\c[Yellow]\"I bet that ugly face of yours would look better inside-out, you little shite!\"\n\n"
+			
+	"\c-Originally a decorated member of the UACs Explosive Ordinance Disposal Unit, you found yourself in the brig after "
+	"an incident involving some next-generation chemical explosives.\n\n"
+	"When the demons made landfall, you broke out in the confusion and wisely decided to 'appropriate' one of the "
+	"EODU's prototype Blast Suits, designed to be worn under armor. If the UAC has a problem with it, they can take it "
+	"off your hazard pay. \n\nIn the meantime however, it'll make you \c[Green]impervious to the splash damage dealt by "
+	"explosive projectiles\c-, though you'll still take impact damage if hit by the projectile.\n\n"
+	"Because you tend to create or gather explosives constantly, you often hide them in your outfits, causing them to "
+	"\c[Green]drop and explode when your armor is destroyed\c-, killing nearby enemies in retribution. \n\n"
+	"Finally, you're well-versed in ammo conservation; with any non-shell weapon that uses more than one ammo unit when "
+	"firing, \c[Green]you expend half the standard amount\c-, rounded down.";
+PDA_CLASS_DOOMRLDEMOLITIONIST_HEIGHT =
+    "50";
+
+PDA_CLASS_DOOMRLCOMMANDO_NAME =
+	"Commando";
+PDA_CLASS_DOOMRLCOMMANDO_ABILITIES =
+	"\c[Green]PERK:\n"
+	"\c[Gold](Berserker)\c-If hit 3 times within 2 seconds, goes berserk for 10 seconds. If he gibs an enemy with melee, goes berserk for 7 seconds.\n\n"
+	"\c[Green]PASSIVE:\n"
+	"Melee attacks do 100% more damage. Also has 10% resistance to all damage.\n\n";
+PDA_CLASS_DOOMRLCOMMANDO_STORY =
+	"\c[Yellow]\"Hmm, who would look cooler in this situation, Schwarzenegger, or Stallone?\"\n\n"
+
+	"This character is currently \c[Red]unfinished.\c-";
+PDA_CLASS_DOOMRLCOMMANDO_HEIGHT =
+    "50";
+
+PDA_CLASS_DOOMRLSNIPER_NAME =
+	"Sniper";
+PDA_CLASS_DOOMRLSNIPER_ABILITIES =
+	"\c[Green]PERK:\n"
+	"\c[Gold](Longshot)\c-Holding fire while using a scope on a weapon will slowly increase damage up to 4x. Beware, you'll also take 50% more damage while doing so.\n\n"
+	"\c[Green]PASSIVE:\n"
+	"Single shot non-energy two-handed guns do 100% more damage and are perfectly accurate.\n\n";
+PDA_CLASS_DOOMRLSNIPER_STORY =
+	"\c[Yellow]\"Hell may have opened up to consume us, but the Lord granted me this glorious rifle, and with it I will not let these fiends past.\"\n\n"
+
+	"This character is currently \c[Red]unfinished.\c-";
+
+PDA_CLASS_DOOMRLSABOTEUR_NAME =
+	"Saboteur";
+PDA_CLASS_DOOMRLSABOTEUR_ABILITIES =
+	"\c[Green]PERK:\n"
+	"\c[Gold](Shredder)\c-Has special melee attacks that debuff enemy damage resistance severely for a short while. Explosions also deal more damage than usual, and leave a weaker version of the debuff on enemies.\n\n"
+	"\c[Green]PASSIVE:\n"
+	"Each kind of Backpack alters her melee attacks differently while worn.\n\n";
+PDA_CLASS_DOOMRLSABOTEUR_STORY =
+	"\c[Yellow]\"Woooow, I kick a knife through your face and you're still fighting? Hahahaha, I could've used a shitty sandbag like you in the past!\"\n\n"
+
+	"This character is currently \c[Red]unfinished.\c-";
+
+PDA_CLASS_DOOMRLCYBORG_NAME =
+	"Cyborg";
+PDA_CLASS_DOOMRLCYBORG_ABILITIES =
+	"\c[Green]PERK:\n"
+	"\c[Gold](Transhumanism)\c-Can disassemble Exotic+ armors and boots to apply small permanent upgrades to herself. Unique+ items can give special abilities, but you can only have one at a time.\n\n"
+	"\c[Green]PASSIVE:\n"
+	"Has a base health of 200. Cannot wear armor or boots. Is healed by both healing items and armor repairs.\n\n";
+PDA_CLASS_DOOMRLCYBORG_STORY =
+	"\c[Yellow]\"You'd better not go bankrupt while paying me, you shifty tosser. I can see you're already morally bankrupt, but if I don't get paid in full I'm coming after you next.\"\n\n"
+
+	"This character is currently \c[Red]unfinished.\c-";
+
+PDA_CLASS_DOOMRLMEDIC_NAME =
+	"Medic";
+PDA_CLASS_DOOMRLMEDIC_ABILITIES =
+	"\c[Green]PERK:\n"
+	"\c[Gold](Whambulance)\c-Converts healing items to a generic health pool inventory item if over 100%. When used, you and any nearby player is also healed for 10 health\n\n"
+	"\c[Green]PASSIVE:\n"
+	"All healing or health pool gain is doubled. Healing other players gives you double damage for 2x the amount you healed them for in seconds.\n\n";
+PDA_CLASS_DOOMRLMEDIC_STORY =
+	"\c[Yellow]\"I'm so frightened I feel ill, but... if I can save lives by going out there, than that's what I'll do!\"\n\n"
+
+	"This character is currently \c[Red]unfinished.\c-";
+
+PDA_CLASS_DOOMRLSCIENTIST_NAME =
+	"Scientist";
+PDA_CLASS_DOOMRLSCIENTIST_ABILITIES =
+	"\c[Green]PERK:\n"
+	"\c[Gold](Chemslinger)\c-Can throw various beakers that bestow AOE buffs and debuffs. Most chemicals remain for a while, and can combine with others to produce interesting reactions.\n\n"
+	"\c[Green]PASSIVE:\n"
+	"Has a weak, but potentially potent poison melee attack. Shields do not take overload damage.\n\n";
+PDA_CLASS_DOOMRLSCIENTIST_STORY =
+	"\c[Yellow]\"Science got us in this mess, science can fix it. Anyone who gets in my way, I'll fix them too, permanently. With science.\"\n\n"
+
+	"This character is currently \c[Red]unfinished.\c-";
+
+PDA_CLASS_DOOMRLEXECUTIVE_NAME =
+	"Executive";
+PDA_CLASS_DOOMRLEXECUTIVE_ABILITIES =
+	"\c[Green]PERK:\n"
+	"\c[Gold](VIP)\c-You are constantly protected by up to two loyal bodyguards who will attack anything that threatens you. If they die, they are quickly replaced.\n\n"
+	"\c[Green]PASSIVE:\n"
+	"Always walks, loses stamina from running, cannot run without it. Collects secret UAC datadisks and can exchange them for special items. Will not drop her last weapon, and does not have a melee attack.\n\n";
+PDA_CLASS_DOOMRLEXECUTIVE_STORY =
+	"\c[Yellow]\"We've sent in teams to contain the threat, but there's a possibility of certain... sensitive information being found. I'll personally oversee retrieval of these classified records.\"\n\n"
+
+	"This character is currently \c[Red]unfinished.\c-";
+
+
+//EOF

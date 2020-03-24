@@ -1,0 +1,479 @@
+// VARIABLES --------------------
+// Ha! You don't want arrays for every player in MP? MUDA MUDA MUDA MUDA
+// [marrub] #define MAX_MUDADA 0x7FFFFFFF
+
+#define MAX_PLAYERS 8
+#define PDA_Responsiveness 1
+#define PDA_Local PDA_Info[PlayerNumber()]
+#define PDA_LocalMouse PDA_Mouse[PlayerNumber()]
+#define PDA_LocalButton PDA_Button[PlayerNumber()]
+#define PDA_CheckPlayer1Inventory(name) ACS_NamedExecuteWithResult("PDA_CheckPlayer1Inventory", name)
+#define PDA_SetEveryoneInventory(name) ACS_NamedExecuteWithResult("PDA_SetEveryoneInventory", name)
+#define PDA_GiveEveryoneInventory(name) ACS_NamedExecuteWithResult("PDA_GiveEveryoneInventory", name)
+#define PDA_HistoryMax 16
+
+
+#define PDA_MODMIN  0
+#define PDA_MODMAX  7
+
+#define PDA_LocalUniqueModEffect PDA_PrintWhichUnique[PlayerNumber()]
+str PDA_PrintWhichUnique[MAX_PLAYERS][PDA_MODMAX];
+
+#define PDA_LocalWeaponModEffect PDA_PrintWhichBasic[PlayerNumber()]
+str PDA_PrintWhichBasic[MAX_PLAYERS][PDA_MODMAX];
+
+bool debug = false;
+bool buttonInteracted = false;
+bool inverted = false;
+    
+int gArmorIndex[MAX_PLAYERS],
+    gBootsIndex[MAX_PLAYERS],
+    gBackpackIndex[MAX_PLAYERS];
+#define localArmorIndex    gArmorIndex[PlayerNumber()]
+#define localBootsIndex    gBootsIndex[PlayerNumber()]
+#define localBackpackIndex gBackpackIndex[PlayerNumber()]
+
+bool showArmor[MAX_PLAYERS],
+     showBoots[MAX_PLAYERS],
+     showBackpack[MAX_PLAYERS];
+#define localShowArmor    showArmor[PlayerNumber()]
+#define localShowBoots    showBoots[PlayerNumber()]
+#define localShowBackpack showBackpack[PlayerNumber()]
+
+
+bool hasArmor[MAX_PLAYERS],
+     hasBoots[MAX_PLAYERS],
+     hasBackpack[MAX_PLAYERS];
+#define localHasArmor    hasArmor[PlayerNumber()]
+#define localHasBoots    hasBoots[PlayerNumber()]
+#define localHasBackpack hasBackpack[PlayerNumber()]
+     
+bool gotOneEquipFirst[MAX_PLAYERS];
+#define localOneEquipFirst gotOneEquipFirst[PlayerNumber()]
+
+int aBoolField[MAX_PLAYERS];
+#define localABoolField aBoolField[PlayerNumber()]
+//bool showSuit = true;
+
+int modPackIndex[MAX_PLAYERS];
+#define localmodPackIndex modPackIndex[PlayerNumber()]
+
+struct PDAInfo
+{
+   bool active;
+   bool pongrunning;
+   
+   int category;
+   int page;
+   int pagemax;
+   
+   float texty;
+   float maxtexty;
+   float scrollingy;
+   float creditsroll;
+   
+   str tiercolor;
+   int assemblyoffset;
+   int currentassembly;
+   int maxassembliesper;
+   
+   bool newEntry[5];
+   
+   bool clicked;
+   bool playonce;
+   
+   str detailFetch[8];
+   
+   int maxmodlimit;
+}
+
+struct PDAMouse
+{
+    int x;
+    int y;
+    
+    bool m1;
+    bool m2;
+    
+    int state;
+    int oldstate;
+}
+
+struct PDAButton
+{
+    int id;
+    float x;
+    float y;
+    
+    int width;
+    int height;
+    
+    int state;
+    int oldstate;
+    
+    str label;
+    str graphic;
+    
+    str tooltip;
+}
+
+struct PDAWeapon
+{
+    int id;
+    
+    str bulkModEffect;
+    str powerModEffect;
+    str agilityModEffect;
+    str technicalModEffect;
+    str sniperModEffect;
+    str firestormModEffect;
+    str nanoModEffect;
+    
+    bool isDemonic;
+}
+
+PDAInfo PDA_Info[MAX_PLAYERS];
+PDAMouse PDA_Mouse[MAX_PLAYERS];
+PDAButton PDA_Button[MAX_PLAYERS][256];
+#define DRLA_WEAPONMAX 318
+PDAWeapon PDA_Weapon[MAX_PLAYERS][DRLA_WEAPONMAX];
+
+// PDA size
+const float PDA_RECTX = 			20,
+			PDA_RECTY = 			23,
+			PDA_RECTWIDTH = 		251,
+			PDA_RECTHEIGHT = 		174;
+            
+const float DES_RECTX = 			180,
+            DES_RECTY = 			80,
+            DES_RECTWIDTH = 		115,
+            DES_RECTHEIGHT = 		158;
+
+const int 	PDA_ASSEMBLYMAX = 		46;
+
+const int 	PDA_MAXARMORININV = 	4,
+			PDA_MAXARMORWORN = 		2,
+			PDA_MAXMODPACKS = 		7;
+
+const int 	PDA_SCROLLABLEY = 		PDA_RectY + 10,
+			PDA_SCROLLABLEHEIGHT = 	PDA_RectHeight - 25;
+
+const float PDA_MENUICONLEFTX = 	20.1,
+			PDA_MENUICONRIGHTX = 	140.1;
+
+const float PDA_MENUTEXTLEFTX = 	PDA_MENUICONLEFTX+30.0,
+			PDA_MENUTEXTRIGHTX = 	PDA_MENUICONRIGHTX+30.0;
+
+const float newresw = 384;
+const float newresh = 288;
+
+const float oldresw = 320;
+const float oldresh = 200;
+            
+const float newresx = newresw / oldresw; // 380 / 320 = 1.1875
+const float newresy = newresh / oldresh; // 260 / 200 = 1.3
+
+const float PDA_NormalY = PDA_RectY;
+
+#define BEAST_WIDTH 85
+#define BEAST_HEIGHT 8
+#define DRLA_MONSTER_PAGE_MAX 19
+
+int monsterCheck[5][DRLA_MONSTER_PAGE_MAX],
+    oldCheck[5][DRLA_MONSTER_PAGE_MAX];
+
+// IDS --------------------
+
+// Enums auto-increment values that aren't already set in stone, so we sort by ascending order.
+enum PDA_ButtonState
+{
+    button_none = 0,
+    button_hovered,
+    button_clicked,
+}
+
+enum PDA_MouseState
+{
+    mouse_default = 0,
+    mouse_pointer = 1,
+}
+
+enum PDA_IDs
+{
+    PDA_CURSORID = 2,
+    
+    PDA_PLAYERS_BUTTON = 40,
+    PDA_WEAPONS_BUTTON,
+    PDA_ARMORS_BUTTON,
+    PDA_ASSEMBLIES_BUTTON,
+    PDA_ITEMS_BUTTON,
+    PDA_BESTIARY_BUTTON,
+    PDA_MISC_BUTTON,
+    PDA_HELP_BUTTON,
+    PDA_CAT_DESCRIPTION = 94,
+    
+	PDA_BOTTOMID,
+	PDA_PEGGLESOSID,
+	PDA_PAGENUMID,
+    
+	// Assembly iterator ID range
+	PDA_ASSEMBLYIDRANGE = PDA_PAGENUMID + 80,
+    PDA_WORNARMORS = PDA_ASSEMBLYIDRANGE + 4,
+    PDA_STASHEDARMORS = PDA_WORNARMORS + 8,
+    PDA_NOEQID = PDA_STASHEDARMORS + 3,
+	// Modpack ID range (INFOID - 7)
+	PDA_MODIDRANGE,
+	// Message IDs
+	PDA_INFO4ID,
+	PDA_INFO3ID,
+	PDA_INFO2ID,
+	PDA_INFOID,
+	// Header
+	PDA_INFOTOPID,
+	// Scrolling arrows
+	PDA_SCROLLDNID,
+	PDA_SCROLLUPID,
+	// Cursor
+    PDA_LASTID,
+    
+	PDA_PONG_LEFTPADDLE,
+	PDA_PONG_RIGHTPADDLE,
+	PDA_PONG_BALL,
+    PDA_PONG_TOPBORD,
+    PDA_PONG_BOTBORD,
+	PDA_PONG_PLAYERSCORE,
+	PDA_PONG_AISCORE,
+	// PDA display
+	PDA_ID,
+    PDA_REALLYLASTID,
+
+	// Shared IDs go down here
+	PDA_ARMORINVIDRANGE = PDA_MODIDRANGE,
+	PDA_ARMORWORNIDRANGE = PDA_ASSEMBLYIDRANGE,
+    PDA_MODPACKSELECTID = PDA_PAGENUMID + 1,
+    PDA_MODPACKANIMID = PDA_INFO4ID,
+    PDA_TOOLTIPID = PDA_CAT_DESCRIPTION,
+    PDA_PLYR_ICON = PDA_ASSEMBLYIDRANGE,
+}
+
+
+// ARRAYS --------------------
+
+// PDA categories - these are all the unique sections you can wind up at
+enum PDA_Categories
+{
+	// Accessibles
+	PDA_MENU = 0,
+	PDA_CLASSES,
+	PDA_WEAPONS,
+	PDA_ASSEMBLIES,
+	PDA_ARMORS,
+	PDA_BESTIARY,
+	PDA_HELP,
+	PDA_ITEMS,
+	PDA_MISC,
+	PDA_MENUMAX, // Always keep this as the last element in the accessible areas
+
+	// Normally unaccessible
+	PDA_ASSEMBLY_DETAIL,
+    PDA_BESTIARY_DETAIL,
+	
+	// Accessible through Misc
+	PDA_PONG,
+	PDA_CREDITS
+}
+
+enum armor_enum
+{
+	armor_TOKEN = 0,
+	armor_ACTOR,
+}
+
+enum bestiary_enum
+{
+    beast_TOKEN = 0,
+    beast_ACTOR,
+}
+
+enum weaponmod_enum
+{
+	mi_bulk = 0,
+	mi_power,
+	mi_agility,
+	mi_technical,
+	mi_sniper,
+	mi_firestorm,
+	mi_nano,
+}
+
+#define	DRLA_MENUMAXELEMENTS 2
+
+str DRLA_MenuOptions[PDA_MENUMAX][DRLA_MENUMAXELEMENTS] =
+{
+	{"MPLYICO", "Classes"},
+	{"MWEPICO", "Weapons"},
+	{"MASMICO", "Assemblies"},
+	{"MARMICO", "Armors"},
+	{"MBESICO", "Bestiary"},
+	{"MHLPICO", "Help"},
+	{"MITMICO", "Items"},
+	{"MMSCICO", "Misc"}
+};
+
+// Amount of player classes available
+#define DRLA_CLASSMAX 5
+
+// Marine, Scout, Technician, Renegade, Demolitionist
+str DRLA_ClassIcon[DRLA_CLASSMAX] = 
+{
+	"PPDAMAR1", "PPDASCO1", "PPDATEC1", "PPDAREN1", "PPDADMO1"
+};
+
+// Is it worth making a separate header file for just these weapon definitions?
+#define DRLA_WEAPONPERKMAX 5
+
+str DRLA_WeaponPerkList[DRLA_WEAPONPERKMAX][3] =
+{
+	{"RLAmmochainPerk",    "Ammochain (Marine)",        "RLRapidfireTypeWeapon"     },
+	{"RLSharpshooterPerk", "Sharpshooter (Scout)",      "RLPistolTypeWeapon"        },
+	{"RLScavengerPerk",    "Scavenger (Technician)",    "RLAssembledTypeWeapon"     },
+	{"RLShellshockPerk",   "Shellshock (Renegade)",     "RLShotgunTypeWeapon"       },
+	{"RLFireangelPerk",    "Fireangel (Demolitionist)", "RLEfficientAmmoTypeWeapon" }
+};
+
+#define DRLA_WEAPONSETMAX 2
+str DRLA_WeaponSetList[DRLA_WEAPONSETMAX][2] =
+{
+	{"RLNuclearWeaponSetBonusActive", "\cfFURIOUS FUSION\c-"  },
+	{"RLCerberusSetBonusActive",      "\cfTRINITY GUARDIAN\c-"}
+};
+
+#define DRLA_NUCLEARMAX 16
+str DRLA_NuclearCheckList[DRLA_NUCLEARMAX] =
+{
+	"RLNuclearPlasmaPistol", "RLNuclearPlasmaRifle", "RLNuclearBFG9000", "RLNuclearOnslaught", "RLNuclearPlasmaRevolver",
+	"RLHighPowerNuclearPlasmaPistol", "RLHighPowerNuclearPlasmaRifle", "RLHighPowerNuclearBFG9000", "RLStormNuclearPlasmaPistol",
+	"RLSuperchargedNuclearPlasmaPistol", "RLNuclearVBFG9000", "RLNuclearPlasmaRifleMKII", "RLNuclearPlasmaShotgun", "RLAssaultRifleNuclearPlasmaRifle",
+	"RLBurstCannonNuclearPlasmaRifle", "RLNuclearBiggestFuckingGun"
+};
+
+#define DRLA_TRISTARMAX 3
+str DRLA_TristarCheckList[DRLA_TRISTARMAX] =
+{
+	"RLTristarBlaster", "RLHighPowerTristarBlaster", "RLNanomanufactureAmmoTristarBlaster"
+};
+
+#define DRLA_BACKPACKMAX 6
+str DRLA_BackpackList[DRLA_BACKPACKMAX][2] =
+{
+    {"RLBackpack", "BASIC"},
+    {"RLCombatBackpackToken", "COMBAT"},
+    {"RLSpecialistBackpackToken", "SPECIALIST"},
+    {"RLScroungerBackpackToken", "SCROUNGER"},
+    {"RLDedicatedBackpackToken", "DEDICATED"},
+    {"RLNuclearBackpackToken", "NUCLEAR"}
+};
+
+// FUNCTIONS --------------------
+
+// Some handy function macros.
+#define StrTrim(a,b,c)			StrMid((a),(b),StrLen((a)) - (c))
+// This is horrible and I'mma have to rewrite it at some point. Too inflexible thanks to the extra element..
+#define Array_Size(array) 		(sizeof((array))/sizeof((array[0][0])))
+// #define Array_Size(array, elements) (sizeof((array))/sizeof((elements)))
+// Maybe like that?
+
+#define PDA_SetScrollLimit(a)  	PDA_Local.maxtexty = (a)
+#define PDA_ResetScroll()       PDA_Local.scrollingy = 20.0;
+//#define PDA_SetScrollTop(a)     PDA_Local
+#define PDA_SetMonsterLimit(a)  if(PDA_Local.monsterpage > (a)) PDA_Local.monsterpage = (a)
+#define PDA_DefaultFont() 		SetFont("STAT_LWR");
+
+#define PDA_PrintHeader(a, b) 		HudMessage(l:(a); HUDMSG_PLAIN, PDA_INFOTOPID, CR_GREEN, (PDA_RectX) + 100.1 + (b), (PDA_RectY) + 0.1, 0)
+
+#define CheckBounds(a) \
+       PDA_LocalMouse.x >= a.x && PDA_LocalMouse.x <= a.x + a.width \
+       && \
+       PDA_LocalMouse.y >= a.y - 2 && PDA_LocalMouse.y <= a.y + a.height \
+
+// PONG stuff -------------------
+//where the sscore is drawn
+#define SCORELINE       PDA_RECTY + 0.1
+
+#define MAXPADDLESPEED  18.0
+
+//velocity in pixels/tic (for virtual resolution)
+#define VELOCITY        4.0
+
+//you get terrible values from the pitch so high sensitivity
+#define MOUSESEN        56.0
+
+//start of the game field
+#define GAMEFIELDSTART 	PDA_RECTY + 20
+//end of the game field
+#define GAMEFIELDEND 	PDA_RECTHEIGHT
+//#define GAMEFIELDSTART  32
+//#define GAMEFIELDEND    200
+
+//start of the horizontal area
+#define GAMEFIELDLEFT 	PDA_RECTX
+#define GAMEFIELDRIGHT 	PDA_RECTWIDTH + 20
+//#define GAMEFIELDLEFT 0
+//#define GAMEFIELDRIGHT 320
+
+//Where the left paddle is drawn
+#define LEFTPADDLEDRAW 	PDA_RECTX + 14
+#define RIGHTPADDLEDRAW	PDA_RECTWIDTH + 4
+//#define LEFTPADDLEDRAW 4
+//Where the left paddle is tested for hits
+#define LEFTPADDLE      (LEFTPADDLEDRAW + PADDLEWIDTH)
+//Where the right paddle is tested and drawn
+#define RIGHTPADDLE     (RIGHTPADDLEDRAW - PADDLEWIDTH)
+
+//needs graphics resized to fit values here
+#define PADDLEHEIGHT    24
+#define PADDLEWIDTH     4
+#define BALLSIZE        4
+
+//AI target reaction times
+#define LOWREACTIONTIME  1
+#define HIGHREACTIONTIME 4
+
+//Amount of ticks per frame
+#define PONGSPEED 1
+
+bool errorbit = false;
+
+#define scoreboard "\cdYOU: [%s:%i:\cd] | NME: [%s:%i:\cd]"
+
+struct ballmove
+{
+	fixed x;
+	fixed y;
+	fixed velx;
+	fixed vely;
+	fixed angle;
+}
+
+int playernumtoconst[] = {AAPTR_PLAYER1, AAPTR_PLAYER2, AAPTR_PLAYER3, AAPTR_PLAYER4, AAPTR_PLAYER5, AAPTR_PLAYER6, AAPTR_PLAYER7, AAPTR_PLAYER8};
+
+fixed ballx[MAX_PLAYERS], bally[MAX_PLAYERS];
+fixed velx[MAX_PLAYERS], vely[MAX_PLAYERS];
+
+int p1score[MAX_PLAYERS], p2score[MAX_PLAYERS];
+
+fixed paddle1y[MAX_PLAYERS], paddle2y[MAX_PLAYERS];
+
+fixed currentAITarget[MAX_PLAYERS];
+int currentAITargTime[MAX_PLAYERS];
+
+int mpChallenges[MAX_PLAYERS];
+int myChallenge[MAX_PLAYERS];
+
+int mpPlayer1[MAX_PLAYERS];
+int mpPlayer2[MAX_PLAYERS];
+
+int quitMode[MAX_PLAYERS];
+
+
+// EOF

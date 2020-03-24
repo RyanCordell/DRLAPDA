@@ -1,0 +1,794 @@
+function void PDA_PlaySound(str PDA_Sound, str soldier, int volume)
+{
+	if(!GetCVar("DRLA_PDA_soldier"))
+		LocalAmbientSound(PDA_Sound,volume);
+	else
+		LocalAmbientSound(soldier,volume);
+}
+
+#define pulser(a) 0.59 + sin(Timer() * 0.99) * 1.0 / (a)
+
+/*function float pulser(float max)
+{
+    return 0.59 + sin(Timer() * 0.99) * 1.0 / max;
+}*/
+
+function void PDA_Wipe(void)
+{
+	for(int wipeIndex = PDA_CURSORID; wipeIndex <= PDA_LASTID; wipeIndex++)
+	{
+		HudMessage(s:"\n"; HUDMSG_ALPHA, wipeIndex, CR_UNTRANSLATED, 0, 0, 0, 0);
+	}
+}
+
+function void PDA_NOPONG(void)
+{
+	for(int wipeIndex = PDA_PONG_LEFTPADDLE; wipeIndex <= PDA_PONG_AISCORE; wipeIndex++)
+	{
+		HudMessage(s:"\n"; HUDMSG_PLAIN, wipeIndex, CR_UNTRANSLATED, 0, 0, 0, 0);
+	}
+}
+
+function void PDA_SetupBounds(void)
+{
+    SetHudSize(newresw,newresh);
+    
+    SetHudClipRect(PDA_RectX, PDA_ScrollableY+15, PDA_RectWidth+80, PDA_ScrollableHeight+65, PDA_RectWidth+10);
+}
+
+function void PDA_SetCategory(int category)
+{
+   if(PDA_Local.category == category)
+      return;
+   
+   if(category == PDA_CREDITS)
+   {
+      PDA_Local.creditsroll = 120;
+   }
+   
+   if(PDA_Local.category == PDA_PONG)
+   {
+      PDA_NOPONG();
+      PDA_Local.pongrunning = false;
+   }
+   
+   PDA_Local.texty = 0.0;
+   PDA_Local.scrollingy = 20.0;
+   PDA_Local.category = category;
+}
+
+function void PDA_HasEquipment(void)
+{
+    bool specialArmorTokens = CheckInventory("RLEnclaveSetBonusActive") || CheckInventory("PowerRLPrototypeAssaultShieldProtection") || CheckInventory("PowerRLOverchargeSystemProtection") || CheckInventory("RLCyberneticArmorModdedToken");
+    
+    // Special
+    /*if(specialArmorTokens || strCmp(strLeft(DRLA_BoostedArmorList[localArmorIndex][armor_TOKEN], 17), "RLCyberneticArmor") == 0)
+    {
+        for(int armorIndex = 0; armorIndex < DRLA_BOOSTEDARMORMAX; armorIndex++)
+        {
+            if(CheckInventory(strParam("%s:Token", DRLA_BoostedArmorList[armorIndex][armor_TOKEN])))
+            {
+                if(StrCmp(DRLA_BoostedArmorList[armorIndex][armor_TOKEN], strParam("%s:Boots", StrTrim(DRLA_BoostedArmorList[armorIndex][armor_TOKEN],0,5))) != 0)
+                {
+                    localArmorIndex = armorIndex;
+                    localHasArmor = true;
+                }
+                else
+                {
+                    localBootsIndex = armorIndex;
+                    localHasBoots = true;
+                }
+            }
+            if(!CheckInventory(strParam("%s:Token", DRLA_BoostedArmorList[localArmorIndex][armor_TOKEN])))
+            {
+                localArmorIndex = 0;
+                localHasArmor = false;
+            }
+            if(!CheckInventory(strParam("%s:Token", DRLA_BoostedArmorList[localBootsIndex][armor_TOKEN])))
+            {
+                localBootsIndex = 0;
+                localHasBoots = false;
+            }
+        }
+        for(int armorIndex = 0; armorIndex < DRLA_ARMORMAX; armorIndex++)
+        {   
+            if(CheckInventory(strParam("%s:Token", DRLA_ArmorList[armorIndex][armor_TOKEN])))
+            {
+                if(StrCmp(DRLA_ArmorList[armorIndex][armor_TOKEN], strParam("%s:Boots", StrTrim(DRLA_ArmorList[armorIndex][armor_TOKEN],0,5))) == 0)
+                {
+                    localBootsIndex = armorIndex;
+                    localHasBoots = true;
+                }
+            }
+            if(!CheckInventory(strParam("%s:Token", DRLA_ArmorList[localBootsIndex][armor_TOKEN])))
+            {
+                localBootsIndex = 0;
+                localHasBoots = false;
+            }
+        }
+    }
+    else
+    {*/
+    // Normal
+    for(int armorIndex = 0; armorIndex < DRLA_ARMORMAX; armorIndex++)
+    {   
+        if(CheckInventory(strParam("%s:Token", DRLA_ArmorList[armorIndex][armor_TOKEN])))
+        {
+            if(StrCmp(DRLA_ArmorList[armorIndex][armor_TOKEN], strParam("%s:Boots", StrTrim(DRLA_ArmorList[armorIndex][armor_TOKEN],0,5))) != 0)
+            {
+                localArmorIndex = armorIndex;
+                localHasArmor = true;
+            }
+            else
+            {
+                localBootsIndex = armorIndex;
+                localHasBoots = true;
+            }
+        }
+        if(!CheckInventory(strParam("%s:Token", DRLA_ArmorList[localArmorIndex][armor_TOKEN])))
+        {
+            localArmorIndex = 0;
+            localHasArmor = false;
+        }
+        if(!CheckInventory(strParam("%s:Token", DRLA_ArmorList[localBootsIndex][armor_TOKEN])))
+        {
+            localBootsIndex = 0;
+            localHasBoots = false;
+        }
+    }
+    //}
+    
+    for(int backpackIndex = 0; backpackIndex < DRLA_BACKPACKMAX; backpackIndex++)
+    {
+        if(CheckInventory(DRLA_BackpackList[backpackIndex][0]))
+        {
+            localBackpackIndex = backpackIndex;
+            localHasBackpack = true;
+        }
+        else if(!CheckInventory(DRLA_BackpackList[localBackpackIndex][0]))
+        {
+            localHasBackpack = false;
+        }
+    }
+}
+
+//PDAButton local[0] = {2, 2, 2, 6, 6, button_none, button_none, "lol", "PDAFONT"};
+
+function PDAButton PDA_CreateMenuButton(int id, str label, str graphic, float x, float y, int width, int height)
+{
+    PDA_LocalButton[id].id = id;
+    PDA_LocalButton[id].x = x;
+    PDA_LocalButton[id].y = y;
+    PDA_LocalButton[id].width = width;
+    PDA_LocalButton[id].height = height;
+    PDA_LocalButton[id].oldstate = PDA_LocalButton[id].state;
+    PDA_LocalButton[id].label = label;
+    PDA_LocalButton[id].graphic = graphic;
+    
+    /*log("PDA_LocalButton[%i:]: %i: | PDA_Button[%i:][%i:]: %i: | PDA_Button[1][%i:]: %i: ",
+    id, PDA_LocalButton[id].id,
+    pl, id, PDA_Button[pl][id].id,
+    id, PDA_Button[1][id].id);*/
+    
+    if(CheckBounds(PDA_LocalButton[id]))
+    {
+        PDA_LocalButton[id].state = button_hovered;
+        PDA_LocalMouse.state = mouse_pointer;
+        
+        if(PDA_LocalButton[id].state != PDA_LocalButton[id].oldstate)
+        {
+            PDA_PlaySound("UI/PDA/Select", "pda/soldier", 80);
+        }
+       
+        if(PDA_LocalMouse.m1)
+        {
+            if(!(PDA_LocalMouse.oldState & BT_ATTACK))
+            {
+                PDA_PlaySound("UI/PDA/ChangePage", "pda/soldier", 80);
+                PDA_LocalButton[id].state = button_clicked;
+
+                PDA_ResetScroll()
+            }
+        }
+    }
+    else
+    {
+        PDA_LocalButton[id].state = button_none;
+        PDA_Local.playonce = false;
+        
+        if(PDA_LocalButton[id].state != PDA_LocalButton[id].oldstate)
+        {
+            PDA_LocalMouse.state = mouse_default;
+        }
+    }
+    
+    int graphicy = (int)(PDA_LocalButton[id].y * newresy) + 0.0;
+    int texty = (int)(PDA_LocalButton[id].y * newresy) + 0.0;
+    
+    fixed alpha = (PDA_LocalButton[id].state == button_hovered) ? 1 : 0.6;
+    fixed xlabeloff = (strcmp(PDA_LocalButton[id].graphic, "PTAB") == 0) ? 4.0 : 0.0;
+    fixed ylabeloff = (strcmp(PDA_LocalButton[id].graphic, "PTAB") == 0) ? 3.0 : 0.0;
+    
+    
+    SetFont(PDA_LocalButton[id].graphic);
+    HudMessage(s:"A\n"; HUDMSG_ALPHA, PDA_LocalButton[id].id, CR_UNTRANSLATED, (PDA_LocalButton[id].x * newresx), graphicy + 10.0, 0, alpha);
+    
+    SetFont("PDAFONT");
+    HudMessage(s:PDA_LocalButton[id].label; HUDMSG_ALPHA, (PDA_LocalButton[id].id) + 20, CR_UNTRANSLATED, (PDA_LocalButton[id].x * newresx) + (xlabeloff * newresx), texty + (ylabeloff * newresy), 0, alpha);
+    
+    return PDA_LocalButton[id];
+}
+
+function PDAButton PDA_CreateTab(int id, str label, str graphic, float x, float y, int width, int height)
+{
+    PDA_LocalButton[id].id = id;
+    PDA_LocalButton[id].x = x;
+    PDA_LocalButton[id].y = y;
+    PDA_LocalButton[id].width = width;
+    PDA_LocalButton[id].height = height;
+    PDA_LocalButton[id].oldstate = PDA_LocalButton[id].state;
+    PDA_LocalButton[id].label = label;
+    PDA_LocalButton[id].graphic = graphic;
+    
+    if(CheckBounds(PDA_LocalButton[id]))
+    {
+        PDA_LocalButton[id].state = button_hovered;
+        PDA_LocalMouse.state = mouse_pointer;
+        
+        if(PDA_LocalButton[id].state != PDA_LocalButton[id].oldstate)
+        {
+            PDA_PlaySound("UI/PDA/Select", "pda/soldier", 80);
+        }
+       
+        if(PDA_LocalMouse.m1)
+        {
+            if(!(PDA_LocalMouse.oldState & BT_ATTACK))
+            {
+                PDA_PlaySound("UI/PDA/ChangePage", "pda/soldier", 80);
+                PDA_LocalButton[id].state = button_clicked;
+
+                PDA_ResetScroll()
+            }
+        }
+    }
+    else
+    {
+        PDA_LocalButton[id].state = button_none;
+        PDA_Local.playonce = false;
+        
+        if(PDA_LocalButton[id].state != PDA_LocalButton[id].oldstate)
+        {
+            PDA_LocalMouse.state = mouse_default;
+        }
+    }
+    
+    fixed alpha = (PDA_LocalButton[id].state == button_hovered) ? 1 : 0.6;
+    fixed xlabeloff = (strcmp(PDA_LocalButton[id].graphic, "PTAB") == 0) ? 4.0 : 0.0;
+    fixed ylabeloff = (strcmp(PDA_LocalButton[id].graphic, "PTAB") == 0) ? 3.0 : 0.0;
+    
+    SetFont(PDA_LocalButton[id].graphic);
+    HudMessage(s:"A\n"; HUDMSG_ALPHA, PDA_LocalButton[id].id, CR_UNTRANSLATED, PDA_LocalButton[id].x, PDA_LocalButton[id].y, 0, alpha);
+    
+    SetFont("PDAFONT");
+    HudMessage(s:PDA_LocalButton[id].label; HUDMSG_ALPHA, (PDA_LocalButton[id].id) + 20, CR_UNTRANSLATED, PDA_LocalButton[id].x + xlabeloff, PDA_LocalButton[id].y + ylabeloff, 0, alpha);
+    
+    return PDA_LocalButton[id];
+}
+
+function PDAButton PDA_CreateButton(int id, str label, str graphic, float x, float y, int width, int height, float gx, float gy)
+{
+    PDA_LocalButton[id].id = id;
+    PDA_LocalButton[id].x = x;
+    PDA_LocalButton[id].y = y;
+    PDA_LocalButton[id].width = width;
+    PDA_LocalButton[id].height = height;
+    PDA_LocalButton[id].oldstate = PDA_LocalButton[id].state;
+    PDA_LocalButton[id].label = label;
+    PDA_LocalButton[id].graphic = graphic;
+    
+    if(CheckBounds(PDA_LocalButton[id]))
+    {
+        PDA_LocalButton[id].state = button_hovered;
+        PDA_LocalMouse.state = mouse_pointer;
+        
+        if(PDA_LocalButton[id].state != PDA_LocalButton[id].oldstate)
+        {
+            PDA_PlaySound("UI/PDA/Select", "pda/soldier", 80);
+        }
+       
+        if(PDA_LocalMouse.m1)
+        {
+            if(!(PDA_LocalMouse.oldState & BT_ATTACK))
+            {
+                PDA_PlaySound("UI/PDA/ChangePage", "pda/soldier", 80);
+                PDA_LocalButton[id].state = button_clicked;
+
+                PDA_ResetScroll()
+            }
+        }
+    }
+    else
+    {
+        PDA_LocalButton[id].state = button_none;
+        PDA_Local.playonce = false;
+        
+        if(PDA_LocalButton[id].state != PDA_LocalButton[id].oldstate)
+        {
+            PDA_LocalMouse.state = mouse_default;
+        }
+    }
+    
+    fixed alpha = (PDA_LocalButton[id].state == button_hovered) ? 1 : 0.6;
+    
+    SetFont(PDA_LocalButton[id].graphic);
+    HudMessage(s:"A\n"; HUDMSG_ALPHA, PDA_LocalButton[id].id, CR_UNTRANSLATED, (int)(PDA_LocalButton[id].x * newresx) + gx, (int)(PDA_LocalButton[id].y * newresy) + gy, 0, alpha);
+    
+    SetFont("PDAFONT");
+    HudMessage(s:PDA_LocalButton[id].label; HUDMSG_ALPHA, (PDA_LocalButton[id].id) + 20, CR_UNTRANSLATED, (int)(PDA_LocalButton[id].x * newresx) + 4.1, (int)(PDA_LocalButton[id].y * newresy) + 3.0, 0, alpha);
+    
+    return PDA_LocalButton[id];
+}
+
+function PDAButton PDA_CreateAssemblyButton(int id, str graphic, str label, float x, float y, int width, int height, str assembly, str tooltip)
+{
+    PDA_LocalButton[id].id = id;
+    PDA_LocalButton[id].x = x;
+    PDA_LocalButton[id].y = y;
+    PDA_LocalButton[id].width = width;
+    PDA_LocalButton[id].height = height;
+    PDA_LocalButton[id].oldstate = PDA_LocalButton[id].state;
+    PDA_LocalButton[id].label = label;
+    PDA_LocalButton[id].graphic = graphic;
+    PDA_LocalButton[id].tooltip = tooltip;
+    
+    if(CheckBounds(PDA_LocalButton[id]))
+    {
+        PDA_LocalButton[id].state = button_hovered;
+        PDA_LocalMouse.state = mouse_pointer;
+        
+        if(PDA_LocalButton[id].state != PDA_LocalButton[id].oldstate)
+        {
+            PDA_PlaySound("UI/PDA/Select", "pda/soldier", 80);
+        }
+        
+        if(PDA_LocalMouse.m1 && !(PDA_LocalMouse.oldState & BT_ATTACK))
+        {
+            PDA_PlaySound("UI/PDA/ChangePage", "pda/soldier", 80);
+            PDA_LocalButton[id].state = button_clicked;
+            
+            PDA_Local.detailFetch[0] = assembly;
+            
+            if(strCmp(PDA_Local.detailFetch[0], "") != 0 )
+            {
+                PDA_SetCategory(PDA_ASSEMBLY_DETAIL);
+            }
+        }
+    }
+    else
+    {
+        PDA_LocalButton[id].state = button_none;
+        PDA_Local.playonce = false;
+        
+        if(PDA_LocalButton[id].state != PDA_LocalButton[id].oldstate)
+        {
+            PDA_LocalMouse.state = mouse_default;
+        }
+    }
+    
+    fixed alpha = (PDA_LocalButton[id].state == button_hovered) ? 1 : 0.6;
+    
+    int graphicy = (int)(PDA_LocalButton[id].y * newresy) + 0.0;
+    int texty = (int)(PDA_LocalButton[id].y * newresy) + 0.0;
+    
+    if(CheckBounds(PDA_LocalButton[id]) && strCmp(tooltip, "") != 0)
+    {
+        //SetHudClipRect(0, 0, 0, 0);
+        SetHudClipRect(PDA_RectX, PDA_ScrollableY+15, PDA_RectWidth+80, PDA_ScrollableHeight+60, PDA_RectWidth+10);
+        SetFont("PTIPM");
+        HudMessage(s:"A\n"; HUDMSG_ALPHA, PDA_TOOLTIPID, CR_UNTRANSLATED, PDA_RectX + 0.1, (int)(PDA_LocalMouse.y * newresy) + 10.1, 0, 0.9);
+        
+        SetFont("STAT_MNO");
+        SetHudSize(500, 400);
+        SetHudClipRect(PDA_RectX, PDA_ScrollableY+15, PDA_RectWidth+80, PDA_ScrollableHeight+165, PDA_RectWidth+10);
+        HudMessage(s:PDA_LocalButton[id].tooltip; HUDMSG_ALPHA, PDA_TOOLTIPID - 1, CR_UNTRANSLATED, PDA_RectX + 20.1, (int)(PDA_LocalMouse.y * (400 / oldresh)) + 30.1, 0, alpha);
+        
+        PDA_SetupBounds();
+    }
+    
+    SetFont(PDA_LocalButton[id].graphic);
+    if(strCmp(tooltip, "???") == 0)
+    {
+        HudMessage(s:"A\n"; HUDMSG_ALPHA, PDA_LocalButton[id].id, CR_UNTRANSLATED, (int)(PDA_LocalButton[id].x * newresx) + 25.1, graphicy + 20.0, 0, alpha);
+    }
+    else
+    {
+        HudMessage(s:"A\n"; HUDMSG_ALPHA, PDA_LocalButton[id].id, CR_UNTRANSLATED, (int)(PDA_LocalButton[id].x * newresx) + 25.1, graphicy + 20.0, 0, alpha);
+    }
+    
+    SetFont("STAT_MNO");
+    HudMessage(l:PDA_LocalButton[id].label; HUDMSG_ALPHA, PDA_LocalButton[id].id - 40, CR_UNTRANSLATED, (int)(PDA_LocalButton[id].x * newresx) + 50.1, texty + 4.0, 0, alpha);
+    
+    return PDA_LocalButton[id];
+}
+
+function PDAButton PDA_CreateBeastButton(int id, str label, str color, float x, float y, int width, int height, float xoff, float yoff, str beast, str unatcokillphrase)
+{
+    PDA_LocalButton[id].id = id;
+    PDA_LocalButton[id].x = x;
+    PDA_LocalButton[id].y = y;
+    PDA_LocalButton[id].width = width;
+    PDA_LocalButton[id].height = height;
+    PDA_LocalButton[id].oldstate = PDA_LocalButton[id].state;
+    PDA_LocalButton[id].label = label;
+    PDA_LocalButton[id].graphic = "";
+    
+    if(CheckBounds(PDA_LocalButton[id]))
+    {
+        PDA_LocalButton[id].state = button_hovered;
+        PDA_LocalMouse.state = mouse_pointer;
+        
+        if(PDA_LocalButton[id].state != PDA_LocalButton[id].oldstate)
+        {
+            PDA_PlaySound("UI/PDA/Select", "pda/soldier", 80);
+        }
+       
+        if(PDA_LocalMouse.m1)
+        {
+            if(!(PDA_LocalMouse.oldState & BT_ATTACK))
+            {
+                PDA_PlaySound("UI/PDA/ChangePage", "pda/soldier", 80);
+                PDA_LocalButton[id].state = button_clicked;
+
+                if(strcmp(beast, "") != 0 )
+                {
+                    PDA_Local.detailFetch[0] = beast;
+                    PDA_Local.detailFetch[1] = unatcokillphrase;
+                    
+                    PDA_SetCategory(PDA_BESTIARY_DETAIL);
+                }
+                
+                PDA_ResetScroll()
+            }
+        }
+    }
+    else
+    {
+        PDA_LocalButton[id].state = button_none;
+        PDA_Local.playonce = false;
+        
+        if(PDA_LocalButton[id].state != PDA_LocalButton[id].oldstate)
+        {
+            PDA_LocalMouse.state = mouse_default;
+        }
+    }
+    
+    fixed alpha = (PDA_LocalButton[id].state == button_hovered) ? 1 : 0.6;
+    int graphicy = (int)(PDA_LocalButton[id].y * newresy) + 0.0;
+    int texty = (int)(PDA_LocalButton[id].y * newresy) + 0.0;
+    
+    if(debug)
+    {
+        SetHudClipRect((int)PDA_LocalButton[id].x, (int)PDA_LocalButton[id].y, PDA_LocalButton[id].width, PDA_LocalButton[id].height);
+        SetFont("BTNBG");
+        HudMessage(s:"A\n"; HUDMSG_ALPHA, (PDA_LocalButton[id].id) + 20, CR_UNTRANSLATED, PDA_LocalButton[id].x, PDA_LocalButton[id].y, 0, alpha);
+        log("CREATE X %f: Y %f: W %i: H %i:", PDA_LocalButton[id].x, PDA_LocalButton[id].y, PDA_LocalButton[id].width, PDA_LocalButton[id].height);
+    }
+   
+    SetFont("PLON");
+    HudMessage(s:"A\n"; HUDMSG_ALPHA, PDA_LocalButton[id].id, CR_UNTRANSLATED, (PDA_LocalButton[id].x * newresx) + 5.0, graphicY + 0.1, 0, alpha);
+    
+    SetFont("STAT_MNO");
+    HudMessage(s:PDA_LocalButton[id].label; HUDMSG_ALPHA | HUDMSG_COLORSTRING, (PDA_LocalButton[id].id) + 20, color, (PDA_LocalButton[id].x * newresx) + 10.0, textY + 4.1, 0, alpha);
+    
+    return PDA_LocalButton[id];
+}
+
+function PDAButton PDA_DisplayArmor(int id, str label, str graphic, float x, float y, int width, int height, str tooltip, fixed opacity)
+{
+    PDA_LocalButton[id].id = id;
+    PDA_LocalButton[id].x = x;
+    PDA_LocalButton[id].y = y;
+    PDA_LocalButton[id].width = width;
+    PDA_LocalButton[id].height = height;
+    PDA_LocalButton[id].oldstate = PDA_LocalButton[id].state;
+    PDA_LocalButton[id].label = label;
+    PDA_LocalButton[id].graphic = graphic;
+    PDA_LocalButton[id].tooltip = tooltip;
+    
+    if(CheckBounds(PDA_LocalButton[id]))
+    {
+        PDA_LocalButton[id].state = button_hovered;
+        PDA_LocalMouse.state = mouse_pointer;
+       
+        if(PDA_LocalButton[id].state != PDA_LocalButton[id].oldstate)
+        {
+            PDA_PlaySound("UI/PDA/Select", "pda/soldier", 80);
+        }
+        if(PDA_LocalMouse.m1)
+        {
+            if(!(PDA_LocalMouse.oldState & BT_ATTACK))
+            {
+                PDA_LocalButton[id].state = button_clicked;
+            }
+        }
+    }
+    else
+    {
+        PDA_LocalButton[id].state = button_none;
+        PDA_Local.playonce = false;
+        
+        if(PDA_LocalButton[id].state != PDA_LocalButton[id].oldstate)
+        {
+            PDA_LocalMouse.state = mouse_default;
+        }
+    }
+    
+    fixed alpha = (PDA_LocalButton[id].state == button_hovered) ? opacity : opacity - 0.15;
+    fixed xlabeloff = 4.0;
+    fixed ylabeloff = 3.0;
+    
+    int graphicy = (int)(PDA_LocalButton[id].y * newresy) + 0.0;
+    int texty = (int)(PDA_LocalButton[id].y * newresy) + 0.0;
+    
+    if(CheckBounds(PDA_LocalButton[id]) && strCmp(tooltip, "") != 0)
+    {
+        //SetHudClipRect(0, 0, 0, 0);
+        
+        SetHudClipRect(PDA_RectX, PDA_ScrollableY+15, PDA_RectWidth+80, PDA_ScrollableHeight+60, PDA_RectWidth+10);
+        
+        SetFont("PTIP");
+        HudMessage(s:"A\n"; HUDMSG_ALPHA, PDA_TOOLTIPID, CR_UNTRANSLATED, PDA_RectX + 0.1, (int)(PDA_LocalMouse.y * newresy) + 20.1, 0, 0.9);
+        
+        SetFont("STAT_MNO");
+        HudMessage(s:PDA_LocalButton[id].tooltip; HUDMSG_ALPHA, PDA_TOOLTIPID - 1, CR_UNTRANSLATED, PDA_RectX + 10.1, (int)(PDA_LocalMouse.y * newresy) + 30.1, 0, alpha);
+        
+        PDA_SetupBounds();
+    }
+    
+    SetFont(StrParam("%l:", PDA_LocalButton[id].graphic));
+    HudMessage(s:"A\n"; HUDMSG_ALPHA, PDA_LocalButton[id].id, CR_UNTRANSLATED, (int)(PDA_LocalButton[id].x * newresx) - 5.1, graphicy + (height / 2) + 3.0, 0, alpha);
+    
+    SetFont("STAT_LWR");
+    HudMessage(l:PDA_LocalButton[id].label; HUDMSG_ALPHA, (PDA_LocalButton[id].id) + 1, CR_UNTRANSLATED, (int)(PDA_LocalButton[id].x * newresx) + 35.1, texty + (height / 2) + 2.0, 0, alpha);
+    
+    return PDA_LocalButton[id];
+}
+
+/*
+struct Button
+{
+    int x, y;
+    int penisSize;
+}
+
+function Button MakeButton(int x, int y)
+{
+    Button btn = { x, y, 69 };
+    return btn;
+}
+*/
+
+function PDAButton PDA_CreateModPackDisplay(int id, str graphic, str name, float x, float y, int width, int height)
+{
+    PDA_LocalButton[id].id = id;
+    PDA_LocalButton[id].x = x;
+    PDA_LocalButton[id].y = y;
+    PDA_LocalButton[id].width = width;
+    PDA_LocalButton[id].height = height;
+    PDA_LocalButton[id].oldstate = PDA_LocalButton[id].state;
+    PDA_LocalButton[id].label = name;
+    PDA_LocalButton[id].graphic = graphic;
+    
+    if(CheckBounds(PDA_LocalButton[id]))
+    {
+        PDA_LocalButton[id].state = button_hovered;
+        PDA_LocalMouse.state = mouse_pointer;
+        
+        if(PDA_LocalButton[id].state != PDA_LocalButton[id].oldstate)
+        {
+            PDA_PlaySound("UI/PDA/Select", "pda/soldier", 80);
+        }
+        
+        if(PDA_LocalMouse.m1 && !(PDA_LocalMouse.oldState & BT_ATTACK))
+        {
+            PDA_LocalButton[id].state = button_clicked;
+            PDA_PlaySound("UI/PDA/UseCategory", "pda/soldier", 80);
+        }
+    }
+    else
+    {
+        PDA_LocalButton[id].state = button_none;
+        
+        if(PDA_LocalButton[id].state != PDA_LocalButton[id].oldstate)
+        {
+            PDA_LocalMouse.state = mouse_default;
+        }
+    }
+    
+    fixed alpha = (PDA_LocalButton[id].state == button_hovered) ? 1 : 0.6;
+    
+    //int graphicy = (int)(PDA_LocalButton[id].y * newresy) + 15.0;
+    
+    int graphicy = (int)(PDA_LocalButton[id].y * newresy) + 14.0;
+    
+    SetFont(PDA_LocalButton[id].graphic);
+    HudMessage(s:"A\n"; HUDMSG_ALPHA, PDA_MODIDRANGE - PDA_LocalButton[id].id, CR_UNTRANSLATED, (int)(PDA_LocalButton[id].x * newresx) + 15.1, graphicy, 0, alpha);
+    
+    SetFont("STAT_MNO");
+    
+    return PDA_LocalButton[id];
+}
+
+#define PDA_InitButton(button, incat, catpage, message) \
+{ \
+    switch(button.state) \
+    { \
+        case button_clicked: \
+            if(!incat) \
+            { \
+                PDA_SetCategory(catpage); \
+                if(PDA_Local.category != PDA_ASSEMBLY_DETAIL) \
+                { \
+                    PDA_Local.page = 1; \
+                    PDA_LocalMouse.state = mouse_default; \
+                } \
+            } \
+            if(incat) \
+            { \
+                if(PDA_Local.category != 0 && PDA_Local.page >= 0) \
+                { \
+                    PDA_Local.page = catpage; \
+                    PDA_Local.scrollingy = 20.0; \
+            PDA_LocalMouse.state = mouse_default; \
+                } \
+            } \
+            break; \
+        case button_hovered: \
+            if(strcmp(message, "") != 0) \
+            { \
+                SetFont("PDAFONT"); \
+                SetHudClipRect(DES_RECTX, DES_RECTY, DES_RECTWIDTH, DES_RECTHEIGHT, DES_RECTWIDTH); \
+                HudMessage(s:message; HUDMSG_PLAIN, PDA_CAT_DESCRIPTION, CR_UNTRANSLATED, DES_RECTX + 0.1, DES_RECTY + 0.1, 0); \
+            } \
+            break; \
+    } \
+} \
+
+function int CheckPointerInventory(str item, int pn)
+{
+	SetActivator(0, AAPTR_PLAYER1 << pn);
+	return CheckInventory(item);
+}
+
+// Debugging functions for SetHudClipRect
+function void PrintSprite(str Sprite, int ID, fixed X, fixed Y, fixed DelayTime)
+{
+    SetFont(Sprite);
+    HudMessage("A\n"; HUDMSG_PLAIN, ID, CR_UNTRANSLATED, X, Y, DelayTime);
+}
+
+function void DrawBorder(int X, int Y, int Width, int Height)
+{
+	SetHudClipRect(X, Y, Width, Height);
+	PrintSprite("BarHorz", 0, X, Y, 0.05);
+	PrintSprite("BarHorz", 0, X, Y + Height - 1, 0.05);
+	PrintSprite("BarVert", 0, X, Y, 0.05);
+	PrintSprite("BarVert", 0, X + Width - 1, Y, 0.05);
+	SetHudClipRect(0, 0, 0, 0);
+	SetFont("");
+}
+
+// Useful for scroll arrows
+function void DisplayIcon(str Sprite, int ID, fixed X, fixed Y, fixed DelayTime, fixed Alpha)
+{
+    SetFont(Sprite);
+    HudMessage(s:"A\n"; HUDMSG_ALPHA, ID, CR_UNTRANSLATED, X, Y, DelayTime, Alpha);
+	PDA_DefaultFont();
+}
+
+function void DisplayArmorIcon(str Sprite, int ID, fixed X, fixed Y, fixed Alpha)
+{
+    SetFont(StrParam("%l:", Sprite));
+    HudMessage(s:"A\n"; HUDMSG_ALPHA, ID, CR_UNTRANSLATED, X, Y, 0, Alpha);
+	SetFont("STAT_MNO");
+}
+
+function int batoi(str stri) 
+{ 
+    int res = 0; 
+
+    for (int i = 0; stri[i] != '\0'; ++i) 
+    {
+        res = res*10 + stri[i] - '0';
+    }
+
+    return res;
+} 
+
+function int SetInventory(str Item, int Count)
+{
+    int n = Count - CheckInventory(Item);
+    
+    if (n > 0)
+        GiveInventory(Item, n);
+    else if (n < 0)
+        TakeInventory(Item, -n);
+    
+    return n;
+}
+
+// Setup scrolling arrows for pages with lots of text 
+function void PDA_SetScrollArrows(int scrollDownMax)
+{
+	if(PDA_Local.scrollingy >= 0)
+		DisplayIcon("RLZARU", PDA_SCROLLUPID, PDA_RectWidth + 0.1, PDA_RectHeight + 0.1, 0, 0.0);
+	else
+		DisplayIcon("RLZARU", PDA_SCROLLUPID, PDA_RectWidth + 0.1, PDA_RectY + 10.1, 0, 0.5);
+
+
+	if(PDA_Local.scrollingy <= scrollDownMax)
+		DisplayIcon("RLZARD", PDA_SCROLLDNID, PDA_RectWidth + 0.1, PDA_RectHeight + 0.1, 0, 0.0);
+	else
+		DisplayIcon("RLZARD", PDA_SCROLLDNID, PDA_RectWidth + 0.1, PDA_RectHeight + 0.1, 0, 0.5);
+}
+
+function void PDA_SetScrollArrows2(int scrollDownMax, float x, float y)
+{
+    bool notbot = PDA_Local.scrollingy > scrollDownMax;
+    bool nottop = PDA_Local.scrollingy < 0;
+    
+    if(notbot) DisplayIcon("RLZARD", PDA_SCROLLDNID, x, y, 0, 0.5);
+    if(nottop) DisplayIcon("RLZARU", PDA_SCROLLUPID, x, PDA_RectY + 40.1, 0, 0.5);
+}
+
+// THEN ERASE THEM FROM REALITY
+function void PDA_UnsetScrollArrows(void)
+{
+	DisplayIcon("RLZARU", PDA_SCROLLUPID, PDA_RectWidth + 0.1, PDA_RectY + 10.1, 0, 0);
+	DisplayIcon("RLZARD", PDA_SCROLLDNID, PDA_RectWidth + 0.1, PDA_RectHeight + 0.1, 0, 0);
+}
+
+function void PDA_SetScrollWindow(int scrollDownMax)
+{
+	SetHudClipRect(PDA_RectX, PDA_ScrollableY, PDA_RectWidth, PDA_ScrollableHeight, PDA_RectWidth);
+	PDA_SetScrollArrows(scrollDownMax);
+}
+
+function void PDA_UnsetScrollWindow(void)
+{
+	SetHudClipRect(PDA_RectX, PDA_RectY, PDA_RectWidth, PDA_RectHeight, PDA_RectWidth);
+}
+
+// Instead of clogging up the script, just do it here.
+function void PDA_EstablishModLimits(void)
+{
+	if(CheckInventory("RLStandardWeaponToken") || CheckInventory("RLExoticWeaponToken"))
+    {
+		PDA_Local.maxmodlimit = 4;
+    }
+
+	if(CheckInventory("RLSuperiorWeaponToken") || CheckInventory("RLBasicAssemblyTypeWeapon"))
+    {
+		PDA_Local.maxmodlimit = 2;
+    }
+
+	if(CheckInventory("RLUniqueWeaponToken") || CheckInventory("RLDemonicWeaponToken") || CheckInventory("RLLegendaryWeaponToken") || CheckInventory("RLAdvancedAssemblyTypeWeapon"))
+    {
+		if(StrCmp(GetWeapon(),"RLDuke2Rifle") == 0 || StrCmp(GetWeapon(),"RLChameleonRifle") == 0 || StrCmp(GetWeapon(),"RLWidowmakerSMG") == 0)
+			PDA_Local.maxmodlimit = 3;
+		else
+			PDA_Local.maxmodlimit = 1;
+    }
+
+	if(CheckInventory("RLMasterAssemblyTypeWeapon") || CheckInventory("RLSuperiorAssembledWeaponToken"))
+    {
+		PDA_Local.maxmodlimit = 0;
+    }
+}
+
+// Returns a fixed point value
+// Thanks, ZD wiki!
+function int ryansfloorisdirty(int fixedNumber)
+{
+	return fixedNumber & 0xFFFF0000;
+}

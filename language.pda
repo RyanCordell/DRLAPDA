@@ -1,0 +1,274 @@
+[enu default]
+
+PDA_BLANK =
+	"";
+
+PDA_MENU_HEADER =
+	"Main menu";
+
+PDA_VERSION_NUMBER =
+	"Peggles OS v1.1";
+
+PDA_PDAHELP_HEADER =
+	"PDA Help";
+PDA_PDAHELP_FIRSTTIME =
+	"Once you're done reading, the PDA will automatically recognize you as having used this the first time!" "\n\n\n";
+PDA_PDAHELP_KEYS_UP =
+	"Press \cfUP\c- to move up in the menu, or scroll text downwards." "\n\n";
+PDA_PDAHELP_KEYS_DOWN =
+	"Press \cfDOWN\c- to move down in the menu, or scroll text upwards." "\n\n";
+PDA_PDAHELP_KEYS_LEFT =
+	"Press \cfLEFT\c- to move left in the menu, or change pages to the left." "\n\n";
+PDA_PDAHELP_KEYS_RIGHT =
+	"Press \cfRIGHT\c- to move right in the menu, or change pages to the right." "\n\n";
+PDA_PDAHELP_KEYS_M1 =
+	"Press \cfM1\c- to use a (highlighted) item in the menu." "\n\n";
+PDA_PDAHELP_KEYS_M2 =
+	"Press \cfM2\c- to back out of a category." "\n\n";
+PDA_PDAHELP_KEYS_RUNUP =
+	"Press \cfRUN+UP\c- to go up a monster page in the Bestiary." "\n\n";
+PDA_PDAHELP_KEYS_RUNDOWN =
+	"Press \cfRUN+DOWN\c- to go down a monster page in the Bestiary." "\n\n";
+PDA_PDAHELP_KEYS_RUNLEFT =
+    "Press \cfRUN+LEFT\c- to select a modpack in the second weapons page." "\n\n";
+PDA_PDAHELP_KEYS_RUNRIGHT =
+    "Press \cfRUN+RIGHT\c- to select a modpack in the second weapons page." "\n\n";
+PDA_PDAHELP_CONTROLS =
+    "The PDA uses the mouse for its main source of controls. Scrolling is done\n"
+    "by dragging the screen up and down during a click event." "\n\n";
+PDA_PDAHELP_MOUSE1 =
+    "is used to click on any given button to take the user to a category or subpage" "\n\n";
+PDA_PDAHELP_MOUSE2 =
+    "is used to navigate backwards from a category onto the main menu. Subpages bring you back to the parent page, however."  "\n\n";
+PDA_PDAHELP_YAXIS =
+    "can be used to navigate up and down the PDA.";
+PDA_PDAHELP_XAXIS =
+    "can be used to navigate left and right in the PDA.";
+
+PDA_DRLAHELP_HEADER =
+	"DoomRL Arsenal Help";
+PDA_DRLAHELP_DROPITEM =
+	"To drop items from your inventory, press the \cfINV USE\c- key once, then the \cfDROP ITEM\c- key afterwards" "\n\n";
+PDA_DRLAHELP_BACKPACK =
+	"To use a special backpack, press the \cfUSE\c- key twice while standing on it." "\n\n";
+PDA_DRLAHELP_CRATE =
+	"If you see a \cudark gray crate\c-, shoot it. Odds are, you'll get weapons, ammo, or even rare and exotic equipment!" "\n\n";
+
+PDA_CLASS_HEADER1 =
+	"Perks";
+PDA_CLASS_HEADER2 =
+	"Backstory";
+
+PDA_WEAPON_HEADER =
+	"Current weapon & perks";
+PDA_WEAPON_PERKUNAVAILABLE =
+	"Class perk does not apply to this weapon";
+
+PDA_MODPACK_HEADER =
+	"Installed mods";
+PDA_MODPACK_MAXSUPPORTED =
+	"Max supported mods: ";
+
+PDA_DEMONARTIFACT_HEADER =
+	"Applied demon artifacts";
+PDA_DEMONARTIFACTS_ZERO =
+	"Zero artifacts";
+PDA_DEMONARTIFACTS_ONE =
+	"One artifact";
+PDA_DEMONARTIFACTS_TWO =
+	"Two artifacts";
+PDA_DEMONARTIFACTS_THREE =
+	"Three artifacts";
+PDA_DEMONARTIFACTS_NOTSUPPORTED =
+	"This weapon does not support demonic artifacts";
+
+PDA_DETAILEDASSEMBLY_HEADER =
+	"Assembly description";
+PDA_DETAILEDBEAST_HEADER =
+	"Monster information";
+    
+PDA_PONG_HEADER1 =
+    "PADDLE WAR 2: REVENGEANCE";
+PDA_PONG_HEADER2 =
+    "PADDLE WAR 2: Issue Challenge";
+PDA_PONG_HEADER3 =
+    "PADDLE WAR 2: Solo";
+
+PDA_ARMOR_HEADER1 =
+	"In inventory";
+PDA_ARMOR_HEADER2 =
+	"Information";
+
+PDA_BESTIARY_HEADER =
+	"Bestiary ";
+PDA_BESTIARY_HEADER_UV =
+	"Bestiary " "(\ccUV or below\c-)";
+PDA_BESTIARY_HEADER_NM =
+	"Bestiary " "(\c[Red]Nightmare\c-)";
+PDA_BESTIARY_HEADER_TP =
+	"Bestiary " "(\c[Blue]Technophobia\c-)";
+PDA_BESTIARY_HEADER_AR =
+	"Bestiary " "(\cfArmageddon\c-)";
+PDA_BESTIARY_HEADER_SP =
+	"Bestiary " "(\cfSpecial\c-)";
+PDA_BESTIARY_NOMONSTERS =
+	"Nothing detected.";
+
+PDA_BESTIARY_DEFAULT_NAME = "\cd""Name:\c- UNDISCOVERED\n";
+PDA_BESTIARY_DEFAULT_KILLS = "\cd""No. of Kills:\c- ??";
+PDA_BESTIARY_DEFAULT_HEALTH = "\cd""Health:\c- ???\n";
+PDA_BESTIARY_DEFAULT_RESISTANCES = "\cd""Resistances:\c-"    "\n"
+                                        "?%     \cjMelee\c-  \n"
+                                        "?%     \cuBullet\c- \n"
+                                        "?%     \cgFire\c-   \n"
+                                        "?%     \chPlasma\c- \n";
+PDA_BESTIARY_DEFAULT_DESC = "\cd""Drops:\c- \cj???\c-\n"
+                            "???\n";
+
+PDA_ITEMS_HEADER =
+	"Items";
+
+PDA_MISC_HEADER =
+	"Misc";
+
+PDA_CREDITS_HEADER =
+	"Credits";
+PDA_DEV_TEAM =
+	"	\cf-=DOOMRL ARSENAL=-\c-\n\n"
+	"	\crLEAD DEV\c-			\n"
+	"	\cfYholl\c-  			\n"
+	"							\n\n"
+	"	\cdSBARINFO devs\c-		\n"
+	"	amv2k9					\n"
+	"							\n\n"
+	"	\cdSprite artists\c-	\n"
+	"	Seryder					\n"
+	"	SoloSpaghetti			\n"
+	"	Ryan Cordell			\n"
+	"	Sgt. Shivers			\n"
+	"							\n\n"
+	"	\cdProgramming\c-		\n"
+	"	Kyle873					\n"
+	"	Marrub					\n"
+	"	Ryan Cordell			\n"
+	"	InsanityBringer			\n"
+	"							\n\n"
+	"	\cdSpecial thanks to\c-	\n"
+	"	GAA1992					\n"
+	"	1337spy					\n"
+	"	/|rchon					\n"
+	"	abbuw					\n"
+	"	Alex_Mercer				\n"
+	"	Bane					\n"
+	"	BatteryBlack			\n"
+	"	Bgraybr					\n"
+	"	Blox					\n"
+	"	Blue Shadow				\n"
+	"	Bren_					\n"
+	"	BouncyTEM				\n"
+	"	Carbine Dioxide			\n"
+	"	Captain Toenail			\n"
+	"	Captain J				\n"
+	"	Crudux Cruo				\n"
+	"	Daniel					\n"
+	"	DBThanatos				\n"
+	"	DoomNukem				\n"
+	"	Edward850				\n"
+	"	Eriance					\n"
+	"	Freedoom				\n"
+	"	Geonightman				\n"
+	"	HellCattX				\n"
+	"	IMX						\n"
+	"	IskatuMesk				\n"
+	"	JoeyTD					\n"
+	"	Kate					\n"
+	"	Kinsie					\n"
+	"	Kribbulous				\n"
+	"	Marty Kirra				\n"
+	"	Mike12					\n"
+	"	Minigunner				\n"
+	"	NeuralStunner			\n"
+	"	NMN						\n"
+	"	osjclatchford			\n"
+	"	Per Kristian			\n"
+	"	PillowBlaster			\n"
+	"	QuickShotGunman			\n"
+	"	Ranik					\n"
+	"	Scalliano				\n"
+	"	Sgt. Mark IV			\n"
+	"	SidDoyle				\n"
+	"	SladeEXE				\n"
+	"	Slax					\n"
+	"	Solmyr					\n"
+	"	That_One_Doom_Mod		\n"
+	"	TerminusEst13			\n"
+	"	The Skulltag Team		\n"
+	"	torridGristle			\n"
+	"	Turbo					\n"
+	"	Warhawk					\n"
+	"	WhiteFang				\n"
+	"	Wildweasel				\n"
+	"	Xim						\n"
+	"	Zedek the Plague Doctor / Uboa	\n"
+	"	Zrrion the Insect		\n"
+	"	Zero X. Diamond			\n"
+	"	ZikShadow				\n"
+	"							\n\n"
+	"	Monolith Productions	\n"
+	"	Lobotomy Software		\n"
+	"	3d Realms				\n"
+	"	Epic Games				\n"
+	"	Banjo Software			\n"
+	"	Infinity Ward			\n"
+	"	Id Software				\n"
+	"	Valve Software			\n"
+	"	STUDIO RADI-8			\n"
+	"							\n\n"
+	"	\cf-=DOOMRL MONSTERPACK=-\c-\n\n"
+	"	\crLEAD DEV\c-			\n"
+	"	\cfYholl\c-  			\n"
+	"							\n\n"
+	"	\cdSpecial thanks to\c-	\n"
+	"	AgentSpork				\n"
+	"	Aubrey Hodges			\n"
+	"	Ben2k9					\n"
+	"	Bloax					\n"
+	"	BlueFireZ88				\n"
+	"	Captain Toenail			\n"
+	"	Carnevil				\n"
+	"	DavidRaven				\n"
+	"	DeVloek					\n"
+	"	Draken					\n"
+	"	Dreadopp				\n"
+	"	Eriance					\n"
+	"	Gez						\n"
+	"	Ghastly Dragon			\n"
+	"	Hetdegon				\n"
+	"	IMX						\n"
+	"	ItsNatureToDie			\n"
+	"	jaws45					\n"
+	"	LilWhiteMouse			\n"
+	"	Marty Kirra				\n"
+	"	Megaherz				\n"
+	"	Nash					\n"
+	"	Neoworm					\n"
+	"	NMN						\n"
+	"	Onslaught Six			\n"
+	"	Revenant100				\n"
+	"	Ryan Cordell			\n"
+	"	Seryder					\n"
+	"	Sgt. Shivers			\n"
+	"	SoloSpaghetti			\n"
+	"	Sergeant Mark IV		\n"
+	"	Skulltag team			\n"
+	"	Spectator				\n"
+	"	Tormentor667			\n"
+	"	torridGristle			\n"
+	"	Vader					\n"
+	"	Virtue					\n"
+	"	Xim						\n"
+	"	Yuraofthehairfan		\n"
+	"	Zrrion the Insect		\n"
+	;
+
+// EOF

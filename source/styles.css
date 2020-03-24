@@ -1,0 +1,35 @@
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+    
+
+html,
+body {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    background-color: #010101;
+}
+
+.main {
+    padding: 20px;
+    color: #EAF3FD;
+}
+
+.main__header {
+    color: #EAF3FD;
+}
+
+.main__instructions {
+    color: #C2C7CC;
+}
+
+.file {
+    
+}
+
+.file__select {
+    border: 1px dotted #eaf3fd;
+    padding: 5px;
+}

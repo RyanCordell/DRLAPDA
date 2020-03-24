@@ -1,0 +1,47 @@
+[enu default]
+
+PDA_BACKPACK_BASIC_ICON = "BPK032X";
+PDA_BACKPACK_BASIC_NAME = "\ccBackpack\c-";
+PDA_BACKPACK_BASIC_INFO = "";
+PDA_BACKPACK_BASIC_DESC =
+"\ccDoubles your ammo capacity,\n"
+"how many phase devices, skulls and\n"
+"armors/boots you can carry.\c-";
+
+PDA_BACKPACK_COMBAT_ICON = "BPK132X";
+PDA_BACKPACK_COMBAT_NAME = "\ccCombat Backpack\c-";
+PDA_BACKPACK_COMBAT_INFO = "";
+PDA_BACKPACK_COMBAT_DESC =
+"\ccGrants +50% extra ammo for everything.\n"
+"\c[Orange]All Special Backpacks add their effects over the basic Backpack's ammo increase.\c-";
+
+PDA_BACKPACK_SPECIALIST_ICON = "BPK232X";
+PDA_BACKPACK_SPECIALIST_NAME = "\ccSpecialist Backpack\c-";
+PDA_BACKPACK_SPECIALIST_INFO = "";
+PDA_BACKPACK_SPECIALIST_DESC =
+"\ccGrants +100% extra ammo for a chosen type.\c-\n"
+"\c[Orange]All Special Backpacks add their effects over the basic Backpack's ammo increase.\c-";
+
+PDA_BACKPACK_SCROUNGER_ICON = "BPK332X";
+PDA_BACKPACK_SCROUNGER_NAME = "\ccScrounger Backpack\c-";
+PDA_BACKPACK_SCROUNGER_INFO = "";
+PDA_BACKPACK_SCROUNGER_DESC =
+"\ccLets the player receive extra chosen ammo\}"
+"from other ammo sources.\c-\n"
+"\c[Orange]All Special Backpacks add their effects over the basic Backpack's ammo increase.\c-";
+
+PDA_BACKPACK_DEDICATED_ICON = "BPK432X";
+PDA_BACKPACK_DEDICATED_NAME = "\ccDedicated Backpack\c-";
+PDA_BACKPACK_DEDICATED_INFO = "+600% extra chosen ammo, -???% non-chosen";
+PDA_BACKPACK_DEDICATED_DESC =
+"\cc600% extra chosen ammo.\n"
+"Greatly reduced non-chosen ammo.\n"
+"Also increases ammo pickups of the chosen type.\c-\n"
+"\c[Orange]All Special Backpacks add their effects over the basic Backpack's ammo increase.\c-";
+
+PDA_BACKPACK_NUCLEAR_ICON = "BPK532X";
+PDA_BACKPACK_NUCLEAR_NAME = "\ccNuclear Backpack\c-";
+PDA_BACKPACK_NUCLEAR_INFO = "";
+PDA_BACKPACK_NUCLEAR_DESC = "\ccRecharges cell ammo constantly.\n"
+"Jury's out on whether it's 'nuclear' or 'nucular' though..\c-\n"
+"\c[Orange]All Special Backpacks add their effects over the basic Backpack's ammo increase.\c-";

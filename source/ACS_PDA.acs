@@ -1,0 +1,343 @@
+#pragma define_raw  on
+#pragma fixed       on
+#pragma block_scope on
+
+#include "zcommon.acs"
+#library "ACS_PDA"     // [marrub] This should be after zcommon.acs. (Don't ask me why.)
+#include "PDA_LIB.ach" // Stores IDs, arrays and other things the PDA uses.
+#include "PDA_MOD.ach" // Stores information about modpack effects on weapons
+#include "PDA_ARM.ach" // Stores information about armor and armor related things
+#include "PDA_ASM.ach" // Stores basic and detailed information on assemblies
+#include "PDA_BES.ach" // i'm da
+#include "PDA_ITM.ach" // Stores information about the many items in DRLA
+#include "PDA_FNC.ach"
+#include "ACS_INP.acs" // PDA input tracker, made separate for better responsiveness
+#include "ACS_PNG.acs" // PDA Pong minigame
+
+// [marrub] This is a pretty cool hack
+script "PDA_CheckPlayer1Inventory" (str name)
+{
+   SetActivator(0, AAPTR_PLAYER1);
+   SetResultValue(CheckInventory(name));
+}
+
+script "PDA_GiveEveryoneInventory" (str name)
+{
+   SetActivator(0, AAPTR_NULL);
+   GiveInventory(name, 1);
+   SetResultValue(1);
+}
+
+script "PDA_SetEveryoneInventory" (str name)
+{
+   SetActivator(0, AAPTR_NULL);
+   SetInventory(name, 1);
+   SetResultValue(1);
+}
+
+SCRIPT "HeyADollar" enter
+{
+    int kcount;
+    for(int page = 0; page < DRLA_DIFFICULTYTIERS; page++)
+    {
+        for(int m = 0; m < DRLA_MONSTER_PAGE_MAX; m++)
+        {
+            kcount = StrParam("%s:KillCounter", DRLA_Bestiary[page][m][beast_TOKEN]);
+            monsterCheck[page][m]  = CheckInventory(kcount);
+            if(CheckPointerInventory(kcount, PlayerNumber()) > 0)
+            {
+                PDA_SetEveryoneInventory(kcount);
+            }
+        }
+    }
+    for(int i = 0; i < (DRLA_BASICMAX + DRLA_ADVANCEDMAX + DRLA_MASTERMAX); i++)
+    {
+        if(CheckInventory(DRLA_Assemblies[i][0])) PDA_SetEveryoneInventory(DRLA_Assemblies[i][0]);
+    }
+    for(int e = 0; e < EXOTICEFFECTS_MAX; e++)
+    {
+        if(CheckInventory(DRLA_UniqueSniperEffects[e][1])) PDA_SetEveryoneInventory(DRLA_UniqueSniperEffects[e][1]);
+        if(CheckInventory(DRLA_UniqueFirestormEFfects[e][1])) PDA_SetEveryoneInventory(DRLA_UniqueFirestormEFfects[e][1]);
+        if(CheckInventory(DRLA_UniqueNanoEffects[e][1])) PDA_SetEveryoneInventory(DRLA_UniqueNanoEffects[e][1]);
+    }
+    
+    Delay(4);
+}
+
+SCRIPT "SyncPDA" (void) net
+{
+    int kcount;
+    for(int page = 0; page < DRLA_DIFFICULTYTIERS; page++)
+    {
+        for(int m = 0; m < DRLA_MONSTER_PAGE_MAX; m++)
+        {
+            kcount = StrParam("%s:KillCounter", DRLA_Bestiary[page][m][beast_TOKEN]);
+            monsterCheck[page][m]  = CheckInventory(kcount);
+            if(CheckPointerInventory(kcount, PlayerNumber()) > 0)
+            {
+                SetInventory(kcount, 1);
+            }
+        }
+    }
+    for(int i = 0; i < (DRLA_BASICMAX + DRLA_ADVANCEDMAX + DRLA_MASTERMAX); i++)
+    {
+        if(CheckInventory(DRLA_Assemblies[i][0]))
+        {
+            SetInventory(DRLA_Assemblies[i][0], 1);
+        }
+    }
+    for(int e = 0; e < EXOTICEFFECTS_MAX; e++)
+    {
+        if(CheckInventory(DRLA_UniqueSniperEffects[e][1])) SetInventory(DRLA_UniqueSniperEffects[e][1], 1);
+        if(CheckInventory(DRLA_UniqueFirestormEFfects[e][1])) SetInventory(DRLA_UniqueFirestormEFfects[e][1], 1);
+        if(CheckInventory(DRLA_UniqueNanoEffects[e][1])) SetInventory(DRLA_UniqueNanoEffects[e][1], 1);
+    }
+}
+
+// [marrub] Static init stuff
+script "PDA_GSInit" open
+{
+   for(int i = 0; i < MAX_PLAYERS; i++)
+   {
+      PDA_Info[i].active = false;
+      PDA_Info[i].pongrunning = false;
+      
+      PDA_Info[i].category = 0;
+      PDA_Info[i].page = 1;
+      PDA_Info[i].pagemax = 0;
+      
+      PDA_Info[i].texty = 0;
+      PDA_Info[i].maxtexty = -200;
+      PDA_Info[i].scrollingy = 20.0;
+      
+      PDA_Info[i].clicked = false;
+      PDA_Info[i].newEntry[0] = false;
+      
+      PDA_Info[i].assemblyoffset = 0;
+      PDA_Info[i].currentassembly = 0;
+      PDA_Info[i].maxassembliesper = 255;
+      
+      PDA_Info[i].playonce = false;
+      
+      PDA_Info[i].maxmodlimit = 0;
+      PDA_Info[i].detailFetch[i] = "null";
+      /*PDA_Mouse[i].x = 0;
+      PDA_Mouse[i].y = 0;
+      PDA_Mouse[i].m1 = false;
+      PDA_Mouse[i].m2 = false;
+      PDA_Mouse[i].pollRate = 1;*/
+   }
+}
+// Display terminal
+SCRIPT "PDA_Display" (void) net
+{
+    SetHudSize(320,200,0);
+    PDA_HasEquipment();
+    
+    if(!localOneEquipFirst)
+    {
+        if(localHasArmor)
+        {
+            localABoolField = localHasArmor<<0;
+            localOneEquipFirst = true;
+        }
+        if(localHasBoots)
+        {
+            localABoolField = localHasBoots<<1;
+            localOneEquipFirst = true;
+        }
+        if(localHasBackpack)
+        {
+            localABoolField = localHasBackpack<<2;
+            localOneEquipFirst = true;
+        }
+    }
+    else
+    {
+        if(!localHasArmor && !localHasBoots && !localHasBackpack) localOneEquipFirst = false;
+    }
+
+    #region PDA_Active
+    if(!PDA_Local.active)
+    {
+        PDA_UnsetScrollArrows();
+
+        SetPlayerProperty(0,1,PROP_TOTALLYFROZEN);
+
+        // No more murdering people while browsing your iP- er, PDA!
+        GiveInventory("RLSynthFireDisabled",1);
+
+        FadeTo(0, 0, 0, 0.5, 0.0);
+
+        DisplayIcon("RLZPDA2", PDA_ID, 0.5, 0.5, 0, 1);
+        
+        PDA_PlaySound("UI/PDA/Online", "pda/soldieropen", 80);
+
+        
+        ACS_NamedExecuteAlways("PDA_MouseController",0);
+        //ACS_NamedExecuteAlways("PDA_TrackKeys",0);
+        ACS_NamedExecuteAlways("PDA_Core",0);
+
+        PDA_Local.active = true;
+    }
+    #endregion
+    #region PDA_Closed
+    else
+    {
+        PDA_NOPONG();
+        PDA_Wipe();
+        ACS_NamedExecuteAlways("QuitPong",0);
+        PDA_UnsetScrollArrows();
+        DisplayIcon("RLZPDA", PDA_ID, 0.5, 0.5, 0, 0);
+        
+        SetPlayerProperty(0,0,PROP_TOTALLYFROZEN);
+        TakeInventory("RLSynthFireDisabled",1);
+        FadeTo(0, 0, 0, 0.0, 0.0);
+        
+        if(PDA_Local.category == PDA_CREDITS) SetMusic("*");
+      
+        PDA_PlaySound("UI/PDA/Offline", "pda/soldierclose", 80);
+      
+        PDA_Local.pongrunning = false;
+        PDA_Local.active = false;   
+    }
+    #endregion
+}
+
+SCRIPT "PDA_YOUAREDEADnotbigsurprise" DEATH
+{
+    if(PDA_Local.active)
+    {
+        PDA_NOPONG();
+        PDA_Wipe();
+        ACS_NamedExecuteAlways("QuitPong",0);
+        PDA_UnsetScrollArrows();
+        DisplayIcon("RLZPDA", PDA_ID, 0.5, 0.5, 0, 0);
+        
+        SetPlayerProperty(0,0,PROP_TOTALLYFROZEN);
+        TakeInventory("RLSynthFireDisabled",1);
+        FadeTo(0, 0, 0, 0.0, 0.0);
+        
+        if(PDA_Local.category == PDA_CREDITS) SetMusic("*");
+      
+        PDA_PlaySound("UI/PDA/Offline", "pda/soldierclose", 80);
+      
+        PDA_Local.pongrunning = false;
+        PDA_Local.active = false;
+    }
+}
+
+SCRIPT "PDA_Respawn" RESPAWN
+{
+    if(PDA_Local.active)
+    {
+        PDA_NOPONG();
+        PDA_Wipe();
+        ACS_NamedExecuteAlways("QuitPong",0);
+        PDA_UnsetScrollArrows();
+        DisplayIcon("RLZPDA", PDA_ID, 0.5, 0.5, 0, 0);
+        
+        SetPlayerProperty(0,0,PROP_TOTALLYFROZEN);
+        TakeInventory("RLSynthFireDisabled",1);
+        FadeTo(0, 0, 0, 0.0, 0.0);
+        
+        if(PDA_Local.category == PDA_CREDITS) SetMusic("*");
+      
+        PDA_PlaySound("UI/PDA/Offline", "pda/soldierclose", 80);
+      
+        PDA_Local.pongrunning = false;
+        PDA_Local.active = false;
+    }
+}
+
+SCRIPT "PDA_Core" (void)
+{  
+    PDA_Local.scrollingy = 20.0;
+    
+    while(PDA_Local.active)
+    {
+        SetHudSize(320,200,0);
+        SetHudClipRect(PDA_RectX, PDA_RectY, PDA_RectWidth, PDA_RectHeight, PDA_RectWidth);
+
+        PDA_DefaultFont();
+
+        PDA_Wipe();
+
+        if(GetUserCvar(PlayerNumber(), "DRLA_PDA_firsttime") != FALSE) PDA_SetCategory(PDA_HELP);
+        
+        for(int t = 0; t < DRLA_DIFFICULTYTIERS; t++)
+        {
+            for(int m = 0; m < DRLA_MONSTER_PAGE_MAX; m++)
+            {
+                monsterCheck[t][m] = CheckInventory(StrParam(s:DRLA_Bestiary[t][m][beast_TOKEN],s:"KillCounter"));
+                
+                if(oldCheck[t][m] != monsterCheck[t][m] && oldCheck[t][m] < 2 && monsterCheck[t][m] < 2)
+                {
+                    PDA_Local.newEntry[t] = true;
+                }
+            }
+        }
+        
+        switch(PDA_Local.category)
+        {
+            case PDA_MENU:
+                #include "menu.pdap"
+                break;
+            case PDA_CLASSES:
+                #include "player.pdap"
+                break;
+            case PDA_WEAPONS:
+                #include "weapons.pdap"
+                break;
+            case PDA_ARMORS:
+                #include "armors.pdap"
+                break;
+            case PDA_ASSEMBLIES:
+                #include "assemblies.pdap"
+                break;
+            case PDA_BESTIARY:
+                #include "bestiary.pdap"
+                break;
+            case PDA_ITEMS:
+                #include "items.pdap"
+                break;
+            case PDA_HELP:
+                #include "help.pdap"
+                break;
+            case PDA_MISC:
+                #include "misc.pdap"
+                break;
+            
+            case PDA_PONG:
+                #include "pong.pdap"
+                break;
+            case PDA_CREDITS:
+                #include "credits.pdap"
+                break;
+            case PDA_ASSEMBLY_DETAIL:
+                #include "assemblyinfo.pdap"
+                break;
+            case PDA_BESTIARY_DETAIL:
+                #include "beastinfo.pdap"
+                break;
+        }
+        
+        PDA_DefaultFont();
+
+        for(int t = 0; t < DRLA_DIFFICULTYTIERS; t++)
+        {
+            for(int m = 0; m < DRLA_MONSTER_PAGE_MAX; m++)
+            {
+                oldCheck[t][m] = monsterCheck[t][m];
+            }
+        }
+
+        SetHudClipRect(0,0,0,0,0);
+        Delay(PDA_Responsiveness);
+        #endregion
+    }
+}
+
+#include "ACS_WRT.acs"
+
+// EOF

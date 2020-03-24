@@ -1,0 +1,47 @@
+PDAFONT
+{
+    A PFONA
+    B PFONB
+    C PFONC
+    D PFOND
+    E PFONE
+    F PFONF
+    G PFONG
+    H PFONH
+    I PFONI
+    J PFONJ
+    K PFONK
+    L PFONL
+    M PFONM
+    N PFONN
+    O PFONO
+    P PFONP
+    Q PFONQ
+    R PFONR
+    S PFONS
+    T PFONT
+    U PFONU
+    V PFONV
+    W PFONW
+    X PFONX
+    Y PFONY
+    Z PFONZ
+    ! PFONEX
+    ? PFONQM
+    . PFONDOT
+    , PFONCOM
+    - PFONDSH
+    + PFONPLS
+    * PFONSTR
+    % PFONPRC
+    0 PFON0
+    1 PFON1
+    2 PFON2
+    3 PFON3
+    4 PFON4
+    5 PFON5
+    6 PFON6
+    7 PFON7
+    8 PFON8
+    9 PFON9
+}

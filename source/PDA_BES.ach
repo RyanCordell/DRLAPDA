@@ -1,0 +1,126 @@
+#library "PDA_BES" // i'm da
+
+#define DRLA_DIFFICULTYTIERS 5
+
+#define DRLA_BESTIARYELEMENTS 2
+
+#define DRLA_NORMALMONSTERMAX 19
+#define DRLA_NIGHTMAREMONSTERMAX 19
+#define DRLA_TECHNOMONSTERMAX 19
+#define DRLA_ARMAGEDDONMONSTERMAX 19
+#define DRLA_SPECIALMONSTERMAX 6
+
+#define DRLA_MONSTERMAX (DRLA_NORMALMONSTERMAX + DRLA_NIGHTMAREMONSTERMAX + DRLA_TECHNOMONSTERMAX + DRLA_ARMAGEDDONMONSTERMAX)
+
+str DRLA_Bestiary[DRLA_DIFFICULTYTIERS][DRLA_MONSTERMAX][DRLA_BESTIARYELEMENTS] =
+{
+	// UV and below
+	#region BESTIARY_UV
+	{
+		{"RLFormerHuman", "PDA_BES_STANDARD_ZOMBIEMAN"},
+		{"RLFormerSergeant", "PDA_BES_STANDARD_SHOTGUNGUY"},
+		{"RLFormerCommando", "PDA_BES_STANDARD_CHAINGUNGUY"},
+		{"RLFormerCaptain", "PDA_BES_STANDARD_CAPTAIN"},
+		{"RLImp", "PDA_BES_STANDARD_IMP"},
+		{"RLDemon", "PDA_BES_STANDARD_DEMON"},
+		{"RLSpectre", "PDA_BES_STANDARD_SPECTRE"},
+		{"RLLostSoul", "PDA_BES_STANDARD_LOSTSOUL"},
+		{"RLCacodemon", "PDA_BES_STANDARD_CACODEMON"},
+		{"RLHellKnight", "PDA_BES_STANDARD_HELLKNIGHT"},
+		{"RLBaronOfHell", "PDA_BES_STANDARD_BARONOFHELL"},
+		{"RLArachnotron", "PDA_BES_STANDARD_ARACHNOTRON"},
+		{"RLPainElemental", "PDA_BES_STANDARD_PAINELEMENTAL"},
+		{"RLRevenant", "PDA_BES_STANDARD_REVENANT"},
+		{"RLMancubus", "PDA_BES_STANDARD_MANCUBUS"},
+		{"RLArchvile", "PDA_BES_STANDARD_ARCHVILE"},
+		{"RLCyberdemon", "PDA_BES_STANDARD_CYBERDEMON"},
+		{"RLSpiderMastermind", "PDA_BES_STANDARD_SPIDERMASTERMIND"},
+		{"RLBruiserBrother", "PDA_BES_STANDARD_WILDCARD"},
+	},
+	#endregion
+
+	// Nightmare
+	#region BESTIARY_NM
+	{
+		{"RLEliteHuman", "PDA_BES_NIGHTMARE_ZOMBIEMAN"},
+		{"RLEliteSergeant", "PDA_BES_NIGHTMARE_SHOTGUNGUY"},
+		{"RLEliteCommando", "PDA_BES_NIGHTMARE_CHAINGUNGUY"},
+		{"RLEliteCaptain", "PDA_BES_NIGHTMARE_CAPTAIN"},
+		{"RLNightmareImp", "PDA_BES_NIGHTMARE_IMP"},
+		{"RLNightmareDemon", "PDA_BES_NIGHTMARE_DEMON"},
+		{"RLNightmareSpectre", "PDA_BES_NIGHTMARE_SPECTRE"},
+		{"RLNightmareLostSoul", "PDA_BES_NIGHTMARE_LOSTSOUL"},
+		{"RLNightmareCacodemon", "PDA_BES_NIGHTMARE_CACODEMON"},
+		{"RLNightmareHellKnight", "PDA_BES_NIGHTMARE_HELLKNIGHT"},
+		{"RLNightmareBaronOfHell", "PDA_BES_NIGHTMARE_BARONOFHELL"},
+		{"RLNightmareArachnotron", "PDA_BES_NIGHTMARE_ARACHNOTRON"},
+		{"RLNightmarePainElemental", "PDA_BES_NIGHTMARE_PAINELEMENTAL"},
+		{"RLNightmareRevenant", "PDA_BES_NIGHTMARE_REVENANT"},
+		{"RLNightmareMancubus", "PDA_BES_NIGHTMARE_MANCUBUS"},
+		{"RLNightmareArchvile", "PDA_BES_NIGHTMARE_ARCHVILE"},
+		{"RLNightmareCyberdemon", "PDA_BES_NIGHTMARE_CYBERDEMON"},
+		{"RLNightmareSpiderMastermind", "PDA_BES_NIGHTMARE_SPIDERMASTERMIND"},
+		{"RLAgonyElemental", "PDA_BES_NIGHTMARE_WILDCARD"},
+	},
+	#endregion
+
+	// Technophobia
+	#region BESTIARY_TP
+	{
+		{"RLFormerCyborg", "PDA_BES_TECHNOPHOBIA_ZOMBIEMAN"},
+		{"RLFormerSergeantCyborg", "PDA_BES_TECHNOPHOBIA_SHOTGUNGUY"},
+		{"RLFormerCommandoCyborg", "PDA_BES_TECHNOPHOBIA_CHAINGUNGUY"},
+		{"RLFormerCaptainCyborg", "PDA_BES_TECHNOPHOBIA_CAPTAIN"},
+		{"RLCyberneticImp", "PDA_BES_TECHNOPHOBIA_IMP"},
+		{"RLCyberneticDemon", "PDA_BES_TECHNOPHOBIA_DEMON"},
+		{"RLCyberneticSpectre", "PDA_BES_TECHNOPHOBIA_SPECTRE"},
+		{"RLCyberneticLostSoul", "PDA_BES_TECHNOPHOBIA_LOSTSOUL"},
+		{"RLCyberneticCacodemon", "PDA_BES_TECHNOPHOBIA_CACODEMON"},
+		{"RLCyberneticHellKnight", "PDA_BES_TECHNOPHOBIA_HELLKNIGHT"},
+		{"RLCyberneticBaronOfHell", "PDA_BES_TECHNOPHOBIA_BARONOFHELL"},
+		{"RLCyberneticArachnotron", "PDA_BES_TECHNOPHOBIA_ARACHNOTRON"},
+		{"RLCyberneticPainElemental", "PDA_BES_TECHNOPHOBIA_PAINELEMENTAL"},
+		{"RLCyberneticRevenant", "PDA_BES_TECHNOPHOBIA_REVENANT"},
+		{"RLCyberneticMancubus", "PDA_BES_TECHNOPHOBIA_MANCUBUS"},
+		{"RLCyberneticArchvile", "PDA_BES_TECHNOPHOBIA_ARCHVILE"},
+		{"RLCyberneticCyberdemon", "PDA_BES_TECHNOPHOBIA_CYBERDEMON"},
+		{"RLCyberneticSpiderMastermind", "PDA_BES_TECHNOPHOBIA_SPIDERMASTERMIND"},
+		{"RLTerminator", "PDA_BES_TECHNOPHOBIA_WILDCARD"},
+	},
+	#endregion
+
+	// Armageddon
+	#region BESTIARY_AR
+	{
+		{"RLFormerAssaultTrooper", "PDA_BES_ARMAGEDDON_ZOMBIEMAN"},
+		{"RLFormerOverwatch", "PDA_BES_ARMAGEDDON_SHOTGUNGUY"},
+		{"RLFormerShocktrooper", "PDA_BES_ARMAGEDDON_CHAINGUNGUY"},
+		{"RLFormerBaseCommander", "PDA_BES_ARMAGEDDON_CAPTAIN"},
+		{"RLArmageddonImp", "PDA_BES_ARMAGEDDON_IMP"},
+		{"RLArmageddonDemon", "PDA_BES_ARMAGEDDON_DEMON"},
+		{"RLArmageddonSpectre", "PDA_BES_ARMAGEDDON_SPECTRE"},
+		{"RLArmageddonLostSoul", "PDA_BES_ARMAGEDDON_LOSTSOUL"},
+		{"RLArmageddonCacodemon", "PDA_BES_ARMAGEDDON_CACODEMON"},
+		{"RLArmageddonHellKnight", "PDA_BES_ARMAGEDDON_HELLKNIGHT"},
+		{"RLArmageddonBaronOfHell", "PDA_BES_ARMAGEDDON_BARONOFHELL"},
+		{"RLArmageddonArachnotron", "PDA_BES_ARMAGEDDON_ARACHNOTRON"},
+		{"RLArmageddonPainElemental", "PDA_BES_ARMAGEDDON_PAINELEMENTAL"},
+		{"RLArmageddonRevenant", "PDA_BES_ARMAGEDDON_REVENANT"},
+		{"RLArmageddonMancubus", "PDA_BES_ARMAGEDDON_MANCUBUS"},
+		{"RLArmageddonArchvile", "PDA_BES_ARMAGEDDON_ARCHVILE"},
+		{"RLArmageddonCyberdemon", "PDA_BES_ARMAGEDDON_CYBERDEMON"},
+		{"RLArmageddonSpiderMastermind", "PDA_BES_ARMAGEDDON_SPIDERMASTERMIND"},
+		{"RLAbominant", "PDA_BES_ARMAGEDDON_WILDCARD"},
+	},
+	#endregion
+	
+	// speshul
+	#region BESTIARY_SP
+	{
+		{"RLEliteScout", "PDA_BES_SPECIAL_SCOUT"},
+		{"RLUACDefenceDrone", "PDA_BES_SPECIAL_DEFENCEDRONE"},
+	}
+	#endregion
+};
+
+// EOF

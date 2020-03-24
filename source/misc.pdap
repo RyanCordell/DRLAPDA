@@ -1,0 +1,28 @@
+PDA_Local.pagemax = 1;
+
+PDA_Wipe();
+
+PDA_PrintHeader("PDA_MISC_HEADER", 10);
+
+PDA_SetupBounds();
+PDA_SetScrollLimit(0);
+PDA_SetScrollArrows2(0, PDA_RectWidth + 50.0, PDA_ScrollableHeight + 90.0);
+
+PDAButton PONG    = PDA_CreateButton(51, "Pong",    "PLON", PDA_RectX + 10.1, PDA_Local.scrollingy + 30.1 + (14.0 * 0), 32, 8, -3.1, 0);
+PDAButton CREDITS = PDA_CreateButton(52, "Credits", "PLON", PDA_RectX + 10.1, PDA_Local.scrollingy + 30.1 + (14.0 * 1), 32, 8, -3.1, 0);
+//PDAButton JUKEBOX = PDA_CreateButton(50, "Jukebox", "TNT1A0", PDA_RectX + 10.1, PDA_Local.scrollingy + 30.1 + (14.0 * 2), 32, 12);
+//PDAButton EMAIL   = PDA_CreateButton(53, "Email",   "TNT1A0", PDA_RectX + 10.1, PDA_Local.scrollingy + 30.1 + (14.0 * 3), 32, 12);
+
+PDA_InitButton(PONG,    false, PDA_PONG,       "Play Pong! (Temporarily SP only)\n");
+PDA_InitButton(CREDITS, false, PDA_CREDITS,    "All the wonderful people that helped bring this together.\n");
+//PDA_InitButton(JUKEBOX, false, PDA_CLASSES,    "Play random music\n");
+//PDA_InitButton(EMAIL,   false, PDA_ASSEMBLIES, "Read up emails\n");
+
+/*HudMessage( s:">", s:(PDA_Local.select == 0) ? "\cf" : "", s:" Jukebox",s:"\n",
+            s:">", s:(PDA_Local.select == 1) ? "\cf" : "", s:" Pong",s:"\n",
+            s:">", s:(PDA_Local.select == 2) ? "\cf" : "", s:" Credits",s:"\n",
+            s:">", s:(PDA_Local.select == 3) ? "\cf" : "", s:" E-mail",s:"\n";
+            HUDMSG_PLAIN,   PDA_INFOID, CR_GREEN,   (PDA_RectX) + 0.1, PDA_Local.scrollingy + 20.1 + (10.0 * 1), 0);
+
+PDA_UnsetScrollWindow();
+break;*/

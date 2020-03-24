@@ -1,0 +1,138 @@
+#define PDA_ChangeDelay 4
+#define PDA_ScrollDelay 2
+#define HOLD_MAX 15
+
+/* Thanks to HeXaGoN for the maths behind the mouse cursor here! */
+
+SCRIPT "PDA_MouseController" (void)
+{
+    const int anymask =
+        BT_FORWARD | BT_BACK | BT_ATTACK | BT_ALTATTACK | BT_MOVERIGHT | BT_RIGHT | BT_MOVELEFT | BT_LEFT;
+    int buttons[MAX_PLAYERS], oldbuttons[MAX_PLAYERS];
+    
+    int mHUDX = 320,
+        mHUDY = 200;
+        
+    str graphic[MAX_PLAYERS] = {"","","","","","","",""};
+    
+    fixed xscale, yscale;
+    fixed mx = (mHUDX/2),
+          my = (mHUDY/2);
+          
+    int oldMouseY = 0;
+    
+    if(GameType() == GAME_SINGLE_PLAYER)
+        inverted = GetCVar("invertmouse");
+
+    //#define sensitivity 8
+    
+    const int HMIN = 0 + PDA_RectX;
+    const int VMIN = 0 + PDA_RectY;
+    const int HMAX = PDA_RectWidth  + PDA_RectX - 7;
+    const int VMAX = PDA_RectHeight + PDA_RectY - 26;
+    
+    int xSensitivity = GetCvar("DRLA_PDA_sensitivity_x"),
+        ySensitivity = GetCvar("DRLA_PDA_sensitivity_y");
+    
+    int vBuffer = 0;
+    int myoff;
+    
+    SetHudSize(mHUDX,mHUDY,0);
+    SetHudClipRect(PDA_RectX, PDA_RectY, PDA_RectWidth, PDA_RectHeight, PDA_RectWidth);
+    
+    while(PDA_Local.active)
+    {
+                                     buttons[PlayerNumber()] = GetPlayerInput(-1, INPUT_BUTTONS);
+        PDA_LocalMouse.oldState = oldbuttons[PlayerNumber()] = GetPlayerInput(-1, INPUT_OLDBUTTONS);
+          
+        oldMouseY = PDA_LocalMouse.y;
+        
+        PDA_LocalMouse.m1 = (buttons[PlayerNumber()] & BT_ATTACK)    ? true : false;
+        PDA_LocalMouse.m2 = (buttons[PlayerNumber()] & BT_ALTATTACK) ? true : false;
+        
+        xscale = 2.5 / (GetCVarFixed("m_yaw")   * GetCVarFixed("mouse_sensitivity"));
+        yscale = 5.0 / (GetCVarFixed("m_pitch") * GetCVarFixed("mouse_sensitivity"));
+        
+        PDA_LocalMouse.x -= (GetPlayerInputFixed(-1, INPUT_YAW) << xsensitivity) * xscale;
+        
+        if(inverted)
+            PDA_LocalMouse.y += (GetPlayerInputFixed(-1, INPUT_PITCH) << ysensitivity) * yscale;
+        else
+            PDA_LocalMouse.y -= (GetPlayerInputFixed(-1, INPUT_PITCH) << ysensitivity) * yscale;
+        
+        if(PDA_LocalMouse.x < HMIN) PDA_LocalMouse.x = HMIN;
+        if(PDA_LocalMouse.y < VMIN) PDA_LocalMouse.y = VMIN;
+        if(PDA_LocalMouse.x > HMAX) PDA_LocalMouse.x = HMAX;
+        if(PDA_LocalMouse.y > VMAX) PDA_LocalMouse.y = VMAX;
+        
+        if(PDA_LocalMouse.state == mouse_default) graphic[PlayerNumber()] = (buttons[PlayerNumber()] & BT_ATTACK) ? "PDACURS" : "PDACUR";
+        else if(PDA_LocalMouse.state == mouse_pointer) graphic[PlayerNumber()] = "PDAPNT";
+        
+        if(!PDA_Local.pongrunning)
+        {
+            DisplayIcon(graphic[PlayerNumber()], PDA_CURSORID, PDA_LocalMouse.x + 0.1, PDA_LocalMouse.y + 0.1, 0, (buttons[PlayerNumber()] & BT_ATTACK) ? 0.8 : 1);
+        }
+        
+        if(PDA_LocalMouse.m1)
+        {
+            vBuffer = PDA_LocalMouse.y - oldMouseY;
+            PDA_Local.scrollingy += vBuffer;
+            myoff = vBuffer;
+            
+            if(PDA_Local.scrollingy < PDA_Local.maxtexty) PDA_Local.scrollingy = PDA_Local.maxtexty;
+            if(PDA_Local.scrollingy > VMIN) PDA_Local.scrollingy = VMIN;
+            
+            //log("scrollingy: %f: | VMIN: %i: | maxtexty: %f: | scrollableheight: %f: | VMIN: %i:", PDA_Local.scrollingy, VMIN, PDA_Local.maxtexty, PDA_ScrollableHeight, VMAX);
+        }
+        
+        if(PDA_LocalMouse.m2 && !(oldButtons[PlayerNumber()] & BT_ALTATTACK))
+        {
+            PDA_LocalMouse.state = mouse_default;
+            PDA_PlaySound("UI/PDA/Cancel", "pda/soldier", 80);
+            
+            if(PDA_Local.category == PDA_ASSEMBLY_DETAIL)
+            {
+                PDA_Local.category = PDA_ASSEMBLIES;
+            }
+            else if(PDA_Local.category == PDA_BESTIARY && PDA_Local.page > 1)
+            {
+                PDA_Local.page = 1;
+            }
+            else if(PDA_Local.category == PDA_BESTIARY_DETAIL)
+            {
+                PDA_Local.category = PDA_BESTIARY;
+            }
+            else if(PDA_Local.category == PDA_PONG)
+            {
+                PDA_Local.category = PDA_MISC;
+                ACS_NamedExecute("QuitPong",0);
+            }
+            else if(PDA_Local.category == PDA_HELP)
+            {
+                SetUserCVar(PlayerNumber(), "DRLA_PDA_firsttime", false);
+                PDA_Wipe();
+                PDA_Local.category = PDA_MENU;
+                PDA_Local.page = 0;
+            }
+            else if(PDA_Local.category == PDA_CREDITS)
+            {
+                PDA_Local.category = PDA_MENU;
+                PDA_Local.page = 0;
+            }
+            else
+            {
+                PDA_Local.category = PDA_MENU;
+                PDA_Local.page = 0;
+            }
+            PDA_ResetScroll();
+        }
+        
+        Delay(1);
+        
+        vBuffer = 0;
+        PDA_LocalMouse.m1 = false;
+        PDA_LocalMouse.m2 = false;
+    }
+}
+
+// EOF

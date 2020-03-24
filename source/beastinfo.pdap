@@ -1,0 +1,73 @@
+PDA_Local.pagemax = 1;
+
+PDA_Wipe();
+str detailedAssemblyStringer;
+
+if(!PDA_Local.playonce)
+{
+    PDA_PlaySound("UI/PDA/Activate", "pda/soldier", 80);
+
+    PDA_Local.playonce = true;
+}
+
+PDA_PrintHeader("PDA_DETAILEDBEAST_HEADER", -30);
+
+PDA_SetupBounds();
+
+str name   = "N/A\n",
+    icon   = "N/A\n",
+    health = "N/A\n",
+    res    = "N/A\n",
+    info   = "N/A\n";
+int count  = 0;
+
+if(StrCmp(PDA_Local.detailFetch[0], "null") != 0)
+{
+
+    PDA_SetScrollLimit(-100);
+    PDA_SetScrollArrows2(-100, PDA_RectWidth + 60.0, PDA_ScrollableHeight + 90.0);
+
+    count  = PDA_Local.detailFetch[1];
+    name   = strParam("%s:_NAME",       PDA_Local.detailFetch[0]);
+    icon   = strParam("%s:_ICON",       PDA_Local.detailFetch[0]);
+    health = strParam("%s:_HEALTH",     PDA_Local.detailFetch[0]);
+    res    = strParam("%s:_RESISTANCE", PDA_Local.detailFetch[0]);
+    info   = strParam("%s:_MISC",       PDA_Local.detailFetch[0]);
+    
+    // Monster icon
+    DisplayIcon(strParam("%l:", icon), PDA_INFO2ID, PDA_RectWidth - 50.1, PDA_Local.scrollingy + 110.1, 0, 0.8);
+
+    // EXPERIMENTS
+    SetFont("STAT_MNO");
+    HudMessage(
+                "\cdName:\c- %l:\n"
+                "\cdNo. of Kills:\c- %i:\n"
+                "\cdHealth:\c- %l:\n"
+                "\cdResistances:\c- \n%l:\n"
+                "\cdDrops and misc info:\c- \n%l:\n",
+                name,
+                count,
+                health,
+                res,
+                info;
+                HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, PDA_RectX + 5.1, PDA_Local.scrollingy + 20.1 + (20.0 * 1), 0);
+}
+else
+{
+    PDA_SetScrollLimit(0);
+
+    SetFont("STAT_MNO");
+    HudMessage("%l:\n"
+               "%l:\n"
+               "%l:\n"
+               "%l:\n"
+               "%l:\n",
+               "PDA_BESTIARY_DEFAULT_NAME",
+               "PDA_BESTIARY_DEFAULT_KILLS",
+               "PDA_BESTIARY_DEFAULT_HEALTH",
+               "PDA_BESTIARY_DEFAULT_RESISTANCES",
+               "PDA_BESTIARY_DEFAULT_DESC";
+                HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, PDA_RectX + 5.1, PDA_RectY + 20.1 + (20.0 * 1), 0);
+}
+
+PDA_UnsetScrollWindow();

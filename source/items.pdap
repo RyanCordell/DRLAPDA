@@ -1,0 +1,79 @@
+if(GetCvar("DRLA_specialstarts") == 2)
+{
+    PDA_Local.pagemax = 3;
+
+    PDA_Wipe();
+
+    //SetHudSize(400,260);
+    //SetHudClipRect(PDA_RectX, PDA_ScrollableY-10, PDA_RectWidth+80, PDA_ScrollableHeight+80, PDA_RectWidth+25);
+    PDA_SetupBounds();
+
+    #define DUKE2X 0.1
+    #define DUKE2Y 0.1
+
+    switch(PDA_Local.page)
+    {
+        case 1: DisplayIcon("DN2HLP1", PDA_INFOTOPID - 1, DUKE2X + (PDA_RectX), (PDA_RectY) + DUKE2Y, 0, 1); break;
+        case 2: DisplayIcon("DN2HLP2", PDA_INFOTOPID - 1, DUKE2X + (PDA_RectX), (PDA_RectY) + DUKE2Y, 0, 1); break;
+        case 3: DisplayIcon("DN2HLP3", PDA_INFOTOPID - 1, DUKE2X + (PDA_RectX), (PDA_RectY) + DUKE2Y, 0, 1); break;
+    }
+
+    //SetHudSize(320,200);
+}
+if(GetCvar("DRLA_specialstarts") != 2)
+{
+    PDA_Local.pagemax = DRLA_GROUPQUANTITY;
+
+    PDA_Wipe();
+
+    PDA_PrintHeader("PDA_ITEMS_HEADER", +20);
+
+    PDAButton P1  = PDA_CreateTab(50, "1" , "PTAB", PDA_RectX + 0.1 + (12.0 * 0), PDA_RectY + 1.1, 12, 12);
+    PDAButton P2  = PDA_CreateTab(51, "2" , "PTAB", PDA_RectX + 0.1 + (12.0 * 1), PDA_RectY + 1.1, 12, 12);
+    PDAButton P3  = PDA_CreateTab(52, "3" , "PTAB", PDA_RectX + 0.1 + (12.0 * 2), PDA_RectY + 1.1, 12, 12);
+    PDAButton P4  = PDA_CreateTab(53, "4" , "PTAB", PDA_RectX + 0.1 + (12.0 * 3), PDA_RectY + 1.1, 12, 12);
+    PDAButton P5  = PDA_CreateTab(54, "5" , "PTAB", PDA_RectX + 0.1 + (12.0 * 4), PDA_RectY + 1.1, 12, 12);
+
+    PDA_InitButton(P1, true, 1, "");
+    PDA_InitButton(P2, true, 2, "");
+    PDA_InitButton(P3, true, 3, "");
+    PDA_InitButton(P4, true, 4, "");
+    PDA_InitButton(P5, true, 5, "");
+
+
+    int y = 0;
+    int ItemLimit = 0;
+
+    int DRLA_PageOffset;
+
+    //SetHudSize(420,280);
+
+    //SetHudClipRect(PDA_RectX, PDA_ScrollableY+15, PDA_RectWidth+80, PDA_ScrollableHeight+50, PDA_RectWidth+25);
+    
+    SetHudSize(newresw,newresh);
+    
+    SetHudClipRect(PDA_RectX, PDA_ScrollableY+15, PDA_RectWidth+80, PDA_ScrollableHeight+65, PDA_RectWidth-30);
+    PDA_SetScrollLimit(-200);
+    PDA_SetScrollArrows2(-200, PDA_RectWidth + 50.0, PDA_ScrollableHeight + 90.0);
+    
+    for(int itemIndex = 0; itemIndex < DRLA_ITEMSMAX; itemIndex++)
+    {
+        if(ItemLimit < 8)
+        {
+            if(PDA_Local.page == 1) DRLA_PageOffset = 1;
+            if(PDA_Local.page > 1)  DRLA_PageOffset = (8*(PDA_Local.page - 1) + 1);
+
+            //if(strcmp(DRLA_ItemInfo[itemIndex+DRLA_PageOffset][0], "PowerMod") != 0)
+            //{
+                // Item icon
+                DisplayIcon(strParam("%l:", DRLA_ItemInfo[itemIndex+DRLA_PageOffset][0]), PDA_INFOTOPID - (ItemLimit+1), 20.1 + (PDA_RectX), PDA_Local.scrollingy + 50.1 + (50.0 * ItemLimit), 0, 1);
+
+                // Item name + desc
+                HudMessage("%l:\cu%l:\c-\n", DRLA_ItemInfo[itemIndex+DRLA_PageOffset][1], DRLA_ItemInfo[itemIndex+DRLA_PageOffset][2]; HUDMSG_PLAIN, PDA_INFOTOPID - (ItemLimit+9), CR_UNTRANSLATED, 40.1 + (PDA_RectX), PDA_Local.scrollingy + 40.1 + (50.0 * ItemLimit), 0);
+                ItemLimit++;
+            //}
+        }
+    }
+    PDA_DefaultFont();
+    PDA_UnsetScrollWindow();
+}

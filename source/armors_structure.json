@@ -1,0 +1,78 @@
+{
+    "equipment": [
+        {
+            "name": "GreenArmor",
+            "tier": "Generic",
+            "icon": "ARM132X",
+            "prettyname": "Security Armor",
+            "description": "Standard issue armor amongst UAC Marines. It won't save you from a fireblast, but bullets won't be much of an issue, at least from basic infantry weaponry.",
+            "protection": "10% Protection",
+            "renprotection": "15% Protection",
+            "resistances": [
+                "0%  Melee ",
+                "15% Bullet",
+                "0%  Fire  ",
+                "0%  Plasma"
+            ],
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CAN_BE_REPAIRED",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "NO_SET",
+                "CAN_BE_ONYXED",
+                "CAN_BE_RECOLORED"
+            ]
+        }
+    ],
+    "assembly": [
+        {
+            "name": "SilencedPistol",
+            "tier": "Basic",
+            "icon": "PDASILEN",
+            "prettyname": "Silenced Weapon",
+            "description": "Converts the weapon into a stealthy weapon, that will not alert monsters beyond close range.\nThe effect of a blursphere will increase their damage exponentially while it is active.\n\n",
+            "valid": [
+                "Pistol ->\n Silenced Pistol\n",
+                "Battle Rifle ->\n Stealth Rifle\n"
+			],
+            "validlist": [
+                "Pistol",
+                "Battle Rifle\n"
+			]
+        }
+    ],
+    "weapon": [
+        {
+            "name": "Pistol",
+            "tier": "Standard",
+            "icon": "NPISX0",
+            "prettyname": "Pistol",
+            "stats": [
+				"Base weapon stats\n",
+				"Fire rate: 19 tics (0.5s)\n",
+				"Damage: (6d3)\n",
+				"Reload: 37 tics (1.0s)\n",
+				"Spread: 4 x 0\n\n"
+			],
+            "quote": "\"Your trusty 10mm pistol. It may be nice, but better find something stronger.\"\n",
+            "description": "Standard UAC pistol, chambered for the 10mm round.\nGood for potshots at the odd zombie or three, but when you start seeing stronger foes, it's time to find something better.\n\n",
+            "mods": "This weapon can support up to four modifications\n"
+        }
+    ],
+    "attributeEntries": [
+        {
+            "NO_PASSIVE": "No passive effect",
+            "NO_SPECIAL": "No armor special",
+            "CAN_BE_REPAIRED": "Repairable",
+            "CAN_BE_DESTROYED": "Destructible",
+            "CAN_BE_REMOVED": "Removable",
+            "NO_SET": "Not part of a set",
+            "CAN_BE_ONYXED": "Can be Onyx-modded",
+            "CAN_BE_RECOLORED": "Can change color type",
+            "CANNOT_BE_ONYXED": "Can't be Onyx-modded",
+            "CANNOT_RECOLOR": "Cannot change color type"
+        }
+    ]
+}
