@@ -1,5 +1,17 @@
 # DRLAPDA
-The PDA for the DoomRL Arsenal mod
+## About
+The PDA for the DoomRL Arsenal mod. It allows for relatively quick and painless previewing of the hundreds of weapons and equipment items present in the mod via a mouse-driven user interface. Coded entirely through GDCC-ACC.
+
+---
+
+## Thanks
+### Alison
+For their generous, in-depth knowledge on programming and tricks with ZDoom that helped iron out some interesting issues.
+
+### Yholl
+For making the DoomRL Arsenal mod to begin with.
+
+(More credits will come with time as I remember the contributions)
 
 ## Structure
 ### acs/
