@@ -4,6 +4,11 @@ The PDA for the DoomRL Arsenal mod. It allows for relatively quick and painless 
 
 ---
 
+## Notice
+While the repository is still being set up, the code cleaned up and adjusted, I apologize for any colorful remarks in the code that I might have left over from long ago.
+
+---
+
 ## Thanks
 ### Alison
 For their generous, in-depth knowledge on programming and tricks with ZDoom that helped iron out some interesting issues.
@@ -12,6 +17,8 @@ For their generous, in-depth knowledge on programming and tricks with ZDoom that
 For making the DoomRL Arsenal mod to begin with.
 
 (More credits will come with time as I remember the contributions)
+
+---
 
 ## Structure
 ### acs/
@@ -22,6 +29,8 @@ Normally assets/, this is to help modern ZDoom-based ports read graphics data.
 
 ### source/
 Can be named anything, only stores the necessary project files.
+
+---
 
 ## Technologies used
 ### GDCC-ACC
