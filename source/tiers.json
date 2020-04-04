@@ -1,0 +1,54 @@
+{
+    "tiers": [
+        {
+            "tier": "Generic",
+            "name": "Generic",
+            "color": "cj"
+        },
+        {
+            "tier": "Basic",
+            "name": "Assembled (Basic)",
+            "color": "c[BB]"
+        },
+        {
+            "tier": "Advanced",
+            "name": "Assembled (Advanced)",
+            "color": "c[AB]"
+        },
+        {
+            "tier": "Master",
+            "name": "Assembled (Master)",
+            "color": "c[MB]"
+        },
+        {
+            "tier": "Exotic",
+            "name": "Exotic",
+            "color": "ct"
+        },
+        {
+            "tier": "Superior",
+            "name": "Superior",
+            "color": "ci"
+        },
+        {
+            "tier": "Unique",
+            "name": "Unique",
+            "color": "cd"
+        },
+        {
+            "tier": "Demonic",
+            "name": "Demonic",
+            "color": "cg"
+        },
+        {
+            "tier": "Legendary",
+            "name": "Legendary",
+            "color": "cf"
+        },
+        {
+            "name": "Onyx-modded",
+            "tier": "Onyx",
+            "color": "cu"
+        }
+    ]
+}

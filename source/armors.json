@@ -1,0 +1,29 @@
+{
+    "equipment": [
+        {
+            "name": "GreenArmor",
+            "tier": "Generic",
+            "icon": "ARM132X",
+            "prettyname": "Security Armor",
+            "description": "Standard issue armor amongst [DARKGREEN]UAC[END] Marines. It won't save you from a fireblast, but [GRAY]bullets[END] won't be much of an issue, at least from basic infantry weaponry.",
+            "protection": "10% Protection",
+            "renprotection": "15% Protection",
+            "resistances": [
+                "0%   Melee ",
+                "15%  Bullet",
+                "0%   Fire  ",
+                "0%   Plasma"
+            ],
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CAN_BE_REPAIRED",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "NO_SET",
+                "CAN_BE_ONYXED",
+                "CAN_BE_RECOLORED"
+            ]
+        }
+    ]
+}

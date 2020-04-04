@@ -1,0 +1,19 @@
+{
+    "assembly": [
+        {
+            "name": "SilencedPistol",
+            "tier": "Basic",
+            "icon": "PDASILEN",
+            "prettyname": "Silenced Weapon",
+            "description": "Converts the weapon into a stealthy weapon, that will not alert monsters beyond close range.\nThe effect of a blursphere will increase their damage exponentially while it is active.\n\n",
+            "valid": [
+                "Pistol ->\n Silenced Pistol",
+                "Battle Rifle ->\n Stealth Rifle"
+			],
+            "validlist": [
+                "Pistol",
+                "Battle Rifle"
+			]
+        }
+    ]
+}
