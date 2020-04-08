@@ -19,6 +19,7 @@
         
         "CAN_BE_ONYXED": "Can be Onyx-modded",
         "CANNOT_BE_ONYXED": "Can't be Onyx-modded",
+        "ALREADY_ONYXED": "Already Onyx-modded",
         
         "CAN_BE_REPAIRED": "Repairable",
         "CANNOT_BE_REPAIRED": "Cannot be conventionally repaired",
