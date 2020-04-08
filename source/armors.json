@@ -1,28 +1,2774 @@
 {
     "equipment": [
         {
+            "name": "GenericArmor",
+            "tier": "Generic",
+            "icon": "ARM032X",
+            "prettyname": "Generic Armor",
+            "description": "A mysterious, perfectly crafted piece of armor. You can't work out what it's made from, and the armor is so smooth it's almost frictionless.\n\nThis probably shouldn't exist.",
+            "protection": "30%",
+            "renprotection": "45%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "0%",
+                "fire": "0%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "NO_SET",
+                "CAN_BE_REPAIRED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
             "name": "GreenArmor",
             "tier": "Generic",
             "icon": "ARM132X",
             "prettyname": "Security Armor",
-            "description": "Standard issue armor amongst [DARKGREEN]UAC[END] Marines. It won't save you from a fireblast, but [GRAY]bullets[END] won't be much of an issue, at least from basic infantry weaponry.",
-            "protection": "10% Protection",
-            "renprotection": "15% Protection",
-            "resistances": [
-                "0%   Melee ",
-                "15%  Bullet",
-                "0%   Fire  ",
-                "0%   Plasma"
-            ],
+            "description": "Standard issue armor amongst [DARKGREEN]UAC[END] Marines. It won't save you from a [RED]fireblast[END], but [GRAY]bullets[END] won't be much of an issue, at least from basic infantry weaponry.",
+            "protection": "10%",
+            "renprotection": "15%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "15%",
+                "fire": "0%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "2%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
             "attributes": [
                 "NO_PASSIVE",
                 "NO_SPECIAL",
-                "CAN_BE_REPAIRED",
                 "CAN_BE_DESTROYED",
                 "CAN_BE_REMOVED",
-                "NO_SET",
                 "CAN_BE_ONYXED",
-                "CAN_BE_RECOLORED"
+                "CAN_BE_RECOLORED",
+                "NO_SET",
+                "CAN_BE_REPAIRED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "BlueArmor",
+            "tier": "Generic",
+            "icon": "ARM232X",
+            "prettyname": "Combat Armor",
+            "description": "Heavy and tough armor for [DARKGREEN]UAC[END]'s assault troops. This armor resists [BLUE]plasma[END], the kind of firepower a real enemy would be packing.",
+            "protection": "20%",
+            "renprotection": "30%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "0%",
+                "fire": "0%",
+                "plasma": "20%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CAN_BE_ONYXED",
+                "CAN_BE_RECOLORED",
+                "NO_SET",
+                "CAN_BE_REPAIRED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "RedArmor",
+            "tier": "Generic",
+            "icon": "ARM332X",
+            "prettyname": "Commando Armor",
+            "description": "The armor of the [DARKGREEN]UAC[END]'s elite commandos, this armor has amazing protective ability, and is quite resistant to [RED]fire[END] attacks.",
+            "protection": "40%",
+            "renprotection": "60%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "0%",
+                "fire": "25%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CAN_BE_ONYXED",
+                "CAN_BE_RECOLORED",
+                "NO_SET",
+                "CAN_BE_REPAIRED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+
+        {
+            "name": "TowerShield",
+            "tier": "Basic",
+            "icon": "TSHD32X",
+            "prettyname": "Tower Shield",
+            "description": "An ancient medieval tower shield, this relic of ancient warfare can completely block the most vicious of attacks. Unfortunately, it can't withstand such damage for a long time.",
+            "protection": "50%",
+            "renprotection": "75%",
+            "resistances": {
+                "melee": "100%",
+                "bullet": "100%",
+                "fire": "100%",
+                "plasma": "100%",
+                "cryo": "100%",
+                "electric": "100%",
+                "poison": "100%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "100%",
+                    "thermal": "100%",
+                    "refractor": "100%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "NO_SET",
+                "CANNOT_BE_REPAIRED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "TacticalArmor",
+            "tier": "Basic",
+            "icon": "TACA32X",
+            "prettyname": "Tactical Armor",
+            "description": "Advanced armor given to [DARKGREEN]UAC[END] operatives that excel at avoiding danger, this armor contains advanced ECM systems that jam any kind of tracking systems. Tactical armor comes standard with a basic nanobot repair module.",
+            "protection": "0%",
+            "renprotection": "0%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "0%",
+                "fire": "0%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "[RED]Seeker projectile disruption[END]"
+            },
+            "attributes": [
+                "[RED]Disrupts seeker projectiles[END]",
+                "NO_SPECIAL",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "HAS_SET",
+                "CANNOT_BE_REPAIRED",
+                "HAS_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "BallisticGreenArmor",
+            "tier": "Basic",
+            "icon": "BLA132X",
+            "prettyname": "Ballistic Green Armor",
+            "description": "Ballistic armor is great for battling former humans, but be careful, it's quite easily ignited by [RED]fire[END] attacks.\n The [GREEN]Security[END] variant retains has considerable [GREEN]bullet[END] resistance.",
+            "protection": "30%",
+            "renprotection": "45%",
+            "resistances": {
+                "melee": "30%",
+                "bullet": "55%",
+                "fire": "0%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CAN_BE_RECOLORED",
+                "NO_SET",
+                "CAN_BE_REPAIRED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "BallisticBlueArmor",
+            "tier": "Basic",
+            "icon": "BLA232X",
+            "prettyname": "Ballistic Combat Armor",
+            "description": "Ballistic armor is great for battling former humans, but be careful, it's quite easily ignited by [RED]fire[END] attacks.\n The [BLUE]Combat[END] variant retains it's [BLUE]plasma[END] resistance, making it a bit more useful in general.",
+            "protection": "30%",
+            "renprotection": "45%",
+            "resistances": {
+                "melee": "30%",
+                "bullet": "30%",
+                "fire": "0%",
+                "plasma": "25%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CAN_BE_RECOLORED",
+                "NO_SET",
+                "CAN_BE_REPAIRED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "BallisticRedArmor",
+            "tier": "Basic",
+            "icon": "BLA332X",
+            "prettyname": "Ballistic Commando Armor",
+            "description": "Ballistic armor is great for battling former humans, but be careful, it's quite easily ignited by [RED]fire[END] attacks.\n The [RED]Commando[END] variant almost nullifies it's [RED]fire[END] weakness, making it a more desirable armor to wear in battle.",
+            "protection": "30%",
+            "renprotection": "45%",
+            "resistances": {
+                "melee": "30%",
+                "bullet": "30%",
+                "fire": "25%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CAN_BE_RECOLORED",
+                "NO_SET",
+                "CAN_BE_REPAIRED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "FireproofGreenArmor",
+            "tier": "Basic",
+            "icon": "FPA132X",
+            "prettyname": "Fireproof Security Armor",
+            "description": "A full body covering suit made out of nonflammable materials, this suit provides adequate protection from both [RED]fire[END] and [GREEN]bullet[END] attacks.\n However, the suit can be easily torn by [YELLOW]melee[END] attacks, so keep your distance from the enemy.",
+            "protection": "30%",
+            "renprotection": "45%",
+            "resistances": {
+                "melee": "-30%",
+                "bullet": "25%",
+                "fire": "30%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CAN_BE_RECOLORED",
+                "NO_SET",
+                "CAN_BE_REPAIRED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "FireproofBlueArmor",
+            "tier": "Basic",
+            "icon": "FPA232X",
+            "prettyname": "Fireproof Combat Armor",
+            "description": "A full body covering suit made out of nonflammable materials, this suit provides adequate protection from both [RED]fire[END] and [BLUE]plasma[END] attacks.\n However, the suit can be easily torn by [YELLOW]melee[END] attacks, so keep your distance from the enemy.",
+            "protection": "30%",
+            "renprotection": "45%",
+            "resistances": {
+                "melee": "-30%",
+                "bullet": "0%",
+                "fire": "30%",
+                "plasma": "25%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CAN_BE_RECOLORED",
+                "NO_SET",
+                "CAN_BE_REPAIRED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "FireproofRedArmor",
+            "tier": "Basic",
+            "icon": "FPA332X",
+            "prettyname": "Fireproof Commando Armor",
+            "description": "A full body covering suit made out of nonflammable materials, this suit provides excellent protection from [RED]fire[END]-based attacks.\n However, the suit can be easily torn by [YELLOW]melee[END] attacks, so keep your distance from the enemy.",
+            "protection": "30%",
+            "renprotection": "45%",
+            "resistances": {
+                "melee": "-30%",
+                "bullet": "0%",
+                "fire": "55%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CAN_BE_RECOLORED",
+                "NO_SET",
+                "CAN_BE_REPAIRED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "NanofiberGreenArmor",
+            "tier": "Basic",
+            "icon": "NFA132X",
+            "prettyname": "Nanofiber Security Armor",
+            "description": "An armor type designed for use in corrosive enviroments, this armor sacrifices protection for extreme durability and resistance to acidic or corrosive effects.\n The [GREEN]Security[END] variant gives a bare minimum of [GREEN]bullet[END] resist, but will probably outlast you by several thousand years.",
+            "protection": "10%",
+            "renprotection": "15%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "13%",
+                "fire": "0%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CANNOT_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CAN_BE_RECOLORED",
+                "NO_SET",
+                "NO_REPAIR_NEEDED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "NanofiberBlueArmor",
+            "tier": "Basic",
+            "icon": "NFA232X",
+            "prettyname": "Nanofiber Combat Armor",
+            "description": "An armor type designed for use in corrosive enviroments, this armor sacrifices protection for extreme durability and resistance to acidic or corrosive effects.\n The [BLUE]Combat[END] variant gives a bare minimum of [BLUE]plasma[END] resist, but will probably outlast you by several thousand years.",
+            "protection": "10%",
+            "renprotection": "15%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "0%",
+                "fire": "0%",
+                "plasma": "13%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CANNOT_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CAN_BE_RECOLORED",
+                "NO_SET",
+                "NO_REPAIR_NEEDED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "NanofiberRedArmor",
+            "tier": "Basic",
+            "icon": "NFA332X",
+            "prettyname": "Nanofiber Commando Armor",
+            "description": "An armor type designed for use in corrosive enviroments, this armor sacrifices protection for extreme durability and resistance to acidic or corrosive effects.\n The [RED]Commando[END] variant gives a bare minimum of [RED]fire[END] resist, but will probably outlast you by several thousand years.",
+            "protection": "10%",
+            "renprotection": "15%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "0%",
+                "fire": "13%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CANNOT_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CAN_BE_RECOLORED",
+                "NO_SET",
+                "NO_REPAIR_NEEDED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "PowerGreenArmor",
+            "tier": "Basic",
+            "icon": "PWR132X",
+            "prettyname": "Powered Security Armor",
+            "description": "A set of armor filled with equipment designed to amplify it's natural resistance to damage. Power armor also comes with an advanced nanobot repair module, making this a great choice for a lone marine on a dangerous mission.\n The [GREEN]Security[END] variant has double [GREEN]bullet[END] resistance.",
+            "protection": "50%",
+            "renprotection": "75%",
+            "resistances": {
+                "melee": "25%",
+                "bullet": "50%",
+                "fire": "13%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CAN_BE_RECOLORED",
+                "NO_SET",
+                "NO_REPAIR_NEEDED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "PowerBlueArmor",
+            "tier": "Basic",
+            "icon": "PWR232X",
+            "prettyname": "Powered Combat Armor",
+            "description": "A set of armor filled with equipment designed to amplify it's natural resistance to damage. Power armor also comes with an advanced nanobot repair module, making this a great choice for a lone marine on a dangerous mission.\n The [BLUE]Combat[END] variant has double [BLUE]plasma[END] resistance.",
+            "protection": "50%",
+            "renprotection": "75%",
+            "resistances": {
+                "melee": "25%",
+                "bullet": "0%",
+                "fire": "0%",
+                "plasma": "50%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CAN_BE_RECOLORED",
+                "NO_SET",
+                "NO_REPAIR_NEEDED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "PowerRedArmor",
+            "tier": "Basic",
+            "icon": "PWR332X",
+            "prettyname": "Powered Commando Armor",
+            "description": "A set of armor filled with equipment designed to amplify it's natural resistance to damage. Power armor also comes with an advanced nanobot repair module, making this a great choice for a lone marine on a dangerous mission.\n The [RED]Commando[END] variant has double [RED]fire[END] resistance.",
+            "protection": "50%",
+            "renprotection": "75%",
+            "resistances": {
+                "melee": "25%",
+                "bullet": "0%",
+                "fire": "50%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CAN_BE_RECOLORED",
+                "NO_SET",
+                "NO_REPAIR_NEEDED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+
+        {
+            "name": "FireshieldArmor",
+            "tier": "Advanced",
+            "icon": "FSHD32X",
+            "prettyname": "Fireshield",
+            "description": "A shield system protected by a tough set of armor, this is designed to shrug off [RED]fire[END] damage without issue, as well as protect against other damage types with a tough heat-resistant alloy.",
+            "protection": "40%",
+            "renprotection": "60%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "0%",
+                "fire": "95%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "NO_SET",
+                "CANNOT_BE_REPAIRED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "AblativeGreenArmor",
+            "tier": "Advanced",
+            "icon": "ABL132X",
+            "prettyname": "Ablative Security Armor",
+            "description": "An armor incorporating ablative armor layers in an effort to improve armor effectiveness without a substantial increase in cost. The [GREEN]Security[END] variant completely prevents [GREEN]bullet[END] damage breaking through the armor's [GOLD]Protection[END].",
+            "protection": "80%",
+            "renprotection": "80%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "100%",
+                "fire": "0%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CAN_BE_RECOLORED",
+                "NO_SET",
+                "CAN_BE_REPAIRED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "AblativeBlueArmor",
+            "tier": "Advanced",
+            "icon": "ABL232X",
+            "prettyname": "Ablative Combat Armor",
+            "description": "An armor incorporating ablative armor layers in an effort to improve armor effectiveness without a substantial increase in cost. The [BLUE]Combat[END] variant completely prevents [BLUE]plasma[END] damage breaking through the armor's [GOLD]Protection[END].",
+            "protection": "80%",
+            "renprotection": "80%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "0%",
+                "fire": "0%",
+                "plasma": "100%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CAN_BE_RECOLORED",
+                "NO_SET",
+                "CAN_BE_REPAIRED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "AblativeRedArmor",
+            "tier": "Advanced",
+            "icon": "ABL332X",
+            "prettyname": "Ablative Commando Armor",
+            "description": "An armor incorporating ablative armor layers in an effort to improve armor effectiveness without a substantial increase in cost. The [RED]Commando[END] variant completely prevents [RED]fire[END] damage breaking through the armor's [GOLD]Protection[END].",
+            "protection": "80%",
+            "renprotection": "80%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "0%",
+                "fire": "100%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CAN_BE_RECOLORED",
+                "NO_SET",
+                "CAN_BE_REPAIRED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "NanofiberSkinGreenArmor",
+            "tier": "Advanced",
+            "icon": "NFS132X",
+            "prettyname": "Nanofiber Skin Security Armor",
+            "description": "A body covering suit made from the same nanofiber technology used in other armors, this suit offers resistance to all damage types. However, the suit has to conform to your body, and cannot be removed without specific equipment.\n The [GREEN]Security[END] variant provides additional [GREEN]bullet[END] resistance.",
+            "protection": "40%",
+            "renprotection": "60%",
+            "resistances": {
+                "melee": "25%",
+                "bullet": "50%",
+                "fire": "25%",
+                "plasma": "25%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CANNOT_BE_DESTROYED",
+                "CANNOT_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CAN_BE_RECOLORED",
+                "NO_SET",
+                "NO_REPAIR_NEEDED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "NanofiberSkinBlueArmor",
+            "tier": "Advanced",
+            "icon": "NFS232X",
+            "prettyname": "Nanofiber Skin Combat Armor",
+            "description": "A body covering suit made from the same nanofiber technology used in other armors, this suit offers resistance to all damage types. However, the suit has to conform to your body, and cannot be removed without specific equipment.\n The [BLUE]Combat[END] variant provides additional [BLUE]plasma[END] resistance.",
+            "protection": "40%",
+            "renprotection": "60%",
+            "resistances": {
+                "melee": "25%",
+                "bullet": "25%",
+                "fire": "25%",
+                "plasma": "50%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CANNOT_BE_DESTROYED",
+                "CANNOT_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CAN_BE_RECOLORED",
+                "NO_SET",
+                "NO_REPAIR_NEEDED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "NanofiberSkinRedArmor",
+            "tier": "Advanced",
+            "icon": "NFS332X",
+            "prettyname": "Nanofiber Skin Commando Armor",
+            "description": "A body covering suit made from the same nanofiber technology used in other armors, this suit offers resistance to all damage types. However, the suit has to conform to your body, and cannot be removed without specific equipment.\n The [RED]Commando[END] variant provides additional [RED]fire[END] resistance.",
+            "protection": "40%",
+            "renprotection": "60%",
+            "resistances": {
+                "melee": "25%",
+                "bullet": "25%",
+                "fire": "50%",
+                "plasma": "25%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CANNOT_BE_DESTROYED",
+                "CANNOT_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CAN_BE_RECOLORED",
+                "NO_SET",
+                "NO_REPAIR_NEEDED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "CerberusArmor",
+            "tier": "Master",
+            "icon": "CERA32X",
+            "prettyname": "Cerberus Armor",
+            "description": "An experimental armor still in the prototype stage, this armor has a dynamic power field that flows across its surface, reducing and deflecting damage without encumbering the user with heavy, bulky plating.",
+            "protection": "40%",
+            "renprotection": "60%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "15%",
+                "fire": "70%",
+                "plasma": "50%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "HAS_SET",
+                "CAN_BE_REPAIRED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "CybernanoGreenArmor",
+            "tier": "Master",
+            "icon": "CYN132X",
+            "prettyname": "Cybernano Security Armor",
+            "description": "One of the [DARKGREEN]UAC[END]'s greatest advancements in infantry armor technology, this wonder of modern science will absorb huge amounts of damage without much problem. Unfortunately, the armor is extremely complex, and [DARKRED]cannot be removed without assistance.[END]\n The [GREEN]Security[END] variant deflects [GREEN]bullets[END] quite efficiently.",
+            "protection": "70%",
+            "renprotection": "80%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "25%",
+                "fire": "0%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CANNOT_BE_DESTROYED",
+                "CANNOT_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CAN_BE_RECOLORED",
+                "NO_SET",
+                "NO_REPAIR_NEEDED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "CybernanoBlueArmor",
+            "tier": "Master",
+            "icon": "CYN232X",
+            "prettyname": "Cybernano Combat Armor",
+            "description": "One of the [DARKGREEN]UAC[END]'s greatest advancements in infantry armor technology, this wonder of modern science will absorb huge amounts of damage without much problem. Unfortunately, the armor is extremely complex, and [DARKRED]cannot be removed without assistance.[END]\n The [BLUE]Combat[END] variant deflects [BLUE]plasma[END] quite efficiently.",
+            "protection": "70%",
+            "renprotection": "80%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "0%",
+                "fire": "0%",
+                "plasma": "25%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CANNOT_BE_DESTROYED",
+                "CANNOT_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CAN_BE_RECOLORED",
+                "NO_SET",
+                "NO_REPAIR_NEEDED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "CybernanoRedArmor",
+            "tier": "Master",
+            "icon": "CYN332X",
+            "prettyname": "Cybernano Commando Armor",
+            "description": "One of the [DARKGREEN]UAC[END]'s greatest advancements in infantry armor technology, this wonder of modern science will absorb huge amounts of damage without much problem. Unfortunately, the armor is extremely complex, and [DARKRED]cannot be removed without assistance.[END]\n The [RED]Commando[END] variant deflects [RED]fire[END] quite efficiently.",
+            "protection": "70%",
+            "renprotection": "80%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "0%",
+                "fire": "25%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CANNOT_BE_DESTROYED",
+                "CANNOT_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CAN_BE_RECOLORED",
+                "NO_SET",
+                "NO_REPAIR_NEEDED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+
+
+        {
+            "name": "BallisticShieldArmor",
+            "tier": "Exotic",
+            "icon": "BSHD32X",
+            "prettyname": "Ballistic Shield",
+            "description": "A [DARKGREEN]UAC[END] energy shield set up to deflect [GREEN]bullets[END] and other kinds of [YELLOW]physical[END] impacts. Because of the way they work, if it tries to deflect an attack of a different type from what it normally should, the shield will short out and take damage. Shields are too complicated to repair normally.",
+            "protection": "0%",
+            "renprotection": "0%",
+            "resistances": {
+                "melee": "95%",
+                "bullet": "95%",
+                "fire": "0%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CAN_BE_RECOLORED",
+                "NO_SET",
+                "CANNOT_BE_REPAIRED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "BallisticVestArmor",
+            "tier": "Exotic",
+            "icon": "BALV32X",
+            "prettyname": "Ballistic Shield",
+            "description": "A tough armor for fighting against a storm of [GREEN]bullets[END] and surviving, the ballistic vest reduces [GREEN]bullet[END] and [YELLOW]physical[END] damage by half.",
+            "protection": "10%",
+            "renprotection": "15%",
+            "resistances": {
+                "melee": "50%",
+                "bullet": "50%",
+                "fire": "0%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CAN_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "NO_SET",
+                "CAN_BE_REPAIRED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "BulletproofVestArmor",
+            "tier": "Exotic",
+            "icon": "BPFV32X",
+            "prettyname": "Bullet-proof Vest",
+            "description": "The toughest non-shield for defending against [GREEN]bullets[END]. The bullet-proof vest will save your hide when you're up against a bunch of formers packing chainguns.",
+            "protection": "10%",
+            "renprotection": "15%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "80%",
+                "fire": "0%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CAN_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "NO_SET",
+                "CAN_BE_REPAIRED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "CyberwarriorArmor",
+            "tier": "Exotic",
+            "icon": "CYWA32X",
+            "prettyname": "Cyberwarrior Armor",
+            "description": "A strange armor with a mixture of futuristic and old Asian design. This armor interfaces with it's wearer and assists their muscle movements, causing their techniques with bladed weapons to improve drastically. Due to the interface, removing the armor by yourself is not recommended.",
+            "protection": "20%",
+            "renprotection": "30%",
+            "resistances": {
+                "melee": "60%",
+                "bullet": "40%",
+                "fire": "0%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "[RED]Enhances bladed weapons[END]",
+                "NO_SPECIAL",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "DAMAGES_ON_REMOVAL",
+                "CAN_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "NO_SET",
+                "CAN_BE_REPAIRED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "DuelistArmor",
+            "tier": "Exotic",
+            "icon": "DUEA32X",
+            "prettyname": "Duelist Armor",
+            "description": "A strange, old looking suit, surprisingly in good condition still. Beneath the outer layer of the outfit lie some armor plates for deflecting [GREEN]bullets[END].",
+            "protection": "20%",
+            "renprotection": "30%",
+            "resistances": {
+                "melee": "50%",
+                "bullet": "50%",
+                "fire": "0%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CAN_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "NO_SET",
+                "CAN_BE_REPAIRED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "EnergyShieldedVestArmor",
+            "tier": "Exotic",
+            "icon": "ESVA32X",
+            "prettyname": "Energy-shielded Vest",
+            "description": "A combination of a small armor vest and a low-power energy shield. The shield reduces energy damage by half, and the vest also protects the user from harm.",
+            "protection": "10%",
+            "renprotection": "15%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "0%",
+                "fire": "50%",
+                "plasma": "50%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CAN_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "NO_SET",
+                "CAN_BE_REPAIRED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "EnergyShieldArmor",
+            "tier": "Exotic",
+            "icon": "ESHD32X",
+            "prettyname": "Energy Shield",
+            "description": "A [DARKGREEN]UAC[END] energy shield set up to resist [BLUE]plasma[END], [RED]fire[END] and other types of energy attacks. Because of the way they work, if it tries to deflect an attack of a different type from what it normally should, the shield will short out and take damage. Shields are too complicated to repair normally.",
+            "protection": "0%",
+            "renprotection": "0%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "0%",
+                "fire": "80%",
+                "plasma": "80%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "NO_SET",
+                "CANNOT_BE_REPAIRED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "GothicArmor",
+            "tier": "Exotic",
+            "icon": "GOTA32X",
+            "prettyname": "Gothic Armor",
+            "description": "Ancient medieval plate armor, heavy as hell and just as protective as it looks. While it might not be terribly easy to move in, you can't dismiss it's defensive power. A downside of this armor is that it degrades quickly under continuous assault.",
+            "protection": "70%",
+            "renprotection": "80%",
+            "resistances": {
+                "melee": "50%",
+                "bullet": "50%",
+                "fire": "0%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CAN_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "HAS_SET",
+                "CAN_BE_REPAIRED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "MedicalArmor",
+            "tier": "Exotic",
+            "icon": "MED132X",
+            "prettyname": "Medical Armor",
+            "description": "An armor co-designed by both the [DARKGREEN]UAC[END] and [DARKBLUE]Serygenix[END], this armor [PINK]heals[END] the user when they are critically wounded, and can also increase the potency of various medical supplies. The armor is quite tough as well, helping to keep field medics alive in battle.",
+            "protection": "20%",
+            "renprotection": "30%",
+            "resistances": {
+                "melee": "20%",
+                "bullet": "20%",
+                "fire": "0%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "[DARKGREEN]Healing is more effective[END]",
+                "[DARKGREEN]Toggleable healing mode[END]",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CAN_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "NO_SET",
+                "CAN_BE_REPAIRED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "PhaseshiftArmor",
+            "tier": "Exotic",
+            "icon": "PSHA32X",
+            "prettyname": "Phaseshift Armor",
+            "description": "An experiment in making a suit that would allow marines to walk through walls to ambush the invading demons. The suit was never able to move the user through walls, but it could put them out of phase with all manner of smaller solid objects, allowing the user to pass through projectiles.",
+            "protection": "20%",
+            "renprotection": "30%",
+            "resistances": {
+                "melee": "30%",
+                "bullet": "30%",
+                "fire": "0%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CAN_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "HAS_SET",
+                "CAN_BE_REPAIRED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "PlasmashieldArmor",
+            "tier": "Exotic",
+            "icon": "PSHD32X",
+            "prettyname": "Plasma Shield",
+            "description": "A [DARKGREEN]UAC[END] energy shield set up to resist [BLUE]plasma[END]-based projectiles or plasma explosions. Because of the way they work, if it tries to deflect an attack of a different type from what it normally should, the shield will short out and take damage. Shields are too complicated to repair normally.",
+            "protection": "0%",
+            "renprotection": "0%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "0%",
+                "fire": "0%",
+                "plasma": "95%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "NO_SET",
+                "CANNOT_BE_REPAIRED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "RepulsionWaveSuitArmor",
+            "tier": "Exotic",
+            "icon": "REPW32X",
+            "prettyname": "Repulsion Wave Suit",
+            "description": "A shield system that has been redesigned to power a small repulsor field system. The wearer can activate it when fully charged to blast away any nearby objects, giving you some precious breathing room.",
+            "protection": "30%",
+            "renprotection": "45%",
+            "resistances": {
+                "melee": "30%",
+                "bullet": "0%",
+                "fire": "0%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "[DARKGREEN]Blasts away nearby objects[END]",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CAN_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "NO_SET",
+                "CANNOT_BE_REPAIRED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "SurvivalMediArmor",
+            "tier": "Exotic",
+            "icon": "SURV32X",
+            "prettyname": "Survival MediArmor",
+            "description": "A specialty armor designed by [DARKBLUE]Serygenix[END], it monitors the life signs of the wearer. If the wearer is injured, the armor releases various chemicals into their bloodstream, helping to preserve their life. It also enhances [PINK]health[END] items.",
+            "protection": "20%",
+            "renprotection": "30%",
+            "resistances": {
+                "melee": "30%",
+                "bullet": "30%",
+                "fire": "15%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "[DARKGREEN]Grants regen when hit or healed[END]",
+                "NO_SPECIAL",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CAN_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "NO_SET",
+                "CANNOT_BE_REPAIRED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "OverchargeSystemArmor",
+            "tier": "Exotic",
+            "icon": "OVES32X",
+            "prettyname": "Overcharge System",
+            "description": "A bulky device worn on the arm, the Overcharge System can be wired directly into most [DARKGREEN]UAC[END] energy weapons, giving them a temporary boost to their damage output. The device recharges slowly, so picking the right time to overcharge your weapons is critical.",
+            "protection": "10%",
+            "renprotection": "15%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "0%",
+                "fire": "0%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "[DARKGREEN]Multiplies plasma damage for a brief time[END]",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CAN_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "NO_SET",
+                "CANNOT_BE_REPAIRED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "OnyxArmor",
+            "tier": "Exotic",
+            "icon": "ONXA32X",
+            "prettyname": "Onyx Armor",
+            "description": "A strange armor that is almost completely [DARKGRAY]indestructible[END]. While it doesn't protect the user that well, it won't break from even the heaviest attacks.",
+            "protection": "20%",
+            "renprotection": "30%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "0%",
+                "fire": "0%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CANNOT_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "NO_SET",
+                "NO_REPAIR_NEEDED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+
+
+        {
+            "name": "NuclearArmor",
+            "tier": "Superior",
+            "icon": "NUKA32X",
+            "prettyname": "Nuclear Armor",
+            "description": "An experimental armor powered by a compact nuclear generator, this armor's primary purpose is to enhance the power generation of nuclear-powered weaponry. The armor has heavy protection around the reactor, but little armor thickness remains to protect the wearer from harm.",
+            "protection": "20%",
+            "renprotection": "30%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "10%",
+                "fire": "20%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CANNOT_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "HAS_SET",
+                "NO_REPAIR_NEEDED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "RechargeableEnergyShieldArmor",
+            "tier": "Superior",
+            "icon": "RESH32X",
+            "prettyname": "Rechargeable Energy Shield",
+            "description": "An energy shield with slightly lower effectiveness, but able to be [ORANGE]recharged[END] with standard [DARKGREEN]UAC[END] energy cells. This allows the shield to continue to function for extended periods of time without needing to have specialists repair it.",
+            "protection": "0%",
+            "renprotection": "0%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "0%",
+                "fire": "70%",
+                "plasma": "70%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "[DARKGREEN]Recharges shield (uses cells)[END]",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "NO_SET",
+                "CANNOT_BE_REPAIRED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+
+
+        {
+            "name": "BerserkerArmor",
+            "tier": "Unique",
+            "icon": "BZRA32X",
+            "prettyname": "Berserker Armor",
+            "description": "A dark and heavy set of armor that seems to amplify your anger. All you want to do is crush all the monsters you can see, and keep killing them until there's nothing left but blood and mangled bodies.",
+            "protection": "0%",
+            "renprotection": "0%",
+            "resistances": {
+                "melee": "50%",
+                "bullet": "50%",
+                "fire": "0%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CANNOT_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "NO_SET",
+                "NO_REPAIR_NEEDED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "BerserkPowersuitArmor",
+            "tier": "Unique",
+            "icon": "BEPS32X",
+            "prettyname": "Berserker Powersuit",
+            "description": "A somewhat sinister creation, this armor can store berserk stimulants and inject the user with them at any time, allowing a marine to change from a half dead wreck to a one-man killing machine in the blink of an eye. The origin of this armor is unknown, but likely disturbing.",
+            "protection": "30%",
+            "renprotection": "45%",
+            "resistances": {
+                "melee": "70%",
+                "bullet": "0%",
+                "fire": "0%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "[DARKGREEN]Converts berserk packs to charges[END]",
+                "[DARKGREEN]Consumes charges to give berserk[END]",
+                "CANNOT_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "DAMAGES_ON_REMOVAL",
+                "CANNOT_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "NO_SET",
+                "NO_REPAIR_NEEDED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "BlazingPhoenixDeviceSuitArmor",
+            "tier": "Unique",
+            "icon": "BPHD32X",
+            "prettyname": "Phoenix-B Device Suit",
+            "description": "A recall device, coupled with a powerful [BLUE]plasma[END] discharge weapon. Activating the device causes it to charge up for a short time, before releasing a colossal [BLUE]plasma[END] explosion and [GREEN]teleporting[END] the wearer out of harms way. Make sure you have the cells to charge it though.",
+            "protection": "20%",
+            "renprotection": "30%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "0%",
+                "fire": "45%",
+                "plasma": "80%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "[DARKGREEN]Explode and teleport to start[END]",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "NO_SET",
+                "NO_REPAIR_NEEDED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "CyberneticArmor",
+            "tier": "Unique",
+            "icon": "CYNA32X",
+            "prettyname": "Cybernetic Armor",
+            "description": "A suit of armor that directly interfaces and combines with the wearer [DARKRED]permanently.[END] The resistance this armor provides is nothing short of incredible, but it can never be removed without killing the wearer. While some people are adverse to the idea of permanently becoming a living cybernetic weapon, sometimes it's the only way you're gonna survive the mess ahead of you. Make a choice.",
+            "protection": "70%",
+            "renprotection": "80%",
+            "resistances": {
+                "melee": "50%",
+                "bullet": "50%",
+                "fire": "0%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "[DARKGREEN]Allows armor-enhancing modding[END]",
+                "CANNOT_BE_DESTROYED",
+                "CANNOT_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "NO_SET",
+                "NO_REPAIR_NEEDED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "EnergyDischargeHarnessArmor",
+            "tier": "Unique",
+            "icon": "EDHX32X",
+            "prettyname": "Energy Discharge Harness",
+            "description": "A counterattack system designed to be used on unmanned drones and robots, this device absorbs part of any energy attacks that hit it. Activating this device unleashes all the collected energy into a single explosion with force equal to the amount of charges it contains.",
+            "protection": "20%",
+            "renprotection": "30%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "0%",
+                "fire": "10%",
+                "plasma": "10%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "[DARKGREEN]Gain charges from fire/plasma damage[END]",
+                "[DARKGREEN]Consume charges in explosion[END]",
+                "CANNOT_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "NO_SET",
+                "NO_REPAIR_NEEDED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "FrontlineEngineerSuitArmor",
+            "tier": "Unique",
+            "icon": "BLUA32X",
+            "prettyname": "Energy Discharge Harness",
+            "description": "A suit generally issued to [DARKGREEN]UAC[END] field engineers, this set has the tools needed to deploy automated sentry guns to assist [DARKGREEN]UAC[END] forces in the field. Multiple sentry models exist with a wide array of weapons, so a user can often deploy sentries that suit them the most.",
+            "protection": "20%",
+            "renprotection": "30%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "0%",
+                "fire": "25%",
+                "plasma": "60%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "[DARKGREEN]Deploys a sentry turret[END]",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "HAS_SET",
+                "CAN_BE_REPAIRED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "GeosGoldenGauntletArmor",
+            "tier": "Unique",
+            "icon": "GGGX32X",
+            "prettyname": "Geo's Golden Gauntlet",
+            "description": "A magical gauntlet made from pure gold. While it offers you almost no protection, it does seem to boost your confidence quite a bit. For some reason, you feel like you could take on any foe with a single punch.\n That's silly, though.",
+            "protection": "0%",
+            "renprotection": "0%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "0%",
+                "fire": "0%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "[DARKGREEN]Enhances a single unarmed attack[END]",
+                "NO_SPECIAL",
+                "CANNOT_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "NO_SET",
+                "NO_REPAIR_NEEDED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "JetpackArmor",
+            "tier": "Unique",
+            "icon": "JETP32X",
+            "prettyname": "Jetpack",
+            "description": "Designed for use in the often crazy and always hazardous terrain of Hell, this jetpack will help you get anywhere you need to, and in style!\n\n (Also breaks levels, don't blame me if you fall out the entire level or something.)",
+            "protection": "5%",
+            "renprotection": "8%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "0%",
+                "fire": "0%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "[DARKGREEN]Toggles Jetpack[END]",
+                "CANNOT_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "HAS_SET",
+                "NO_REPAIR_NEEDED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "JetpackArmor",
+            "tier": "Unique",
+            "icon": "JETP32X",
+            "prettyname": "Jetpack",
+            "description": "Designed for use in the often crazy and always hazardous terrain of Hell, this jetpack will help you get anywhere you need to, and in style!\n\n (Also breaks levels, don't blame me if you fall out the entire level or something.)",
+            "protection": "5%",
+            "renprotection": "8%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "0%",
+                "fire": "0%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "[DARKGREEN]Toggles Jetpack[END]",
+                "CANNOT_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "HAS_SET",
+                "NO_REPAIR_NEEDED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "KateMatterstormHarnessArmor",
+            "tier": "Unique",
+            "icon": "K8MH32X",
+            "prettyname": "K-8 Matterstorm Harness",
+            "description": "The product of an experiment in controlled prismatic [BLUE]plasma[END], this armor can unleash a storm of bouncing blasts from the prismatic arrays across the armor's surface. While bizarre in appearance, its power cannot be questioned; in a closed space, it'll rip enemies apart. There's also a little heart on the side.",
+            "protection": "15%",
+            "renprotection": "23%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "0%",
+                "fire": "30%",
+                "plasma": "45%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "[DARKGREEN]Fires bouncing energy blasts[END]",
+                "CANNOT_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "NO_SET",
+                "NO_REPAIR_NEEDED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "KyleTeslaboltArmor",
+            "tier": "Unique",
+            "icon": "KTES32X",
+            "prettyname": "K1-L3 Teslabolt Armor",
+            "description": "A mysterious armor armed with advanced lightning generators. The tesla coils are capable of electrocuting enemies at quite a long range, and can destroy most enemies with ease. The internal generators have a long charge time, so pick your targets wisely.",
+            "protection": "30%",
+            "renprotection": "45%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "0%",
+                "fire": "0%",
+                "plasma": "75%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "[DARKGREEN]Emit thunderbolts for a short period[END]",
+                "CANNOT_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "NO_SET",
+                "NO_REPAIR_NEEDED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "LavaArmor",
+            "tier": "Unique",
+            "icon": "LAVU32X",
+            "prettyname": "Lava Armor",
+            "description": "A mysterious piece of armor, forged in the depths of Hell. The armor appears to be made of still-liquid magma, but the armor is solid to the touch, and only warm, instead of superheated.",
+            "protection": "30%",
+            "renprotection": "45%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "0%",
+                "fire": "75%",
+                "plasma": "50%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CANNOT_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "HAS_SET",
+                "NO_REPAIR_NEEDED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "MaleksArmor",
+            "tier": "Unique",
+            "icon": "MALK32X",
+            "prettyname": "Malek's Armor",
+            "description": "The heavy armor of a long-dead warrior who fought against Hell in ages past. The armor is infused with the soul of the warrior, who yearns to battle the demons once more.",
+            "protection": "30%",
+            "renprotection": "45%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "0%",
+                "fire": "30%",
+                "plasma": "30%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CANNOT_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "HAS_SET",
+                "NO_REPAIR_NEEDED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "MedicalPowerArmor",
+            "tier": "Unique",
+            "icon": "MED232X",
+            "prettyname": "Medical Powerarmor",
+            "description": "[DARKBLUE]]Serygenix's[END] advanced medical systems are incorporated into a set of powerarmor. This armor is far more durable than normal, preventing loss of the medical capacities from enemy attacks. The armor is also twice as resistant to damage as it's smaller, non-powered cousin.",
+            "protection": "40%",
+            "renprotection": "60%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "0%",
+                "fire": "0%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "[DARKGREEN]Healing is more effective[END]",
+                "[DARKGREEN]Toggleable healing mode[END]",
+                "CANNOT_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "NO_SET",
+                "NO_REPAIR_NEEDED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "NanoAblativeArmor",
+            "tier": "Unique",
+            "icon": "NABL32X",
+            "prettyname": "Nano Ablative Armor",
+            "description": "An advanced armor prototype, this armor is a combination of the excellent protective power of ablative armor, along with the self-repair capacity of an advanced nanobot repair module. Keep this armor working, and it'll keep you alive.",
+            "protection": "50%",
+            "renprotection": "75%",
+            "resistances": {
+                "melee": "100%",
+                "bullet": "100%",
+                "fire": "100%",
+                "plasma": "100%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "NO_SET",
+                "NO_REPAIR_NEEDED",
+                "HAS_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "NuclearPowerArmor",
+            "tier": "Unique",
+            "icon": "ENUK32X",
+            "prettyname": "Nuclear Powerarmor",
+            "description": "A bulky set of powerarmor, clearly not of UAC manufacture, this armor is powered by a small microfusion reactor on it's heavily armor back. It's obvious it was designed to be used in extremely hazardous enviroments, and that'll serve you well.",
+            "protection": "50%",
+            "renprotection": "75%",
+            "resistances": {
+                "melee": "20%",
+                "bullet": "40%",
+                "fire": "20%",
+                "plasma": "10%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CANNOT_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "HAS_SET",
+                "NO_REPAIR_NEEDED",
+                "HAS_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "PrototypeAssaultShieldArmor",
+            "tier": "Unique",
+            "icon": "PASS32X",
+            "prettyname": "Prototype Assault Shield",
+            "description": "A prototype shield designed to be worn by special assault marines, this shield uses up an extraordinary amount of power compared to normal shields, but provides great protection to [WHITE]all normal damage[END] types while active. It costs [BLUE]100 cells[END] to activate, and lasts for [ORANGE]5 minutes[END] before running out of power entirely.",
+            "protection": "0%",
+            "renprotection": "0%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "0%",
+                "fire": "0%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "[DARKGREEN]Uses cells to activate shielding[END]",
+                "CANNOT_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "NO_SET",
+                "NO_REPAIR_NEEDED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "RoystensCommandArmor",
+            "tier": "Unique",
+            "icon": "ROYA32X",
+            "prettyname": "Roysten's Command Armor",
+            "description": "The uniform of the commander of the Deimos research base. Wearing this decorated armor makes you feel like a hero, although the medals aren't actually yours. You've no idea why you found it here, though.\n\n [RED]SHENANIGANS[END]",
+            "protection": "15%",
+            "renprotection": "23%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "50%",
+                "fire": "35%",
+                "plasma": "15%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "[DARKGREEN]Summon one supply crate per level[END]",
+                "CANNOT_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "HAS_SET",
+                "NO_REPAIR_NEEDED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "RyanCordellPsychicAmplifierSuitArmor",
+            "tier": "Unique",
+            "icon": "RCPA32X",
+            "prettyname": "R11-n Psychic Amplifier Suit",
+            "description": "The product of [DARKGREEN]UAC's[END] limited forays into the strange world of psychic power, this suit heightens the wearer's psionic potential, allowing them to attack the minds of their enemies. Its protective ability is pretty poor though.",
+            "protection": "15%",
+            "renprotection": "23%",
+            "resistances": {
+                "melee": "-23%",
+                "bullet": "0%",
+                "fire": "40%",
+                "plasma": "50%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "[DARKGREEN]Causes fear in nearby enemies[END]",
+                "CANNOT_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "DAMAGES_ON_REMOVAL",
+                "CANNOT_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "NO_SET",
+                "NO_REPAIR_NEEDED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "ShieldedArmor",
+            "tier": "Unique",
+            "icon": "SSHD32X",
+            "prettyname": "Shielded Armor",
+            "description": "A perfect shield/armor combo, this armor has the power of a prototype ballistic shield, protected by a bulky set of armor, preventing the shield from being damaged. With this massive suit, you no longer fear (most) [GREEN]bullets[END]!",
+            "protection": "20%",
+            "renprotection": "30%",
+            "resistances": {
+                "melee": "90%",
+                "bullet": "90%",
+                "fire": "0%",
+                "plasma": "0%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "NO_SPECIAL",
+                "CANNOT_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "NO_SET",
+                "NO_REPAIR_NEEDED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "SoloOperativeSuitArmor",
+            "tier": "Unique",
+            "icon": "SSOS32X",
+            "prettyname": "Solo Operative Suit",
+            "description": "A stealth suit left behind by some unknown soldier who fell to the demons onslaught. It's very resistant to bullets, and comes with a bunch of gadgets you could use to sneak around. That is, if you were sneaking around humans, instead of bloodthirsty demons.",
+            "protection": "0%",
+            "renprotection": "0%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "90%",
+                "fire": "10%",
+                "plasma": "10%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "[DARKGREEN]Short damage boost and invisibility[END]",
+                "CANNOT_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "HAS_SET",
+                "NO_REPAIR_NEEDED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "TacticalAssemblerSuitArmor",
+            "tier": "Unique",
+            "icon": "REDA32X",
+            "prettyname": "Tactical Assembler Suit",
+            "description": "A suit generally issued to [DARKGREEN]UAC[END] maintenance workers, this set has the tools needed to deploy advanced restorer devices to heal [DARKGREEN]UAC[END] forces in the field. A properly qualified technician would be able to use this equipment most efficiently.",
+            "protection": "20%",
+            "renprotection": "30%",
+            "resistances": {
+                "melee": "0%",
+                "bullet": "0%",
+                "fire": "60%",
+                "plasma": "25%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "[DARKGREEN]Deploys a Healing Station[END]",
+                "CAN_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "HAS_SET",
+                "CAN_BE_REPAIRED",
+                "NO_AUTO_REPAIR"
+            ]
+        },
+        {
+            "name": "TerminusEst13BattlesuitArmor",
+            "tier": "Unique",
+            "icon": "TEBS32X",
+            "prettyname": "Terminus Battlesuit",
+            "description": "A juggernaut of an armor, armed with 4 shoulder mounted missile launchers. In an attempt to surprise the enemy with a single volley of missiles, [DARKGREEN]UAC[END] incorporated a minor disguise into the design. Unfortunately, demons don't fall for it, but it looks cool.",
+            "protection": "45%",
+            "renprotection": "60%",
+            "resistances": {
+                "melee": "30%",
+                "bullet": "30%",
+                "fire": "25%",
+                "plasma": "15%",
+                "cryo": "0%",
+                "electric": "0%",
+                "poison": "0%",
+                "radiation": "0%"
+            },
+            "cyborgstats": {
+                "resistances": {
+                    "kinetic": "0%",
+                    "thermal": "0%",
+                    "refractor": "0%",
+                    "organic": "0%",
+                    "hazard": "0%"
+                },
+                "augment": "NO_UNIQUE_AUGMENT"
+            },
+            "attributes": [
+                "NO_PASSIVE",
+                "[DARKGREEN]Fires four missiles[END]",
+                "CANNOT_BE_DESTROYED",
+                "CAN_BE_REMOVED",
+                "CANNOT_BE_ONYXED",
+                "CANNOT_BE_RECOLORED",
+                "HAS_SET",
+                "NO_REPAIR_NEEDED",
+                "NO_AUTO_REPAIR"
             ]
         }
     ]

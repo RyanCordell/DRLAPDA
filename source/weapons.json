@@ -5,15 +5,18 @@
             "tier": "Standard",
             "icon": "NPISX0",
             "prettyname": "Pistol",
-            "stats": [
-				"Fire rate: 0.5s (19 tics)",
-				"Damage: 6-18 (6d3)",
-				"Reload: 1.0s (37 tics)",
-				"Spread: 4 x 0"
-			],
+            "stats": {
+				"Fire rate": "0.5s (19 tics)",
+				"Damage": "6-18 (6d3)",
+				"Reload": "1.0s (37 tics)",
+                "Spread": "4 x 0",
+                "Radius": "0",
+                "Magazine": "many",
+                "Projectiles": "1"
+            },
             "quote": "Your trusty 10mm pistol. It may be nice, but better find something stronger.",
             "description": "Standard UAC pistol, chambered for the 10mm round.\nGood for potshots at the odd zombie or three, but when you start seeing stronger foes, it's time to find something better.",
-            "mods": "This weapon can support up to four modifications"
+            "mods": "FOUR_MODS_CAPACITY"
         }
     ]
 }

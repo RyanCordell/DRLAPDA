@@ -13,7 +13,11 @@
             "validlist": [
                 "Pistol",
                 "Battle Rifle"
-			]
+            ],
+            "mods": [
+                "TECHNICAL",
+                "TECHNICAL"
+            ]
         }
     ]
 }

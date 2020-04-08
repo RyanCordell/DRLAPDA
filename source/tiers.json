@@ -3,52 +3,52 @@
         {
             "tier": "Generic",
             "name": "Generic",
-            "color": "cj"
+            "color": "WHITE"
         },
         {
             "tier": "Basic",
             "name": "Assembled (Basic)",
-            "color": "c[BB]"
+            "color": "BASIC"
         },
         {
             "tier": "Advanced",
             "name": "Assembled (Advanced)",
-            "color": "c[AB]"
+            "color": "ADVANCED"
         },
         {
             "tier": "Master",
             "name": "Assembled (Master)",
-            "color": "c[MB]"
+            "color": "MASTER"
         },
         {
             "tier": "Exotic",
             "name": "Exotic",
-            "color": "ct"
+            "color": "EXOTIC"
         },
         {
             "tier": "Superior",
             "name": "Superior",
-            "color": "ci"
+            "color": "SUPERIOR"
         },
         {
             "tier": "Unique",
             "name": "Unique",
-            "color": "cd"
+            "color": "UNIQUE"
         },
         {
             "tier": "Demonic",
             "name": "Demonic",
-            "color": "cg"
+            "color": "DEMONIC"
         },
         {
             "tier": "Legendary",
             "name": "Legendary",
-            "color": "cf"
+            "color": "LEGENDARY"
         },
         {
             "name": "Onyx-modded",
             "tier": "Onyx",
-            "color": "cu"
+            "color": "ONYX"
         }
     ]
 }

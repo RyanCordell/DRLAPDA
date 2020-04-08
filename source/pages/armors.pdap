@@ -388,6 +388,7 @@ if(PDA_Local.page == 2)
                     (!isRenegade) ? strParam("%l:_PROT", langEntry) : strParam("%l:_RENPROT", langEntry));
         }
         
+        // TODO: Account for Cybernetic Armor description
         armorDesc = strParam("%l:_DESC", langEntry);
         width     = (strLen(name) * 5);
     
