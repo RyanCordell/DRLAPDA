@@ -1,5 +1,5 @@
 {
-    "attributeEntries": {
+    "attributes": {
         "NO_PASSIVE": "No passive effect",
         "NO_SPECIAL": "No armor special",
 
@@ -10,7 +10,7 @@
         "NO_SET": "Not part of a set",
 
         "CAN_BE_RECOLORED": "Can change color type",
-        "CANNOT_RECOLOR": "Cannot change color type",
+        "CANNOT_BE_RECOLORED": "Cannot change color type",
         
         "CAN_BE_REMOVED": "Removable",
         "CANNOT_BE_REMOVED": "Cannot be removed",

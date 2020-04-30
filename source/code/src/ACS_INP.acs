@@ -2,7 +2,8 @@
 #define PDA_ScrollDelay 2
 #define HOLD_MAX 15
 
-/* Thanks to HeXaGoN for the maths behind the mouse cursor here! */
+/** Thanks to HeXaGoN for the maths behind the mouse cursor here! */
+/** TODO: Account for "Prescale Mouse Movement" option being off */
 
 SCRIPT "PDA_MouseController" (void)
 {

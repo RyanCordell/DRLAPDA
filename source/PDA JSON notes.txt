@@ -24,5 +24,4 @@ Items:
     Names are all colored GREEN by default
     Descriptions are all colored GRAY by default, with differently colored words
 
-
 Assembly mods list are auto-colored based on the mod

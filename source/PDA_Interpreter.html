@@ -10,12 +10,30 @@
     <h1 class="main__header">PDA JSON parser</h1>
     <p class="main__instructions">Use the input below to select the PDA JSON file.</p>
 
-    <div class="file">
-        <p>File: <span class="file__object"></span></p>
-        <input type="file" class="file__select" name="file[]" />
-        <p class="file__content"></p>
+    <form id="file-field">
+        <div class="input-field">
+            <p>File: <span class="file__object"></span></p>
+            <input type="file" class="file__select" name="file[]" multiple />
+        </div>
+        <div class="input-field">
+            <button type="submit" class="file__process">Process data</button>
+        </div>
+    </form>
+    <!-- <div class="input-field">
+        <p>Weapon language: <span class="language-weapon__object"></span></p>
+        <input type="file" class="language-weapon__select" name="weapon[]" />
     </div>
+    <div class="input-field">
+        <p>Mod header: <span class="header-mod__object"></span></p>
+        <input type="file" class="header-mod__select" name="modheader[]" />
+    </div>
+    <div class="input-field">
+        <p>Mod language: <span class="language-mod__object"></span></p>
+        <input type="file" class="language-mod__select" name="mod[]" />
+    </div> -->
 </div>
 </body>
+<script type="text/javascript" src="./freader.js"></script>
 <script type="text/javascript" src="./parser.js"></script>
+<script type="text/javascript" src="./templates.js"></script>
 </html> 
