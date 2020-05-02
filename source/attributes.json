@@ -1,31 +1,31 @@
 {
     "attributes": {
-        "NO_PASSIVE": "No passive effect",
-        "NO_SPECIAL": "No armor special",
+        "NO_PASSIVE": "[ORANGE]No passive effect[END]",
+        "NO_SPECIAL": "[ORANGE]No armor special[END]",
 
-        "CAN_BE_DESTROYED": "Destructible",
-        "CANNOT_BE_DESTROYED": "Indestructible",
+        "CAN_BE_DESTROYED": "[ORANGE]Destructible[END]",
+        "CANNOT_BE_DESTROYED": "[DARKGREEN]Indestructible[END]",
 
-        "HAS_SET": "Is part of a set",
-        "NO_SET": "Not part of a set",
+        "HAS_SET": "[DARKGREEN]Is part of a set[END]",
+        "NO_SET": "[ORANGE]Not part of a set[END]",
 
-        "CAN_BE_RECOLORED": "Can change color type",
-        "CANNOT_BE_RECOLORED": "Cannot change color type",
+        "CAN_BE_RECOLORED": "[DARKGREEN]Can change color type[END]",
+        "CANNOT_BE_RECOLORED": "[ORANGE]Cannot change color type[END]",
         
-        "CAN_BE_REMOVED": "Removable",
-        "CANNOT_BE_REMOVED": "Cannot be removed",
+        "CAN_BE_REMOVED": "[DARKGREEN]Removable[END]",
+        "CANNOT_BE_REMOVED": "[ORANGE]Cannot be removed[END]",
 
-        "DAMAGES_ON_REMOVAL": "Damages user if removed",
+        "DAMAGES_ON_REMOVAL": "[DARKGREEN]Damages user if removed[END]",
         
-        "CAN_BE_ONYXED": "Can be Onyx-modded",
-        "CANNOT_BE_ONYXED": "Can't be Onyx-modded",
-        "ALREADY_ONYXED": "Already Onyx-modded",
+        "CAN_BE_ONYXED": "[DARKGREEN]Can be Onyx-modded[END]",
+        "CANNOT_BE_ONYXED": "[ORANGE]Can't be Onyx-modded[END]",
+        "ALREADY_ONYXED": "[DARKGREEN]Already Onyx-modded[END]",
         
-        "CAN_BE_REPAIRED": "Repairable",
-        "CANNOT_BE_REPAIRED": "Cannot be conventionally repaired",
-        "NO_REPAIR_NEEDED": "Does not need repairs",
+        "CAN_BE_REPAIRED": "[DARKGREEN]Repairable[END]",
+        "CANNOT_BE_REPAIRED": "[ORANGE]Cannot be conventionally repaired[END]",
+        "NO_REPAIR_NEEDED": "[ORANGE]Does not need repairs[END]",
 
-        "HAS_AUTO_REPAIR": "Repairs itself overtime",
-        "NO_AUTO_REPAIR": "Does not repair itself"
+        "HAS_AUTO_REPAIR": "[DARKGREEN]Repairs itself overtime[END]",
+        "NO_AUTO_REPAIR": "[ORANGE]Does not repair itself[END]"
     }
 }

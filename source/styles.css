@@ -29,7 +29,37 @@ body {
     
 }
 
+#file-field {
+    max-width: 640px;
+}
+
 .input-field {
-    border: 1px dotted #eaf3fd;
+    border: 1px dotted #EAF3FD;
     padding: 5px;
+}
+
+.output {
+    max-width: 640px;
+}
+
+.output__field {
+    padding: 20px;
+}
+
+a.output__download {
+    padding: 20px;
+    border: 1px solid #EAF3FD;
+    color: #EAF3FD;
+    border-radius: 10px;
+    display: inline-block;
+    cursor: pointer;
+    text-decoration: none;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    transition: background-color 0.2s ease-out, color 0.2s ease-out;
+}
+
+.output__download:hover {
+    color: #000;
+    background-color: #EAF3FD;
 }

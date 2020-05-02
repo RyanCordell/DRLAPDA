@@ -1,12 +1,13 @@
 var eqData;
 var fileList = [];
-var fileInput, fileProcess;
+var fileInput, fileProcess, outputDownload;
 
 window.pdaglobals = {};
 
 window.onload = function (e) {
     fileInput = this.document.getElementsByClassName('file__select')[0];
     fileProcess = this.document.getElementById('file-field');
+    outputDownload = this.document.getElementsByClassName('output__field')[0];
     var that = this;
     var weaponLangInput = this.document.getElementsByClassName('language-weapon__select')[0];
     var modHeaderInput = this.document.getElementsByClassName('header-mod__select')[0];
@@ -17,21 +18,16 @@ window.onload = function (e) {
         /** TODO: Once processed, make the files downloadable */
         fileInput.addEventListener('change', handleFile, false);
 
+        /** TODO: Better naming convention for functions */
         fileProcess.addEventListener('submit', function (evt) {
             evt.preventDefault();
             fileList.forEach(function (file) {
                 processFile(file);
             });
-            console.log(window.pdaglobals);
             /** Necessary to have it read the global variable properly */
             setTimeout(parseJSON, 100);
         });
 
-        /* weaponLangInput.addEventListener('change', handleWeaponLanguage, false);
-        modHeaderInput.addEventListener('change', handleModHeader, false);
-        modLangInput.addEventListener('change', handleModLanguage, false); */
-        //readInput.addEventListener('change', handleRead, false);
-        /** TODO: Better naming convention for functions */
         //this.fetchJSON();
     } else {
         console.error('The File APIs are not fully supported in this browser, this parser will not work otherwise.');
@@ -41,14 +37,54 @@ window.onload = function (e) {
 
 var template = ``;
 
+
+function generateDownload (filename, text) {
+    var element = document.createElement('a');
+    element.setAttribute('id', filename);
+    element.text = `Download ${filename}`;
+    element.setAttribute('class', 'output__download');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+  
+    if (element.length != 1) outputDownload.appendChild(element);
+}
+
+var weaponModList = [];
+var equipmentList = [];
+var assemblyList = [];
+
+function weaponModListing (max, list, dmax, dlist) {
+    this.max = max;
+    this.list = list;
+    this.dmax = dmax;
+    this.dlist = dlist;
+}
+
+function equipmentListing (max, list) {
+    this.max = max;
+    this.list = list;
+}
+
+function assemblyListing (max, list, uniquemax, sniper, firestorm, nano) {
+    this.max = max;
+    this.list = list;
+    this.uniquemax = uniquemax;
+    this.sniper = sniper;
+    this.firestorm = firestorm;
+    this.nano = nano;
+}
+
 function parseJSON () {
     if (Object.keys(window.pdaglobals).length < 1) return;
+
+    var language_warning = `[enu default]\n\n// Please do not modify this file directly, it's specifically compiled and any changes may be lost.\n\n`;
 
     if (window.pdaglobals.hasOwnProperty('weapons')) {
         var weaponModEffects = ``;
         var weaponModMax = 0;
         var demonicWeapons = 0;
         var demonicArtifacts = ``;
+        var weaponLanguage = ``;
         
         window.pdaglobals.weapons.forEach(weapon => {
             if (weapon.mods) {
@@ -59,114 +95,120 @@ function parseJSON () {
                 demonicArtifacts = demonicArtifacts.concat(`{ "RL${weapon.name}", "${weapon.corruptions[0]}", "${weapon.corruptions[1]}", "${weapon.corruptions[2]}"},`)
                 demonicWeapons++;
             }
+
+            weaponLanguage = weaponLanguage.concat(LANGUAGE_WEAPONS(weapon));
         });
+
+        /** PDA_MOD */
         weaponModList.push(new weaponModListing(weaponModMax, weaponModEffects, demonicWeapons, demonicArtifacts));
-        //console.log(PDA_MOD(weaponModList[0]));
-        //console.log("DRLA_WEAPONMODLIST: { \"RL" + data.weapons[0].name + "\", \"" + data.weapons[0] +"\",}");
+        generateDownload('PDA_MOD.ach', PDA_MOD(weaponModList[0]));
+
+        /** LANGUAGE.WEAPONS */
+        weaponLanguage = revertColors(weaponLanguage);
+        /* if (window.pdaglobals.hasOwnProperty('colors')) {
+            for(let [key, value] of Object.entries(window.pdaglobals.colors)) {
+                weaponLanguage = weaponLanguage.replace(new RegExp('\\['+key+'\\]', 'g'), `\\c${value}`);
+            }
+        } */
+        /** Strip readability for language */
+        weaponLanguage = weaponLanguage.replace(/(\n)/g, '\\n').replace(/(;)\\n/gm, ';').replace(/( {3,})\\n/gm, '').replace(/^\\n( {1,})/gm, '');
+        generateDownload('language.auto.weapons', weaponLanguage);
+
     }
     
     if (pdaglobals.hasOwnProperty('equipment')) {
         var headerArmorList = ``;
-        var languageArmorList = `[enu default]\n\n// Please do not modify this file directly, it's specifically compiled and any changes may be lost.\n\n`;
+        var languageArmorList = language_warning;
         var equipmentMax = 0;
 
         window.pdaglobals.equipment.forEach(item => {
-            headerArmorList = headerArmorList.concat(`{"RL${item.name}", "${item.name}"},`);
+            headerArmorList = headerArmorList.concat(`{"RL${item.name}", "${item.name.toUpperCase()}"},`);
             equipmentMax++;
 
+            /** Pipe into language */
             languageArmorList = languageArmorList.concat(LANGUAGE_EQUIPMENT(item));
         });
-
-        for(let [key, value] of Object.entries(window.pdaglobals.attributes))
-        {
-            languageArmorList = languageArmorList.replace(new RegExp(key, 'g'), value);
-        }
-        //languageArmorList
-        console.log(languageArmorList);
-
+        
+        /** Pipes into PDA_ARM */
         equipmentList.push(new equipmentListing(equipmentMax, headerArmorList));
-        //console.log(PDA_ARM(equipmentList[0]));
-        //console.log(languageArmorList);
-        /** TODO: This needs to pipe into: LANGUAGE.ARMORS, PDA_ARM (actor name and language entry) */
+        generateDownload('PDA_ARM.ach', PDA_ARM(equipmentList[0]));
+
+        /** Replace all language pointers with their contents */
+        if (window.pdaglobals.hasOwnProperty('attributes')) {
+            for(let [key, value] of Object.entries(window.pdaglobals.attributes)) {
+                languageArmorList = languageArmorList.replace(new RegExp(key, 'g'), value);
+            }
+        }
+
+        /** LANGUAGE.WEAPONS */
+        languageArmorList = languageArmorList.replace(/(\n)/g, '\\n').replace(/(;)\\n/gm, ';').replace(/\\n(?=(?:[^"]*"[^"]*")*[^"]*$)/gm, '');
+        languageArmorList = revertColors(languageArmorList);
+        generateDownload('language.auto.equipment', languageArmorList);
     }
 
     if (window.pdaglobals.hasOwnProperty('modeffect')) {
-        var modEffectList = `[enu default]\n\n// Please do not modify this file directly, it's specifically compiled and any changes may be lost.\n\n`;
+        var modEffectList = language_warning;
 
         window.pdaglobals.modeffect.forEach(modeffect => {
-            modEffectList = modEffectList.concat(`${modeffect.name} = "${modeffect.effect.replace('\\n', '\n')}";`);
+            modEffectList = modEffectList.concat(`${modeffect.name} = "${modeffect.effect}";`);
         });
 
-        //console.log(modEffectList);
+        modEffectList = revertColors(languageAssemblyList);
+        generateDownload('language.auto.mods', modEffectList);
+    }
+
+    if (window.pdaglobals.hasOwnProperty('assemblies')) {
+        var headerAssemblyList = ``;
+        var headerAssemblyMax = 0;
+        var headerUniqueMax = 0;
+        var headerSniperList = ``;
+        var headerFirestormList = ``;
+        var headerNanoList = ``;
+        var languageAssemblyList = language_warning;
+
+        window.pdaglobals.assemblies.forEach(assembly => {
+            headerAssemblyList = headerAssemblyList.concat(`{"RL${assembly.name}AssemblyLearntToken", "PDA_ASSEMBLY_${assembly.tier.toUpperCase()}_${assembly.name.toUpperCase()}"},`);
+            headerAssemblyMax++;
+
+            /** LANGUAGE */
+            languageAssemblyList = languageAssemblyList.concat(LANGUAGE_ASSEMBLIES(assembly));
+        });
+
+        languageAssemblyList = languageAssemblyList.replace(/(\n)/g, '\\n').replace(/(;)\\n/gm, ';').replace(/\\n(?=(?:[^"]*"[^"]*")*[^"]*$)/gm, '');
+        languageAssemblyList = revertColors(languageAssemblyList);
+        generateDownload('language.auto.assemblies', languageAssemblyList);
+
+        /** PDA_ASM */
+        if (window.pdaglobals.hasOwnProperty('weapons')) {
+            window.pdaglobals.weapons.forEach(weapon => { 
+                if (weapon.tier === 'Unique' || weapon.tier === 'Demonic' || weapon.tier === 'Legendary') {
+                    if (weapon.unmoddable) {
+                        headerSniperList = headerSniperList.concat(`{"RL${weapon.name}", "null"},`);
+                        headerFirestormList = headerFirestormList.concat(`{"RL${weapon.name}", "null"},`);
+                        headerNanoList = headerNanoList.concat(`{"RL${weapon.name}", "null"},`);
+                    }
+                    else {
+                        headerSniperList = headerSniperList.concat(`{"RL${weapon.name}", "RL${weapon.name}SniperLearntToken"},`);
+                        headerFirestormList = headerFirestormList.concat(`{"RL${weapon.name}", "RL${weapon.name}FirestormLearntToken"},`);
+                        headerNanoList = headerNanoList.concat(`{"RL${weapon.name}", "RL${weapon.name}NanoLearntToken"},`);
+                    }
+                    headerUniqueMax++;
+                }
+            });
+        }
+
+        assemblyList.push(new assemblyListing(headerAssemblyMax, headerArmorList, headerUniqueMax, headerSniperList, headerFirestormList, headerNanoList));
+
+        generateDownload('PDA_ASM.ach', PDA_ASM(assemblyList[0]))
     }
 }
 
-function fetchJSON () {
-    // Grab JSON file from current directory
-    /** TODO: Automatically grab JSON files instead of relying on input */
-    var fileContent = document.getElementsByClassName('file__content')[0];
-        fileContent.innerHTML = template;
-
-    equipmentKeys = Object.keys(eqData);
-    resistancesKeys = Object.keys(eqData.resistances);
-    cyborgResKeys = Object.keys(eqData.cyborgstats.resistances);
-
-    /** TODO: Generate ACS and Language templates with these values */
-    template = `
-Actor:${eqData.name}<br>
-<br>
-Name: ${eqData.prettyname}<br>
-<br>
-Icon: ${eqData.icon}<br>
-<br>
-Tier: ${eqData.tier}<br>
-<br>
-Description: ${eqData.description}<br>
-<br>
-Protection: ${eqData.protection} (Renegade bonus: ${eqData.renprotection})<br>
-<br>
-Resistances: <br>
-    ${resistancesKeys[0]}: ${eqData.resistances.melee}<br>
-    ${resistancesKeys[1]}: ${eqData.resistances.bullet}<br>
-    ${resistancesKeys[2]}: ${eqData.resistances.fire}<br>
-    ${resistancesKeys[3]}: ${eqData.resistances.plasma}<br>
-    ${resistancesKeys[4]}: ${eqData.resistances.cryo}<br>
-    ${resistancesKeys[5]}: ${eqData.resistances.electric}<br>
-    ${resistancesKeys[6]}: ${eqData.resistances.poison}<br>
-    ${resistancesKeys[7]}: ${eqData.resistances.radiation}<br>
-<br>
-Cyborg information: <br>
-    Resistances: <br>
-        ${cyborgResKeys[0]}: ${eqData.cyborgstats.resistances.kinetic}<br>
-        ${cyborgResKeys[1]}: ${eqData.cyborgstats.resistances.thermal}<br>
-        ${cyborgResKeys[2]}: ${eqData.cyborgstats.resistances.refractor}<br>
-        ${cyborgResKeys[3]}: ${eqData.cyborgstats.resistances.organic}<br>
-        ${cyborgResKeys[4]}: ${eqData.cyborgstats.resistances.hazard}<br>
-    Augment: ${eqData.cyborgstats.augment}<br>
-<br>
-Attributes: <br>
-    ${eqData.attributes[0]}<br>
-    ${eqData.attributes[1]}<br>
-    ${eqData.attributes[2]}<br>
-    ${eqData.attributes[3]}<br>
-    ${eqData.attributes[4]}<br>
-    ${eqData.attributes[5]}<br>
-    ${eqData.attributes[6]}<br>
-    ${eqData.attributes[7]}<br>
-    ${eqData.attributes[8]}<br>
-`;
-
-    /** TODO: Be able to save/export templates as the appropriate files */
-
-    console.info('JSON loaded');
-}
-
-/*
+/** 
  * @name: Handle Colors
  * @param: var val The string to modify
  * @param: object searchreplace An object containing the key:value pairs of strings to search and replace with
  * @desc: Given a string, it replaces all instances of KEY with VALUE
- * @example: handleColors ('test value with extra test', {"test": "sneaky"})
+ * @example: handleColors('test value with extra test', {"test": "sneaky"})
  */
 function handleColors (val, searchreplace) {
     var mod = val;
@@ -181,7 +223,28 @@ function handleColors (val, searchreplace) {
     return mod;
 }
 
-/** Temp */
+/** 
+ * @name: Revert colors
+ * @param: var str The string to modify
+ * @desc: Given a string, it goes through and changes all known instances of a string from the left to the right one
+ * @example: revertColors("\cdThis is a unique weapon\c-")
+ */
+function revertColors (str) {
+    if (window.pdaglobals.hasOwnProperty('colors')) {
+        for(let [key, value] of Object.entries(window.pdaglobals.colors)) {
+            str = str.replace(new RegExp('\\['+key+'\\]', 'g'), `\\c${value}`);
+        }
+    }
+
+    return str;
+}
+
+/** 
+ * @name: Filter characters
+ * @param: var str The string to modify
+ * @desc: Given a string, it goes through and changes all known instances of a string from the left to the right one
+ * @example: filterCharacters("\cdThis is a unique weapon\c-")
+ */
 function filterCharacters (str) {
     /** Strip out all control characters and some quotation marks to better merge strings */
     str = str.replace(/[^\x20-\x7E]/g, '');
@@ -258,6 +321,7 @@ function weaponDef (wname, wtier, wpretty, wcapacity, wdesc) {
     this.description = wdesc;
 }
 
+/** No longer necessary */
 function parseWeaponLanguage (file) {
     var lines = file.split('\n');
     var name = '';
@@ -361,32 +425,7 @@ function parseModLanguage (file) {
             name = '';
             effect = '';
         }
-        /*
-        if (lines[line].startsWith('PDA_') && lines[line].includes('_DESC')) {
-            
-        }
-        if (name != '' && desc != '') {
-                 if(prettyname.includes("NORMAL")   ) { tier = 'Standard';  capacity = 'FOUR_MOD_CAPACITY'; }
-            else if(prettyname.includes("EXPTOC")   ) { tier = 'Exotic';    capacity = 'FOUR_MOD_CAPACITY'; }
-            else if(prettyname.includes("SUPERIOR") ) { tier = 'Superior';  capacity = 'TWO_MOD_CAPACITY';  }
-            else if(prettyname.includes("UNIQUE")   ) { tier = 'Unique';    capacity = 'ONE_MOD_CAPACITY';  }
-            else if(prettyname.includes("LEGENDARY")) { tier = 'Legendary'; capacity = 'ONE_MOD_CAPACITY';  }
-            else if(prettyname.includes("DEMONIC")  ) { tier = 'Demonic';   capacity = 'FOUR_MOD_CAPACITY'; }
-            else if(prettyname.includes("BASIC")    ) { tier = 'Basic';     capacity = 'TWO_MOD_CAPACITY';  }
-            else if(prettyname.includes("ADVANCED") ) { tier = 'Advanced';  capacity = 'ONE_MOD_CAPACITY';  }
-            else if(prettyname.includes("MASTER")   ) { tier = 'Master';    capacity = 'ZERO_MOD_CAPACITY'; }
-
-            assemble.push(new weaponDef(name, tier, prettyname, capacity, desc));
-            tier = '';
-            prettyname = '';
-            capacity = '';
-            desc = '';
-        }
-
-        assemble = [...new Set(assemble)];
-        */
     }
-    //console.log(modEffects);
 }
 
 function modsEffects (wbulk, wpower, wagility, wtechnical, wsniper, wfirestorm, wnano) {
@@ -412,10 +451,8 @@ function parseHeader (file) {
                 for(var i = 0; i < assembleLength; i++) {
                     var an = assemble[i].name.toUpperCase();
                     var n = name.substring(2).toUpperCase();
-                    //console.log(an, n, an == n);
                     
                     if (an == n) {
-                        //console.log(lines[line+1], lines[line+2], lines[line+3], lines[line+4], lines[line+5], lines[line+6], lines[line+7]);
                         if (!lines[line+1].includes("ARTIFACT")) {
                             var bulk      = lines[line+1].replace('					"', '').replace('",\r', '');
                             var power     = lines[line+2].replace('					"', '').replace('",\r', '');
@@ -434,7 +471,5 @@ function parseHeader (file) {
         else {
             continue;
         }
-        //console.log(lines[line], lines[line].includes("RL"));
     }
-    //console.log(assemble);
 }

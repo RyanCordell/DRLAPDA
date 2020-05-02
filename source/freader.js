@@ -46,30 +46,15 @@ function handleFile (evt) {
     }
 }
 
-var weaponModList = [];
-var equipmentList = [];
-
-function weaponModListing (max, list, dmax, dlist) {
-    this.max = max;
-    this.list = list;
-    this.dmax = dmax;
-    this.dlist = dlist;
-}
-
-function equipmentListing (max, list) {
-    this.max = max;
-    this.list = list;
-}
-
-function equipmentLanguage (equipment) {
-    this.equipment = equipment;
-}
-
 function processFile (file) {
     readAsText(file);
 
     reader.addEventListener('load', function (evt) {
-        data = JSON.parse(evt.target.result);
+        /** 'Allow' for newlines in JSON */
+        data = evt.target.result.replace(/\\n(\r\n|\n|\r)/g, '\\n');
+        //data = data.replace(/            (?=[a-zA-Z\[\]])(?!")/gm, '');
+        /** NOW actually parse */
+        data = JSON.parse(data);
         window.pdaglobals = Object.assign(window.pdaglobals, data);
     });
 }
