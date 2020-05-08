@@ -11,14 +11,6 @@ PDA_SetupBounds();
 PDA_SetScrollLimit(-30);
 PDA_SetScrollArrows2(-30, PDA_RectWidth + 60.0, PDA_ScrollableHeight + 90.0);
 
-/*SetHudClipRect(PDA_RectX, PDA_ScrollableY, PDA_RectWidth+80, PDA_ScrollableHeight, PDA_RectWidth+10);
-PDA_SetScrollLimit  (-100);
-bool notbot = PDA_Local.scrollingy > -100;
-bool nottop = PDA_Local.scrollingy < 10;
-
-if(notbot) DisplayIcon("RLZARD", PDA_SCROLLDNID, PDA_RectWidth+10, PDA_RectHeight - 10.1, 0, 0.5);
-if(nottop) DisplayIcon("RLZARU", PDA_SCROLLUPID, PDA_RectWidth+10, PDA_RectY + 20.1, 0, 0.5);*/
-
 PDAButton PLAYERS    = PDA_CreateMenuButton(PDA_PLAYERS_BUTTON,    "", "MPLYICO", PDA_RectX + 10.1, PDA_Local.scrollingy + menuY + (20.0 * 0), 88, menuBtnHeight);
 
 PDAButton WEAPONS    = PDA_CreateMenuButton(PDA_WEAPONS_BUTTON,    "", "MWEPICO", PDA_RectX + 10.1, PDA_Local.scrollingy + menuY + (20.0 * 1), 88, menuBtnHeight);

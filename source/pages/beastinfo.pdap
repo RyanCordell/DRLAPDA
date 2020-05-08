@@ -3,8 +3,7 @@ PDA_Local.pagemax = 1;
 PDA_Wipe();
 str detailedAssemblyStringer;
 
-if(!PDA_Local.playonce)
-{
+if (!PDA_Local.playonce) {
     PDA_PlaySound("UI/PDA/Activate", "pda/soldier", 80);
 
     PDA_Local.playonce = true;
@@ -21,8 +20,7 @@ str name   = "N/A\n",
     info   = "N/A\n";
 int count  = 0;
 
-if(StrCmp(PDA_Local.detailFetch[0], "null") != 0)
-{
+if (StrCmp(PDA_Local.detailFetch[0], "null") != 0) {
 
     PDA_SetScrollLimit(-100);
     PDA_SetScrollArrows2(-100, PDA_RectWidth + 60.0, PDA_ScrollableHeight + 90.0);
@@ -51,9 +49,7 @@ if(StrCmp(PDA_Local.detailFetch[0], "null") != 0)
                 res,
                 info;
                 HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, PDA_RectX + 5.1, PDA_Local.scrollingy + 20.1 + (20.0 * 1), 0);
-}
-else
-{
+} else {
     PDA_SetScrollLimit(0);
 
     SetFont("STAT_MNO");

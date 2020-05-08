@@ -4,16 +4,11 @@ var PDA_MOD = function (weapons) { return `
 
 #define DRLA_WEAPONMAX ${weapons.max}
 #define DRLA_DEMONWEAPONMAX ${weapons.dmax}
+#define DRLA_BASICMODMAX ${weapons.basicmax}
+#define DRLA_ADVANCEDMODMAX ${weapons.advancedmax}
+#define DRLA_MASTERMODMAX ${weapons.mastermax}
 #define DRLA_WEAPONMODELEMENTS 8
 #define DRLA_DEMONWEAPONELEMENTS 4
-
-str DRLA_WeaponModIcons[PDA_MODMAX] = {
-	"BMODICON","PMODICON","AMODICON","TMODICON","SMODICON","FMODICON","NMODICON"
-};
-
-str DRLA_AnimatedModIcons[PDA_MODMAX] = {
-	"PDABMOD","PDAPMOD","PDAAMOD","PDATMOD","PDASMOD","PDAFMOD","PDANMOD"
-};
 
 str DRLA_WeaponModList[DRLA_WEAPONMAX][DRLA_WEAPONMODELEMENTS] = {
     ${weapons.list}
@@ -32,7 +27,7 @@ var PDA_ARM = function (equipment) { return `
 #define DRLA_ARMORELEMENTS 2
 #define DRLA_ARMORSETMAX 18
 
-str DRLA_WeaponModList[DRLA_ARMORMAX][DRLA_ARMORELEMENTS] = {
+str DRLA_ArmorList[DRLA_ARMORMAX][DRLA_ARMORELEMENTS] = {
     ${equipment.list}
 };
 
@@ -65,32 +60,64 @@ var PDA_ASM = function (assemblies) { return `
 #define DRLA_ASSEMBLYMAX ${assemblies.max}
 #define DRLA_ASSEMBLYELEMENTS 2
 #define DRLA_EXOTICEFFECTS_MAX ${assemblies.uniquemax}
+#define DRLA_EXOTICELEMENTS 4
+#define DRLA_BASICMAX ${assemblies.basicmax}
+#define DRLA_ADVANCEDMAX ${assemblies.advancedmax}
+#define DRLA_MASTERMAX ${assemblies.mastermax}
+
+/** 
+ * Storage for .ini assembly writer
+ */
+
+int     DRLA_AssemblyState[MAX_PLAYERS][DRLA_ASSEMBLYMAX],
+        DRLA_OldAssemblyState[MAX_PLAYERS][DRLA_ASSEMBLYMAX];
+
+int     DRLA_KnownExoticState[MAX_PLAYERS][DRLA_EXOTICEFFECTS_MAX * 3],
+        DRLA_OldExoticState[MAX_PLAYERS][DRLA_EXOTICEFFECTS_MAX * 3];
+
+int     DRLA_KnownSniperState[MAX_PLAYERS][DRLA_EXOTICEFFECTS_MAX],
+        DRLA_OldSniperState[MAX_PLAYERS][DRLA_EXOTICEFFECTS_MAX],
+
+        DRLA_KnownFirestormState[MAX_PLAYERS][DRLA_EXOTICEFFECTS_MAX],
+        DRLA_OldFirestormState[MAX_PLAYERS][DRLA_EXOTICEFFECTS_MAX],
+
+        DRLA_KnownNanoState[MAX_PLAYERS][DRLA_EXOTICEFFECTS_MAX],
+        DRLA_OldNanoState[MAX_PLAYERS][DRLA_EXOTICEFFECTS_MAX];
+
+/** CVAR use */
+str     DRLA_FetchStoredInfo[MAX_PLAYERS],
+        DRLA_FetchExoticInfo[MAX_PLAYERS],
+        DRLA_FetchSniperInfo[MAX_PLAYERS],
+        DRLA_FetchFirestormInfo[MAX_PLAYERS],
+        DRLA_FetchNanoInfo[MAX_PLAYERS];
+
+/** Current state of weapon assembly knowledge */
+str     DRLA_CurrentAssemblerState[MAX_PLAYERS] = {"","","","","","","",""};
+
+str     DRLA_CurrentExoticModInfo[MAX_PLAYERS];
+
+str     DRLA_CurrentSniperState[MAX_PLAYERS]    = {"","","","","","","",""},
+        DRLA_CurrentFirestormState[MAX_PLAYERS] = {"","","","","","","",""},
+        DRLA_CurrentNanoState[MAX_PLAYERS]      = {"","","","","","","",""};
 
 str DRLA_Assemblies[DRLA_ASSEMBLYMAX][DRLA_ASSEMBLYELEMENTS] = {
     ${assemblies.list}
 };
 
-str DRLA_UniqueSniperEffects[DRLA_EXOTICEFFECTS_MAX][DRLA_ASSEMBLYELEMENTS] = {
-	${assemblies.sniper}
-};
-
-str DRLA_UniqueFirestormEFfects[DRLA_EXOTICEFFECTS_MAX][DRLA_ASSEMBLYELEMENTS] = {
-	${assemblies.firestorm}
-};
-
-str DRLA_UniqueNanoEffects[DRLA_EXOTICEFFECTS_MAX][DRLA_ASSEMBLYELEMENTS] = {
-	${assemblies.nano}
+str DRLA_UniqueExoticModEffects[DRLA_EXOTICEFFECTS_MAX][DRLA_EXOTICELEMENTS] = {
+    ${assemblies.exotics}
 };
 `; };
 
 /** Handle armor language entries */
+
 var LANGUAGE_EQUIPMENT = function (equipment) { 
     var bigname = equipment.name.toUpperCase();
     var coloredequipment = equipment.prettyname;
 
     var atts = ``;
     for (var i = 0; i < equipment.attributes.length; i++) {
-        atts += `"${equipment.attributes[i]}\\n"`;
+        atts += `" ${equipment.attributes[i]}\\n"`;
     }
 
     if (window.pdaglobals.hasOwnProperty('colors')) {
@@ -112,23 +139,23 @@ var LANGUAGE_EQUIPMENT = function (equipment) {
     PDA_ARMOR_${bigname}_ICON = "${equipment.icon}";
     PDA_ARMOR_${bigname}_NAME = "${coloredequipment}";
     PDA_ARMOR_${bigname}_DESC = "${equipment.description}";
-    PDA_ARMOR_${bigname}_PROT = "${equipment.protection}% [GOLD]Protection[END]";
-    PDA_ARMOR_${bigname}_RENPROT = "${equipment.renprotection}% [GOLD]Protection[END]";
+    PDA_ARMOR_${bigname}_PROT = "${resPadder(' ', 4 - equipment.protection)}${equipment.protection}% [GOLD]Protection[END]";
+    PDA_ARMOR_${bigname}_RENPROT = "${resPadder(' ', 4 - equipment.renprotection)}${equipment.renprotection}% [GOLD]Protection[END]";
     ${ equipment.resistances ? `PDA_ARMOR_${bigname}_RES = 
-        "${res.melee}%${resPadder(' ', 4 - equipment.resistances.melee.length)}[DARKGRAY]Melee[END]${resPadder(' ', 4 - equipment.resistances.melee.length)}"
-        "${res.bullet}%${resPadder(' ', 4 - equipment.resistances.bullet.length)}[GRAY]Bullet[END]\\n"
-        "${res.fire}%${resPadder(' ', 4 - equipment.resistances.fire.length)}[RED]Fire[END]${resPadder(' ', 4 - equipment.resistances.melee.length)}"
-        "${res.plasma}%${resPadder(' ', 4 - equipment.resistances.plasma.length)}[BLUE]Plasma[END]\\n"
-        "${res.cryo}%${resPadder(' ', 4 - equipment.resistances.cryo.length)}[CYAN]Cryo[END]${resPadder(' ', 4 - equipment.resistances.melee.length)}"
-        "${res.electric}%${resPadder(' ', 4 - equipment.resistances.electric.length)}[YELLOW]Electric[END]\\n"
-        "${res.poison}%${resPadder(' ', 4 - equipment.resistances.poison.length)}[PURPLE]Poison[END]${resPadder(' ', 4 - equipment.resistances.melee.length)}"
-        "${res.radiation}%${resPadder(' ', 4 - equipment.resistances.radiation.length)}[GREEN]Radiation[END]\\n";` : `` }
+        "${resPadder(' ', 4 - equipment.resistances.melee.length)}${res.melee}% [DARKGRAY]Melee[END]  "
+        "${resPadder(' ', 4 - equipment.resistances.bullet.length)}${res.bullet}% [GRAY]Bullet[END] \\n"
+        "${resPadder(' ', 4 - equipment.resistances.fire.length)}${res.fire}% [RED]Fire[END]   "
+        "${resPadder(' ', 4 - equipment.resistances.cryo.length)}${res.cryo}% [CYAN]Cryo[END]   \\n"
+        "${resPadder(' ', 4 - equipment.resistances.plasma.length)}${res.plasma}% [BLUE]Plasma[END] "
+        "${resPadder(' ', 4 - equipment.resistances.electric.length)}${res.electric}% [YELLOW]Electric[END]\\n"
+        "${resPadder(' ', 4 - equipment.resistances.poison.length)}${res.poison}% [PURPLE]Poison[END] "
+        "${resPadder(' ', 4 - equipment.resistances.radiation.length)}${res.radiation}% [GREEN]Radiation[END]\\n";` : `` }
     ${ equipment.cyborgstats ? `PDA_ARMOR_${bigname}_CYBRES = 
-        ${cybres.kinetic ? `"${cybres.kinetic}%${resPadder(' ', 4 - cybres.kinetic.length)}[WHITE]Kinetic Plating[END]\\n"` : ""}
-        ${cybres.thermal ? `"${cybres.thermal}%${resPadder(' ', 4 - cybres.thermal.length)}[RED]Thermal Dampeners[END]\\n"` : ""}
-        ${cybres.refractor ? `"${cybres.refractor}%${resPadder(' ', 4 - cybres.refractor.length)}[BLUE]Refractor Field[END]\\n"` : ""}
-        ${cybres.organic ? `"${cybres.organic}%${resPadder(' ', 4 - cybres.organic.length)}[GREEN]Organic Recovery[END]\\n"` : ""}
-        "${cybres.hazard}%${resPadder(' ', 4 - cybres.hazard.length)}[YELLOW]Hazard Shielding[END]\\n";` : `` }
+        ${cybres.kinetic ? `"${resPadder(' ', 4 - cybres.kinetic.length)}${cybres.kinetic}% [WHITE]Kinetic Plating[END]\\n"` : ""}
+        ${cybres.thermal ? `"${resPadder(' ', 4 - cybres.thermal.length)}${cybres.thermal}% [RED]Thermal Dampeners[END]\\n"` : ""}
+        ${cybres.refractor ? `"${resPadder(' ', 4 - cybres.refractor.length)}${cybres.refractor}% [BLUE]Refractor Field[END]\\n"` : ""}
+        ${cybres.organic ? `"${resPadder(' ', 4 - cybres.organic.length)}${cybres.organic}% [GREEN]Organic Recovery[END]\\n"` : ""}
+        "${resPadder(' ', 4 - cybres.hazard.length)}${cybres.hazard}% [YELLOW]Hazard Shielding[END]\\n";` : `` }
     PDA_ARMOR_${bigname}_CYBAUG = "${equipment.cyborgstats.augment}";
     PDA_ARMOR_${bigname}_ATTR = ${atts};`;
 };
@@ -169,13 +196,23 @@ var LANGUAGE_ASSEMBLIES = function (assembly) {
         }
     }
 
+    var valid = ``;
+    for (var i = 0; i < assembly.valid.length; i++) {
+        valid += `${assembly.valid[i]}`;
+    }
+
+    var validlist = ``;
+    for (var i = 0; i < assembly.validlist.length; i++) {
+        validlist += `${assembly.validlist[i]}`;
+    }
+
     return `
     PDA_ASSEMBLY_${bigtier}_${bigname} = "${assembly.prettyname} [GRAY][[END]${mods}[GRAY]][END]";
     PDA_ASSEMBLY_${bigtier}_${bigname}_NAME = "${coloredname}";
     PDA_ASSEMBLY_${bigtier}_${bigname}_MODS = "[GRAY][[END]${mods}[GRAY]][END]";
     PDA_ASSEMBLY_${bigtier}_${bigname}_ICON = "${assembly.icon}";
     PDA_ASSEMBLY_${bigtier}_${bigname}_HEIGHT = "0";
-    PDA_ASSEMBLY_${bigtier}_${bigname}_DESC = "${assembly.description}[GREEN]Valid Weapons:[END]\n${assembly.valid.toString().replace('->', '[YELLOW]->[END]')}";
-    PDA_ASSEMBLY_${bigtier}_${bigname}_REQ = "${assembly.validlist}";
+    PDA_ASSEMBLY_${bigtier}_${bigname}_DESC = "${assembly.description}[GREEN]Valid Weapons:[END]\n${valid.toString().replace(/->/gm, '[YELLOW]->[END]')}";
+    PDA_ASSEMBLY_${bigtier}_${bigname}_REQ = "${validlist}";
     `;
 };

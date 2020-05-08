@@ -1,4 +1,4 @@
-// VARIABLES --------------------
+/** VARIABLES */
 // Ha! You don't want arrays for every player in MP? MUDA MUDA MUDA MUDA
 // [marrub] #define MAX_MUDADA 0x7FFFFFFF
 
@@ -11,7 +11,6 @@
 #define PDA_SetEveryoneInventory(name) ACS_NamedExecuteWithResult("PDA_SetEveryoneInventory", name)
 #define PDA_GiveEveryoneInventory(name) ACS_NamedExecuteWithResult("PDA_GiveEveryoneInventory", name)
 #define PDA_HistoryMax 16
-
 
 #define PDA_MODMIN  0
 #define PDA_MODMAX  7
@@ -40,7 +39,6 @@ bool showArmor[MAX_PLAYERS],
 #define localShowBoots    showBoots[PlayerNumber()]
 #define localShowBackpack showBackpack[PlayerNumber()]
 
-
 bool hasArmor[MAX_PLAYERS],
      hasBoots[MAX_PLAYERS],
      hasBackpack[MAX_PLAYERS];
@@ -58,8 +56,7 @@ int aBoolField[MAX_PLAYERS];
 int modPackIndex[MAX_PLAYERS];
 #define localmodPackIndex modPackIndex[PlayerNumber()]
 
-struct PDAInfo
-{
+struct PDAInfo {
    bool active;
    bool pongrunning;
    
@@ -86,9 +83,9 @@ struct PDAInfo
    
    int maxmodlimit;
 }
+PDAInfo PDA_Info[MAX_PLAYERS];
 
-struct PDAMouse
-{
+struct PDAMouse {
     int x;
     int y;
     
@@ -98,9 +95,9 @@ struct PDAMouse
     int state;
     int oldstate;
 }
+PDAMouse PDA_Mouse[MAX_PLAYERS];
 
-struct PDAButton
-{
+struct PDAButton {
     int id;
     float x;
     float y;
@@ -116,9 +113,9 @@ struct PDAButton
     
     str tooltip;
 }
+PDAButton PDA_Button[MAX_PLAYERS][256];
 
-struct PDAWeapon
-{
+struct PDAWeapon {
     int id;
     
     str bulkModEffect;
@@ -132,43 +129,37 @@ struct PDAWeapon
     bool isDemonic;
 }
 
-PDAInfo PDA_Info[MAX_PLAYERS];
-PDAMouse PDA_Mouse[MAX_PLAYERS];
-PDAButton PDA_Button[MAX_PLAYERS][256];
-#define DRLA_WEAPONMAX 318
-PDAWeapon PDA_Weapon[MAX_PLAYERS][DRLA_WEAPONMAX];
+/** This is technically already defined by the weapons database... */
+//#define DRLA_WEAPONMAX 318
+//PDAWeapon PDA_Weapon[MAX_PLAYERS][DRLA_WEAPONMAX];
 
 // PDA size
-const float PDA_RECTX = 			20,
-			PDA_RECTY = 			23,
-			PDA_RECTWIDTH = 		251,
-			PDA_RECTHEIGHT = 		174;
+const float PDA_RECTX      = 20,
+			PDA_RECTY      = 23,
+			PDA_RECTWIDTH  = 251,
+			PDA_RECTHEIGHT = 174;
             
-const float DES_RECTX = 			180,
-            DES_RECTY = 			80,
-            DES_RECTWIDTH = 		115,
-            DES_RECTHEIGHT = 		158;
+const float DES_RECTX      = 180,
+            DES_RECTY      = 80,
+            DES_RECTWIDTH  = 115,
+            DES_RECTHEIGHT = 158;
 
-const int 	PDA_ASSEMBLYMAX = 		46;
+const int 	PDA_MAXARMORININV = 4,
+			PDA_MAXARMORWORN  = 2,
+			PDA_MAXMODPACKS   = 7;
 
-const int 	PDA_MAXARMORININV = 	4,
-			PDA_MAXARMORWORN = 		2,
-			PDA_MAXMODPACKS = 		7;
-
-const int 	PDA_SCROLLABLEY = 		PDA_RectY + 10,
+const int 	PDA_SCROLLABLEY      = 	PDA_RectY + 10,
 			PDA_SCROLLABLEHEIGHT = 	PDA_RectHeight - 25;
 
-const float PDA_MENUICONLEFTX = 	20.1,
-			PDA_MENUICONRIGHTX = 	140.1;
+const float PDA_MENUICONLEFTX  = 20.1,
+			PDA_MENUICONRIGHTX = 140.1;
 
-const float PDA_MENUTEXTLEFTX = 	PDA_MENUICONLEFTX+30.0,
-			PDA_MENUTEXTRIGHTX = 	PDA_MENUICONRIGHTX+30.0;
+const float PDA_MENUTEXTLEFTX  = PDA_MENUICONLEFTX+30.0,
+			PDA_MENUTEXTRIGHTX = PDA_MENUICONRIGHTX+30.0;
 
-const float newresw = 384;
-const float newresh = 288;
+const float newresw = 384, newresh = 288;
 
-const float oldresw = 320;
-const float oldresh = 200;
+const float oldresw = 320, oldresh = 200;
             
 const float newresx = newresw / oldresw; // 380 / 320 = 1.1875
 const float newresy = newresh / oldresh; // 260 / 200 = 1.3
@@ -182,24 +173,25 @@ const float PDA_NormalY = PDA_RectY;
 int monsterCheck[5][DRLA_MONSTER_PAGE_MAX],
     oldCheck[5][DRLA_MONSTER_PAGE_MAX];
 
-// IDS --------------------
+/** 
+ * PDA IDs
+ * 
+ * Ideally, this would be automatically generated to avoid compat issues, not unlike DoomRPG.
+ */
 
-// Enums auto-increment values that aren't already set in stone, so we sort by ascending order.
-enum PDA_ButtonState
-{
+/** Sort by ascending order. */
+enum PDA_ButtonState {
     button_none = 0,
     button_hovered,
     button_clicked,
 }
 
-enum PDA_MouseState
-{
+enum PDA_MouseState {
     mouse_default = 0,
     mouse_pointer = 1,
 }
 
-enum PDA_IDs
-{
+enum PDA_IDs {
     PDA_CURSORID = 2,
     
     PDA_PLAYERS_BUTTON = 40,
@@ -260,8 +252,7 @@ enum PDA_IDs
 // ARRAYS --------------------
 
 // PDA categories - these are all the unique sections you can wind up at
-enum PDA_Categories
-{
+enum PDA_Categories {
 	// Accessibles
 	PDA_MENU = 0,
 	PDA_CLASSES,
@@ -283,20 +274,17 @@ enum PDA_Categories
 	PDA_CREDITS
 }
 
-enum armor_enum
-{
+enum armor_enum {
 	armor_TOKEN = 0,
 	armor_ACTOR,
 }
 
-enum bestiary_enum
-{
+enum bestiary_enum {
     beast_TOKEN = 0,
     beast_ACTOR,
 }
 
-enum weaponmod_enum
-{
+enum weaponmod_enum {
 	mi_bulk = 0,
 	mi_power,
 	mi_agility,
@@ -307,9 +295,7 @@ enum weaponmod_enum
 }
 
 #define	DRLA_MENUMAXELEMENTS 2
-
-str DRLA_MenuOptions[PDA_MENUMAX][DRLA_MENUMAXELEMENTS] =
-{
+str DRLA_MenuOptions[PDA_MENUMAX][DRLA_MENUMAXELEMENTS] = {
 	{"MPLYICO", "Classes"},
 	{"MWEPICO", "Weapons"},
 	{"MASMICO", "Assemblies"},
@@ -322,18 +308,14 @@ str DRLA_MenuOptions[PDA_MENUMAX][DRLA_MENUMAXELEMENTS] =
 
 // Amount of player classes available
 #define DRLA_CLASSMAX 5
-
-// Marine, Scout, Technician, Renegade, Demolitionist
-str DRLA_ClassIcon[DRLA_CLASSMAX] = 
-{
+str DRLA_ClassIcon[DRLA_CLASSMAX] = {
+    // Marine, Scout, Technician, Renegade, Demolitionist
 	"PPDAMAR1", "PPDASCO1", "PPDATEC1", "PPDAREN1", "PPDADMO1"
 };
 
 // Is it worth making a separate header file for just these weapon definitions?
 #define DRLA_WEAPONPERKMAX 5
-
-str DRLA_WeaponPerkList[DRLA_WEAPONPERKMAX][3] =
-{
+str DRLA_WeaponPerkList[DRLA_WEAPONPERKMAX][3] = {
 	{"RLAmmochainPerk",    "Ammochain (Marine)",        "RLRapidfireTypeWeapon"     },
 	{"RLSharpshooterPerk", "Sharpshooter (Scout)",      "RLPistolTypeWeapon"        },
 	{"RLScavengerPerk",    "Scavenger (Technician)",    "RLAssembledTypeWeapon"     },
@@ -342,15 +324,13 @@ str DRLA_WeaponPerkList[DRLA_WEAPONPERKMAX][3] =
 };
 
 #define DRLA_WEAPONSETMAX 2
-str DRLA_WeaponSetList[DRLA_WEAPONSETMAX][2] =
-{
+str DRLA_WeaponSetList[DRLA_WEAPONSETMAX][2] = {
 	{"RLNuclearWeaponSetBonusActive", "\cfFURIOUS FUSION\c-"  },
 	{"RLCerberusSetBonusActive",      "\cfTRINITY GUARDIAN\c-"}
 };
 
 #define DRLA_NUCLEARMAX 16
-str DRLA_NuclearCheckList[DRLA_NUCLEARMAX] =
-{
+str DRLA_NuclearCheckList[DRLA_NUCLEARMAX] = {
 	"RLNuclearPlasmaPistol", "RLNuclearPlasmaRifle", "RLNuclearBFG9000", "RLNuclearOnslaught", "RLNuclearPlasmaRevolver",
 	"RLHighPowerNuclearPlasmaPistol", "RLHighPowerNuclearPlasmaRifle", "RLHighPowerNuclearBFG9000", "RLStormNuclearPlasmaPistol",
 	"RLSuperchargedNuclearPlasmaPistol", "RLNuclearVBFG9000", "RLNuclearPlasmaRifleMKII", "RLNuclearPlasmaShotgun", "RLAssaultRifleNuclearPlasmaRifle",
@@ -364,8 +344,7 @@ str DRLA_TristarCheckList[DRLA_TRISTARMAX] =
 };
 
 #define DRLA_BACKPACKMAX 6
-str DRLA_BackpackList[DRLA_BACKPACKMAX][2] =
-{
+str DRLA_BackpackList[DRLA_BACKPACKMAX][2] = {
     {"RLBackpack", "BASIC"},
     {"RLCombatBackpackToken", "COMBAT"},
     {"RLSpecialistBackpackToken", "SPECIALIST"},
@@ -374,19 +353,18 @@ str DRLA_BackpackList[DRLA_BACKPACKMAX][2] =
     {"RLNuclearBackpackToken", "NUCLEAR"}
 };
 
+/** Mod icons for the PDA */
+str icon_static_WeaponMods[PDA_MODMAX] = { "BMODICON", "PMODICON", "AMODICON", "TMODICON", "SMODICON", "FMODICON", "NMODICON" };
+str icon_animated_WeaponMods[PDA_MODMAX] = { "PDABMOD", "PDAPMOD", "PDAAMOD", "PDATMOD", "PDASMOD", "PDAFMOD", "PDANMOD" };
+
 // FUNCTIONS --------------------
 
-// Some handy function macros.
 #define StrTrim(a,b,c)			StrMid((a),(b),StrLen((a)) - (c))
-// This is horrible and I'mma have to rewrite it at some point. Too inflexible thanks to the extra element..
 #define Array_Size(array) 		(sizeof((array))/sizeof((array[0][0])))
-// #define Array_Size(array, elements) (sizeof((array))/sizeof((elements)))
-// Maybe like that?
 
 #define PDA_SetScrollLimit(a)  	PDA_Local.maxtexty = (a)
 #define PDA_ResetScroll()       PDA_Local.scrollingy = 20.0;
-//#define PDA_SetScrollTop(a)     PDA_Local
-#define PDA_SetMonsterLimit(a)  if(PDA_Local.monsterpage > (a)) PDA_Local.monsterpage = (a)
+#define PDA_SetMonsterLimit(a)  if (PDA_Local.monsterpage > (a)) PDA_Local.monsterpage = (a)
 #define PDA_DefaultFont() 		SetFont("STAT_LWR");
 
 #define PDA_PrintHeader(a, b) 		HudMessage(l:(a); HUDMSG_PLAIN, PDA_INFOTOPID, CR_GREEN, (PDA_RectX) + 100.1 + (b), (PDA_RectY) + 0.1, 0)
@@ -396,7 +374,7 @@ str DRLA_BackpackList[DRLA_BACKPACKMAX][2] =
        && \
        PDA_LocalMouse.y >= a.y - 2 && PDA_LocalMouse.y <= a.y + a.height \
 
-// PONG stuff -------------------
+/** PONG stuff */
 //where the sscore is drawn
 #define SCORELINE       PDA_RECTY + 0.1
 

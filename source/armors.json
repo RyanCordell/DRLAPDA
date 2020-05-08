@@ -162,7 +162,7 @@
         },
 
         {
-            "name": "TowerShield",
+            "name": "TowerShieldArmor",
             "tier": "Basic",
             "icon": "TSHD32X",
             "prettyname": "Tower Shield",

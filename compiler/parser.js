@@ -53,11 +53,14 @@ var weaponModList = [];
 var equipmentList = [];
 var assemblyList = [];
 
-function weaponModListing (max, list, dmax, dlist) {
+function weaponModListing (max, list, dmax, dlist, basicmax, advancedmax, mastermax) {
     this.max = max;
     this.list = list;
     this.dmax = dmax;
     this.dlist = dlist;
+    this.basicmax = basicmax;
+    this.advancedmax = advancedmax;
+    this.mastermax = mastermax;
 }
 
 function equipmentListing (max, list) {
@@ -65,13 +68,14 @@ function equipmentListing (max, list) {
     this.list = list;
 }
 
-function assemblyListing (max, list, uniquemax, sniper, firestorm, nano) {
+function assemblyListing (max, list, uniquemax, basicmax, advancedmax, mastermax, exotics) {
     this.max = max;
     this.list = list;
     this.uniquemax = uniquemax;
-    this.sniper = sniper;
-    this.firestorm = firestorm;
-    this.nano = nano;
+    this.basicmax = basicmax;
+    this.advancedmax = advancedmax;
+    this.mastermax = mastermax;
+    this.exotics = exotics;
 }
 
 function parseJSON () {
@@ -85,6 +89,9 @@ function parseJSON () {
         var demonicWeapons = 0;
         var demonicArtifacts = ``;
         var weaponLanguage = ``;
+        var basicModMax = 0,
+            advancedModMax = 0,
+            masterModMax = 0;
         
         window.pdaglobals.weapons.forEach(weapon => {
             if (weapon.mods) {
@@ -96,29 +103,29 @@ function parseJSON () {
                 demonicWeapons++;
             }
 
+            if (weapon.tier === 'Basic') basicModMax++;
+            if (weapon.tier === 'Advanced') advancedModMax++;
+            if (weapon.tier === 'Master') masterModMax++;
+
             weaponLanguage = weaponLanguage.concat(LANGUAGE_WEAPONS(weapon));
         });
 
         /** PDA_MOD */
-        weaponModList.push(new weaponModListing(weaponModMax, weaponModEffects, demonicWeapons, demonicArtifacts));
-        generateDownload('PDA_MOD.ach', PDA_MOD(weaponModList[0]));
+        weaponModList.push(new weaponModListing(weaponModMax, weaponModEffects, demonicWeapons, demonicArtifacts, basicModMax, advancedModMax, masterModMax));
+        generateDownload('modeffects.idb', PDA_MOD(weaponModList[0]));
 
         /** LANGUAGE.WEAPONS */
         weaponLanguage = revertColors(weaponLanguage);
-        /* if (window.pdaglobals.hasOwnProperty('colors')) {
-            for(let [key, value] of Object.entries(window.pdaglobals.colors)) {
-                weaponLanguage = weaponLanguage.replace(new RegExp('\\['+key+'\\]', 'g'), `\\c${value}`);
-            }
-        } */
+
         /** Strip readability for language */
-        weaponLanguage = weaponLanguage.replace(/(\n)/g, '\\n').replace(/(;)\\n/gm, ';').replace(/( {3,})\\n/gm, '').replace(/^\\n( {1,})/gm, '');
-        generateDownload('language.auto.weapons', weaponLanguage);
+        weaponLanguage = weaponLanguage.replace(/(\n)/g, '\\n').replace(/(;)\\n/gm, ';').replace(/\\n(?=(?:[^"]*"[^"]*")*[^"]*$)/gm, '').replace(/( {3,})\\n/gm, '').replace(/^\\n( {1,})/gm, '');
+        generateDownload('language.auto.weapons', language_warning.concat(weaponLanguage));
 
     }
     
     if (pdaglobals.hasOwnProperty('equipment')) {
         var headerArmorList = ``;
-        var languageArmorList = language_warning;
+        var languageArmorList = ``;
         var equipmentMax = 0;
 
         window.pdaglobals.equipment.forEach(item => {
@@ -131,7 +138,7 @@ function parseJSON () {
         
         /** Pipes into PDA_ARM */
         equipmentList.push(new equipmentListing(equipmentMax, headerArmorList));
-        generateDownload('PDA_ARM.ach', PDA_ARM(equipmentList[0]));
+        generateDownload('equipment.idb', PDA_ARM(equipmentList[0]));
 
         /** Replace all language pointers with their contents */
         if (window.pdaglobals.hasOwnProperty('attributes')) {
@@ -143,7 +150,7 @@ function parseJSON () {
         /** LANGUAGE.WEAPONS */
         languageArmorList = languageArmorList.replace(/(\n)/g, '\\n').replace(/(;)\\n/gm, ';').replace(/\\n(?=(?:[^"]*"[^"]*")*[^"]*$)/gm, '');
         languageArmorList = revertColors(languageArmorList);
-        generateDownload('language.auto.equipment', languageArmorList);
+        generateDownload('language.auto.equipment', language_warning.concat(languageArmorList));
     }
 
     if (window.pdaglobals.hasOwnProperty('modeffect')) {
@@ -153,7 +160,7 @@ function parseJSON () {
             modEffectList = modEffectList.concat(`${modeffect.name} = "${modeffect.effect}";`);
         });
 
-        modEffectList = revertColors(languageAssemblyList);
+        modEffectList = revertColors(modEffectList);
         generateDownload('language.auto.mods', modEffectList);
     }
 
@@ -161,45 +168,47 @@ function parseJSON () {
         var headerAssemblyList = ``;
         var headerAssemblyMax = 0;
         var headerUniqueMax = 0;
-        var headerSniperList = ``;
-        var headerFirestormList = ``;
-        var headerNanoList = ``;
-        var languageAssemblyList = language_warning;
+        var headerExoticList = ``;
+        var languageAssemblyList = ``;
+        var basicMax = 0,
+            advancedMax = 0,
+            masterMax = 0;
 
         window.pdaglobals.assemblies.forEach(assembly => {
             headerAssemblyList = headerAssemblyList.concat(`{"RL${assembly.name}AssemblyLearntToken", "PDA_ASSEMBLY_${assembly.tier.toUpperCase()}_${assembly.name.toUpperCase()}"},`);
             headerAssemblyMax++;
 
+            if (assembly.tier === 'Basic') basicMax++;
+            if (assembly.tier === 'Advanced') advancedMax++;
+            if (assembly.tier === 'Master') masterMax++;
+
             /** LANGUAGE */
             languageAssemblyList = languageAssemblyList.concat(LANGUAGE_ASSEMBLIES(assembly));
         });
-
+        console.log(languageAssemblyList);
         languageAssemblyList = languageAssemblyList.replace(/(\n)/g, '\\n').replace(/(;)\\n/gm, ';').replace(/\\n(?=(?:[^"]*"[^"]*")*[^"]*$)/gm, '');
         languageAssemblyList = revertColors(languageAssemblyList);
-        generateDownload('language.auto.assemblies', languageAssemblyList);
+        
+        generateDownload('language.auto.assemblies', language_warning.concat(languageAssemblyList));
 
         /** PDA_ASM */
         if (window.pdaglobals.hasOwnProperty('weapons')) {
             window.pdaglobals.weapons.forEach(weapon => { 
                 if (weapon.tier === 'Unique' || weapon.tier === 'Demonic' || weapon.tier === 'Legendary') {
                     if (weapon.unmoddable) {
-                        headerSniperList = headerSniperList.concat(`{"RL${weapon.name}", "null"},`);
-                        headerFirestormList = headerFirestormList.concat(`{"RL${weapon.name}", "null"},`);
-                        headerNanoList = headerNanoList.concat(`{"RL${weapon.name}", "null"},`);
+                        headerExoticList = headerExoticList.concat(`{"RL${weapon.name}", "null", "null", "null"},`);
                     }
                     else {
-                        headerSniperList = headerSniperList.concat(`{"RL${weapon.name}", "RL${weapon.name}SniperLearntToken"},`);
-                        headerFirestormList = headerFirestormList.concat(`{"RL${weapon.name}", "RL${weapon.name}FirestormLearntToken"},`);
-                        headerNanoList = headerNanoList.concat(`{"RL${weapon.name}", "RL${weapon.name}NanoLearntToken"},`);
+                        headerExoticList = headerExoticList.concat(`{"RL${weapon.name}", "RL${weapon.name}SniperLearntToken", "RL${weapon.name}FirestormLearntToken", "RL${weapon.name}NanoLearntToken"},`);
                     }
                     headerUniqueMax++;
                 }
             });
         }
 
-        assemblyList.push(new assemblyListing(headerAssemblyMax, headerArmorList, headerUniqueMax, headerSniperList, headerFirestormList, headerNanoList));
+        assemblyList.push(new assemblyListing(headerAssemblyMax, headerAssemblyList, headerUniqueMax, basicMax, advancedMax, masterMax, headerExoticList));
 
-        generateDownload('PDA_ASM.ach', PDA_ASM(assemblyList[0]))
+        generateDownload('assemblies.idb', PDA_ASM(assemblyList[0]))
     }
 }
 
@@ -230,13 +239,16 @@ function handleColors (val, searchreplace) {
  * @example: revertColors("\cdThis is a unique weapon\c-")
  */
 function revertColors (str) {
-    if (window.pdaglobals.hasOwnProperty('colors')) {
-        for(let [key, value] of Object.entries(window.pdaglobals.colors)) {
-            str = str.replace(new RegExp('\\['+key+'\\]', 'g'), `\\c${value}`);
+    if (str) {
+        if (window.pdaglobals.hasOwnProperty('colors')) {
+            for(let [key, value] of Object.entries(window.pdaglobals.colors)) {
+                str = str.replace(new RegExp('\\['+key+'\\]', 'g'), `\\c${value}`);
+            }
         }
-    }
 
-    return str;
+        return str;
+    }
+    else return 'No data found to process';
 }
 
 /** 

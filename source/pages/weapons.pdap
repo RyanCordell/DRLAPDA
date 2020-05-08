@@ -1,21 +1,26 @@
 PDA_Local.pagemax = 3;
 
 PDA_Wipe();
-        
+
 str classperkdisplayed = "\n",
     weaponperkdisplayed = "\n";
 int perkoffset = 1;
 
-
-switch(PDA_Local.page)
+switch (PDA_Local.page)
 {
-    case 1: PDA_PrintHeader("PDA_WEAPON_HEADER", -50); break;
-    case 2: PDA_PrintHeader("PDA_MODPACK_HEADER", -20); break;
-    case 3: PDA_PrintHeader("PDA_DEMONARTIFACT_HEADER", -40); break;
+case 1:
+    PDA_PrintHeader("PDA_WEAPON_HEADER", -50);
+    break;
+case 2:
+    PDA_PrintHeader("PDA_MODPACK_HEADER", -20);
+    break;
+case 3:
+    PDA_PrintHeader("PDA_DEMONARTIFACT_HEADER", -40);
+    break;
 }
 
 // Add icon to first page
-// Superior weapons should read 2 max mods, 0 when any basic has been applied
+// Superior weapons should read 2 max mods, 0 when any basic assembly has been applied
 
 PDAButton P1 = PDA_CreateTab(50, "1", "PTAB", PDA_RectX + 0.1 + (12.0 * 0), PDA_RectY + 1.1, 12, 12);
 PDAButton P2 = PDA_CreateTab(51, "2", "PTAB", PDA_RectX + 0.1 + (12.0 * 1), PDA_RectY + 1.1, 12, 12);
@@ -28,29 +33,28 @@ PDA_InitButton(P3, true, 3, "");
 PDA_SetupBounds();
 PDA_DefaultFont();
 
-if(StrCmp(CheckInventory(GetWeapon()),"None") != 0)
+#define WEAPON_PAGE_STORY 1
+#define WEAPON_PAGE_MODPACK_EFFECTS 2
+#define WEAPON_PAGE_ARTIFACT_EFFECTS 3
+
+if (StrCmp(CheckInventory(GetWeapon()), "None") != 0)
 {
-    int PDA_Weapon_Name_Printer       = StrParam("PDA_WEAPON_%s:_NAME", StrTrim(GetWeapon(),2,0)),
-        PDA_Weapon_Desc_Printer       = StrParam("PDA_WEAPON_%s:_DESC", StrTrim(GetWeapon(),2,0));
+    int PDA_Weapon_Name_Printer = StrParam("PDA_WEAPON_%s:_NAME", StrTrim(GetWeapon(), 2, 0)),
+        PDA_Weapon_Desc_Printer = StrParam("PDA_WEAPON_%s:_DESC", StrTrim(GetWeapon(), 2, 0));
 
-    // Use THESE for akimbo weapons.
-    int PDA_Weapon_DualName_Printer   = StrParam("PDA_WEAPON_%s:DEMONARTIFACTS_NAME", StrTrim(GetWeapon(),2,0)),
-        PDA_Weapon_DualDesc_Printer   = StrParam("PDA_WEAPON_%s:DEMONARTIFACTS_DESC", StrTrim(GetWeapon(),2,0));
+    int PDA_Weapon_DualName_Printer = StrParam("PDA_WEAPON_%s:DEMONARTIFACTS_NAME", StrTrim(GetWeapon(), 2, 0)),
+        PDA_Weapon_DualDesc_Printer = StrParam("PDA_WEAPON_%s:DEMONARTIFACTS_DESC", StrTrim(GetWeapon(), 2, 0));
 
-    int PDA_Weapon_Bulk_Quantity      = CheckInventory(StrParam("%s:BulkMod", GetWeapon())),
-        PDA_Weapon_Power_Quantity     = CheckInventory(StrParam("%s:PowerMod", GetWeapon())),
-        PDA_Weapon_Agility_Quantity   = CheckInventory(StrParam("%s:AgilityMod", GetWeapon())),
+    int PDA_Weapon_Bulk_Quantity = CheckInventory(StrParam("%s:BulkMod", GetWeapon())),
+        PDA_Weapon_Power_Quantity = CheckInventory(StrParam("%s:PowerMod", GetWeapon())),
+        PDA_Weapon_Agility_Quantity = CheckInventory(StrParam("%s:AgilityMod", GetWeapon())),
         PDA_Weapon_Technical_Quantity = CheckInventory(StrParam("%s:TechnicalMod", GetWeapon())),
-        PDA_Weapon_Sniper_Quantity    = CheckInventory(StrParam("%s:SniperMod", GetWeapon())),
+        PDA_Weapon_Sniper_Quantity = CheckInventory(StrParam("%s:SniperMod", GetWeapon())),
         PDA_Weapon_Firestorm_Quantity = CheckInventory(StrParam("%s:FirestormMod", GetWeapon())),
-        PDA_Weapon_Nano_Quantity      = CheckInventory(StrParam("%s:NanoMod", GetWeapon())),
-        PDA_Weapon_Artifact_Quantity  = CheckInventory(StrParam("%s:DemonArtifacts", GetWeapon()));
+        PDA_Weapon_Nano_Quantity = CheckInventory(StrParam("%s:NanoMod", GetWeapon())),
+        PDA_Weapon_Artifact_Quantity = CheckInventory(StrParam("%s:DemonArtifacts", GetWeapon()));
 
-
-    // Current weapon + backstory
-    #region WEP_STORY
-    if(PDA_Local.page == 1)
-    {
+    if (PDA_Local.page == WEAPON_PAGE_STORY) {
         //PDA_SetScrollWindow(-140);
         PDA_SetScrollLimit(0);
 
@@ -59,47 +63,39 @@ if(StrCmp(CheckInventory(GetWeapon()),"None") != 0)
         bool hasArtifacts = CheckInventory(StrParam("%s:DemonArtifacts", GetWeapon()));
 
         // Checks for player perks that influence weapons
-        for(int perkIndex = 0; perkIndex < DRLA_WEAPONPERKMAX; perkIndex++)
-        {
-            if(CheckInventory(DRLA_WeaponPerkList[perkIndex][0]) && CheckInventory(DRLA_WeaponPerkList[perkIndex][2]))
-            {
-                classperkdisplayed = strParam("> \c[Yellow]%s:",DRLA_WeaponPerkList[perkIndex][1]);
+        for (int perkIndex = 0; perkIndex < DRLA_WEAPONPERKMAX; perkIndex++) {
+            if (CheckInventory(DRLA_WeaponPerkList[perkIndex][0]) && CheckInventory(DRLA_WeaponPerkList[perkIndex][2])) {
+                classperkdisplayed = strParam("> \c[Yellow]%s:", DRLA_WeaponPerkList[perkIndex][1]);
             }
         }
         // Checks for unique weapon + armor set perks
         // I should get a better name for this loop's max at some point..
-        for(int setPerkIndex = 0; setPerkIndex < DRLA_NUCLEARMAX; setPerkIndex++)
-        {
-            if(CheckInventory(DRLA_WeaponSetList[setPerkIndex][0]) && (GetWeapon() == DRLA_NuclearCheckList[setPerkIndex]))
-            {
-                weaponperkdisplayed = strParam("> \c[Yellow]%s:",DRLA_WeaponSetList[0][1]);
+        for (int setPerkIndex = 0; setPerkIndex < DRLA_NUCLEARMAX; setPerkIndex++) {
+            if (CheckInventory(DRLA_WeaponSetList[setPerkIndex][0]) && (GetWeapon() == DRLA_NuclearCheckList[setPerkIndex])) {
+                weaponperkdisplayed = strParam("> \c[Yellow]%s:", DRLA_WeaponSetList[0][1]);
             }
-            if(CheckInventory("RLCerberusSetBonusActive") && (GetWeapon() == DRLA_TristarCheckList[setPerkIndex]))
-            {
-                weaponperkdisplayed = strParam("> \c[Yellow]%s:",DRLA_WeaponSetList[1][1]);
+            if (CheckInventory("RLCerberusSetBonusActive") && (GetWeapon() == DRLA_TristarCheckList[setPerkIndex])) {
+                weaponperkdisplayed = strParam("> \c[Yellow]%s:", DRLA_WeaponSetList[1][1]);
             }
         }
 
         HudMessage(
-                "%s:" // Tech perk
-                "%s:" // Non-Tech Class perk
-                "\n"
-                "%s:" // Weapon perk
-                "%l:\n"
-                "\c-%l:\n",
-                (canDisassemble) ? strParam("> \c[Yellow]%s:",DRLA_WeaponPerkList[2][1]) : "",
-                (!canDisassemble) ? classperkdisplayed : "",
-                weaponperkdisplayed,
-                (hasArtifacts) ? PDA_Weapon_DualName_Printer : PDA_Weapon_Name_Printer,
-                (hasArtifacts) ? PDA_Weapon_DualDesc_Printer : PDA_Weapon_Desc_Printer;
-                HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, PDA_RectX + 10.1, PDA_Local.scrollingy + 20.1 + (20.0 * 1), 0);
+            "%s:" // Tech perk
+            "%s:" // Non-Tech Class perk
+            "\n"
+            "%s:" // Weapon perk
+            "%l:\n"
+            "\c-%l:\n",
+            (canDisassemble) ? strParam("> \c[Yellow]%s:", DRLA_WeaponPerkList[2][1]) : "",
+            (!canDisassemble) ? classperkdisplayed : "",
+            weaponperkdisplayed,
+            (hasArtifacts) ? PDA_Weapon_DualName_Printer : PDA_Weapon_Name_Printer,
+            (hasArtifacts) ? PDA_Weapon_DualDesc_Printer : PDA_Weapon_Desc_Printer;
+            HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, PDA_RectX + 10.1, PDA_Local.scrollingy + 20.1 + (20.0 * 1), 0);
     }
-    #endregion
-    // Weapon modpack effects
-    #region WEP_MODPACK
-    if(PDA_Local.page == 2)
+
+    if (PDA_Local.page == WEAPON_PAGE_MODPACK_EFFECTS)
     {
-        
         // Every weapon and assembly tier has their own max amount of mod packs applicable. Set that up.
         PDA_EstablishModLimits();
 
@@ -107,107 +103,65 @@ if(StrCmp(CheckInventory(GetWeapon()),"None") != 0)
 
         bool PDA_IsNotDemonic = false;
         PDAButton button[7];
-        for(int demonic = 0; demonic < DRLA_DEMONWEAPONMAX; demonic++)
-        {
-            if(GetWeapon() == DRLA_ArtifactEffectList[demonic][0])
+
+        for (int demonic = 0; demonic < DRLA_DEMONWEAPONMAX; demonic++) {
+            if (GetWeapon() == DRLA_ArtifactEffectList[demonic][0])
                 PDA_IsNotDemonic = true;
             else
                 PDA_IsNotDemonic = false;
         }
-        HudMessage( "%l:\n[\c[LightBlue]%i:B \c[Red]%i:P \c[Green]%i:A \c[Yellow]%i:T \c[Purple]%i:S \c[Orange]%i:F \c[White]%i:N \cr%i:D\c-]"
-        "\n\n"
-        "%l:\c[Cyan]%i:",
-                    (PDA_IsNotDemonic) ? (CheckInventory(strParam("%s:DemonArtifacts", GetWeapon())) ?
-                        PDA_Weapon_DualName_Printer : PDA_Weapon_Name_Printer) : PDA_Weapon_Name_Printer,
-                    PDA_Weapon_Bulk_Quantity,     
-                    PDA_Weapon_Power_Quantity,    
-                    PDA_Weapon_Agility_Quantity,  
-                    PDA_Weapon_Technical_Quantity,
-                    PDA_Weapon_Sniper_Quantity,   
-                    PDA_Weapon_Firestorm_Quantity,
-                    PDA_Weapon_Nano_Quantity,
-                    (PDA_IsNotDemonic) ? 0 : PDA_Weapon_Artifact_Quantity,
-                    "PDA_MODPACK_MAXSUPPORTED",
-                    PDA_Local.maxmodlimit;
-                HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, PDA_RectX + 10.1, (int)(PDA_Local.scrollingy * newresy) + 20.1 + (20.0 * 1), 0);
+        HudMessage("%l:\n[\c[LightBlue]%i:B \c[Red]%i:P \c[Green]%i:A \c[Yellow]%i:T \c[Purple]%i:S \c[Orange]%i:F \c[White]%i:N \cr%i:D\c-]"
+                   "\n\n"
+                   "%l:\c[Cyan]%i:",
+                   (PDA_IsNotDemonic) ? (CheckInventory(strParam("%s:DemonArtifacts", GetWeapon())) ? PDA_Weapon_DualName_Printer : PDA_Weapon_Name_Printer) : PDA_Weapon_Name_Printer,
+                   PDA_Weapon_Bulk_Quantity, PDA_Weapon_Power_Quantity, PDA_Weapon_Agility_Quantity, PDA_Weapon_Technical_Quantity,
+                   PDA_Weapon_Sniper_Quantity, PDA_Weapon_Firestorm_Quantity, PDA_Weapon_Nano_Quantity,
+                   (PDA_IsNotDemonic) ? 0 : PDA_Weapon_Artifact_Quantity,
+                   "PDA_MODPACK_MAXSUPPORTED",
+                   PDA_Local.maxmodlimit;
+                   HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, PDA_RectX + 10.1, (int)(PDA_Local.scrollingy * newresy) + 20.1 + (20.0 * 1), 0);
 
         //HudMessage("%l:\c[Cyan]%i:", "PDA_MODPACK_MAXSUPPORTED", PDA_Local.maxmodlimit; HUDMSG_PLAIN, PDA_INFO2ID, CR_RED, PDA_RectX + 10.1, (int)(PDA_Local.scrollingy * newresy) + 20.1 + (20.0 * 2), 0);
-        
+
         str DRLA_SniperLearned = "\n", DRLA_FirestormLearned = "\n", DRLA_NanoLearned = "\n";
 
         // I am so sorry.
-        for(int weaponIndex = 0; weaponIndex < DRLA_WEAPONMODMAX; weaponIndex++)
-        {
-            if(DRLA_WeaponModList[weaponIndex][0] == GetWeapon())
-            {
+        for (int weaponIndex = 0; weaponIndex < DRLA_WEAPONMAX; weaponIndex++) {
+            if (stricmp(DRLA_WeaponModList[weaponIndex][0], GetWeapon()) == 0) {
+                bool isUnmaker = stricmp(GetWeapon(), "RLUnmaker") == 0;
                 SetFont("STAT_MNO");
-                
+
                 /*log("host learned %s:? %b: | guest learned %s:? %b:", strParam("%s:SniperLearntToken", GetWeapon()), PDA_CheckPlayer1Inventory(strParam("%s:SniperLearntToken", GetWeapon())), strParam("%s:SniperLearntToken", GetWeapon()), CheckInventory(strParam("%s:SniperLearntToken", GetWeapon())));*/
-                
-                DRLA_SniperLearned = (
-                    PDA_CheckPlayer1Inventory(strParam("%s:SniperLearntToken", GetWeapon())) ||
-                    CheckInventory(strParam("%s:SniperLearntToken", GetWeapon()))
-                ) ?
-                DRLA_WeaponModList[weaponIndex][5] :
-                (StrCmp(GetWeapon(),"RLUnmaker") == 0) ? "PDA_MODS_SNIPERMOD_UNMAKER" : "PDA_MODS_SNIPERMOD_UNKNOWN";
-                
-                DRLA_FirestormLearned = (
-                    PDA_CheckPlayer1Inventory(strParam("%s:FirestormLearntToken", GetWeapon())) || 
-                    CheckInventory(strParam("%s:FirestormLearntToken", GetWeapon()))
-                ) ?
-                DRLA_WeaponModList[weaponIndex][6] :
-                (StrCmp(GetWeapon(),"RLUnmaker") == 0) ? "PDA_MODS_FIRESTORMMOD_UNMAKER" :  "PDA_MODS_FIRESTORMMOD_UNKNOWN";
-                
-                DRLA_NanoLearned = (
-                    PDA_CheckPlayer1Inventory(strParam("%s:NanoLearntToken", GetWeapon())) || 
-                    CheckInventory(strParam("%s:NanoLearntToken", GetWeapon()))
-                ) ?
-                DRLA_WeaponModList[weaponIndex][7] :
-                (StrCmp(GetWeapon(),"RLUnmaker") == 0) ? "PDA_MODS_NANOMOD_UNMAKER" : "PDA_MODS_NANOMOD_UNKNOWN";
-                
-                PDA_LocalWeaponModEffect[mi_bulk]      = DRLA_WeaponModList[weaponIndex][1];
-                PDA_LocalWeaponModEffect[mi_power]     = DRLA_WeaponModList[weaponIndex][2];
-                PDA_LocalWeaponModEffect[mi_agility]   = DRLA_WeaponModList[weaponIndex][3];
-                PDA_LocalWeaponModEffect[mi_technical] = DRLA_WeaponModList[weaponIndex][4];
-                PDA_LocalWeaponModEffect[mi_sniper]    = DRLA_WeaponModList[weaponIndex][5];
-                PDA_LocalWeaponModEffect[mi_firestorm] = DRLA_WeaponModList[weaponIndex][6];
-                PDA_LocalWeaponModEffect[mi_nano]      = DRLA_WeaponModList[weaponIndex][7];
-                
-                PDA_LocalUniqueModEffect[mi_bulk]      = DRLA_WeaponModList[weaponIndex][1];
-                PDA_LocalUniqueModEffect[mi_power]     = DRLA_WeaponModList[weaponIndex][2];
-                PDA_LocalUniqueModEffect[mi_agility]   = DRLA_WeaponModList[weaponIndex][3];
-                PDA_LocalUniqueModEffect[mi_technical] = DRLA_WeaponModList[weaponIndex][4];
-                PDA_LocalUniqueModEffect[mi_sniper]    = DRLA_SniperLearned;
-                PDA_LocalUniqueModEffect[mi_firestorm] = DRLA_FirestormLearned;
-                PDA_LocalUniqueModEffect[mi_nano]      = DRLA_NanoLearned;
-                
-                
-                /*PDA_PrintWhichUnique[PlayerNumber()][] =
-                {
-                    DRLA_WeaponModList[weaponIndex][mi_bulk], DRLA_WeaponModList[weaponIndex][mi_power], DRLA_WeaponModList[weaponIndex][mi_agility], DRLA_WeaponModList[weaponIndex][mi_technical],
-                    DRLA_SniperLearned, DRLA_FirestormLearned, DRLA_NanoLearned
-                };
-                
-                PDA_PrintWhichBasic[PlayerNumber()] =
-                {
-                    DRLA_WeaponModList[weaponIndex][mi_bulk], DRLA_WeaponModList[weaponIndex][mi_power], DRLA_WeaponModList[weaponIndex][mi_agility], DRLA_WeaponModList[weaponIndex][mi_technical],
-                    DRLA_WeaponModList[weaponIndex][mi_sniper], DRLA_WeaponModList[weaponIndex][mi_firestorm], DRLA_WeaponModList[weaponIndex][mi_nano]
-                };*/
-                
-                for(int modPack = 0; modPack < 7; modPack++)
-                {
-                    button[modPack] = PDA_CreateModPackDisplay(modPack, DRLA_WeaponModIcons[modPack], PDA_LocalWeaponModEffect[modPack], PDA_RectX - 30.1 + (20.0 * (2+modPack)), PDA_Local.scrollingy + 60.1, 16, 24);
-                   
-                    if(button[modPack].state == button_clicked && button[modPack].id == modPack)
-                    {
+
+                /** TODO: Try to shorten this someday */
+                for (int modeffect = PDA_MODMIN; modeffect < PDA_MODMAX; modeffect++) {
+                    PDA_LocalWeaponModEffect[modeffect] = DRLA_WeaponModList[weaponIndex][modeffect];
+
+                    if (modeffect < mi_sniper) {
+                        PDA_LocalUniqueModEffect[modeffect] = DRLA_WeaponModList[weaponIndex][modeffect];
+                    }
+                }
+
+                PDA_LocalUniqueModEffect[mi_sniper] = (PDA_CheckPlayer1Inventory(strParam("%s:SniperLearntToken", GetWeapon())) || CheckInventory(strParam("%s:SniperLearntToken", GetWeapon())))
+                                         ? DRLA_WeaponModList[weaponIndex][mi_sniper] : (isUnmaker) ? "PDA_MODS_SNIPERMOD_UNMAKER" : "PDA_MODS_SNIPERMOD_UNKNOWN";
+
+                PDA_LocalUniqueModEffect[mi_firestorm] = (PDA_CheckPlayer1Inventory(strParam("%s:FirestormLearntToken", GetWeapon())) || CheckInventory(strParam("%s:FirestormLearntToken", GetWeapon())))
+                                            ? DRLA_WeaponModList[weaponIndex][mi_firestorm] : (isUnmaker) ? "PDA_MODS_FIRESTORMMOD_UNMAKER" : "PDA_MODS_FIRESTORMMOD_UNKNOWN";
+
+                PDA_LocalUniqueModEffect[mi_nano] = (PDA_CheckPlayer1Inventory(strParam("%s:NanoLearntToken", GetWeapon())) || CheckInventory(strParam("%s:NanoLearntToken", GetWeapon())))
+                                       ? DRLA_WeaponModList[weaponIndex][mi_nano] : (isUnmaker) ? "PDA_MODS_NANOMOD_UNMAKER" : "PDA_MODS_NANOMOD_UNKNOWN";
+
+                for (int modPack = PDA_MODMIN; modPack < PDA_MODMAX; modPack++) {
+                    button[modPack] = PDA_CreateModPackDisplay(modPack, icon_static_WeaponMods[modPack], PDA_LocalWeaponModEffect[modPack], PDA_RectX - 30.1 + (20.0 * (2 + modPack)), PDA_Local.scrollingy + 60.1, 16, 24);
+
+                    if (button[modPack].state == button_clicked && button[modPack].id == modPack) {
                         PDA_Local.clicked = true;
                         localmodPackIndex = modPack;
                     }
                 }
-                
-                if(PDA_Local.clicked)
-                {
-                    if(CheckInventory("RLUniqueWeaponToken") || CheckInventory("RLDemonicWeaponToken") || CheckInventory("RLLegendaryWeaponToken"))
+
+                if (PDA_Local.clicked) {
+                    if (CheckInventory("RLUniqueWeaponToken") || CheckInventory("RLDemonicWeaponToken") || CheckInventory("RLLegendaryWeaponToken"))
                         HudMessage("%l:", PDA_LocalUniqueModEffect[localmodPackIndex]; HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, PDA_RectX + 10.1, (int)(PDA_Local.scrollingy * newresy) + 120.1, 0);
                     else
                         HudMessage("%l:", PDA_LocalWeaponModEffect[localmodPackIndex]; HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, PDA_RectX + 10.1, (int)(PDA_Local.scrollingy * newresy) + 120.1, 0);
@@ -216,55 +170,50 @@ if(StrCmp(CheckInventory(GetWeapon()),"None") != 0)
         }
         PDA_DefaultFont();
     }
-    #endregion
-    // Demon artifact 'benefits'
-    #region WEP_DEMON
-    if(PDA_Local.page == 3)
-    {
+    if (PDA_Local.page == WEAPON_PAGE_ARTIFACT_EFFECTS) {
         PDA_SetScrollLimit(-80);
         PDA_SetScrollArrows2(-80, PDA_RectWidth + 50.0, PDA_ScrollableHeight + 90.0);
 
-        int id, hudX;
-        HudMessage( "\cf%l:\c-\n", "PDA_DEMONARTIFACTS_NOTSUPPORTED"; HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, PDA_RectX + 10.1, PDA_Local.scrollingy + 20.1 + (20.0 * 1), 0);
-                
-        for(int weaponIndex = 0; weaponIndex < DRLA_DEMONWEAPONMAX; weaponIndex++)
-        {
-            if(StrCmp(GetWeapon(),DRLA_ArtifactEffectList[weaponIndex][0]) == 0)
-            {
-                if(PDA_Weapon_Artifact_Quantity > 0)
-                {
-                    if(PDA_Weapon_Artifact_Quantity == 1)
+        HudMessage("\cf%l:\c-\n", "PDA_DEMONARTIFACTS_NOTSUPPORTED"; HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, PDA_RectX + 10.1, PDA_Local.scrollingy + 20.1 + (20.0 * 1), 0);
+
+        for (int weaponIndex = 0; weaponIndex < DRLA_DEMONWEAPONMAX; weaponIndex++) {
+            if (StrCmp(GetWeapon(), DRLA_ArtifactEffectList[weaponIndex][0]) == 0) {
+                if (PDA_Weapon_Artifact_Quantity > 0) {
+                    switch (PDA_Weapon_Artifact_Quantity) {
+                    case 1:
                         HudMessage("\cf%l:\c-\n%l:\n\n",
-                                    "PDA_DEMONARTIFACTS_ONE",
-                                    DRLA_ArtifactEffectList[weaponIndex][1];
-                                    HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, PDA_RectX + 10.1, PDA_Local.scrollingy + 10.1 + (50.0 * 1), 0);
-
-                    if(PDA_Weapon_Artifact_Quantity == 2)
+                                   "PDA_DEMONARTIFACTS_ONE",
+                                   DRLA_ArtifactEffectList[weaponIndex][1];
+                                   HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, PDA_RectX + 10.1, PDA_Local.scrollingy + 10.1 + (50.0 * 1), 0);
+                        break;
+                    case 2:
                         HudMessage("\cf%l:\c-\n%l:\n\n\c[Red]%l:\c-\n%l:\n\n",
-                                    "PDA_DEMONARTIFACTS_TWO",
-                                    DRLA_ArtifactEffectList[weaponIndex][2],
-                                    "PDA_DEMONARTIFACTS_ONE",
-                                    DRLA_ArtifactEffectList[weaponIndex][1];
-                                    HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, PDA_RectX + 10.1, PDA_Local.scrollingy + 10.1 + (50.0 * 1), 0);
-
-                    if(PDA_Weapon_Artifact_Quantity == 3)
+                                   "PDA_DEMONARTIFACTS_TWO",
+                                   DRLA_ArtifactEffectList[weaponIndex][2],
+                                   "PDA_DEMONARTIFACTS_ONE",
+                                   DRLA_ArtifactEffectList[weaponIndex][1];
+                                   HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, PDA_RectX + 10.1, PDA_Local.scrollingy + 10.1 + (50.0 * 1), 0);
+                        break;
+                    case 3:
                         HudMessage("\cf%l:\c-\n%l:\n\n\c[Red]%l:\c-\n%l:\n\n\c[Red]%l:\c-\n%l:\n\n",
-                                    "PDA_DEMONARTIFACTS_THREE",
-                                    DRLA_ArtifactEffectList[weaponIndex][3],
-                                    "PDA_DEMONARTIFACTS_TWO",
-                                    DRLA_ArtifactEffectList[weaponIndex][2],
-                                    "PDA_DEMONARTIFACTS_ONE",
-                                    DRLA_ArtifactEffectList[weaponIndex][1];
-                                    HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, PDA_RectX + 10.1, PDA_Local.scrollingy + 10.1 + (50.0 * 1), 0);
+                                   "PDA_DEMONARTIFACTS_THREE",
+                                   DRLA_ArtifactEffectList[weaponIndex][3],
+                                   "PDA_DEMONARTIFACTS_TWO",
+                                   DRLA_ArtifactEffectList[weaponIndex][2],
+                                   "PDA_DEMONARTIFACTS_ONE",
+                                   DRLA_ArtifactEffectList[weaponIndex][1];
+                                   HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, PDA_RectX + 10.1, PDA_Local.scrollingy + 10.1 + (50.0 * 1), 0);
+                        break;
+                    }
                 }
-                else
+                else {
                     HudMessage("\c[Red]%l:\c-\n",
-                                "PDA_DEMONARTIFACTS_ZERO";
-                                HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, PDA_RectX + 10.1, PDA_Local.scrollingy + 10.1 + (50.0 * 1), 0);
+                               "PDA_DEMONARTIFACTS_ZERO";
+                               HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, PDA_RectX + 10.1, PDA_Local.scrollingy + 10.1 + (50.0 * 1), 0);
+                }
             }
         }
     }
-    #endregion
 }
 
 PDA_UnsetScrollWindow();

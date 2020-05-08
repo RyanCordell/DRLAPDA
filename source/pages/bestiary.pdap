@@ -5,8 +5,7 @@ PDA_Wipe();
 
 str color;
 
-switch(PDA_Local.page)
-{
+switch (PDA_Local.page) {
     case 1: PDA_PrintHeader("PDA_BESTIARY_HEADER", 0); break;
     case 2: PDA_PrintHeader("PDA_BESTIARY_HEADER_UV", -40); color = "White"; break;
     case 3: PDA_PrintHeader("PDA_BESTIARY_HEADER_NM", -40); color = "Brick"; break;
@@ -18,9 +17,7 @@ switch(PDA_Local.page)
 PDA_SetScrollLimit(-240);
 PDA_SetScrollWindow(-240);
 
-str token,
-    name,
-    icon;
+str token, name, icon;
 int kcount;
 
 int page = PDA_Local.page - 2;
@@ -30,8 +27,7 @@ PDA_SetupBounds();
 
 fixed newY = (PDA_Local.scrollingy * newresy) + (34.0 * newresy) + 0.1;
 
-switch(PDA_Local.page)
-{
+switch (PDA_Local.page) {
     case 1:
         PDA_SetScrollLimit(20);
         PDA_SetScrollArrows2(0, PDA_RectWidth + 60.0, PDA_ScrollableHeight + 90.0);
@@ -42,24 +38,23 @@ switch(PDA_Local.page)
         PDAButton ARMAGEDDON   = PDA_CreateBeastButton(53, "Armageddon",   "Gold",      PDA_RectX + 10.1, PDA_Local.scrollingy + 30.1 + (15.0 * 3), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, "", "");
         PDAButton EXTRA        = PDA_CreateBeastButton(54, "Extra",        "Purple",    PDA_RectX + 10.1, PDA_Local.scrollingy + 30.1 + (15.0 * 4), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, "", "");
         
-        if(PDA_Local.newEntry[0]) HudMessage(s:"New!\n"; HUDMSG_ALPHA, 55, CR_GREEN, PDA_RectX + 120.1, newY + (21.0 * 0), 0, 0.2 + pulser(2.0));
-        if(PDA_Local.newEntry[1]) HudMessage(s:"New!\n"; HUDMSG_ALPHA, 56, CR_GREEN, PDA_RectX + 120.1, newY + (21.0 * 1), 0, 0.2 + pulser(2.0));
-        if(PDA_Local.newEntry[2]) HudMessage(s:"New!\n"; HUDMSG_ALPHA, 57, CR_GREEN, PDA_RectX + 120.1, newY + (21.0 * 2), 0, 0.2 + pulser(2.0));
-        if(PDA_Local.newEntry[3]) HudMessage(s:"New!\n"; HUDMSG_ALPHA, 58, CR_GREEN, PDA_RectX + 120.1, newY + (21.0 * 3), 0, 0.2 + pulser(2.0));
-        if(PDA_Local.newEntry[4]) HudMessage(s:"New!\n"; HUDMSG_ALPHA, 59, CR_GREEN, PDA_RectX + 120.1, newY + (21.0 * 4), 0, 0.2 + pulser(2.0));
-        
-        PDA_InitButton(NORMAL,       true, 2, "Enemies available on Ultra-Violence and lower\n");
-        PDA_InitButton(NIGHTMARE,    true, 3, "Enemies available on Nightmare difficulty\n");
-        PDA_InitButton(TECHNOPHOBIA, true, 4, "Enemies available on Technophobia difficulty\n");
-        PDA_InitButton(ARMAGEDDON,   true, 5, "Enemies available on Armageddon difficulty\n");
-        PDA_InitButton(EXTRA,        true, 6, "Enemies that don't cleanly fit in any one difficulty\n");
+        if (PDA_Local.newEntry[0]) HudMessage(s:"New!\n"; HUDMSG_ALPHA, 55, CR_GREEN, PDA_RectX + 120.1, newY + (21.0 * 0), 0, 0.2 + pulser(2.0));
+        if (PDA_Local.newEntry[1]) HudMessage(s:"New!\n"; HUDMSG_ALPHA, 56, CR_GREEN, PDA_RectX + 120.1, newY + (21.0 * 1), 0, 0.2 + pulser(2.0));
+        if (PDA_Local.newEntry[2]) HudMessage(s:"New!\n"; HUDMSG_ALPHA, 57, CR_GREEN, PDA_RectX + 120.1, newY + (21.0 * 2), 0, 0.2 + pulser(2.0));
+        if (PDA_Local.newEntry[3]) HudMessage(s:"New!\n"; HUDMSG_ALPHA, 58, CR_GREEN, PDA_RectX + 120.1, newY + (21.0 * 3), 0, 0.2 + pulser(2.0));
+        if (PDA_Local.newEntry[4]) HudMessage(s:"New!\n"; HUDMSG_ALPHA, 59, CR_GREEN, PDA_RectX + 120.1, newY + (21.0 * 4), 0, 0.2 + pulser(2.0));
+
+        PDA_InitButton(NORMAL,       true, 2, strparam("%l:\n", "PDA_DIFFICULTY_UV_OR_LOWER"));
+        PDA_InitButton(NIGHTMARE,    true, 3, strparam("%l:\n", "PDA_DIFFICULTY_NIGHTMARE"));
+        PDA_InitButton(TECHNOPHOBIA, true, 4, strparam("%l:\n", "PDA_DIFFICULTY_TECHNOPHOBIA"));
+        PDA_InitButton(ARMAGEDDON,   true, 5, strparam("%l:\n", "PDA_DIFFICULTY_ARMAGEDDON"));
+        PDA_InitButton(EXTRA,        true, 6, strparam("%l:\n", "PDA_DIFFICULTY_EXTRA"));
         
         break;
     default:
         PDA_SetScrollLimit(-60);
         PDA_SetScrollArrows2(-60, PDA_RectWidth + 60.0, PDA_ScrollableHeight + 90.0);
-        for(int i = 0; i < DRLA_MONSTER_PAGE_MAX; i++)
-        {
+        for (int i = 0; i < DRLA_MONSTER_PAGE_MAX; i++) {
             kcount = StrParam("%s:KillCounter", DRLA_Bestiary[page][i][beast_TOKEN]);
             monsterCheck[page][i] = CheckInventory(kcount);
             //log("%s:: %i: %i:", DRLA_Bestiary[page][i][beast_TOKEN], monsterCheck[page][i], CheckInventory(kcount));
@@ -75,9 +70,7 @@ switch(PDA_Local.page)
                 if(button.state == button_hovered){
                     DisplayIcon(icon, PDA_INFO2ID, PDA_RectWidth - 30.1, PDA_RectY + 100.1, 0, 0.2 + pulser(2.0));
                 }
-            }
-            else
-            {
+            } else {
                 PDAButton button = PDA_CreateBeastButton(50 + i, " ????", color, PDA_RectX + 0.1, PDA_Local.scrollingy + 20.1 + (11.0 * i), 80, BEAST_HEIGHT, 3.0, -3.0, "null", "");
             }
         }

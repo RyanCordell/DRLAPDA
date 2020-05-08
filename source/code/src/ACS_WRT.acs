@@ -1,183 +1,97 @@
-SCRIPT "DRLA_AssemblyGlobalizer" ENTER
-{
+#define asciiNumberZero 48
+
+#define getNumber(a, i)  (int)(GetChar((a), (i)) - asciiNumberZero)
+
+SCRIPT "DRLA_AssemblyGlobalizer" ENTER {
 	bool dowrite;
-    int DRLA_AllAssemblies = DRLA_BASICMAX + DRLA_ADVANCEDMAX + DRLA_MASTERMAX;
 
-    int DRLA_AssemblyOffset;
-    DRLA_FetchStoredInfo[PlayerNumber()] = GetUserCVarString(PlayerNumber(),"DRLA_knownassemblies");
+    /** Fetch all available assembly and exotic mod effect data from ini */
+    DRLA_FetchStoredInfo[PlayerNumber()] = GetUserCVarString(PlayerNumber(), "DRLA_knownassemblies");
+    DRLA_FetchExoticInfo[PlayerNumber()] = GetUserCVarString(PlayerNumber(), "DRLA_knownexoticeffects");
 
-    DRLA_FetchSniperInfo[PlayerNumber()] = GetUserCVarString(PlayerNumber(),"DRLA_knownsnipereffects");
-    DRLA_FetchFirestormInfo[PlayerNumber()] = GetUserCVarString(PlayerNumber(),"DRLA_knownfirestormeffects");
-    DRLA_FetchNanoInfo[PlayerNumber()] = GetUserCVarString(PlayerNumber(),"DRLA_knownnanoeffects");
-
-    // READ --------------------------------------------------
-    // ASSEMBLIES ---
-    for(int assemblyIndex = 0; assemblyIndex < DRLA_AllAssemblies; assemblyIndex++)
-    {
-        // Read from the ini and give the player all the assemblies.
-        if(StrCmp(DRLA_BasicAssemblies[assemblyIndex][0],"null") != 0 && assemblyIndex < DRLA_BASICMAX)
-        {
-            if((GetChar(DRLA_FetchStoredInfo[PlayerNumber()],assemblyIndex) - 48) == 0)
-            {
-                TakeInventory(DRLA_BasicAssemblies[assemblyIndex][0], 1);
+    /**
+     * READ
+     * 
+     * Read data from ini fetched cvars and give the player all the assemblies.
+     */
+    /** ASSEMBLIES */
+    for(int assemblyIndex = 0; assemblyIndex < DRLA_ASSEMBLYMAX; assemblyIndex++) {
+         if (stricmp(DRLA_Assemblies[assemblyIndex][0],"null") != 0) {
+            if (getNumber(DRLA_FetchStoredInfo[PlayerNumber()], assemblyIndex) == 0) {
+                TakeInventory(DRLA_Assemblies[assemblyIndex][0], 1);
             }
-
-            else
-            {
-                GiveInventory(DRLA_BasicAssemblies[assemblyIndex][0], 1);
+            else {
+                GiveInventory(DRLA_Assemblies[assemblyIndex][0], 1);
             }
         }
-        if(StrCmp(DRLA_AdvancedAssemblies[assemblyIndex-DRLA_BASICMAX][0],"null") != 0 && assemblyIndex >= DRLA_BASICMAX && assemblyIndex < DRLA_BASICMAX+DRLA_ADVANCEDMAX)
-        {
-            if((GetChar(DRLA_FetchStoredInfo[PlayerNumber()],assemblyIndex) - 48) == 0)
-            {
-                TakeInventory(DRLA_AdvancedAssemblies[assemblyIndex-DRLA_BASICMAX][0], 1);
-            }
 
-            else
-            {
-                GiveInventory(DRLA_AdvancedAssemblies[assemblyIndex-DRLA_BASICMAX][0], 1);
-            }
-        }
-        if(StrCmp(DRLA_MasterAssemblies[assemblyIndex-DRLA_BASICMAX-DRLA_ADVANCEDMAX][0],"null") != 0 && assemblyIndex >= DRLA_BASICMAX+DRLA_ADVANCEDMAX && assemblyIndex < DRLA_BASICMAX+DRLA_ADVANCEDMAX+DRLA_MASTERMAX)
-        {
-            if((GetChar(DRLA_FetchStoredInfo[PlayerNumber()],assemblyIndex) - 48) == 0)
-            {
-                TakeInventory(DRLA_MasterAssemblies[assemblyIndex-DRLA_BASICMAX-DRLA_ADVANCEDMAX][0], 1);
-            }
-
-            else
-            {
-                GiveInventory(DRLA_MasterAssemblies[assemblyIndex-DRLA_BASICMAX-DRLA_ADVANCEDMAX][0], 1);
-            }
-        }
-        // Update old state with what was read from the ini. Any change afterwards will trigger an ini write.
-        if(assemblyIndex < DRLA_BASICMAX)
-        {
-            DRLA_OldAssemblyState[PlayerNumber()][assemblyIndex] =  CheckInventory(DRLA_BasicAssemblies[assemblyIndex][0]);
-        }
-
-        if(assemblyIndex >= DRLA_BASICMAX && assemblyIndex < DRLA_BASICMAX+DRLA_ADVANCEDMAX )
-        {
-            DRLA_OldAssemblyState[PlayerNumber()][assemblyIndex] =  CheckInventory(DRLA_AdvancedAssemblies[assemblyIndex-DRLA_BASICMAX][0]);
-        }
-
-        if(assemblyIndex >= DRLA_BASICMAX+DRLA_ADVANCEDMAX && assemblyIndex < DRLA_BASICMAX+DRLA_ADVANCEDMAX+DRLA_MASTERMAX)
-        {
-            DRLA_OldAssemblyState[PlayerNumber()][assemblyIndex] =  CheckInventory(DRLA_MasterAssemblies[assemblyIndex-DRLA_BASICMAX-DRLA_ADVANCEDMAX][0]);
-        }
-
+        DRLA_OldAssemblyState[PlayerNumber()][assemblyIndex] = CheckInventory(DRLA_Assemblies[assemblyIndex][0]);
     }
-    // UNIQUE+ ---
-    for(int effectIndex = 0; effectIndex < EXOTICEFFECTS_MAX; effectIndex++)
-    {
-        // Don't bother with data that's null, like Unmaker exotic effects or missing weapons
-        // Sniper	
-        if( (StrCmp(DRLA_UniqueSniperEffects[effectIndex][1],"null") != 0))
-        {
-            if((GetChar(DRLA_FetchSniperInfo[PlayerNumber()],effectIndex) - 48) == 0)
-                TakeInventory(DRLA_UniqueSniperEffects[effectIndex][1], 1);
-
-            else
-                GiveInventory(DRLA_UniqueSniperEffects[effectIndex][1], 1);
-
+    /** UNIQUE, LEGENDARY, DEMONIC */
+    for (int effectIndex = 0; effectIndex < DRLA_EXOTICEFFECTS_MAX; effectIndex++) {
+        /** Don't bother with data that's null, like Unmaker exotic effects or missing weapons */
+        if (stricmp(DRLA_UniqueExoticModEffects[effectIndex][1], "null") != 0) {
+            for (int bit = 1, exoticMod = 1; bit < 5; bit *= 2, exoticMod++) {
+                SetInventory(DRLA_UniqueExoticModEffects[effectIndex][exoticMod], ((GetChar(DRLA_FetchExoticInfo[PlayerNumber()], effectIndex) - asciiNumberZero) & bit) - (bit-1));
+            }
         }
-        DRLA_OldSniperState[PlayerNumber()][effectIndex] = CheckInventory(DRLA_UniqueSniperEffects[effectIndex][1]);
-
-        // Firestorm
-        if((StrCmp(DRLA_UniqueFirestormEffects[effectIndex][1],"null") != 0))
-        {
-            if((GetChar(DRLA_FetchFirestormInfo[PlayerNumber()],effectIndex) - 48) == 0)
-                TakeInventory(DRLA_UniqueFirestormEffects[effectIndex][1], 1);
-
-            else
-                GiveInventory(DRLA_UniqueFirestormEffects[effectIndex][1], 1);
-
-        }
-        DRLA_OldFirestormState[PlayerNumber()][effectIndex] = CheckInventory(DRLA_UniqueFirestormEffects[effectIndex][1]);
-
-        // Nano
-        if( (StrCmp(DRLA_UniqueNanoEffects[effectIndex][1],"null") != 0))
-        {
-            if((GetChar(DRLA_FetchNanoInfo[PlayerNumber()],effectIndex) - 48) == 0)
-                TakeInventory(DRLA_UniqueNanoEffects[effectIndex][1], 1);
-
-            else
-                GiveInventory(DRLA_UniqueNanoEffects[effectIndex][1], 1);
-
-        }
-        DRLA_OldNanoState[PlayerNumber()][effectIndex] = CheckInventory(DRLA_UniqueNanoEffects[effectIndex][1]);
+        DRLA_OldExoticState[PlayerNumber()][effectIndex] = CheckInventory(DRLA_UniqueExoticModEffects[effectIndex][1]);
     }
 
-    // UPDATE --------------------------------------------------
-    while(true)
-    {
-        // Start checking for differences between New and Old states
+    /**
+     * UPDATE
+     * 
+     * Update old state with what was read from the ini. Any change afterwards will trigger an ini write.
+     */
+    while (true) {
         // ASSEMBLIES ---
-        for(int assemblyIndex2 = 0; assemblyIndex2 < (DRLA_AllAssemblies); assemblyIndex2++)
-        {
-            if(assemblyIndex2                                                     < DRLA_BASICMAX)
-            {
-                DRLA_AssemblyState[PlayerNumber()][assemblyIndex2] = CheckInventory(DRLA_BasicAssemblies[assemblyIndex2][0]);
-            }
-            if(assemblyIndex2 >= DRLA_BASICMAX                  && assemblyIndex2 < DRLA_BASICMAX+DRLA_ADVANCEDMAX )
-            {
-                DRLA_AssemblyState[PlayerNumber()][assemblyIndex2] = CheckInventory(DRLA_AdvancedAssemblies[assemblyIndex2-DRLA_BASICMAX][0]);
-            }
-            if(assemblyIndex2 >= DRLA_BASICMAX+DRLA_ADVANCEDMAX && assemblyIndex2 < DRLA_BASICMAX+DRLA_ADVANCEDMAX+DRLA_MASTERMAX)
-            {
-                DRLA_AssemblyState[PlayerNumber()][assemblyIndex2] = CheckInventory(DRLA_MasterAssemblies[assemblyIndex2-DRLA_BASICMAX-DRLA_ADVANCEDMAX][0]);
-            }
+        for(int assemblyIndex2 = 0; assemblyIndex2 < DRLA_ASSEMBLYMAX; assemblyIndex2++) {
+            DRLA_AssemblyState[PlayerNumber()][assemblyIndex2] = CheckInventory(DRLA_Assemblies[assemblyIndex2][0]);
 
-            if(DRLA_AssemblyState[PlayerNumber()][assemblyIndex2] != DRLA_OldAssemblyState[PlayerNumber()][assemblyIndex2])
+            if (DRLA_AssemblyState[PlayerNumber()][assemblyIndex2] != DRLA_OldAssemblyState[PlayerNumber()][assemblyIndex2]) {
                 dowrite = true;
+            }
         }
         // UNIQUE+ ---
-        for(int effectIndex2 = 0; effectIndex2 < EXOTICEFFECTS_MAX; effectIndex2++)
-        {
-            DRLA_KnownSniperState[PlayerNumber()][effectIndex2] =           CheckInventory(DRLA_UniqueSniperEffects[effectIndex2][1]);
-            DRLA_KnownFirestormState[PlayerNumber()][effectIndex2] =        CheckInventory(DRLA_UniqueFirestormEffects[effectIndex2][1]);
-            DRLA_KnownNanoState[PlayerNumber()][effectIndex2] =             CheckInventory(DRLA_UniqueNanoEffects[effectIndex2][1]);
+        for (int weaponIndex = 0; weaponIndex < DRLA_EXOTICEFFECTS_MAX; weaponIndex++) { /** Per weapon.. */
+            for (int exoticModIndex = 1, bit = 1; exoticModIndex < DRLA_EXOTICELEMENTS; bit *= 2, exoticModIndex++) { /** Per exotic mod effect.. */
+                if (CheckInventory(DRLA_UniqueExoticModEffects[weaponIndex][exoticModIndex]) == 1) {
+                    DRLA_KnownExoticState[PlayerNumber()][weaponIndex] |= (CheckInventory(DRLA_UniqueExoticModEffects[weaponIndex][exoticModIndex])) ? ((exoticModIndex == 3) ? 4 : exoticModIndex) : 0;
+                }
+                else {
+                    DRLA_KnownExoticState[PlayerNumber()][weaponIndex] &= ~(bit);
+                }
 
-            if( (DRLA_KnownSniperState[PlayerNumber()][effectIndex2]    !=  DRLA_OldSniperState[PlayerNumber()][effectIndex2])      ||
-                (DRLA_KnownFirestormState[PlayerNumber()][effectIndex2] !=  DRLA_OldFirestormState[PlayerNumber()][effectIndex2])   ||
-                (DRLA_KnownNanoState[PlayerNumber()][effectIndex2]      !=  DRLA_OldNanoState[PlayerNumber()][effectIndex2]))
-                dowrite = true;
+                if (DRLA_KnownExoticState[PlayerNumber()][weaponIndex] != DRLA_OldExoticState[PlayerNumber()][exoticModIndex]) {
+                    dowrite = true;
+                }
+            }
         }
         Delay(2);
 
     // WRITE --------------------------------------------------
-        if(dowrite)
-        {
+        if (dowrite) {
             // ASSEMBLIES ---
             DRLA_CurrentAssemblerState[PlayerNumber()] = "";
 
-            for(int i = 0; i < DRLA_AllAssemblies; i++)
-                if(StrLen(DRLA_CurrentAssemblerState[PlayerNumber()]) <= DRLA_AllAssemblies)
-                    DRLA_CurrentAssemblerState[PlayerNumber()] = StrParam(s:DRLA_CurrentAssemblerState[PlayerNumber()],i:DRLA_AssemblyState[PlayerNumber()][i]);
-
-            SetUserCVarString(PlayerNumber(),"DRLA_knownassemblies",DRLA_CurrentAssemblerState[PlayerNumber()]);
-
-            // UNIQUE+ ---
-            DRLA_CurrentSniperState[PlayerNumber()] = "";
-            DRLA_CurrentFirestormState[PlayerNumber()] = "";
-            DRLA_CurrentNanoState[PlayerNumber()] = "";
-
-            for(int i5 = 0; i5 < EXOTICEFFECTS_MAX; i5++)
-            {
-                if(StrLen(DRLA_CurrentSniperState[PlayerNumber()]) <= EXOTICEFFECTS_MAX)
-                    DRLA_CurrentSniperState[PlayerNumber()] =       StrParam(s:DRLA_CurrentSniperState[PlayerNumber()],     i:DRLA_KnownSniperState[PlayerNumber()][i5]);
-
-                if(StrLen(DRLA_CurrentFirestormState[PlayerNumber()]) <= EXOTICEFFECTS_MAX)
-                    DRLA_CurrentFirestormState[PlayerNumber()] =    StrParam(s:DRLA_CurrentFirestormState[PlayerNumber()],  i:DRLA_KnownFirestormState[PlayerNumber()][i5]);
-
-                if(StrLen(DRLA_CurrentNanoState[PlayerNumber()]) <= EXOTICEFFECTS_MAX)
-                    DRLA_CurrentNanoState[PlayerNumber()] =         StrParam(s:DRLA_CurrentNanoState[PlayerNumber()],       i:DRLA_KnownNanoState[PlayerNumber()][i5]);
+            for (int i = 0; i < DRLA_ASSEMBLYMAX; i++) {
+                if (StrLen(DRLA_CurrentAssemblerState[PlayerNumber()]) <= DRLA_ASSEMBLYMAX) {
+                    DRLA_CurrentAssemblerState[PlayerNumber()] = StrParam(s:DRLA_CurrentAssemblerState[PlayerNumber()], i:DRLA_AssemblyState[PlayerNumber()][i]);
+                }
             }
 
-            SetUserCVarString(PlayerNumber(),"DRLA_knownsnipereffects",     DRLA_CurrentSniperState[PlayerNumber()]);
-            SetUserCVarString(PlayerNumber(),"DRLA_knownfirestormeffects",  DRLA_CurrentFirestormState[PlayerNumber()]);
-            SetUserCVarString(PlayerNumber(),"DRLA_knownnanoeffects",       DRLA_CurrentNanoState[PlayerNumber()]);
+            SetUserCVarString(PlayerNumber(), "DRLA_knownassemblies", DRLA_CurrentAssemblerState[PlayerNumber()]);
+
+            // UNIQUE+ ---
+            DRLA_CurrentExoticModInfo[PlayerNumber()] = "";
+
+            for (int i5 = 0; i5 < DRLA_EXOTICEFFECTS_MAX; i5++) {
+                if (StrLen(DRLA_CurrentExoticModInfo[PlayerNumber()]) <= DRLA_EXOTICEFFECTS_MAX) {
+                    DRLA_CurrentExoticModInfo[PlayerNumber()] = StrParam(s:DRLA_CurrentExoticModInfo[PlayerNumber()], i:DRLA_KnownExoticState[PlayerNumber()][i5]);
+                }
+            }
+
+            SetUserCVarString(PlayerNumber(), "DRLA_knownexoticeffects", DRLA_CurrentExoticModInfo[PlayerNumber()]);
 
             // Sanity delay.
             dowrite = false;

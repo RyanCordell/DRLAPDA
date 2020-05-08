@@ -23,8 +23,7 @@ str desc;
 str textH;
 str ar[12];
 
-if(StrCmp(PDA_Local.detailFetch[0], "null") != 0)
-{
+if (StrCmp(PDA_Local.detailFetch[0], "null") != 0) {
     icon  = strParam("%s:_ICON",   PDA_Local.detailFetch[0]);
     name  = strParam("%s:_NAME",   PDA_Local.detailFetch[0]);
     mods  = strParam("%s:_MODS",   PDA_Local.detailFetch[0]);
@@ -39,13 +38,11 @@ if(StrCmp(PDA_Local.detailFetch[0], "null") != 0)
         desc;
         HUDMSG_PLAIN, PDA_INFO2ID, CR_WHITE, (PDA_RectX) + 10.1, (PDA_Local.scrollingy) + 50.1 + (20.0 * 1), 0);
         
-    if(strCmp(strParam("%l:", textH), textH) != 0) {
+    if (strCmp(strParam("%l:", textH), textH) != 0) {
         PDA_SetScrollLimit(-1 * batoi(strParam("%l:", textH)));
         PDA_SetScrollArrows2(-1 * batoi(strParam("%l:", textH)), PDA_RectWidth + 60.0, PDA_ScrollableHeight + 90.0);
     }
-}
-else
-{
+} else {
     HudMessage("%l:\n%l:\n\n\n%l:\n",
         "PDA_ASSEMBLY_NOTFOUND_NAME",
         "PDA_ASSEMBLY_NOTFOUND_MODS",

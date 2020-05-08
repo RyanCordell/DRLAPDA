@@ -2,10 +2,11 @@
     "weapons": [
         {
             "name": "FIST",
-            "tier": "Standard",
+            "tier": "Normal",
             "prettyname": "[NORMAL]Fists[END]",
             "capacity": "FOUR_MOD_CAPACITY",
-            "description": "Brass knuckles and 100% Grade A Space Marine muscle. They won't do much damage, but at least you won't wake up every beastie in the place while you break jaws.\n
+            "description": "[DARKGRAY]\"Hopefully, you were born with them.\"[END]\n\n
+            Brass knuckles and 100% Grade A Space Marine muscle. They won't do much damage, but at least you won't wake up every beastie in the place while you break jaws.\n
 Your kick move is also a good way to get enemies out of your face.\n
 The UAC's patented Berserk Packs will augment your muscle strength, making your melee attacks deal devastating amounts of damage.",
             "mods": {
@@ -20,7 +21,7 @@ The UAC's patented Berserk Packs will augment your muscle strength, making your 
         },
         {
             "name": "CHAINSAW",
-            "tier": "Standard",
+            "tier": "Normal",
             "prettyname": "[NORMAL]Chainsaw[END]",
             "capacity": "FOUR_MOD_CAPACITY",
             "description": "[ORANGE]Use rate[END]: 4 tics (0.11s)\n
@@ -44,7 +45,7 @@ Keep in mind, though, that some enemies can shrug off the damage and continue at
         },
         {
             "name": "PISTOL",
-            "tier": "Standard",
+            "tier": "Normal",
             "prettyname": "[NORMAL]Pistol[END]",
             "capacity": "FOUR_MOD_CAPACITY",
             "description": "[ORANGE]Fire rate[END]: 19 tics (0.5s)\n
@@ -68,7 +69,7 @@ Good for potshots at the odd zombie or three, but when you start seeing stronger
         },
         {
             "name": "SHOTGUN",
-            "tier": "Standard",
+            "tier": "Normal",
             "prettyname": "[NORMAL]Shotgun[END]",
             "capacity": "FOUR_MOD_CAPACITY",
             "description": "[ORANGE]Fire rate[END]: 10 tics (0.2s)\n
@@ -92,7 +93,7 @@ Relatively tight pellet spread makes it usable even at longer ranges, but it onl
         },
         {
             "name": "COMBATSHOTGUN",
-            "tier": "Standard",
+            "tier": "Normal",
             "prettyname": "[NORMAL]Combat Shotgun[END]",
             "capacity": "FOUR_MOD_CAPACITY",
             "description": "[ORANGE]Fire rate[END]: 14 tics +/- 9 tics (0.4s +/- 0.2s)\n
@@ -116,7 +117,7 @@ Damage randomization per pellet is slightly reduced compared to the standard Sho
         },
         {
             "name": "DOUBLESHOTGUN",
-            "tier": "Standard",
+            "tier": "Normal",
             "prettyname": "[NORMAL]Double Shotgun[END]",
             "capacity": "FOUR_MOD_CAPACITY",
             "description": "[ORANGE]Fire rate[END]: 10 tics (0.28s)\n
@@ -140,7 +141,7 @@ Best at short range against densely packed groups of enemies, or just one big ba
         },
         {
             "name": "CHAINGUN",
-            "tier": "Standard",
+            "tier": "Normal",
             "prettyname": "[NORMAL]Chaingun[END]",
             "capacity": "FOUR_MOD_CAPACITY",
             "description": "[ORANGE]Fire rate[END]: 4 tics (0.11s)\n
@@ -164,7 +165,7 @@ Utilizing standard rifle rounds, it fires at an impressive rate without sacrific
         },
         {
             "name": "BATTLERIFLE",
-            "tier": "Standard",
+            "tier": "Normal",
             "prettyname": "[NORMAL]Battle Rifle[END]",
             "capacity": "FOUR_MOD_CAPACITY",
             "description": "[ORANGE]Fire rate[END]: 4 tics (0.11s)\n
@@ -186,7 +187,7 @@ Unfortunately, the magazine capacity is half that of the Chaingun, so its a matt
         },
         {
             "name": "ROCKETLAUNCHER",
-            "tier": "Standard",
+            "tier": "Normal",
             "prettyname": "[NORMAL]Rocket Launcher[END]",
             "capacity": "FOUR_MOD_CAPACITY",
             "description": "[ORANGE]Fire rate[END]: 23 tics (0.92s)\n
@@ -211,7 +212,7 @@ Just keep yourself out of the blast radius.",
         },
         {
             "name": "PLASMARIFLE",
-            "tier": "Standard",
+            "tier": "Normal",
             "prettyname": "[NORMAL]Plasma Rifle[END]",
             "capacity": "FOUR_MOD_CAPACITY",
             "description": "[ORANGE]Fire rate[END]: 3 tics +/- 18 tics (0.08s +/- 0.5)\n
@@ -236,7 +237,7 @@ The Plasma Rifle fires bolts of pure plasma energy at an impressive rate, making
         },
         {
             "name": "BFG9000",
-            "tier": "Standard",
+            "tier": "Normal",
             "prettyname": "[NORMAL]BFG 9000[END]",
             "capacity": "FOUR_MOD_CAPACITY",
             "description": "[ORANGE]Fire rate[END]: 60 tics (1.7s)\n
@@ -261,7 +262,7 @@ The field also prevents the gun from disrupting the use. when used at point blan
         },
         {
             "name": "BLASTER",
-            "tier": "Standard",
+            "tier": "Normal",
             "prettyname": "[EXOTIC]Blaster[END]",
             "capacity": "FOUR_MOD_CAPACITY",
             "description": "    \n
@@ -281,7 +282,7 @@ Firing the gun until no shots remain will result in the generator needing to 'bo
         },
         {
             "name": "COMBATPISTOL",
-            "tier": "Standard",
+            "tier": "Normal",
             "prettyname": "[EXOTIC]Combat Pistol[END]",
             "capacity": "FOUR_MOD_CAPACITY",
             "description": "[DARKGRAY]This is the kind of handgun given to your superiors. Doesn't look like they're using it right now...[END]\n
@@ -299,7 +300,7 @@ The firing mechanism has also been finely tuned, resulting in higher damage and 
         },
         {
             "name": "MARKSMANPISTOL",
-            "tier": "Standard",
+            "tier": "Normal",
             "prettyname": "[EXOTIC]Marksman Pistol[END]",
             "capacity": "FOUR_MOD_CAPACITY",
             "description": "Purported to have been based on a black-market weapon designed for assassination purposes, this pistol is no more damaging than the standard UAC Pistol, but it is highly accurate, making it an ideal weapon at longer ranges and a highly prized sidearm for Scouts.",
@@ -315,7 +316,7 @@ The firing mechanism has also been finely tuned, resulting in higher damage and 
         },
         {
             "name": "HANDCANNON",
-            "tier": "Standard",
+            "tier": "Normal",
             "prettyname": "[EXOTIC]Handcannon[END]",
             "capacity": "FOUR_MOD_CAPACITY",
             "description": "One look at this sidearm might have you thinking 'Too fancy for me', but the Handcannon proves style need not come at the cost of substance.\n
@@ -332,7 +333,7 @@ The Handcannon's high-caliber rounds will wipe the stupid look off any zombie's 
         },
         {
             "name": "SUPERSHOTGUN",
-            "tier": "Standard",
+            "tier": "Normal",
             "prettyname": "[EXOTIC]Super Shotgun[END]",
             "capacity": "FOUR_MOD_CAPACITY",
             "description": "[DARKGRAY]After the first hellish invasion, weapon engineers designed the super shotgun as the world's first firearm designed to kill demons. And boy does it.[END]\n
@@ -350,7 +351,7 @@ The lighter alloy used in the barrels means that despite their length, this shot
         },
         {
             "name": "ASSAULTSHOTGUN",
-            "tier": "Standard",
+            "tier": "Normal",
             "prettyname": "[EXOTIC]Assault Shotgun[END]",
             "capacity": "FOUR_MOD_CAPACITY",
             "description": "[DARKGRAY]Big, bad and ugly.[END]\n
@@ -368,7 +369,7 @@ In addition, the assault shotgun boasts a tighter pellet spread, although it has
         },
         {
             "name": "PLASMASHOTGUN",
-            "tier": "Standard",
+            "tier": "Normal",
             "prettyname": "[EXOTIC]Plasma Shotgun[END]",
             "capacity": "FOUR_MOD_CAPACITY",
             "description": "[DARKGRAY]Plasma Shotgun, the best of both worlds![END]\n
@@ -387,7 +388,7 @@ Realizing their jobs were at stake, the team reworked the weapon to fire a sprea
         },
         {
             "name": "TRISTARBLASTER",
-            "tier": "Standard",
+            "tier": "Normal",
             "prettyname": "[EXOTIC]Tristar Blaster[END]",
             "capacity": "FOUR_MOD_CAPACITY",
             "description": "[DARKGRAY]Now this is a weird weapon.[END]\n
@@ -406,7 +407,7 @@ An ill-timed cross-promotional deal with Cerberus Defense Systems GMBH doesn't s
         },
         {
             "name": "MINIGUN",
-            "tier": "Standard",
+            "tier": "Normal",
             "prettyname": "[EXOTIC]Minigun[END]",
             "capacity": "FOUR_MOD_CAPACITY",
             "description": "[DARKGRAY]Spits enough lead into the air to be considered an environmental hazard.[END]\n
@@ -425,7 +426,7 @@ Unfortunately, it achieves this through the use of a smaller round, dealing less
         },
         {
             "name": "MISSILELAUNCHER",
-            "tier": "Standard",
+            "tier": "Normal",
             "prettyname": "[EXOTIC]Missile Launcher[END]",
             "capacity": "FOUR_MOD_CAPACITY",
             "description": "[DARKGRAY]A definitive upgrade to the rocket launcher.[END]\n
@@ -443,7 +444,7 @@ The missiles themselves deal explosive damage in a greater radius, thanks to adv
         },
         {
             "name": "NAPALMLAUNCHER",
-            "tier": "Standard",
+            "tier": "Normal",
             "prettyname": "[EXOTIC]Napalm Launcher[END]",
             "capacity": "FOUR_MOD_CAPACITY",
             "description": "[DARKGRAY]This will surely make a mess![END]\n
@@ -461,7 +462,7 @@ This is one of the newer, more advanced weapons that were developed to counter t
         },
         {
             "name": "LASERRIFLE",
-            "tier": "Standard",
+            "tier": "Normal",
             "prettyname": "[EXOTIC]Laser Rifle[END]",
             "capacity": "FOUR_MOD_CAPACITY",
             "description": "[DARKGRAY]With no recoil and pinpoint accuracy, it takes a world-class moron to miss while using a laser rifle.[END]\n
@@ -480,7 +481,7 @@ One of the new and advanced weapons that were designed after the first demon inv
         },
         {
             "name": "NUCLEARPLASMAPISTOL",
-            "tier": "Standard",
+            "tier": "Normal",
             "prettyname": "[EXOTIC]Nuclear Plasma Pistol[END]",
             "capacity": "FOUR_MOD_CAPACITY",
             "description": "Nuclear variants of energy-based firearms feature an onboard cell energy generator that replenishes ammo over time, and this Plasma Pistol represents the degree to which the Nuclear team at the Energy Weapons Division have been able to downscale the generator without making sacrifices to the original weapon's form and function.",
@@ -496,7 +497,7 @@ One of the new and advanced weapons that were designed after the first demon inv
         },
         {
             "name": "NUCLEARPLASMARIFLE",
-            "tier": "Standard",
+            "tier": "Normal",
             "prettyname": "[EXOTIC]Nuclear Plasma Rifle[END]",
             "capacity": "FOUR_MOD_CAPACITY",
             "description": "[DARKGRAY]A self-charging plasma rifle -- too bad it can't be manually reloaded.[END]\n
@@ -514,7 +515,7 @@ The result has been highly sucessful, the only widespread criticisms voiced by S
         },
         {
             "name": "NUCLEARBFG9000",
-            "tier": "Standard",
+            "tier": "Normal",
             "prettyname": "[EXOTIC]Nuclear BFG 9000[END]",
             "capacity": "FOUR_MOD_CAPACITY",
             "description": "[DARKGRAY]A self-charging BFG9000! How much more lucky can you get?[END]\n
@@ -534,7 +535,7 @@ Users are advised to not tinker with the weapon unless they know what they are d
         },
         {
             "name": "COMBATTRANSLOCATOR",
-            "tier": "Standard",
+            "tier": "Normal",
             "prettyname": "[EXOTIC]Combat Translocator[END]",
             "capacity": "FOUR_MOD_CAPACITY",
             "description": "[DARKGRAY]Now this is a weird piece of technology, wonder how it works?[END]\n
@@ -552,7 +553,7 @@ The Mark II comes with various extra modes, allowing the user to teleport themse
         },
         {
             "name": "UZI",
-            "tier": "Standard",
+            "tier": "Normal",
             "prettyname": "[EXOTIC]Uzi[END]",
             "capacity": "FOUR_MOD_CAPACITY",
             "description": "This centuries-old submachine gun is still in production, a testament to the stopping power it provides in its compact form factor.\n

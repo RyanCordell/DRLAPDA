@@ -4,16 +4,6 @@
 
 #define DRLA_MODICONMAX 8
 
-str DRLA_WeaponModIcons[PDA_MODMAX] =
-{
-	"BMODICON", "PMODICON", "AMODICON", "TMODICON", "SMODICON", "FMODICON", "NMODICON"
-};
-
-str DRLA_AnimatedModIcons[PDA_MODMAX] =
-{
-	"PDABMOD", "PDAPMOD", "PDAAMOD", "PDATMOD", "PDASMOD", "PDAFMOD", "PDANMOD"
-};
-
 // Amount of weapons in every rarity
 #define STANDARD_MAX			10
 #define EXOTIC_MAX				17
