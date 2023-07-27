@@ -18,6 +18,8 @@ PDA_CLASS_DOOMRLMARINE_STORY =
 	"They also \c[Green]increase the firerate of rapidfire weapons\c- while they're active.\n";
 PDA_CLASS_DOOMRLMARINE_HEIGHT = 
     "0";
+PDA_CLASS_DOOMRLMARINE_ICON = 
+	"PPDAMAR1";
 
 
 PDA_CLASS_DOOMRLSCOUT_NAME =
@@ -41,6 +43,8 @@ PDA_CLASS_DOOMRLSCOUT_STORY =
 	"thanks to your leg-mounted boosters.";
 PDA_CLASS_DOOMRLSCOUT_HEIGHT =
     "50";
+PDA_CLASS_DOOMRLSCOUT_ICON = 
+	"PPDASCO1";
 
 
 PDA_CLASS_DOOMRLTECHNICIAN_NAME =
@@ -66,6 +70,8 @@ PDA_CLASS_DOOMRLTECHNICIAN_STORY =
 	"and Master assemblies deal a whopping \c[Red]50%\cc additional damage\c- when you wield them.";
 PDA_CLASS_DOOMRLTECHNICIAN_HEIGHT =
     "60";
+PDA_CLASS_DOOMRLTECHNICIAN_ICON = 
+	"PPDATEC1";
 
 PDA_CLASS_DOOMRLRENEGADE_NAME =
 	"Renegade";
@@ -89,6 +95,8 @@ PDA_CLASS_DOOMRLRENEGADE_STORY =
 	"Any armor with a base protection stat of \c[Yellow]80%\c- or higher recieves no bonus.";
 PDA_CLASS_DOOMRLRENEGADE_HEIGHT =
     "60";
+PDA_CLASS_DOOMRLRENEGADE_ICON = 
+	"PPDAREN1";
 
 PDA_CLASS_DOOMRLDEMOLITIONIST_NAME =
 	"Demolitionist";
@@ -112,6 +120,8 @@ PDA_CLASS_DOOMRLDEMOLITIONIST_STORY =
 	"firing, \c[Green]you expend half the standard amount\c-, rounded down.";
 PDA_CLASS_DOOMRLDEMOLITIONIST_HEIGHT =
     "50";
+PDA_CLASS_DOOMRLDEMOLITIONIST_ICON = 
+	"PPDADMO1";
 
 PDA_CLASS_DOOMRLCOMMANDO_NAME =
 	"Commando";

@@ -1,0 +1,49 @@
+To-do:
+
+Add start-of-level messages as a separate section in the PDA
+
+Gothic Armor reports incorrect protection/resistance value (done)
+Nuclear Plasma Rifle Mk. II has an incorrect sniper mod effect (fixed, also fixed normal PR Mk 2)
+Normal Red armor reported incorrect protection values (fixed)
+Y: could you add some hud indicator to every hud type for the renegades extra shot? RLRenegadeExtraShot
+Y: here's a bunch of weapons that apparently need to have some less boilerplate
+	nuclear weapons say technical increases reload speed (done?)
+	fix bulletstorm mod descriptions (done)
+	check shrapnel cannon mod descriptions (done)
+	nuclear and normal plasma rifle mk ii has incorrect sniper description (done)
+
+Y: HAVE FUN
+add drl descriptions to the top of weapon descriptions
+
+
+NerdyRat: I dont know if it's anything that can be fixed, but there seems to be a bug if DRLA is being played multiplayer... If the client gets fragged on spawn, it breaks a bunch of things involving weapon modding. The client's HUD stops displaying what mods are in what weapon, weapons dropped by the client no longer have the little numbers above them to indicate what mods are in it, and if the client picks up a modded weapon and then drops it while in this state, the weapon has its mods erased.
+
+NerdyRat: Also, the client's PDA does not update its info (monster, weapon) during a multiplayer run.
+    (Correction: Host PDA hijacks client PDA's modpack info in some cases, but still..)
+NerdyRat: Assemblies seem to get saved to the PDA correctly, if they're learned from a blueprint pickup.
+NerdyRat: AFAIK, though, they arent applied to the PDA if you build one before learning it through a blueprint. I dont know if this is intended or not.
+NerdyRat: Again, these are client-side issues, so if they're not able to be fixed, not a big deal, i just figured i'd let the pertinent folks know.
+
+just noticed that w/ Cybernetic Armor on, the Boots (environmental steel i think?) are invisible, in the PDA (already fixed in latest, unreleased PDA)
+
+
+Fancier sprites (lower priority):
+* Jackhammer
+* Heavy SSG and HS need some black polish and venting
+* Black polish and general Nuclear tweaks for Nuke BiggestFG (Y: and VBFG too if yer gonna)
+* Perhaps something radioactivityvy for other Nuclear weapons
+* MAYBE a beefier stock for Quad Shotgun?
+* Better regen dispenser for Tactical Assembler set special
+* Prettier scope sprite for AMR (and others that use the same graphic)
+* Remake Baron Blaster projectile. BADLY.
+* Tweak BFG Infinity energy scythes for more fancy. Can probably steal stuff from Enblanco for that
+
+
+v1.2:
+* Map page which lists various little tidbits about a map. Also tracks whether a unique weapon spawned.
+* Add a little fluff message that states when the map is devoid of monsters
+* Little helmet feature akin to Dark Forces where you can toggle on a small flashlight (at the cost of cell ammo) and other jank
+* Something like DRL's mortem message - possibly accessible after an endgame event (easy), through sekrit HQ map (easy), through death (slightly harder) - basically detailing various stats about the player
+* Go through all weapons and add base stats for all weapons (reload time, damage, spread, etc)
+* THE GRAND FXENING
+    (god help me)

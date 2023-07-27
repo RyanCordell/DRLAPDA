@@ -1,5 +1,6 @@
 /** Handle mod + artifact effects on all weapons */
-var PDA_MOD = function (weapons) { return `
+/* eslint-disable */
+export const PDA_MOD = (weapons) => { return `
 #library "PDA_MOD"
 
 #define DRLA_WEAPONMAX ${weapons.max}
@@ -20,7 +21,7 @@ str DRLA_ArtifactEffectList[DRLA_DEMONWEAPONMAX][DRLA_DEMONWEAPONELEMENTS] = {
 `; };
 
 /** Handle armor-to-language link entries */
-var PDA_ARM = function (equipment) { return `
+export const PDA_ARM = (equipment) => { return `
 #library "PDA_ARM"
 
 #define DRLA_ARMORMAX ${equipment.max}
@@ -54,7 +55,7 @@ str DRLA_ArmorSetList[DRLA_ARMORSETMAX] = {
 `; };
 
 /** Handle assemblies-to-language link entries */
-var PDA_ASM = function (assemblies) { return `
+export const PDA_ASM = (assemblies) => { return `
 #library "PDA_ASM"
 
 #define DRLA_ASSEMBLYMAX ${assemblies.max}
@@ -111,29 +112,29 @@ str DRLA_UniqueExoticModEffects[DRLA_EXOTICEFFECTS_MAX][DRLA_EXOTICELEMENTS] = {
 
 /** Handle armor language entries */
 
-var LANGUAGE_EQUIPMENT = function (equipment) { 
-    var bigname = equipment.name.toUpperCase();
-    var coloredequipment = equipment.prettyname;
+export const LANGUAGE_EQUIPMENT = (value, equipment) => { 
+    const bigname = equipment.name.toUpperCase();
+    let coloredequipment = equipment.prettyname;
 
-    var atts = ``;
+    let atts = ``;
     for (var i = 0; i < equipment.attributes.length; i++) {
         atts += `" ${equipment.attributes[i]}\\n"`;
     }
 
-    if (window.pdaglobals.hasOwnProperty('colors')) {
-        for(let [key, value] of Object.entries(window.pdaglobals.colors)) {
+    if (value.hasOwnProperty('colors')) {
+        for(let [key, value] of Object.entries(value.colors)) {
             if (key.toUpperCase() === equipment.tier.toUpperCase()) {
                 coloredequipment = `\\c${value}${equipment.prettyname}\\c-`;
             }
         }
     }
 
-    var resPadder = function (str, len) {
+    const resPadder = (str, len) => {
         return str.padStart(len, ' ');
     };
 
-    var res = equipment.resistances;
-    var cybres = equipment.cyborgstats.resistances;
+    const res = equipment.resistances;
+    const cybres = equipment.cyborgstats.resistances;
 
     return `
     PDA_ARMOR_${bigname}_ICON = "${equipment.icon}";
@@ -161,48 +162,48 @@ var LANGUAGE_EQUIPMENT = function (equipment) {
 };
 
 /** Handle weapon language entries */
-var LANGUAGE_WEAPONS = function (weapon) { 
-    var bigname = weapon.name.toUpperCase();
+export const LANGUAGE_WEAPONS = (weapon) => { 
+    const bigname = weapon.name.toUpperCase();
 
     return `
     PDA_WEAPON_${bigname}_NAME = "${weapon.prettyname}";
-    PDA_WEAPON_${bigname}_DESC = "${weapon.description}";
+    PDA_WEAPON_${bigname}_DESC = "${weapon.actualDescription}";
     ${weapon.specialpretty ? `PDA_WEAPON_${bigname}DEMONARTIFACTS_NAME = "${weapon.specialpretty}";` : `` }
     ${weapon.specialdesc ? `PDA_WEAPON_${bigname}DEMONARTIFACTS_DESC = "${weapon.specialdesc}";` : `` }`;
 };
 
 /** Handle assemblies language entries */
-var LANGUAGE_ASSEMBLIES = function (assembly) { 
-    var bigname = assembly.name.toUpperCase();
-    var bigtier = assembly.tier.toUpperCase();
-    var coloredname = ``;
+export const LANGUAGE_ASSEMBLIES = (value, assembly) => { 
+    const bigname = assembly.name.toUpperCase();
+    const bigtier = assembly.tier.toUpperCase();
+    let coloredname = ``;
     //var coloredvalid = assembly.valid.toString().;
 
-    var mods = ``;
-    for (var i = 0; i < assembly.mods.length; i++) {
-        if (window.pdaglobals.hasOwnProperty('colors')) {
-            for(let [key, value] of Object.entries(window.pdaglobals.colors)) {
+    let mods = ``;
+    for (let i = 0; i < assembly.mods.length; i++) {
+        if (value.hasOwnProperty('colors')) {
+            for(let [key, value] of Object.entries(value.colors)) {
                 if (key === assembly.mods[i]) {
                     mods += `\\c${value}${assembly.mods[i].charAt(0)}\\c-`;
                 }
             }
         }
     }
-    if (window.pdaglobals.hasOwnProperty('colors')) {
-        for(let [key, value] of Object.entries(window.pdaglobals.colors)) {
+    if (value.hasOwnProperty('colors')) {
+        for(let [key, value] of Object.entries(value.colors)) {
             if (key.toUpperCase() === assembly.tier.toUpperCase()) {
                 coloredname = `\\c${value}${assembly.prettyname}\\c-`;
             }
         }
     }
 
-    var valid = ``;
-    for (var i = 0; i < assembly.valid.length; i++) {
+    let valid = ``;
+    for (let i = 0; i < assembly.valid.length; i++) {
         valid += `${assembly.valid[i]}`;
     }
 
-    var validlist = ``;
-    for (var i = 0; i < assembly.validlist.length; i++) {
+    let validlist = ``;
+    for (let i = 0; i < assembly.validlist.length; i++) {
         validlist += `${assembly.validlist[i]}`;
     }
 

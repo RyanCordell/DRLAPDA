@@ -1,6 +1,6 @@
 #define asciiNumberZero 48
 
-#define getNumber(a, i)  (int)(GetChar((a), (i)) - asciiNumberZero)
+#define strToNumber(a, i)  (int)(GetChar((a), (i)) - asciiNumberZero)
 
 SCRIPT "DRLA_AssemblyGlobalizer" ENTER {
 	bool dowrite;
@@ -16,11 +16,10 @@ SCRIPT "DRLA_AssemblyGlobalizer" ENTER {
      */
     /** ASSEMBLIES */
     for(int assemblyIndex = 0; assemblyIndex < DRLA_ASSEMBLYMAX; assemblyIndex++) {
-         if (stricmp(DRLA_Assemblies[assemblyIndex][0],"null") != 0) {
-            if (getNumber(DRLA_FetchStoredInfo[PlayerNumber()], assemblyIndex) == 0) {
+         if (stricmp(DRLA_Assemblies[assemblyIndex][0], "null") != 0) {
+            if (strToNumber(DRLA_FetchStoredInfo[PlayerNumber()], assemblyIndex) == 0) {
                 TakeInventory(DRLA_Assemblies[assemblyIndex][0], 1);
-            }
-            else {
+            } else {
                 GiveInventory(DRLA_Assemblies[assemblyIndex][0], 1);
             }
         }
@@ -57,8 +56,7 @@ SCRIPT "DRLA_AssemblyGlobalizer" ENTER {
             for (int exoticModIndex = 1, bit = 1; exoticModIndex < DRLA_EXOTICELEMENTS; bit *= 2, exoticModIndex++) { /** Per exotic mod effect.. */
                 if (CheckInventory(DRLA_UniqueExoticModEffects[weaponIndex][exoticModIndex]) == 1) {
                     DRLA_KnownExoticState[PlayerNumber()][weaponIndex] |= (CheckInventory(DRLA_UniqueExoticModEffects[weaponIndex][exoticModIndex])) ? ((exoticModIndex == 3) ? 4 : exoticModIndex) : 0;
-                }
-                else {
+                } else {
                     DRLA_KnownExoticState[PlayerNumber()][weaponIndex] &= ~(bit);
                 }
 

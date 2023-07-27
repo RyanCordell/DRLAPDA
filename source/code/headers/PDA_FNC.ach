@@ -8,15 +8,13 @@ function void PDA_PlaySound (str PDA_Sound, str soldier, int volume) {
 #define pulser(a) 0.59 + sin(Timer() * 0.99) * 1.0 / (a)
 
 function void PDA_Wipe (void) {
-	for(int wipeIndex = PDA_CURSORID; wipeIndex <= PDA_LASTID; wipeIndex++)
-	{
+	for(int wipeIndex = PDA_CURSORID; wipeIndex <= PDA_LASTID; wipeIndex++) {
 		HudMessage(s:"\n"; HUDMSG_ALPHA, wipeIndex, CR_UNTRANSLATED, 0, 0, 0, 0);
 	}
 }
 
 function void PDA_NOPONG (void) {
-	for(int wipeIndex = PDA_PONG_LEFTPADDLE; wipeIndex <= PDA_PONG_AISCORE; wipeIndex++)
-	{
+	for(int wipeIndex = PDA_PONG_LEFTPADDLE; wipeIndex <= PDA_PONG_AISCORE; wipeIndex++) {
 		HudMessage(s:"\n"; HUDMSG_PLAIN, wipeIndex, CR_UNTRANSLATED, 0, 0, 0, 0);
 	}
 }
@@ -28,8 +26,9 @@ function void PDA_SetupBounds (void) {
 }
 
 function void PDA_SetCategory (int category) {
-   if (PDA_Local.category == category)
+   if (PDA_Local.category == category) {
       return;
+   }
    
    if (category == PDA_CREDITS) {
       PDA_Local.creditsroll = 120;
@@ -54,8 +53,7 @@ function void PDA_HasEquipment (void) {
             if (StrCmp(DRLA_ArmorList[armorIndex][armor_TOKEN], strParam("%s:Boots", StrTrim(DRLA_ArmorList[armorIndex][armor_TOKEN],0,5))) != 0) {
                 localArmorIndex = armorIndex;
                 localHasArmor = true;
-            }
-            else {
+            } else {
                 localBootsIndex = armorIndex;
                 localHasBoots = true;
             }
@@ -70,12 +68,11 @@ function void PDA_HasEquipment (void) {
         }
     }
 
-    for(int backpackIndex = 0; backpackIndex < DRLA_BACKPACKMAX; backpackIndex++) {
+    for (int backpackIndex = 0; backpackIndex < DRLA_BACKPACKMAX; backpackIndex++) {
         if (CheckInventory(DRLA_BackpackList[backpackIndex][0])) {
             localBackpackIndex = backpackIndex;
             localHasBackpack = true;
-        }
-        else if (!CheckInventory(DRLA_BackpackList[localBackpackIndex][0])) {
+        } else if (!CheckInventory(DRLA_BackpackList[localBackpackIndex][0])) {
             localHasBackpack = false;
         }
     }
@@ -439,46 +436,47 @@ function PDAButton PDA_DisplayArmor (int id, str label, str graphic, float x, fl
 
 function PDAButton PDA_CreateModPackDisplay (int id, str graphic, str name, float x, float y, int width, int height)
 {
-    PDA_LocalButton[id].id = id;
-    PDA_LocalButton[id].x = x;
-    PDA_LocalButton[id].y = y;
-    PDA_LocalButton[id].width = width;
-    PDA_LocalButton[id].height = height;
-    PDA_LocalButton[id].oldstate = PDA_LocalButton[id].state;
-    PDA_LocalButton[id].label = name;
-    PDA_LocalButton[id].graphic = graphic;
+    #define thisButton PDA_LocalButton[id]
+    thisButton.id = id;
+    thisButton.x = x;
+    thisButton.y = y;
+    thisButton.width = width;
+    thisButton.height = height;
+    thisButton.oldstate = thisButton.state;
+    thisButton.label = name;
+    thisButton.graphic = graphic;
 
-    if (CheckBounds(PDA_LocalButton[id])) {
-        PDA_LocalButton[id].state = button_hovered;
+    if (CheckBounds(thisButton)) {
+        thisButton.state = button_hovered;
         PDA_LocalMouse.state = mouse_pointer;
 
-        if (PDA_LocalButton[id].state != PDA_LocalButton[id].oldstate) {
+        if (thisButton.state != thisButton.oldstate) {
             PDA_PlaySound("UI/PDA/Select", "pda/soldier", 80);
         }
 
         if (PDA_LocalMouse.m1 && !(PDA_LocalMouse.oldState & BT_ATTACK)) {
-            PDA_LocalButton[id].state = button_clicked;
+            thisButton.state = button_clicked;
             PDA_PlaySound("UI/PDA/UseCategory", "pda/soldier", 80);
         }
     }
     else {
-        PDA_LocalButton[id].state = button_none;
+        thisButton.state = button_none;
 
-        if (PDA_LocalButton[id].state != PDA_LocalButton[id].oldstate) {
+        if (thisButton.state != thisButton.oldstate) {
             PDA_LocalMouse.state = mouse_default;
         }
     }
 
-    fixed alpha = (PDA_LocalButton[id].state == button_hovered) ? 1 : 0.6;
+    fixed alpha = (thisButton.state == button_hovered) ? 1 : 0.6;
 
-    int graphicy = (int)(PDA_LocalButton[id].y * newresy) + 14.0;
+    int graphicy = (int)(thisButton.y * newresy) + 14.0;
 
-    SetFont(PDA_LocalButton[id].graphic);
-    HudMessage(s:"A\n"; HUDMSG_ALPHA, PDA_MODIDRANGE - PDA_LocalButton[id].id, CR_UNTRANSLATED, (int)(PDA_LocalButton[id].x * newresx) + 15.1, graphicy, 0, alpha);
+    SetFont(thisButton.graphic);
+    HudMessage(s:"A\n"; HUDMSG_ALPHA, PDA_MODIDRANGE - thisButton.id, CR_UNTRANSLATED, (int)(thisButton.x * newresx) + 15.1, graphicy, 0, alpha);
 
     SetFont("STAT_MNO");
 
-    return PDA_LocalButton[id];
+    return thisButton;
 }
 
 /**
@@ -516,33 +514,6 @@ function void PDA_InitButton (PDAButton button, int incat, int catpage, str mess
             break;
     }
 }
-/*#define PDA_InitButton (button, incat, catpage, message) { \
-    switch(button.state) { \
-        case button_clicked: \
-            if (!incat) { \
-                PDA_SetCategory(catpage); \
-                if(PDA_Local.category != PDA_ASSEMBLY_DETAIL) { \
-                    PDA_Local.page = 1; \
-                    PDA_LocalMouse.state = mouse_default; \
-                } \
-            } \
-            if (incat) { \
-                if(PDA_Local.category != 0 && PDA_Local.page >= 0) { \
-                    PDA_Local.page = catpage; \
-                    PDA_Local.scrollingy = 20.0; \
-                    PDA_LocalMouse.state = mouse_default; \
-                } \
-            } \
-            break; \
-        case button_hovered: \
-            if (strcmp(message, "") != 0) { \
-                SetFont("PDAFONT"); \
-                SetHudClipRect(DES_RECTX, DES_RECTY, DES_RECTWIDTH, DES_RECTHEIGHT, DES_RECTWIDTH); \
-                HudMessage(s:message; HUDMSG_PLAIN, PDA_CAT_DESCRIPTION, CR_UNTRANSLATED, DES_RECTX + 0.1, DES_RECTY + 0.1, 0); \
-            } \
-            break; \
-    } \
-} \*/
 
 function int CheckPointerInventory (str item, int pn) {
 	SetActivator(0, AAPTR_PLAYER1 << pn);
@@ -629,7 +600,7 @@ function void PDA_UnsetScrollArrows (void) {
 
 function void PDA_SetScrollWindow (int scrollDownMax) {
 	SetHudClipRect(PDA_RectX, PDA_ScrollableY, PDA_RectWidth, PDA_ScrollableHeight, PDA_RectWidth);
-	PDA_SetScrollArrows(scrollDownMax);
+	PDA_SetScrollArrows2(scrollDownMax, PDA_RectWidth + 0.1, PDA_RectHeight + 0.1);
 }
 
 function void PDA_UnsetScrollWindow (void) {
@@ -658,8 +629,23 @@ function void PDA_EstablishModLimits (void) {
     }
 }
 
-// Returns a fixed point value
-// Thanks, ZD wiki!
-function int ryansfloorisdirty (int fixedNumber) {
-	return fixedNumber & 0xFFFF0000;
+// kd: An "odd sensitivity cvar" is a mouse sensitivity cvar that became unavailable starting gzd
+// 4.5.0 when mouse sensitivity stuff got overhauled. One example is mouse_sensitivity being removed
+// and m_sensitivity_x and m_sensitivity_y being added instead.
+function fixed GetOddSensitivityCVarFixed (str cvar_name, fixed default_value) {
+    fixed cvar_value = GetCVarFixed(cvar_name);
+    
+    if(0 == cvar_value) {
+        return default_value;
+    }
+    
+    return cvar_value;
+}
+
+function int max (int x, int y) {
+    if(x < y) {
+        return y;
+    }
+    
+    return x;
 }

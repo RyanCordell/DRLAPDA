@@ -63,7 +63,7 @@ if (PDA_Local.page == EQUIPMENT_PAGE_ONHAND) {
     str armorWornCheck = "\n";
     bool boots = false;
     
-    bool specialArmorTokens = CheckInventory("RLEnclaveSetBonusActive") || CheckInventory("PowerRLPrototypeAssaultShieldProtection") || CheckInventory("PowerRLOverchargeSystemProtection") || CheckInventory("RLCyberneticArmorModdedToken");
+    bool specialArmorTokens = CheckInventory("RLEnclaveSetBonusActive") || CheckInventory("PowerRLPrototypeAssaultShieldProtection") || CheckInventory("PowerRLOverchargeSystemProtection") || CheckInventory("RLCyberneticArmorModdedToken") || CheckInventory("RLDeathFromAboveSetBonusActive") || CheckInventory("PowerRLInquisitorsSetBonusProtection");
     
     if (localHasArmor) {
         tooltip = "";

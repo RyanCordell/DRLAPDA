@@ -1,42 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./dist/main.css">
     <title>PDA JSON interpreter</title>
 </head>
 <body>
-<div class="main">
-    <h1 class="main__header">PDA JSON parser</h1>
-    <p class="main__instructions">Use the input below to select the PDA JSON file.</p>
+    <div class="main">
+        <h1 class="main__header">PDA JSON parser</h1>
+        <p class="main__instructions">Use the input below to select the PDA JSON files.</p>
 
-    <form id="file-field">
-        <div class="input-field">
-            <p>File: <span class="file__object"></span></p>
-            <input type="file" class="file__select" name="file[]" multiple />
+        <div class="left-side">
+            <form id="file-field">
+                <div class="input-field">
+                    <p>File: <span class="file__object"></span></p>
+                    <input type="file" class="file__select" name="file[]" accept="text/json" multiple/>
+                </div>
+                <div class="input-field">
+                    <button type="submit" class="btn file__process"><span>Process data</span></button>
+                </div>
+            </form>
+            <div class="output">
+                <p>Download section:</p>
+                <div class=output__field></div>
+            </div>
         </div>
-        <div class="input-field">
-            <button type="submit" class="file__process">Process data</button>
+        <div class="right-side">
+            <div class="debug-field"></div>
         </div>
-    </form>
-    <div class="output">
-        <p>Download section:</p>
-        <div class=output__field></div>
+        <div class="clear">
+        </div>
     </div>
-    <!-- <div class="input-field">
-        <p>Weapon language: <span class="language-weapon__object"></span></p>
-        <input type="file" class="language-weapon__select" name="weapon[]" />
-    </div>
-    <div class="input-field">
-        <p>Mod header: <span class="header-mod__object"></span></p>
-        <input type="file" class="header-mod__select" name="modheader[]" />
-    </div>
-    <div class="input-field">
-        <p>Mod language: <span class="language-mod__object"></span></p>
-        <input type="file" class="language-mod__select" name="mod[]" />
-    </div> -->
-</div>
+    <script type="text/javascript" src="./dist/main.js"></script>
 </body>
-<script type="text/javascript" src="./templates.js"></script>
-<script type="text/javascript" src="./freader.js"></script>
-<script type="text/javascript" src="./parser.js"></script>
 </html> 

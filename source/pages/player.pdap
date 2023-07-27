@@ -18,10 +18,14 @@ PDA_SetupBounds();
 // Concatenate things together depending on player class. Used to retrieve class specific info.
 if(GetActorclass(0) != "None")
 {
-    str PDA_Class_Name_Printer, PDA_Class_Ability_Printer, PDA_Class_Story_Printer, PDA_Class_Story_Height;
+    str PDA_Class_Name_Printer, PDA_Class_Ability_Printer, PDA_Class_Story_Printer, PDA_Class_Story_Height, PDA_Class_Icon;
     int PDA_Class_TrimValue = 0;
     
-    DisplayIcon(DRLA_ClassIcon[PlayerClass(PlayerNumber())], PDA_INFOID, PDA_RectWidth + 5.2, (PDA_ScrollableHeight) +5.1, 0, 0.45);
+    PDA_Class_Icon = StrParam("PDA_CLASS_%s:_ICON", StrTrim(GetActorClass(0),0,PDA_Class_TrimValue));
+
+    SetFont(StrParam("%l:", PDA_Class_Icon));
+    HudMessage(s:"A\n"; HUDMSG_ALPHA, PDA_INFOID, CR_UNTRANSLATED,  PDA_RectWidth + 5.2,  (PDA_ScrollableHeight) +5.1, 0, 0.45);
+	PDA_DefaultFont();
 
     if(CheckInventory("DRPGDRLAActive"))
         PDA_Class_TrimValue = 3;
@@ -45,8 +49,8 @@ if(GetActorclass(0) != "None")
     // Class backstory
     if(PDA_Local.page == 2)
     {
-        PDA_SetScrollLimit(-1 * batoi(strParam("%l:", PDA_Class_Story_Height)));
-        PDA_SetScrollArrows2(-1 * batoi(strParam("%l:", PDA_Class_Story_Height)), PDA_RectWidth + 60.0, PDA_ScrollableHeight + 90.0);
+        PDA_SetScrollLimit(-1 * batoi(StrParam("%l:", PDA_Class_Story_Height)));
+        PDA_SetScrollArrows2(-1 * batoi(StrParam("%l:", PDA_Class_Story_Height)), PDA_RectWidth + 60.0, PDA_ScrollableHeight + 90.0);
 
         HudMessage("\cd%l:\c-\n\n%l:",
                     PDA_Class_Name_Printer,

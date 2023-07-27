@@ -13,7 +13,7 @@
 #define PDA_HistoryMax 16
 
 #define PDA_MODMIN  0
-#define PDA_MODMAX  7
+#define PDA_MODMAX  8
 
 #define PDA_LocalUniqueModEffect PDA_PrintWhichUnique[PlayerNumber()]
 str PDA_PrintWhichUnique[MAX_PLAYERS][PDA_MODMAX];
@@ -113,7 +113,7 @@ struct PDAButton {
     
     str tooltip;
 }
-PDAButton PDA_Button[MAX_PLAYERS][256];
+PDAButton PDA_Button[MAX_PLAYERS][512];
 
 struct PDAWeapon {
     int id;
@@ -306,14 +306,8 @@ str DRLA_MenuOptions[PDA_MENUMAX][DRLA_MENUMAXELEMENTS] = {
 	{"MMSCICO", "Misc"}
 };
 
-// Amount of player classes available
-#define DRLA_CLASSMAX 5
-str DRLA_ClassIcon[DRLA_CLASSMAX] = {
-    // Marine, Scout, Technician, Renegade, Demolitionist
-	"PPDAMAR1", "PPDASCO1", "PPDATEC1", "PPDAREN1", "PPDADMO1"
-};
-
 // Is it worth making a separate header file for just these weapon definitions?
+// TODO: Unhardcode this
 #define DRLA_WEAPONPERKMAX 5
 str DRLA_WeaponPerkList[DRLA_WEAPONPERKMAX][3] = {
 	{"RLAmmochainPerk",    "Ammochain (Marine)",        "RLRapidfireTypeWeapon"     },
@@ -323,6 +317,7 @@ str DRLA_WeaponPerkList[DRLA_WEAPONPERKMAX][3] = {
 	{"RLFireangelPerk",    "Fireangel (Demolitionist)", "RLEfficientAmmoTypeWeapon" }
 };
 
+// TODO: Unhardcode this?
 #define DRLA_WEAPONSETMAX 2
 str DRLA_WeaponSetList[DRLA_WEAPONSETMAX][2] = {
 	{"RLNuclearWeaponSetBonusActive", "\cfFURIOUS FUSION\c-"  },
@@ -337,6 +332,7 @@ str DRLA_NuclearCheckList[DRLA_NUCLEARMAX] = {
 	"RLBurstCannonNuclearPlasmaRifle", "RLNuclearBiggestFuckingGun"
 };
 
+// TODO: Unhardcode this?
 #define DRLA_TRISTARMAX 3
 str DRLA_TristarCheckList[DRLA_TRISTARMAX] =
 {
@@ -354,8 +350,9 @@ str DRLA_BackpackList[DRLA_BACKPACKMAX][2] = {
 };
 
 /** Mod icons for the PDA */
-str icon_static_WeaponMods[PDA_MODMAX] = { "BMODICON", "PMODICON", "AMODICON", "TMODICON", "SMODICON", "FMODICON", "NMODICON" };
-str icon_animated_WeaponMods[PDA_MODMAX] = { "PDABMOD", "PDAPMOD", "PDAAMOD", "PDATMOD", "PDASMOD", "PDAFMOD", "PDANMOD" };
+// TODO: Unhardcode this. This is dumb, this shouldn't be hardcoded.
+str icon_static_WeaponMods[PDA_MODMAX - 1] = { "BMODICON", "PMODICON", "AMODICON", "TMODICON", "SMODICON", "FMODICON", "NMODICON" };
+str icon_animated_WeaponMods[PDA_MODMAX - 1] = { "PDABMOD", "PDAPMOD", "PDAAMOD", "PDATMOD", "PDASMOD", "PDAFMOD", "PDANMOD" };
 
 // FUNCTIONS --------------------
 

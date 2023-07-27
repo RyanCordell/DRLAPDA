@@ -51,8 +51,18 @@ SCRIPT "PDA_MouseController" (void)
         PDA_LocalMouse.m1 = (buttons[PlayerNumber()] & BT_ATTACK)    ? true : false;
         PDA_LocalMouse.m2 = (buttons[PlayerNumber()] & BT_ALTATTACK) ? true : false;
         
-        xscale = 2.5 / (GetCVarFixed("m_yaw")   * GetCVarFixed("mouse_sensitivity"));
-        yscale = 5.0 / (GetCVarFixed("m_pitch") * GetCVarFixed("mouse_sensitivity"));
+//        xscale = 2.5 / (GetCVarFixed("m_yaw")   * GetCVarFixed("mouse_sensitivity"));
+//        yscale = 5.0 / (GetCVarFixed("m_pitch") * GetCVarFixed("mouse_sensitivity"));
+
+        // kd: I AM REINFORCEMENTS FROM A DIFFERENT DIMENSION
+        fixed mouse_sensitivity    = GetOddSensitivityCVarFixed("mouse_sensitivity", 1.0);
+        fixed x_sensitivity        = GetOddSensitivityCVarFixed("m_sensitivity_x", 2.5);
+        fixed y_sensitivity        = GetOddSensitivityCVarFixed("m_sensitivity_y", 5.0);
+        fixed total_sensitivity    = max(x_sensitivity, y_sensitivity) * mouse_sensitivity;
+        
+        xscale = GetCVarFixed("m_yaw")   * total_sensitivity;
+        yscale = GetCVarFixed("m_pitch") * total_sensitivity;
+        // kd: aight now back to Ryan coding
         
         PDA_LocalMouse.x -= (GetPlayerInputFixed(-1, INPUT_YAW) << xsensitivity) * xscale;
         

@@ -144,7 +144,7 @@ SCRIPT "PDA_Display" (void) net {
         if (!localHasArmor && !localHasBoots && !localHasBackpack) localOneEquipFirst = false;
     }
 
-    if(!PDA_Local.active) {
+    if (!PDA_Local.active) {
         PDA_UnsetScrollArrows();
 
         SetPlayerProperty(0,1,PROP_TOTALLYFROZEN);
@@ -164,8 +164,7 @@ SCRIPT "PDA_Display" (void) net {
         ACS_NamedExecuteAlways("PDA_Core",0);
 
         PDA_Local.active = true;
-    }
-    else {
+    } else {
         PDA_NOPONG();
         PDA_Wipe();
         ACS_NamedExecuteAlways("QuitPong",0);
@@ -197,7 +196,7 @@ SCRIPT "PDA_YOUAREDEADnotbigsurprise" DEATH {
         TakeInventory("RLSynthFireDisabled",1);
         FadeTo(0, 0, 0, 0.0, 0.0);
         
-        if(PDA_Local.category == PDA_CREDITS) SetMusic("*");
+        if (PDA_Local.category == PDA_CREDITS) SetMusic("*");
       
         PDA_PlaySound("UI/PDA/Offline", "pda/soldierclose", 80);
       
@@ -208,7 +207,7 @@ SCRIPT "PDA_YOUAREDEADnotbigsurprise" DEATH {
 
 /** Attempt to eliminate problems that result from dying w/ PDA*/
 SCRIPT "PDA_Respawn" RESPAWN {
-    if(PDA_Local.active) {
+    if (PDA_Local.active) {
         PDA_NOPONG();
         PDA_Wipe();
         ACS_NamedExecuteAlways("QuitPong",0);
@@ -231,7 +230,7 @@ SCRIPT "PDA_Respawn" RESPAWN {
 SCRIPT "PDA_Core" (void) {  
     PDA_Local.scrollingy = 20.0;
     
-    while(PDA_Local.active) {
+    while (PDA_Local.active) {
         SetHudSize(320,200,0);
         SetHudClipRect(PDA_RectX, PDA_RectY, PDA_RectWidth, PDA_RectHeight, PDA_RectWidth);
 
@@ -251,7 +250,7 @@ SCRIPT "PDA_Core" (void) {
             }
         }
         
-        switch(PDA_Local.category) {
+        switch (PDA_Local.category) {
             case PDA_MENU:
                 #include "../../pages/menu.pdap"
                 break;
@@ -296,8 +295,8 @@ SCRIPT "PDA_Core" (void) {
         
         PDA_DefaultFont();
 
-        for(int t = 0; t < DRLA_DIFFICULTYTIERS; t++) {
-            for(int m = 0; m < DRLA_MONSTER_PAGE_MAX; m++)
+        for (int t = 0; t < DRLA_DIFFICULTYTIERS; t++) {
+            for (int m = 0; m < DRLA_MONSTER_PAGE_MAX; m++)
             {
                 oldCheck[t][m] = monsterCheck[t][m];
             }

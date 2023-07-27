@@ -1,0 +1,34 @@
+
+#file-field {
+    max-width: 640px;
+}
+
+.input-field {
+    border: 1px solid #525252;
+    padding: 20px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+}
+
+
+.left-side,
+.right-side {
+    width: calc(50% - 20px);
+    float: left;
+    min-height: 400px;
+    display: block;
+    padding: 0 10px;
+}
+
+.debug-field {
+    border: 1px solid #525252;
+    background: #000;
+    color: #fff;
+    padding: 20px;
+    border-radius: 4px;
+    background: #141414;
+    max-width: calc(100% - 40px);
+    width: 100%;
+    height: 70vh;
+    overflow-y: scroll;
+}

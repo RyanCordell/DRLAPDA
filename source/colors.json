@@ -16,6 +16,7 @@
         "LIGHTBLUE": "n",
         "CREAM": "o",
         "OLIVE": "p",
+        "DARKBLUE": "h",
         "DARKGREEN": "q",
         "DARKRED": "r",
         "DARKBROWN": "s",
@@ -26,6 +27,7 @@
         "FIRE": "x",
         "SAPPHIRE": "y",
         "TEAL": "z",
+        "PINK": "a",
 
         "BASIC": "[BB]",
         "ADVANCED": "[AB]",

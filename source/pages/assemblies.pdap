@@ -5,8 +5,7 @@ PDA_Wipe();
 
 int scrollOffset;
 
-switch(PDA_Local.page)
-{
+switch (PDA_Local.page) {
     case 1:
         PDA_PrintHeader("PDA_ASSEMBLY_BASIC_NAME", -30);
         scrollOffset = PDA_Local.maxassembliesper * -5;
