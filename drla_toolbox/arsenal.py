@@ -7,6 +7,10 @@ from tkinter import filedialog as fd
 from tkinter.messagebox import showinfo
 from datetime import datetime
 
+# TODO: Examine memory footprint of all loaded JSON modules (currently around 555KB worth of JSON)
+# TODO: Optimize loading
+# TODO: Perhaps there's a better way to parse and compile all this data instead of smashing it all in memory?
+
 class Arsenal:
   outputData = ''
   language_warning = '[enu default]\n\n// Please do not modify this file directly, it\'s specifically compiled and any changes may be lost.\n\n'

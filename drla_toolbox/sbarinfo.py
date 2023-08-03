@@ -2,6 +2,8 @@ import os.path
 from tkinter import filedialog as fd
 from datetime import datetime
 
+#TODO: Introduce 'variables'
+
 class Sbarinfo:
   def sbarinfo_directive_MERGE(self, index: any, line: any):
     if self.inputFile != '': 
