@@ -27,5 +27,57 @@
 
         "HAS_AUTO_REPAIR": "[DARKGREEN]Repairs itself overtime[END]",
         "NO_AUTO_REPAIR": "[ORANGE]Does not repair itself[END]"
+    },
+    "colors": {
+        "BRICK": "a",
+        "TAN": "b",
+        "GRAY": "c",
+        "GREEN": "d",
+        "BROWN": "e",
+        "GOLD": "f",
+        "RED": "g",
+        "BLUE": "h",
+        "ORANGE": "i",
+        "WHITE": "j",
+        "YELLOW": "k",
+        "INHERIT": "l",
+        "BLACK": "m",
+        "LIGHTBLUE": "n",
+        "CREAM": "o",
+        "OLIVE": "p",
+        "DARKBLUE": "h",
+        "DARKGREEN": "q",
+        "DARKRED": "r",
+        "DARKBROWN": "s",
+        "PURPLE": "t",
+        "DARKGRAY": "u",
+        "CYAN": "v",
+        "ICE": "w",
+        "FIRE": "x",
+        "SAPPHIRE": "y",
+        "TEAL": "z",
+        "PINK": "a",
+
+        "BASIC": "[BB]",
+        "ADVANCED": "[AB]",
+        "MASTER": "[MB]",
+
+        "NORMAL": "[WN]",
+        "EXOTIC": "[WE]",
+        "SUPERIOR": "[WS]",
+        "DEMONIC": "[WD]",
+        "UNIQUE": "[WU]",
+        "LEGENDARY": "[WL]",
+
+        "BULK": "[BM]",
+        "POWER": "[PM]",
+        "AGILITY": "[AM]",
+        "TECHNICAL": "[TM]",
+        "SNIPER": "[SM]",
+        "FIRESTORM": "[FM]",
+        "NANO": "[NM]",
+        "ONYX": "[OM]",
+
+        "END": "-"
     }
 }

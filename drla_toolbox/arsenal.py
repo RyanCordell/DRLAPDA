@@ -16,25 +16,8 @@ class Arsenal:
   language_warning = '[enu default]\n\n// Please do not modify this file directly, it\'s specifically compiled and any changes may be lost.\n\n'
 
   def arsenal_doInput(self):
-    self.inputFile = fd.askopenfilename(
-      title='Open a file',
-      initialdir=self.currentPath,
-      filetypes=(
-        ('JSON files', '*.json'),
-        ('All files', '*.*')
-      ),
-      defaultextension='.json'
-    )
-
-    self.clearResults()
-    if (self.inputFile):
-      self.printLine('[%s] File selected: %s\n' % (datetime.now().strftime("%H:%M:%S"), os.path.normpath(self.inputFile)))
-    else:
-      self.printLine('[%s] No JSON selected\n' % datetime.now().strftime("%H:%M:%S"))
-
-  def arsenal_doFillerInputs(self):
     self.inputFiles = fd.askopenfilenames(
-      title='Open a file',
+      title='Open files',
       initialdir=self.currentPath,
       filetypes=(
         ('JSON files', '*.json'),
@@ -45,31 +28,37 @@ class Arsenal:
 
     self.clearResults()
     if (self.inputFiles):
-      self.filler = {}
       self.printLine('[%s] Files selected: %s\n' % (datetime.now().strftime("%H:%M:%S"), list(self.inputFiles)))
-      for i, filler in enumerate(self.inputFiles):
-        with open(os.path.normpath(filler), mode='r', encoding='utf-8') as freshdata:
-          self.filler[i] = json.load(freshdata)
+      # self.printLine('[%s] File selected: %s\n' % (datetime.now().strftime("%H:%M:%S"), os.path.normpath(self.inputFile)))
+      self.filler = {}
+      for _, file in enumerate(self.inputFiles):
+        self.printLine('[%s] Loaded JSON into filler memory: %s\n' % (datetime.now().strftime("%H:%M:%S"), file))
+
+        if ('data.json' in file):
+          with open(os.path.normpath(file), mode='r', encoding='utf-8') as freshdata:
+            self.filler = json.load(freshdata)
     else:
-      self.printLine('[%s] No JSON selected\n' % datetime.now().strftime("%H:%M:%S"))
+      self.printLine('[%s] No JSON files selected\n' % datetime.now().strftime("%H:%M:%S"))
 
   def arsenal_doCompile(self):
-    loadFilePath = os.path.normpath(self.inputFile)
-    if self.inputFile:
-      with open(loadFilePath, mode='r', encoding='utf-8') as jsonBuffer:
-        self.data = json.load(jsonBuffer)
-        # self.printLine('[%s] %s\n' % (datetime.now().strftime("%H:%M:%S"), self.data))
-        # self.data = jsonBuffer.readlines()
+    for _, file in enumerate(self.inputFiles):
+      loadFilePath = os.path.normpath(file)
+      if file:
+        with open(loadFilePath, mode='r', encoding='utf-8') as jsonBuffer:
+          self.data = json.load(jsonBuffer)
+          # self.printLine('[%s] %s\n' % (datetime.now().strftime("%H:%M:%S"), self.data))
+          # self.data = jsonBuffer.readlines()
 
-        if ('weapons' in self.data): Arsenal.arsenal_processWeapons(self, self.data['weapons'])
-        if ('equipment' in self.data): Arsenal.arsenal_processEquipment(self, self.data['equipment'])
-        if ('modeffect' in self.data): Arsenal.arsenal_processModEffect(self, self.data['modeffect'])
-        if ('assemblies' in self.data): Arsenal.arsenal_processAssemblies(self, self.data['assemblies'])
+          if ('weapons' in self.data): Arsenal.arsenal_processWeapons(self, self.data['weapons'])
+          if ('equipment' in self.data): Arsenal.arsenal_processEquipment(self, self.data['equipment'])
+          if ('modeffect' in self.data): Arsenal.arsenal_processModEffect(self, self.data['modeffect'])
+          if ('assemblies' in self.data): Arsenal.arsenal_processAssemblies(self, self.data['assemblies'])
 
-        # for index, line in enumerate(self.data):
-          # self.printLine('[%s] %s\n' % (datetime.now().strftime("%H:%M:%S"), line))
-    else:
-      self.printLine('[%s] No file defined\n' % datetime.now().strftime("%H:%M:%S"))
+          self.printLine('[%s] Done compiling. Have fun!\n' % (datetime.now().strftime("%H:%M:%S")))
+          # for index, line in enumerate(self.data):
+            # self.printLine('[%s] %s\n' % (datetime.now().strftime("%H:%M:%S"), line))
+      else:
+        self.printLine('[%s] No input files found in memory\n' % datetime.now().strftime("%H:%M:%S"))
 
   def arsenal_doOutput(self, name):
     self.outputData = fd.asksaveasfile(
@@ -95,7 +84,7 @@ class Arsenal:
     noColors = 1
     
     for i in dict:
-      if ('colors' in dict[i]):
+      if ('colors' in i):
         noColors = 0
 
     if (noColors): 
@@ -103,8 +92,8 @@ class Arsenal:
       return 'false'
 
     for i in dict:
-      if ('colors' in dict[i]):
-        colors = dict[i]['colors'].items()
+      if ('colors' in i):
+        colors = dict[i].items()
         for colorKey, colorValue in colors:
           str = str.replace('['+colorKey+']', '\c'+colorValue)
 
@@ -171,10 +160,7 @@ class Arsenal:
 
     self.printLine('[%s] Created modeffects array list as modeffects.idb\n' % datetime.now().strftime("%H:%M:%S"))
 
-    if (not self.filler):
-      Arsenal.arsenal_doFillerInputs() # TODO: Not gonna work out the way you think it will, Ryan.
-    else:
-      weaponLanguage = Arsenal.arsenal_revertColors(self, self.filler, weaponLanguage)
+    weaponLanguage = Arsenal.arsenal_revertColors(self, self.filler, weaponLanguage)
 
     weaponLanguage = weaponLanguage.replace('[INNERQUOTE]', '\\"')
     weaponLanguage = re.sub('/(\n)/g', '\\n', weaponLanguage)
@@ -221,8 +207,8 @@ class Arsenal:
     self.printLine('[%s] Created ACS array list for EQUIPMENT as equipment.idb\n' % datetime.now().strftime("%H:%M:%S"))
 
     for i in self.filler:
-      if ('attributes' in self.filler[i]):
-        attributes = self.filler[i]['attributes'].items()
+      if ('attributes' in i):
+        attributes = self.filler[i].items()
         for attributeKey, attributeValue in attributes:
           languageArmorList = languageArmorList.replace('['+attributeKey+']', '\c'+attributeValue)
 
@@ -241,10 +227,10 @@ class Arsenal:
     self.printLine('[%s] Done with processing equipment. Generated language.auto.equipment\n' % datetime.now().strftime("%H:%M:%S"))
 
         
-  def arsenal_processMods(self, mods):
+  def arsenal_processModEffect(self, mods):
     if (not mods): return 0
 
-    modEffectList = '';
+    modEffectList = ''
     for mod in mods:
       modEffectList += f'''{mod['name']} = "{mod['effect']}";'''
 
@@ -264,9 +250,9 @@ class Arsenal:
   def arsenal_processAssemblies(self, assemblies):
     if (not assemblies): return 0
 
-    headerAssemblyList = '';
-    headerAssemblyMax = 0;
-    headerUniqueMax = 0;
+    headerAssemblyList = ''
+    headerAssemblyMax = 0
+    headerUniqueMax = 0
     headerExoticList = ''
     languageAssemblyList = ''
     basicMax = 0
@@ -274,7 +260,7 @@ class Arsenal:
     masterMax = 0
 
     for assembly in assemblies:
-      headerAssemblyList += '{';
+      headerAssemblyList += '{'
       headerAssemblyList += f'''"RL{assembly['name']}AssemblyLearntToken", "PDA_ASSEMBLY_{assembly['tier'].upper()}_{assembly['name'].upper()}"'''
       headerAssemblyList += '},'
       headerAssemblyMax+=1
@@ -297,8 +283,8 @@ class Arsenal:
         file.write(languageAssemblyOutput)
 
     for i in self.filler:
-      if ('weapons' in self.filler[i]):
-        for weapon in self.filler[i]['weapons']:
+      if ('weapons' in i):
+        for weapon in self.filler[i]:
           if (weapon['tier'] == 'Unique' or weapon['tier'] == 'Demonic' or weapon['tier'] == 'Legendary'):
             if ('unmoddable' in weapon):
               headerExoticList += '{'
@@ -462,8 +448,8 @@ class Arsenal:
       atts += f'''" {attr}\\n"''';
 
     for f in self.filler:
-      if ('colors' in self.filler[f]):
-        colors = self.filler[f]['colors'].items()
+      if ('colors' in f):
+        colors = self.filler[f].items()
         for colorKey, colorValue in colors:
           if (colorKey.upper() == equipment['tier'].upper()):
             coloredequipment = f'''\\c{colorValue}{equipment['prettyname']}\\c-'''
@@ -523,15 +509,15 @@ class Arsenal:
 
     for mod in assembly['mods']:
       for f in self.filler:
-        if ('colors' in self.filler[f]):
-          colors = self.filler[f]['colors'].items()
+        if ('colors' in f):
+          colors = self.filler[f].items()
           for colorKey, colorValue in colors:
             if (colorKey.upper() == mod):
               mods += f'''\\c{colorValue}{mod[0]}\\c-''';
 
     for f in self.filler:
-      if ('colors' in self.filler[f]):
-        colors = self.filler[f]['colors'].items()
+      if ('colors' in f):
+        colors = self.filler[f].items()
         for colorKey, colorValue in colors:
           if (colorKey.upper() == assembly['tier'].upper()):
             coloredname = f'''\\c{colorValue}{assembly['prettyname']}\\c-''';
