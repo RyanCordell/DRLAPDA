@@ -235,7 +235,7 @@ class Arsenal:
       if ('attributes' in i):
         attributes = self.filler[i].items()
         for attributeKey, attributeValue in attributes:
-          languageArmorList = languageArmorList.replace('['+attributeKey+']', '\c'+attributeValue)
+          languageArmorList = languageArmorList.replace(attributeKey, attributeValue)
 
     self.printLine('[%s] Keywords translated into attributes\n' % datetime.now().strftime("%H:%M:%S"))
 

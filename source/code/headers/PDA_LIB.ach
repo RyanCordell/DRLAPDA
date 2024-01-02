@@ -21,6 +21,15 @@ str PDA_PrintWhichUnique[MAX_PLAYERS][PDA_MODMAX];
 #define PDA_LocalWeaponModEffect PDA_PrintWhichBasic[PlayerNumber()]
 str PDA_PrintWhichBasic[MAX_PLAYERS][PDA_MODMAX];
 
+// #define BASICMODMAX 4
+// #define UNIMODMAX 3
+
+// #define PDA_LocalWeaponModEffect PDA_PrintWhichBasic[PlayerNumber()]
+// str PDA_PrintWhichBasic[MAX_PLAYERS][BASICMODMAX];
+
+// #define PDA_LocalUniqueModEffect PDA_PrintWhichUnique[PlayerNumber()]
+// str PDA_PrintWhichUnique[MAX_PLAYERS][UNIMODMAX];
+
 bool debug = false;
 bool buttonInteracted = false;
 bool inverted = false;
@@ -204,44 +213,44 @@ enum PDA_IDs {
     PDA_HELP_BUTTON,
     PDA_CAT_DESCRIPTION = 94,
     
-	PDA_BOTTOMID,
-	PDA_PEGGLESOSID,
-	PDA_PAGENUMID,
-    
-	// Assembly iterator ID range
-	PDA_ASSEMBLYIDRANGE = PDA_PAGENUMID + 80,
+    PDA_BOTTOMID,
+    PDA_PEGGLESOSID,
+    PDA_PAGENUMID,
+      
+    // Assembly iterator ID range
+    PDA_ASSEMBLYIDRANGE = PDA_PAGENUMID + 80,
     PDA_WORNARMORS = PDA_ASSEMBLYIDRANGE + 4,
     PDA_STASHEDARMORS = PDA_WORNARMORS + 8,
     PDA_NOEQID = PDA_STASHEDARMORS + 3,
-	// Modpack ID range (INFOID - 7)
-	PDA_MODIDRANGE,
-	// Message IDs
-	PDA_INFO4ID,
-	PDA_INFO3ID,
-	PDA_INFO2ID,
-	PDA_INFOID,
-	// Header
-	PDA_INFOTOPID,
-	// Scrolling arrows
-	PDA_SCROLLDNID,
-	PDA_SCROLLUPID,
-	// Cursor
+    // Modpack ID range (INFOID - 7)
+    PDA_MODIDRANGE,
+    // Message IDs
+    PDA_INFO4ID,
+    PDA_INFO3ID,
+    PDA_INFO2ID,
+    PDA_INFOID,
+    // Header
+    PDA_INFOTOPID,
+    // Scrolling arrows
+    PDA_SCROLLDNID,
+    PDA_SCROLLUPID,
+    // Cursor
     PDA_LASTID,
-    
-	PDA_PONG_LEFTPADDLE,
-	PDA_PONG_RIGHTPADDLE,
-	PDA_PONG_BALL,
+      
+    PDA_PONG_LEFTPADDLE,
+    PDA_PONG_RIGHTPADDLE,
+    PDA_PONG_BALL,
     PDA_PONG_TOPBORD,
     PDA_PONG_BOTBORD,
-	PDA_PONG_PLAYERSCORE,
-	PDA_PONG_AISCORE,
-	// PDA display
-	PDA_ID,
+    PDA_PONG_PLAYERSCORE,
+    PDA_PONG_AISCORE,
+    // PDA display
+    PDA_ID,
     PDA_REALLYLASTID,
 
-	// Shared IDs go down here
-	PDA_ARMORINVIDRANGE = PDA_MODIDRANGE,
-	PDA_ARMORWORNIDRANGE = PDA_ASSEMBLYIDRANGE,
+    // Shared IDs go down here
+    PDA_ARMORINVIDRANGE = PDA_MODIDRANGE,
+    PDA_ARMORWORNIDRANGE = PDA_ASSEMBLYIDRANGE,
     PDA_MODPACKSELECTID = PDA_PAGENUMID + 1,
     PDA_MODPACKANIMID = PDA_INFO4ID,
     PDA_TOOLTIPID = PDA_CAT_DESCRIPTION,
