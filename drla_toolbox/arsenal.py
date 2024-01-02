@@ -105,10 +105,12 @@ class Arsenal:
     advancedModMax = 0
     masterModMax = 0
     weaponDescription = ''
+    weaponSDescription = ''
     weaponModList = {}
 
     for weapon in weapons:
       weaponDescription = ''
+      weaponSDescription = ''
       if ('mods' in weapon):
         weaponModEffects += '{'
         weaponModEffects += f'"RL{weapon["name"]}", "{weapon["mods"]["bulk"]}", "{weapon["mods"]["power"]}", "{weapon["mods"]["agility"]}", "{weapon["mods"]["technical"]}", "{weapon["mods"]["sniper"]}", "{weapon["mods"]["firestorm"]}", "{weapon["mods"]["nano"]}"'
@@ -140,6 +142,16 @@ class Arsenal:
           else:
             weaponDescription += f'"{descFragment}"'
         weapon['actualDescription'] = weaponDescription
+      
+      if ('specialdesc' in weapon):
+        descLen = len(weapon['specialdesc'])
+        for i, descFragment in enumerate(weapon['specialdesc']):
+          descFragment = descFragment.replace('\n', '/n')
+          if i < descLen - 1:
+            weaponSDescription += f'"{descFragment}"\n'
+          else:
+            weaponSDescription += f'"{descFragment}"'
+        weapon['actualSpecialDesc'] = weaponSDescription
 
       weaponLanguage += Arsenal.LANGUAGE_WEAPONS(self, weapon)
       weaponLanguage += '\n'
@@ -459,7 +471,7 @@ str DRLA_UniqueExoticModEffects[DRLA_EXOTICEFFECTS_MAX][DRLA_EXOTICELEMENTS] = {
     if ('specialpretty' in weapon): 
       fragment += f'''PDA_WEAPON_{bigname}DEMONARTIFACTS_NAME = "{weapon['specialpretty']}";\n'''
     if ('specialdesc' in weapon): 
-      fragment += f'''PDA_WEAPON_{bigname}DEMONARTIFACTS_DESC = "{weapon['specialdesc']}";\n'''
+      fragment += f'''PDA_WEAPON_{bigname}DEMONARTIFACTS_DESC = {weapon['actualSpecialDesc']};\n'''
 
     return fragment
 
