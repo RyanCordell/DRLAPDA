@@ -23,9 +23,15 @@ if(GetActorclass(0) != "None")
     
     PDA_Class_Icon = StrParam("PDA_CLASS_%s:_ICON", StrTrim(GetActorClass(0),0,PDA_Class_TrimValue));
 
-    SetFont(StrParam("%l:", PDA_Class_Icon));
+    str classIcon = StrParam("%l:", PDA_Class_Icon);
+
+    if(stricmp(classIcon, "PDA_", 4) == 0) 
+      classIcon = "PPDAUNK";
+      
+    SetFont(classIcon);
     HudMessage(s:"A\n"; HUDMSG_ALPHA, PDA_INFOID, CR_UNTRANSLATED,  PDA_RectWidth + 5.2,  (PDA_ScrollableHeight) +5.1, 0, 0.45);
-	PDA_DefaultFont();
+    
+    PDA_DefaultFont();
 
     if(CheckInventory("DRPGDRLAActive"))
         PDA_Class_TrimValue = 3;

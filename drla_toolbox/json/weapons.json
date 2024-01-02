@@ -1558,7 +1558,9 @@
             "tier": "Demonic",
             "prettyname": "[DEMONIC]Unmaker[END]",
             "capacity": "FOUR_MOD_CAPACITY",
-            "description": "What the !@#%* is this!?",
+            "description": [
+              "What the !@#%* is this!?"
+            ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMAKER",
                 "power": "PDA_MODS_POWERMOD_UNMAKER",

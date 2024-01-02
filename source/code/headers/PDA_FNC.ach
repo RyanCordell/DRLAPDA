@@ -611,22 +611,22 @@ function void PDA_UnsetScrollWindow (void) {
 function void PDA_EstablishModLimits (void) {
 	if (CheckInventory("RLStandardWeaponToken") || CheckInventory("RLExoticWeaponToken")) {
 		PDA_Local.maxmodlimit = 4;
-    }
+  }
 
 	if (CheckInventory("RLSuperiorWeaponToken") || CheckInventory("RLBasicAssemblyTypeWeapon")) {
 		PDA_Local.maxmodlimit = 2;
-    }
+  }
 
 	if (CheckInventory("RLUniqueWeaponToken") || CheckInventory("RLDemonicWeaponToken") || CheckInventory("RLLegendaryWeaponToken") || CheckInventory("RLAdvancedAssemblyTypeWeapon")) {
 		if (StrCmp(GetWeapon(),"RLDuke2Rifle") == 0 || StrCmp(GetWeapon(),"RLChameleonRifle") == 0 || StrCmp(GetWeapon(),"RLWidowmakerSMG") == 0)
 			PDA_Local.maxmodlimit = 3;
 		else
 			PDA_Local.maxmodlimit = 1;
-    }
+  }
 
 	if (CheckInventory("RLMasterAssemblyTypeWeapon") || CheckInventory("RLSuperiorAssembledWeaponToken")) {
 		PDA_Local.maxmodlimit = 0;
-    }
+  }
 }
 
 // kd: An "odd sensitivity cvar" is a mouse sensitivity cvar that became unavailable starting gzd
@@ -635,14 +635,14 @@ function void PDA_EstablishModLimits (void) {
 function fixed GetOddSensitivityCVarFixed (str cvar_name, fixed default_value) {
     fixed cvar_value = GetCVarFixed(cvar_name);
     
-    if(0 == cvar_value) {
+    if(cvar_value == 0) {
         return default_value;
     }
     
     return cvar_value;
 }
 
-function int max (int x, int y) {
+function fixed max (fixed x, fixed y) {
     if(x < y) {
         return y;
     }

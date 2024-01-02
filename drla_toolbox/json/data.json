@@ -28,7 +28,7 @@
         "HAS_AUTO_REPAIR": "[DARKGREEN]Repairs itself overtime[END]",
         "NO_AUTO_REPAIR": "[ORANGE]Does not repair itself[END]"
     },
-    "colors": {
+"colors": {
         "BRICK": "a",
         "TAN": "b",
         "GRAY": "c",
@@ -79,5 +79,5 @@
         "ONYX": "[OM]",
 
         "END": "-"
-    }
+    }	
 }

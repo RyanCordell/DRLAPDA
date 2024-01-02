@@ -16,7 +16,7 @@ SCRIPT "PDA_MouseController" (void)
         
     str graphic[MAX_PLAYERS] = {"","","","","","","",""};
     
-    fixed xscale, yscale;
+    fixed xScale, yScale;
     fixed mx = (mHUDX/2),
           my = (mHUDY/2);
           
@@ -33,7 +33,7 @@ SCRIPT "PDA_MouseController" (void)
     const int VMAX = PDA_RectHeight + PDA_RectY - 26;
     
     int xSensitivity = GetCvar("DRLA_PDA_sensitivity_x"),
-        ySensitivity = GetCvar("DRLA_PDA_sensitivity_y");
+          ySensitivity = GetCvar("DRLA_PDA_sensitivity_y");
     
     int vBuffer = 0;
     int myoff;
@@ -51,25 +51,28 @@ SCRIPT "PDA_MouseController" (void)
         PDA_LocalMouse.m1 = (buttons[PlayerNumber()] & BT_ATTACK)    ? true : false;
         PDA_LocalMouse.m2 = (buttons[PlayerNumber()] & BT_ALTATTACK) ? true : false;
         
-//        xscale = 2.5 / (GetCVarFixed("m_yaw")   * GetCVarFixed("mouse_sensitivity"));
-//        yscale = 5.0 / (GetCVarFixed("m_pitch") * GetCVarFixed("mouse_sensitivity"));
+//        xScale = 2.5 / (GetCVarFixed("m_yaw")   * GetCVarFixed("mouse_sensitivity"));
+//        yScale = 5.0 / (GetCVarFixed("m_pitch") * GetCVarFixed("mouse_sensitivity"));
 
         // kd: I AM REINFORCEMENTS FROM A DIFFERENT DIMENSION
         fixed mouse_sensitivity    = GetOddSensitivityCVarFixed("mouse_sensitivity", 1.0);
         fixed x_sensitivity        = GetOddSensitivityCVarFixed("m_sensitivity_x", 2.5);
         fixed y_sensitivity        = GetOddSensitivityCVarFixed("m_sensitivity_y", 5.0);
         fixed total_sensitivity    = max(x_sensitivity, y_sensitivity) * mouse_sensitivity;
+        // log("max: %f: ", max(x_sensitivity, y_sensitivity));
+        // log("mouse_sensitivity: %f: | x_sensitivity: %f: | y_sensitivity: %f: | total_sensitivity: %f: ", mouse_sensitivity, x_sensitivity, y_sensitivity, total_sensitivity);
         
-        xscale = GetCVarFixed("m_yaw")   * total_sensitivity;
-        yscale = GetCVarFixed("m_pitch") * total_sensitivity;
+        xScale = GetCVarFixed("m_yaw")   * total_sensitivity;
+        yScale = GetCVarFixed("m_pitch") * total_sensitivity;
         // kd: aight now back to Ryan coding
         
-        PDA_LocalMouse.x -= (GetPlayerInputFixed(-1, INPUT_YAW) << xsensitivity) * xscale;
+        PDA_LocalMouse.x -= (GetPlayerInputFixed(-1, INPUT_YAW) << xSensitivity) * xScale;
+        // log("INPUT_PITCH: %f: | xsense: %f: | xScale: %f: | LMX: %f: ", GetPlayerInputFixed(-1, INPUT_YAW), xSensitivity, xScale, PDA_LocalMouse.x);
         
         if(inverted)
-            PDA_LocalMouse.y += (GetPlayerInputFixed(-1, INPUT_PITCH) << ysensitivity) * yscale;
+            PDA_LocalMouse.y += (GetPlayerInputFixed(-1, INPUT_PITCH) << ysensitivity) * yScale;
         else
-            PDA_LocalMouse.y -= (GetPlayerInputFixed(-1, INPUT_PITCH) << ysensitivity) * yscale;
+            PDA_LocalMouse.y -= (GetPlayerInputFixed(-1, INPUT_PITCH) << ysensitivity) * yScale;
         
         if(PDA_LocalMouse.x < HMIN) PDA_LocalMouse.x = HMIN;
         if(PDA_LocalMouse.y < VMIN) PDA_LocalMouse.y = VMIN;

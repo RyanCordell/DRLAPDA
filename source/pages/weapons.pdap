@@ -109,6 +109,7 @@ if (stricmp(CheckInventory(GetWeapon()), "None") != 0) {
                 PDA_IsNotDemonic = false;
             }
         }
+        /*
         HudMessage("%l:\n[\c[LightBlue]%i:B \c[Red]%i:P \c[Green]%i:A \c[Yellow]%i:T \c[Purple]%i:S \c[Orange]%i:F \c[White]%i:N \cr%i:D\c-]"
                    "\n\n"
                    "%l:\c[Cyan]%i:",
@@ -119,7 +120,7 @@ if (stricmp(CheckInventory(GetWeapon()), "None") != 0) {
                    "PDA_MODPACK_MAXSUPPORTED",
                    PDA_Local.maxmodlimit;
                    HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, PDA_RectX + 10.1, (int)(PDA_Local.scrollingy * newresy) + 20.1 + (20.0 * 1), 0);
-
+*/
         str DRLA_SniperLearned = "\n", DRLA_FirestormLearned = "\n", DRLA_NanoLearned = "\n";
 
         // I am so sorry.
@@ -146,6 +147,16 @@ if (stricmp(CheckInventory(GetWeapon()), "None") != 0) {
                 PDA_LocalUniqueModEffect[mi_nano] = (PDA_CheckPlayer1Inventory(strParam("%s:NanoLearntToken", GetWeapon())) || CheckInventory(strParam("%s:NanoLearntToken", GetWeapon())))
                                        ? DRLA_WeaponModList[weaponIndex][mi_nano] : (isUnmaker) ? "PDA_MODS_NANOMOD_UNMAKER" : "PDA_MODS_NANOMOD_UNKNOWN";
 
+
+                HudMessage("index: %i: \n| %l: | %l: | %l: | %l: | %l: | %l: | %l: ", localmodPackIndex, 
+                  PDA_LocalWeaponModEffect[1],
+                  PDA_LocalWeaponModEffect[2],
+                  PDA_LocalWeaponModEffect[3],
+                  PDA_LocalWeaponModEffect[4],
+                  PDA_LocalUniqueModEffect[mi_sniper], PDA_LocalUniqueModEffect[mi_firestorm], PDA_LocalUniqueModEffect[mi_nano]; 
+                  HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, PDA_RectX + 10.1, 80.1, 0);
+
+                /*
                 for (int modPack = 0; modPack < PDA_MODMAX - 1; modPack++) {
                     button[modPack] = PDA_CreateModPackDisplay(modPack, icon_static_WeaponMods[modPack], PDA_LocalWeaponModEffect[modPack + 1], PDA_RectX - 30.1 + (20.0 * (2 + modPack)), PDA_Local.scrollingy + 60.1, 16, 24);
 
@@ -157,10 +168,11 @@ if (stricmp(CheckInventory(GetWeapon()), "None") != 0) {
 
                 if (PDA_Local.clicked) {
                     if (CheckInventory("RLUniqueWeaponToken") || CheckInventory("RLDemonicWeaponToken") || CheckInventory("RLLegendaryWeaponToken"))
-                        HudMessage("%l:", PDA_LocalUniqueModEffect[localmodPackIndex + 1]; HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, PDA_RectX + 10.1, (int)(PDA_Local.scrollingy * newresy) + 120.1, 0);
+                        HudMessage("%l:", PDA_LocalUniqueModEffect[localmodPackIndex]; HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, PDA_RectX + 10.1, (int)(PDA_Local.scrollingy * newresy) + 120.1, 0);
                     else
                         HudMessage("%l:", PDA_LocalWeaponModEffect[localmodPackIndex + 1]; HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, PDA_RectX + 10.1, (int)(PDA_Local.scrollingy * newresy) + 120.1, 0);
                 }
+                */
             }
         }
         PDA_DefaultFont();

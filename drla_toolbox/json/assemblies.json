@@ -5,7 +5,9 @@
             "tier": "Basic",
             "icon": "PDACSWOR",
             "prettyname": "Chainsword",
-            "description": "404 DESCRIPTION NOT FOUND\n\n",
+            "description": [
+              "404 DESCRIPTION NOT FOUND\n\n"
+            ],
             "valid": [
                 "[WHITE]Combat Knife[END] ->\n [BASIC]Chainsword[END]\n\n"
             ],
@@ -22,7 +24,10 @@
             "tier": "Basic",
             "icon": "PDAPIERC",
             "prettyname": "Piercing Blade",
-            "description": "By incorporating advanced nano technology to strengthen and sharpen melee weapons, their durability will be increased substantially.\nAs a side effect, the weapon is extremely effective at bypassing armor on enemies.\n\n",
+            "description": [
+              "By incorporating advanced nano technology to strengthen and sharpen melee weapons, their durability will be increased substantially.\n",
+              "As a side effect, the weapon is extremely effective at bypassing armor on enemies.\n\n"
+            ],
             "valid": [
                 "[WHITE]Chainsaw[END] ->\n [BASIC]Nanoedge Saw[END]\n\n"
             ],
@@ -39,7 +44,9 @@
             "tier": "Basic",
             "icon": "PDAREVOL",
             "prettyname": "Revolver",
-            "description": "Converts the weapon into a revolver-type weapon. Generally, a revolver will be slower, but far more powerful than normal pistols.\n\n",
+            "description": [
+              "Converts the weapon into a revolver-type weapon. Generally, a revolver will be slower, but far more powerful than normal pistols.\n\n"
+            ],
             "valid": [
                 "[WHITE]Pistol[END] ->\n [BASIC]Revolver[END]\n\n",
                 "[PURPLE]Nuclear Plasma Pistol[END] ->\n [BASIC]Nuclear Plasma Revolver[END]\n\n"
@@ -58,7 +65,9 @@
             "tier": "Basic",
             "icon": "PDASILEN",
             "prettyname": "Silenced Weapon",
-            "description": "Converts the weapon into a stealthy weapon, that will not alert monsters beyond close range.\nThe effect of a blursphere will increase their damage exponentially while it is active.\n\n",
+            "description": [
+              "Converts the weapon into a stealthy weapon, that will not alert monsters beyond close range.\nThe effect of a blursphere will increase their damage exponentially while it is active.\n\n"
+            ],
             "valid": [
                 "[WHITE]Pistol[END] ->\n [BASIC]Silenced Pistol[END]\n\n",
                 "[WHITE]Battle Rifle[END] ->\n [BASIC]Stealth Rifle[END]\n\n"
@@ -77,7 +86,9 @@
             "tier": "Basic",
             "icon": "PDASHRED",
             "prettyname": "Shredder Weapon",
-            "description": "Shredder weapons fire off the pellets in a shell one after another, instead of all at once like a proper shotgun.\n\n",
+            "description": [
+              "Shredder weapons fire off the pellets in a shell one after another, instead of all at once like a proper shotgun.\n\n"
+            ],
             "valid": [
                 "[WHITE]Pistol[END] ->\n [BASIC]Shredder Pistol[END]\n\n",
                 "[WHITE]Double Shotgun[END] ->\n [BASIC]Shredder Shotgun[END]\n\n"
@@ -96,7 +107,10 @@
             "tier": "Basic",
             "icon": "PDAELEPH",
             "prettyname": "Elephant Gun",
-            "description": "The Elephant Gun takes all the pellets of the shotgun, and combines them into a fairly accurate single slug.\nPowerful at ranges where the shotgun starts to drop off, and armor piercing.\n\n",
+            "description": [
+              "The Elephant Gun takes all the pellets of the shotgun, and combines them into a fairly accurate single slug.\n",
+              "Powerful at ranges where the shotgun starts to drop off, and armor piercing.\n\n"
+            ],
             "valid": [
                 "[WHITE]Shotgun[END] ->\n [BASIC]Elephant Gun[END]\n\n"
             ],
@@ -113,7 +127,10 @@
             "tier": "Basic",
             "icon": "PDAGATLI",
             "prettyname": "Gatling Gun",
-            "description": "A chaingun type weapon with an increase to all stats.\nDamage, mag, accuracy are all increased, but windup and down is as well.\n\n",
+            "description": [
+              "A chaingun type weapon with an increase to all stats.\n",
+              "Damage, mag, accuracy are all increased, but windup and down is as well.\n\n"
+            ],
             "valid": [
                 "[WHITE]Chaingun[END] ->\n [BASIC]Gatling Gun[END]\n\n"
             ],
@@ -130,7 +147,9 @@
             "tier": "Basic",
             "icon": "PDAMICRO",
             "prettyname": "Micro Launcher",
-            "description": "A smaller, less powerful rocket launcher that reloads much faster. Great for smaller enemies or when you have a surplus of rockets.\n\n",
+            "description": [
+              "A smaller, less powerful rocket launcher that reloads much faster. Great for smaller enemies or when you have a surplus of rockets.\n\n"
+            ],
             "valid": [
                 "[WHITE]Rocket Launcher[END] ->\n [BASIC]Micro Launcher[END]\n\n"
             ],
@@ -147,7 +166,9 @@
             "tier": "Basic",
             "icon": "PDAHIGHP",
             "prettyname": "High-Power Weapon",
-            "description": "Increases the base damage of a weapon by 2, and the max randomization by 2, but drops the magazine size by 40%.\nAn easy way of increasing damage as long as reloading isn't an issue.\n\n",
+            "description": [
+              "Increases the base damage of a weapon by 2, and the max randomization by 2, but drops the magazine size by 40%.\nAn easy way of increasing damage as long as reloading isn't an issue.\n\n"
+            ],
             "valid": [
                 "[WHITE]Pistol[END] ->\n [BASIC]High-Power Pistol[END]\n\n",
                 "[WHITE]Chaingun[END] ->\n [BASIC]High-Power Chaingun[END]\n\n",
@@ -185,7 +206,9 @@
             "tier": "Basic",
             "icon": "PDATACSH",
             "prettyname": "Tactical Shotgun",
-            "description": "Upgrades the Combat Shotgun to run off magazines, rather than loose shells, making it much easier to reload.\nIt has a scope and all kinds of other gadgets for maximum tacticool.\n\n",
+            "description": [
+              "Upgrades the Combat Shotgun to run off magazines, rather than loose shells, making it much easier to reload.\nIt has a scope and all kinds of other gadgets for maximum tacticool.\n\n"
+            ],
             "valid": [
                 "[WHITE]Combat Shotgun[END] ->\n [BASIC]Tactical Shotgun[END]\n\n"
             ],
@@ -202,7 +225,9 @@
             "tier": "Basic",
             "icon": "PDAPLASM",
             "prettyname": "Plasmatic Shrapnel",
-            "description": "Causes shotguns to do Plasma damage, as well as create small AOE explosions on impact, making it very effective against massed crowds.\n\n",
+            "description": [
+              "Causes shotguns to do Plasma damage, as well as create small AOE explosions on impact, making it very effective against massed crowds.\n\n"
+            ],
             "valid": [
                 "[WHITE]Shotgun[END] ->\n [BASIC]Plasmatic Shotgun[END]\n\n",
                 "[WHITE]Combat Shotgun[END] ->\n [BASIC]Plasmatic Combat Shotgun[END]\n\n",
@@ -231,7 +256,9 @@
             "tier": "Basic",
             "icon": "PDAHSHOT",
             "prettyname": "Heavy Shotgun",
-            "description": "Increases the number of pellets fired per barrel by 3, and increases max damage randomization by 2.\nAn effective way to boost starting shotguns to a level that can deal with higher tier enemies.\n\n",
+            "description": [
+              "Increases the number of pellets fired per barrel by 3, and increases max damage randomization by 2.\nAn effective way to boost starting shotguns to a level that can deal with higher tier enemies.\n\n"
+            ],
             "valid": [
                 "[WHITE]Shotgun[END] ->\n [BASIC]Heavy Shotgun[END]\n\n",
                 "[WHITE]Combat Shotgun[END] ->\n [BASIC]Heavy Combat Shotgun[END]\n\n",
@@ -260,7 +287,9 @@
             "tier": "Basic",
             "icon": "PDAFLAMT",
             "prettyname": "Flamethrower",
-            "description": "A rapid fire area denial weapon, that runs off the fuel in rockets.\nIt can be a very efficient weapon for ammo consumption.\n\n",
+            "description": [
+              "A rapid fire area denial weapon, that runs off the fuel in rockets.\nIt can be a very efficient weapon for ammo consumption.\n\n"
+            ],
             "valid": [
                 "[PURPLE]Napalm Launcher[END] ->\n [BASIC]Flamethrower[END]"
             ],
@@ -277,7 +306,10 @@
             "tier": "Basic",
             "icon": "PDASHRAP",
             "prettyname": "Shrapnel Cannon",
-            "description": "A strange weapon that detonates a rocket internally, and then uses the force to blast out the casing as deadly shrapnel.\nEffective against larger enemies, but smaller enemies will often dodge most of the damage.\n\n",
+            "description": [
+              "A strange weapon that detonates a rocket internally, and then uses the force to blast out the casing as deadly shrapnel.\n",
+              "Effective against larger enemies, but smaller enemies will often dodge most of the damage.\n\n"
+            ],
             "valid": [
                 "[WHITE]Shotgun[END] ->\n [BASIC]Shrapnel Cannon[END]"
             ],
@@ -294,7 +326,9 @@
             "tier": "Basic",
             "icon": "PDASNIPE",
             "prettyname": "Sniper Rifle",
-            "description": "Converts the weapon to a scoped, powerful weapon, capable of dealing extreme damage with pinpoint accuracy.\n\n",
+            "description": [
+              "Converts the weapon to a scoped, powerful weapon, capable of dealing extreme damage with pinpoint accuracy.\n\n"
+            ],
             "valid": [
                 "[WHITE]Battle Rifle[END] ->\n [BASIC]Sniper Rifle[END]",
                 "[PURPLE]LMG[END] ->\n [BASIC]Bozar[END]"
@@ -313,7 +347,9 @@
             "tier": "Basic",
             "icon": "PDAESPLI",
             "prettyname": "Energy Splitter",
-            "description": "Converts weapons into extreme scatter guns. Each point of damage the gun would normally deal is converted into a projectile, and all fired at once.\n\n",
+            "description": [
+              "Converts weapons into extreme scatter guns. Each point of damage the gun would normally deal is converted into a projectile, and all fired at once.\n\n"
+            ],
             "valid": [
                 "[WHITE]Plasma Rifle[END] ->\n [BASIC]Plasma Splitter[END]\n\n",
                 "[PURPLE]Laser Rifle[END] ->\n [BASIC]Laser Splitter[END]\n\n",
@@ -334,7 +370,10 @@
             "tier": "Advanced",
             "icon": "PDADOUBL",
             "prettyname": "Double Chainsaw",
-            "description": "A chainsaw with two blades.\n'Nuff said.\n\n",
+            "description": [
+              "A chainsaw with two blades.\n",
+              "'Nuff said.\n\n"
+            ],
             "valid": [
                 "[WHITE]Chainsaw[END] ->\n [ADVANCED]Double Chainsaw[END]"
             ],
@@ -352,7 +391,9 @@
             "tier": "Advanced",
             "icon": "PDATACRO",
             "prettyname": "Tactical Rocket Launcher",
-            "description": "A rocket launcher that gets loaded with drum mags, this weapon is very quick to reload.\nThe rockets are only slightly weaker than normal.\n\n",
+            "description": [
+              "A rocket launcher that gets loaded with drum mags, this weapon is very quick to reload.\nThe rockets are only slightly weaker than normal.\n\n"
+            ],
             "valid": [
                 "[WHITE]Rocket Launcher[END] ->\n [ADVANCED]Tactical Rocket Launcher[END]"
             ],
@@ -370,7 +411,9 @@
             "tier": "Advanced",
             "icon": "PDASPIST",
             "prettyname": "Storm Pistol",
-            "description": "A powerful pistol type that has two barrels and a large magazine size.\nFor some reason, firing only consumes one unit of ammo, don't question it.\n\n",
+            "description": [
+              "A powerful pistol type that has two barrels and a large magazine size.\nFor some reason, firing only consumes one unit of ammo, don't question it.\n\n"
+            ],
             "valid": [
                 "[WHITE]Pistol[END] ->\n [ADVANCED]Storm Pistol[END]",
                 "[PURPLE]Blaster[END] ->\n [ADVANCED]Storm Blaster[END]",
@@ -400,7 +443,9 @@
             "tier": "Advanced",
             "icon": "PDAPPIST",
             "prettyname": "Plasma Pistol",
-            "description": "Converts the pistol into a cell-using plasma weapon.\nEnhances already energy-based weapons instead.\n\n",
+            "description": [
+              "Converts the pistol into a cell-using plasma weapon.\nEnhances already energy-based weapons instead.\n\n"
+            ],
             "valid": [
                 "[WHITE]Pistol[END] ->\n [ADVANCED]Plasma Pistol[END]",
                 "[PURPLE]Blaster[END] ->\n [ADVANCED]Overcharged Blaster[END]",
@@ -430,7 +475,9 @@
             "tier": "Advanced",
             "icon": "PDAASSAU",
             "prettyname": "Precision Rifle",
-            "description": "Replaces existing firerate with a very slow one and makes it fire single shots at a time.\nAttacks are three times stronger than normal and extremely accurate.\n\n",
+            "description": [
+              "Replaces existing firerate with a very slow one and makes it fire single shots at a time.\nAttacks are three times stronger than normal and extremely accurate.\n\n"
+            ],
             "valid": [
                 "[WHITE]Chaingun[END] ->\n [ADVANCED]Precision Chaingun[END]",
                 "[WHITE]Battle Rifle[END] ->\n [ADVANCED]Scoped Rifle[END]",
@@ -456,7 +503,9 @@
             "tier": "Advanced",
             "icon": "PDABURST",
             "prettyname": "Burst Cannon",
-            "description": "Removes the full-auto functionality and makes it fire bursts of three shots.\nThe mag size is doubled, attacks are two times stronger than normal, and are less accurate than normal.\n\n",
+            "description": [
+              "Removes the full-auto functionality and makes it fire bursts of three shots.\nThe mag size is doubled, attacks are two times stronger than normal, and are less accurate than normal.\n\n"
+            ],
             "valid": [
                 "[WHITE]Chaingun[END] ->\n [ADVANCED]Burst Chaingun[END]",
                 "[WHITE]Battle Rifle[END] ->\n [ADVANCED]Burst-fire Rifle[END]",
@@ -482,7 +531,9 @@
             "tier": "Advanced",
             "icon": "PDAVBFG9",
             "prettyname": "VBFG 9000",
-            "description": "A more powerful version of the BFG.\nMore damage, rays, ammo consumption, charge time and way more carnage.\n\n",
+            "description": [
+              "A more powerful version of the BFG.\nMore damage, rays, ammo consumption, charge time and way more carnage.\n\n"
+            ],
             "valid": [
                 "[WHITE]BFG 9000[END] ->\n [ADVANCED]VBFG 9000[END]",
                 "[PURPLE]Nuclear BFG 9000[END] ->\n [ADVANCED]Nuclear VBFG 9000[END]"
@@ -501,7 +552,9 @@
             "tier": "Advanced",
             "icon": "PDANANSH",
             "prettyname": "Nano Shrapnel",
-            "description": "Converts shotguns to not use ammo, but with substantially lowered damage.\nThe firerate and capacity to ignore resistances make these guns very powerful.\n\n",
+            "description": [
+              "Converts shotguns to not use ammo, but with substantially lowered damage.\nThe firerate and capacity to ignore resistances make these guns very powerful.\n\n"
+            ],
             "valid": [
                 "[WHITE]Shotgun[END] ->\n [ADVANCED]Nano Shotgun[END]\n\n",
                 "[WHITE]Combat Shotgun[END] ->\n [ADVANCED]Nano Combat Shotgun[END]\n\n",
@@ -524,7 +577,9 @@
             "tier": "Advanced",
             "icon": "PDAHYPER",
             "prettyname": "Hyperblaster",
-            "description": "A plasma rifle that fires faster, smaller projectiles, and does so without needing to cooldown. An excellent and adaptive weapon.\n\n",
+            "description": [
+              "A plasma rifle that fires faster, smaller projectiles, and does so without needing to cooldown. An excellent and adaptive weapon.\n\n"
+            ],
             "valid": [
                 "[WHITE]Plasma Rifle[END] ->\n [ADVANCED]Hyperblaster[END]\n\n"
             ],
@@ -542,7 +597,9 @@
             "tier": "Advanced",
             "icon": "PDAFOCUS",
             "prettyname": "Focused Double Shotgun",
-            "description": "A double shotgun with an extended barrel that greatly reduces spread and slightly increases damage.\n\n",
+            "description": [
+              "A double shotgun with an extended barrel that greatly reduces spread and slightly increases damage.\n\n"
+            ],
             "valid": [
                 "[WHITE]Double Shotgun[END] ->\n [ADVANCED]Focused Double Shotgun[END]\n\n"
             ],
@@ -560,7 +617,9 @@
             "tier": "Advanced",
             "icon": "PDAPLS2G",
             "prettyname": "Plasma Rifle Mk. II",
-            "description": "A powerful but slow series of plasma weapons, these guns do more than double the damage of normal plasma weapons.\n\n",
+            "description": [
+              "A powerful but slow series of plasma weapons, these guns do more than double the damage of normal plasma weapons.\n\n"
+            ],
             "valid": [
                 "[WHITE]Plasma Rifle[END] ->\n [ADVANCED]Plasma Rifle Mk. II[END]\n\n",
                 "[PURPLE]Plasma Shotgun[END] ->\n [ADVANCED]Plasma Shotgun Mk. II[END]\n\n",
@@ -582,7 +641,9 @@
             "tier": "Advanced",
             "icon": "PDABULLS",
             "prettyname": "Bulletstorm Weapon",
-            "description": "Bulletstorm weapons do away with reloading altogether, allowing you to fire them as long as you have the ammo to do so.\n\n",
+            "description": [
+              "Bulletstorm weapons do away with reloading altogether, allowing you to fire them as long as you have the ammo to do so.\n\n"
+            ],
             "valid": [
                 "[WHITE]Chaingun[END] ->\n [ADVANCED]Bulleststorm Chaingun[END]\n\n",
                 "[WHITE]Battle Rifle[END] ->\n [ADVANCED]Bulletstorm Rifle[END]\n\n"
@@ -602,7 +663,9 @@
             "tier": "Advanced",
             "icon": "PDAMMISP",
             "prettyname": "Mini-missile Pistol",
-            "description": "A small launcher that fires 6 mini-missiles for the cost of one full size rocket. How it does this is unknown.\n\n",
+            "description": [
+              "A small launcher that fires 6 mini-missiles for the cost of one full size rocket. How it does this is unknown.\n\n"
+            ],
             "valid": [
                 "[PURPLE]Handcannon[END] ->\n [ADVANCED]Mini-missile Pistol[END]\n\n"
             ],
@@ -620,7 +683,10 @@
             "tier": "Advanced",
             "icon": "PDAAUTSH",
             "prettyname": "Auto Shotgun",
-            "description": "Weaker than normal shotguns, but possessing a ferocious firerate.\nIf you have shells to spare, you can spew them out with these in no time at all.\n\n",
+            "description": [
+              "Weaker than normal shotguns, but possessing a ferocious firerate.\n",
+              "If you have shells to spare, you can spew them out with these in no time at all.\n\n"
+            ],
             "valid": [
                 "[WHITE]Shotgun[END] ->\n [ADVANCED]Autoshotgun[END]\n\n",
                 "[WHITE]Double Shotgun[END] ->\n [ADVANCED]Auto Double Shotgun[END]\n\n"
@@ -640,7 +706,9 @@
             "tier": "Advanced",
             "icon": "PDAGRENL",
             "prettyname": "Grenade Launcher",
-            "description": "Converts the weapon into an arcing, bouncing projectile launcher, allowing it to be used in different ways.\n\n",
+            "description": [
+              "Converts the weapon into an arcing, bouncing projectile launcher, allowing it to be used in different ways.\n\n"
+            ],
             "valid": [
                 "[WHITE]Rocket Launcher[END] ->\n [ADVANCED]Grenade Launcher[END]\n\n"
             ],
@@ -658,7 +726,10 @@
             "tier": "Advanced",
             "icon": "PDAESHOT",
             "prettyname": "Energy Shotgun",
-            "description": "Converts the weapon into a shotgun variant of itself.\nA useful way of getting shotgun variants of advanced weapons.\n\n",
+            "description": [
+              "Converts the weapon into a shotgun variant of itself.\n",
+              "A useful way of getting shotgun variants of advanced weapons.\n\n"
+            ],
             "valid": [
                 "[PURPLE]Laser Rifle[END] ->\n [ADVANCED]Laser Shotgun[END]\n\n",
                 "[PURPLE]Nuclear Plasma Rifle[END] ->\n [ADVANCED]Nuclear Plasma Shotgun[END]\n\n"
@@ -678,7 +749,10 @@
             "tier": "Master",
             "icon": "PDANANOM",
             "prettyname": "Nanomanufacture Ammo",
-            "description": "Converts the loading mechanism into a nanomachic ammo assembler, allowing the weapon to fire infinitely.\nWeapons with larger ammo types will require time to charge.\n\n",
+            "description": [
+              "Converts the loading mechanism into a nanomachic ammo assembler, allowing the weapon to fire infinitely.\n",
+              "Weapons with larger ammo types will require time to charge.\n\n"
+            ],
             "valid": [
                 "[WHITE]Pistol[END] ->\n [MASTER]Nanomachic Pistol[END]\n\n",
                 "[WHITE]Chaingun[END] ->\n [MASTER]Nanomachic Chaingun[END]\n\n",
@@ -711,7 +785,10 @@
             "tier": "Master",
             "icon": "PDADEMOA",
             "prettyname": "Demolition Ammo",
-            "description": "Loads bullet weapons with explosive ammunition and a cool paint scheme.\nThe explosions are dangerous to yourself, so don't fire in enclosed spaces.\n\n",
+            "description": [
+              "Loads bullet weapons with explosive ammunition and a cool paint scheme.\n",
+              "The explosions are dangerous to yourself, so don't fire in enclosed spaces.\n\n"
+            ],
             "valid": [
                 "[WHITE]Pistol[END] ->\n [MASTER]Demolition Ammo Pistol[END]\n\n",
                 "[WHITE]Chaingun[END] ->\n [MASTER]Demolition Ammo Chaingun[END]\n\n",
@@ -738,7 +815,9 @@
             "tier": "Master",
             "icon": "PDABFGXX",
             "prettyname": "Demolition Ammo",
-            "description": "The king of BFGs, with unparalleled destructive power and a charge time that'll send you to sleep.\n\n",
+            "description": [
+              "The king of BFGs, with unparalleled destructive power and a charge time that'll send you to sleep.\n\n"
+            ],
             "valid": [
                 "[WHITE]BFG 9000[END] ->\n [MASTER]Biggest Fucking Gun[END]\n\n",
                 "[PURPLE]Nuclear BFG 9000[END] ->\n [MASTER]Nuclear Biggest Fucking Gun[END]\n\n"
@@ -759,7 +838,10 @@
             "tier": "Master",
             "icon": "PDARIPPE",
             "prettyname": "Ripper",
-            "description": "A super high speed chainsaw that also drains health from enemies.\nA good choice for close-range combat.\n\n",
+            "description": [
+              "A super high speed chainsaw that also drains health from enemies.\n",
+              "A good choice for close-range combat.\n\n"
+            ],
             "valid": [
                 "[WHITE]Chainsaw[END] ->\n [MASTER]Ripper[END]\n\n"
             ],
@@ -778,7 +860,10 @@
             "tier": "Master",
             "icon": "PDAPREFR",
             "prettyname": "Plasma Overcharger",
-            "description": "A beam-based weapon that imbues an enemy with a critical, unstable plasma charge.\nCan be fired at surfaces to detonate plasma everywhere.\n\n",
+            "description": [
+              "A beam-based weapon that imbues an enemy with a critical, unstable plasma charge.\n",
+              "Can be fired at surfaces to detonate plasma everywhere.\n\n"
+            ],
             "valid": [
                 "[WHITE]Plasma Rifle[END] ->\n [MASTER]Plasma Overcharger[END]\n\n"
             ],
@@ -797,7 +882,10 @@
             "tier": "Master",
             "icon": "PDAAUTOC",
             "prettyname": "Autocannon",
-            "description": "Converts the minigun's spinning barrels into a larger, slower, explosive slug cannon.\nDon't fire in close proximity.\n\n",
+            "description": [
+              "Converts the minigun's spinning barrels into a larger, slower, explosive slug cannon.\n",
+              "Don't fire in close proximity.\n\n"
+            ],
             "valid": [
                 "[PURPLE]Minigun[END] ->\n [MASTER]Autocannon[END]\n\n"
             ],
@@ -816,7 +904,9 @@
             "tier": "Master",
             "icon": "PDAMOTHE",
             "prettyname": "Mother-In-Law",
-            "description": "The most powerful rocket launcher. The longer the rocket travels, the more damage it does. Also, generates its own ammo over time.\n\n",
+            "description": [
+              "The most powerful rocket launcher. The longer the rocket travels, the more damage it does. Also, generates its own ammo over time.\n\n"
+            ],
             "valid": [
                 "[WHITE]Rocket Launcher[END] ->\n [MASTER]Mother-In-Law[END]\n\n"
             ],
@@ -835,7 +925,9 @@
             "tier": "Master",
             "icon": "PDAMEGAT",
             "prettyname": "Megaton Shotgun",
-            "description": "A giant three barrelled death shotgun with rotating barrels. Capable of firing a single barrel, or all barrels at once.\n\n",
+            "description": [
+              "A giant three barrelled death shotgun with rotating barrels. Capable of firing a single barrel, or all barrels at once.\n\n"
+            ],
             "valid": [
                 "[PURPLE]Super Shotgun[END] ->\n [MASTER]Megaton Shotgun[END]\n\n"
             ],
@@ -854,7 +946,9 @@
             "tier": "Master",
             "icon": "PDACONQU",
             "prettyname": "Conqueror Shotgun",
-            "description": "A powerful, responsive, mag-based shotgun. Very effective in every single way, but not a master of anything.\n\n",
+            "description": [
+              "A powerful, responsive, mag-based shotgun. Very effective in every single way, but not a master of anything.\n\n"
+            ],
             "valid": [
                 "[WHITE]Combat Shotgun[END] ->\n [MASTER]Conqueror Shotgun[END]\n\n"
             ],
@@ -873,7 +967,9 @@
             "tier": "Master",
             "icon": "PDACLUST",
             "prettyname": "Cluster Bomb Launcher",
-            "description": "A powerful multi-warhead weapon that does heavy damage in an area over time.\nUses increased ammo and has a small charge time.\n\n",
+            "description": [
+              "A powerful multi-warhead weapon that does heavy damage in an area over time.\nUses increased ammo and has a small charge time.\n\n"
+            ],
             "valid": [
                 "[PURPLE]Missile Launcher[END] ->\n [MASTER]Cluster Bomb Launcher[END]\n\n"
             ],
@@ -892,7 +988,9 @@
             "tier": "Master",
             "icon": "PDAGAUSS",
             "prettyname": "Gauss Rifle",
-            "description": "A chargeable single shot sniper weapon that uses cells to do bullet damage.\nVery powerful, especially when fully charged.\n\n",
+            "description": [
+              "A chargeable single shot sniper weapon that uses cells to do bullet damage.\nVery powerful, especially when fully charged.\n\n"
+            ],
             "valid": [
                 "[PURPLE]Laser Rifle[END] ->\n [MASTER]Gauss Rifle[END]\n\n"
             ],
@@ -911,7 +1009,9 @@
             "tier": "Master",
             "icon": "PDAAMRXX",
             "prettyname": "Anti-materiel Rifle",
-            "description": "The most powerful single-shot rifle weapon. Can pierce multiple enemies at a time and devastate bosses, but has a slow rate of fire.\n\n",
+            "description": [
+              "The most powerful single-shot rifle weapon. Can pierce multiple enemies at a time and devastate bosses, but has a slow rate of fire.\n\n"
+            ],
             "valid": [
                 "[WHITE]Battle Rifle[END] ->\n [MASTER]Anti-materiel Rifle[END]\n\n"
             ],
@@ -930,7 +1030,11 @@
             "tier": "Master",
             "icon": "PDAEINFU",
             "prettyname": "Electro Infusion",
-            "description": "Converts the weapon to an electric-based variant of itself.\nOften very powerful, but remember the damage type is changed to Electric.\nIf the weapon was already an electric weapon, it's converted into a more powerful variant.\n\n",
+            "description": [
+              "Converts the weapon to an electric-based variant of itself.\n",
+              "Often very powerful, but remember the damage type is changed to Electric.\n",
+              "If the weapon was already an electric weapon, it's converted into a more powerful variant.\n\n"
+            ],
             "valid": [
                 "[WHITE]BFG 9000[END] ->\n [MASTER]Zeus Cannon[END]\n\n",
                 "[PURPLE]Plasma Shotgun[END] ->\n [MASTER]ARC-4 Voltgun[END]\n\n"
@@ -951,7 +1055,11 @@
             "tier": "Master",
             "icon": "PDAPINFU",
             "prettyname": "Plasma Infusion",
-            "description": "Converts the weapon to an energy-based variant of itself.\nOften very powerful, but remember the damage type is changed to Plasma.\nIf the weapon was already an energy weapon, it's converted into a more powerful variant.\n\n",
+            "description": [
+              "Converts the weapon to an energy-based variant of itself.\n",
+              "Often very powerful, but remember the damage type is changed to Plasma.\n",
+              "If the weapon was already an energy weapon, it's converted into a more powerful variant.\n\n"
+            ],
             "valid": [
                 "[WHITE]Rocket Launcher[END] ->\n [MASTER]Plascharge Launcher[END]\n\n",
                 "[WHITE]Plasma Rifle[END] ->\n [MASTER]Plasma Cannon[END]\n\n",
@@ -980,7 +1088,10 @@
             "tier": "Master",
             "icon": "PDASUPER",
             "prettyname": "Super Machinegun",
-            "description": "The most shooty machinegun of all.\nThis weapon annihilates the enemy and your bullet supply like nothing else.\n\n",
+            "description": [
+              "The most shooty machinegun of all.\n",
+              "This weapon annihilates the enemy and your bullet supply like nothing else.\n\n"
+            ],
             "valid": [
                 "[WHITE]Battle Rifle[END] ->\n [MASTER]Super Machinegun[END]\n\n"
             ],
@@ -999,7 +1110,10 @@
             "tier": "Master",
             "icon": "PDAEBLAD",
             "prettyname": "Energy Blade",
-            "description": "Enhances the weapon with an energy-based attack.\nFar more powerful, but requires cell ammo to wield, unlike normal melee weapons.\n\n",
+            "description": [
+              "Enhances the weapon with an energy-based attack.\n",
+              "Far more powerful, but requires cell ammo to wield, unlike normal melee weapons.\n\n"
+            ],
             "valid": [
                 "[WHITE]Chainsaw[END] ->\n [MASTER]Energysaw[END]\n\n"
             ],
