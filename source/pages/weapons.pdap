@@ -111,6 +111,8 @@ if (stricmp(CheckInventory(GetWeapon()), "None") != 0) {
             }
         }
         // TODO: Add weapon icon here.
+
+        int playerHazMod[PDA_MODMAX] = { PDA_Weapon_Bulk_Quantity, PDA_Weapon_Power_Quantity, PDA_Weapon_Agility_Quantity, PDA_Weapon_Technical_Quantity, PDA_Weapon_Sniper_Quantity, PDA_Weapon_Firestorm_Quantity, PDA_Weapon_Nano_Quantity };
         
         // DisplayIcon(GetWeapon(), PDA_ID, 0.5, 0.5, 0, 1);
         HudMessage("%l:\n[\c[LightBlue]%i:B \c[Red]%i:P \c[Green]%i:A \c[Yellow]%i:T \c[Purple]%i:S \c[Orange]%i:F \c[White]%i:N \cr%i:D\c-]"
@@ -128,6 +130,7 @@ if (stricmp(CheckInventory(GetWeapon()), "None") != 0) {
 
         // I am so sorry.
         float modYOffset = 20.0;
+        fixed modAlpha = 0.6;
         for (int weaponIndex = 0; weaponIndex < DRLA_WEAPONMAX; weaponIndex++) {
             if (stricmp(DRLA_WeaponModList[weaponIndex][0], GetWeapon()) == 0) {
                 bool isUnmaker = stricmp(GetWeapon(), "RLUnmaker") == 0;
@@ -159,15 +162,20 @@ if (stricmp(CheckInventory(GetWeapon()), "None") != 0) {
                     if (modPack < mi_sniper) modYOffset = 10.1;
                     else modYOffset = 12.1;
 
+                    modAlpha = 0.5;
+                    if (playerHazMod[modPack] > 0) {
+                      modAlpha = 1;
+                    }
+                    
                     button[modPack] = PDA_CreateModPackDisplay(modPack, icon_static_WeaponMods[modPack], PDA_LocalWeaponModEffect[1 + modPack], 
-                        PDA_RectX + 5.1, PDA_Local.scrollingy + modYOffset + (20.0 * (2 + modPack)), 16, 24);
+                        PDA_RectX + 5.1, PDA_Local.scrollingy + modYOffset + (20.0 * (2 + modPack)), 16, 24, modAlpha);
 
                     if (CheckInventory("RLUniqueWeaponToken") || CheckInventory("RLDemonicWeaponToken") || CheckInventory("RLLegendaryWeaponToken")) {
-                      HudMessage("%l:", PDA_LocalUniqueModEffect[modPack]; HUDMSG_PLAIN, PDA_ASSEMBLYIDRANGE + modPack, CR_UNTRANSLATED, 
-                        PDA_RectX + 35.1, (int)(PDA_Local.scrollingy * newresy) + 80.1 + (29.0 * modPack), 0);
+                      HudMessage("%l:", PDA_LocalUniqueModEffect[modPack]; HUDMSG_ALPHA, PDA_ASSEMBLYIDRANGE + modPack, CR_UNTRANSLATED, 
+                        PDA_RectX + 35.1, (int)(PDA_Local.scrollingy * newresy) + 80.1 + (29.0 * modPack), 0, modAlpha);
                     } else {
-                      HudMessage("%l:", PDA_LocalWeaponModEffect[modPack]; HUDMSG_PLAIN, PDA_ASSEMBLYIDRANGE + modPack, CR_UNTRANSLATED, 
-                        PDA_RectX + 35.1, (int)(PDA_Local.scrollingy * newresy) + 80.1 + (29.0 * modPack), 0);
+                      HudMessage("%l:", PDA_LocalWeaponModEffect[modPack]; HUDMSG_ALPHA, PDA_ASSEMBLYIDRANGE + modPack, CR_UNTRANSLATED, 
+                        PDA_RectX + 35.1, (int)(PDA_Local.scrollingy * newresy) + 80.1 + (29.0 * modPack), 0, modAlpha);
                     }
                 }
                 

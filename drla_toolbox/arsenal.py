@@ -541,6 +541,7 @@ PDA_ARMOR_{bigname}_ATTR = {atts};
   def LANGUAGE_ASSEMBLIES(self, assembly):
     if (not self.filler): return 0
     if ('name' not in assembly):
+      print('Name not found in assembly data')
       return ''
 
     bigname = assembly['name'].upper()

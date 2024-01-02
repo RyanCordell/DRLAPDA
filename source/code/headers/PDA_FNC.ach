@@ -434,7 +434,7 @@ function PDAButton PDA_DisplayArmor (int id, str label, str graphic, float x, fl
     return PDA_LocalButton[id];
 }
 
-function PDAButton PDA_CreateModPackDisplay (int id, str graphic, str name, float x, float y, int width, int height)
+function PDAButton PDA_CreateModPackDisplay (int id, str graphic, str name, float x, float y, int width, int height, fixed alpha)
 {
     #define thisButton PDA_LocalButton[id]
     thisButton.id = id;
@@ -446,28 +446,28 @@ function PDAButton PDA_CreateModPackDisplay (int id, str graphic, str name, floa
     thisButton.label = name;
     thisButton.graphic = graphic;
 
-    if (CheckBounds(thisButton)) {
-        thisButton.state = button_hovered;
-        PDA_LocalMouse.state = mouse_pointer;
+    // if (CheckBounds(thisButton)) {
+    //     thisButton.state = button_hovered;
+    //     PDA_LocalMouse.state = mouse_pointer;
 
-        if (thisButton.state != thisButton.oldstate) {
-            PDA_PlaySound("UI/PDA/Select", "pda/soldier", 80);
-        }
+    //     if (thisButton.state != thisButton.oldstate) {
+    //         PDA_PlaySound("UI/PDA/Select", "pda/soldier", 80);
+    //     }
 
-        if (PDA_LocalMouse.m1 && !(PDA_LocalMouse.oldState & BT_ATTACK)) {
-            thisButton.state = button_clicked;
-            PDA_PlaySound("UI/PDA/UseCategory", "pda/soldier", 80);
-        }
-    }
-    else {
-        thisButton.state = button_none;
+    //     if (PDA_LocalMouse.m1 && !(PDA_LocalMouse.oldState & BT_ATTACK)) {
+    //         thisButton.state = button_clicked;
+    //         PDA_PlaySound("UI/PDA/UseCategory", "pda/soldier", 80);
+    //     }
+    // }
+    // else {
+    //     thisButton.state = button_none;
 
-        if (thisButton.state != thisButton.oldstate) {
-            PDA_LocalMouse.state = mouse_default;
-        }
-    }
+    //     if (thisButton.state != thisButton.oldstate) {
+    //         PDA_LocalMouse.state = mouse_default;
+    //     }
+    // }
 
-    fixed alpha = (thisButton.state == button_hovered) ? 1 : 0.6;
+    // fixed alpha = (thisButton.state == button_hovered) ? 1 : 0.6;
 
     int graphicy = (int)(thisButton.y * newresy) + 14.0;
 
