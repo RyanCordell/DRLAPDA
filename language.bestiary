@@ -1,0 +1,7 @@
+[enu default]
+
+PDA_DIFFICULTY_UV_OR_LOWER  = "Enemies available on Ultra-Violence and lower\n";
+PDA_DIFFICULTY_NIGHTMARE    = "Enemies available on Nightmare difficulty\n";
+PDA_DIFFICULTY_TECHNOPHOBIA = "Enemies available on Technophobia difficulty\n";
+PDA_DIFFICULTY_ARMAGEDDON   = "Enemies available on Armageddon difficulty\n";
+PDA_DIFFICULTY_EXTRA        = "Enemies that don't cleanly fit in any one difficulty\n";
