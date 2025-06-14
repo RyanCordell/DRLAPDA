@@ -1,13 +1,15 @@
-import os.path
 import sys
-import customtkinter
+import os.path
+
 import json
 import re
 
 from tkinter import filedialog as fd
-from tkinter.messagebox import showinfo
 from datetime import datetime
-from typing import Dict, List, Optional, Union
+
+from typing import Dict, List, Optional, Union, Any, Literal
+
+import pdb
 
 # TODO: Examine memory footprint of all loaded JSON modules (currently around 555KB worth of JSON)
 # TODO: Optimize loading
@@ -16,79 +18,140 @@ from typing import Dict, List, Optional, Union
 def currentTime() -> datetime:
   return datetime.now().strftime("%H:%M:%S")
 
-class Arsenal:
+INPUT_FOLDER_ARG : int = 1
+OUTPUT_FOLDER_ARG: int = 2
+SEPARATOR_ARG    : int = 3
+
+class Arsenal():
   outputData      : str = ''
   language_warning: str = '[enu default]\n\n// Please do not modify this file directly, it\'s specifically compiled and any changes may be lost.\n\n'
   loadedFiles     : str = ''
+  data            : Any = ''
+  loadedJson      : dict[str, Any] | str = {}
+  separatorToken  : str = ':'
+  filler          : dict[str, Any] = dict()
+  inputFiles      : list[str] = list()
+  
+  
+  def resPadder(self, str: str, len: int) -> str:
+    return str.rjust(len, ' ')
 
-  def doInput(self):
-    if (not self.currentPath): self.currentPath = os.path.dirname(os.path.realpath(__file__))
+  def languagePadding(self, value: str) -> str:
+    return Arsenal.resPadder(self, ' ', 4 - len(value))
+  
+  def isInvokedByCombiner(self) -> bool:
+    return 'Combiner' in self.__class__.__name__
+  
+  def main(self) -> None:
+    Arsenal.doInput(self)
     
-    self.inputFiles = fd.askopenfilenames(
-      title='Open files',
-      initialdir=self.currentPath,
-      filetypes=(
-        ('JSON files', '*.json'),
-        ('All files', '*.*')
-      ),
-      defaultextension='.json'
-    )
+    if (len(sys.argv) > 3): 
+      if (sys.argv[SEPARATOR_ARG]):
+        Arsenal.separatorToken = sys.argv[SEPARATOR_ARG]
+    
+    if (sys.argv[OUTPUT_FOLDER_ARG]):
+        Arsenal.outputFile = sys.argv[OUTPUT_FOLDER_ARG]
+        
+    Arsenal.doCompile(self)
+  
+  def attemptPrint(self, line: str) -> None:
+    if (Arsenal.isInvokedByCombiner(self) and hasattr(self, 'printline')): self.printLine(line)
+    else: print(line)
+      
+  def attemptClearResults(self) -> None:
+    if (Arsenal.isInvokedByCombiner(self) and hasattr(self, 'clearResults')): self.clearResults()
 
-    self.clearResults()
-    if (self.inputFiles):
-      self.printLine('[%s] Files selected: %s\n' % (currentTime(), list(self.inputFiles)))
-      # self.printLine('[%s] File selected: %s\n' % (currentTime(), os.path.normpath(self.inputFile)))
-      self.filler = {}
-      for _, file in enumerate(self.inputFiles):
-        self.printLine('[%s] Loaded JSON into filler memory: %s\n' % (currentTime(), file))
-        self.loadedFiles += os.path.basename(file) + '\n'
+  def doInput(self) -> None:
+    print(Arsenal.isInvokedByCombiner(self))
+    if (Arsenal.isInvokedByCombiner(self) and hasattr(self, 'currentPath')) :
+      if (not self.currentPath): self.currentPath = os.path.dirname(os.path.realpath(__file__))
+      
+      if (self.currentPath):
+        selectDirectory: str = fd.askdirectory(title='Open folder of JSON files', initialdir=self.currentPath)
+        
+        if (selectDirectory):
+          Arsenal.inputFiles = [os.path.join(selectDirectory, filename) for filename in os.listdir(selectDirectory) if filename.endswith('.json')]
+        
+    else:
+      if (sys.argv[INPUT_FOLDER_ARG]):
+        if (not os.path.isdir(sys.argv[INPUT_FOLDER_ARG])): return None
+        for filename in os.listdir(sys.argv[INPUT_FOLDER_ARG]):
+          if (filename.endswith('.json')):
+            Arsenal.inputFiles.append(os.path.join(sys.argv[INPUT_FOLDER_ARG], filename))
+      else:
+        return None
+
+    Arsenal.attemptClearResults(self)
+    
+    if (Arsenal.inputFiles):
+      Arsenal.attemptPrint(self, '[%s] Files selected: %s\n' % (currentTime(), list(Arsenal.inputFiles)))
+      Arsenal.filler = {}
+      
+      for _, file in enumerate(Arsenal.inputFiles):
+        Arsenal.attemptPrint(self, '[%s] Loaded JSON into filler memory: %s\n' % (currentTime(), file))
+        Arsenal.loadedFiles += os.path.basename(file) + '\n'
 
         if ('data.json' in file):
           with open(os.path.normpath(file), mode='r', encoding='utf-8') as freshdata:
-            self.filler = json.load(freshdata)
+            Arsenal.filler = json.load(freshdata)
             
         if file:
           with open(os.path.normpath(file), mode='r', encoding='utf-8') as jsonBuffer:
-            self.loadedJson.update(json.load(jsonBuffer))
-      # self.selected_files.configure(text=loadedFiles)
+            Arsenal.loadedJson.update(json.load(jsonBuffer))
     else:
-      self.printLine('[%s] No JSON files selected\n' % currentTime())
-
-  def doQuasiCompile(self):
-    if ('weapons'    in self.loadedJson): Arsenal.processWeapons(self, self.loadedJson['weapons'], False)
-    if ('equipment'  in self.loadedJson): Arsenal.processEquipment(self, self.loadedJson['equipment'], False)
-    if ('modeffect'  in self.loadedJson): Arsenal.processModEffect(self, self.loadedJson['modeffect'], False)
-    if ('assemblies' in self.loadedJson): Arsenal.processAssemblies(self, self.loadedJson, False)
+      Arsenal.attemptPrint(self, '[%s] No JSON files selected\n' % currentTime())
 
   def clearWindow(self):
-    self.printLine('[%s] Clearing window\n' % currentTime())
-    self.clearResults()
+    Arsenal.attemptPrint(self, line='[%s] Clearing window\n' % currentTime())
+    Arsenal.attemptClearResults(self)
 
   def doCompile(self):
-    if ('weapons'    in self.loadedJson): Arsenal.processWeapons(self, self.loadedJson['weapons'], True)
-    if ('equipment'  in self.loadedJson): Arsenal.processEquipment(self, self.loadedJson['equipment'], True)
-    if ('modeffect'  in self.loadedJson): Arsenal.processModEffect(self, self.loadedJson['modeffect'], True)
-    if ('assemblies' in self.loadedJson): Arsenal.processAssemblies(self, self.loadedJson, True)
+    if ('weapons'    in Arsenal.loadedJson): Arsenal.processWeapons(self,Arsenal.loadedJson['weapons'], True)
+    if ('equipment'  in Arsenal.loadedJson): Arsenal.processEquipment(self, Arsenal.loadedJson['equipment'], True)
+    if ('modeffect'  in Arsenal.loadedJson): Arsenal.processModEffect(self, Arsenal.loadedJson['modeffect'], True)
+    if ('assemblies' in Arsenal.loadedJson): Arsenal.processAssemblies(self, Arsenal.loadedJson, True)
 
-  def doOutput(self, name):
-    self.outputData = fd.asksaveasfile(
-      title='Save file as..',
-      initialfile=name,
-      initialdir=self.currentPath,
-      filetypes=(
-        ('Text files', '*.txt'),
-        ('All files', '*.*')
-      )
-    )
-    if (not self.outputData): 
-      self.clearResults()
-      self.printLine('[%s] No file chosen\n' % currentTime())
-      self.compileArsenal.configure(state='disabled')
-      return 0
+  def doQuasiCompile(self):
+    if ('weapons'    in Arsenal.loadedJson): Arsenal.processWeapons(self, Arsenal.loadedJson['weapons'], False)
+    if ('equipment'  in Arsenal.loadedJson): Arsenal.processEquipment(self, Arsenal.loadedJson['equipment'], False)
+    if ('modeffect'  in Arsenal.loadedJson): Arsenal.processModEffect(self, Arsenal.loadedJson['modeffect'], False)
+    if ('assemblies' in Arsenal.loadedJson): Arsenal.processAssemblies(self, Arsenal.loadedJson, False)
 
-  def handleColors(self, dict: dict, str: str, method: str):
+  def doOutput(self, name: str):
+    if (Arsenal.isInvokedByCombiner(self) and hasattr(self, 'currentPath') and self.currentPath):
+      Arsenal.outputData: str = fd.asksaveasfile(
+        title='Save file as..',
+        initialfile=name,
+        initialdir=self.currentPath,
+        filetypes=(
+          ('Text files', '*.txt'),
+          ('All files', '*.*')
+        )
+      ) # type: ignore
+      
+      if (not Arsenal.outputData): 
+        Arsenal.attemptClearResults(self)
+        Arsenal.attemptPrint(self, '[%s] No file chosen\n' % currentTime())
+        if (hasattr(self, 'compileArsenal')): self.compileArsenal.configure(state='disabled')
+        return 0
+      else:
+        return Arsenal.outputData
+    else:
+      if (not os.path.isdir(sys.argv[OUTPUT_FOLDER_ARG])): 
+        os.mkdir(sys.argv[OUTPUT_FOLDER_ARG])
+        
+      newPath: str = os.path.join(sys.argv[OUTPUT_FOLDER_ARG], name)
+      
+      with open(file=newPath, mode='w+', encoding='utf-8') as newFile:
+        newFile.write('')
+        
+      Arsenal.outputData = newPath
+      return Arsenal.outputData
+        
+
+  def handleColors(self, dict: dict[str, Any], str: str, method: str) -> str:
     if (not str or len(dict) < 1): 
-      self.printLine('[%s] No data found to process\n' % currentTime())
+      Arsenal.attemptPrint(self, '[%s] No data found to process\n' % currentTime())
       return 'false'
 
     noColors = 1
@@ -98,7 +161,7 @@ class Arsenal:
         noColors = 0
 
     if (noColors): 
-      self.printLine('[%s] No such property: colors\n' % currentTime())
+      Arsenal.attemptPrint(self, '[%s] No such property: colors\n' % currentTime())
       return 'false'
 
     for i in dict:
@@ -109,10 +172,10 @@ class Arsenal:
 
     return str
 
-
-  def processWeapons(self, weapons, doOutput):
+  # -----
+  def processWeapons(self, weapons: dict[str, Any], doOutput: bool) -> None | Literal[0]:
     if (not weapons): return 0
-    self.printLine('[%s] Parsing WEAPONS database\n' % currentTime())
+    Arsenal.attemptPrint(self, '[%s] Parsing WEAPONS database\n' % currentTime())
     
     weaponModMax      : int = 0
     demonicWeapons    : int = 0
@@ -125,28 +188,31 @@ class Arsenal:
     # weaponDescription : str = ''
     # weaponSDescription: str = ''
     # weaponLanguage    : str = ''
-    weaponLanguage    : list = list()
-    weaponDescription : list = list()
-    weaponSDescription: list = list()
-    demonicArtifacts  : list = list()
-    weaponMods        : list = list()
-    weaponModEffects  : list = list()
-    weaponModList     : dict = {}
+    weaponLanguage    : list[str] = list()
+    weaponDescription : list[str] = list()
+    weaponSDescription: list[str] = list()
+    demonicArtifacts  : list[str] = list()
+    weaponMods        : list[str] = list()
+    weaponModEffects  : list[str] = list()
+    weaponModList     : dict[str, Any] = {}
     # weaponArtifacts = ''
 
     for weapon in weapons:
+      weapon: dict[str, Any]
       weaponDescription  = list()
       weaponSDescription = list()
       weaponMods         = list()
       # weaponArtifacts = ''
       
       if ('mods' in weapon):
-        weaponModEffects.append('{', f'"RL{weapon["name"]}", "{weapon["mods"]["bulk"]}", "{weapon["mods"]["power"]}", "{weapon["mods"]["agility"]}", "{weapon["mods"]["technical"]}", "{weapon["mods"]["sniper"]}", "{weapon["mods"]["firestorm"]}", "{weapon["mods"]["nano"]}"', '},')
+        weaponModEffects.append('{')
+        weaponModEffects.append(f'"RL{weapon["name"]}", "{weapon["mods"]["bulk"]}", "{weapon["mods"]["power"]}", "{weapon["mods"]["agility"]}", "{weapon["mods"]["technical"]}", "{weapon["mods"]["sniper"]}", "{weapon["mods"]["firestorm"]}", "{weapon["mods"]["nano"]}"')
+        weaponModEffects.append('},')
         weaponModMax     += 1
 
         modsLen = len(weapon['mods'])
         for i, modsFragment in enumerate(weapon['mods']):
-          modsFragment = modsFragment.replace('\n', '/n')
+          modsFragment: str = modsFragment.replace('\n', '/n')
           weaponMods.append(f'"{weapon['mods'][modsFragment]}{self.separatorToken}"')
 
           if (i < modsLen - 1):
@@ -155,18 +221,10 @@ class Arsenal:
         weapon['actualMods'] = ''.join(weaponMods)
 
       if ('corruptions' in weapon):
-        demonicArtifacts.append('{', f'"RL{weapon["name"]}", "{weapon["corruptions"][0]}", "{weapon["corruptions"][1]}", "{weapon["corruptions"][2]}"', '},')
+        demonicArtifacts.append('{')
+        demonicArtifacts.append(f'"RL{weapon["name"]}", "{weapon["corruptions"][0]}", "{weapon["corruptions"][INPUT_FOLDER_ARG]}", "{weapon["corruptions"][OUTPUT_FOLDER_ARG]}"')
+        demonicArtifacts.append('},')
         demonicWeapons   += 1
-
-        # artifactsLen = len(weapon['corruptions'])
-        # for i, artifactsFragment in enumerate(weapon['corruptions']):
-        #   artifactsFragment = artifactsFragment.replace('\n', '/n')
-        #   weaponArtifacts += f'"{artifactsFragment}|"'
-
-        #   if i < artifactsLen - 1:
-        #     weaponArtifacts += f'\n'
-
-        # weapon['actualArtifacts'] = weaponArtifacts
       
       if ('tier' in weapon):
         match weapon['tier']:
@@ -178,7 +236,7 @@ class Arsenal:
       if ('description' in weapon):
         descLen = len(weapon['description'])
         for i, descFragment in enumerate(weapon['description']):
-          descFragment       = descFragment.replace('\n', '/n')
+          descFragment: str = descFragment.replace('\n', '/n')
           weaponDescription.append(f'"{descFragment}"')
 
           if (i < descLen - 1):
@@ -190,7 +248,7 @@ class Arsenal:
         descLen = len(weapon['specialdesc'])
         
         for i, descFragment in enumerate(weapon['specialdesc']):
-          descFragment        = descFragment.replace('\n', '/n')
+          descFragment: str = descFragment.replace('\n', '/n')
           weaponSDescription.append(f'"{descFragment}"')
 
           if i < descLen - 1:
@@ -198,7 +256,7 @@ class Arsenal:
 
         weapon['actualSpecialDesc'] = ''.join(weaponSDescription)
 
-      weapon['flatname'] = Arsenal.handleColors(self, self.filler, weapon['prettyname'], 'strip')
+      weapon['flatname'] = Arsenal.handleColors(self, Arsenal.filler, weapon['prettyname'], 'strip')
       weaponLanguage.append(Arsenal.LANGUAGE_WEAPONS(self, weapon))
       weaponLanguage.append('\n')
 
@@ -210,19 +268,9 @@ class Arsenal:
     weaponModList['mastermax']   = masterModMax
     weaponModList['list']        = ''.join(weaponModEffects)
     weaponModList['dlist']       = ''.join(demonicArtifacts)
-  
-    # Arsenal.doOutput(self, 'modeffects.idb')
-    # modEffectsDB = Arsenal.PDA_MOD(self, weaponModList)
-    # modEffectsDB = modEffectsDB.replace("'", '"')
-
-    # if (self.outputData):
-    #   with open(self.outputData.name, mode='w', encoding='utf-8') as file:
-    #     file.write(modEffectsDB)
-
-    # self.printLine('[%s] Created modeffects array list as modeffects.idb\n' % currentTime())
 
     tempString: str = ''.join(weaponLanguage)
-    tempString = Arsenal.handleColors(self, self.filler, tempString, 'revert')
+    tempString = Arsenal.handleColors(self, Arsenal.filler, tempString, 'revert')
 
     tempString = tempString.replace('[INNERQUOTE]', '\\"')
     tempString = re.sub('/(\n)/g', '\\n', tempString)
@@ -237,31 +285,42 @@ class Arsenal:
     if (doOutput):
       Arsenal.doOutput(self, 'language.auto.weapons')
       
-      if (self.outputData):
-        with open(self.outputData.name, mode='w', encoding='utf-8') as file:
-          file.write(languageWeaponOutput)
+      if (Arsenal.outputData):
+        filePath: str = ''
+        
+        if (hasattr(Arsenal.outputData, 'name')):
+          filePath = Arsenal.outputData.name
+        else:
+          filePath = Arsenal.outputData
+        
+        if (len(filePath) > 0):
+          with open(filePath, mode='w', encoding='utf-8') as file:
+            file.write(languageWeaponOutput)
     
-      self.printLine('[%s] Ending weapons processing. Created language.auto.weapons\n' % currentTime())
+      Arsenal.attemptPrint(self, '[%s] Weapons complete. Created/updated language.auto.weapons (size %s bytes)\n' % (currentTime(), os.path.getsize(filePath)))
     else: 
-      self.printLine('[%s] Ending weapons processing.\n' % currentTime())
-      self.printLine('[%s] %s.\n' % (currentTime(), languageWeaponOutput))
+      Arsenal.attemptPrint(self, '[%s] Ending weapons processing.\n' % currentTime())
+      Arsenal.attemptPrint(self, '[%s] %s.\n' % (currentTime(), languageWeaponOutput))
     
-  def processEquipment(self, equipment, doOutput):
+  def processEquipment(self, equipment: dict[str, Any], doOutput: bool) -> None | Literal[0]:
     if (not equipment): return 0
-    self.printLine('[%s] Reading EQUIPMENT...\n' % currentTime())
+    Arsenal.attemptPrint(self, '[%s] Reading EQUIPMENT...\n' % currentTime())
 
     # headerArmorList  : str = ''
     # languageArmorList: str = ''
     equipmentMax     : int = 0
     # equipDescription : str = ''
-    languageArmorList: list = list()
-    headerArmorList  : list = list()
-    equipDescription : list = list()
+    languageArmorList: list[str] = list()
+    headerArmorList  : list[str] = list()
+    equipDescription : list[str] = list()
     
 
     for equip in equipment:
-      equipDescription = ''
-      headerArmorList.append('{', f'"RL{equip['name']}", "{equip['name'].upper()}"', '},')
+      equip: dict[str, Any]
+      equipDescription = list()
+      headerArmorList.append('{')
+      headerArmorList.append(f'"RL{equip['name']}", "{equip['name'].upper()}"')
+      headerArmorList.append('},')
       # headerArmorList += '{'
       # headerArmorList += f'''"RL{equip['name']}", "{equip['name'].upper()}"'''
       # headerArmorList += '},'
@@ -269,7 +328,7 @@ class Arsenal:
 
       if ('description' in equip):
         for descFragment in equip['description']:
-          descFragment = descFragment.replace('\n', '/n')
+          descFragment: str = descFragment.replace('\n', '/n')
           equipDescription.append(f'"{descFragment}"\n')
           # equipDescription += f'"{descFragment}"\n'
           
@@ -278,7 +337,7 @@ class Arsenal:
       languageArmorList.append(Arsenal.LANGUAGE_EQUIPMENT(self, equip))
       languageArmorList.append('\n')
 
-    equipmentList: dict   = {}
+    equipmentList: dict[str, Any]  = {}
     equipmentList['max']  = equipmentMax
     equipmentList['list'] = ''.join(headerArmorList)
 
@@ -289,23 +348,32 @@ class Arsenal:
     
     if (doOutput):
       Arsenal.doOutput(self, 'equipment.idb')
-      if (self.outputData):
-        with open(self.outputData.name, mode='w', encoding='utf-8') as file:
-          file.write(arsenalDB)
+      
+      if (Arsenal.outputData):
+        filePath: str = ''
+        
+        if (hasattr(Arsenal.outputData, 'name')):
+          filePath = Arsenal.outputData.name
+        else:
+          filePath = Arsenal.outputData
+        
+        if (len(filePath) > 0):
+          with open(filePath, mode='w', encoding='utf-8') as file:
+            file.write(arsenalDB)
 
-      self.printLine('[%s] Created ACS array list for EQUIPMENT as equipment.idb\n' % currentTime())
+      Arsenal.attemptPrint(self, '[%s] Created Equipment ACS array list as equipment.idb (size %s bytes)\n' % (currentTime(), os.path.getsize(filePath)))
     else: 
-      self.printLine('[%s] Created ACS array list for EQUIPMENT\n' % currentTime())
-      self.printLine('[%s] %s\n' % (currentTime(), arsenalDB))
+      Arsenal.attemptPrint(self, '[%s] Created ACS array list for EQUIPMENT\n' % currentTime())
+      Arsenal.attemptPrint(self, '[%s] %s\n' % (currentTime(), arsenalDB))
 
-    for i in self.filler:
+    for i in Arsenal.filler:
       if ('attributes' in i):
-        attributes = self.filler[i].items()
+        attributes = Arsenal.filler[i].items()
         
         for attributeKey, attributeValue in attributes:
           tempString = tempString.replace(attributeKey, attributeValue)
 
-    self.printLine('[%s] Keywords translated into attributes\n' % currentTime())
+    Arsenal.attemptPrint(self, '[%s] Keywords translated into attributes\n' % currentTime())
 
     tempString = re.sub('/(\n)/g', '\\n', tempString)
     tempString = re.sub('/(;)\\n/gm', ';', tempString)
@@ -313,76 +381,84 @@ class Arsenal:
     
     tempString = tempString.replace('/n', '\\n')
     
-    tempString = Arsenal.handleColors(self, self.filler, tempString, 'revert')
+    tempString = Arsenal.handleColors(self, Arsenal.filler, tempString, 'revert')
 
     languageArmorOutput = Arsenal.language_warning + tempString
     
     if (doOutput):
       Arsenal.doOutput(self, 'language.auto.equipment')
       
-      if (self.outputData):
-        with open(self.outputData.name, mode='w', encoding='utf-8') as file:
-          file.write(languageArmorOutput)
+      if (Arsenal.outputData):
+        filePath: str = ''
+        if (hasattr(Arsenal.outputData, 'name')):
+          filePath = Arsenal.outputData.name
+        else:
+          filePath = Arsenal.outputData
           
-      self.printLine('[%s] Done with processing equipment. Generated language.auto.equipment\n' % currentTime())
+        if (len(filePath) > 0):
+          with open(filePath, mode='w', encoding='utf-8') as file:
+            file.write(languageArmorOutput)
+          
+      Arsenal.attemptPrint(self, '[%s] Finished Equipment. Generated language.auto.equipment (size %s bytes)\n' % (currentTime(), os.path.getsize(filePath)))
     else:
-      self.printLine('[%s] Done with processing equipment.\n' % currentTime())
-      self.printLine('[%s] %s.\n' % (currentTime(), languageArmorOutput))
+      Arsenal.attemptPrint(self, '[%s] Done with processing equipment.\n' % currentTime())
+      Arsenal.attemptPrint(self, '[%s] %s.\n' % (currentTime(), languageArmorOutput))
 
-        
-  def processModEffect(self, mods, doOutput):
+  def processModEffect(self, mods: dict[str, Any], doOutput: bool) -> None | Literal[0]:
     if (not mods): return 0
 
     # modEffectList = ''
-    modEffectList: list = list()
+    modEffectList: list[str] = list()
+    
     for mod in mods:
+      mod: dict[str, Any]
       modEffectListLen: int = len(mod['effect'])
         
       if (type(mod['effect']) == str) :
-        # modEffectList += f'''{mod['name']} = "{mod['effect']}";'''
         modEffectList.append(f'''{mod['name']} = "{mod['effect']}";''')
         
       if (type(mod['effect']) == list or type(mod['effect']) == dict) :
-        # modEffectList += f'''{mod['name']} = '''
         modEffectList.append(f'''{mod['name']} = ''')
         
         for i, modEffectFragment in enumerate(mod['effect']):
-          # modEffectList += f'"{modEffectFragment}"'
-          modEffectFragment = modEffectFragment.replace('\n', '/n')
+          modEffectFragment: str = modEffectFragment.replace('\n', '/n')
           modEffectList.append(f'"{modEffectFragment}"')
 
           if i < modEffectListLen - 1:
-            # modEffectList += f'\n'
             modEffectList.append(f'\n')
             
-        # modEffectList += f';'
         modEffectList.append(f';')
         
-      # modEffectList += '\n'
       modEffectList.append('\n')
 
-    # modEffectList = Arsenal.handleColors(self, self.filler, ''.join(modEffectList), 'revert')
-    # languageModOutput = Arsenal.language_warning + modEffectList
-    
     tempString: str = ''.join(modEffectList)
-    tempString = Arsenal.handleColors(self, self.filler, tempString, 'revert')
+    tempString = Arsenal.handleColors(self, Arsenal.filler, tempString, 'revert')
     
-    languageModOutput = Arsenal.language_warning + tempString
+    languageModOutput: Any | str = Arsenal.language_warning + tempString
     
-    self.printLine('[%s] Done parsing mod effects DB.\n' % currentTime())
+    Arsenal.attemptPrint(self, '[%s] Done parsing mod effects DB.\n' % currentTime())
 
     if (doOutput):
       Arsenal.doOutput(self, 'language.auto.mods')
-      if (self.outputData):
-        with open(self.outputData.name, mode='w', encoding='utf-8') as file:
-          file.write(languageModOutput)
-      self.printLine('[%s] Created language.auto.mods\n' % currentTime())
-    else: 
-      self.printLine('[%s] \n'  % currentTime())
-      self.printLine('[%s] %s.\n' % (currentTime(), languageModOutput))
-
+      
+      if (Arsenal.outputData):
+        filePath: str = ''
         
-  def processAssemblies(self, data, doOutput):
+        if (hasattr(Arsenal.outputData, 'name')):
+          filePath = Arsenal.outputData.name
+        else:
+          filePath = Arsenal.outputData
+          
+        if (len(filePath) > 0):
+          with open(filePath, mode='w', encoding='utf-8') as file:
+            file.write(languageModOutput)
+            
+      Arsenal.attemptPrint(self, '[%s] Created language.auto.mods (size %s bytes)\n' % (currentTime(), os.path.getsize(filePath)))
+    else: 
+      Arsenal.attemptPrint(self, '[%s] \n'  % currentTime())
+      Arsenal.attemptPrint(self, '[%s] %s.\n' % (currentTime(), languageModOutput))
+
+  def processAssemblies(self, data: dict[str, Any], doOutput: bool) -> None | Literal[0]:
     if (not data): return 0
 
     headerAssemblyMax   : int = 0
@@ -394,10 +470,10 @@ class Arsenal:
     # assemblyDescription : str = ''
     # headerAssemblyList  : str = ''
     # languageAssemblyList: str = f'''PDA_ASSEMBLY_REQUIREMENTS = "\\cdRequirements:\\c-\\n";\n'''
-    assemblyDescription : list = list()
-    headerAssemblyList  : list = list()
-    languageAssemblyList: list = list()
-    headerExoticList    : list = list()
+    assemblyDescription : list[str] = list()
+    headerAssemblyList  : list[str] = list()
+    languageAssemblyList: list[str] = list()
+    headerExoticList    : list[str] = list()
 
     # languageAssemblyList += 'PDA_ASSEMBLIES='
     languageAssemblyList.append(f'''PDA_ASSEMBLY_REQUIREMENTS = "\\cdRequirements:\\c-\\n";\n''')
@@ -420,20 +496,22 @@ class Arsenal:
     for assembly in data['assemblies']:
       assemblyDescription = list()
       
-      headerAssemblyList.append('{', f'''"RL{assembly['name']}AssemblyLearntToken", "PDA_ASSEMBLY_{assembly['tier'].upper()}_{assembly['name'].upper()}"''', '},')
+      headerAssemblyList.append('{')
+      headerAssemblyList.append(f'''"RL{assembly['name']}AssemblyLearntToken", "PDA_ASSEMBLY_{assembly['tier'].upper()}_{assembly['name'].upper()}"''')
+      headerAssemblyList.append('},')
       headerAssemblyMax += 1
 
       match assembly['tier']:
         case 'Basic':    basicMax    += 1
         case 'Advanced': advancedMax += 1
         case 'Master':   masterMax   += 1
-        case _: pass
+        case _:          pass
 
       if ('description' in assembly):
         descLen = len(assembly['description'])
         
         for i, descFragment in enumerate(assembly['description']):
-          descFragment = descFragment.replace('\n', '/n')
+          descFragment: str = descFragment.replace('\n', '/n')
           
           if i < descLen - 1:
             assemblyDescription.append(f'"{descFragment}"\n')
@@ -442,7 +520,7 @@ class Arsenal:
             
         assembly['actualDescription'] = ''.join(assemblyDescription)
 
-      languageAssemblyList.append(Arsenal.LANGUAGE_ASSEMBLIES(self, assembly))
+      languageAssemblyList.append(self.LANGUAGE_ASSEMBLIES(assembly))
       languageAssemblyList.append('\n')
 
     tempString: str = ''.join(languageAssemblyList)
@@ -453,14 +531,19 @@ class Arsenal:
     
     tempString = tempString.replace('/n', '\\n')
     
-    tempString = Arsenal.handleColors(self, self.filler, tempString, 'revert')
+    tempString = Arsenal.handleColors(self, Arsenal.filler, tempString, 'revert')
   
     for weapon in data['weapons']:
+      weapon: dict[str, Any] 
       if (weapon['tier'] == 'Unique' or weapon['tier'] == 'Demonic' or weapon['tier'] == 'Legendary'):
         if ('unmoddable' in weapon):
-          headerExoticList.append('{', f'''"RL{weapon['name']}", "null", "null", "null"''', '},')
+          headerExoticList.append('{')
+          headerExoticList.append(f'''"RL{weapon['name']}", "null", "null", "null"''')
+          headerExoticList.append('},')
         else:
-          headerExoticList.append('{', f'''"RL{weapon['name']}", "RL{weapon['name']}SniperLearntToken", "RL{weapon['name']}FirestormLearntToken", "RL{weapon['name']}NanoLearntToken"''', '},')
+          headerExoticList.append('{')
+          headerExoticList.append(f'''"RL{weapon['name']}", "RL{weapon['name']}SniperLearntToken", "RL{weapon['name']}FirestormLearntToken", "RL{weapon['name']}NanoLearntToken"''')
+          headerExoticList.append('},')
           
         headerUniqueMax += 1
     
@@ -479,64 +562,41 @@ DRLA_MASTERMAX="{masterMax}";
     if (doOutput):
       Arsenal.doOutput(self, 'language.auto.assemblies')
       
-      if (self.outputData):
-        with open(self.outputData.name, mode='w', encoding='utf-8') as file:
-          file.write(languageAssemblyOutput)
+      if (Arsenal.outputData):
+        filePath: str = ''
+        
+        if (hasattr(Arsenal.outputData, 'name')):
+          filePath = Arsenal.outputData.name
+        else:
+          filePath = Arsenal.outputData
+        
+        if (len(filePath) > 0):
+          with open(filePath, mode='w', encoding='utf-8') as file:
+            file.write(languageAssemblyOutput)
 
-      self.printLine('[%s] Created language.auto.assemblies\n' % currentTime())
+      Arsenal.attemptPrint(self, '[%s] Created language.auto.assemblies\n' % currentTime())
     else:
-      self.printLine('[%s] Created nothing\n' % currentTime())
-      self.printLine('[%s] %s.\n' % (currentTime(), languageAssemblyOutput))
+      Arsenal.attemptPrint(self, '[%s] Created nothing\n' % currentTime())
+      Arsenal.attemptPrint(self, '[%s] %s.\n' % (currentTime(), languageAssemblyOutput))
 
-    assemblyList: dict          = {}
+    assemblyList: dict[str, Any] = {}
     
-    assemblyList['list']        = ''.join(headerAssemblyList)
-    assemblyList['exotics']     = ''.join(headerExoticList)
+    assemblyList['list']         = ''.join(headerAssemblyList)
+    assemblyList['exotics']      = ''.join(headerExoticList)
     
-    assemblyList['max']         = headerAssemblyMax
-    assemblyList['uniquemax']   = headerUniqueMax
-    assemblyList['basicmax']    = basicMax
-    assemblyList['advancedmax'] = advancedMax
-    assemblyList['mastermax']   = masterMax
+    assemblyList['max']          = headerAssemblyMax
+    assemblyList['uniquemax']    = headerUniqueMax
+    assemblyList['basicmax']     = basicMax
+    assemblyList['advancedmax']  = advancedMax
+    assemblyList['mastermax']    = masterMax
     
 
-    self.printLine('[%s] Finished compilation\n' % currentTime())
+    Arsenal.attemptPrint(self, '[%s] Finished compilation\n' % currentTime())
 
-    # assembliesDB = Arsenal.PDA_ASM(self, assemblyList)
-    # assembliesDB = assembliesDB.replace("'", '"')
-    # if (doOutput):
-    #   Arsenal.doOutput(self, 'assemblies.idb')
-    #   if (self.outputData):
-    #     with open(self.outputData.name, mode='w', encoding='utf-8') as file:
-    #       file.write(assembliesDB)
-    #   self.printLine('[%s] Created assemblies.idb\n' % currentTime())
-    # else: 
-    #   self.printLine('[%s] Created nothing\n' % currentTime())
-    #   self.printLine('[%s] %s\n' % (currentTime(), assembliesDB))
-
-
-  def PDA_MOD(self, weapons):
-    construct = f'''#library "PDA_MOD"
-
-// These, however, are deprecated.
-/*
-#define DRLA_WEAPONMAX {weapons['max']}
-#define DRLA_DEMONWEAPONMAX {weapons['dmax']}
-#define DRLA_BASICMODMAX {weapons['basicmax']}
-#define DRLA_ADVANCEDMODMAX {weapons['advancedmax']}
-#define DRLA_MASTERMODMAX {weapons['mastermax']}
-#define DRLA_WEAPONMODELEMENTS 8
-#define DRLA_DEMONWEAPONELEMENTS 4
-
-str DRLA_WeaponModList[DRLA_WEAPONMAX][DRLA_WEAPONMODELEMENTS] = {{{weapons['list']}}};
-
-str DRLA_ArtifactEffectList[DRLA_DEMONWEAPONMAX][DRLA_DEMONWEAPONELEMENTS] = {{{weapons['dlist']}}};
-*/
-    '''
-
-    return construct
-
-  def PDA_ARM(self, equipment):
+  # -----
+  
+  def PDA_ARM(self, equipment: dict[str, Any]) -> str:
+    # TODO: Export the active set bonuses into a separate JSON, or rely on Equipment instead?
     construct = f'''#library "PDA_ARM"
     
 #define DRLA_ARMORMAX {equipment['max']}
@@ -570,66 +630,15 @@ str DRLA_ArmorSetList[DRLA_ARMORSETMAX] = {{
 
     return construct
 
-  def PDA_ASM(self, assemblies):
-    construct = f'''#library "PDA_ASM"
-
-#define DRLA_ASSEMBLYMAX {assemblies['max']}
-#define DRLA_ASSEMBLYELEMENTS 2
-#define DRLA_EXOTICEFFECTS_MAX {assemblies['uniquemax']}
-#define DRLA_EXOTICELEMENTS 4
-#define DRLA_BASICMAX {assemblies['basicmax']}
-#define DRLA_ADVANCEDMAX {assemblies['advancedmax']}
-#define DRLA_MASTERMAX {assemblies['mastermax']}
-
-/** 
-* Storage for .ini assembly writer
-*/
-
-int     DRLA_AssemblyState[MAX_PLAYERS][DRLA_ASSEMBLYMAX],
-        DRLA_OldAssemblyState[MAX_PLAYERS][DRLA_ASSEMBLYMAX];
-
-int     DRLA_KnownExoticState[MAX_PLAYERS][DRLA_EXOTICEFFECTS_MAX * 3],
-        DRLA_OldExoticState[MAX_PLAYERS][DRLA_EXOTICEFFECTS_MAX * 3];
-
-int     DRLA_KnownSniperState[MAX_PLAYERS][DRLA_EXOTICEFFECTS_MAX],
-        DRLA_OldSniperState[MAX_PLAYERS][DRLA_EXOTICEFFECTS_MAX],
-
-        DRLA_KnownFirestormState[MAX_PLAYERS][DRLA_EXOTICEFFECTS_MAX],
-        DRLA_OldFirestormState[MAX_PLAYERS][DRLA_EXOTICEFFECTS_MAX],
-
-        DRLA_KnownNanoState[MAX_PLAYERS][DRLA_EXOTICEFFECTS_MAX],
-        DRLA_OldNanoState[MAX_PLAYERS][DRLA_EXOTICEFFECTS_MAX];
-
-/** CVAR use */
-str     DRLA_FetchStoredInfo[MAX_PLAYERS],
-        DRLA_FetchExoticInfo[MAX_PLAYERS],
-        DRLA_FetchSniperInfo[MAX_PLAYERS],
-        DRLA_FetchFirestormInfo[MAX_PLAYERS],
-        DRLA_FetchNanoInfo[MAX_PLAYERS];
-
-/** Current state of weapon assembly knowledge */
-str     DRLA_CurrentAssemblerState[MAX_PLAYERS] = {{"","","","","","","",""}};
-
-str     DRLA_CurrentExoticModInfo[MAX_PLAYERS];
-
-str     DRLA_CurrentSniperState[MAX_PLAYERS]    = {{"","","","","","","",""}},
-        DRLA_CurrentFirestormState[MAX_PLAYERS] = {{"","","","","","","",""}},
-        DRLA_CurrentNanoState[MAX_PLAYERS]      = {{"","","","","","","",""}};
-
-str DRLA_Assemblies[DRLA_ASSEMBLYMAX][DRLA_ASSEMBLYELEMENTS] = {{{assemblies['list']}}};
-
-str DRLA_UniqueExoticModEffects[DRLA_EXOTICEFFECTS_MAX][DRLA_EXOTICELEMENTS] = {{{assemblies['exotics']}}};'''
-
-    return construct
-
-  def LANGUAGE_WEAPONS(self, weapon):
+  # -----
+  
+  def LANGUAGE_WEAPONS(self, weapon: dict[str, Any]):
     if ('name' not in weapon):
       return ''
 
-    bigname = weapon['name'].upper()
+    bigname: str = weapon['name'].upper()
 
-    # fragment = f'''PDA_WEAPON_{bigname}_ACTOR = "RL{bigname}";\n'''
-    fragment: list = list(f'''PDA_WEAPON_{bigname}_ACTOR = "RL{bigname}";\n''')
+    fragment: list[str] = list(f'''PDA_WEAPON_{bigname}_ACTOR = "RL{bigname}";\n''')
 
     if ('prettyname' in weapon): 
       fragment.append(f'''PDA_WEAPON_{bigname}_NAME = "{weapon['prettyname']}";\n''')
@@ -647,12 +656,9 @@ str DRLA_UniqueExoticModEffects[DRLA_EXOTICEFFECTS_MAX][DRLA_EXOTICELEMENTS] = {
 
     return ''.join(fragment)
 
-  def resPadder(str, len):
-    return str.rjust(len, ' ')
-
-  def LANGUAGE_EQUIPMENT(self, equipment: any): 
-    if (not self.filler): 
-      print("self.filler is empty")
+  def LANGUAGE_EQUIPMENT(self, equipment: dict[str, Any]) -> str | Literal[0]: 
+    if (not Arsenal.filler): 
+      print("Arsenal.filler is empty")
       return 0
     if ('name' not in equipment): 
       print("Name not found in equipment")
@@ -660,49 +666,50 @@ str DRLA_UniqueExoticModEffects[DRLA_EXOTICEFFECTS_MAX][DRLA_EXOTICELEMENTS] = {
 
     bigname         : str = equipment['name'].upper()
     coloredequipment: str = equipment['prettyname']
-    flatequipment   : str = Arsenal.handleColors(self, self.filler, equipment['prettyname'], 'strip')
+    flatequipment   : str = Arsenal.handleColors(self, Arsenal.filler, equipment['prettyname'], 'strip')
 
-    atts: list = list()
+    atts: list[str] = list()
     for attr in equipment['attributes']:
       atts.append(f'''" {attr}\\n"''')
 
-    for f in self.filler:
+    for f in Arsenal.filler:
       if ('colors' in f):
-        colors = self.filler[f].items()
+        colors = Arsenal.filler[f].items()
+        
         for colorKey, colorValue in colors:
           if (colorKey.upper() == equipment['tier'].upper()):
             coloredequipment = f'''\\c{colorValue}{equipment['prettyname']}\\c-'''
 
-    construct: list = list(f'''
+    construct: list[str] = list(f'''
 PDA_ARMOR_{bigname}_ICON = "{equipment['icon']}";
 PDA_ARMOR_{bigname}_NAME = "{coloredequipment}";
 PDA_ARMOR_{bigname}_FLATNAME = "{flatequipment}";
 PDA_ARMOR_{bigname}_DESC = {equipment['actualDescription']};
-PDA_ARMOR_{bigname}_PROT = "{Arsenal.resPadder(' ', 4 - len(equipment['protection']))}{equipment['protection']}% [GOLD]Protection[END]";
-PDA_ARMOR_{bigname}_RENPROT = "{Arsenal.resPadder(' ', 4 - len(equipment['renprotection']))}{equipment['renprotection']}% [GOLD]Protection[END]";''')
+PDA_ARMOR_{bigname}_PROT = "{Arsenal.languagePadding(self, equipment['protection'])}{equipment['protection']}% [GOLD]Protection[END]";
+PDA_ARMOR_{bigname}_RENPROT = "{Arsenal.languagePadding(self, equipment['renprotection'])}{equipment['renprotection']}% [GOLD]Protection[END]";''')
 
     if 'resistances' in equipment:
-      res: dict = equipment['resistances']
+      res: dict[str, Any] = equipment['resistances']
       construct.append(f'''
 PDA_ARMOR_{bigname}_RES = 
-  "{Arsenal.resPadder(' ', 4 - len(res['melee']))}{res['melee']}% [DARKGRAY]Melee[END]  "
-  "{Arsenal.resPadder(' ', 4 - len(res['bullet']))}{res['bullet']}% [GRAY]Bullet[END] \\n"
-  "{Arsenal.resPadder(' ', 4 - len(res['fire']))}{res['fire']}% [RED]Fire[END]   "
-  "{Arsenal.resPadder(' ', 4 - len(res['cryo']))}{res['cryo']}% [CYAN]Cryo[END]   \\n"
-  "{Arsenal.resPadder(' ', 4 - len(res['plasma']))}{res['plasma']}% [BLUE]Plasma[END] "
-  "{Arsenal.resPadder(' ', 4 - len(res['electric']))}{res['electric']}% [YELLOW]Electric[END]\\n"
-  "{Arsenal.resPadder(' ', 4 - len(res['poison']))}{res['poison']}% [PURPLE]Poison[END] "
-  "{Arsenal.resPadder(' ', 4 - len(res['radiation']))}{res['radiation']}% [GREEN]Radiation[END]\\n";''')
+  "{Arsenal.languagePadding(self, res['melee'])}{res['melee']}% [DARKGRAY]Melee[END]  "
+  "{Arsenal.languagePadding(self, res['bullet'])}{res['bullet']}% [GRAY]Bullet[END] \\n"
+  "{Arsenal.languagePadding(self, res['fire'])}{res['fire']}% [RED]Fire[END]   "
+  "{Arsenal.languagePadding(self, res['cryo'])}{res['cryo']}% [CYAN]Cryo[END]   \\n"
+  "{Arsenal.languagePadding(self, res['plasma'])}{res['plasma']}% [BLUE]Plasma[END] "
+  "{Arsenal.languagePadding(self, res['electric'])}{res['electric']}% [YELLOW]Electric[END]\\n"
+  "{Arsenal.languagePadding(self, res['poison'])}{res['poison']}% [PURPLE]Poison[END] "
+  "{Arsenal.languagePadding(self, res['radiation'])}{res['radiation']}% [GREEN]Radiation[END]\\n";''')
       construct.append('\n')
     
     if 'cyborgstats' in equipment:
-      cybres: dict = equipment['cyborgstats']['resistances']
+      cybres: dict[str, Any] = equipment['cyborgstats']['resistances']
       construct.append(f'''PDA_ARMOR_{bigname}_CYBRES =''')
-      if 'kinetic' in cybres:   construct.append(f'''"{Arsenal.resPadder(' ', 4 - len(cybres['kinetic']))}{cybres['kinetic']}% [WHITE]Kinetic Plating[END]\\n"''')
-      if 'thermal' in cybres:   construct.append(f'''"{Arsenal.resPadder(' ', 4 - len(cybres['thermal']))}{cybres['thermal']}% [RED]Thermal Dampeners[END]\\n"''')
-      if 'refractor' in cybres: construct.append(f'''"{Arsenal.resPadder(' ', 4 - len(cybres['refractor']))}{cybres['refractor']}% [BLUE]Refractor Field[END]\\n"''')
-      if 'organic' in cybres:   construct.append(f'''"{Arsenal.resPadder(' ', 4 - len(cybres['organic']))}{cybres['organic']}% [GREEN]Organic Recovery[END]\\n"''')
-      construct.append(f'''"{Arsenal.resPadder(' ', 4 - len(cybres['hazard']))}{cybres['hazard']}% [YELLOW]Hazard Shielding[END]\\n";''')
+      if 'kinetic' in cybres:   construct.append(f'''"{Arsenal.languagePadding(self, cybres['kinetic'])}{cybres['kinetic']}% [WHITE]Kinetic Plating[END]\\n"''')
+      if 'thermal' in cybres:   construct.append(f'''"{Arsenal.languagePadding(self, cybres['thermal'])}{cybres['thermal']}% [RED]Thermal Dampeners[END]\\n"''')
+      if 'refractor' in cybres: construct.append(f'''"{Arsenal.languagePadding(self, cybres['refractor'])}{cybres['refractor']}% [BLUE]Refractor Field[END]\\n"''')
+      if 'organic' in cybres:   construct.append(f'''"{Arsenal.languagePadding(self, cybres['organic'])}{cybres['organic']}% [GREEN]Organic Recovery[END]\\n"''')
+      construct.append(f'''"{Arsenal.languagePadding(self, cybres['hazard'])}{cybres['hazard']}% [YELLOW]Hazard Shielding[END]\\n";''')
 
     construct.append(f'''
 PDA_ARMOR_{bigname}_CYBAUG = "{equipment['cyborgstats']['augment']}";
@@ -710,10 +717,9 @@ PDA_ARMOR_{bigname}_ATTR = {''.join(atts)};
     ''')
 
     return ''.join(construct)
-
-    
-  def LANGUAGE_ASSEMBLIES(self, assembly: dict):
-    if (not self.filler): return 0
+ 
+  def LANGUAGE_ASSEMBLIES(self, assembly: dict[str, Any]) -> str | Literal[0]:
+    if (not Arsenal.filler): return 0
     if ('name' not in assembly):
       print('Name not found in assembly data')
       return ''
@@ -730,17 +736,17 @@ PDA_ARMOR_{bigname}_ATTR = {''.join(atts)};
     descLen  : int = 0
 
     for mod in assembly['mods']:
-      for f in self.filler:
+      for f in Arsenal.filler:
         if ('colors' in f):
-          colors = self.filler[f].items()
+          colors = Arsenal.filler[f].items()
           
           for colorKey, colorValue in colors:
             if (colorKey.upper() == mod):
               mods.append(f'''\\c{colorValue}{mod[0]}\\c-''')
 
-    for f in self.filler:
+    for f in Arsenal.filler:
       if ('colors' in f):
-        colors = self.filler[f].items()
+        colors = Arsenal.filler[f].items()
         
         for colorKey, colorValue in colors:
           if (colorKey.upper() == assembly['tier'].upper()):
@@ -749,7 +755,7 @@ PDA_ARMOR_{bigname}_ATTR = {''.join(atts)};
     descLen = len(assembly['valid'])
     
     for i, validassemblies in enumerate(assembly['valid']):
-      validassemblies = validassemblies.replace('\n', '/n')
+      validassemblies: str = validassemblies.replace('\n', '/n')
       
       if i < descLen - 1:
         valid.append(f'''"{validassemblies}"\n''')
@@ -758,7 +764,7 @@ PDA_ARMOR_{bigname}_ATTR = {''.join(atts)};
 
     descLen = len(assembly['validlist'])
     for i, validweapon in enumerate(assembly['validlist']):
-      validweapon = validweapon.replace('\n', '/n')
+      validweapon: str = validweapon.replace('\n', '/n')
       
       if i < descLen - 1:
         validlist.append(f'''"{validweapon}"\n''')
@@ -777,4 +783,12 @@ PDA_ASSEMBLY_{bigtier}_{bigname}_HEIGHT = "0";
 PDA_ASSEMBLY_{bigtier}_{bigname}_DESC = {assembly['actualDescription']}"[GREEN]Valid Weapons:[END]/n"\n{tempString};
 PDA_ASSEMBLY_{bigtier}_{bigname}_REQ = {validlist};
     '''
-  # };
+  
+  # -----
+  
+if __name__ == '__main__':
+  if (len(sys.argv) < 2):
+    print("Usage: python arsenal.py input_folder output_file [separator token]")
+  else:
+    self = Arsenal()
+    self.main()

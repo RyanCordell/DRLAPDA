@@ -9,12 +9,12 @@ customtkinter.set_appearance_mode('dark')
 customtkinter.set_default_color_theme('dark-blue')
 
 class Combiner(customtkinter.CTk):
-  inputFile: str = ''
-  outputFile: str= ''
-  currentPath = os.path.dirname(os.path.abspath(__file__))
-  data = ''
-  debug = 0
-  loadedJson: str = ''
+  inputFile     : str = ''
+  outputFile    : str = ''
+  currentPath   : str = os.path.dirname(os.path.abspath(__file__))
+  data          : str = ''
+  debug         : bool = False
+  loadedJson    : str = ''
   separatorToken: str = ':'
 
   def clearResults(self):
@@ -86,7 +86,7 @@ class Combiner(customtkinter.CTk):
     self.frame_label = customtkinter.CTkLabel(self.right_frame, text='Arsenal Builder', font=('CTkFont', 20))
     self.frame_label.grid(row=0, column=2, padx=20, pady=(10, 40))
 
-    self.openJSON = customtkinter.CTkButton(self.right_frame, text='Open JSON files', command=partial(Arsenal.doInput, self))
+    self.openJSON = customtkinter.CTkButton(self.right_frame, text='Open JSON folder', command=partial(Arsenal.doInput, self))
     self.openJSON.grid(row=2, column=2, padx=40, pady=(0, 20))
 
     # self.files_label = customtkinter.CTkLabel(self.right_frame, text='Selected files:')
