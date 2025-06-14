@@ -273,16 +273,20 @@ function PDAButton PDA_CreateAssemblyButton (int id, str graphic, str label, flo
         }
 
         // Open tooltip
-        if  (strCmp(tooltip, "") != 0) {
+        if (strCmp(thisButton.tooltip, "") != 0 && strCmp(assembly, "") != 0) {
             SetHudClipRect(PDA_RectX, PDA_ScrollableY+15, PDA_RectWidth+80, PDA_ScrollableHeight+60, PDA_RectWidth+10);
             SetFont("PTIPM");
-            HudMessage(s:"A\n"; HUDMSG_ALPHA, PDA_TOOLTIPID, CR_UNTRANSLATED, PDA_RectX + 0.1, (int)(PDA_LocalMouse.y * newresy) + 10.1, 0, 0.9);
+            HudMessage(s:"A\n"; HUDMSG_ALPHA, PDA_TOOLTIPID, CR_UNTRANSLATED, 
+                PDA_RectX + 0.1, (int)(PDA_LocalMouse.y * newresy) + 10.1, 
+                0, 0.9);
 
             SetFont("STAT_MNO");
             SetHudSize(500, 400);
             SetHudClipRect(PDA_RectX, PDA_ScrollableY+15, PDA_RectWidth+80, PDA_ScrollableHeight+165, PDA_RectWidth+10);
-            HudMessage(s:thisButton.tooltip; HUDMSG_ALPHA, PDA_TOOLTIPID - 1, CR_UNTRANSLATED, PDA_RectX + 20.1, (int)(PDA_LocalMouse.y * (400 / oldresh)) + 30.1, 0, thisButton.alpha);
-
+            HudMessage("%s:", thisButton.tooltip; HUDMSG_ALPHA, PDA_TOOLTIPID - 1, CR_UNTRANSLATED, 
+                PDA_RectX + 20.1, (int)(PDA_LocalMouse.y * (400 / oldresh)) + 30.1, 
+                0, 1.0);
+            
             PDA_SetupBounds();
         }
     }
@@ -297,6 +301,13 @@ function PDAButton PDA_CreateAssemblyButton (int id, str graphic, str label, flo
     // if (strCmp(tooltip, "???") == 0) {
     // }
     // else {
+    // }
+
+
+    // if (strCmp(tooltip, "???") == 0) {
+    //     HudMessage(s:"A\n"; HUDMSG_ALPHA, thisButton.id, CR_UNTRANSLATED, (int)(thisButton.x * newresx) + 25.1, graphicy + 20.0, 0, thisButton.alpha);
+    // } else {
+    //     HudMessage(s:"A\n"; HUDMSG_ALPHA, thisButton.id, CR_UNTRANSLATED, (int)(thisButton.x * newresx) + 25.1, graphicy + 20.0, 0, thisButton.alpha);
     // }
 
     thisButton.textFont = "STAT_MNO";
@@ -440,21 +451,21 @@ function PDAButton PDA_DisplayArmor (int id, str label, str graphic, float x, fl
     return thisButton;
 }
 
-function PDAButton PDA_CreateModPackDisplay (int id, str graphic, str name, float x, float y, int width, int height, fixed alpha) {
+function PDAButton PDA_CreateModPackDisplay (int id, str graphic, float x, float y, int width, int height, fixed alpha) {
     #define thisButton PDA_LocalButton[id]
-    assignButtonParams(thisButton, name)
+    assignButtonParams(thisButton, '')
     thisButton.graphic = graphic;
-    
-    buttonBoundsDefault(thisButton)
-
-    int graphicy = (int)(thisButton.y * newresy) + 14.0;
 
     thisButton.graphicFlags = HUDMSG_ALPHA;
-    thisButton.graphicID = PDA_MODIDRANGE - thisButton.id;
+    thisButton.graphicID = PDA_ASSEMBLYIDRANGE + PDA_MODMAX + thisButton.id;
     thisButton.graphicX = (int)(thisButton.x * newresx) + 15.1;
-    thisButton.graphicY = graphicy;
+    // thisButton.graphicY = (int)(thisButton.y * newresy) + 14.0;
+    thisButton.graphicY = (int)(PDA_Local.scrollingy * newresy) + 80.1 + (29.0 * thisButton.y);
+    // thisButton.graphicY = (int)(PDA_Local.scrollingy * newresy) + 76.1 + ( id > 4 ? (30.0 * thisButton.y) : (30.0 * thisButton.y));
 
+    thisButton.textFlags = HUDMSG_ALPHA;
     thisButton.textFont = "STAT_MNO";
+    thisButton.finalX = PDA_RectX + 35.1;
 
     return thisButton;
 }

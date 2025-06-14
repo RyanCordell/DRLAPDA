@@ -147,17 +147,22 @@ if (stricmp(CheckInventory(currentWeapon), "None") != 0) {
 
         for (int modPack = PDA_MODMIN; modPack < PDA_MODMAX - 1; modPack++) {
             if (modPack < mi_sniper) modYOffset = 10.1;
-            else modYOffset = 12.1;
+            else                     modYOffset = 12.1;
+
+            str selectedMod = StrParam("%s:MODICON", strMid(stringArray[modPack], 9, 1));
 
             modAlpha = 1;
             // modAlpha = 0.5;
             // if (playerHazMod[modPack] > 0) modAlpha = 1;
             
-            button[modPack] = PDA_CreateModPackDisplay(modPack, icon_static_WeaponMods[modPack], stringArray[modPack], 
-                PDA_RectX + 5.1, PDA_Local.scrollingy + modYOffset + (20.0 * (2 + modPack)), 16, 24, modAlpha);
+            #define modButton button[modPack]
+            modButton = PDA_CreateModPackDisplay(modPack, selectedMod, PDA_RectX + 5.1, modPack, 16, 24, modAlpha);
+                        PDA_InitButton(modButton, true, WEAPON_PAGE_MODPACK_EFFECTS, '');
 
-            HudMessage("%l:", stringArray[modPack]; HUDMSG_ALPHA, PDA_ASSEMBLYIDRANGE + modPack, CR_UNTRANSLATED, 
-                PDA_RectX + 35.1, (int)(PDA_Local.scrollingy * newresy) + 80.1 + (29.0 * modPack), 0, modAlpha);
+            SetFont(modButton.textFont);
+            HudMessage("%l:", stringArray[modPack]; modButton.textFlags, PDA_ASSEMBLYIDRANGE + modPack, CR_UNTRANSLATED, 
+                modButton.finalX, (int)(PDA_Local.scrollingy * newresy) + 80.1 + (29.0 * modPack), 
+                0, modAlpha);
         }
         
         // for (int weaponIndex = 0; weaponIndex < DRLA_WEAPONMAX; weaponIndex++) {

@@ -99,11 +99,15 @@ for (int ti = 0, li = 1; ti <= PDA_Local.maxassembliesper; ti+=2, li+=2) {
     if (peekFuture >= advancedInd && PDA_Local.assemblyOffset < advancedInd) continue;
     if (peekFuture >= masterInd && PDA_Local.assemblyOffset < masterMax) continue;
 
+    // log("assemblyCallback [%s:] | tooltip:\n %s:", assemblyCallback, tooltip);
+    // log("----------------------------");
+
     if (PDA_CheckPlayer1Inventory(actorToken) || CheckInventory(actorToken)) {
-        button = PDA_CreateAssemblyButton(id, icon, asmFormatter, x, y, width, height, assemblyCallback, tooltip);
+        button = PDA_CreateAssemblyButton(id, icon,     asmFormatter,                       x, y, width, height, assemblyCallback, tooltip);
                  PDA_InitButton(button, false, PDA_ASSEMBLY_DETAIL, "");
     } else { 
-        button = PDA_CreateAssemblyButton(id, "PDAUNK", strParam(l:"PDA_ASSEMBLY_UNKNOWN"), x, y, width, height, "", "???");
+        button = PDA_CreateAssemblyButton(id, "PDAUNK", strParam(l:"PDA_ASSEMBLY_UNKNOWN"), x, y, width, height, "",               "???");
+                 PDA_InitButton(button, true, PDA_Local.page, "");
     }
 }
         

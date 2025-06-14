@@ -398,9 +398,8 @@ str DRLA_BackpackList[DRLA_BACKPACKMAX][2] = {
 };
 
 /** Mod icons for the PDA */
-// TODO: Unhardcode this. This is dumb, this shouldn't be hardcoded.
-str icon_static_WeaponMods[PDA_MODMAX - 1] = { "BMODICON", "PMODICON", "AMODICON", "TMODICON", "SMODICON", "FMODICON", "NMODICON" };
-str icon_animated_WeaponMods[PDA_MODMAX - 1] = { "PDABMOD", "PDAPMOD", "PDAAMOD", "PDATMOD", "PDASMOD", "PDAFMOD", "PDANMOD" };
+// str icon_static_WeaponMods[PDA_MODMAX - 1] = { "BMODICON", "PMODICON", "AMODICON", "TMODICON", "SMODICON", "FMODICON", "NMODICON" };
+// str icon_animated_WeaponMods[PDA_MODMAX - 1] = { "PDABMOD", "PDAPMOD", "PDAAMOD", "PDATMOD", "PDASMOD", "PDAFMOD", "PDANMOD" };
 
 // FUNCTIONS --------------------
 

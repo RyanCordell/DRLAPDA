@@ -1,6 +1,6 @@
 #define asciiNumberZero 48
 #define MAX_PLAYERS 8
-#define ASSEMBLY_MAX 200
+#define ASSEMBLY_MAX 300
 
 #define strToNumber(a, i)  (int)(GetChar((a), (i)) - asciiNumberZero)
 
@@ -21,7 +21,6 @@ SCRIPT "DRLA_AssemblyGlobalizer" ENTER {
             if (ai % 2 == 0) masterMax++;
         }
     }
-    masterMax--;
 
     int DRLA_AssemblyState[MAX_PLAYERS][ASSEMBLY_MAX],
         DRLA_OldAssemblyState[MAX_PLAYERS][ASSEMBLY_MAX];
@@ -35,8 +34,8 @@ SCRIPT "DRLA_AssemblyGlobalizer" ENTER {
      * 
      * Read data from ini fetched cvars and give the player all the assemblies.
      */
-    for (int ti = 0; ti < masterMax; ti++) {
-        if (ti % 2 == 0) actorToken = stringArray[ti];
+    for (int ti = 0, at = 0; ti < masterMax, at < masterMax * 2; ti++, at += 2) {
+        actorToken = stringArray[at];
 
         int stateAt = strToNumber(DRLA_FetchStoredInfo[PlayerNumber()], ti);
 
@@ -57,10 +56,8 @@ SCRIPT "DRLA_AssemblyGlobalizer" ENTER {
      */
      
     while (true) {
-        for (int ti = 0; ti < masterMax; ti++) {
-            if (ti % 2 == 0) {
-                actorToken = stringArray[ti];
-            }
+        for (int ti = 0, at = 0; ti < masterMax, at < masterMax * 2; ti++, at += 2) {
+            actorToken = stringArray[at];
 
             DRLA_AssemblyState[PlayerNumber()][ti] = CheckInventory(actorToken);
 
