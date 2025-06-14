@@ -2,4 +2,701 @@
 
 // Please do not modify this file directly, it's specifically compiled and any changes may be lost.
 
-    PDA_ASSEMBLY_BASIC_CHAINSWORD = "Chainsword \cc[\c-\c[BM]B\c-\c[PM]P\c-\cc]\c-";    PDA_ASSEMBLY_BASIC_CHAINSWORD_NAME = "\c[BB]Chainsword\c-";    PDA_ASSEMBLY_BASIC_CHAINSWORD_MODS = "\cc[\c-\c[BM]B\c-\c[PM]P\c-\cc]\c-";    PDA_ASSEMBLY_BASIC_CHAINSWORD_ICON = "PDACSWOR";    PDA_ASSEMBLY_BASIC_CHAINSWORD_HEIGHT = "0";    PDA_ASSEMBLY_BASIC_CHAINSWORD_DESC = "404 DESCRIPTION NOT FOUND\n\n\cdValid Weapons:\c-\n\cjCombat Knife\c- \ck->\c-\n \c[BB]Chainsword\c-\n\n";    PDA_ASSEMBLY_BASIC_CHAINSWORD_REQ = "Combat Knife\c-";        PDA_ASSEMBLY_BASIC_PIERCINGBLADE = "Piercing Blade \cc[\c-\c[PM]P\c-\c[AM]A\c-\cc]\c-";    PDA_ASSEMBLY_BASIC_PIERCINGBLADE_NAME = "\c[BB]Piercing Blade\c-";    PDA_ASSEMBLY_BASIC_PIERCINGBLADE_MODS = "\cc[\c-\c[PM]P\c-\c[AM]A\c-\cc]\c-";    PDA_ASSEMBLY_BASIC_PIERCINGBLADE_ICON = "PDAPIERC";    PDA_ASSEMBLY_BASIC_PIERCINGBLADE_HEIGHT = "0";    PDA_ASSEMBLY_BASIC_PIERCINGBLADE_DESC = "By incorporating advanced nano technology to strengthen and sharpen melee weapons, their durability will be increased substantially.\nAs a side effect, the weapon is extremely effective at bypassing armor on enemies.\n\n\cdValid Weapons:\c-\n\cjChainsaw\c- \ck->\c-\n \c[BB]Nanoedge Saw\c-\n\n";    PDA_ASSEMBLY_BASIC_PIERCINGBLADE_REQ = "\cjChainsaw\c-";        PDA_ASSEMBLY_BASIC_SPEEDLOADERPISTOL = "Revolver \cc[\c-\c[AM]A\c-\c[TM]T\c-\cc]\c-";    PDA_ASSEMBLY_BASIC_SPEEDLOADERPISTOL_NAME = "\c[BB]Revolver\c-";    PDA_ASSEMBLY_BASIC_SPEEDLOADERPISTOL_MODS = "\cc[\c-\c[AM]A\c-\c[TM]T\c-\cc]\c-";    PDA_ASSEMBLY_BASIC_SPEEDLOADERPISTOL_ICON = "PDAREVOL";    PDA_ASSEMBLY_BASIC_SPEEDLOADERPISTOL_HEIGHT = "0";    PDA_ASSEMBLY_BASIC_SPEEDLOADERPISTOL_DESC = "Converts the weapon into a revolver-type weapon. Generally, a revolver will be slower, but far more powerful than normal pistols.\n\n\cdValid Weapons:\c-\n\cjPistol\c- \ck->\c-\n \c[BB]Revolver\c-\n\n\ctNuclear Plasma Pistol\c- \ck->\c-\n \c[BB]Nuclear Plasma Revolver\c-\n\n";    PDA_ASSEMBLY_BASIC_SPEEDLOADERPISTOL_REQ = "\cjPistol\c-, \ctNuclear Plasma Pistol\c-";        PDA_ASSEMBLY_BASIC_SILENCEDPISTOL = "Silenced Weapon \cc[\c-\c[TM]T\c-\c[TM]T\c-\cc]\c-";    PDA_ASSEMBLY_BASIC_SILENCEDPISTOL_NAME = "\c[BB]Silenced Weapon\c-";    PDA_ASSEMBLY_BASIC_SILENCEDPISTOL_MODS = "\cc[\c-\c[TM]T\c-\c[TM]T\c-\cc]\c-";    PDA_ASSEMBLY_BASIC_SILENCEDPISTOL_ICON = "PDASILEN";    PDA_ASSEMBLY_BASIC_SILENCEDPISTOL_HEIGHT = "0";    PDA_ASSEMBLY_BASIC_SILENCEDPISTOL_DESC = "Converts the weapon into a stealthy weapon, that will not alert monsters beyond close range.\nThe effect of a blursphere will increase their damage exponentially while it is active.\n\n\cdValid Weapons:\c-\n\cjPistol\c- \ck->\c-\n \c[BB]Silenced Pistol\c-\n\n\cjBattle Rifle\c- \ck->\c-\n \c[BB]Stealth Rifle\c-\n\n";    PDA_ASSEMBLY_BASIC_SILENCEDPISTOL_REQ = "\cjPistol\c-, \cjBattle Rifle\c-";        PDA_ASSEMBLY_BASIC_SHREDDERPISTOL = "Shredder Weapon \cc[\c-\c[PM]P\c-\c[TM]T\c-\cc]\c-";    PDA_ASSEMBLY_BASIC_SHREDDERPISTOL_NAME = "\c[BB]Shredder Weapon\c-";    PDA_ASSEMBLY_BASIC_SHREDDERPISTOL_MODS = "\cc[\c-\c[PM]P\c-\c[TM]T\c-\cc]\c-";    PDA_ASSEMBLY_BASIC_SHREDDERPISTOL_ICON = "PDASHRED";    PDA_ASSEMBLY_BASIC_SHREDDERPISTOL_HEIGHT = "0";    PDA_ASSEMBLY_BASIC_SHREDDERPISTOL_DESC = "Shredder weapons fire off the pellets in a shell one after another, instead of all at once like a proper shotgun.\n\n\cdValid Weapons:\c-\n\cjPistol\c- \ck->\c-\n \c[BB]Shredder Pistol\c-\n\n\cjDouble Shotgun\c- \ck->\c-\n \c[BB]Shredder Shotgun\c-\n\n";    PDA_ASSEMBLY_BASIC_SHREDDERPISTOL_REQ = "\cjPistol\c-, \cjDouble Shotgun\c-";        PDA_ASSEMBLY_BASIC_ELEPHANTGUN = "Elephant Gun \cc[\c-\c[PM]P\c-\c[PM]P\c-\cc]\c-";    PDA_ASSEMBLY_BASIC_ELEPHANTGUN_NAME = "\c[BB]Elephant Gun\c-";    PDA_ASSEMBLY_BASIC_ELEPHANTGUN_MODS = "\cc[\c-\c[PM]P\c-\c[PM]P\c-\cc]\c-";    PDA_ASSEMBLY_BASIC_ELEPHANTGUN_ICON = "PDAELEPH";    PDA_ASSEMBLY_BASIC_ELEPHANTGUN_HEIGHT = "0";    PDA_ASSEMBLY_BASIC_ELEPHANTGUN_DESC = "The Elephant Gun takes all the pellets of the shotgun, and combines them into a fairly accurate single slug.\nPowerful at ranges where the shotgun starts to drop off, and armor piercing.\n\n\cdValid Weapons:\c-\n\cjShotgun\c- \ck->\c-\n \c[BB]Elephant Gun\c-\n\n";    PDA_ASSEMBLY_BASIC_ELEPHANTGUN_REQ = "\cjShotgun\c-";        PDA_ASSEMBLY_BASIC_GATLINGGUN = "Gatling Gun \cc[\c-\c[BM]B\c-\c[BM]B\c-\cc]\c-";    PDA_ASSEMBLY_BASIC_GATLINGGUN_NAME = "\c[BB]Gatling Gun\c-";    PDA_ASSEMBLY_BASIC_GATLINGGUN_MODS = "\cc[\c-\c[BM]B\c-\c[BM]B\c-\cc]\c-";    PDA_ASSEMBLY_BASIC_GATLINGGUN_ICON = "PDAGATLI";    PDA_ASSEMBLY_BASIC_GATLINGGUN_HEIGHT = "0";    PDA_ASSEMBLY_BASIC_GATLINGGUN_DESC = "A chaingun type weapon with an increase to all stats.\nDamage, mag, accuracy are all increased, but windup and down is as well.\n\n\cdValid Weapons:\c-\n\cjChaingun\c- \ck->\c-\n \c[BB]Gatling Gun\c-\n\n";    PDA_ASSEMBLY_BASIC_GATLINGGUN_REQ = "\cjChaingun\c-";        PDA_ASSEMBLY_BASIC_MICROLAUNCHER = "Micro Launcher \cc[\c-\c[TM]T\c-\c[TM]T\c-\cc]\c-";    PDA_ASSEMBLY_BASIC_MICROLAUNCHER_NAME = "\c[BB]Micro Launcher\c-";    PDA_ASSEMBLY_BASIC_MICROLAUNCHER_MODS = "\cc[\c-\c[TM]T\c-\c[TM]T\c-\cc]\c-";    PDA_ASSEMBLY_BASIC_MICROLAUNCHER_ICON = "PDAMICRO";    PDA_ASSEMBLY_BASIC_MICROLAUNCHER_HEIGHT = "0";    PDA_ASSEMBLY_BASIC_MICROLAUNCHER_DESC = "A smaller, less powerful rocket launcher that reloads much faster. Great for smaller enemies or when you have a surplus of rockets.\n\n\cdValid Weapons:\c-\n\cjRocket Launcher\c- \ck->\c-\n \c[BB]Micro Launcher\c-\n\n";    PDA_ASSEMBLY_BASIC_MICROLAUNCHER_REQ = "\cjRocket Launcher\c-";        PDA_ASSEMBLY_BASIC_HIGHPOWERWEAPON = "High-Power Weapon \cc[\c-\c[BM]B\c-\c[PM]P\c-\cc]\c-";    PDA_ASSEMBLY_BASIC_HIGHPOWERWEAPON_NAME = "\c[BB]High-Power Weapon\c-";    PDA_ASSEMBLY_BASIC_HIGHPOWERWEAPON_MODS = "\cc[\c-\c[BM]B\c-\c[PM]P\c-\cc]\c-";    PDA_ASSEMBLY_BASIC_HIGHPOWERWEAPON_ICON = "PDAHIGHP";    PDA_ASSEMBLY_BASIC_HIGHPOWERWEAPON_HEIGHT = "0";    PDA_ASSEMBLY_BASIC_HIGHPOWERWEAPON_DESC = "Increases the base damage of a weapon by 2, and the max randomization by 2, but drops the magazine size by 40%.\nAn easy way of increasing damage as long as reloading isn't an issue.\n\n\cdValid Weapons:\c-\n\cjPistol\c- \ck->\c-\n \c[BB]High-Power Pistol\c-\n\n\cjChaingun\c- \ck->\c-\n \c[BB]High-Power Chaingun\c-\n\n\cjBattle Rifle\c- \ck->\c-\n \c[BB]High-Power Battle Rifle\c-\n\n\cjPlasma Rifle\c- \ck->\c-\n \c[BB]High-Power Plasma Rifle\c-\n\n\cjBFG 9000\c- \ck->\c-\n \c[BB]High-Power BFG 9000\c-\n\n\ctBlaster\c- \ck->\c-\n \c[BB]High-Power Blaster\c-\n\n\ctCombat Pistol\c- \ck->\c-\n \c[BB]High-Power Combat Pistol\c-\n\n\ctMarksman Pistol\c- \ck->\c-\n \c[BB]High-Power Marksman Pistol\c-\n\n\ctHandcannon\c- \ck->\c-\n \c[BB]High-Power Handcannon\c-\n\n\ctTristar Blaster\c- \ck->\c-\n \c[BB]High-Power Tristar Blaster\c-\n\n\ctMinigun\c- \ck->\c-\n \c[BB]High-Power Minigun\c-\n\n\ctLaser Rifle\c- \ck->\c-\n \c[BB]High-Power Laser Rifle\c-\n\n\ctNuclear Plasma Pistol\c- \ck->\c-\n \c[BB]High-Power Nuclear Plasma Pistol\c-\n\n\ctNuclear Plasma Rifle\c- \ck->\c-\n \c[BB]High-Power Nuclear Plasma Rifle\c-\n\n\ctNuclear BFG 9000\c- \ck->\c-\n \c[BB]High-Power Nuclear BFG 9000\c-\n\n\ctUzi\c- \ck->\c-\n \c[BB]High-Power Uzi\c-\n\n\ciMarksman Rifle\c- \ck->\c-\n \c[BB]High-Power Marksman Rifle\c-\n\n\ciVanguard Rifle\c- \ck->\c-\n \c[BB]High-Power Vanguard Rifle\c-\n\n\ciHunting Revolver\c- \ck->\c-\n \c[BB]High-Power Hunting Revolver\c-\n\n\ciThompson\c- \ck->\c-\n \c[BB]High-Power Thompson\c-\n\n\ciPP7\c- \ck->\c-\n \c[BB]High-Power PP7\c-\n\n\ciRC-P90\c- \ck->\c-\n \c[BB]RC-P120\c-\n\n";    PDA_ASSEMBLY_BASIC_HIGHPOWERWEAPON_REQ = "Any \cdnon-shotgun \cjweapon\c-.\nMagazine capacity needs to be more than \cf5\c- shots.";        PDA_ASSEMBLY_BASIC_TACTICALSHOTGUN = "Tactical Shotgun \cc[\c-\c[PM]P\c-\c[TM]T\c-\cc]\c-";    PDA_ASSEMBLY_BASIC_TACTICALSHOTGUN_NAME = "\c[BB]Tactical Shotgun\c-";    PDA_ASSEMBLY_BASIC_TACTICALSHOTGUN_MODS = "\cc[\c-\c[PM]P\c-\c[TM]T\c-\cc]\c-";    PDA_ASSEMBLY_BASIC_TACTICALSHOTGUN_ICON = "PDATACSH";    PDA_ASSEMBLY_BASIC_TACTICALSHOTGUN_HEIGHT = "0";    PDA_ASSEMBLY_BASIC_TACTICALSHOTGUN_DESC = "Upgrades the Combat Shotgun to run off magazines, rather than loose shells, making it much easier to reload. It also has a very slight damage increase.\n\n\cdValid Weapons:\c-\n\cjCombat Shotgun\c- \ck->\c-\n \c[BB]Tactical Shotgun\c-\n\n";    PDA_ASSEMBLY_BASIC_TACTICALSHOTGUN_REQ = "\cjCombat Shotgun\c-";        PDA_ASSEMBLY_BASIC_PLASMATICSHRAPNEL = "Plasmatic Shrapnel \cc[\c-\c[PM]P\c-\c[SM]S\c-\cc]\c-";    PDA_ASSEMBLY_BASIC_PLASMATICSHRAPNEL_NAME = "\c[BB]Plasmatic Shrapnel\c-";    PDA_ASSEMBLY_BASIC_PLASMATICSHRAPNEL_MODS = "\cc[\c-\c[PM]P\c-\c[SM]S\c-\cc]\c-";    PDA_ASSEMBLY_BASIC_PLASMATICSHRAPNEL_ICON = "PDAPLASM";    PDA_ASSEMBLY_BASIC_PLASMATICSHRAPNEL_HEIGHT = "0";    PDA_ASSEMBLY_BASIC_PLASMATICSHRAPNEL_DESC = "Causes shotguns to do Plasma damage, as well as create small AOE explosions on impact, making it very effective against massed crowds.\n\n\cdValid Weapons:\c-\n\cjShotgun\c- \ck->\c-\n \c[BB]Plasmatic Shotgun\c-\n\n\cjCombat Shotgun\c- \ck->\c-\n \c[BB]Plasmatic Combat Shotgun\c-\n\n\cjDouble Shotgun\c- \ck->\c-\n \c[BB]Plasmatic Double Shotgun\c-\n\n\ctSuper Shotgun\c- \ck->\c-\n \c[BB]Plasmatic Super Shotgun\c-\n\n\ctAssault Shotgun\c- \ck->\c-\n \c[BB]Plasmatic Assault Shotgun\c-\n\n\ctPlasma Shotgun\c- \ck->\c-\n \c[BB]Overcharged Plasma Shotgun\c-\n\n\ciHunting Shotgun\c- \ck->\c-\n \c[BB]Plasmatic Hunting Shotgun\c-\n\n";    PDA_ASSEMBLY_BASIC_PLASMATICSHRAPNEL_REQ = "\cjShotgun\c-, \cjCombat Shotgun\c-,\n\cjDouble Shotgun\c-, \ctSuper Shotgun\c-,\n\ctAssault Shotgun\c-, \ctPlasma Shotgun\c-,\n\ciHunting Shotgun\c-,\n";        PDA_ASSEMBLY_BASIC_HEAVYSHOTGUN = "Heavy Shotgun \cc[\c-\c[BM]B\c-\c[BM]B\c-\cc]\c-";    PDA_ASSEMBLY_BASIC_HEAVYSHOTGUN_NAME = "\c[BB]Heavy Shotgun\c-";    PDA_ASSEMBLY_BASIC_HEAVYSHOTGUN_MODS = "\cc[\c-\c[BM]B\c-\c[BM]B\c-\cc]\c-";    PDA_ASSEMBLY_BASIC_HEAVYSHOTGUN_ICON = "PDAHSHOT";    PDA_ASSEMBLY_BASIC_HEAVYSHOTGUN_HEIGHT = "0";    PDA_ASSEMBLY_BASIC_HEAVYSHOTGUN_DESC = "Increases the number of pellets fired per barrel by 3, and increases max damage randomization by 2.\nAn effective way to boost starting shotguns to a level that can deal with higher tier enemies.\n\n\cdValid Weapons:\c-\n\cjShotgun\c- \ck->\c-\n \c[BB]Heavy Shotgun\c-\n\n\cjCombat Shotgun\c- \ck->\c-\n \c[BB]Heavy Combat Shotgun\c-\n\n\cjDouble Shotgun\c- \ck->\c-\n \c[BB]Heavy Double Shotgun\c-\n\n\ctSuper Shotgun\c- \ck->\c-\n \c[BB]Heavy Super Shotgun\c-\n\n\ctAssault Shotgun\c- \ck->\c-\n \c[BB]Heavy Assault Shotgun\c-\n\n\ctPlasma Shotgun\c- \ck->\c-\n \c[BB]Heavy Plasma Shotgun\c-\n\n\ciHunting Shotgun\c- \ck->\c-\n \c[BB]Heavy Hunting Shotgun\c-\n\n";    PDA_ASSEMBLY_BASIC_HEAVYSHOTGUN_REQ = "\cjShotgun\c-, \cjCombat Shotgun\c-,\n\cjDouble Shotgun\c-, \ctSuper Shotgun\c-,\n\ctAssault Shotgun\c-, \ctPlasma Shotgun\c-,\n\ciHunting Shotgun\c-";        PDA_ASSEMBLY_BASIC_FLAMETHROWER = "Flamethrower \cc[\c-\c[PM]P\c-\c[FM]F\c-\cc]\c-";    PDA_ASSEMBLY_BASIC_FLAMETHROWER_NAME = "\c[BB]Flamethrower\c-";    PDA_ASSEMBLY_BASIC_FLAMETHROWER_MODS = "\cc[\c-\c[PM]P\c-\c[FM]F\c-\cc]\c-";    PDA_ASSEMBLY_BASIC_FLAMETHROWER_ICON = "PDAFLAMT";    PDA_ASSEMBLY_BASIC_FLAMETHROWER_HEIGHT = "0";    PDA_ASSEMBLY_BASIC_FLAMETHROWER_DESC = "A rapid fire area denial weapon, that runs off the fuel in rockets.\nIt can be a very efficient weapon for ammo consumption.\n\n\cdValid Weapons:\c-\n\ctNapalm Launcher\c- \ck->\c- \c[BB]Flamethrower\c-";    PDA_ASSEMBLY_BASIC_FLAMETHROWER_REQ = "\ctNapalm Launcher\c-";        PDA_ASSEMBLY_BASIC_SHRAPNELCANNON = "Shrapnel Cannon \cc[\c-\c[PM]P\c-\c[AM]A\c-\cc]\c-";    PDA_ASSEMBLY_BASIC_SHRAPNELCANNON_NAME = "\c[BB]Shrapnel Cannon\c-";    PDA_ASSEMBLY_BASIC_SHRAPNELCANNON_MODS = "\cc[\c-\c[PM]P\c-\c[AM]A\c-\cc]\c-";    PDA_ASSEMBLY_BASIC_SHRAPNELCANNON_ICON = "PDASHRAP";    PDA_ASSEMBLY_BASIC_SHRAPNELCANNON_HEIGHT = "0";    PDA_ASSEMBLY_BASIC_SHRAPNELCANNON_DESC = "A strange weapon that detonates a rocket internally, and then uses the force to blast out the casing as deadly shrapnel.\nEffective against larger enemies, but smaller enemies will often dodge most of the damage.\n\n\cdValid Weapons:\c-\n\cjShotgun\c- \ck->\c- \c[BB]Shrapnel Cannon\c-";    PDA_ASSEMBLY_BASIC_SHRAPNELCANNON_REQ = "\cjShotgun\c-";        PDA_ASSEMBLY_BASIC_SNIPERRIFLE = "Sniper Rifle \cc[\c-\c[AM]A\c-\c[SM]S\c-\cc]\c-";    PDA_ASSEMBLY_BASIC_SNIPERRIFLE_NAME = "\c[BB]Sniper Rifle\c-";    PDA_ASSEMBLY_BASIC_SNIPERRIFLE_MODS = "\cc[\c-\c[AM]A\c-\c[SM]S\c-\cc]\c-";    PDA_ASSEMBLY_BASIC_SNIPERRIFLE_ICON = "PDASNIPE";    PDA_ASSEMBLY_BASIC_SNIPERRIFLE_HEIGHT = "0";    PDA_ASSEMBLY_BASIC_SNIPERRIFLE_DESC = "Converts the weapon to a scoped, powerful weapon, capable of dealing extreme damage with pinpoint accuracy.\n\n\cdValid Weapons:\c-\n\cjBattle Rifle\c- \ck->\c- \c[BB]Flamethrower\c-";    PDA_ASSEMBLY_BASIC_SNIPERRIFLE_REQ = "\cjBattle Rifle\c-";        PDA_ASSEMBLY_ADVANCED_DOUBLECHAINSAW = "Double Chainsaw \cc[\c-\c[BM]B\c-\c[PM]P\c-\c[PM]P\c-\cc]\c-";    PDA_ASSEMBLY_ADVANCED_DOUBLECHAINSAW_NAME = "\c[AB]Double Chainsaw\c-";    PDA_ASSEMBLY_ADVANCED_DOUBLECHAINSAW_MODS = "\cc[\c-\c[BM]B\c-\c[PM]P\c-\c[PM]P\c-\cc]\c-";    PDA_ASSEMBLY_ADVANCED_DOUBLECHAINSAW_ICON = "PDADOUBL";    PDA_ASSEMBLY_ADVANCED_DOUBLECHAINSAW_HEIGHT = "0";    PDA_ASSEMBLY_ADVANCED_DOUBLECHAINSAW_DESC = "A chainsaw with two blades.\n'Nuff said.\n\n\cdValid Weapons:\c-\n\cjChainsaw\c- \ck->\c- \c[AB]Double Chainsaw\c-";    PDA_ASSEMBLY_ADVANCED_DOUBLECHAINSAW_REQ = "\cjChainsaw\c-";        PDA_ASSEMBLY_ADVANCED_TACTICALROCKETLAUNCHER = "Tactical Rocket Launcher \cc[\c-\c[BM]B\c-\c[BM]B\c-\c[BM]B\c-\cc]\c-";    PDA_ASSEMBLY_ADVANCED_TACTICALROCKETLAUNCHER_NAME = "\c[AB]Tactical Rocket Launcher\c-";    PDA_ASSEMBLY_ADVANCED_TACTICALROCKETLAUNCHER_MODS = "\cc[\c-\c[BM]B\c-\c[BM]B\c-\c[BM]B\c-\cc]\c-";    PDA_ASSEMBLY_ADVANCED_TACTICALROCKETLAUNCHER_ICON = "PDATACRO";    PDA_ASSEMBLY_ADVANCED_TACTICALROCKETLAUNCHER_HEIGHT = "0";    PDA_ASSEMBLY_ADVANCED_TACTICALROCKETLAUNCHER_DESC = "A rocket launcher that gets loaded with drum mags, this weapon is very quick to reload.\nThe rockets are only slightly weaker than normal.\n\n\cdValid Weapons:\c-\n\cjRocket Launcher\c- \ck->\c- \c[AB]Tactical Rocket Launcher\c-";    PDA_ASSEMBLY_ADVANCED_TACTICALROCKETLAUNCHER_REQ = "\cjRocket Launcher\c-";        PDA_ASSEMBLY_ADVANCED_STORMPISTOL = "Storm Pistol \cc[\c-\c[BM]B\c-\c[BM]B\c-\c[TM]T\c-\cc]\c-";    PDA_ASSEMBLY_ADVANCED_STORMPISTOL_NAME = "\c[AB]Storm Pistol\c-";    PDA_ASSEMBLY_ADVANCED_STORMPISTOL_MODS = "\cc[\c-\c[BM]B\c-\c[BM]B\c-\c[TM]T\c-\cc]\c-";    PDA_ASSEMBLY_ADVANCED_STORMPISTOL_ICON = "PDASPIST";    PDA_ASSEMBLY_ADVANCED_STORMPISTOL_HEIGHT = "0";    PDA_ASSEMBLY_ADVANCED_STORMPISTOL_DESC = "A powerful pistol type that has two barrels and a large magazine size.\nFor some reason, firing only consumes one unit of ammo, don't question it.\n\n\cdValid Weapons:\c-\n\cjPistol\c- \ck->\c- \c[AB]Storm Pistol\c-\ctBlaster\c- \ck->\c- \c[AB]Storm Blaster\c-\ctCombat Pistol\c- \ck->\c- \c[AB]Storm Combat Pistol\c-\ctMarksman Pistol\c- \ck->\c- \c[AB]Storm Marksman Pistol\c-\ctHandcannon\c- \ck->\c- \c[AB]Storm Handcannon\c-\ctNuclear Plasma Pistol\c- \ck->\c- \c[AB]Storm Nuclear Plasma Pistol\c-\ctUzi\c- \ck->\c- \c[AB]Dual Uzis\c-";    PDA_ASSEMBLY_ADVANCED_STORMPISTOL_REQ = "\cjPistol\c-, \ctBlaster\c-, \ctCombat Pistol\c-, \n\ctMarksman Pistol\c-, \ctHandcannon\c-, \n\ctNuclear Plasma Pistol\c-, \ctUzi\c-, \n";        PDA_ASSEMBLY_ADVANCED_PLASMAPISTOL = "Plasma Pistol \cc[\c-\c[PM]P\c-\c[PM]P\c-\c[TM]T\c-\cc]\c-";    PDA_ASSEMBLY_ADVANCED_PLASMAPISTOL_NAME = "\c[AB]Plasma Pistol\c-";    PDA_ASSEMBLY_ADVANCED_PLASMAPISTOL_MODS = "\cc[\c-\c[PM]P\c-\c[PM]P\c-\c[TM]T\c-\cc]\c-";    PDA_ASSEMBLY_ADVANCED_PLASMAPISTOL_ICON = "PDAPPIST";    PDA_ASSEMBLY_ADVANCED_PLASMAPISTOL_HEIGHT = "0";    PDA_ASSEMBLY_ADVANCED_PLASMAPISTOL_DESC = "Converts the pistol into a cell-using plasma weapon.\nEnhances already energy-based weapons instead.\n\n\cdValid Weapons:\c-\n\cjPistol\c- \ck->\c- \c[AB]Plasma Pistol\c-\ctBlaster\c- \ck->\c- \c[AB]Overcharged Blaster\c-\ctCombat Pistol\c- \ck->\c- \c[AB]Plasma Combat Pistol\c-\ctMarksman Pistol\c- \ck->\c- \c[AB]Plasma Marksman Pistol\c-\ctHandcannon\c- \ck->\c- \c[AB]Plasma Handcannon\c-\ctNuclear Plasma Pistol\c- \ck->\c- \c[AB]Supercharged Nuclear Plasma Pistol\c-\ctUzi\c- \ck->\c- \c[AB]Plasma Uzi\c-";    PDA_ASSEMBLY_ADVANCED_PLASMAPISTOL_REQ = "\cjPistol\c-, \ctBlaster\c-, \ctCombat Pistol\c-, \n\ctMarksman Pistol\c-, \ctHandcannon\c-, \n\ctNuclear Plasma Pistol\c-, \ctUzi\c-, \n";        PDA_ASSEMBLY_ADVANCED_ASSAULTRIFLE = "Precision Rifle \cc[\c-\c[AM]A\c-\c[AM]A\c-\c[AM]A\c-\cc]\c-";    PDA_ASSEMBLY_ADVANCED_ASSAULTRIFLE_NAME = "\c[AB]Precision Rifle\c-";    PDA_ASSEMBLY_ADVANCED_ASSAULTRIFLE_MODS = "\cc[\c-\c[AM]A\c-\c[AM]A\c-\c[AM]A\c-\cc]\c-";    PDA_ASSEMBLY_ADVANCED_ASSAULTRIFLE_ICON = "PDAASSAU";    PDA_ASSEMBLY_ADVANCED_ASSAULTRIFLE_HEIGHT = "0";    PDA_ASSEMBLY_ADVANCED_ASSAULTRIFLE_DESC = "Removes the rapid-fire functionality and makes it fire single shots at a time.\nAttacks are three times stronger than normal and extremely accurate.\n\n\cdValid Weapons:\c-\n\cjChaingun\c- \ck->\c- \c[AB]Precision Chaingun\c-\cjBattle Rifle\c- \ck->\c- \c[AB]Scoped Rifle\c-\cjPlasma Rifle\c- \ck->\c- \c[AB]Precision Plasma Rifle\c-\ctMinigun\c- \ck->\c- \c[AB]Precision Minigun\c-\ctLaser Rifle\c- \ck->\c- \c[AB]Precision Laser Rifle\c-\ctNuclear Plasma Rifle\c- \ck->\c- \c[AB]Precision Nuclear Plasma Rifle\c-\ctUzi\c- \ck->\c- \c[AB]Precision Uzi\c-";    PDA_ASSEMBLY_ADVANCED_ASSAULTRIFLE_REQ = "\cjChaingun\c-, \cjBattle Rifle\c-, \n\cjPlasma Rifle\c-, \ctMinigun\c-, \n\ctLaser Rifle\c-, \ctNuclear Plasma Rifle\c-, \n\ctUzi\c-";        PDA_ASSEMBLY_ADVANCED_BURSTCANNON = "Burst Cannon \cc[\c-\c[BM]B\c-\c[BM]B\c-\c[PM]P\c-\cc]\c-";    PDA_ASSEMBLY_ADVANCED_BURSTCANNON_NAME = "\c[AB]Burst Cannon\c-";    PDA_ASSEMBLY_ADVANCED_BURSTCANNON_MODS = "\cc[\c-\c[BM]B\c-\c[BM]B\c-\c[PM]P\c-\cc]\c-";    PDA_ASSEMBLY_ADVANCED_BURSTCANNON_ICON = "PDABURST";    PDA_ASSEMBLY_ADVANCED_BURSTCANNON_HEIGHT = "0";    PDA_ASSEMBLY_ADVANCED_BURSTCANNON_DESC = "Removes the full-auto functionality and makes it fire bursts of three shots.\nThe mag size is doubled, attacks are two times stronger than normal, and are less accurate than normal.\n\n\cdValid Weapons:\c-\n\cjChaingun\c- \ck->\c- \c[AB]Burst Chaingun\c-\cjBattle Rifle\c- \ck->\c- \c[AB]Burst-fire Rifle\c-\cjPlasma Rifle\c- \ck->\c- \c[AB]Burst Plasma Rifle\c-\ctMinigun\c- \ck->\c- \c[AB]Burst Minigun\c-\ctLaser Rifle\c- \ck->\c- \c[AB]Burst Laser Rifle\c-\ctNuclear Plasma Rifle\c- \ck->\c- \c[AB]Burst Nuclear Plasma Rifle\c-\ctUzi\c- \ck->\c- \c[AB]Burst Uzi\c-";    PDA_ASSEMBLY_ADVANCED_BURSTCANNON_REQ = "\cjChaingun\c-, \cjBattle Rifle\c-, \n\cjPlasma Rifle\c-, \ctMinigun\c-, \n\ctLaser Rifle\c-, \ctNuclear Plasma Rifle\c-, \n\ctUzi\c-";        PDA_ASSEMBLY_ADVANCED_VBFG9000 = "VBFG 9000 \cc[\c-\c[PM]P\c-\c[PM]P\c-\c[PM]P\c-\cc]\c-";    PDA_ASSEMBLY_ADVANCED_VBFG9000_NAME = "\c[AB]VBFG 9000\c-";    PDA_ASSEMBLY_ADVANCED_VBFG9000_MODS = "\cc[\c-\c[PM]P\c-\c[PM]P\c-\c[PM]P\c-\cc]\c-";    PDA_ASSEMBLY_ADVANCED_VBFG9000_ICON = "PDAVBFG9";    PDA_ASSEMBLY_ADVANCED_VBFG9000_HEIGHT = "0";    PDA_ASSEMBLY_ADVANCED_VBFG9000_DESC = "A more powerful version of the BFG.\nMore damage, rays, ammo consumption, charge time and way more carnage.\n\n\cdValid Weapons:\c-\n\cjBFG 9000\c- \ck->\c- \c[AB]VBFG 9000\c-\ctNuclear BFG 9000\c- \ck->\c- \c[AB]Nuclear VBFG 9000\c-";    PDA_ASSEMBLY_ADVANCED_VBFG9000_REQ = "\cjBFG 9000\c-, \ctNuclear BFG 9000\c-";        PDA_ASSEMBLY_ADVANCED_NANOSHRAPNEL = "Nano Shrapnel \cc[\c-\c[PM]P\c-\c[PM]P\c-\c[NM]N\c-\cc]\c-";    PDA_ASSEMBLY_ADVANCED_NANOSHRAPNEL_NAME = "\c[AB]Nano Shrapnel\c-";    PDA_ASSEMBLY_ADVANCED_NANOSHRAPNEL_MODS = "\cc[\c-\c[PM]P\c-\c[PM]P\c-\c[NM]N\c-\cc]\c-";    PDA_ASSEMBLY_ADVANCED_NANOSHRAPNEL_ICON = "PDANANSH";    PDA_ASSEMBLY_ADVANCED_NANOSHRAPNEL_HEIGHT = "0";    PDA_ASSEMBLY_ADVANCED_NANOSHRAPNEL_DESC = "Converts shotguns to not use ammo, but with substantially lowered damage.\nThe firerate and capacity to ignore resistances make these guns very powerful.\n\n\cdValid Weapons:\c-\n\cjShotgun\c- \ck->\c-\n \c[AB]Nano Shotgun\c-\n\n\cjCombat Shotgun\c- \ck->\c-\n \c[AB]Nano Combat Shotgun\c-\n\n\cjDouble Shotgun\c- \ck->\c-\n \c[AB]Nano Double Shotgun\c-\n\n\ctSuper Shotgun\c- \ck->\c-\n \c[AB]Nano Super Shotgun\c-\n\n\ctAssault Shotgun\c- \ck->\c-\n \c[AB]Nano Assault Shotgun\c-\n\n\ctPlasma Shotgun\c- \ck->\c-\n \c[AB]Nano Plasma Shotgun\c-\n\n";    PDA_ASSEMBLY_ADVANCED_NANOSHRAPNEL_REQ = "\cjShotgun\c-, \cjCombat Shotgun\c-,\n\cjDouble Shotgun\c-, \ctSuper Shotgun\c-,\n\ctAssault Shotgun\c-, \ctPlasma Shotgun\c-\n";        PDA_ASSEMBLY_ADVANCED_HYPERBLASTER = "Hyperblaster \cc[\c-\c[AM]A\c-\c[TM]T\c-\c[TM]T\c-\cc]\c-";    PDA_ASSEMBLY_ADVANCED_HYPERBLASTER_NAME = "\c[AB]Hyperblaster\c-";    PDA_ASSEMBLY_ADVANCED_HYPERBLASTER_MODS = "\cc[\c-\c[AM]A\c-\c[TM]T\c-\c[TM]T\c-\cc]\c-";    PDA_ASSEMBLY_ADVANCED_HYPERBLASTER_ICON = "PDAHYPER";    PDA_ASSEMBLY_ADVANCED_HYPERBLASTER_HEIGHT = "0";    PDA_ASSEMBLY_ADVANCED_HYPERBLASTER_DESC = "A plasma rifle that fires faster, smaller projectiles, and does so without needing to cooldown. An excellent and adaptive weapon.\n\n\cdValid Weapons:\c-\n\cjPlasma Rifle\c- \ck->\c-\n \c[AB]Hyperblaster\c-\n\n";    PDA_ASSEMBLY_ADVANCED_HYPERBLASTER_REQ = "\cjPlasma Rifle\c-";        PDA_ASSEMBLY_ADVANCED_FOCUSEDDOUBLESHOTGUN = "Focused Double Shotgun \cc[\c-\c[PM]P\c-\c[AM]A\c-\c[TM]T\c-\cc]\c-";    PDA_ASSEMBLY_ADVANCED_FOCUSEDDOUBLESHOTGUN_NAME = "\c[AB]Focused Double Shotgun\c-";    PDA_ASSEMBLY_ADVANCED_FOCUSEDDOUBLESHOTGUN_MODS = "\cc[\c-\c[PM]P\c-\c[AM]A\c-\c[TM]T\c-\cc]\c-";    PDA_ASSEMBLY_ADVANCED_FOCUSEDDOUBLESHOTGUN_ICON = "PDAFOCUS";    PDA_ASSEMBLY_ADVANCED_FOCUSEDDOUBLESHOTGUN_HEIGHT = "0";    PDA_ASSEMBLY_ADVANCED_FOCUSEDDOUBLESHOTGUN_DESC = "A double shotgun with an extended barrel that greatly reduces spread and slightly increases damage.\n\n\cdValid Weapons:\c-\n\cjDouble Shotgun\c- \ck->\c-\n \c[AB]Focused Double Shotgun\c-\n\n";    PDA_ASSEMBLY_ADVANCED_FOCUSEDDOUBLESHOTGUN_REQ = "\cjDouble Shotgun\c-";        PDA_ASSEMBLY_ADVANCED_PLASMARIFLEMKII = "Plasma Rifle Mk. II \cc[\c-\c[BM]B\c-\c[BM]B\c-\c[TM]T\c-\cc]\c-";    PDA_ASSEMBLY_ADVANCED_PLASMARIFLEMKII_NAME = "\c[AB]Plasma Rifle Mk. II\c-";    PDA_ASSEMBLY_ADVANCED_PLASMARIFLEMKII_MODS = "\cc[\c-\c[BM]B\c-\c[BM]B\c-\c[TM]T\c-\cc]\c-";    PDA_ASSEMBLY_ADVANCED_PLASMARIFLEMKII_ICON = "PDAPLS2G";    PDA_ASSEMBLY_ADVANCED_PLASMARIFLEMKII_HEIGHT = "0";    PDA_ASSEMBLY_ADVANCED_PLASMARIFLEMKII_DESC = "A powerful but slow series of plasma weapons, these guns do more than double the damage of normal plasma weapons.\n\n\cdValid Weapons:\c-\n\cjPlasma Rifle\c- \ck->\c-\n \c[AB]Plasma Rifle Mk. II\c-\n\n\ctPlasma Shotgun\c- \ck->\c-\n \c[AB]Plasma Shotgun Mk. II\c-\n\n\ctNuclear Plasma Rifle\c- \ck->\c-\n \c[AB]Nuclear Plasma Rifle Mk. II\c-\n\n";    PDA_ASSEMBLY_ADVANCED_PLASMARIFLEMKII_REQ = "\cjPlasma Rifle\c-, \ctPlasma Shotgun\c-,\n\ctNuclear Plasma Rifle\c-";        PDA_ASSEMBLY_ADVANCED_BULLETSTORMCHAINGUN = "Bulletstorm Weapon \cc[\c-\c[BM]B\c-\c[BM]B\c-\c[BM]B\c-\cc]\c-";    PDA_ASSEMBLY_ADVANCED_BULLETSTORMCHAINGUN_NAME = "\c[AB]Bulletstorm Weapon\c-";    PDA_ASSEMBLY_ADVANCED_BULLETSTORMCHAINGUN_MODS = "\cc[\c-\c[BM]B\c-\c[BM]B\c-\c[BM]B\c-\cc]\c-";    PDA_ASSEMBLY_ADVANCED_BULLETSTORMCHAINGUN_ICON = "PDABULLS";    PDA_ASSEMBLY_ADVANCED_BULLETSTORMCHAINGUN_HEIGHT = "0";    PDA_ASSEMBLY_ADVANCED_BULLETSTORMCHAINGUN_DESC = "Bulletstorm weapons do away with reloading altogether, allowing you to fire them as long as you have the ammo to do so.\n\n\cdValid Weapons:\c-\n\cjChaingun\c- \ck->\c-\n \c[AB]Bulleststorm Chaingun\c-\n\n\cjBattle Rifle\c- \ck->\c-\n \c[AB]Bulletstorm Rifle\c-\n\n";    PDA_ASSEMBLY_ADVANCED_BULLETSTORMCHAINGUN_REQ = "\cjChaingun\c-, \cjBattle Rifle\c-\n";        PDA_ASSEMBLY_ADVANCED_MINIMISSILEPISTOL = "Mini-missile Pistol \cc[\c-\c[AM]A\c-\c[AM]A\c-\c[TM]T\c-\cc]\c-";    PDA_ASSEMBLY_ADVANCED_MINIMISSILEPISTOL_NAME = "\c[AB]Mini-missile Pistol\c-";    PDA_ASSEMBLY_ADVANCED_MINIMISSILEPISTOL_MODS = "\cc[\c-\c[AM]A\c-\c[AM]A\c-\c[TM]T\c-\cc]\c-";    PDA_ASSEMBLY_ADVANCED_MINIMISSILEPISTOL_ICON = "PDAMMISP";    PDA_ASSEMBLY_ADVANCED_MINIMISSILEPISTOL_HEIGHT = "0";    PDA_ASSEMBLY_ADVANCED_MINIMISSILEPISTOL_DESC = "A small launcher that fires 6 mini-missiles for the cost of one full size rocket. How it does this is unknown.\n\n\cdValid Weapons:\c-\n\ctHandcannon\c- \ck->\c-\n \c[AB]Mini-missile Pistol\c-\n\n";    PDA_ASSEMBLY_ADVANCED_MINIMISSILEPISTOL_REQ = "\ctHandcannon\c-\n";        PDA_ASSEMBLY_ADVANCED_AUTOSHOTGUN = "Auto Shotgun \cc[\c-\c[BM]B\c-\c[BM]B\c-\c[FM]F\c-\cc]\c-";    PDA_ASSEMBLY_ADVANCED_AUTOSHOTGUN_NAME = "\c[AB]Auto Shotgun\c-";    PDA_ASSEMBLY_ADVANCED_AUTOSHOTGUN_MODS = "\cc[\c-\c[BM]B\c-\c[BM]B\c-\c[FM]F\c-\cc]\c-";    PDA_ASSEMBLY_ADVANCED_AUTOSHOTGUN_ICON = "PDAAUTSH";    PDA_ASSEMBLY_ADVANCED_AUTOSHOTGUN_HEIGHT = "0";    PDA_ASSEMBLY_ADVANCED_AUTOSHOTGUN_DESC = "Weaker than normal shotguns, but possessing a ferocious firerate.\nIf you have shells to spare, you can spew them out with these in no time at all.\n\n\cdValid Weapons:\c-\n\cjShotgun\c- \ck->\c-\n \c[AB]Autoshotgun\c-\n\n\cjDouble Shotgun\c- \ck->\c-\n \c[AB]Auto Double Shotgun\c-\n\n";    PDA_ASSEMBLY_ADVANCED_AUTOSHOTGUN_REQ = "\cjShotgun\c-, \cjDouble Shotgun\c-\n";        PDA_ASSEMBLY_ADVANCED_GRENADELAUNCHER = "Grenade Launcher \cc[\c-\c[AM]A\c-\c[AM]A\c-\c[AM]A\c-\cc]\c-";    PDA_ASSEMBLY_ADVANCED_GRENADELAUNCHER_NAME = "\c[AB]Grenade Launcher\c-";    PDA_ASSEMBLY_ADVANCED_GRENADELAUNCHER_MODS = "\cc[\c-\c[AM]A\c-\c[AM]A\c-\c[AM]A\c-\cc]\c-";    PDA_ASSEMBLY_ADVANCED_GRENADELAUNCHER_ICON = "PDAGRENL";    PDA_ASSEMBLY_ADVANCED_GRENADELAUNCHER_HEIGHT = "0";    PDA_ASSEMBLY_ADVANCED_GRENADELAUNCHER_DESC = "Converts the weapon into an arcing, bouncing projectile launcher, allowing it to be used in different ways.\n\n\cdValid Weapons:\c-\n\cjRocket Launcher\c- \ck->\c-\n \c[AB]Grenade Launcher\c-\n\n";    PDA_ASSEMBLY_ADVANCED_GRENADELAUNCHER_REQ = "\cjRocket Launcher\c-\n";        PDA_ASSEMBLY_ADVANCED_NUCLEARPLASMASHOTGUN = "Energy Shotgun \cc[\c-\c[BM]B\c-\c[BM]B\c-\c[SM]S\c-\cc]\c-";    PDA_ASSEMBLY_ADVANCED_NUCLEARPLASMASHOTGUN_NAME = "\c[AB]Energy Shotgun\c-";    PDA_ASSEMBLY_ADVANCED_NUCLEARPLASMASHOTGUN_MODS = "\cc[\c-\c[BM]B\c-\c[BM]B\c-\c[SM]S\c-\cc]\c-";    PDA_ASSEMBLY_ADVANCED_NUCLEARPLASMASHOTGUN_ICON = "PDAESHOT";    PDA_ASSEMBLY_ADVANCED_NUCLEARPLASMASHOTGUN_HEIGHT = "0";    PDA_ASSEMBLY_ADVANCED_NUCLEARPLASMASHOTGUN_DESC = "Converts the weapon into a shotgun variant of itself.\nA useful way of getting shotgun variants of advanced weapons.\n\n\cdValid Weapons:\c-\n\ctLaser Rifle\c- \ck->\c-\n \c[AB]Laser Shotgun\c-\n\n\ctNuclear Plasma Rifle\c- \ck->\c-\n \c[AB]Nuclear Plasma Shotgun\c-\n\n";    PDA_ASSEMBLY_ADVANCED_NUCLEARPLASMASHOTGUN_REQ = "\ctLaser Rifle\c-, \ctNuclear Plasma Rifle\c-\n";        PDA_ASSEMBLY_MASTER_NANOMANUFACTUREAMMO = "Nanomanufacture Ammo \cc[\c-\c[BM]B\c-\c[BM]B\c-\c[BM]B\c-\c[NM]N\c-\cc]\c-";    PDA_ASSEMBLY_MASTER_NANOMANUFACTUREAMMO_NAME = "\c[MB]Nanomanufacture Ammo\c-";    PDA_ASSEMBLY_MASTER_NANOMANUFACTUREAMMO_MODS = "\cc[\c-\c[BM]B\c-\c[BM]B\c-\c[BM]B\c-\c[NM]N\c-\cc]\c-";    PDA_ASSEMBLY_MASTER_NANOMANUFACTUREAMMO_ICON = "PDANANOM";    PDA_ASSEMBLY_MASTER_NANOMANUFACTUREAMMO_HEIGHT = "0";    PDA_ASSEMBLY_MASTER_NANOMANUFACTUREAMMO_DESC = "Converts the loading mechanism into a nanomachic ammo assembler, allowing the weapon to fire infinitely.\nWeapons with larger ammo types will require time to charge.\n\n\cdValid Weapons:\c-\n\cjPistol\c- \ck->\c-\n \c[MB]Nanomachic Pistol\c-\n\n\cjChaingun\c- \ck->\c-\n \c[MB]Nanomachic Chaingun\c-\n\n\cjBattle Rifle\c- \ck->\c-\n \c[MB]Nanomachic Battle Rifle\c-\n\n\cjRocket Launcher\c- \ck->\c-\n \c[MB]Nanomachic Rocket Launcher\c-\n\n\cjPlasma Rifle\c- \ck->\c-\n \c[MB]Nanomachic Plasma Rifle\c-\n\n\ctBlaster\c- \ck->\c-\n \c[MB]Nanomachic Blaster\c-\n\n\ctCombat Pistol\c- \ck->\c-\n \c[MB]Nanomachic Combat Pistol\c-\n\n\ctMarksman Pistol\c- \ck->\c-\n \c[MB]Nanomachic Marksman Pistol\c-\n\n\ctHandcannon\c- \ck->\c-\n \c[MB]Nanomachic Handcannon\c-\n\n\ctTristar Blaster\c- \ck->\c-\n \c[MB]Nanomachic Tristar Blaster\c-\n\n\ctMinigun\c- \ck->\c-\n \c[MB]Nanomachic Minigun\c-\n\n\ctMissile Launcher\c- \ck->\c-\n \c[MB]Nanomachic Missile Launcher\c-\n\n\ctNapalm Launcher\c- \ck->\c-\n \c[MB]Nanomachic Napalm Launcher\c-\n\n\ctLaser Rifle\c- \ck->\c-\n \c[MB]Nanomachic Laser Rifle\c-\n\n\ctUzi\c- \ck->\c-\n \c[MB]Nanomachic Uzi\c-\n\n";    PDA_ASSEMBLY_MASTER_NANOMANUFACTUREAMMO_REQ = "\cjAny \cdnon-shotgun\c- and \cdnon-BFG \cjweapon.\c-\n";        PDA_ASSEMBLY_MASTER_DEMOLITIONAMMO = "Demolition Ammo \cc[\c-\c[PM]P\c-\c[TM]T\c-\c[TM]T\c-\c[FM]F\c-\cc]\c-";    PDA_ASSEMBLY_MASTER_DEMOLITIONAMMO_NAME = "\c[MB]Demolition Ammo\c-";    PDA_ASSEMBLY_MASTER_DEMOLITIONAMMO_MODS = "\cc[\c-\c[PM]P\c-\c[TM]T\c-\c[TM]T\c-\c[FM]F\c-\cc]\c-";    PDA_ASSEMBLY_MASTER_DEMOLITIONAMMO_ICON = "PDADEMOA";    PDA_ASSEMBLY_MASTER_DEMOLITIONAMMO_HEIGHT = "0";    PDA_ASSEMBLY_MASTER_DEMOLITIONAMMO_DESC = "Loads bullet weapons with explosive ammunition and a cool paint scheme.\nThe explosions are dangerous to yourself, so don't fire in enclosed spaces.\n\n\cdValid Weapons:\c-\n\cjPistol\c- \ck->\c-\n \c[MB]Demolition Ammo Pistol\c-\n\n\cjChaingun\c- \ck->\c-\n \c[MB]Demolition Ammo Chaingun\c-\n\n\cjBattle Rifle\c- \ck->\c-\n \c[MB]Demolition Ammo Battle Rifle\c-\n\n\ctCombat Pistol\c- \ck->\c-\n \c[MB]Demolition Ammo Combat Pistol\c-\n\n\ctMarksman Pistol\c- \ck->\c-\n \c[MB]Demolition Ammo Marksman Pistol\c-\n\n\ctHandcannon\c- \ck->\c-\n \c[MB]Demolition Ammo Handcannon\c-\n\n\ctMinigun\c- \ck->\c-\n \c[MB]Demolition Ammo Minigun\c-\n\n\ctUzi\c- \ck->\c-\n \c[MB]Demolition Ammo Uzi\c-\n\n";    PDA_ASSEMBLY_MASTER_DEMOLITIONAMMO_REQ = "\cjAny \cdnon-shotgun\c- \cjweapon\c-.\n\cjWeapon must use \cf10mm ammo\c-.\n";        PDA_ASSEMBLY_MASTER_BIGGESTFUCKINGGUN = "Demolition Ammo \cc[\c-\c[BM]B\c-\c[BM]B\c-\c[FM]F\c-\c[FM]F\c-\cc]\c-";    PDA_ASSEMBLY_MASTER_BIGGESTFUCKINGGUN_NAME = "\c[MB]Demolition Ammo\c-";    PDA_ASSEMBLY_MASTER_BIGGESTFUCKINGGUN_MODS = "\cc[\c-\c[BM]B\c-\c[BM]B\c-\c[FM]F\c-\c[FM]F\c-\cc]\c-";    PDA_ASSEMBLY_MASTER_BIGGESTFUCKINGGUN_ICON = "PDABFGXX";    PDA_ASSEMBLY_MASTER_BIGGESTFUCKINGGUN_HEIGHT = "0";    PDA_ASSEMBLY_MASTER_BIGGESTFUCKINGGUN_DESC = "The king of BFGs, with unparalleled destructive power and a charge time that'll send you to sleep.\n\n\cdValid Weapons:\c-\n\cjBFG 9000\c- \ck->\c-\n \c[MB]Biggest Fucking Gun\c-\n\n\ctNuclear BFG 9000\c- \ck->\c-\n \c[MB]Nuclear Biggest Fucking Gun\c-\n\n";    PDA_ASSEMBLY_MASTER_BIGGESTFUCKINGGUN_REQ = "\cjBFG 9000\c-, \ctNuclear BFG 9000\c-\n";        PDA_ASSEMBLY_MASTER_RIPPER = "Ripper \cc[\c-\c[BM]B\c-\c[PM]P\c-\c[PM]P\c-\c[TM]T\c-\cc]\c-";    PDA_ASSEMBLY_MASTER_RIPPER_NAME = "\c[MB]Ripper\c-";    PDA_ASSEMBLY_MASTER_RIPPER_MODS = "\cc[\c-\c[BM]B\c-\c[PM]P\c-\c[PM]P\c-\c[TM]T\c-\cc]\c-";    PDA_ASSEMBLY_MASTER_RIPPER_ICON = "PDARIPPE";    PDA_ASSEMBLY_MASTER_RIPPER_HEIGHT = "0";    PDA_ASSEMBLY_MASTER_RIPPER_DESC = "A super high speed chainsaw that also drains health from enemies.\nA good choice for close-range combat.\n\n\cdValid Weapons:\c-\n\cjChainsaw\c- \ck->\c-\n \c[MB]Ripper\c-\n\n";    PDA_ASSEMBLY_MASTER_RIPPER_REQ = "\cjChainsaw\c-\n";        PDA_ASSEMBLY_MASTER_PLASMAREFRACTOR = "Plasma Overcharger \cc[\c-\c[PM]P\c-\c[PM]P\c-\c[PM]P\c-\c[SM]S\c-\cc]\c-";    PDA_ASSEMBLY_MASTER_PLASMAREFRACTOR_NAME = "\c[MB]Plasma Overcharger\c-";    PDA_ASSEMBLY_MASTER_PLASMAREFRACTOR_MODS = "\cc[\c-\c[PM]P\c-\c[PM]P\c-\c[PM]P\c-\c[SM]S\c-\cc]\c-";    PDA_ASSEMBLY_MASTER_PLASMAREFRACTOR_ICON = "PDAPREFR";    PDA_ASSEMBLY_MASTER_PLASMAREFRACTOR_HEIGHT = "0";    PDA_ASSEMBLY_MASTER_PLASMAREFRACTOR_DESC = "A beam-based weapon that imbues an enemy with a critical, unstable plasma charge.\nCan be fired at surfaces to detonate plasma everywhere.\n\n\cdValid Weapons:\c-\n\cjPlasma Rifle\c- \ck->\c-\n \c[MB]Plasma Overcharger\c-\n\n";    PDA_ASSEMBLY_MASTER_PLASMAREFRACTOR_REQ = "\cjPlasma Rifle\c-\n";        PDA_ASSEMBLY_MASTER_AUTOCANNON = "Autocannon \cc[\c-\c[PM]P\c-\c[PM]P\c-\c[FM]F\c-\c[FM]F\c-\cc]\c-";    PDA_ASSEMBLY_MASTER_AUTOCANNON_NAME = "\c[MB]Autocannon\c-";    PDA_ASSEMBLY_MASTER_AUTOCANNON_MODS = "\cc[\c-\c[PM]P\c-\c[PM]P\c-\c[FM]F\c-\c[FM]F\c-\cc]\c-";    PDA_ASSEMBLY_MASTER_AUTOCANNON_ICON = "PDAAUTOC";    PDA_ASSEMBLY_MASTER_AUTOCANNON_HEIGHT = "0";    PDA_ASSEMBLY_MASTER_AUTOCANNON_DESC = "Converts the minigun's spinning barrels into a larger, slower, explosive slug cannon.\nDon't fire in close proximity.\n\n\cdValid Weapons:\c-\n\ctMinigun\c- \ck->\c-\n \c[MB]Autocannon\c-\n\n";    PDA_ASSEMBLY_MASTER_AUTOCANNON_REQ = "\ctMinigun\c-\n";        PDA_ASSEMBLY_MASTER_MOTHERINLAW = "Mother-In-Law \cc[\c-\c[PM]P\c-\c[PM]P\c-\c[FM]F\c-\c[NM]N\c-\cc]\c-";    PDA_ASSEMBLY_MASTER_MOTHERINLAW_NAME = "\c[MB]Mother-In-Law\c-";    PDA_ASSEMBLY_MASTER_MOTHERINLAW_MODS = "\cc[\c-\c[PM]P\c-\c[PM]P\c-\c[FM]F\c-\c[NM]N\c-\cc]\c-";    PDA_ASSEMBLY_MASTER_MOTHERINLAW_ICON = "PDAMOTHE";    PDA_ASSEMBLY_MASTER_MOTHERINLAW_HEIGHT = "0";    PDA_ASSEMBLY_MASTER_MOTHERINLAW_DESC = "The most powerful rocket launcher. The longer the rocket travels, the more damage it does. Also, generates its own ammo over time.\n\n\cdValid Weapons:\c-\n\cjRocket Launcher\c- \ck->\c-\n \c[MB]Mother-In-Law\c-\n\n";    PDA_ASSEMBLY_MASTER_MOTHERINLAW_REQ = "\cjRocket Launcher\c-\n";        PDA_ASSEMBLY_MASTER_MEGATONSHOTGUN = "Megaton Shotgun \cc[\c-\c[BM]B\c-\c[BM]B\c-\c[BM]B\c-\c[FM]F\c-\cc]\c-";    PDA_ASSEMBLY_MASTER_MEGATONSHOTGUN_NAME = "\c[MB]Megaton Shotgun\c-";    PDA_ASSEMBLY_MASTER_MEGATONSHOTGUN_MODS = "\cc[\c-\c[BM]B\c-\c[BM]B\c-\c[BM]B\c-\c[FM]F\c-\cc]\c-";    PDA_ASSEMBLY_MASTER_MEGATONSHOTGUN_ICON = "PDAMEGAT";    PDA_ASSEMBLY_MASTER_MEGATONSHOTGUN_HEIGHT = "0";    PDA_ASSEMBLY_MASTER_MEGATONSHOTGUN_DESC = "A giant three barrelled death shotgun with rotating barrels. Capable of firing a single barrel, or all barrels at once.\n\n\cdValid Weapons:\c-\n\ctSuper Shotgun\c- \ck->\c-\n \c[MB]Megaton Shotgun\c-\n\n";    PDA_ASSEMBLY_MASTER_MEGATONSHOTGUN_REQ = "\ctSuper Shotgun\c-\n";        PDA_ASSEMBLY_MASTER_VOLTGUN = "ARC-4 Voltgun \cc[\c-\c[PM]P\c-\c[TM]T\c-\c[SM]S\c-\c[SM]S\c-\cc]\c-";    PDA_ASSEMBLY_MASTER_VOLTGUN_NAME = "\c[MB]ARC-4 Voltgun\c-";    PDA_ASSEMBLY_MASTER_VOLTGUN_MODS = "\cc[\c-\c[PM]P\c-\c[TM]T\c-\c[SM]S\c-\c[SM]S\c-\cc]\c-";    PDA_ASSEMBLY_MASTER_VOLTGUN_ICON = "PDAVOLTG";    PDA_ASSEMBLY_MASTER_VOLTGUN_HEIGHT = "0";    PDA_ASSEMBLY_MASTER_VOLTGUN_DESC = "An advanced weapon that unleashes a spread of lightning bolts at close range. Does extreme damage, but requires you to close in on the enemy.\n\n\cdValid Weapons:\c-\n\ctPlasma Shotgun\c- \ck->\c-\n \c[MB]ARC-4 Voltgun\c-\n\n";    PDA_ASSEMBLY_MASTER_VOLTGUN_REQ = "\ctPlasma Shotgun\c-\n";        PDA_ASSEMBLY_MASTER_CONQUERORSHOTGUN = "Conqueror Shotgun \cc[\c-\c[BM]B\c-\c[PM]P\c-\c[AM]A\c-\c[FM]F\c-\cc]\c-";    PDA_ASSEMBLY_MASTER_CONQUERORSHOTGUN_NAME = "\c[MB]Conqueror Shotgun\c-";    PDA_ASSEMBLY_MASTER_CONQUERORSHOTGUN_MODS = "\cc[\c-\c[BM]B\c-\c[PM]P\c-\c[AM]A\c-\c[FM]F\c-\cc]\c-";    PDA_ASSEMBLY_MASTER_CONQUERORSHOTGUN_ICON = "PDACONQU";    PDA_ASSEMBLY_MASTER_CONQUERORSHOTGUN_HEIGHT = "0";    PDA_ASSEMBLY_MASTER_CONQUERORSHOTGUN_DESC = "A powerful, responsive, mag-based shotgun. Very effective in every single way, but not a master of anything.\n\n\cdValid Weapons:\c-\n\cjCombat Shotgun\c- \ck->\c-\n \c[MB]Conqueror Shotgun\c-\n\n";    PDA_ASSEMBLY_MASTER_CONQUERORSHOTGUN_REQ = "\cjCombat Shotgun\c-\n";        PDA_ASSEMBLY_MASTER_CLUSTERBOMBLAUNCHER = "Cluster Bomb Launcher \cc[\c-\c[BM]B\c-\c[AM]A\c-\c[FM]F\c-\c[FM]F\c-\cc]\c-";    PDA_ASSEMBLY_MASTER_CLUSTERBOMBLAUNCHER_NAME = "\c[MB]Cluster Bomb Launcher\c-";    PDA_ASSEMBLY_MASTER_CLUSTERBOMBLAUNCHER_MODS = "\cc[\c-\c[BM]B\c-\c[AM]A\c-\c[FM]F\c-\c[FM]F\c-\cc]\c-";    PDA_ASSEMBLY_MASTER_CLUSTERBOMBLAUNCHER_ICON = "PDACLUST";    PDA_ASSEMBLY_MASTER_CLUSTERBOMBLAUNCHER_HEIGHT = "0";    PDA_ASSEMBLY_MASTER_CLUSTERBOMBLAUNCHER_DESC = "A powerful multi-warhead weapon that does heavy damage in an area over time.\nUses increased ammo and has a small charge time.\n\n\cdValid Weapons:\c-\n\ctMissile Launcher\c- \ck->\c-\n \c[MB]Cluster Bomb Launcher\c-\n\n";    PDA_ASSEMBLY_MASTER_CLUSTERBOMBLAUNCHER_REQ = "\ctMissile Launcher\c-\n";        PDA_ASSEMBLY_MASTER_GAUSSRIFLE = "Gauss Rifle \cc[\c-\c[PM]P\c-\c[AM]A\c-\c[SM]S\c-\c[FM]F\c-\cc]\c-";    PDA_ASSEMBLY_MASTER_GAUSSRIFLE_NAME = "\c[MB]Gauss Rifle\c-";    PDA_ASSEMBLY_MASTER_GAUSSRIFLE_MODS = "\cc[\c-\c[PM]P\c-\c[AM]A\c-\c[SM]S\c-\c[FM]F\c-\cc]\c-";    PDA_ASSEMBLY_MASTER_GAUSSRIFLE_ICON = "PDAGAUSS";    PDA_ASSEMBLY_MASTER_GAUSSRIFLE_HEIGHT = "0";    PDA_ASSEMBLY_MASTER_GAUSSRIFLE_DESC = "A chargeable single shot sniper weapon that uses cells to do bullet damage.\nVery powerful, especially when fully charged.\n\n\cdValid Weapons:\c-\n\ctLaser Rifle\c- \ck->\c-\n \c[MB]Gauss Rifle\c-\n\n";    PDA_ASSEMBLY_MASTER_GAUSSRIFLE_REQ = "\ctLaser Rifle\c-\n";        PDA_ASSEMBLY_MASTER_ANTIMATERIELRIFLE = "Anti-materiel Rifle \cc[\c-\c[PM]P\c-\c[AM]A\c-\c[SM]S\c-\c[SM]S\c-\cc]\c-";    PDA_ASSEMBLY_MASTER_ANTIMATERIELRIFLE_NAME = "\c[MB]Anti-materiel Rifle\c-";    PDA_ASSEMBLY_MASTER_ANTIMATERIELRIFLE_MODS = "\cc[\c-\c[PM]P\c-\c[AM]A\c-\c[SM]S\c-\c[SM]S\c-\cc]\c-";    PDA_ASSEMBLY_MASTER_ANTIMATERIELRIFLE_ICON = "PDAAMRXX";    PDA_ASSEMBLY_MASTER_ANTIMATERIELRIFLE_HEIGHT = "0";    PDA_ASSEMBLY_MASTER_ANTIMATERIELRIFLE_DESC = "The most powerful single-shot rifle weapon. Can pierce multiple enemies at a time and devastate bosses, but has a slow rate of fire.\n\n\cdValid Weapons:\c-\n\cjBattle Rifle\c- \ck->\c-\n \c[MB]Anti-materiel Rifle\c-\n\n";    PDA_ASSEMBLY_MASTER_ANTIMATERIELRIFLE_REQ = "\cjBattle Rifle\c-\n";        PDA_ASSEMBLY_MASTER_ZEUSCANNON = "Zeus Cannon \cc[\c-\c[PM]P\c-\c[TM]T\c-\c[SM]S\c-\c[SM]S\c-\cc]\c-";    PDA_ASSEMBLY_MASTER_ZEUSCANNON_NAME = "\c[MB]Zeus Cannon\c-";    PDA_ASSEMBLY_MASTER_ZEUSCANNON_MODS = "\cc[\c-\c[PM]P\c-\c[TM]T\c-\c[SM]S\c-\c[SM]S\c-\cc]\c-";    PDA_ASSEMBLY_MASTER_ZEUSCANNON_ICON = "PDAZEUSC";    PDA_ASSEMBLY_MASTER_ZEUSCANNON_HEIGHT = "0";    PDA_ASSEMBLY_MASTER_ZEUSCANNON_DESC = "Redesigned to fire a homing shot that damages everything around itself.\nIt's perfect for dealing with swarms of enemies.\n\n\cdValid Weapons:\c-\n\cjBFG 9000\c- \ck->\c-\n \c[MB]Zeus Cannon\c-\n\n";    PDA_ASSEMBLY_MASTER_ZEUSCANNON_REQ = "\cjBFG 9000\c-\n";        PDA_ASSEMBLY_MASTER_PLASMAINFUSION = "Plasma Infusion \cc[\c-\c[PM]P\c-\c[AM]A\c-\c[TM]T\c-\c[SM]S\c-\cc]\c-";    PDA_ASSEMBLY_MASTER_PLASMAINFUSION_NAME = "\c[MB]Plasma Infusion\c-";    PDA_ASSEMBLY_MASTER_PLASMAINFUSION_MODS = "\cc[\c-\c[PM]P\c-\c[AM]A\c-\c[TM]T\c-\c[SM]S\c-\cc]\c-";    PDA_ASSEMBLY_MASTER_PLASMAINFUSION_ICON = "PDAPINFU";    PDA_ASSEMBLY_MASTER_PLASMAINFUSION_HEIGHT = "0";    PDA_ASSEMBLY_MASTER_PLASMAINFUSION_DESC = "Converts the weapon to an energy-based variant of itself.\nOften very powerful, but remember the damage type is changed to Plasma.\nIf the weapon was already an energy weapon, it's converted into a more powerful variant.\n\n\cdValid Weapons:\c-\n\cjRocket Launcher\c- \ck->\c-\n \c[MB]Plascharge Launcher\c-\n\n\cjPlasma Rifle\c- \ck->\c-\n \c[MB]Plasma Heavycannon\c-\n\n\ctBlaster\c- \ck->\c-\n \c[MB]Heavy Pulse Blaster\c-\n\n\ctMinigun\c- \ck->\c-\n \c[MB]Laser Minigun\c-\n\n\ctMissile Launcher\c- \ck->\c-\n \c[MB]Defence Drone Launcher\c-\n\n\ctNapalm Launcher\c- \ck->\c-\n \c[MB]Incineration Device Launcher\c-\n\n";    PDA_ASSEMBLY_MASTER_PLASMAINFUSION_REQ = "\cjRocket Launcher\c-, \cjPlasma Rifle\c-, \n\ctBlaster\c-, \ctMinigun\c-, \n\ctMissile Launcher\c-, \ctNapalm Launcher\c-\n";        PDA_ASSEMBLY_MASTER_SUPERMACHINEGUN = "Super Machinegun \cc[\c-\c[PM]P\c-\c[AM]A\c-\c[TM]T\c-\c[SM]S\c-\cc]\c-";    PDA_ASSEMBLY_MASTER_SUPERMACHINEGUN_NAME = "\c[MB]Super Machinegun\c-";    PDA_ASSEMBLY_MASTER_SUPERMACHINEGUN_MODS = "\cc[\c-\c[PM]P\c-\c[AM]A\c-\c[TM]T\c-\c[SM]S\c-\cc]\c-";    PDA_ASSEMBLY_MASTER_SUPERMACHINEGUN_ICON = "PDASUPER";    PDA_ASSEMBLY_MASTER_SUPERMACHINEGUN_HEIGHT = "0";    PDA_ASSEMBLY_MASTER_SUPERMACHINEGUN_DESC = "The most shooty machinegun of all.\nThis weapon annihilates the enemy and your bullet supply like nothing else.\n\n\cdValid Weapons:\c-\n\cjBattle Rifle\c- \ck->\c-\n \c[MB]Super Machinegun\c-\n\n";    PDA_ASSEMBLY_MASTER_SUPERMACHINEGUN_REQ = "\cjBattle Rifle\c-\n";        PDA_ASSEMBLY_MASTER_ENERGYBLADE = "Energy Blade \cc[\c-\c[PM]P\c-\c[PM]P\c-\c[PM]P\c-\c[AM]A\c-\cc]\c-";    PDA_ASSEMBLY_MASTER_ENERGYBLADE_NAME = "\c[MB]Energy Blade\c-";    PDA_ASSEMBLY_MASTER_ENERGYBLADE_MODS = "\cc[\c-\c[PM]P\c-\c[PM]P\c-\c[PM]P\c-\c[AM]A\c-\cc]\c-";    PDA_ASSEMBLY_MASTER_ENERGYBLADE_ICON = "PDAEBLAD";    PDA_ASSEMBLY_MASTER_ENERGYBLADE_HEIGHT = "0";    PDA_ASSEMBLY_MASTER_ENERGYBLADE_DESC = "Enhances the weapon with an energy-based attack.\nFar more powerful, but requires cell ammo to wield, unlike normal melee weapons.\n\n\cdValid Weapons:\c-\n\cjChainsaw\c- \ck->\c-\n \c[MB]Energysaw\c-\n\n";    PDA_ASSEMBLY_MASTER_ENERGYBLADE_REQ = "\cjChainsaw\c-\n";    
+PDA_ASSEMBLIES="RLChainswordAssemblyLearntToken:PDA_ASSEMBLY_BASIC_CHAINSWORD:"
+"RLPiercingBladeAssemblyLearntToken:PDA_ASSEMBLY_BASIC_PIERCINGBLADE:"
+"RLSpeedloaderPistolAssemblyLearntToken:PDA_ASSEMBLY_BASIC_SPEEDLOADERPISTOL:"
+"RLSilencedPistolAssemblyLearntToken:PDA_ASSEMBLY_BASIC_SILENCEDPISTOL:"
+"RLShredderPistolAssemblyLearntToken:PDA_ASSEMBLY_BASIC_SHREDDERPISTOL:"
+"RLElephantGunAssemblyLearntToken:PDA_ASSEMBLY_BASIC_ELEPHANTGUN:"
+"RLGatlingGunAssemblyLearntToken:PDA_ASSEMBLY_BASIC_GATLINGGUN:"
+"RLMicroLauncherAssemblyLearntToken:PDA_ASSEMBLY_BASIC_MICROLAUNCHER:"
+"RLHighPowerWeaponAssemblyLearntToken:PDA_ASSEMBLY_BASIC_HIGHPOWERWEAPON:"
+"RLTacticalShotgunAssemblyLearntToken:PDA_ASSEMBLY_BASIC_TACTICALSHOTGUN:"
+"RLPlasmaticShrapnelAssemblyLearntToken:PDA_ASSEMBLY_BASIC_PLASMATICSHRAPNEL:"
+"RLHeavyShotgunAssemblyLearntToken:PDA_ASSEMBLY_BASIC_HEAVYSHOTGUN:"
+"RLFlamethrowerAssemblyLearntToken:PDA_ASSEMBLY_BASIC_FLAMETHROWER:"
+"RLShrapnelCannonAssemblyLearntToken:PDA_ASSEMBLY_BASIC_SHRAPNELCANNON:"
+"RLSniperRifleAssemblyLearntToken:PDA_ASSEMBLY_BASIC_SNIPERRIFLE:"
+"RLEnergySplitterAssemblyLearntToken:PDA_ASSEMBLY_BASIC_ENERGYSPLITTER:"
+"RLDoubleChainsawAssemblyLearntToken:PDA_ASSEMBLY_ADVANCED_DOUBLECHAINSAW:"
+"RLTacticalRocketLauncherAssemblyLearntToken:PDA_ASSEMBLY_ADVANCED_TACTICALROCKETLAUNCHER:"
+"RLStormPistolAssemblyLearntToken:PDA_ASSEMBLY_ADVANCED_STORMPISTOL:"
+"RLPlasmaPistolAssemblyLearntToken:PDA_ASSEMBLY_ADVANCED_PLASMAPISTOL:"
+"RLAssaultRifleAssemblyLearntToken:PDA_ASSEMBLY_ADVANCED_ASSAULTRIFLE:"
+"RLBurstCannonAssemblyLearntToken:PDA_ASSEMBLY_ADVANCED_BURSTCANNON:"
+"RLVBFG9000AssemblyLearntToken:PDA_ASSEMBLY_ADVANCED_VBFG9000:"
+"RLNanoshrapnelAssemblyLearntToken:PDA_ASSEMBLY_ADVANCED_NANOSHRAPNEL:"
+"RLHyperblasterAssemblyLearntToken:PDA_ASSEMBLY_ADVANCED_HYPERBLASTER:"
+"RLFocusedDoubleShotgunAssemblyLearntToken:PDA_ASSEMBLY_ADVANCED_FOCUSEDDOUBLESHOTGUN:"
+"RLPlasmaRifleMKIIAssemblyLearntToken:PDA_ASSEMBLY_ADVANCED_PLASMARIFLEMKII:"
+"RLBulletstormChaingunAssemblyLearntToken:PDA_ASSEMBLY_ADVANCED_BULLETSTORMCHAINGUN:"
+"RLMinimissilePistolAssemblyLearntToken:PDA_ASSEMBLY_ADVANCED_MINIMISSILEPISTOL:"
+"RLAutoShotgunAssemblyLearntToken:PDA_ASSEMBLY_ADVANCED_AUTOSHOTGUN:"
+"RLGrenadeLauncherAssemblyLearntToken:PDA_ASSEMBLY_ADVANCED_GRENADELAUNCHER:"
+"RLNuclearPlasmaShotgunAssemblyLearntToken:PDA_ASSEMBLY_ADVANCED_NUCLEARPLASMASHOTGUN:"
+"RLNanomanufactureAmmoAssemblyLearntToken:PDA_ASSEMBLY_MASTER_NANOMANUFACTUREAMMO:"
+"RLDemolitionAmmoAssemblyLearntToken:PDA_ASSEMBLY_MASTER_DEMOLITIONAMMO:"
+"RLBiggestFuckingGunAssemblyLearntToken:PDA_ASSEMBLY_MASTER_BIGGESTFUCKINGGUN:"
+"RLRipperAssemblyLearntToken:PDA_ASSEMBLY_MASTER_RIPPER:"
+"RLPlasmaRefractorAssemblyLearntToken:PDA_ASSEMBLY_MASTER_PLASMAREFRACTOR:"
+"RLAutocannonAssemblyLearntToken:PDA_ASSEMBLY_MASTER_AUTOCANNON:"
+"RLMotherInLawAssemblyLearntToken:PDA_ASSEMBLY_MASTER_MOTHERINLAW:"
+"RLMegatonShotgunAssemblyLearntToken:PDA_ASSEMBLY_MASTER_MEGATONSHOTGUN:"
+"RLConquerorShotgunAssemblyLearntToken:PDA_ASSEMBLY_MASTER_CONQUERORSHOTGUN:"
+"RLClusterBombLauncherAssemblyLearntToken:PDA_ASSEMBLY_MASTER_CLUSTERBOMBLAUNCHER:"
+"RLGaussRifleAssemblyLearntToken:PDA_ASSEMBLY_MASTER_GAUSSRIFLE:"
+"RLAntimaterielRifleAssemblyLearntToken:PDA_ASSEMBLY_MASTER_ANTIMATERIELRIFLE:"
+"RLElectroInfusionAssemblyLearntToken:PDA_ASSEMBLY_MASTER_ELECTROINFUSION:"
+"RLPlasmaInfusionAssemblyLearntToken:PDA_ASSEMBLY_MASTER_PLASMAINFUSION:"
+"RLSuperMachinegunAssemblyLearntToken:PDA_ASSEMBLY_MASTER_SUPERMACHINEGUN:"
+"RLEnergyBladeAssemblyLearntToken:PDA_ASSEMBLY_MASTER_ENERGYBLADE:";
+
+PDA_SEPARATOR_CHARACTER=":";
+
+
+PDA_ASSEMBLY_BASIC_CHAINSWORD = "Chainsword \cc[\c-\c[BM]B\c-\c[PM]P\c-\cc]\c-";
+PDA_ASSEMBLY_BASIC_CHAINSWORD_NAME = "\c[BB]Chainsword\c-";
+PDA_ASSEMBLY_BASIC_CHAINSWORD_MODS = "\cc[\c-\c[BM]B\c-\c[PM]P\c-\cc]\c-";
+PDA_ASSEMBLY_BASIC_CHAINSWORD_ICON = "PDACSWOR";
+PDA_ASSEMBLY_BASIC_CHAINSWORD_HEIGHT = "0";
+PDA_ASSEMBLY_BASIC_CHAINSWORD_DESC = "404 DESCRIPTION NOT FOUND\n\n""\cdValid Weapons:\c-\n"
+"\cjCombat Knife\c- \ck->\c-\n \c[BB]Chainsword\c-\n\n";
+PDA_ASSEMBLY_BASIC_CHAINSWORD_REQ = "Combat Knife\c-";
+    
+
+PDA_ASSEMBLY_BASIC_PIERCINGBLADE = "Piercing Blade \cc[\c-\c[PM]P\c-\c[AM]A\c-\cc]\c-";
+PDA_ASSEMBLY_BASIC_PIERCINGBLADE_NAME = "\c[BB]Piercing Blade\c-";
+PDA_ASSEMBLY_BASIC_PIERCINGBLADE_MODS = "\cc[\c-\c[PM]P\c-\c[AM]A\c-\cc]\c-";
+PDA_ASSEMBLY_BASIC_PIERCINGBLADE_ICON = "PDAPIERC";
+PDA_ASSEMBLY_BASIC_PIERCINGBLADE_HEIGHT = "0";
+PDA_ASSEMBLY_BASIC_PIERCINGBLADE_DESC = "By incorporating advanced nano technology to strengthen and sharpen melee weapons, their durability will be increased substantially.\n"
+"As a side effect, the weapon is extremely effective at bypassing armor on enemies.\n\n""\cdValid Weapons:\c-\n"
+"\cjChainsaw\c- \ck->\c-\n \c[BB]Nanoedge Saw\c-\n\n";
+PDA_ASSEMBLY_BASIC_PIERCINGBLADE_REQ = "\cjChainsaw\c-";
+    
+
+PDA_ASSEMBLY_BASIC_SPEEDLOADERPISTOL = "Revolver \cc[\c-\c[AM]A\c-\c[TM]T\c-\cc]\c-";
+PDA_ASSEMBLY_BASIC_SPEEDLOADERPISTOL_NAME = "\c[BB]Revolver\c-";
+PDA_ASSEMBLY_BASIC_SPEEDLOADERPISTOL_MODS = "\cc[\c-\c[AM]A\c-\c[TM]T\c-\cc]\c-";
+PDA_ASSEMBLY_BASIC_SPEEDLOADERPISTOL_ICON = "PDAREVOL";
+PDA_ASSEMBLY_BASIC_SPEEDLOADERPISTOL_HEIGHT = "0";
+PDA_ASSEMBLY_BASIC_SPEEDLOADERPISTOL_DESC = "Converts the weapon into a revolver-type weapon. Generally, a revolver will be slower, but far more powerful than normal pistols.\n\n""\cdValid Weapons:\c-\n"
+"\cjPistol\c- \ck->\c-\n \c[BB]Revolver\c-\n\n"
+"\ctNuclear Plasma Pistol\c- \ck->\c-\n \c[BB]Nuclear Plasma Revolver\c-\n\n";
+PDA_ASSEMBLY_BASIC_SPEEDLOADERPISTOL_REQ = "\cjPistol\c-, "
+"\ctNuclear Plasma Pistol\c-";
+    
+
+PDA_ASSEMBLY_BASIC_SILENCEDPISTOL = "Silenced Weapon \cc[\c-\c[TM]T\c-\c[TM]T\c-\cc]\c-";
+PDA_ASSEMBLY_BASIC_SILENCEDPISTOL_NAME = "\c[BB]Silenced Weapon\c-";
+PDA_ASSEMBLY_BASIC_SILENCEDPISTOL_MODS = "\cc[\c-\c[TM]T\c-\c[TM]T\c-\cc]\c-";
+PDA_ASSEMBLY_BASIC_SILENCEDPISTOL_ICON = "PDASILEN";
+PDA_ASSEMBLY_BASIC_SILENCEDPISTOL_HEIGHT = "0";
+PDA_ASSEMBLY_BASIC_SILENCEDPISTOL_DESC = "Converts the weapon into a stealthy weapon, that will not alert monsters beyond close range.\nThe effect of a blursphere will increase their damage exponentially while it is active.\n\n""\cdValid Weapons:\c-\n"
+"\cjPistol\c- \ck->\c-\n \c[BB]Silenced Pistol\c-\n\n"
+"\cjBattle Rifle\c- \ck->\c-\n \c[BB]Stealth Rifle\c-\n\n";
+PDA_ASSEMBLY_BASIC_SILENCEDPISTOL_REQ = "\cjPistol\c-, "
+"\cjBattle Rifle\c-";
+    
+
+PDA_ASSEMBLY_BASIC_SHREDDERPISTOL = "Shredder Weapon \cc[\c-\c[PM]P\c-\c[TM]T\c-\cc]\c-";
+PDA_ASSEMBLY_BASIC_SHREDDERPISTOL_NAME = "\c[BB]Shredder Weapon\c-";
+PDA_ASSEMBLY_BASIC_SHREDDERPISTOL_MODS = "\cc[\c-\c[PM]P\c-\c[TM]T\c-\cc]\c-";
+PDA_ASSEMBLY_BASIC_SHREDDERPISTOL_ICON = "PDASHRED";
+PDA_ASSEMBLY_BASIC_SHREDDERPISTOL_HEIGHT = "0";
+PDA_ASSEMBLY_BASIC_SHREDDERPISTOL_DESC = "Shredder weapons fire off the pellets in a shell one after another, instead of all at once like a proper shotgun.\n\n""\cdValid Weapons:\c-\n"
+"\cjPistol\c- \ck->\c-\n \c[BB]Shredder Pistol\c-\n\n"
+"\cjDouble Shotgun\c- \ck->\c-\n \c[BB]Shredder Shotgun\c-\n\n";
+PDA_ASSEMBLY_BASIC_SHREDDERPISTOL_REQ = "\cjPistol\c-, "
+"\cjDouble Shotgun\c-";
+    
+
+PDA_ASSEMBLY_BASIC_ELEPHANTGUN = "Elephant Gun \cc[\c-\c[PM]P\c-\c[PM]P\c-\cc]\c-";
+PDA_ASSEMBLY_BASIC_ELEPHANTGUN_NAME = "\c[BB]Elephant Gun\c-";
+PDA_ASSEMBLY_BASIC_ELEPHANTGUN_MODS = "\cc[\c-\c[PM]P\c-\c[PM]P\c-\cc]\c-";
+PDA_ASSEMBLY_BASIC_ELEPHANTGUN_ICON = "PDAELEPH";
+PDA_ASSEMBLY_BASIC_ELEPHANTGUN_HEIGHT = "0";
+PDA_ASSEMBLY_BASIC_ELEPHANTGUN_DESC = "The Elephant Gun takes all the pellets of the shotgun, and combines them into a fairly accurate single slug.\n"
+"Powerful at ranges where the shotgun starts to drop off, and armor piercing.\n\n""\cdValid Weapons:\c-\n"
+"\cjShotgun\c- \ck->\c-\n \c[BB]Elephant Gun\c-\n\n";
+PDA_ASSEMBLY_BASIC_ELEPHANTGUN_REQ = "\cjShotgun\c-";
+    
+
+PDA_ASSEMBLY_BASIC_GATLINGGUN = "Gatling Gun \cc[\c-\c[BM]B\c-\c[BM]B\c-\cc]\c-";
+PDA_ASSEMBLY_BASIC_GATLINGGUN_NAME = "\c[BB]Gatling Gun\c-";
+PDA_ASSEMBLY_BASIC_GATLINGGUN_MODS = "\cc[\c-\c[BM]B\c-\c[BM]B\c-\cc]\c-";
+PDA_ASSEMBLY_BASIC_GATLINGGUN_ICON = "PDAGATLI";
+PDA_ASSEMBLY_BASIC_GATLINGGUN_HEIGHT = "0";
+PDA_ASSEMBLY_BASIC_GATLINGGUN_DESC = "A chaingun type weapon with an increase to all stats.\n"
+"Damage, mag, accuracy are all increased, but windup and down is as well.\n\n""\cdValid Weapons:\c-\n"
+"\cjChaingun\c- \ck->\c-\n \c[BB]Gatling Gun\c-\n\n";
+PDA_ASSEMBLY_BASIC_GATLINGGUN_REQ = "\cjChaingun\c-";
+    
+
+PDA_ASSEMBLY_BASIC_MICROLAUNCHER = "Micro Launcher \cc[\c-\c[TM]T\c-\c[TM]T\c-\cc]\c-";
+PDA_ASSEMBLY_BASIC_MICROLAUNCHER_NAME = "\c[BB]Micro Launcher\c-";
+PDA_ASSEMBLY_BASIC_MICROLAUNCHER_MODS = "\cc[\c-\c[TM]T\c-\c[TM]T\c-\cc]\c-";
+PDA_ASSEMBLY_BASIC_MICROLAUNCHER_ICON = "PDAMICRO";
+PDA_ASSEMBLY_BASIC_MICROLAUNCHER_HEIGHT = "0";
+PDA_ASSEMBLY_BASIC_MICROLAUNCHER_DESC = "A smaller, less powerful rocket launcher that reloads much faster. Great for smaller enemies or when you have a surplus of rockets.\n\n""\cdValid Weapons:\c-\n"
+"\cjRocket Launcher\c- \ck->\c-\n \c[BB]Micro Launcher\c-\n\n";
+PDA_ASSEMBLY_BASIC_MICROLAUNCHER_REQ = "\cjRocket Launcher\c-";
+    
+
+PDA_ASSEMBLY_BASIC_HIGHPOWERWEAPON = "High-Power Weapon \cc[\c-\c[BM]B\c-\c[PM]P\c-\cc]\c-";
+PDA_ASSEMBLY_BASIC_HIGHPOWERWEAPON_NAME = "\c[BB]High-Power Weapon\c-";
+PDA_ASSEMBLY_BASIC_HIGHPOWERWEAPON_MODS = "\cc[\c-\c[BM]B\c-\c[PM]P\c-\cc]\c-";
+PDA_ASSEMBLY_BASIC_HIGHPOWERWEAPON_ICON = "PDAHIGHP";
+PDA_ASSEMBLY_BASIC_HIGHPOWERWEAPON_HEIGHT = "0";
+PDA_ASSEMBLY_BASIC_HIGHPOWERWEAPON_DESC = "Increases the base damage of a weapon by 2, and the max randomization by 2, but drops the magazine size by 40%.\nAn easy way of increasing damage as long as reloading isn't an issue.\n\n""\cdValid Weapons:\c-\n"
+"\cjPistol\c- \ck->\c-\n \c[BB]High-Power Pistol\c-\n\n"
+"\cjChaingun\c- \ck->\c-\n \c[BB]High-Power Chaingun\c-\n\n"
+"\cjBattle Rifle\c- \ck->\c-\n \c[BB]High-Power Battle Rifle\c-\n\n"
+"\cjPlasma Rifle\c- \ck->\c-\n \c[BB]High-Power Plasma Rifle\c-\n\n"
+"\cjBFG 9000\c- \ck->\c-\n \c[BB]High-Power BFG 9000\c-\n\n"
+"\ctBlaster\c- \ck->\c-\n \c[BB]High-Power Blaster\c-\n\n"
+"\ctCombat Pistol\c- \ck->\c-\n \c[BB]High-Power Combat Pistol\c-\n\n"
+"\ctMarksman Pistol\c- \ck->\c-\n \c[BB]High-Power Marksman Pistol\c-\n\n"
+"\ctHandcannon\c- \ck->\c-\n \c[BB]High-Power Handcannon\c-\n\n"
+"\ctTristar Blaster\c- \ck->\c-\n \c[BB]High-Power Tristar Blaster\c-\n\n"
+"\ctMinigun\c- \ck->\c-\n \c[BB]High-Power Minigun\c-\n\n"
+"\ctLaser Rifle\c- \ck->\c-\n \c[BB]High-Power Laser Rifle\c-\n\n"
+"\ctNuclear Plasma Pistol\c- \ck->\c-\n \c[BB]High-Power Nuclear Plasma Pistol\c-\n\n"
+"\ctNuclear Plasma Rifle\c- \ck->\c-\n \c[BB]High-Power Nuclear Plasma Rifle\c-\n\n"
+"\ctNuclear BFG 9000\c- \ck->\c-\n \c[BB]High-Power Nuclear BFG 9000\c-\n\n"
+"\ctUzi\c- \ck->\c-\n \c[BB]High-Power Uzi\c-\n\n"
+"\ciMarksman Rifle\c- \ck->\c-\n \c[BB]High-Power Marksman Rifle\c-\n\n"
+"\ciVanguard Rifle\c- \ck->\c-\n \c[BB]High-Power Vanguard Rifle\c-\n\n"
+"\ciHunting Revolver\c- \ck->\c-\n \c[BB]High-Power Hunting Revolver\c-\n\n"
+"\ciThompson\c- \ck->\c-\n \c[BB]High-Power Thompson\c-\n\n"
+"\ciPP7\c- \ck->\c-\n \c[BB]High-Power PP7\c-\n\n"
+"\ciRC-P90\c- \ck->\c-\n \c[BB]RC-P120\c-\n\n";
+PDA_ASSEMBLY_BASIC_HIGHPOWERWEAPON_REQ = "Any \cdnon-shotgun \cjweapon\c-.\nMagazine capacity needs to be more than \cf5\c- shots.";
+    
+
+PDA_ASSEMBLY_BASIC_TACTICALSHOTGUN = "Tactical Shotgun \cc[\c-\c[PM]P\c-\c[TM]T\c-\cc]\c-";
+PDA_ASSEMBLY_BASIC_TACTICALSHOTGUN_NAME = "\c[BB]Tactical Shotgun\c-";
+PDA_ASSEMBLY_BASIC_TACTICALSHOTGUN_MODS = "\cc[\c-\c[PM]P\c-\c[TM]T\c-\cc]\c-";
+PDA_ASSEMBLY_BASIC_TACTICALSHOTGUN_ICON = "PDATACSH";
+PDA_ASSEMBLY_BASIC_TACTICALSHOTGUN_HEIGHT = "0";
+PDA_ASSEMBLY_BASIC_TACTICALSHOTGUN_DESC = "Upgrades the Combat Shotgun to run off magazines, rather than loose shells, making it much easier to reload.\nIt has a scope and all kinds of other gadgets for maximum tacticool.\n\n""\cdValid Weapons:\c-\n"
+"\cjCombat Shotgun\c- \ck->\c-\n \c[BB]Tactical Shotgun\c-\n\n";
+PDA_ASSEMBLY_BASIC_TACTICALSHOTGUN_REQ = "\cjCombat Shotgun\c-";
+    
+
+PDA_ASSEMBLY_BASIC_PLASMATICSHRAPNEL = "Plasmatic Shrapnel \cc[\c-\c[PM]P\c-\c[SM]S\c-\cc]\c-";
+PDA_ASSEMBLY_BASIC_PLASMATICSHRAPNEL_NAME = "\c[BB]Plasmatic Shrapnel\c-";
+PDA_ASSEMBLY_BASIC_PLASMATICSHRAPNEL_MODS = "\cc[\c-\c[PM]P\c-\c[SM]S\c-\cc]\c-";
+PDA_ASSEMBLY_BASIC_PLASMATICSHRAPNEL_ICON = "PDAPLASM";
+PDA_ASSEMBLY_BASIC_PLASMATICSHRAPNEL_HEIGHT = "0";
+PDA_ASSEMBLY_BASIC_PLASMATICSHRAPNEL_DESC = "Causes shotguns to do Plasma damage, as well as create small AOE explosions on impact, making it very effective against massed crowds.\n\n""\cdValid Weapons:\c-\n"
+"\cjShotgun\c- \ck->\c-\n \c[BB]Plasmatic Shotgun\c-\n\n"
+"\cjCombat Shotgun\c- \ck->\c-\n \c[BB]Plasmatic Combat Shotgun\c-\n\n"
+"\cjDouble Shotgun\c- \ck->\c-\n \c[BB]Plasmatic Double Shotgun\c-\n\n"
+"\ctSuper Shotgun\c- \ck->\c-\n \c[BB]Plasmatic Super Shotgun\c-\n\n"
+"\ctAssault Shotgun\c- \ck->\c-\n \c[BB]Plasmatic Assault Shotgun\c-\n\n"
+"\ctPlasma Shotgun\c- \ck->\c-\n \c[BB]Overcharged Plasma Shotgun\c-\n\n"
+"\ciHunting Shotgun\c- \ck->\c-\n \c[BB]Plasmatic Hunting Shotgun\c-\n\n";
+PDA_ASSEMBLY_BASIC_PLASMATICSHRAPNEL_REQ = "\cjShotgun\c-, "
+"\cjCombat Shotgun\c-,\n"
+"\cjDouble Shotgun\c-, "
+"\ctSuper Shotgun\c-,\n"
+"\ctAssault Shotgun\c-, "
+"\ctPlasma Shotgun\c-,\n"
+"\ciHunting Shotgun\c-,\n";
+    
+
+PDA_ASSEMBLY_BASIC_HEAVYSHOTGUN = "Heavy Shotgun \cc[\c-\c[BM]B\c-\c[BM]B\c-\cc]\c-";
+PDA_ASSEMBLY_BASIC_HEAVYSHOTGUN_NAME = "\c[BB]Heavy Shotgun\c-";
+PDA_ASSEMBLY_BASIC_HEAVYSHOTGUN_MODS = "\cc[\c-\c[BM]B\c-\c[BM]B\c-\cc]\c-";
+PDA_ASSEMBLY_BASIC_HEAVYSHOTGUN_ICON = "PDAHSHOT";
+PDA_ASSEMBLY_BASIC_HEAVYSHOTGUN_HEIGHT = "0";
+PDA_ASSEMBLY_BASIC_HEAVYSHOTGUN_DESC = "Increases the number of pellets fired per barrel by 3, and increases max damage randomization by 2.\nAn effective way to boost starting shotguns to a level that can deal with higher tier enemies.\n\n""\cdValid Weapons:\c-\n"
+"\cjShotgun\c- \ck->\c-\n \c[BB]Heavy Shotgun\c-\n\n"
+"\cjCombat Shotgun\c- \ck->\c-\n \c[BB]Heavy Combat Shotgun\c-\n\n"
+"\cjDouble Shotgun\c- \ck->\c-\n \c[BB]Heavy Double Shotgun\c-\n\n"
+"\ctSuper Shotgun\c- \ck->\c-\n \c[BB]Heavy Super Shotgun\c-\n\n"
+"\ctAssault Shotgun\c- \ck->\c-\n \c[BB]Heavy Assault Shotgun\c-\n\n"
+"\ctPlasma Shotgun\c- \ck->\c-\n \c[BB]Heavy Plasma Shotgun\c-\n\n"
+"\ciHunting Shotgun\c- \ck->\c-\n \c[BB]Heavy Hunting Shotgun\c-\n\n";
+PDA_ASSEMBLY_BASIC_HEAVYSHOTGUN_REQ = "\cjShotgun\c-, "
+"\cjCombat Shotgun\c-,\n"
+"\cjDouble Shotgun\c-, "
+"\ctSuper Shotgun\c-,\n"
+"\ctAssault Shotgun\c-, "
+"\ctPlasma Shotgun\c-,\n"
+"\ciHunting Shotgun\c-";
+    
+
+PDA_ASSEMBLY_BASIC_FLAMETHROWER = "Flamethrower \cc[\c-\c[PM]P\c-\c[FM]F\c-\cc]\c-";
+PDA_ASSEMBLY_BASIC_FLAMETHROWER_NAME = "\c[BB]Flamethrower\c-";
+PDA_ASSEMBLY_BASIC_FLAMETHROWER_MODS = "\cc[\c-\c[PM]P\c-\c[FM]F\c-\cc]\c-";
+PDA_ASSEMBLY_BASIC_FLAMETHROWER_ICON = "PDAFLAMT";
+PDA_ASSEMBLY_BASIC_FLAMETHROWER_HEIGHT = "0";
+PDA_ASSEMBLY_BASIC_FLAMETHROWER_DESC = "A rapid fire area denial weapon, that runs off the fuel in rockets.\nIt can be a very efficient weapon for ammo consumption.\n\n""\cdValid Weapons:\c-\n"
+"\ctNapalm Launcher\c- \ck->\c-\n \c[BB]Flamethrower\c-";
+PDA_ASSEMBLY_BASIC_FLAMETHROWER_REQ = "\ctNapalm Launcher\c-";
+    
+
+PDA_ASSEMBLY_BASIC_SHRAPNELCANNON = "Shrapnel Cannon \cc[\c-\c[PM]P\c-\c[AM]A\c-\cc]\c-";
+PDA_ASSEMBLY_BASIC_SHRAPNELCANNON_NAME = "\c[BB]Shrapnel Cannon\c-";
+PDA_ASSEMBLY_BASIC_SHRAPNELCANNON_MODS = "\cc[\c-\c[PM]P\c-\c[AM]A\c-\cc]\c-";
+PDA_ASSEMBLY_BASIC_SHRAPNELCANNON_ICON = "PDASHRAP";
+PDA_ASSEMBLY_BASIC_SHRAPNELCANNON_HEIGHT = "0";
+PDA_ASSEMBLY_BASIC_SHRAPNELCANNON_DESC = "A strange weapon that detonates a rocket internally, and then uses the force to blast out the casing as deadly shrapnel.\n"
+"Effective against larger enemies, but smaller enemies will often dodge most of the damage.\n\n""\cdValid Weapons:\c-\n"
+"\cjShotgun\c- \ck->\c-\n \c[BB]Shrapnel Cannon\c-";
+PDA_ASSEMBLY_BASIC_SHRAPNELCANNON_REQ = "\cjShotgun\c-";
+    
+
+PDA_ASSEMBLY_BASIC_SNIPERRIFLE = "Sniper Rifle \cc[\c-\c[AM]A\c-\c[SM]S\c-\cc]\c-";
+PDA_ASSEMBLY_BASIC_SNIPERRIFLE_NAME = "\c[BB]Sniper Rifle\c-";
+PDA_ASSEMBLY_BASIC_SNIPERRIFLE_MODS = "\cc[\c-\c[AM]A\c-\c[SM]S\c-\cc]\c-";
+PDA_ASSEMBLY_BASIC_SNIPERRIFLE_ICON = "PDASNIPE";
+PDA_ASSEMBLY_BASIC_SNIPERRIFLE_HEIGHT = "0";
+PDA_ASSEMBLY_BASIC_SNIPERRIFLE_DESC = "Converts the weapon to a scoped, powerful weapon, capable of dealing extreme damage with pinpoint accuracy.\n\n""\cdValid Weapons:\c-\n"
+"\cjBattle Rifle\c- \ck->\c-\n \c[BB]Sniper Rifle\c-"
+"\ctLMG\c- \ck->\c-\n \c[BB]Bozar\c-";
+PDA_ASSEMBLY_BASIC_SNIPERRIFLE_REQ = "\cjBattle Rifle\c-"
+"\ctLMG\c-";
+    
+
+PDA_ASSEMBLY_BASIC_ENERGYSPLITTER = "Energy Splitter \cc[\c-\c[BM]B\c-\c[AM]A\c-\cc]\c-";
+PDA_ASSEMBLY_BASIC_ENERGYSPLITTER_NAME = "\c[BB]Energy Splitter\c-";
+PDA_ASSEMBLY_BASIC_ENERGYSPLITTER_MODS = "\cc[\c-\c[BM]B\c-\c[AM]A\c-\cc]\c-";
+PDA_ASSEMBLY_BASIC_ENERGYSPLITTER_ICON = "PDAESPLI";
+PDA_ASSEMBLY_BASIC_ENERGYSPLITTER_HEIGHT = "0";
+PDA_ASSEMBLY_BASIC_ENERGYSPLITTER_DESC = "Converts weapons into extreme scatter guns. Each point of damage the gun would normally deal is converted into a projectile, and all fired at once.\n\n""\cdValid Weapons:\c-\n"
+"\cjPlasma Rifle\c- \ck->\c-\n \c[BB]Plasma Splitter\c-\n\n"
+"\ctLaser Rifle\c- \ck->\c-\n \c[BB]Laser Splitter\c-\n\n"
+"\ctNuclear Plasma Rifle\c- \ck->\c-\n \c[BB]Nuclear Plasma Splitter\c-\n\n";
+PDA_ASSEMBLY_BASIC_ENERGYSPLITTER_REQ = "\cjBattle Rifle\c-"
+"\ctLaser Rifle\c-"
+"\ctNuclear Plasma Rifle\c-";
+    
+
+PDA_ASSEMBLY_ADVANCED_DOUBLECHAINSAW = "Double Chainsaw \cc[\c-\c[BM]B\c-\c[PM]P\c-\c[PM]P\c-\cc]\c-";
+PDA_ASSEMBLY_ADVANCED_DOUBLECHAINSAW_NAME = "\c[AB]Double Chainsaw\c-";
+PDA_ASSEMBLY_ADVANCED_DOUBLECHAINSAW_MODS = "\cc[\c-\c[BM]B\c-\c[PM]P\c-\c[PM]P\c-\cc]\c-";
+PDA_ASSEMBLY_ADVANCED_DOUBLECHAINSAW_ICON = "PDADOUBL";
+PDA_ASSEMBLY_ADVANCED_DOUBLECHAINSAW_HEIGHT = "0";
+PDA_ASSEMBLY_ADVANCED_DOUBLECHAINSAW_DESC = "A chainsaw with two blades.\n"
+"'Nuff said.\n\n""\cdValid Weapons:\c-\n"
+"\cjChainsaw\c- \ck->\c-\n \c[AB]Double Chainsaw\c-";
+PDA_ASSEMBLY_ADVANCED_DOUBLECHAINSAW_REQ = "\cjChainsaw\c-";
+    
+
+PDA_ASSEMBLY_ADVANCED_TACTICALROCKETLAUNCHER = "Tactical Rocket Launcher \cc[\c-\c[BM]B\c-\c[BM]B\c-\c[BM]B\c-\cc]\c-";
+PDA_ASSEMBLY_ADVANCED_TACTICALROCKETLAUNCHER_NAME = "\c[AB]Tactical Rocket Launcher\c-";
+PDA_ASSEMBLY_ADVANCED_TACTICALROCKETLAUNCHER_MODS = "\cc[\c-\c[BM]B\c-\c[BM]B\c-\c[BM]B\c-\cc]\c-";
+PDA_ASSEMBLY_ADVANCED_TACTICALROCKETLAUNCHER_ICON = "PDATACRO";
+PDA_ASSEMBLY_ADVANCED_TACTICALROCKETLAUNCHER_HEIGHT = "0";
+PDA_ASSEMBLY_ADVANCED_TACTICALROCKETLAUNCHER_DESC = "A rocket launcher that gets loaded with drum mags, this weapon is very quick to reload.\nThe rockets are only slightly weaker than normal.\n\n""\cdValid Weapons:\c-\n"
+"\cjRocket Launcher\c- \ck->\c-\n \c[AB]Tactical Rocket Launcher\c-";
+PDA_ASSEMBLY_ADVANCED_TACTICALROCKETLAUNCHER_REQ = "\cjRocket Launcher\c-";
+    
+
+PDA_ASSEMBLY_ADVANCED_STORMPISTOL = "Storm Pistol \cc[\c-\c[BM]B\c-\c[BM]B\c-\c[TM]T\c-\cc]\c-";
+PDA_ASSEMBLY_ADVANCED_STORMPISTOL_NAME = "\c[AB]Storm Pistol\c-";
+PDA_ASSEMBLY_ADVANCED_STORMPISTOL_MODS = "\cc[\c-\c[BM]B\c-\c[BM]B\c-\c[TM]T\c-\cc]\c-";
+PDA_ASSEMBLY_ADVANCED_STORMPISTOL_ICON = "PDASPIST";
+PDA_ASSEMBLY_ADVANCED_STORMPISTOL_HEIGHT = "0";
+PDA_ASSEMBLY_ADVANCED_STORMPISTOL_DESC = "A powerful pistol type that has two barrels and a large magazine size.\nFor some reason, firing only consumes one unit of ammo, don't question it.\n\n""\cdValid Weapons:\c-\n"
+"\cjPistol\c- \ck->\c-\n \c[AB]Storm Pistol\c-"
+"\ctBlaster\c- \ck->\c-\n \c[AB]Storm Blaster\c-"
+"\ctCombat Pistol\c- \ck->\c-\n \c[AB]Storm Combat Pistol\c-"
+"\ctMarksman Pistol\c- \ck->\c-\n \c[AB]Storm Marksman Pistol\c-"
+"\ctHandcannon\c- \ck->\c-\n \c[AB]Storm Handcannon\c-"
+"\ctNuclear Plasma Pistol\c- \ck->\c-\n \c[AB]Storm Nuclear Plasma Pistol\c-"
+"\ctUzi\c- \ck->\c-\n \c[AB]Dual Uzis\c-";
+PDA_ASSEMBLY_ADVANCED_STORMPISTOL_REQ = "\cjPistol\c-, "
+"\ctBlaster\c-, "
+"\ctCombat Pistol\c-, \n"
+"\ctMarksman Pistol\c-, "
+"\ctHandcannon\c-, \n"
+"\ctNuclear Plasma Pistol\c-, "
+"\ctUzi\c-, \n";
+    
+
+PDA_ASSEMBLY_ADVANCED_PLASMAPISTOL = "Plasma Pistol \cc[\c-\c[PM]P\c-\c[PM]P\c-\c[TM]T\c-\cc]\c-";
+PDA_ASSEMBLY_ADVANCED_PLASMAPISTOL_NAME = "\c[AB]Plasma Pistol\c-";
+PDA_ASSEMBLY_ADVANCED_PLASMAPISTOL_MODS = "\cc[\c-\c[PM]P\c-\c[PM]P\c-\c[TM]T\c-\cc]\c-";
+PDA_ASSEMBLY_ADVANCED_PLASMAPISTOL_ICON = "PDAPPIST";
+PDA_ASSEMBLY_ADVANCED_PLASMAPISTOL_HEIGHT = "0";
+PDA_ASSEMBLY_ADVANCED_PLASMAPISTOL_DESC = "Converts the pistol into a cell-using plasma weapon.\nEnhances already energy-based weapons instead.\n\n""\cdValid Weapons:\c-\n"
+"\cjPistol\c- \ck->\c-\n \c[AB]Plasma Pistol\c-"
+"\ctBlaster\c- \ck->\c-\n \c[AB]Overcharged Blaster\c-"
+"\ctCombat Pistol\c- \ck->\c-\n \c[AB]Plasma Combat Pistol\c-"
+"\ctMarksman Pistol\c- \ck->\c-\n \c[AB]Plasma Marksman Pistol\c-"
+"\ctHandcannon\c- \ck->\c-\n \c[AB]Plasma Handcannon\c-"
+"\ctNuclear Plasma Pistol\c- \ck->\c-\n \c[AB]Supercharged Nuclear Plasma Pistol\c-"
+"\ctUzi\c- \ck->\c-\n \c[AB]Plasma Uzi\c-";
+PDA_ASSEMBLY_ADVANCED_PLASMAPISTOL_REQ = "\cjPistol\c-, "
+"\ctBlaster\c-, "
+"\ctCombat Pistol\c-, \n"
+"\ctMarksman Pistol\c-, "
+"\ctHandcannon\c-, \n"
+"\ctNuclear Plasma Pistol\c-, "
+"\ctUzi\c-, \n";
+    
+
+PDA_ASSEMBLY_ADVANCED_ASSAULTRIFLE = "Precision Rifle \cc[\c-\c[AM]A\c-\c[AM]A\c-\c[AM]A\c-\cc]\c-";
+PDA_ASSEMBLY_ADVANCED_ASSAULTRIFLE_NAME = "\c[AB]Precision Rifle\c-";
+PDA_ASSEMBLY_ADVANCED_ASSAULTRIFLE_MODS = "\cc[\c-\c[AM]A\c-\c[AM]A\c-\c[AM]A\c-\cc]\c-";
+PDA_ASSEMBLY_ADVANCED_ASSAULTRIFLE_ICON = "PDAASSAU";
+PDA_ASSEMBLY_ADVANCED_ASSAULTRIFLE_HEIGHT = "0";
+PDA_ASSEMBLY_ADVANCED_ASSAULTRIFLE_DESC = "Replaces existing firerate with a very slow one and makes it fire single shots at a time.\nAttacks are three times stronger than normal and extremely accurate.\n\n""\cdValid Weapons:\c-\n"
+"\cjChaingun\c- \ck->\c-\n \c[AB]Precision Chaingun\c-"
+"\cjBattle Rifle\c- \ck->\c-\n \c[AB]Scoped Rifle\c-"
+"\cjPlasma Rifle\c- \ck->\c-\n \c[AB]Precision Plasma Rifle\c-"
+"\ctMinigun\c- \ck->\c-\n \c[AB]Precision Minigun\c-"
+"\ctLaser Rifle\c- \ck->\c-\n \c[AB]Precision Laser Rifle\c-"
+"\ctNuclear Plasma Rifle\c- \ck->\c-\n \c[AB]Precision Nuclear Plasma Rifle\c-"
+"\ctUzi\c- \ck->\c-\n \c[AB]Precision Uzi\c-"
+"\ctInfantry Rifle\c- \ck->\c-\n \c[AB]Precision Infantry Rifle\c-"
+"\ctLMG\c- \ck->\c-\n \c[AB]Precision LMG\c-";
+PDA_ASSEMBLY_ADVANCED_ASSAULTRIFLE_REQ = "\cjAny \cdrapid-fire\c- or \cdrifle-type \cjweapon.\c-\n";
+    
+
+PDA_ASSEMBLY_ADVANCED_BURSTCANNON = "Burst Cannon \cc[\c-\c[BM]B\c-\c[BM]B\c-\c[PM]P\c-\cc]\c-";
+PDA_ASSEMBLY_ADVANCED_BURSTCANNON_NAME = "\c[AB]Burst Cannon\c-";
+PDA_ASSEMBLY_ADVANCED_BURSTCANNON_MODS = "\cc[\c-\c[BM]B\c-\c[BM]B\c-\c[PM]P\c-\cc]\c-";
+PDA_ASSEMBLY_ADVANCED_BURSTCANNON_ICON = "PDABURST";
+PDA_ASSEMBLY_ADVANCED_BURSTCANNON_HEIGHT = "0";
+PDA_ASSEMBLY_ADVANCED_BURSTCANNON_DESC = "Removes the full-auto functionality and makes it fire bursts of three shots.\nThe mag size is doubled, attacks are two times stronger than normal, and are less accurate than normal.\n\n""\cdValid Weapons:\c-\n"
+"\cjChaingun\c- \ck->\c-\n \c[AB]Burst Chaingun\c-"
+"\cjBattle Rifle\c- \ck->\c-\n \c[AB]Burst-fire Rifle\c-"
+"\cjPlasma Rifle\c- \ck->\c-\n \c[AB]Burst Plasma Rifle\c-"
+"\ctMinigun\c- \ck->\c-\n \c[AB]Burst Minigun\c-"
+"\ctLaser Rifle\c- \ck->\c-\n \c[AB]Burst Laser Rifle\c-"
+"\ctNuclear Plasma Rifle\c- \ck->\c-\n \c[AB]Burst Nuclear Plasma Rifle\c-"
+"\ctUzi\c- \ck->\c-\n \c[AB]Burst Uzi\c-"
+"\ctInfantry Rifle\c- \ck->\c-\n \c[AB]Burst Infantry Rifle\c-"
+"\ctLMG\c- \ck->\c-\n \c[AB]Burst LMG\c-";
+PDA_ASSEMBLY_ADVANCED_BURSTCANNON_REQ = "\cjAny \cdrapid-fire\c- or \cdrifle-type \cjweapon.\c-\n";
+    
+
+PDA_ASSEMBLY_ADVANCED_VBFG9000 = "VBFG 9000 \cc[\c-\c[PM]P\c-\c[PM]P\c-\c[PM]P\c-\cc]\c-";
+PDA_ASSEMBLY_ADVANCED_VBFG9000_NAME = "\c[AB]VBFG 9000\c-";
+PDA_ASSEMBLY_ADVANCED_VBFG9000_MODS = "\cc[\c-\c[PM]P\c-\c[PM]P\c-\c[PM]P\c-\cc]\c-";
+PDA_ASSEMBLY_ADVANCED_VBFG9000_ICON = "PDAVBFG9";
+PDA_ASSEMBLY_ADVANCED_VBFG9000_HEIGHT = "0";
+PDA_ASSEMBLY_ADVANCED_VBFG9000_DESC = "A more powerful version of the BFG.\nMore damage, rays, ammo consumption, charge time and way more carnage.\n\n""\cdValid Weapons:\c-\n"
+"\cjBFG 9000\c- \ck->\c-\n \c[AB]VBFG 9000\c-"
+"\ctNuclear BFG 9000\c- \ck->\c-\n \c[AB]Nuclear VBFG 9000\c-";
+PDA_ASSEMBLY_ADVANCED_VBFG9000_REQ = "\cjAny \cdBFG 9000\c- \cjtype.\c-\n";
+    
+
+PDA_ASSEMBLY_ADVANCED_NANOSHRAPNEL = "Nano Shrapnel \cc[\c-\c[PM]P\c-\c[PM]P\c-\c[NM]N\c-\cc]\c-";
+PDA_ASSEMBLY_ADVANCED_NANOSHRAPNEL_NAME = "\c[AB]Nano Shrapnel\c-";
+PDA_ASSEMBLY_ADVANCED_NANOSHRAPNEL_MODS = "\cc[\c-\c[PM]P\c-\c[PM]P\c-\c[NM]N\c-\cc]\c-";
+PDA_ASSEMBLY_ADVANCED_NANOSHRAPNEL_ICON = "PDANANSH";
+PDA_ASSEMBLY_ADVANCED_NANOSHRAPNEL_HEIGHT = "0";
+PDA_ASSEMBLY_ADVANCED_NANOSHRAPNEL_DESC = "Converts shotguns to not use ammo, but with substantially lowered damage.\nThe firerate and capacity to ignore resistances make these guns very powerful.\n\n""\cdValid Weapons:\c-\n"
+"\cjShotgun\c- \ck->\c-\n \c[AB]Nano Shotgun\c-\n\n"
+"\cjCombat Shotgun\c- \ck->\c-\n \c[AB]Nano Combat Shotgun\c-\n\n"
+"\cjDouble Shotgun\c- \ck->\c-\n \c[AB]Nano Double Shotgun\c-\n\n"
+"\ctSuper Shotgun\c- \ck->\c-\n \c[AB]Nano Super Shotgun\c-\n\n"
+"\ctAssault Shotgun\c- \ck->\c-\n \c[AB]Nano Assault Shotgun\c-\n\n"
+"\ctPlasma Shotgun\c- \ck->\c-\n \c[AB]Nano Plasma Shotgun\c-\n\n";
+PDA_ASSEMBLY_ADVANCED_NANOSHRAPNEL_REQ = "\cjAny \cdshotgun\c- \cjweapon.\c-\n";
+    
+
+PDA_ASSEMBLY_ADVANCED_HYPERBLASTER = "Hyperblaster \cc[\c-\c[AM]A\c-\c[TM]T\c-\c[TM]T\c-\cc]\c-";
+PDA_ASSEMBLY_ADVANCED_HYPERBLASTER_NAME = "\c[AB]Hyperblaster\c-";
+PDA_ASSEMBLY_ADVANCED_HYPERBLASTER_MODS = "\cc[\c-\c[AM]A\c-\c[TM]T\c-\c[TM]T\c-\cc]\c-";
+PDA_ASSEMBLY_ADVANCED_HYPERBLASTER_ICON = "PDAHYPER";
+PDA_ASSEMBLY_ADVANCED_HYPERBLASTER_HEIGHT = "0";
+PDA_ASSEMBLY_ADVANCED_HYPERBLASTER_DESC = "A plasma rifle that fires faster, smaller projectiles, and does so without needing to cooldown. An excellent and adaptive weapon.\n\n""\cdValid Weapons:\c-\n"
+"\cjPlasma Rifle\c- \ck->\c-\n \c[AB]Hyperblaster\c-\n\n";
+PDA_ASSEMBLY_ADVANCED_HYPERBLASTER_REQ = "\cjPlasma Rifle\c-";
+    
+
+PDA_ASSEMBLY_ADVANCED_FOCUSEDDOUBLESHOTGUN = "Focused Double Shotgun \cc[\c-\c[PM]P\c-\c[AM]A\c-\c[TM]T\c-\cc]\c-";
+PDA_ASSEMBLY_ADVANCED_FOCUSEDDOUBLESHOTGUN_NAME = "\c[AB]Focused Double Shotgun\c-";
+PDA_ASSEMBLY_ADVANCED_FOCUSEDDOUBLESHOTGUN_MODS = "\cc[\c-\c[PM]P\c-\c[AM]A\c-\c[TM]T\c-\cc]\c-";
+PDA_ASSEMBLY_ADVANCED_FOCUSEDDOUBLESHOTGUN_ICON = "PDAFOCUS";
+PDA_ASSEMBLY_ADVANCED_FOCUSEDDOUBLESHOTGUN_HEIGHT = "0";
+PDA_ASSEMBLY_ADVANCED_FOCUSEDDOUBLESHOTGUN_DESC = "A double shotgun with an extended barrel that greatly reduces spread and slightly increases damage.\n\n""\cdValid Weapons:\c-\n"
+"\cjDouble Shotgun\c- \ck->\c-\n \c[AB]Focused Double Shotgun\c-\n\n";
+PDA_ASSEMBLY_ADVANCED_FOCUSEDDOUBLESHOTGUN_REQ = "\cjDouble Shotgun\c-";
+    
+
+PDA_ASSEMBLY_ADVANCED_PLASMARIFLEMKII = "Plasma Rifle Mk. II \cc[\c-\c[BM]B\c-\c[BM]B\c-\c[TM]T\c-\cc]\c-";
+PDA_ASSEMBLY_ADVANCED_PLASMARIFLEMKII_NAME = "\c[AB]Plasma Rifle Mk. II\c-";
+PDA_ASSEMBLY_ADVANCED_PLASMARIFLEMKII_MODS = "\cc[\c-\c[BM]B\c-\c[BM]B\c-\c[TM]T\c-\cc]\c-";
+PDA_ASSEMBLY_ADVANCED_PLASMARIFLEMKII_ICON = "PDAPLS2G";
+PDA_ASSEMBLY_ADVANCED_PLASMARIFLEMKII_HEIGHT = "0";
+PDA_ASSEMBLY_ADVANCED_PLASMARIFLEMKII_DESC = "A powerful but slow series of plasma weapons, these guns do more than double the damage of normal plasma weapons.\n\n""\cdValid Weapons:\c-\n"
+"\cjPlasma Rifle\c- \ck->\c-\n \c[AB]Plasma Rifle Mk. II\c-\n\n"
+"\ctPlasma Shotgun\c- \ck->\c-\n \c[AB]Plasma Shotgun Mk. II\c-\n\n"
+"\ctNuclear Plasma Rifle\c- \ck->\c-\n \c[AB]Nuclear Plasma Rifle Mk. II\c-\n\n";
+PDA_ASSEMBLY_ADVANCED_PLASMARIFLEMKII_REQ = "\cjPlasma Rifle\c-, "
+"\ctPlasma Shotgun\c-,\n"
+"\ctNuclear Plasma Rifle\c-";
+    
+
+PDA_ASSEMBLY_ADVANCED_BULLETSTORMCHAINGUN = "Bulletstorm Weapon \cc[\c-\c[BM]B\c-\c[BM]B\c-\c[BM]B\c-\cc]\c-";
+PDA_ASSEMBLY_ADVANCED_BULLETSTORMCHAINGUN_NAME = "\c[AB]Bulletstorm Weapon\c-";
+PDA_ASSEMBLY_ADVANCED_BULLETSTORMCHAINGUN_MODS = "\cc[\c-\c[BM]B\c-\c[BM]B\c-\c[BM]B\c-\cc]\c-";
+PDA_ASSEMBLY_ADVANCED_BULLETSTORMCHAINGUN_ICON = "PDABULLS";
+PDA_ASSEMBLY_ADVANCED_BULLETSTORMCHAINGUN_HEIGHT = "0";
+PDA_ASSEMBLY_ADVANCED_BULLETSTORMCHAINGUN_DESC = "Bulletstorm weapons do away with reloading altogether, allowing you to fire them as long as you have the ammo to do so.\n\n""\cdValid Weapons:\c-\n"
+"\cjChaingun\c- \ck->\c-\n \c[AB]Bulleststorm Chaingun\c-\n\n"
+"\cjBattle Rifle\c- \ck->\c-\n \c[AB]Bulletstorm Rifle\c-\n\n";
+PDA_ASSEMBLY_ADVANCED_BULLETSTORMCHAINGUN_REQ = "\cjChaingun\c-, "
+"\cjBattle Rifle\c-\n";
+    
+
+PDA_ASSEMBLY_ADVANCED_MINIMISSILEPISTOL = "Mini-missile Pistol \cc[\c-\c[AM]A\c-\c[AM]A\c-\c[TM]T\c-\cc]\c-";
+PDA_ASSEMBLY_ADVANCED_MINIMISSILEPISTOL_NAME = "\c[AB]Mini-missile Pistol\c-";
+PDA_ASSEMBLY_ADVANCED_MINIMISSILEPISTOL_MODS = "\cc[\c-\c[AM]A\c-\c[AM]A\c-\c[TM]T\c-\cc]\c-";
+PDA_ASSEMBLY_ADVANCED_MINIMISSILEPISTOL_ICON = "PDAMMISP";
+PDA_ASSEMBLY_ADVANCED_MINIMISSILEPISTOL_HEIGHT = "0";
+PDA_ASSEMBLY_ADVANCED_MINIMISSILEPISTOL_DESC = "A small launcher that fires 6 mini-missiles for the cost of one full size rocket. How it does this is unknown.\n\n""\cdValid Weapons:\c-\n"
+"\ctHandcannon\c- \ck->\c-\n \c[AB]Mini-missile Pistol\c-\n\n";
+PDA_ASSEMBLY_ADVANCED_MINIMISSILEPISTOL_REQ = "\ctHandcannon\c-\n";
+    
+
+PDA_ASSEMBLY_ADVANCED_AUTOSHOTGUN = "Auto Shotgun \cc[\c-\c[BM]B\c-\c[BM]B\c-\c[FM]F\c-\cc]\c-";
+PDA_ASSEMBLY_ADVANCED_AUTOSHOTGUN_NAME = "\c[AB]Auto Shotgun\c-";
+PDA_ASSEMBLY_ADVANCED_AUTOSHOTGUN_MODS = "\cc[\c-\c[BM]B\c-\c[BM]B\c-\c[FM]F\c-\cc]\c-";
+PDA_ASSEMBLY_ADVANCED_AUTOSHOTGUN_ICON = "PDAAUTSH";
+PDA_ASSEMBLY_ADVANCED_AUTOSHOTGUN_HEIGHT = "0";
+PDA_ASSEMBLY_ADVANCED_AUTOSHOTGUN_DESC = "Weaker than normal shotguns, but possessing a ferocious firerate.\n"
+"If you have shells to spare, you can spew them out with these in no time at all.\n\n""\cdValid Weapons:\c-\n"
+"\cjShotgun\c- \ck->\c-\n \c[AB]Autoshotgun\c-\n\n"
+"\cjDouble Shotgun\c- \ck->\c-\n \c[AB]Auto Double Shotgun\c-\n\n";
+PDA_ASSEMBLY_ADVANCED_AUTOSHOTGUN_REQ = "\cjShotgun\c-, "
+"\cjDouble Shotgun\c-\n";
+    
+
+PDA_ASSEMBLY_ADVANCED_GRENADELAUNCHER = "Grenade Launcher \cc[\c-\c[AM]A\c-\c[AM]A\c-\c[AM]A\c-\cc]\c-";
+PDA_ASSEMBLY_ADVANCED_GRENADELAUNCHER_NAME = "\c[AB]Grenade Launcher\c-";
+PDA_ASSEMBLY_ADVANCED_GRENADELAUNCHER_MODS = "\cc[\c-\c[AM]A\c-\c[AM]A\c-\c[AM]A\c-\cc]\c-";
+PDA_ASSEMBLY_ADVANCED_GRENADELAUNCHER_ICON = "PDAGRENL";
+PDA_ASSEMBLY_ADVANCED_GRENADELAUNCHER_HEIGHT = "0";
+PDA_ASSEMBLY_ADVANCED_GRENADELAUNCHER_DESC = "Converts the weapon into an arcing, bouncing projectile launcher, allowing it to be used in different ways.\n\n""\cdValid Weapons:\c-\n"
+"\cjRocket Launcher\c- \ck->\c-\n \c[AB]Grenade Launcher\c-\n\n";
+PDA_ASSEMBLY_ADVANCED_GRENADELAUNCHER_REQ = "\cjRocket Launcher\c-\n";
+    
+
+PDA_ASSEMBLY_ADVANCED_NUCLEARPLASMASHOTGUN = "Energy Shotgun \cc[\c-\c[BM]B\c-\c[AM]A\c-\c[AM]A\c-\cc]\c-";
+PDA_ASSEMBLY_ADVANCED_NUCLEARPLASMASHOTGUN_NAME = "\c[AB]Energy Shotgun\c-";
+PDA_ASSEMBLY_ADVANCED_NUCLEARPLASMASHOTGUN_MODS = "\cc[\c-\c[BM]B\c-\c[AM]A\c-\c[AM]A\c-\cc]\c-";
+PDA_ASSEMBLY_ADVANCED_NUCLEARPLASMASHOTGUN_ICON = "PDAESHOT";
+PDA_ASSEMBLY_ADVANCED_NUCLEARPLASMASHOTGUN_HEIGHT = "0";
+PDA_ASSEMBLY_ADVANCED_NUCLEARPLASMASHOTGUN_DESC = "Converts the weapon into a shotgun variant of itself.\n"
+"A useful way of getting shotgun variants of advanced weapons.\n\n""\cdValid Weapons:\c-\n"
+"\ctLaser Rifle\c- \ck->\c-\n \c[AB]Laser Shotgun\c-\n\n"
+"\ctNuclear Plasma Rifle\c- \ck->\c-\n \c[AB]Nuclear Plasma Shotgun\c-\n\n";
+PDA_ASSEMBLY_ADVANCED_NUCLEARPLASMASHOTGUN_REQ = "\ctLaser Rifle\c-, "
+"\ctNuclear Plasma Rifle\c-\n";
+    
+
+PDA_ASSEMBLY_MASTER_NANOMANUFACTUREAMMO = "Nanomanufacture Ammo \cc[\c-\c[BM]B\c-\c[BM]B\c-\c[BM]B\c-\c[NM]N\c-\cc]\c-";
+PDA_ASSEMBLY_MASTER_NANOMANUFACTUREAMMO_NAME = "\c[MB]Nanomanufacture Ammo\c-";
+PDA_ASSEMBLY_MASTER_NANOMANUFACTUREAMMO_MODS = "\cc[\c-\c[BM]B\c-\c[BM]B\c-\c[BM]B\c-\c[NM]N\c-\cc]\c-";
+PDA_ASSEMBLY_MASTER_NANOMANUFACTUREAMMO_ICON = "PDANANOM";
+PDA_ASSEMBLY_MASTER_NANOMANUFACTUREAMMO_HEIGHT = "0";
+PDA_ASSEMBLY_MASTER_NANOMANUFACTUREAMMO_DESC = "Converts the loading mechanism into a nanomachic ammo assembler, allowing the weapon to fire infinitely.\n"
+"Weapons with larger ammo types will require time to charge.\n\n""\cdValid Weapons:\c-\n"
+"\cjPistol\c- \ck->\c-\n \c[MB]Nanomachic Pistol\c-\n\n"
+"\cjChaingun\c- \ck->\c-\n \c[MB]Nanomachic Chaingun\c-\n\n"
+"\cjBattle Rifle\c- \ck->\c-\n \c[MB]Nanomachic Battle Rifle\c-\n\n"
+"\cjRocket Launcher\c- \ck->\c-\n \c[MB]Nanomachic Rocket Launcher\c-\n\n"
+"\cjPlasma Rifle\c- \ck->\c-\n \c[MB]Nanomachic Plasma Rifle\c-\n\n"
+"\ctBlaster\c- \ck->\c-\n \c[MB]Nanomachic Blaster\c-\n\n"
+"\ctCombat Pistol\c- \ck->\c-\n \c[MB]Nanomachic Combat Pistol\c-\n\n"
+"\ctMarksman Pistol\c- \ck->\c-\n \c[MB]Nanomachic Marksman Pistol\c-\n\n"
+"\ctHandcannon\c- \ck->\c-\n \c[MB]Nanomachic Handcannon\c-\n\n"
+"\ctTristar Blaster\c- \ck->\c-\n \c[MB]Nanomachic Tristar Blaster\c-\n\n"
+"\ctMinigun\c- \ck->\c-\n \c[MB]Nanomachic Minigun\c-\n\n"
+"\ctMissile Launcher\c- \ck->\c-\n \c[MB]Nanomachic Missile Launcher\c-\n\n"
+"\ctNapalm Launcher\c- \ck->\c-\n \c[MB]Nanomachic Napalm Launcher\c-\n\n"
+"\ctLaser Rifle\c- \ck->\c-\n \c[MB]Nanomachic Laser Rifle\c-\n\n"
+"\ctUzi\c- \ck->\c-\n \c[MB]Nanomachic Uzi\c-\n\n";
+PDA_ASSEMBLY_MASTER_NANOMANUFACTUREAMMO_REQ = "\cjAny \cdnon-shotgun\c- and \cdnon-BFG \cjweapon.\c-\n";
+    
+
+PDA_ASSEMBLY_MASTER_DEMOLITIONAMMO = "Demolition Ammo \cc[\c-\c[PM]P\c-\c[TM]T\c-\c[TM]T\c-\c[FM]F\c-\cc]\c-";
+PDA_ASSEMBLY_MASTER_DEMOLITIONAMMO_NAME = "\c[MB]Demolition Ammo\c-";
+PDA_ASSEMBLY_MASTER_DEMOLITIONAMMO_MODS = "\cc[\c-\c[PM]P\c-\c[TM]T\c-\c[TM]T\c-\c[FM]F\c-\cc]\c-";
+PDA_ASSEMBLY_MASTER_DEMOLITIONAMMO_ICON = "PDADEMOA";
+PDA_ASSEMBLY_MASTER_DEMOLITIONAMMO_HEIGHT = "0";
+PDA_ASSEMBLY_MASTER_DEMOLITIONAMMO_DESC = "Loads bullet weapons with explosive ammunition and a cool paint scheme.\n"
+"The explosions are dangerous to yourself, so don't fire in enclosed spaces.\n\n""\cdValid Weapons:\c-\n"
+"\cjPistol\c- \ck->\c-\n \c[MB]Demolition Ammo Pistol\c-\n\n"
+"\cjChaingun\c- \ck->\c-\n \c[MB]Demolition Ammo Chaingun\c-\n\n"
+"\cjBattle Rifle\c- \ck->\c-\n \c[MB]Demolition Ammo Battle Rifle\c-\n\n"
+"\ctCombat Pistol\c- \ck->\c-\n \c[MB]Demolition Ammo Combat Pistol\c-\n\n"
+"\ctMarksman Pistol\c- \ck->\c-\n \c[MB]Demolition Ammo Marksman Pistol\c-\n\n"
+"\ctHandcannon\c- \ck->\c-\n \c[MB]Demolition Ammo Handcannon\c-\n\n"
+"\ctMinigun\c- \ck->\c-\n \c[MB]Demolition Ammo Minigun\c-\n\n"
+"\ctUzi\c- \ck->\c-\n \c[MB]Demolition Ammo Uzi\c-\n\n";
+PDA_ASSEMBLY_MASTER_DEMOLITIONAMMO_REQ = "\cjAny \cdnon-shotgun\c- \cjweapon\c-.\n"
+"\cjWeapon must use \cf10mm ammo\c-.\n";
+    
+
+PDA_ASSEMBLY_MASTER_BIGGESTFUCKINGGUN = "Demolition Ammo \cc[\c-\c[BM]B\c-\c[BM]B\c-\c[FM]F\c-\c[FM]F\c-\cc]\c-";
+PDA_ASSEMBLY_MASTER_BIGGESTFUCKINGGUN_NAME = "\c[MB]Demolition Ammo\c-";
+PDA_ASSEMBLY_MASTER_BIGGESTFUCKINGGUN_MODS = "\cc[\c-\c[BM]B\c-\c[BM]B\c-\c[FM]F\c-\c[FM]F\c-\cc]\c-";
+PDA_ASSEMBLY_MASTER_BIGGESTFUCKINGGUN_ICON = "PDABFGXX";
+PDA_ASSEMBLY_MASTER_BIGGESTFUCKINGGUN_HEIGHT = "0";
+PDA_ASSEMBLY_MASTER_BIGGESTFUCKINGGUN_DESC = "The king of BFGs, with unparalleled destructive power and a charge time that'll send you to sleep.\n\n""\cdValid Weapons:\c-\n"
+"\cjBFG 9000\c- \ck->\c-\n \c[MB]Biggest Fucking Gun\c-\n\n"
+"\ctNuclear BFG 9000\c- \ck->\c-\n \c[MB]Nuclear Biggest Fucking Gun\c-\n\n";
+PDA_ASSEMBLY_MASTER_BIGGESTFUCKINGGUN_REQ = "\cjBFG 9000\c-, "
+"\ctNuclear BFG 9000\c-\n";
+    
+
+PDA_ASSEMBLY_MASTER_RIPPER = "Ripper \cc[\c-\c[BM]B\c-\c[PM]P\c-\c[PM]P\c-\c[TM]T\c-\cc]\c-";
+PDA_ASSEMBLY_MASTER_RIPPER_NAME = "\c[MB]Ripper\c-";
+PDA_ASSEMBLY_MASTER_RIPPER_MODS = "\cc[\c-\c[BM]B\c-\c[PM]P\c-\c[PM]P\c-\c[TM]T\c-\cc]\c-";
+PDA_ASSEMBLY_MASTER_RIPPER_ICON = "PDARIPPE";
+PDA_ASSEMBLY_MASTER_RIPPER_HEIGHT = "0";
+PDA_ASSEMBLY_MASTER_RIPPER_DESC = "A super high speed chainsaw that also drains health from enemies.\n"
+"A good choice for close-range combat.\n\n""\cdValid Weapons:\c-\n"
+"\cjChainsaw\c- \ck->\c-\n \c[MB]Ripper\c-\n\n";
+PDA_ASSEMBLY_MASTER_RIPPER_REQ = "\cjChainsaw\c-\n";
+    
+
+PDA_ASSEMBLY_MASTER_PLASMAREFRACTOR = "Plasma Overcharger \cc[\c-\c[PM]P\c-\c[PM]P\c-\c[PM]P\c-\c[SM]S\c-\cc]\c-";
+PDA_ASSEMBLY_MASTER_PLASMAREFRACTOR_NAME = "\c[MB]Plasma Overcharger\c-";
+PDA_ASSEMBLY_MASTER_PLASMAREFRACTOR_MODS = "\cc[\c-\c[PM]P\c-\c[PM]P\c-\c[PM]P\c-\c[SM]S\c-\cc]\c-";
+PDA_ASSEMBLY_MASTER_PLASMAREFRACTOR_ICON = "PDAPREFR";
+PDA_ASSEMBLY_MASTER_PLASMAREFRACTOR_HEIGHT = "0";
+PDA_ASSEMBLY_MASTER_PLASMAREFRACTOR_DESC = "A beam-based weapon that imbues an enemy with a critical, unstable plasma charge.\n"
+"Can be fired at surfaces to detonate plasma everywhere.\n\n""\cdValid Weapons:\c-\n"
+"\cjPlasma Rifle\c- \ck->\c-\n \c[MB]Plasma Overcharger\c-\n\n";
+PDA_ASSEMBLY_MASTER_PLASMAREFRACTOR_REQ = "\cjPlasma Rifle\c-\n";
+    
+
+PDA_ASSEMBLY_MASTER_AUTOCANNON = "Autocannon \cc[\c-\c[PM]P\c-\c[PM]P\c-\c[FM]F\c-\c[FM]F\c-\cc]\c-";
+PDA_ASSEMBLY_MASTER_AUTOCANNON_NAME = "\c[MB]Autocannon\c-";
+PDA_ASSEMBLY_MASTER_AUTOCANNON_MODS = "\cc[\c-\c[PM]P\c-\c[PM]P\c-\c[FM]F\c-\c[FM]F\c-\cc]\c-";
+PDA_ASSEMBLY_MASTER_AUTOCANNON_ICON = "PDAAUTOC";
+PDA_ASSEMBLY_MASTER_AUTOCANNON_HEIGHT = "0";
+PDA_ASSEMBLY_MASTER_AUTOCANNON_DESC = "Converts the minigun's spinning barrels into a larger, slower, explosive slug cannon.\n"
+"Don't fire in close proximity.\n\n""\cdValid Weapons:\c-\n"
+"\ctMinigun\c- \ck->\c-\n \c[MB]Autocannon\c-\n\n";
+PDA_ASSEMBLY_MASTER_AUTOCANNON_REQ = "\ctMinigun\c-\n";
+    
+
+PDA_ASSEMBLY_MASTER_MOTHERINLAW = "Mother-In-Law \cc[\c-\c[PM]P\c-\c[PM]P\c-\c[FM]F\c-\c[NM]N\c-\cc]\c-";
+PDA_ASSEMBLY_MASTER_MOTHERINLAW_NAME = "\c[MB]Mother-In-Law\c-";
+PDA_ASSEMBLY_MASTER_MOTHERINLAW_MODS = "\cc[\c-\c[PM]P\c-\c[PM]P\c-\c[FM]F\c-\c[NM]N\c-\cc]\c-";
+PDA_ASSEMBLY_MASTER_MOTHERINLAW_ICON = "PDAMOTHE";
+PDA_ASSEMBLY_MASTER_MOTHERINLAW_HEIGHT = "0";
+PDA_ASSEMBLY_MASTER_MOTHERINLAW_DESC = "The most powerful rocket launcher. The longer the rocket travels, the more damage it does. Also, generates its own ammo over time.\n\n""\cdValid Weapons:\c-\n"
+"\cjRocket Launcher\c- \ck->\c-\n \c[MB]Mother-In-Law\c-\n\n";
+PDA_ASSEMBLY_MASTER_MOTHERINLAW_REQ = "\cjRocket Launcher\c-\n";
+    
+
+PDA_ASSEMBLY_MASTER_MEGATONSHOTGUN = "Megaton Shotgun \cc[\c-\c[BM]B\c-\c[BM]B\c-\c[BM]B\c-\c[FM]F\c-\cc]\c-";
+PDA_ASSEMBLY_MASTER_MEGATONSHOTGUN_NAME = "\c[MB]Megaton Shotgun\c-";
+PDA_ASSEMBLY_MASTER_MEGATONSHOTGUN_MODS = "\cc[\c-\c[BM]B\c-\c[BM]B\c-\c[BM]B\c-\c[FM]F\c-\cc]\c-";
+PDA_ASSEMBLY_MASTER_MEGATONSHOTGUN_ICON = "PDAMEGAT";
+PDA_ASSEMBLY_MASTER_MEGATONSHOTGUN_HEIGHT = "0";
+PDA_ASSEMBLY_MASTER_MEGATONSHOTGUN_DESC = "A giant three barrelled death shotgun with rotating barrels. Capable of firing a single barrel, or all barrels at once.\n\n""\cdValid Weapons:\c-\n"
+"\ctSuper Shotgun\c- \ck->\c-\n \c[MB]Megaton Shotgun\c-\n\n";
+PDA_ASSEMBLY_MASTER_MEGATONSHOTGUN_REQ = "\ctSuper Shotgun\c-\n";
+    
+
+PDA_ASSEMBLY_MASTER_CONQUERORSHOTGUN = "Conqueror Shotgun \cc[\c-\c[BM]B\c-\c[PM]P\c-\c[AM]A\c-\c[FM]F\c-\cc]\c-";
+PDA_ASSEMBLY_MASTER_CONQUERORSHOTGUN_NAME = "\c[MB]Conqueror Shotgun\c-";
+PDA_ASSEMBLY_MASTER_CONQUERORSHOTGUN_MODS = "\cc[\c-\c[BM]B\c-\c[PM]P\c-\c[AM]A\c-\c[FM]F\c-\cc]\c-";
+PDA_ASSEMBLY_MASTER_CONQUERORSHOTGUN_ICON = "PDACONQU";
+PDA_ASSEMBLY_MASTER_CONQUERORSHOTGUN_HEIGHT = "0";
+PDA_ASSEMBLY_MASTER_CONQUERORSHOTGUN_DESC = "A powerful, responsive, mag-based shotgun. Very effective in every single way, but not a master of anything.\n\n""\cdValid Weapons:\c-\n"
+"\cjCombat Shotgun\c- \ck->\c-\n \c[MB]Conqueror Shotgun\c-\n\n";
+PDA_ASSEMBLY_MASTER_CONQUERORSHOTGUN_REQ = "\cjCombat Shotgun\c-\n";
+    
+
+PDA_ASSEMBLY_MASTER_CLUSTERBOMBLAUNCHER = "Cluster Bomb Launcher \cc[\c-\c[BM]B\c-\c[AM]A\c-\c[FM]F\c-\c[FM]F\c-\cc]\c-";
+PDA_ASSEMBLY_MASTER_CLUSTERBOMBLAUNCHER_NAME = "\c[MB]Cluster Bomb Launcher\c-";
+PDA_ASSEMBLY_MASTER_CLUSTERBOMBLAUNCHER_MODS = "\cc[\c-\c[BM]B\c-\c[AM]A\c-\c[FM]F\c-\c[FM]F\c-\cc]\c-";
+PDA_ASSEMBLY_MASTER_CLUSTERBOMBLAUNCHER_ICON = "PDACLUST";
+PDA_ASSEMBLY_MASTER_CLUSTERBOMBLAUNCHER_HEIGHT = "0";
+PDA_ASSEMBLY_MASTER_CLUSTERBOMBLAUNCHER_DESC = "A powerful multi-warhead weapon that does heavy damage in an area over time.\nUses increased ammo and has a small charge time.\n\n""\cdValid Weapons:\c-\n"
+"\ctMissile Launcher\c- \ck->\c-\n \c[MB]Cluster Bomb Launcher\c-\n\n";
+PDA_ASSEMBLY_MASTER_CLUSTERBOMBLAUNCHER_REQ = "\ctMissile Launcher\c-\n";
+    
+
+PDA_ASSEMBLY_MASTER_GAUSSRIFLE = "Gauss Rifle \cc[\c-\c[PM]P\c-\c[AM]A\c-\c[SM]S\c-\c[FM]F\c-\cc]\c-";
+PDA_ASSEMBLY_MASTER_GAUSSRIFLE_NAME = "\c[MB]Gauss Rifle\c-";
+PDA_ASSEMBLY_MASTER_GAUSSRIFLE_MODS = "\cc[\c-\c[PM]P\c-\c[AM]A\c-\c[SM]S\c-\c[FM]F\c-\cc]\c-";
+PDA_ASSEMBLY_MASTER_GAUSSRIFLE_ICON = "PDAGAUSS";
+PDA_ASSEMBLY_MASTER_GAUSSRIFLE_HEIGHT = "0";
+PDA_ASSEMBLY_MASTER_GAUSSRIFLE_DESC = "A chargeable single shot sniper weapon that uses cells to do bullet damage.\nVery powerful, especially when fully charged.\n\n""\cdValid Weapons:\c-\n"
+"\ctLaser Rifle\c- \ck->\c-\n \c[MB]Gauss Rifle\c-\n\n";
+PDA_ASSEMBLY_MASTER_GAUSSRIFLE_REQ = "\ctLaser Rifle\c-\n";
+    
+
+PDA_ASSEMBLY_MASTER_ANTIMATERIELRIFLE = "Anti-materiel Rifle \cc[\c-\c[PM]P\c-\c[AM]A\c-\c[SM]S\c-\c[SM]S\c-\cc]\c-";
+PDA_ASSEMBLY_MASTER_ANTIMATERIELRIFLE_NAME = "\c[MB]Anti-materiel Rifle\c-";
+PDA_ASSEMBLY_MASTER_ANTIMATERIELRIFLE_MODS = "\cc[\c-\c[PM]P\c-\c[AM]A\c-\c[SM]S\c-\c[SM]S\c-\cc]\c-";
+PDA_ASSEMBLY_MASTER_ANTIMATERIELRIFLE_ICON = "PDAAMRXX";
+PDA_ASSEMBLY_MASTER_ANTIMATERIELRIFLE_HEIGHT = "0";
+PDA_ASSEMBLY_MASTER_ANTIMATERIELRIFLE_DESC = "The most powerful single-shot rifle weapon. Can pierce multiple enemies at a time and devastate bosses, but has a slow rate of fire.\n\n""\cdValid Weapons:\c-\n"
+"\cjBattle Rifle\c- \ck->\c-\n \c[MB]Anti-materiel Rifle\c-\n\n";
+PDA_ASSEMBLY_MASTER_ANTIMATERIELRIFLE_REQ = "\cjBattle Rifle\c-\n";
+    
+
+PDA_ASSEMBLY_MASTER_ELECTROINFUSION = "Electro Infusion \cc[\c-\c[PM]P\c-\c[TM]T\c-\c[SM]S\c-\c[SM]S\c-\cc]\c-";
+PDA_ASSEMBLY_MASTER_ELECTROINFUSION_NAME = "\c[MB]Electro Infusion\c-";
+PDA_ASSEMBLY_MASTER_ELECTROINFUSION_MODS = "\cc[\c-\c[PM]P\c-\c[TM]T\c-\c[SM]S\c-\c[SM]S\c-\cc]\c-";
+PDA_ASSEMBLY_MASTER_ELECTROINFUSION_ICON = "PDAEINFU";
+PDA_ASSEMBLY_MASTER_ELECTROINFUSION_HEIGHT = "0";
+PDA_ASSEMBLY_MASTER_ELECTROINFUSION_DESC = "Converts the weapon to an electric-based variant of itself.\n"
+"Often very powerful, but remember the damage type is changed to Electric.\n"
+"If the weapon was already an electric weapon, it's converted into a more powerful variant.\n\n""\cdValid Weapons:\c-\n"
+"\cjBFG 9000\c- \ck->\c-\n \c[MB]Zeus Cannon\c-\n\n"
+"\ctPlasma Shotgun\c- \ck->\c-\n \c[MB]ARC-4 Voltgun\c-\n\n";
+PDA_ASSEMBLY_MASTER_ELECTROINFUSION_REQ = "\cjBFG 9000\c-\n"
+"\ctPlasma Shotgun\c-\n";
+    
+
+PDA_ASSEMBLY_MASTER_PLASMAINFUSION = "Plasma Infusion \cc[\c-\c[PM]P\c-\c[AM]A\c-\c[TM]T\c-\c[SM]S\c-\cc]\c-";
+PDA_ASSEMBLY_MASTER_PLASMAINFUSION_NAME = "\c[MB]Plasma Infusion\c-";
+PDA_ASSEMBLY_MASTER_PLASMAINFUSION_MODS = "\cc[\c-\c[PM]P\c-\c[AM]A\c-\c[TM]T\c-\c[SM]S\c-\cc]\c-";
+PDA_ASSEMBLY_MASTER_PLASMAINFUSION_ICON = "PDAPINFU";
+PDA_ASSEMBLY_MASTER_PLASMAINFUSION_HEIGHT = "0";
+PDA_ASSEMBLY_MASTER_PLASMAINFUSION_DESC = "Converts the weapon to an energy-based variant of itself.\n"
+"Often very powerful, but remember the damage type is changed to Plasma.\n"
+"If the weapon was already an energy weapon, it's converted into a more powerful variant.\n\n""\cdValid Weapons:\c-\n"
+"\cjRocket Launcher\c- \ck->\c-\n \c[MB]Plascharge Launcher\c-\n\n"
+"\cjPlasma Rifle\c- \ck->\c-\n \c[MB]Plasma Cannon\c-\n\n"
+"\ctBlaster\c- \ck->\c-\n \c[MB]Heavy Pulse Blaster\c-\n\n"
+"\ctMinigun\c- \ck->\c-\n \c[MB]Laser Minigun\c-\n\n"
+"\ctMissile Launcher\c- \ck->\c-\n \c[MB]Defence Drone Launcher\c-\n\n"
+"\ctNapalm Launcher\c- \ck->\c-\n \c[MB]Incineration Device Launcher\c-\n\n";
+PDA_ASSEMBLY_MASTER_PLASMAINFUSION_REQ = "\cjRocket Launcher\c-, "
+"\cjPlasma Rifle\c-, \n"
+"\ctBlaster\c-, "
+"\ctMinigun\c-, \n"
+"\ctMissile Launcher\c-, "
+"\ctNapalm Launcher\c-\n";
+    
+
+PDA_ASSEMBLY_MASTER_SUPERMACHINEGUN = "Super Machinegun \cc[\c-\c[PM]P\c-\c[AM]A\c-\c[TM]T\c-\c[SM]S\c-\cc]\c-";
+PDA_ASSEMBLY_MASTER_SUPERMACHINEGUN_NAME = "\c[MB]Super Machinegun\c-";
+PDA_ASSEMBLY_MASTER_SUPERMACHINEGUN_MODS = "\cc[\c-\c[PM]P\c-\c[AM]A\c-\c[TM]T\c-\c[SM]S\c-\cc]\c-";
+PDA_ASSEMBLY_MASTER_SUPERMACHINEGUN_ICON = "PDASUPER";
+PDA_ASSEMBLY_MASTER_SUPERMACHINEGUN_HEIGHT = "0";
+PDA_ASSEMBLY_MASTER_SUPERMACHINEGUN_DESC = "The most shooty machinegun of all.\n"
+"This weapon annihilates the enemy and your bullet supply like nothing else.\n\n""\cdValid Weapons:\c-\n"
+"\cjBattle Rifle\c- \ck->\c-\n \c[MB]Super Machinegun\c-\n\n";
+PDA_ASSEMBLY_MASTER_SUPERMACHINEGUN_REQ = "\cjBattle Rifle\c-\n";
+    
+
+PDA_ASSEMBLY_MASTER_ENERGYBLADE = "Energy Blade \cc[\c-\c[PM]P\c-\c[PM]P\c-\c[PM]P\c-\c[AM]A\c-\cc]\c-";
+PDA_ASSEMBLY_MASTER_ENERGYBLADE_NAME = "\c[MB]Energy Blade\c-";
+PDA_ASSEMBLY_MASTER_ENERGYBLADE_MODS = "\cc[\c-\c[PM]P\c-\c[PM]P\c-\c[PM]P\c-\c[AM]A\c-\cc]\c-";
+PDA_ASSEMBLY_MASTER_ENERGYBLADE_ICON = "PDAEBLAD";
+PDA_ASSEMBLY_MASTER_ENERGYBLADE_HEIGHT = "0";
+PDA_ASSEMBLY_MASTER_ENERGYBLADE_DESC = "Enhances the weapon with an energy-based attack.\n"
+"Far more powerful, but requires cell ammo to wield, unlike normal melee weapons.\n\n""\cdValid Weapons:\c-\n"
+"\cjChainsaw\c- \ck->\c-\n \c[MB]Energysaw\c-\n\n";
+PDA_ASSEMBLY_MASTER_ENERGYBLADE_REQ = "\cjChainsaw\c-\n";
+    
