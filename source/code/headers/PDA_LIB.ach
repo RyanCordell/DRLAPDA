@@ -12,6 +12,25 @@
 #define PDA_GiveEveryoneInventory(name) ACS_NamedExecuteWithResult("PDA_GiveEveryoneInventory", name)
 #define PDA_HistoryMax 16
 
+#define AVAILABLE_HUDS 13
+str playerSelectedHUD[AVAILABLE_HUDS] = {
+  "RLStatusBarHUDType",
+  "RLStatusBarAltHUDType",
+  "RLStatusBarGeoscaperHUDType",
+  "RLStatusBarRepublicHUDType",
+  "RLStatusBarRigelatinHUDType",
+  "RLStatusBarTritiumHUDType",
+
+ // Fullscreen HUD Types
+  "RLFullscreenOriginalHUDType",
+  "RLFullscreenShockHUDType",
+  "RLFullscreenHazardHUDType",
+  "RLFullscreenCorruptHUDType",
+  "RLFullscreenFluidHUDType",
+  "RLFullscreenStatyHUDType",
+  "RLFullscreenTrackerHUDType"
+};
+
 #define PDA_MODMIN  0
 #define PDA_MODMAX  8
 
@@ -64,6 +83,12 @@ int aBoolField[MAX_PLAYERS];
 
 int modPackIndex[MAX_PLAYERS];
 #define localmodPackIndex modPackIndex[PlayerNumber()]
+
+str DRLA_FetchStoredInfo[MAX_PLAYERS],
+    DRLA_FetchExoticInfo[MAX_PLAYERS],
+    DRLA_FetchSniperInfo[MAX_PLAYERS],
+    DRLA_FetchFirestormInfo[MAX_PLAYERS],
+    DRLA_FetchNanoInfo[MAX_PLAYERS];
 
 struct PDAInfo {
    bool active;
@@ -121,6 +146,19 @@ struct PDAButton {
     str graphic;
     
     str tooltip;
+
+    fixed alpha;
+
+    int graphicID;
+    int graphicFlags;
+    float graphicX;
+    float graphicY;
+    
+    str textFont;
+    int textID;
+    int textFlags;
+    float finalX;
+    float finalY;
 }
 PDAButton PDA_Button[MAX_PLAYERS][512];
 
@@ -218,12 +256,12 @@ enum PDA_IDs {
     PDA_PAGENUMID,
       
     // Assembly iterator ID range
-    PDA_ASSEMBLYIDRANGE = PDA_PAGENUMID + 80,
-    PDA_WORNARMORS = PDA_ASSEMBLYIDRANGE + 4,
+    PDA_ASSEMBLYIDRANGE = PDA_PAGENUMID + 48,
+    PDA_WORNARMORS = PDA_ASSEMBLYIDRANGE + 512, // excessive range, but you never know.
     PDA_STASHEDARMORS = PDA_WORNARMORS + 8,
     PDA_NOEQID = PDA_STASHEDARMORS + 3,
-    // Modpack ID range (INFOID - 7)
-    PDA_MODIDRANGE,
+    // Modpack ID range
+    PDA_MODIDRANGE = PDA_NOEQID + 7,
     // Message IDs
     PDA_INFO4ID,
     PDA_INFO3ID,
@@ -280,7 +318,8 @@ enum PDA_Categories {
 	
 	// Accessible through Misc
 	PDA_PONG,
-	PDA_CREDITS
+	PDA_CREDITS,
+	PDA_HUDSWITCH,
 }
 
 enum armor_enum {

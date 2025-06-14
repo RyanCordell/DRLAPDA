@@ -7,9 +7,9 @@
 #include "../headers/PDA_LIB.ach" // Stores IDs, arrays and other things the PDA uses.
 
 /** PDA Databases */
-#include "../database/assemblies.idb" // Assemblies
+// #include "../database/assemblies.idb" // Assemblies
 #include "../database/equipment.idb" // Armors, boots, and etc.
-#include "../database/modeffects.idb" // Modpack effects on weapons
+// #include "../database/modeffects.idb" // Modpack effects on weapons
 
 /** Includes for other stuff */
 #include "../headers/PDA_BES.ach" // i'm da
@@ -36,8 +36,102 @@ script "PDA_SetEveryoneInventory" (str name) {
    SetResultValue(1);
 }
 
+global str 43:weaponval;
+global str 44:armorval;
+script "DRLA_HUD_InfoHandler" ENTER {
+    while (true) {
+        bool IsNotDemonic = false;
+            IsNotDemonic  = !CheckInventory("RLDemonicWeaponToken");
+        
+        str currentWeapon        = GetWeapon();
+        str trimmedCurrentWeapon = StrTrim(currentWeapon, 2, 0);
+        int Weapon_Name_Printer  = StrParam("PDA_WEAPON_%s:_FLATNAME", trimmedCurrentWeapon);
+
+        int Weapon_DualName_Printer = StrParam("PDA_WEAPON_%s:DEMONARTIFACTS_FLATNAME", trimmedCurrentWeapon);
+
+        int Weapon_Bulk_Quantity      = CheckInventory(StrParam("%s:BulkMod", currentWeapon)),
+            Weapon_Power_Quantity     = CheckInventory(StrParam("%s:PowerMod", currentWeapon)),
+            Weapon_Agility_Quantity   = CheckInventory(StrParam("%s:AgilityMod", currentWeapon)),
+            Weapon_Technical_Quantity = CheckInventory(StrParam("%s:TechnicalMod", currentWeapon)),
+            Weapon_Sniper_Quantity    = CheckInventory(StrParam("%s:SniperMod", currentWeapon)),
+            Weapon_Firestorm_Quantity = CheckInventory(StrParam("%s:FirestormMod", currentWeapon)),
+            Weapon_Nano_Quantity      = CheckInventory(StrParam("%s:NanoMod", currentWeapon)),
+            Weapon_Artifact_Quantity  = CheckInventory(StrParam("%s:DemonArtifacts", currentWeapon));
+        
+        str weaponName = (IsNotDemonic) ? 
+                        (CheckInventory(strParam("%s:DemonArtifacts", currentWeapon)) ? 
+                            Weapon_DualName_Printer 
+                            : Weapon_Name_Printer) 
+                        : Weapon_Name_Printer;
+        str modsOn     = StrParam("%l: ", weaponName);
+
+        // Weapons
+        if(Weapon_Power_Quantity || Weapon_Bulk_Quantity || Weapon_Agility_Quantity || Weapon_Technical_Quantity || 
+        Weapon_Sniper_Quantity || Weapon_Firestorm_Quantity || Weapon_Nano_Quantity || Weapon_Artifact_Quantity )
+        {
+            modsOn = StrParam("%l: (", weaponName);
+            modsOn = (Weapon_Power_Quantity     > 0) ? StrParam("%s:P%i:\n", modsOn, Weapon_Power_Quantity    ) : StrParam("%s:\n", modsOn);
+            modsOn = (Weapon_Bulk_Quantity      > 0) ? StrParam("%s:B%i:\n", modsOn, Weapon_Bulk_Quantity     ) : StrParam("%s:\n", modsOn);
+            modsOn = (Weapon_Agility_Quantity   > 0) ? StrParam("%s:A%i:\n", modsOn, Weapon_Agility_Quantity  ) : StrParam("%s:\n", modsOn);
+            modsOn = (Weapon_Technical_Quantity > 0) ? StrParam("%s:T%i:\n", modsOn, Weapon_Technical_Quantity) : StrParam("%s:\n", modsOn);
+            modsOn = (Weapon_Sniper_Quantity    > 0) ? StrParam("%s:S%i:\n", modsOn, Weapon_Sniper_Quantity   ) : StrParam("%s:\n", modsOn);
+            modsOn = (Weapon_Firestorm_Quantity > 0) ? StrParam("%s:F%i:\n", modsOn, Weapon_Firestorm_Quantity) : StrParam("%s:\n", modsOn);
+            modsOn = (Weapon_Nano_Quantity      > 0) ? StrParam("%s:N%i:\n", modsOn, Weapon_Nano_Quantity     ) : StrParam("%s:\n", modsOn);
+            modsOn = (Weapon_Artifact_Quantity  > 0) ? StrParam("%s:D%i:\n", modsOn, Weapon_Artifact_Quantity ) : StrParam("%s:\n", modsOn);
+            modsOn = StrParam("%s:)\n", modsOn);
+        } else if(!Weapon_Power_Quantity && !Weapon_Bulk_Quantity && !Weapon_Agility_Quantity && !Weapon_Technical_Quantity && 
+        !Weapon_Sniper_Quantity && !Weapon_Firestorm_Quantity && !Weapon_Nano_Quantity && !Weapon_Artifact_Quantity)
+        {
+            modsOn = StrParam("%l:", weaponName);
+        };
+        weaponval = modsOn;
+
+        // Armor
+        str armorType = GetArmorInfo(ARMORINFO_CLASSNAME);
+        if (armorType != "None") {
+            armorType = StrMid(armorType, 2, StrLen(armorType) - (CheckActorClass(0,"DoomRLRenegade") ? 10 : 0));
+            armorType = StrParam(s:"PDA_ARMOR_", s:armorType, s:"_FLATNAME");
+            armorval  = StrParam(l:armorType, s:" (",i:CheckInventory("BasicArmor"),s:"%)");
+        } else {
+            armorval = StrParam(s:"none");
+        }
+        Delay(1);
+    }
+}
+
+
+script "DRLA_HUDStyleChanger" (void) {
+    #define statusbarMax 6
+    str statusbarHuds[statusbarMax] = {
+        "RLStatusBarTritiumHUDType",
+        "RLStatusBarTritiumHUDType",
+        "RLStatusBarGeoscaperHUDType",
+        "RLStatusBarRepublicHUDType",
+        "RLStatusBarRigelatinHUDType",
+        "RLStatusBarVintageHUDType"
+    };
+    #define fullscreenMax 6
+    str fullscreenHuds[fullscreenMax] = {
+        "RLFullscreenShockHUDType", 
+        "RLFullscreenHazardHUDType", 
+        "RLFullscreenCorruptHUDType", 
+        "RLFullscreenFluidHUDType",
+        "RLFullscreenStatyHUDType",
+        "RLFullscreenTrackerHUDType"
+    };
+
+    int statusbarStyleCVar  = GetCVar("DRLA_HUD_statusbarstyle");
+    int fullscreenStyleCVar = GetCVar("DRLA_HUD_fullscreenstyle");
+
+    for (int s = 0; s <  statusbarMax; s++) TakeActorInventory(PlayerNumber(),  statusbarHuds[s], 1);
+    for (int f = 0; f < fullscreenMax; f++) TakeActorInventory(PlayerNumber(), fullscreenHuds[f], 1);
+
+    GiveActorInventory(PlayerNumber(),  statusbarHuds[statusbarStyleCVar] , 1);
+    GiveActorInventory(PlayerNumber(), fullscreenHuds[fullscreenStyleCVar], 1);
+}
+
 /** TODO: This and the below script are redundant, look into it */
-SCRIPT "HeyADollar" enter {
+function void doPDASync (void) {
     int kcount;
     for (int page = 0; page < DRLA_DIFFICULTYTIERS; page++) {
         for (int m = 0; m < DRLA_MONSTER_PAGE_MAX; m++) {
@@ -49,44 +143,42 @@ SCRIPT "HeyADollar" enter {
             }
         }
     }
-    for (int i = 0; i < DRLA_WEAPONMAX; i++) {
-        if (CheckInventory(DRLA_Assemblies[i][0])) PDA_SetEveryoneInventory(DRLA_Assemblies[i][0]);
+
+    int masterMax   = 0;
+    str allAssemblies = StrParam(l:"PDA_ASSEMBLIES");
+    str_split(StrParam("%l:", "PDA_SEPARATOR_CHARACTER"), allAssemblies);
+    int ai = 0;
+    int TEXT_OFFSET = 13; // aka length of "PDA_ASSEMBLY_"
+    str actorToken = "";
+    if (stringArray[0] != "") {
+        while ((stringArray[ai++]) != "") {
+            if (ai % 2 == 0) masterMax++;
+        }
     }
-    for (int w = 0; w < DRLA_EXOTICEFFECTS_MAX; w++) {
-        for (int e = 1; e < DRLA_EXOTICELEMENTS; e++)
-            if (CheckInventory(DRLA_UniqueExoticModEffects[w][e])) PDA_SetEveryoneInventory(DRLA_UniqueExoticModEffects[w][e]);
-        //if (CheckInventory(DRLA_UniqueSniperEffects[e][1])) PDA_SetEveryoneInventory(DRLA_UniqueSniperEffects[e][1]);
-        //if (CheckInventory(DRLA_UniqueFirestormEFfects[e][1])) PDA_SetEveryoneInventory(DRLA_UniqueFirestormEFfects[e][1]);
-        //if (CheckInventory(DRLA_UniqueNanoEffects[e][1])) PDA_SetEveryoneInventory(DRLA_UniqueNanoEffects[e][1]);
+    masterMax--;
+
+    for (int ti = 0; ti <= masterMax; ti++) {
+        if (ti % 2 == 0) {
+            actorToken = stringArray[ti];
+        }
+        if (CheckInventory(actorToken)) PDA_SetEveryoneInventory(actorToken);
     }
-    
-    Delay(4);
+    // for (int i = 0; i < masterMax; i++) {
+    //     if (CheckInventory(DRLA_Assemblies[i][0])) PDA_SetEveryoneInventory(DRLA_Assemblies[i][0]);
+    // }
+    // for (int w = 0; w < DRLA_EXOTICEFFECTS_MAX; w++) {
+    //     for (int e = 1; e < DRLA_EXOTICELEMENTS; e++)
+    //         if (CheckInventory(DRLA_UniqueExoticModEffects[w][e])) PDA_SetEveryoneInventory(DRLA_UniqueExoticModEffects[w][e]);
+    // }
+}
+SCRIPT "HeyADollar" enter {
+    doPDASync();
+    GiveInventory("RLHUDStyleChanger", 1);
+    ACS_NamedExecuteAlways("DRLA_HUDStyleChanger", 0);
 }
 
 SCRIPT "SyncPDA" (void) net {
-    int kcount;
-    for (int page = 0; page < DRLA_DIFFICULTYTIERS; page++) {
-        for (int m = 0; m < DRLA_MONSTER_PAGE_MAX; m++) {
-            kcount = StrParam("%s:KillCounter", DRLA_Bestiary[page][m][beast_TOKEN]);
-            monsterCheck[page][m]  = CheckInventory(kcount);
-
-            if (CheckPointerInventory(kcount, PlayerNumber()) > 0) {
-                SetInventory(kcount, 1);
-            }
-        }
-    }
-    for (int i = 0; i < DRLA_WEAPONMAX; i++) {
-        if (CheckInventory(DRLA_Assemblies[i][0])) SetInventory(DRLA_Assemblies[i][0], 1);
-    }
-    for (int w = 0; w < DRLA_EXOTICEFFECTS_MAX; w++) {
-        for (int e = 1; e < DRLA_EXOTICELEMENTS; e++)
-            if (CheckInventory(DRLA_UniqueExoticModEffects[w][e])) SetInventory(DRLA_UniqueExoticModEffects[w][e], 1);
-    }
-    /* for (int e = 0; e < DRLA_EXOTICEFFECTS_MAX; e++) {
-        if (CheckInventory(DRLA_UniqueSniperEffects[e][1])) SetInventory(DRLA_UniqueSniperEffects[e][1], 1);
-        if (CheckInventory(DRLA_UniqueFirestormEFfects[e][1])) SetInventory(DRLA_UniqueFirestormEFfects[e][1], 1);
-        if (CheckInventory(DRLA_UniqueNanoEffects[e][1])) SetInventory(DRLA_UniqueNanoEffects[e][1], 1);
-    } */
+    // doPDASync();
 }
 
 // [marrub] Static init stuff
@@ -294,6 +386,15 @@ SCRIPT "PDA_Core" (void) {
         }
         
         PDA_DefaultFont();
+
+        int freelook = GetCvar("sv_freelook");
+        int nofreelook = GetCvar("sv_nofreelook");
+        if (freelook == 1 || nofreelook == 1) {
+            HudMessage(s:"\cgWARNING!\c- The PDA will not function properly with \cb\"Allow freelook\"\c- disabled! Sorry about that."; 
+            HUDMSG_PLAIN, PDA_PLAYERS_BUTTON, CR_GREEN, (PDA_RectX) + 10.1, (PDA_RectY) + 35.1, 0);
+            HudMessage(s:"Find either \cb\"sv_freelook\"\c-, \cb\"sv_nofreelook\"\c-, or \cbenable mouselook under Mouse Options\c- to rectify this."; 
+            HUDMSG_PLAIN, PDA_WEAPONS_BUTTON, CR_GREEN, (PDA_RectX) + 10.1, (PDA_RectY) + 60.1, 0);
+        }
 
         for (int t = 0; t < DRLA_DIFFICULTYTIERS; t++) {
             for (int m = 0; m < DRLA_MONSTER_PAGE_MAX; m++)

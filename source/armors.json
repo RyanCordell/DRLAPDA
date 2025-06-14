@@ -5,7 +5,10 @@
             "tier": "Normal",
             "icon": "ARM032X",
             "prettyname": "Generic Armor",
-            "description": "A mysterious, perfectly crafted piece of armor. You can't work out what it's made from, and the armor is so smooth it's almost frictionless.\n\nThis probably shouldn't exist.",
+            "description": [
+              "A mysterious, perfectly crafted piece of armor. You can't work out what it's made from, and the armor is so smooth it's almost frictionless.\n\n",
+              "This probably shouldn't exist."
+            ],
             "protection": "30",
             "renprotection": "45",
             "resistances": {
@@ -45,7 +48,9 @@
             "tier": "Normal",
             "icon": "ARM132X",
             "prettyname": "Security Armor",
-            "description": "Standard issue armor amongst [DARKGREEN]UAC[END] Marines. It won't save you from a [RED]fireblast[END], but [GRAY]bullets[END] won't be much of an issue, at least from basic infantry weaponry.",
+            "description": [
+              "Standard issue armor amongst [DARKGREEN]UAC[END] Marines. It won't save you from a [RED]fireblast[END], but [GRAY]bullets[END] won't be much of an issue, at least from basic infantry weaponry."
+            ],
             "protection": "10",
             "renprotection": "15",
             "resistances": {
@@ -85,7 +90,9 @@
             "tier": "Normal",
             "icon": "ARM232X",
             "prettyname": "Combat Armor",
-            "description": "Heavy and tough armor for [DARKGREEN]UAC[END]'s assault troops. This armor resists [BLUE]plasma[END], the kind of firepower a real enemy would be packing.",
+            "description": [
+              "Heavy and tough armor for [DARKGREEN]UAC[END]'s assault troops. This armor resists [BLUE]plasma[END], the kind of firepower a real enemy would be packing."
+            ],
             "protection": "20",
             "renprotection": "30",
             "resistances": {
@@ -125,7 +132,9 @@
             "tier": "Normal",
             "icon": "ARM332X",
             "prettyname": "Commando Armor",
-            "description": "The armor of the [DARKGREEN]UAC[END]'s elite commandos, this armor has amazing protective ability, and is quite resistant to [RED]fire[END] attacks.",
+            "description": [
+              "The armor of the [DARKGREEN]UAC[END]'s elite commandos, this armor has amazing protective ability, and is quite resistant to [RED]fire[END] attacks."
+            ],
             "protection": "40",
             "renprotection": "60",
             "resistances": {
@@ -166,7 +175,9 @@
             "tier": "Basic",
             "icon": "TSHD32X",
             "prettyname": "Tower Shield",
-            "description": "An ancient medieval tower shield, this relic of ancient warfare can completely block the most vicious of attacks. Unfortunately, it can't withstand such damage for a long time.",
+            "description": [
+              "An ancient medieval tower shield, this relic of ancient warfare can completely block the most vicious of attacks. Unfortunately, it can't withstand such damage for a long time."
+            ],
             "protection": "50",
             "renprotection": "75",
             "resistances": {
@@ -206,7 +217,9 @@
             "tier": "Basic",
             "icon": "TACA32X",
             "prettyname": "Tactical Armor",
-            "description": "Advanced armor given to [DARKGREEN]UAC[END] operatives that excel at avoiding danger, this armor contains advanced ECM systems that jam any kind of tracking systems. Tactical armor comes standard with a basic nanobot repair module.",
+            "description": [
+              "Advanced armor given to [DARKGREEN]UAC[END] operatives that excel at avoiding danger, this armor contains advanced ECM systems that jam any kind of tracking systems. Tactical armor comes standard with a basic nanobot repair module."
+            ],
             "protection": "0",
             "renprotection": "0",
             "resistances": {
@@ -246,7 +259,10 @@
             "tier": "Basic",
             "icon": "BLA132X",
             "prettyname": "Ballistic Green Armor",
-            "description": "Ballistic armor is great for battling former humans, but be careful, it's quite easily ignited by [RED]fire[END] attacks.\n The [GREEN]Security[END] variant retains has considerable [GREEN]bullet[END] resistance.",
+            "description": [
+              "Ballistic armor is great for battling former humans, but be careful, it's quite easily ignited by [RED]fire[END] attacks.\n",
+              " The [GREEN]Security[END] variant retains has considerable [GREEN]bullet[END] resistance."
+            ],
             "protection": "30",
             "renprotection": "45",
             "resistances": {
@@ -286,7 +302,10 @@
             "tier": "Basic",
             "icon": "BLA232X",
             "prettyname": "Ballistic Combat Armor",
-            "description": "Ballistic armor is great for battling former humans, but be careful, it's quite easily ignited by [RED]fire[END] attacks.\n The [BLUE]Combat[END] variant retains it's [BLUE]plasma[END] resistance, making it a bit more useful in general.",
+            "description": [
+              "Ballistic armor is great for battling former humans, but be careful, it's quite easily ignited by [RED]fire[END] attacks.\n",
+              " The [BLUE]Combat[END] variant retains it's [BLUE]plasma[END] resistance, making it a bit more useful in general."
+            ],
             "protection": "30",
             "renprotection": "45",
             "resistances": {
@@ -326,7 +345,10 @@
             "tier": "Basic",
             "icon": "BLA332X",
             "prettyname": "Ballistic Commando Armor",
-            "description": "Ballistic armor is great for battling former humans, but be careful, it's quite easily ignited by [RED]fire[END] attacks.\n The [RED]Commando[END] variant almost nullifies it's [RED]fire[END] weakness, making it a more desirable armor to wear in battle.",
+            "description": [
+              "Ballistic armor is great for battling former humans, but be careful, it's quite easily ignited by [RED]fire[END] attacks.\n",
+              " The [RED]Commando[END] variant almost nullifies it's [RED]fire[END] weakness, making it a more desirable armor to wear in battle."
+            ],
             "protection": "30",
             "renprotection": "45",
             "resistances": {
@@ -366,7 +388,10 @@
             "tier": "Basic",
             "icon": "FPA132X",
             "prettyname": "Fireproof Security Armor",
-            "description": "A full body covering suit made out of nonflammable materials, this suit provides adequate protection from both [RED]fire[END] and [GREEN]bullet[END] attacks.\n However, the suit can be easily torn by [YELLOW]melee[END] attacks, so keep your distance from the enemy.",
+            "description": [
+              "A full body covering suit made out of nonflammable materials, this suit provides adequate protection from both [RED]fire[END] and [GREEN]bullet[END] attacks.\n",
+              " However, the suit can be easily torn by [YELLOW]melee[END] attacks, so keep your distance from the enemy."
+            ],
             "protection": "30",
             "renprotection": "45",
             "resistances": {
@@ -406,7 +431,10 @@
             "tier": "Basic",
             "icon": "FPA232X",
             "prettyname": "Fireproof Combat Armor",
-            "description": "A full body covering suit made out of nonflammable materials, this suit provides adequate protection from both [RED]fire[END] and [BLUE]plasma[END] attacks.\n However, the suit can be easily torn by [YELLOW]melee[END] attacks, so keep your distance from the enemy.",
+            "description": [
+              "A full body covering suit made out of nonflammable materials, this suit provides adequate protection from both [RED]fire[END] and [BLUE]plasma[END] attacks.\n",
+              " However, the suit can be easily torn by [YELLOW]melee[END] attacks, so keep your distance from the enemy."
+            ],
             "protection": "30",
             "renprotection": "45",
             "resistances": {
@@ -446,7 +474,10 @@
             "tier": "Basic",
             "icon": "FPA332X",
             "prettyname": "Fireproof Commando Armor",
-            "description": "A full body covering suit made out of nonflammable materials, this suit provides excellent protection from [RED]fire[END]-based attacks.\n However, the suit can be easily torn by [YELLOW]melee[END] attacks, so keep your distance from the enemy.",
+            "description": [
+              "A full body covering suit made out of nonflammable materials, this suit provides excellent protection from [RED]fire[END]-based attacks.\n",
+              " However, the suit can be easily torn by [YELLOW]melee[END] attacks, so keep your distance from the enemy."
+            ],
             "protection": "30",
             "renprotection": "45",
             "resistances": {
@@ -486,7 +517,10 @@
             "tier": "Basic",
             "icon": "NFA132X",
             "prettyname": "Nanofiber Security Armor",
-            "description": "An armor type designed for use in corrosive enviroments, this armor sacrifices protection for extreme durability and resistance to acidic or corrosive effects.\n The [GREEN]Security[END] variant gives a bare minimum of [GREEN]bullet[END] resist, but will probably outlast you by several thousand years.",
+            "description": [
+              "An armor type designed for use in corrosive enviroments, this armor sacrifices protection for extreme durability and resistance to acidic or corrosive effects.\n",
+              " The [GREEN]Security[END] variant gives a bare minimum of [GREEN]bullet[END] resist, but will probably outlast you by several thousand years."
+            ],
             "protection": "10",
             "renprotection": "15",
             "resistances": {
@@ -526,7 +560,10 @@
             "tier": "Basic",
             "icon": "NFA232X",
             "prettyname": "Nanofiber Combat Armor",
-            "description": "An armor type designed for use in corrosive enviroments, this armor sacrifices protection for extreme durability and resistance to acidic or corrosive effects.\n The [BLUE]Combat[END] variant gives a bare minimum of [BLUE]plasma[END] resist, but will probably outlast you by several thousand years.",
+            "description": [
+              "An armor type designed for use in corrosive enviroments, this armor sacrifices protection for extreme durability and resistance to acidic or corrosive effects.\n",
+              " The [BLUE]Combat[END] variant gives a bare minimum of [BLUE]plasma[END] resist, but will probably outlast you by several thousand years."
+            ],
             "protection": "10",
             "renprotection": "15",
             "resistances": {
@@ -566,7 +603,10 @@
             "tier": "Basic",
             "icon": "NFA332X",
             "prettyname": "Nanofiber Commando Armor",
-            "description": "An armor type designed for use in corrosive enviroments, this armor sacrifices protection for extreme durability and resistance to acidic or corrosive effects.\n The [RED]Commando[END] variant gives a bare minimum of [RED]fire[END] resist, but will probably outlast you by several thousand years.",
+            "description": [
+              "An armor type designed for use in corrosive enviroments, this armor sacrifices protection for extreme durability and resistance to acidic or corrosive effects.\n",
+              " The [RED]Commando[END] variant gives a bare minimum of [RED]fire[END] resist, but will probably outlast you by several thousand years."
+            ],
             "protection": "10",
             "renprotection": "15",
             "resistances": {
@@ -606,7 +646,10 @@
             "tier": "Basic",
             "icon": "PWR132X",
             "prettyname": "Powered Security Armor",
-            "description": "A set of armor filled with equipment designed to amplify it's natural resistance to damage. Power armor also comes with an advanced nanobot repair module, making this a great choice for a lone marine on a dangerous mission.\n The [GREEN]Security[END] variant has double [GREEN]bullet[END] resistance.",
+            "description": [
+              "A set of armor filled with equipment designed to amplify it's natural resistance to damage. Power armor also comes with an advanced nanobot repair module, making this a great choice for a lone marine on a dangerous mission.\n",
+              " The [GREEN]Security[END] variant has double [GREEN]bullet[END] resistance."
+            ],
             "protection": "50",
             "renprotection": "75",
             "resistances": {
@@ -646,7 +689,10 @@
             "tier": "Basic",
             "icon": "PWR232X",
             "prettyname": "Powered Combat Armor",
-            "description": "A set of armor filled with equipment designed to amplify it's natural resistance to damage. Power armor also comes with an advanced nanobot repair module, making this a great choice for a lone marine on a dangerous mission.\n The [BLUE]Combat[END] variant has double [BLUE]plasma[END] resistance.",
+            "description": [
+              "A set of armor filled with equipment designed to amplify it's natural resistance to damage. Power armor also comes with an advanced nanobot repair module, making this a great choice for a lone marine on a dangerous mission.\n",
+              " The [BLUE]Combat[END] variant has double [BLUE]plasma[END] resistance."
+            ],
             "protection": "50",
             "renprotection": "75",
             "resistances": {
@@ -686,7 +732,10 @@
             "tier": "Basic",
             "icon": "PWR332X",
             "prettyname": "Powered Commando Armor",
-            "description": "A set of armor filled with equipment designed to amplify it's natural resistance to damage. Power armor also comes with an advanced nanobot repair module, making this a great choice for a lone marine on a dangerous mission.\n The [RED]Commando[END] variant has double [RED]fire[END] resistance.",
+            "description": [
+              "A set of armor filled with equipment designed to amplify it's natural resistance to damage. Power armor also comes with an advanced nanobot repair module, making this a great choice for a lone marine on a dangerous mission.\n",
+              " The [RED]Commando[END] variant has double [RED]fire[END] resistance."
+            ],
             "protection": "50",
             "renprotection": "75",
             "resistances": {
@@ -727,7 +776,9 @@
             "tier": "Advanced",
             "icon": "FSHD32X",
             "prettyname": "Fireshield",
-            "description": "A shield system protected by a tough set of armor, this is designed to shrug off [RED]fire[END] damage without issue, as well as protect against other damage types with a tough heat-resistant alloy.",
+            "description": [
+              "A shield system protected by a tough set of armor, this is designed to shrug off [RED]fire[END] damage without issue, as well as protect against other damage types with a tough heat-resistant alloy."
+            ],
             "protection": "40",
             "renprotection": "60",
             "resistances": {
@@ -767,7 +818,9 @@
             "tier": "Advanced",
             "icon": "ABL132X",
             "prettyname": "Ablative Security Armor",
-            "description": "An armor incorporating ablative armor layers in an effort to improve armor effectiveness without a substantial increase in cost. The [GREEN]Security[END] variant completely prevents [GREEN]bullet[END] damage breaking through the armor's [GOLD]Protection[END].",
+            "description": [
+              "An armor incorporating ablative armor layers in an effort to improve armor effectiveness without a substantial increase in cost. The [GREEN]Security[END] variant completely prevents [GREEN]bullet[END] damage breaking through the armor's [GOLD]Protection[END]."
+            ],
             "protection": "80",
             "renprotection": "80",
             "resistances": {
@@ -807,7 +860,9 @@
             "tier": "Advanced",
             "icon": "ABL232X",
             "prettyname": "Ablative Combat Armor",
-            "description": "An armor incorporating ablative armor layers in an effort to improve armor effectiveness without a substantial increase in cost. The [BLUE]Combat[END] variant completely prevents [BLUE]plasma[END] damage breaking through the armor's [GOLD]Protection[END].",
+            "description": [
+              "An armor incorporating ablative armor layers in an effort to improve armor effectiveness without a substantial increase in cost. The [BLUE]Combat[END] variant completely prevents [BLUE]plasma[END] damage breaking through the armor's [GOLD]Protection[END]."
+            ],
             "protection": "80",
             "renprotection": "80",
             "resistances": {
@@ -847,7 +902,9 @@
             "tier": "Advanced",
             "icon": "ABL332X",
             "prettyname": "Ablative Commando Armor",
-            "description": "An armor incorporating ablative armor layers in an effort to improve armor effectiveness without a substantial increase in cost. The [RED]Commando[END] variant completely prevents [RED]fire[END] damage breaking through the armor's [GOLD]Protection[END].",
+            "description": [
+              "An armor incorporating ablative armor layers in an effort to improve armor effectiveness without a substantial increase in cost. The [RED]Commando[END] variant completely prevents [RED]fire[END] damage breaking through the armor's [GOLD]Protection[END]."
+            ],
             "protection": "80",
             "renprotection": "80",
             "resistances": {
@@ -887,7 +944,10 @@
             "tier": "Advanced",
             "icon": "NFS132X",
             "prettyname": "Nanofiber Skin Security Armor",
-            "description": "A body covering suit made from the same nanofiber technology used in other armors, this suit offers resistance to all damage types. However, the suit has to conform to your body, and cannot be removed without specific equipment.\n The [GREEN]Security[END] variant provides additional [GREEN]bullet[END] resistance.",
+            "description": [
+              "A body covering suit made from the same nanofiber technology used in other armors, this suit offers resistance to all damage types. However, the suit has to conform to your body, and cannot be removed without specific equipment.\n",
+              " The [GREEN]Security[END] variant provides additional [GREEN]bullet[END] resistance."
+            ],
             "protection": "40",
             "renprotection": "60",
             "resistances": {
@@ -927,7 +987,10 @@
             "tier": "Advanced",
             "icon": "NFS232X",
             "prettyname": "Nanofiber Skin Combat Armor",
-            "description": "A body covering suit made from the same nanofiber technology used in other armors, this suit offers resistance to all damage types. However, the suit has to conform to your body, and cannot be removed without specific equipment.\n The [BLUE]Combat[END] variant provides additional [BLUE]plasma[END] resistance.",
+            "description": [
+              "A body covering suit made from the same nanofiber technology used in other armors, this suit offers resistance to all damage types. However, the suit has to conform to your body, and cannot be removed without specific equipment.\n",
+              " The [BLUE]Combat[END] variant provides additional [BLUE]plasma[END] resistance."
+            ],
             "protection": "40",
             "renprotection": "60",
             "resistances": {
@@ -967,7 +1030,10 @@
             "tier": "Advanced",
             "icon": "NFS332X",
             "prettyname": "Nanofiber Skin Commando Armor",
-            "description": "A body covering suit made from the same nanofiber technology used in other armors, this suit offers resistance to all damage types. However, the suit has to conform to your body, and cannot be removed without specific equipment.\n The [RED]Commando[END] variant provides additional [RED]fire[END] resistance.",
+            "description": [
+              "A body covering suit made from the same nanofiber technology used in other armors, this suit offers resistance to all damage types. However, the suit has to conform to your body, and cannot be removed without specific equipment.\n",
+              " The [RED]Commando[END] variant provides additional [RED]fire[END] resistance."
+            ],
             "protection": "40",
             "renprotection": "60",
             "resistances": {
@@ -1007,7 +1073,9 @@
             "tier": "Master",
             "icon": "CERA32X",
             "prettyname": "Cerberus Armor",
-            "description": "An experimental armor still in the prototype stage, this armor has a dynamic power field that flows across its surface, reducing and deflecting damage without encumbering the user with heavy, bulky plating.",
+            "description": [
+              "An experimental armor still in the prototype stage, this armor has a dynamic power field that flows across its surface, reducing and deflecting damage without encumbering the user with heavy, bulky plating."
+            ],
             "protection": "40",
             "renprotection": "60",
             "resistances": {
@@ -1047,7 +1115,10 @@
             "tier": "Master",
             "icon": "CYN132X",
             "prettyname": "Cybernano Security Armor",
-            "description": "One of the [DARKGREEN]UAC[END]'s greatest advancements in infantry armor technology, this wonder of modern science will absorb huge amounts of damage without much problem. Unfortunately, the armor is extremely complex, and [DARKRED]cannot be removed without assistance.[END]\n The [GREEN]Security[END] variant deflects [GREEN]bullets[END] quite efficiently.",
+            "description": [
+              "One of the [DARKGREEN]UAC[END]'s greatest advancements in infantry armor technology, this wonder of modern science will absorb huge amounts of damage without much problem. Unfortunately, the armor is extremely complex, and [DARKRED]cannot be removed without assistance.[END]\n",
+              " The [GREEN]Security[END] variant deflects [GREEN]bullets[END] quite efficiently."
+            ],
             "protection": "70",
             "renprotection": "80",
             "resistances": {
@@ -1087,7 +1158,10 @@
             "tier": "Master",
             "icon": "CYN232X",
             "prettyname": "Cybernano Combat Armor",
-            "description": "One of the [DARKGREEN]UAC[END]'s greatest advancements in infantry armor technology, this wonder of modern science will absorb huge amounts of damage without much problem. Unfortunately, the armor is extremely complex, and [DARKRED]cannot be removed without assistance.[END]\n The [BLUE]Combat[END] variant deflects [BLUE]plasma[END] quite efficiently.",
+            "description": [
+              "One of the [DARKGREEN]UAC[END]'s greatest advancements in infantry armor technology, this wonder of modern science will absorb huge amounts of damage without much problem. Unfortunately, the armor is extremely complex, and [DARKRED]cannot be removed without assistance.[END]\n",
+              " The [BLUE]Combat[END] variant deflects [BLUE]plasma[END] quite efficiently."
+            ],
             "protection": "70",
             "renprotection": "80",
             "resistances": {
@@ -1127,7 +1201,10 @@
             "tier": "Master",
             "icon": "CYN332X",
             "prettyname": "Cybernano Commando Armor",
-            "description": "One of the [DARKGREEN]UAC[END]'s greatest advancements in infantry armor technology, this wonder of modern science will absorb huge amounts of damage without much problem. Unfortunately, the armor is extremely complex, and [DARKRED]cannot be removed without assistance.[END]\n The [RED]Commando[END] variant deflects [RED]fire[END] quite efficiently.",
+            "description": [
+              "One of the [DARKGREEN]UAC[END]'s greatest advancements in infantry armor technology, this wonder of modern science will absorb huge amounts of damage without much problem. Unfortunately, the armor is extremely complex, and [DARKRED]cannot be removed without assistance.[END]\n",
+              " The [RED]Commando[END] variant deflects [RED]fire[END] quite efficiently."
+            ],
             "protection": "70",
             "renprotection": "80",
             "resistances": {
@@ -1169,7 +1246,9 @@
             "tier": "Exotic",
             "icon": "BSHD32X",
             "prettyname": "Ballistic Shield",
-            "description": "A [DARKGREEN]UAC[END] energy shield set up to deflect [GREEN]bullets[END] and other kinds of [YELLOW]physical[END] impacts. Because of the way they work, if it tries to deflect an attack of a different type from what it normally should, the shield will short out and take damage. Shields are too complicated to repair normally.",
+            "description": [
+              "A [DARKGREEN]UAC[END] energy shield set up to deflect [GREEN]bullets[END] and other kinds of [YELLOW]physical[END] impacts. Because of the way they work, if it tries to deflect an attack of a different type from what it normally should, the shield will short out and take damage. Shields are too complicated to repair normally."
+            ],
             "protection": "0",
             "renprotection": "0",
             "resistances": {
@@ -1209,7 +1288,9 @@
             "tier": "Exotic",
             "icon": "BALV32X",
             "prettyname": "Ballistic Shield",
-            "description": "A tough armor for fighting against a storm of [GREEN]bullets[END] and surviving, the ballistic vest reduces [GREEN]bullet[END] and [YELLOW]physical[END] damage by half.",
+            "description": [
+              "A tough armor for fighting against a storm of [GREEN]bullets[END] and surviving, the ballistic vest reduces [GREEN]bullet[END] and [YELLOW]physical[END] damage by half."
+            ],
             "protection": "10",
             "renprotection": "15",
             "resistances": {
@@ -1249,7 +1330,9 @@
             "tier": "Exotic",
             "icon": "BPFV32X",
             "prettyname": "Bullet-proof Vest",
-            "description": "The toughest non-shield for defending against [GREEN]bullets[END]. The bullet-proof vest will save your hide when you're up against a bunch of formers packing chainguns.",
+            "description": [
+              "The toughest non-shield for defending against [GREEN]bullets[END]. The bullet-proof vest will save your hide when you're up against a bunch of formers packing chainguns."
+            ],
             "protection": "10",
             "renprotection": "15",
             "resistances": {
@@ -1289,7 +1372,9 @@
             "tier": "Exotic",
             "icon": "CYWA32X",
             "prettyname": "Cyberwarrior Armor",
-            "description": "A strange armor with a mixture of futuristic and old Asian design. This armor interfaces with it's wearer and assists their muscle movements, causing their techniques with bladed weapons to improve drastically. Due to the interface, removing the armor by yourself is not recommended.",
+            "description": [
+              "A strange armor with a mixture of futuristic and old Asian design. This armor interfaces with it's wearer and assists their muscle movements, causing their techniques with bladed weapons to improve drastically. Due to the interface, removing the armor by yourself is not recommended."
+            ],
             "protection": "20",
             "renprotection": "30",
             "resistances": {
@@ -1330,7 +1415,9 @@
             "tier": "Exotic",
             "icon": "DUEA32X",
             "prettyname": "Duelist Armor",
-            "description": "A strange, old looking suit, surprisingly in good condition still. Beneath the outer layer of the outfit lie some armor plates for deflecting [GREEN]bullets[END].",
+            "description": [
+              "A strange, old looking suit, surprisingly in good condition still. Beneath the outer layer of the outfit lie some armor plates for deflecting [GREEN]bullets[END]."
+            ],
             "protection": "20",
             "renprotection": "30",
             "resistances": {
@@ -1370,7 +1457,9 @@
             "tier": "Exotic",
             "icon": "ESVA32X",
             "prettyname": "Energy-shielded Vest",
-            "description": "A combination of a small armor vest and a low-power energy shield. The shield reduces energy damage by half, and the vest also protects the user from harm.",
+            "description": [
+              "A combination of a small armor vest and a low-power energy shield. The shield reduces energy damage by half, and the vest also protects the user from harm."
+            ],
             "protection": "10",
             "renprotection": "15",
             "resistances": {
@@ -1410,7 +1499,9 @@
             "tier": "Exotic",
             "icon": "ESHD32X",
             "prettyname": "Energy Shield",
-            "description": "A [DARKGREEN]UAC[END] energy shield set up to resist [BLUE]plasma[END], [RED]fire[END] and other types of energy attacks. Because of the way they work, if it tries to deflect an attack of a different type from what it normally should, the shield will short out and take damage. Shields are too complicated to repair normally.",
+            "description": [
+              "A [DARKGREEN]UAC[END] energy shield set up to resist [BLUE]plasma[END], [RED]fire[END] and other types of energy attacks. Because of the way they work, if it tries to deflect an attack of a different type from what it normally should, the shield will short out and take damage. Shields are too complicated to repair normally."
+            ],
             "protection": "0",
             "renprotection": "0",
             "resistances": {
@@ -1450,7 +1541,9 @@
             "tier": "Exotic",
             "icon": "GOTA32X",
             "prettyname": "Gothic Armor",
-            "description": "Ancient medieval plate armor, heavy as hell and just as protective as it looks. While it might not be terribly easy to move in, you can't dismiss it's defensive power. A downside of this armor is that it degrades quickly under continuous assault.",
+            "description": [
+              "Ancient medieval plate armor, heavy as hell and just as protective as it looks. While it might not be terribly easy to move in, you can't dismiss it's defensive power. A downside of this armor is that it degrades quickly under continuous assault."
+            ],
             "protection": "70",
             "renprotection": "80",
             "resistances": {
@@ -1490,7 +1583,9 @@
             "tier": "Exotic",
             "icon": "MED132X",
             "prettyname": "Medical Armor",
-            "description": "An armor co-designed by both the [DARKGREEN]UAC[END] and [DARKBLUE]Serygenix[END], this armor [PINK]heals[END] the user when they are critically wounded, and can also increase the potency of various medical supplies. The armor is quite tough as well, helping to keep field medics alive in battle.",
+            "description": [
+              "An armor co-designed by both the [DARKGREEN]UAC[END] and [DARKBLUE]Serygenix[END], this armor [PINK]heals[END] the user when they are critically wounded, and can also increase the potency of various medical supplies. The armor is quite tough as well, helping to keep field medics alive in battle."
+            ],
             "protection": "20",
             "renprotection": "30",
             "resistances": {
@@ -1530,7 +1625,9 @@
             "tier": "Exotic",
             "icon": "PSHA32X",
             "prettyname": "Phaseshift Armor",
-            "description": "An experiment in making a suit that would allow marines to walk through walls to ambush the invading demons. The suit was never able to move the user through walls, but it could put them out of phase with all manner of smaller solid objects, allowing the user to pass through projectiles.",
+            "description": [
+              "An experiment in making a suit that would allow marines to walk through walls to ambush the invading demons. The suit was never able to move the user through walls, but it could put them out of phase with all manner of smaller solid objects, allowing the user to pass through projectiles."
+            ],
             "protection": "20",
             "renprotection": "30",
             "resistances": {
@@ -1570,7 +1667,9 @@
             "tier": "Exotic",
             "icon": "PSHD32X",
             "prettyname": "Plasma Shield",
-            "description": "A [DARKGREEN]UAC[END] energy shield set up to resist [BLUE]plasma[END]-based projectiles or plasma explosions. Because of the way they work, if it tries to deflect an attack of a different type from what it normally should, the shield will short out and take damage. Shields are too complicated to repair normally.",
+            "description": [
+              "A [DARKGREEN]UAC[END] energy shield set up to resist [BLUE]plasma[END]-based projectiles or plasma explosions. Because of the way they work, if it tries to deflect an attack of a different type from what it normally should, the shield will short out and take damage. Shields are too complicated to repair normally."
+            ],
             "protection": "0",
             "renprotection": "0",
             "resistances": {
@@ -1610,7 +1709,9 @@
             "tier": "Exotic",
             "icon": "REPW32X",
             "prettyname": "Repulsion Wave Suit",
-            "description": "A shield system that has been redesigned to power a small repulsor field system. The wearer can activate it when fully charged to blast away any nearby objects, giving you some precious breathing room.",
+            "description": [
+              "A shield system that has been redesigned to power a small repulsor field system. The wearer can activate it when fully charged to blast away any nearby objects, giving you some precious breathing room."
+            ],
             "protection": "30",
             "renprotection": "45",
             "resistances": {
@@ -1650,7 +1751,9 @@
             "tier": "Exotic",
             "icon": "SURV32X",
             "prettyname": "Survival MediArmor",
-            "description": "A specialty armor designed by [DARKBLUE]Serygenix[END], it monitors the life signs of the wearer. If the wearer is injured, the armor releases various chemicals into their bloodstream, helping to preserve their life. It also enhances [PINK]health[END] items.",
+            "description": [
+              "A specialty armor designed by [DARKBLUE]Serygenix[END], it monitors the life signs of the wearer. If the wearer is injured, the armor releases various chemicals into their bloodstream, helping to preserve their life. It also enhances [PINK]health[END] items."
+            ],
             "protection": "20",
             "renprotection": "30",
             "resistances": {
@@ -1690,7 +1793,9 @@
             "tier": "Exotic",
             "icon": "OVES32X",
             "prettyname": "Overcharge System",
-            "description": "A bulky device worn on the arm, the Overcharge System can be wired directly into most [DARKGREEN]UAC[END] energy weapons, giving them a temporary boost to their damage output. The device recharges slowly, so picking the right time to overcharge your weapons is critical.",
+            "description": [
+              "A bulky device worn on the arm, the Overcharge System can be wired directly into most [DARKGREEN]UAC[END] energy weapons, giving them a temporary boost to their damage output. The device recharges slowly, so picking the right time to overcharge your weapons is critical."
+            ],
             "protection": "10",
             "renprotection": "15",
             "resistances": {
@@ -1730,7 +1835,9 @@
             "tier": "Exotic",
             "icon": "ONXA32X",
             "prettyname": "Onyx Armor",
-            "description": "A strange armor that is almost completely [DARKGRAY]indestructible[END]. While it doesn't protect the user that well, it won't break from even the heaviest attacks.",
+            "description": [
+              "A strange armor that is almost completely [DARKGRAY]indestructible[END]. While it doesn't protect the user that well, it won't break from even the heaviest attacks."
+            ],
             "protection": "20",
             "renprotection": "30",
             "resistances": {
@@ -1772,7 +1879,9 @@
             "tier": "Superior",
             "icon": "NUKA32X",
             "prettyname": "Nuclear Armor",
-            "description": "An experimental armor powered by a compact nuclear generator, this armor's primary purpose is to enhance the power generation of nuclear-powered weaponry. The armor has heavy protection around the reactor, but little armor thickness remains to protect the wearer from harm.",
+            "description": [
+              "An experimental armor powered by a compact nuclear generator, this armor's primary purpose is to enhance the power generation of nuclear-powered weaponry. The armor has heavy protection around the reactor, but little armor thickness remains to protect the wearer from harm."
+            ],
             "protection": "20",
             "renprotection": "30",
             "resistances": {
@@ -1812,7 +1921,9 @@
             "tier": "Superior",
             "icon": "RESH32X",
             "prettyname": "Rechargeable Energy Shield",
-            "description": "An energy shield with slightly lower effectiveness, but able to be [ORANGE]recharged[END] with standard [DARKGREEN]UAC[END] energy cells. This allows the shield to continue to function for extended periods of time without needing to have specialists repair it.",
+            "description": [
+              "An energy shield with slightly lower effectiveness, but able to be [ORANGE]recharged[END] with standard [DARKGREEN]UAC[END] energy cells. This allows the shield to continue to function for extended periods of time without needing to have specialists repair it."
+            ],
             "protection": "0",
             "renprotection": "0",
             "resistances": {
@@ -1854,7 +1965,9 @@
             "tier": "Unique",
             "icon": "BZRA32X",
             "prettyname": "Berserker Armor",
-            "description": "A dark and heavy set of armor that seems to amplify your anger. All you want to do is crush all the monsters you can see, and keep killing them until there's nothing left but blood and mangled bodies.",
+            "description": [
+              "A dark and heavy set of armor that seems to amplify your anger. All you want to do is crush all the monsters you can see, and keep killing them until there's nothing left but blood and mangled bodies."
+            ],
             "protection": "0",
             "renprotection": "0",
             "resistances": {
@@ -1894,7 +2007,9 @@
             "tier": "Unique",
             "icon": "BEPS32X",
             "prettyname": "Berserker Powersuit",
-            "description": "A somewhat sinister creation, this armor can store berserk stimulants and inject the user with them at any time, allowing a marine to change from a half dead wreck to a one-man killing machine in the blink of an eye. The origin of this armor is unknown, but likely disturbing.",
+            "description": [
+              "A somewhat sinister creation, this armor can store berserk stimulants and inject the user with them at any time, allowing a marine to change from a half dead wreck to a one-man killing machine in the blink of an eye. The origin of this armor is unknown, but likely disturbing."
+            ],
             "protection": "30",
             "renprotection": "45",
             "resistances": {
@@ -1935,7 +2050,9 @@
             "tier": "Unique",
             "icon": "BPHD32X",
             "prettyname": "Phoenix-B Device Suit",
-            "description": "A recall device, coupled with a powerful [BLUE]plasma[END] discharge weapon. Activating the device causes it to charge up for a short time, before releasing a colossal [BLUE]plasma[END] explosion and [GREEN]teleporting[END] the wearer out of harms way. Make sure you have the cells to charge it though.",
+            "description": [
+              "A recall device, coupled with a powerful [BLUE]plasma[END] discharge weapon. Activating the device causes it to charge up for a short time, before releasing a colossal [BLUE]plasma[END] explosion and [GREEN]teleporting[END] the wearer out of harms way. Make sure you have the cells to charge it though."
+            ],
             "protection": "20",
             "renprotection": "30",
             "resistances": {
@@ -1975,7 +2092,9 @@
             "tier": "Unique",
             "icon": "CYNA32X",
             "prettyname": "Cybernetic Armor",
-            "description": "A suit of armor that directly interfaces and combines with the wearer [DARKRED]permanently.[END] The resistance this armor provides is nothing short of incredible, but it can never be removed without killing the wearer. While some people are adverse to the idea of permanently becoming a living cybernetic weapon, sometimes it's the only way you're gonna survive the mess ahead of you. Make a choice.",
+            "description": [
+              "A suit of armor that directly interfaces and combines with the wearer [DARKRED]permanently.[END] The resistance this armor provides is nothing short of incredible, but it can never be removed without killing the wearer. While some people are adverse to the idea of permanently becoming a living cybernetic weapon, sometimes it's the only way you're gonna survive the mess ahead of you. Make a choice."
+            ],
             "protection": "70",
             "renprotection": "80",
             "resistances": {
@@ -2015,7 +2134,9 @@
             "tier": "Unique",
             "icon": "EDHX32X",
             "prettyname": "Energy Discharge Harness",
-            "description": "A counterattack system designed to be used on unmanned drones and robots, this device absorbs part of any energy attacks that hit it. Activating this device unleashes all the collected energy into a single explosion with force equal to the amount of charges it contains.",
+            "description": [
+              "A counterattack system designed to be used on unmanned drones and robots, this device absorbs part of any energy attacks that hit it. Activating this device unleashes all the collected energy into a single explosion with force equal to the amount of charges it contains."
+            ],
             "protection": "20",
             "renprotection": "30",
             "resistances": {
@@ -2055,7 +2176,9 @@
             "tier": "Unique",
             "icon": "BLUA32X",
             "prettyname": "Energy Discharge Harness",
-            "description": "A suit generally issued to [DARKGREEN]UAC[END] field engineers, this set has the tools needed to deploy automated sentry guns to assist [DARKGREEN]UAC[END] forces in the field. Multiple sentry models exist with a wide array of weapons, so a user can often deploy sentries that suit them the most.",
+            "description": [
+              "A suit generally issued to [DARKGREEN]UAC[END] field engineers, this set has the tools needed to deploy automated sentry guns to assist [DARKGREEN]UAC[END] forces in the field. Multiple sentry models exist with a wide array of weapons, so a user can often deploy sentries that suit them the most."
+            ],
             "protection": "20",
             "renprotection": "30",
             "resistances": {
@@ -2095,7 +2218,10 @@
             "tier": "Unique",
             "icon": "GGGX32X",
             "prettyname": "Geo's Golden Gauntlet",
-            "description": "A magical gauntlet made from pure gold. While it offers you almost no protection, it does seem to boost your confidence quite a bit. For some reason, you feel like you could take on any foe with a single punch.\n That's silly, though.",
+            "description": [
+              "A magical gauntlet made from pure gold. While it offers you almost no protection, it does seem to boost your confidence quite a bit. For some reason, you feel like you could take on any foe with a single punch.\n",
+              " That's silly, though."
+            ],
             "protection": "0",
             "renprotection": "0",
             "resistances": {
@@ -2135,7 +2261,10 @@
             "tier": "Unique",
             "icon": "JETP32X",
             "prettyname": "Jetpack",
-            "description": "Designed for use in the often crazy and always hazardous terrain of Hell, this jetpack will help you get anywhere you need to, and in style!\n\n (Also breaks levels, don't blame me if you fall out the entire level or something.)",
+            "description": [
+              "Designed for use in the often crazy and always hazardous terrain of Hell, this jetpack will help you get anywhere you need to, and in style!\n\n",
+              " (Also breaks levels, don't blame me if you fall out the entire level or something.)"
+            ],
             "protection": "5",
             "renprotection": "8",
             "resistances": {
@@ -2175,7 +2304,9 @@
             "tier": "Unique",
             "icon": "K8MH32X",
             "prettyname": "K-8 Matterstorm Harness",
-            "description": "The product of an experiment in controlled prismatic [BLUE]plasma[END], this armor can unleash a storm of bouncing blasts from the prismatic arrays across the armor's surface. While bizarre in appearance, its power cannot be questioned; in a closed space, it'll rip enemies apart. There's also a cute little heart on the side.",
+            "description": [
+              "The product of an experiment in controlled prismatic [BLUE]plasma[END], this armor can unleash a storm of bouncing blasts from the prismatic arrays across the armor's surface. While bizarre in appearance, its power cannot be questioned; in a closed space, it'll rip enemies apart. There's also a cute little heart on the side."
+            ],
             "protection": "15",
             "renprotection": "23",
             "resistances": {
@@ -2215,7 +2346,9 @@
             "tier": "Unique",
             "icon": "KTES32X",
             "prettyname": "K1-L3 Teslabolt Armor",
-            "description": "A mysterious armor armed with advanced lightning generators. The tesla coils are capable of electrocuting enemies at quite a long range, and can destroy most enemies with ease. The internal generators have a long charge time, so pick your targets wisely.",
+            "description": [
+              "A mysterious armor armed with advanced lightning generators. The tesla coils are capable of electrocuting enemies at quite a long range, and can destroy most enemies with ease. The internal generators have a long charge time, so pick your targets wisely."
+            ],
             "protection": "30",
             "renprotection": "45",
             "resistances": {
@@ -2255,7 +2388,9 @@
             "tier": "Unique",
             "icon": "LAVU32X",
             "prettyname": "Lava Armor",
-            "description": "A mysterious piece of armor, forged in the depths of Hell. The armor appears to be made of still-liquid magma, but the armor is solid to the touch, and only warm, instead of superheated.",
+            "description": [
+              "A mysterious piece of armor, forged in the depths of Hell. The armor appears to be made of still-liquid magma, but the armor is solid to the touch, and only warm, instead of superheated."
+            ],
             "protection": "30",
             "renprotection": "45",
             "resistances": {
@@ -2295,7 +2430,9 @@
             "tier": "Unique",
             "icon": "MALK32X",
             "prettyname": "Malek's Armor",
-            "description": "The heavy armor of a long-dead warrior who fought against Hell in ages past. The armor is infused with the soul of the warrior, who yearns to battle the demons once more.",
+            "description": [
+              "The heavy armor of a long-dead warrior who fought against Hell in ages past. The armor is infused with the soul of the warrior, who yearns to battle the demons once more."
+            ],
             "protection": "30",
             "renprotection": "45",
             "resistances": {
@@ -2335,7 +2472,9 @@
             "tier": "Unique",
             "icon": "MED232X",
             "prettyname": "Medical Powerarmor",
-            "description": "[DARKBLUE]]Serygenix's[END] advanced medical systems are incorporated into a set of powerarmor. This armor is far more durable than normal, preventing loss of the medical capacities from enemy attacks. The armor is also twice as resistant to damage as it's smaller, non-powered cousin.",
+            "description": [
+              "[DARKBLUE]]Serygenix's[END] advanced medical systems are incorporated into a set of powerarmor. This armor is far more durable than normal, preventing loss of the medical capacities from enemy attacks. The armor is also twice as resistant to damage as it's smaller, non-powered cousin."
+            ],
             "protection": "40",
             "renprotection": "60",
             "resistances": {
@@ -2375,7 +2514,9 @@
             "tier": "Unique",
             "icon": "NABL32X",
             "prettyname": "Nano Ablative Armor",
-            "description": "An advanced armor prototype, this armor is a combination of the excellent protective power of ablative armor, along with the self-repair capacity of an advanced nanobot repair module. Keep this armor working, and it'll keep you alive.",
+            "description": [
+              "An advanced armor prototype, this armor is a combination of the excellent protective power of ablative armor, along with the self-repair capacity of an advanced nanobot repair module. Keep this armor working, and it'll keep you alive."
+            ],
             "protection": "50",
             "renprotection": "75",
             "resistances": {
@@ -2415,7 +2556,9 @@
             "tier": "Unique",
             "icon": "ENUK32X",
             "prettyname": "Nuclear Powerarmor",
-            "description": "A bulky set of powerarmor, clearly not of UAC manufacture, this armor is powered by a small microfusion reactor on it's heavily armor back. It's obvious it was designed to be used in extremely hazardous enviroments, and that'll serve you well.",
+            "description": [
+              "A bulky set of powerarmor, clearly not of UAC manufacture, this armor is powered by a small microfusion reactor on it's heavily armor back. It's obvious it was designed to be used in extremely hazardous enviroments, and that'll serve you well."
+            ],
             "protection": "50",
             "renprotection": "75",
             "resistances": {
@@ -2455,7 +2598,9 @@
             "tier": "Unique",
             "icon": "PASS32X",
             "prettyname": "Prototype Assault Shield",
-            "description": "A prototype shield designed to be worn by special assault marines, this shield uses up an extraordinary amount of power compared to normal shields, but provides great protection to [WHITE]all normal damage[END] types while active. It costs [BLUE]100 cells[END] to activate, and lasts for [ORANGE]5 minutes[END] before running out of power entirely.",
+            "description": [
+              "A prototype shield designed to be worn by special assault marines, this shield uses up an extraordinary amount of power compared to normal shields, but provides great protection to [WHITE]all normal damage[END] types while active. It costs [BLUE]100 cells[END] to activate, and lasts for [ORANGE]5 minutes[END] before running out of power entirely."
+            ],
             "protection": "0",
             "renprotection": "0",
             "resistances": {
@@ -2495,7 +2640,10 @@
             "tier": "Unique",
             "icon": "ROYA32X",
             "prettyname": "Roysten's Command Armor",
-            "description": "The uniform of the commander of the Deimos research base. Wearing this decorated armor makes you feel like a hero, although the medals aren't actually yours. You've no idea why you found it here, though.\n\n [RED]SHENANIGANS[END]",
+            "description": [
+              "The uniform of the commander of the Deimos research base. Wearing this decorated armor makes you feel like a hero, although the medals aren't actually yours. You've no idea why you found it here, though.\n\n",
+              " [RED]SHENANIGANS[END]"
+            ],
             "protection": "15",
             "renprotection": "23",
             "resistances": {
@@ -2535,7 +2683,9 @@
             "tier": "Unique",
             "icon": "RCPA32X",
             "prettyname": "R11-n Psychic Amplifier Suit",
-            "description": "The product of [DARKGREEN]UAC's[END] limited forays into the strange world of psychic power, this suit heightens the wearer's psionic potential, allowing them to attack the minds of their enemies. Its protective ability is pretty poor though.",
+            "description": [
+              "The product of [DARKGREEN]UAC's[END] limited forays into the strange world of psychic power, this suit heightens the wearer's psionic potential, allowing them to attack the minds of their enemies. Its protective ability is pretty poor though."
+            ],
             "protection": "15",
             "renprotection": "23",
             "resistances": {
@@ -2576,7 +2726,9 @@
             "tier": "Unique",
             "icon": "SSHD32X",
             "prettyname": "Shielded Armor",
-            "description": "A perfect shield/armor combo, this armor has the power of a prototype ballistic shield, protected by a bulky set of armor, preventing the shield from being damaged. With this massive suit, you no longer fear (most) [GREEN]bullets[END]!",
+            "description": [
+              "A perfect shield/armor combo, this armor has the power of a prototype ballistic shield, protected by a bulky set of armor, preventing the shield from being damaged. With this massive suit, you no longer fear (most) [GREEN]bullets[END]!"
+            ],
             "protection": "20",
             "renprotection": "30",
             "resistances": {
@@ -2616,7 +2768,9 @@
             "tier": "Unique",
             "icon": "SSOS32X",
             "prettyname": "Solo Operative Suit",
-            "description": "A stealth suit left behind by some unknown soldier who fell to the demons onslaught. It's very resistant to bullets, and comes with a bunch of gadgets you could use to sneak around. That is, if you were sneaking around humans, instead of bloodthirsty demons.",
+            "description": [
+              "A stealth suit left behind by some unknown soldier who fell to the demons onslaught. It's very resistant to bullets, and comes with a bunch of gadgets you could use to sneak around. That is, if you were sneaking around humans, instead of bloodthirsty demons."
+            ],
             "protection": "0",
             "renprotection": "0",
             "resistances": {
@@ -2656,7 +2810,9 @@
             "tier": "Unique",
             "icon": "REDA32X",
             "prettyname": "Tactical Assembler Suit",
-            "description": "A suit generally issued to [DARKGREEN]UAC[END] maintenance workers, this set has the tools needed to deploy advanced restorer devices to heal [DARKGREEN]UAC[END] forces in the field. A properly qualified technician would be able to use this equipment most efficiently.",
+            "description": [
+              "A suit generally issued to [DARKGREEN]UAC[END] maintenance workers, this set has the tools needed to deploy advanced restorer devices to heal [DARKGREEN]UAC[END] forces in the field. A properly qualified technician would be able to use this equipment most efficiently."
+            ],
             "protection": "20",
             "renprotection": "30",
             "resistances": {
@@ -2696,7 +2852,9 @@
             "tier": "Unique",
             "icon": "TEBS32X",
             "prettyname": "Terminus Battlesuit",
-            "description": "A juggernaut of an armor, armed with 4 shoulder mounted missile launchers. In an attempt to surprise the enemy with a single volley of missiles, [DARKGREEN]UAC[END] incorporated a minor disguise into the design. Unfortunately, demons don't fall for it, but it looks cool.",
+            "description": [
+              "A juggernaut of an armor, armed with 4 shoulder mounted missile launchers. In an attempt to surprise the enemy with a single volley of missiles, [DARKGREEN]UAC[END] incorporated a minor disguise into the design. Unfortunately, demons don't fall for it, but it looks cool."
+            ],
             "protection": "45",
             "renprotection": "60",
             "resistances": {
@@ -2736,7 +2894,9 @@
             "tier": "Unique",
             "icon": "TORA32X",
             "prettyname": "Torgue Blastplate Armor",
-            "description": "[DARKGREEN]UAC[END], in a visit to a different dimension, discovered a company with access to advanced alloys and technology. Commissioning them to craft a set of high-tech armor, they were presented with this item. The enthusiastic test by the company official resulted in some fatalities, so [DARKGREEN]UAC[END] left and did not return.",
+            "description": [
+              "[DARKGREEN]UAC[END], in a visit to a different dimension, discovered a company with access to advanced alloys and technology. Commissioning them to craft a set of high-tech armor, they were presented with this item. The enthusiastic test by the company official resulted in some fatalities, so [DARKGREEN]UAC[END] left and did not return."
+            ],
             "protection": "25",
             "renprotection": "38",
             "resistances": {
@@ -2776,7 +2936,9 @@
             "tier": "Unique",
             "icon": "WWPK32X",
             "prettyname": "WW-41 Peacekeeper Armor",
-            "description": "A specialty armor designed for the commander of the Phobos garrison, a fan of westerns. While he might be dead, his armor will help you bring the law to the demons, and with a stylish hat to boot. This armor causes all Revolver-type weapons to do +50 extra damage, and have perfect accuracy.",
+            "description": [
+              "A specialty armor designed for the commander of the Phobos garrison, a fan of westerns. While he might be dead, his armor will help you bring the law to the demons, and with a stylish hat to boot. This armor causes all Revolver-type weapons to do +50 extra damage, and have perfect accuracy."
+            ],
             "protection": "10",
             "renprotection": "15",
             "resistances": {
@@ -2816,7 +2978,9 @@
             "tier": "Unique",
             "icon": "XASP32X",
             "prettyname": "Xaser Inc. Powerarmor",
-            "description": "A powerarmor design from the enigmatic [GOLD]Xaser Incorporated[END], the specifications of this armor are unknown. It appears to have excellent protective properties and appears to be able to interface directly with [DARKGREEN]UAC[END] plasma rifles somehow. Modified or assembled plasma rifles will likely work too.",
+            "description": [
+              "A powerarmor design from the enigmatic [GOLD]Xaser Incorporated[END], the specifications of this armor are unknown. It appears to have excellent protective properties and appears to be able to interface directly with [DARKGREEN]UAC[END] plasma rifles somehow. Modified or assembled plasma rifles will likely work too."
+            ],
             "protection": "50",
             "renprotection": "75",
             "resistances": {
@@ -2856,7 +3020,9 @@
             "tier": "Unique",
             "icon": "0DAF32X",
             "prettyname": "0D-1a Assaultforce Armor",
-            "description": "Armor designed for a special branch of heavy assault troops, this armor has a minigun built into the chest, allowing the wearer to fire it while also being free to use any other weapon they want. The 0D Assaultforce motto is ''If it ain't dead, give it more lead!'' The minigun fires a burst of 50 shots, so make sure you have the ammo for it.",
+            "description": [
+              "Armor designed for a special branch of heavy assault troops, this armor has a minigun built into the chest, allowing the wearer to fire it while also being free to use any other weapon they want. The 0D Assaultforce motto is ''If it ain't dead, give it more lead!'' The minigun fires a burst of 50 shots, so make sure you have the ammo for it."
+            ],
             "protection": "65",
             "renprotection": "80",
             "resistances": {
@@ -2898,7 +3064,9 @@
             "tier": "Unique",
             "icon": "DEMA32X",
             "prettyname": "Demonic Carapace",
-            "description": "Made from the flesh of demons and imbued with unholy life, this armor is quite willing to protect your life, as long as you keep killing enemies. Smells really bad though.",
+            "description": [
+              "Made from the flesh of demons and imbued with unholy life, this armor is quite willing to protect your life, as long as you keep killing enemies. Smells really bad though."
+            ],
             "protection": "30",
             "renprotection": "45",
             "resistances": {
@@ -2938,7 +3106,9 @@
             "tier": "Unique",
             "icon": "NECR32X",
             "prettyname": "Necroarmor",
-            "description": "A foul demonic armor from the silent crypts of Hell, this armor feeds of the blood of it's wearer to repair damage to itself. Luckily the armor has difficulty drinking your blood when you are close to death, so it won't kill you. The next thing you find probably will, though.",
+            "description": [
+              "A foul demonic armor from the silent crypts of Hell, this armor feeds of the blood of it's wearer to repair damage to itself. Luckily the armor has difficulty drinking your blood when you are close to death, so it won't kill you. The next thing you find probably will, though."
+            ],
             "protection": "60",
             "renprotection": "80",
             "resistances": {
@@ -2978,7 +3148,9 @@
             "tier": "Unique",
             "icon": "SOLS32X",
             "prettyname": "Soulshatter Armor",
-            "description": "An unspeakable unholy armor, wearing it feels like it's slowly eating away at you. While an extremely bad idea, if you allow it to feed off your soul, it'll unleash the energy it stole in a wave that'll sap the lifeforce of all nearby enemies.",
+            "description": [
+              "An unspeakable unholy armor, wearing it feels like it's slowly eating away at you. While an extremely bad idea, if you allow it to feed off your soul, it'll unleash the energy it stole in a wave that'll sap the lifeforce of all nearby enemies."
+            ],
             "protection": "50",
             "renprotection": "75",
             "resistances": {
@@ -3021,7 +3193,9 @@
             "tier": "Legendary",
             "icon": "ANGA32X",
             "prettyname": "Angelic Armor",
-            "description": "The armor of an archangel, who fell in battle against the forces of Hell. The holy power of the armor shields you from harm. Hope heaven doesn't want it back anytime soon.\n The decoration on this armor is extremely intricate, and anytime you try to study the carvings in detail, you notice that it's even more intricate than you can fathom.",
+            "description": [
+              "The armor of an archangel, who fell in battle against the forces of Hell. The holy power of the armor shields you from harm. Hope heaven doesn't want it back anytime soon.\n The decoration on this armor is extremely intricate, and anytime you try to study the carvings in detail, you notice that it's even more intricate than you can fathom."
+            ],
             "protection": "70",
             "renprotection": "80",
             "resistances": {
@@ -3061,7 +3235,9 @@
             "tier": "Legendary",
             "icon": "CHRO32X",
             "prettyname": "Chronotrooper Armor",
-            "description": "A [DARKGREEN]UAC[END] armor filled with the most incredible technology ever seen. This armor can stop time for a short length of time, and considering this, it's apparent that this armor came from some point in the future. How it came to be here is a mystery. There seems to be faint writing on the back that spells out 'Za Warudo'",
+            "description": [
+              "A [DARKGREEN]UAC[END] armor filled with the most incredible technology ever seen. This armor can stop time for a short length of time, and considering this, it's apparent that this armor came from some point in the future. How it came to be here is a mystery. There seems to be faint writing on the back that spells out 'Za Warudo'"
+            ],
             "protection": "30",
             "renprotection": "45",
             "resistances": {
@@ -3101,7 +3277,9 @@
             "tier": "Legendary",
             "icon": "RSSD32X",
             "prettyname": "Reactive Shield System",
-            "description": "The most advanced shield system the [DARKGREEN]UAC[END] has designed, this shield adapts to any type of damage without any strain on it's systems, and provides more resistance than any other shield as well. It's only flaw is that it won't protect against damage types other than it's current one.",
+            "description": [
+              "The most advanced shield system the [DARKGREEN]UAC[END] has designed, this shield adapts to any type of damage without any strain on it's systems, and provides more resistance than any other shield as well. It's only flaw is that it won't protect against damage types other than it's current one."
+            ],
             "protection": "0",
             "renprotection": "0",
             "resistances": {
@@ -3141,7 +3319,9 @@
             "tier": "Legendary",
             "icon": "BEES32X",
             "prettyname": "The Bee",
-            "description": "A strange kind of shield, very different from [DARKGREEN]UAC[END] designed shields. This shield absorbs all kinetic and exotic energy that impacts it, and redirects the energy to enhance weaponry to an extreme level. Unfortunately, the effect works both ways, enhancing enemy attacks to devastating effect against you. If you intend on using this device, mastering the art of dodging is a must for survival. Or just killing everything before it even attacks. That works too.",
+            "description": [
+              "A strange kind of shield, very different from [DARKGREEN]UAC[END] designed shields. This shield absorbs all kinetic and exotic energy that impacts it, and redirects the energy to enhance weaponry to an extreme level. Unfortunately, the effect works both ways, enhancing enemy attacks to devastating effect against you. If you intend on using this device, mastering the art of dodging is a must for survival. Or just killing everything before it even attacks. That works too."
+            ],
             "protection": "0",
             "renprotection": "0",
             "resistances": {
@@ -3182,7 +3362,9 @@
             "tier": "Onyx",
             "icon": "ONYA32X",
             "prettyname": "Security Armor",
-            "description": "[DARKGRAY]Onyx[END]-modded standard issue armor amongst [DARKGREEN]UAC[END] Marines. It won't save you from a fireblast, but [GREEN]bullets[END] won't be much of an issue, at least from basic infantry weaponry.\n",
+            "description": [
+              "[DARKGRAY]Onyx[END]-modded standard issue armor amongst [DARKGREEN]UAC[END] Marines. It won't save you from a fireblast, but [GREEN]bullets[END] won't be much of an issue, at least from basic infantry weaponry.\n"
+            ],
             "protection": "10",
             "renprotection": "15",
             "resistances": {
@@ -3222,7 +3404,9 @@
             "tier": "Onyx",
             "icon": "ONYB32X",
             "prettyname": "Combat Armor",
-            "description": "Heavy, tough, [DARKGRAY]onyx[END]-modded armor for [DARKGREEN]UAC[END]'s assault troops. This armor resists [BLUE]plasma[END], the kind of firepower a real enemy would be packing.\n",
+            "description": [
+              "Heavy, tough, [DARKGRAY]onyx[END]-modded armor for [DARKGREEN]UAC[END]'s assault troops. This armor resists [BLUE]plasma[END], the kind of firepower a real enemy would be packing.\n"
+            ],
             "protection": "20",
             "renprotection": "30",
             "resistances": {
@@ -3262,7 +3446,9 @@
             "tier": "Onyx",
             "icon": "ONYC32X",
             "prettyname": "Commando Armor",
-            "description": "The armor of the [DARKGREEN]UAC[END]'s elite commandos that's been [DARKGRAY]onyx[END]-modded, this armor has amazing protective ability, and is quite resistant to [RED]fire[END] attacks.\n",
+            "description": [
+              "The armor of the [DARKGREEN]UAC[END]'s elite commandos that's been [DARKGRAY]onyx[END]-modded, this armor has amazing protective ability, and is quite resistant to [RED]fire[END] attacks.\n"
+            ],
             "protection": "30",
             "renprotection": "45",
             "resistances": {
@@ -3302,7 +3488,9 @@
             "tier": "Onyx",
             "icon": "ONYD32X",
             "prettyname": "Ballistic Vest",
-            "description": "A tough, [DARKGRAY]onyx[END]-modded armor for fighting against a storm of bullets and surviving, the ballistic vest reduces [GREEN]bullet[END] damage by half.\n",
+            "description": [
+              "A tough, [DARKGRAY]onyx[END]-modded armor for fighting against a storm of bullets and surviving, the ballistic vest reduces [GREEN]bullet[END] damage by half.\n"
+            ],
             "protection": "10",
             "renprotection": "15",
             "resistances": {
@@ -3342,7 +3530,9 @@
             "tier": "Onyx",
             "icon": "ONYE32X",
             "prettyname": "Bullet-proof Vest",
-            "description": "The toughest non-shield for defending against [GREEN]bullets[END]. The [DARKGRAY]onyx[END]-modded bullet-proof vest will save your hide when you're up against a bunch of formers packing chainguns.\n",
+            "description": [
+              "The toughest non-shield for defending against [GREEN]bullets[END]. The [DARKGRAY]onyx[END]-modded bullet-proof vest will save your hide when you're up against a bunch of formers packing chainguns.\n"
+            ],
             "protection": "10",
             "renprotection": "15",
             "resistances": {
@@ -3382,7 +3572,9 @@
             "tier": "Onyx",
             "icon": "ONYF32X",
             "prettyname": "Cyberwarrior Vest",
-            "description": "A strange, [DARKGRAY]onyx[END]-modded armor with a mixture of futuristic and old Asian design. This armor interfaces with its wearer and assists their muscle movements, causing their techniques with bladed weapons to improve drastically. Due to the interface, removing the armor by yourself is not recommended.\n",
+            "description": [
+              "A strange, [DARKGRAY]onyx[END]-modded armor with a mixture of futuristic and old Asian design. This armor interfaces with its wearer and assists their muscle movements, causing their techniques with bladed weapons to improve drastically. Due to the interface, removing the armor by yourself is not recommended.\n"
+            ],
             "protection": "20",
             "renprotection": "30",
             "resistances": {
@@ -3423,7 +3615,9 @@
             "tier": "Onyx",
             "icon": "ONYG32X",
             "prettyname": "Duelist Armor",
-            "description": "A strange, old-looking [DARKGRAY]onyx[MOD]-modded suit, surprisingly in good condition still. Beneath the outer layer of the outfit lie some armor plates for deflecting [GREEN]bullets[END].\n",
+            "description": [
+              "A strange, old-looking [DARKGRAY]onyx[MOD]-modded suit, surprisingly in good condition still. Beneath the outer layer of the outfit lie some armor plates for deflecting [GREEN]bullets[END].\n"
+            ],
             "protection": "20",
             "renprotection": "30",
             "resistances": {
@@ -3463,7 +3657,9 @@
             "tier": "Onyx",
             "icon": "ONYH32X",
             "prettyname": "Energy Shielded Vest",
-            "description": "A combination of a small, [DARKGRAY]onyx[END]-modded armor vest and a low-power energy shield. The shield reduces energy damage by half, and the vest also protects the user from harm.\n",
+            "description": [
+              "A combination of a small, [DARKGRAY]onyx[END]-modded armor vest and a low-power energy shield. The shield reduces energy damage by half, and the vest also protects the user from harm.\n"
+            ],
             "protection": "10",
             "renprotection": "15",
             "resistances": {
@@ -3503,7 +3699,9 @@
             "tier": "Onyx",
             "icon": "ONYJ32X",
             "prettyname": "Gothic Armor",
-            "description": "Ancient medieval plate armor that's been [DARKGRAY]onyx[END]-modded, heavy as hell and just as protective as it looks. While it might not be terribly easy to move in, you can't dismiss its defensive power.\n",
+            "description": [
+              "Ancient medieval plate armor that's been [DARKGRAY]onyx[END]-modded, heavy as hell and just as protective as it looks. While it might not be terribly easy to move in, you can't dismiss its defensive power.\n"
+            ],
             "protection": "30",
             "renprotection": "45",
             "resistances": {
@@ -3543,7 +3741,9 @@
             "tier": "Onyx",
             "icon": "ONYK32X",
             "prettyname": "Medical Armor",
-            "description": "An [DARKGRAY]onyx[END]-modded armor co-designed by both the [DARKGREEN]UAC[END] and Serygenix, this armor [PINK]heals[END] the user when they are critically wounded, and can also increase the potency of various medical supplies. The armor is quite tough as well, helping to keep field medics alive in battle.\n",
+            "description": [
+              "An [DARKGRAY]onyx[END]-modded armor co-designed by both the [DARKGREEN]UAC[END] and Serygenix, this armor [PINK]heals[END] the user when they are critically wounded, and can also increase the potency of various medical supplies. The armor is quite tough as well, helping to keep field medics alive in battle.\n"
+            ],
             "protection": "20",
             "renprotection": "30",
             "resistances": {
@@ -3583,7 +3783,9 @@
             "tier": "Onyx",
             "icon": "ONYL32X",
             "prettyname": "Phaseshift Armor",
-            "description": "An experiment in making a suit that would allow marines to walk through walls to ambush the invading demons. This [DARKGRAY]onyx[END]-modded suit was never able to move the user through walls, but it could put them out of phase with all manner of smaller solid objects, allowing the user to pass through projectiles.\n",
+            "description": [
+              "An experiment in making a suit that would allow marines to walk through walls to ambush the invading demons. This [DARKGRAY]onyx[END]-modded suit was never able to move the user through walls, but it could put them out of phase with all manner of smaller solid objects, allowing the user to pass through projectiles.\n"
+            ],
             "protection": "20",
             "renprotection": "30",
             "resistances": {
@@ -3623,7 +3825,9 @@
             "tier": "Onyx",
             "icon": "ONYM32X",
             "prettyname": "Repulsion Wave Suit",
-            "description": "An [DARKGRAY]onyx[END]-modded shield system that has been redesigned to power a small repulsor field system. The wearer can activate it when fully charged to blast away any nearby objects, giving you some precious breathing room.\n",
+            "description": [
+              "An [DARKGRAY]onyx[END]-modded shield system that has been redesigned to power a small repulsor field system. The wearer can activate it when fully charged to blast away any nearby objects, giving you some precious breathing room.\n"
+            ],
             "protection": "30",
             "renprotection": "45",
             "resistances": {
@@ -3663,7 +3867,9 @@
             "tier": "Onyx",
             "icon": "ONYN32X",
             "prettyname": "Survival MediArmor",
-            "description": "A specialty, [DARKGRAY]onyx[END]-modded armor designed by [DARKBLUE]Serygenix[END], it monitors the life signs of the wearer. If the wearer is injured, the armor releases various chemicals into their bloodstream, helping to preserve their life. It also enhances [PINK]health[END] items.\n",
+            "description": [
+              "A specialty, [DARKGRAY]onyx[END]-modded armor designed by [DARKBLUE]Serygenix[END], it monitors the life signs of the wearer. If the wearer is injured, the armor releases various chemicals into their bloodstream, helping to preserve their life. It also enhances [PINK]health[END] items.\n"
+            ],
             "protection": "20",
             "renprotection": "30",
             "resistances": {
@@ -3704,7 +3910,9 @@
             "tier": "Normal",
             "icon": "SUI032X",
             "prettyname": "Generic Suit",
-            "description": "A mysterious, perfectly crafted fully body suit. You can't work out what it's made from, and it is so smooth it's almost frictionless.\n\nThis probably shouldn't exist.",
+            "description": [
+              "A mysterious, perfectly crafted fully body suit. You can't work out what it's made from, and it is so smooth it's almost frictionless.\n\nThis probably shouldn't exist."
+            ],
             "protection": "20",
             "renprotection": "30",
             "resistances": {
@@ -3745,7 +3953,9 @@
             "tier": "Legendary",
             "icon": "ANSS32X",
             "prettyname": "Annihilation System",
-            "description": "One of the most obscene power armor designs out of the [DARKGREEN]UAC[END] yet, this bulky, complex suit manages to interface with [DARKGREEN]UAC[END] BFG weapons, granting them truly ridiculous firepower.\n",
+            "description": [
+              "One of the most obscene power armor designs out of the [DARKGREEN]UAC[END] yet, this bulky, complex suit manages to interface with [DARKGREEN]UAC[END] BFG weapons, granting them truly ridiculous firepower.\n"
+            ],
             "protection": "30",
             "renprotection": "45",
             "resistances": {
@@ -3788,7 +3998,9 @@
             "tier": "Normal",
             "icon": "BOO032X",
             "prettyname": "Generic Boots",
-            "description": "A terrifyingly generic pair of boots. The sheer plainness of them sends your brain reeling in shock. You aren't entirely sure how you can even walk in such things, but apparently they do have friction somehow.",
+            "description": [
+              "A terrifyingly generic pair of boots. The sheer plainness of them sends your brain reeling in shock. You aren't entirely sure how you can even walk in such things, but apparently they do have friction somehow."
+            ],
             "protection": "50",
             "renprotection": "50",
             "cyborgstats": {
@@ -3808,7 +4020,9 @@
             "tier": "Normal",
             "icon": "BOO132X",
             "prettyname": "Steel Boots",
-            "description": "Standard issue boots for most [DARKGREEN]UAC[END] Space Marines. While not terribly protective, it's good to have an extra layer between your toes and whatever enviroment you're walking through.",
+            "description": [
+              "Standard issue boots for most [DARKGREEN]UAC[END] Space Marines. While not terribly protective, it's good to have an extra layer between your toes and whatever enviroment you're walking through."
+            ],
             "protection": "10",
             "renprotection": "10",
             "cyborgstats": {
@@ -3828,7 +4042,9 @@
             "tier": "Normal",
             "icon": "BOO232X",
             "prettyname": "Protective Boots",
-            "description": "Thicker and costlier than the standard-issue steel boots, the Protective Boots will do a far better job at protecting you from whatever stupid crap you just dunked yourself into.",
+            "description": [
+              "Thicker and costlier than the standard-issue steel boots, the Protective Boots will do a far better job at protecting you from whatever stupid crap you just dunked yourself into."
+            ],
             "protection": "20",
             "renprotection": "20",
             "cyborgstats": {
@@ -3848,7 +4064,9 @@
             "tier": "Normal",
             "icon": "BOO332X",
             "prettyname": "Plasteel Boots",
-            "description": "Expensive but awesome, plasteel-armored boots are extremely resilient to both direct damage, as well as various kinds of acid and extreme temperatures.",
+            "description": [
+              "Expensive but awesome, plasteel-armored boots are extremely resilient to both direct damage, as well as various kinds of acid and extreme temperatures."
+            ],
             "protection": "45",
             "renprotection": "45",
             "cyborgstats": {
@@ -3869,7 +4087,9 @@
             "tier": "Exotic",
             "icon": "ACPB32X",
             "prettyname": "Acid-proof Boots",
-            "description": "Super high-tech boots that laugh at any kind of acid. Apparently the team leader of the scientists that developed this was injured by acid in her youth, and declared war upon them, or something like that.\n The technology that shields them from acid seems to work well in other enviroments too.",
+            "description": [
+              "Super high-tech boots that laugh at any kind of acid. Apparently the team leader of the scientists that developed this was injured by acid in her youth, and declared war upon them, or something like that.\n The technology that shields them from acid seems to work well in other enviroments too."
+            ],
             "protection": "100",
             "renprotection": "100",
             "cyborgstats": {
@@ -3889,7 +4109,9 @@
             "tier": "Exotic",
             "icon": "GOTB32X",
             "prettyname": "Gothic Boots",
-            "description": "Giant, superheavy metal boots, the kind you'd expect some plate-armored knight to be stomping around in. It's sure going to be a heck of a workout running around in these, that's for sure.",
+            "description": [
+              "Giant, superheavy metal boots, the kind you'd expect some plate-armored knight to be stomping around in. It's sure going to be a heck of a workout running around in these, that's for sure."
+            ],
             "protection": "50",
             "renprotection": "50",
             "cyborgstats": {
@@ -3909,7 +4131,10 @@
             "tier": "Exotic",
             "icon": "PSHB32X",
             "prettyname": "Phaseshift Boots",
-            "description": "The second set of equipment for the Phased-Assault Initiative. By producing a field of energy between the armor and boots, it can be expanded to cover an entire person, and kinda just... phase them slightly out of existance.\n\n It is a mystery.",
+            "description": [
+              "The second set of equipment for the Phased-Assault Initiative. By producing a field of energy between the armor and boots, it can be expanded to cover an entire person, and kinda just... phase them slightly out of existance.\n\n",
+              " It is a mystery."
+            ],
             "protection": "50",
             "renprotection": "50",
             "cyborgstats": {
@@ -3929,7 +4154,10 @@
             "tier": "Exotic",
             "icon": "SHKB32X",
             "prettyname": "Shockwave Boots",
-            "description": "Originally used to cushion people from the crushing impact of a long drop, the extreme timing needed to use these effectively made them pretty useless for their intended role.\n Thanks to a frustrated test subject, scientists found that the sonic force it emits is really good at smashing things, even through the air.",
+            "description": [
+              "Originally used to cushion people from the crushing impact of a long drop, the extreme timing needed to use these effectively made them pretty useless for their intended role.\n",
+              " Thanks to a frustrated test subject, scientists found that the sonic force it emits is really good at smashing things, even through the air."
+            ],
             "protection": "35",
             "renprotection": "35",
             "cyborgstats": {
@@ -3951,7 +4179,9 @@
             "tier": "Unique",
             "icon": "ENVI32X",
             "prettyname": "Enviroboots",
-            "description": "Top of the line [DARKGREEN]UAC[END] hazardous enviroment boots. The amount of protective tech, backup protective fields, emergency shields, and other stuff in these boots boggles the mind.\n If you go die a horrible fate somewhere, in the future some explorer will likely find your skeleton, sticking out of a pair of perfectly functioning Enviroboots.",
+            "description": [
+              "Top of the line [DARKGREEN]UAC[END] hazardous enviroment boots. The amount of protective tech, backup protective fields, emergency shields, and other stuff in these boots boggles the mind.\n If you go die a horrible fate somewhere, in the future some explorer will likely find your skeleton, sticking out of a pair of perfectly functioning Enviroboots."
+            ],
             "protection": "100",
             "renprotection": "100",
             "cyborgstats": {
@@ -3971,7 +4201,9 @@
             "tier": "Unique",
             "icon": "BLUB32X",
             "prettyname": "Frontline Engineer Boots",
-            "description": "Comfy little blue boots. They fill you with a strange sense of pride in machinery, and also a slight hatred of invisible frenchmen for some reason.",
+            "description": [
+              "Comfy little blue boots. They fill you with a strange sense of pride in machinery, and also a slight hatred of invisible frenchmen for some reason."
+            ],
             "protection": "80",
             "renprotection": "80",
             "cyborgstats": {
@@ -3991,7 +4223,9 @@
             "tier": "Unique",
             "icon": "LAVB32X",
             "prettyname": "Lava Boots",
-            "description": "These look like they'll burn your feet off, but are actually really warm and comfy. You'd probably love to go out on a snowy day wearing these.",
+            "description": [
+              "These look like they'll burn your feet off, but are actually really warm and comfy. You'd probably love to go out on a snowy day wearing these."
+            ],
             "protection": "100",
             "renprotection": "100",
             "cyborgstats": {
@@ -4011,7 +4245,10 @@
             "tier": "Unique",
             "icon": "SPAR32X",
             "prettyname": "Leonidas' Boots",
-            "description": "Ancient-looking armored sandals, spattered with dried blood. A strange spiritual essence seems to permeate them, and occasionally enhance your ability to kick so hard you'll turn things inside out.\n\n Sounds like madness, really.",
+            "description": [
+              "Ancient-looking armored sandals, spattered with dried blood. A strange spiritual essence seems to permeate them, and occasionally enhance your ability to kick so hard you'll turn things inside out.\n\n",
+              " Sounds like madness, really."
+            ],
             "protection": "30",
             "renprotection": "30",
             "cyborgstats": {
@@ -4031,7 +4268,9 @@
             "tier": "Unique",
             "icon": "ENUB32X",
             "prettyname": "Nuclear Powerboots",
-            "description": "High-tech super-tough armored leggings, designed to fit together with some sort of massive power armor. Interestingly, it doesn't seem like it was [DARKGREEN]UAC[END]-made.",
+            "description": [
+              "High-tech super-tough armored leggings, designed to fit together with some sort of massive power armor. Interestingly, it doesn't seem like it was [DARKGREEN]UAC[END]-made."
+            ],
             "protection": "75",
             "renprotection": "75",
             "cyborgstats": {
@@ -4051,7 +4290,9 @@
             "tier": "Unique",
             "icon": "NYAB32X",
             "prettyname": "Nyarlaptoteps Boots",
-            "description": "Strange metal boots that pulsate with strange, eldritch power. Fire seems to simply glance off them with no effects whatsoever.",
+            "description": [
+              "Strange metal boots that pulsate with strange, eldritch power. Fire seems to simply glance off them with no effects whatsoever."
+            ],
             "protection": "75",
             "renprotection": "75",
             "cyborgstats": {
@@ -4071,7 +4312,9 @@
             "tier": "Unique",
             "icon": "ROYB32X",
             "prettyname": "Roysten's Combat Boots",
-            "description": "Fancy [DARKGREEN]UAC[END] boots, generally issued to a high-ranking military officer. I'm sure no one will mind if you wear them here.",
+            "description": [
+              "Fancy [DARKGREEN]UAC[END] boots, generally issued to a high-ranking military officer. I'm sure no one will mind if you wear them here."
+            ],
             "protection": "50",
             "renprotection": "50",
             "cyborgstats": {
@@ -4091,7 +4334,9 @@
             "tier": "Unique",
             "icon": "SSOB32X",
             "prettyname": "Solo Operative Boots",
-            "description": "Sleek and form-fitting, made of a non-reflective black material. These boots seem like the kind of thing you'd want to use to infiltrate some secret military base or something.",
+            "description": [
+              "Sleek and form-fitting, made of a non-reflective black material. These boots seem like the kind of thing you'd want to use to infiltrate some secret military base or something."
+            ],
             "protection": "50",
             "renprotection": "50",
             "cyborgstats": {
@@ -4111,7 +4356,9 @@
             "tier": "Unique",
             "icon": "REDB32X",
             "prettyname": "Tactical Assembler Boots",
-            "description": "Comfy little red boots. They fill you with a strange sense of pride in machinery, and also a slight fear of wheeled bombs on rail-tracks.",
+            "description": [
+              "Comfy little red boots. They fill you with a strange sense of pride in machinery, and also a slight fear of wheeled bombs on rail-tracks."
+            ],
             "protection": "80",
             "renprotection": "80",
             "cyborgstats": {
@@ -4131,7 +4378,9 @@
             "tier": "Unique",
             "icon": "TORB32X",
             "prettyname": "Torgue Blastboots",
-            "description": "Big bulky boots with all sorts of fire-resistant plating and materials. The soles of the boots have some sort of explosive weapon built into them, but require a compatible powersource to use, it seems.",
+            "description": [
+              "Big bulky boots with all sorts of fire-resistant plating and materials. The soles of the boots have some sort of explosive weapon built into them, but require a compatible powersource to use, it seems."
+            ],
             "protection": "60",
             "renprotection": "60",
             "cyborgstats": {
@@ -4153,7 +4402,9 @@
             "tier": "Demonic",
             "icon": "DEMB32X",
             "prettyname": "Demonic Boots",
-            "description": "A disgusting pile of flesh in a crude representation of boots. If you can stomach the thought of wearing these, they might be useful in overcoming the dangers of Hell.",
+            "description": [
+              "A disgusting pile of flesh in a crude representation of boots. If you can stomach the thought of wearing these, they might be useful in overcoming the dangers of Hell."
+            ],
             "protection": "80",
             "renprotection": "80",
             "cyborgstats": {
@@ -4175,7 +4426,9 @@
             "tier": "Legendary",
             "icon": "ANGB32X",
             "prettyname": "Angelic Boots",
-            "description": "Radiating a faint holy light, these boots seem like the perfect thing to wear if you're going to fight Hell itself.",
+            "description": [
+              "Radiating a faint holy light, these boots seem like the perfect thing to wear if you're going to fight Hell itself."
+            ],
             "protection": "100",
             "renprotection": "100",
             "cyborgstats": {
@@ -4197,7 +4450,9 @@
             "tier": "Basic",
             "icon": "TACB32X",
             "prettyname": "Tactical Boots",
-            "description": "Lightweight and sleek, these boots have an advanced friction coating on the soles, and all kinds of pumps and gyros that help you launch yourself faster with each step you take.",
+            "description": [
+              "Lightweight and sleek, these boots have an advanced friction coating on the soles, and all kinds of pumps and gyros that help you launch yourself faster with each step you take."
+            ],
             "protection": "0",
             "renprotection": "0",
             "cyborgstats": {
@@ -4217,7 +4472,10 @@
             "tier": "Basic",
             "icon": "FIRS32X",
             "prettyname": "Fireproof Steel Boots",
-            "description": "Made of highly fire-resistant materials, these boots are excellent for the kinds of burning enviroments Hell might have to offer.\n These were originally Steel Boots, but have been modified to be fire-resistant.",
+            "description": [
+              "Made of highly fire-resistant materials, these boots are excellent for the kinds of burning enviroments Hell might have to offer.\n",
+              " These were originally Steel Boots, but have been modified to be fire-resistant."
+            ],
             "protection": "40",
             "renprotection": "40",
             "cyborgstats": {
@@ -4237,7 +4495,9 @@
             "tier": "Basic",
             "icon": "FIRG32X",
             "prettyname": "Fireproof Protective Boots",
-            "description": "Made of highly fire-resistant materials, these boots are excellent for the kinds of burning enviroments Hell might have to offer.\n These were originally Protective Boots, but have been modified to be fire-resistant.",
+            "description": [
+              "Made of highly fire-resistant materials, these boots are excellent for the kinds of burning enviroments Hell might have to offer.\n These were originally Protective Boots, but have been modified to be fire-resistant."
+            ],
             "protection": "50",
             "renprotection": "50",
             "cyborgstats": {
@@ -4257,7 +4517,10 @@
             "tier": "Basic",
             "icon": "FIRB32X",
             "prettyname": "Fireproof Plasteel Boots",
-            "description": "Made of highly fire-resistant materials, these boots are excellent for the kinds of burning enviroments Hell might have to offer.\n These were originally Plasteel Boots, but have been modified to be fire-resistant.",
+            "description": [
+              "Made of highly fire-resistant materials, these boots are excellent for the kinds of burning enviroments Hell might have to offer.\n",
+              " These were originally Plasteel Boots, but have been modified to be fire-resistant."
+            ],
             "protection": "75",
             "renprotection": "75",
             "cyborgstats": {
@@ -4277,7 +4540,10 @@
             "tier": "Basic",
             "icon": "GRAS32X",
             "prettyname": "Grappling Steel Boots",
-            "description": "Boots equipped with a set of hooks and grapples that automatically fasten the wearer to whatever surface they're standing on, but without impeding their normal movement.\n These were originally Steel Boots, but have been modified to intelligently attach to surfaces.",
+            "description": [
+              "Boots equipped with a set of hooks and grapples that automatically fasten the wearer to whatever surface they're standing on, but without impeding their normal movement.\n",
+              " These were originally Steel Boots, but have been modified to intelligently attach to surfaces."
+            ],
             "protection": "20",
             "renprotection": "20",
             "cyborgstats": {
@@ -4297,7 +4563,10 @@
             "tier": "Basic",
             "icon": "GRAG32X",
             "prettyname": "Grappling Protective Boots",
-            "description": "Boots equipped with a set of hooks and grapples that automatically fasten the wearer to whatever surface they're standing on, but without impeding their normal movement.\n These were originally Protective Boots, but have been modified to intelligently attach to surfaces.",
+            "description": [
+              "Boots equipped with a set of hooks and grapples that automatically fasten the wearer to whatever surface they're standing on, but without impeding their normal movement.\n",
+              " These were originally Protective Boots, but have been modified to intelligently attach to surfaces."
+            ],
             "protection": "30",
             "renprotection": "30",
             "cyborgstats": {
@@ -4317,7 +4586,10 @@
             "tier": "Basic",
             "icon": "GRAB32X",
             "prettyname": "Grappling Plasteel Boots",
-            "description": "Boots equipped with a set of hooks and grapples that automatically fasten the wearer to whatever surface they're standing on, but without impeding their normal movement.\n These were originally Plasteel Boots, but have been modified to intelligently attach to surfaces.",
+            "description": [
+              "Boots equipped with a set of hooks and grapples that automatically fasten the wearer to whatever surface they're standing on, but without impeding their normal movement.\n",
+              " These were originally Plasteel Boots, but have been modified to intelligently attach to surfaces."
+            ],
             "protection": "55",
             "renprotection": "55",
             "cyborgstats": {
@@ -4337,7 +4609,10 @@
             "tier": "Basic",
             "icon": "ENVS32X",
             "prettyname": "Enviromental Steel Boots",
-            "description": "Boots that have been equipped with all kinds of hazardous enviroment technology. While not as effective as the [DARKGREEN]UAC[END]'s Enviroboots, these are still some of the best footgear for going to bad places.\n These were originally Steel Boots, but have been modified to be immensely protective against hazardous enviroments.",
+            "description": [
+              "Boots that have been equipped with all kinds of hazardous enviroment technology. While not as effective as the [DARKGREEN]UAC[END]'s Enviroboots, these are still some of the best footgear for going to bad places.\n",
+              " These were originally Steel Boots, but have been modified to be immensely protective against hazardous enviroments."
+            ],
             "protection": "85",
             "renprotection": "85",
             "cyborgstats": {
@@ -4357,7 +4632,10 @@
             "tier": "Basic",
             "icon": "ENVG32X",
             "prettyname": "Enviromental Protective Boots",
-            "description": "Boots that have been equipped with all kinds of hazardous enviroment technology. While not as effective as the [DARKGREEN]UAC[END]'s Enviroboots, these are still some of the best footgear for going to bad places.\n These were originally Protective Boots, but have been modified to be immensely protective against hazardous enviroments.",
+            "description": [
+              "Boots that have been equipped with all kinds of hazardous enviroment technology. While not as effective as the [DARKGREEN]UAC[END]'s Enviroboots, these are still some of the best footgear for going to bad places.\n",
+              " These were originally Protective Boots, but have been modified to be immensely protective against hazardous enviroments."
+            ],
             "protection": "90",
             "renprotection": "90",
             "cyborgstats": {
@@ -4377,7 +4655,10 @@
             "tier": "Basic",
             "icon": "ENVG32X",
             "prettyname": "Enviromental Plasteel Boots",
-            "description": "Boots that have been equipped with all kinds of hazardous enviroment technology. While not as effective as the [DARKGREEN]UAC[END]'s Enviroboots, these are still some of the best footgear for going to bad places.\n These were originally Plasteel Boots, but have been modified to be immensely protective against hazardous enviroments.",
+            "description": [
+              "Boots that have been equipped with all kinds of hazardous enviroment technology. While not as effective as the [DARKGREEN]UAC[END]'s Enviroboots, these are still some of the best footgear for going to bad places.\n",
+              " These were originally Plasteel Boots, but have been modified to be immensely protective against hazardous enviroments."
+            ],
             "protection": "90",
             "renprotection": "90",
             "cyborgstats": {
@@ -4399,7 +4680,10 @@
             "tier": "Advanced",
             "icon": "AGSB32X",
             "prettyname": "Antigrav Steel Boots",
-            "description": "Boots that have been equipped with compact anti-grav generators and tiny ion thrusters. Not strong enough to fly with on their own, but they will certainly increase the height you can jump massively.\n These were originally Steel Boots, but have been modified to be increase your jump height.",
+            "description": [
+              "Boots that have been equipped with compact anti-grav generators and tiny ion thrusters. Not strong enough to fly with on their own, but they will certainly increase the height you can jump massively.\n",
+              " These were originally Steel Boots, but have been modified to be increase your jump height."
+            ],
             "protection": "20",
             "renprotection": "20",
             "cyborgstats": {
@@ -4419,7 +4703,10 @@
             "tier": "Advanced",
             "icon": "AGGB32X",
             "prettyname": "Antigrav Protective Boots",
-            "description": "Boots that have been equipped with compact anti-grav generators and tiny ion thrusters. Not strong enough to fly with on their own, but they will certainly increase the height you can jump massively.\n These were originally Protective Boots, but have been modified to be increase your jump height.",
+            "description": [
+              "Boots that have been equipped with compact anti-grav generators and tiny ion thrusters. Not strong enough to fly with on their own, but they will certainly increase the height you can jump massively.\n",
+              " These were originally Protective Boots, but have been modified to be increase your jump height."
+            ],
             "protection": "45",
             "renprotection": "45",
             "cyborgstats": {
@@ -4439,7 +4726,10 @@
             "tier": "Advanced",
             "icon": "AGBB32X",
             "prettyname": "Antigrav Plasteel Boots",
-            "description": "Boots that have been equipped with compact anti-grav generators and tiny ion thrusters. Not strong enough to fly with on their own, but they will certainly increase the height you can jump massively.\n These were originally Plasteel Boots, but have been modified to be increase your jump height.",
+            "description": [
+              "Boots that have been equipped with compact anti-grav generators and tiny ion thrusters. Not strong enough to fly with on their own, but they will certainly increase the height you can jump massively.\n",
+              " These were originally Plasteel Boots, but have been modified to be increase your jump height."
+            ],
             "protection": "45",
             "renprotection": "45",
             "cyborgstats": {
@@ -4461,7 +4751,9 @@
             "tier": "Master",
             "icon": "CERB32X",
             "prettyname": "Cerberus Boots",
-            "description": "Advanced boots designed to not only laugh at lethal enviroments, but to link with the Cerberus Armor and Tristar Blaster's systems. An amazing piece of technology that'll serve you well for sure.",
+            "description": [
+              "Advanced boots designed to not only laugh at lethal enviroments, but to link with the Cerberus Armor and Tristar Blaster's systems. An amazing piece of technology that'll serve you well for sure."
+            ],
             "protection": "100",
             "renprotection": "100",
             "cyborgstats": {
@@ -4482,7 +4774,9 @@
             "tier": "Unique",
             "icon": "CYNA32X",
             "prettyname": "Cybernetic Armor",
-            "description": "A suit of armor that directly interfaces and combines with the wearer [DARKRED]permanently.[END] The resistance this armor provides is nothing short of incredible, but it can never be removed without killing the wearer. While some people are adverse to the idea of permanently becoming a living cybernetic weapon, sometimes it's the only way you're gonna survive the mess ahead of you. Make a choice.",
+            "description": [
+              "A suit of armor that directly interfaces and combines with the wearer [DARKRED]permanently.[END] The resistance this armor provides is nothing short of incredible, but it can never be removed without killing the wearer. While some people are adverse to the idea of permanently becoming a living cybernetic weapon, sometimes it's the only way you're gonna survive the mess ahead of you. Make a choice."
+            ],
             "protection": "70",
             "renprotection": "80",
             "resistances": {
@@ -4522,7 +4816,9 @@
             "tier": "Unique",
             "icon": "CYNA32X",
             "prettyname": "Cybernetic Armor",
-            "description": "A suit of armor that directly interfaces and combines with the wearer [DARKRED]permanently.[END] The resistance this armor provides is nothing short of incredible, but it can never be removed without killing the wearer. While some people are adverse to the idea of permanently becoming a living cybernetic weapon, sometimes it's the only way you're gonna survive the mess ahead of you. Make a choice.",
+            "description": [
+              "A suit of armor that directly interfaces and combines with the wearer [DARKRED]permanently.[END] The resistance this armor provides is nothing short of incredible, but it can never be removed without killing the wearer. While some people are adverse to the idea of permanently becoming a living cybernetic weapon, sometimes it's the only way you're gonna survive the mess ahead of you. Make a choice."
+            ],
             "protection": "70",
             "renprotection": "80",
             "resistances": {
@@ -4562,7 +4858,9 @@
             "tier": "Unique",
             "icon": "CYNA32X",
             "prettyname": "Cybernetic Armor",
-            "description": "A suit of armor that directly interfaces and combines with the wearer [DARKRED]permanently.[END] The resistance this armor provides is nothing short of incredible, but it can never be removed without killing the wearer. While some people are adverse to the idea of permanently becoming a living cybernetic weapon, sometimes it's the only way you're gonna survive the mess ahead of you. Make a choice.",
+            "description": [
+              "A suit of armor that directly interfaces and combines with the wearer [DARKRED]permanently.[END] The resistance this armor provides is nothing short of incredible, but it can never be removed without killing the wearer. While some people are adverse to the idea of permanently becoming a living cybernetic weapon, sometimes it's the only way you're gonna survive the mess ahead of you. Make a choice."
+            ],
             "protection": "70",
             "renprotection": "80",
             "resistances": {
@@ -4602,7 +4900,9 @@
             "tier": "Unique",
             "icon": "CYNA32X",
             "prettyname": "Cybernetic Armor",
-            "description": "A suit of armor that directly interfaces and combines with the wearer [DARKRED]permanently.[END] The resistance this armor provides is nothing short of incredible, but it can never be removed without killing the wearer. While some people are adverse to the idea of permanently becoming a living cybernetic weapon, sometimes it's the only way you're gonna survive the mess ahead of you. Make a choice.",
+            "description": [
+              "A suit of armor that directly interfaces and combines with the wearer [DARKRED]permanently.[END] The resistance this armor provides is nothing short of incredible, but it can never be removed without killing the wearer. While some people are adverse to the idea of permanently becoming a living cybernetic weapon, sometimes it's the only way you're gonna survive the mess ahead of you. Make a choice."
+            ],
             "protection": "70",
             "renprotection": "80",
             "resistances": {
@@ -4642,7 +4942,9 @@
             "tier": "Unique",
             "icon": "CYNA32X",
             "prettyname": "Cybernetic Armor",
-            "description": "A suit of armor that directly interfaces and combines with the wearer [DARKRED]permanently.[END] The resistance this armor provides is nothing short of incredible, but it can never be removed without killing the wearer. While some people are adverse to the idea of permanently becoming a living cybernetic weapon, sometimes it's the only way you're gonna survive the mess ahead of you. Make a choice.",
+            "description": [
+              "A suit of armor that directly interfaces and combines with the wearer [DARKRED]permanently.[END] The resistance this armor provides is nothing short of incredible, but it can never be removed without killing the wearer. While some people are adverse to the idea of permanently becoming a living cybernetic weapon, sometimes it's the only way you're gonna survive the mess ahead of you. Make a choice."
+            ],
             "protection": "70",
             "renprotection": "80",
             "resistances": {
@@ -4682,7 +4984,9 @@
             "tier": "Unique",
             "icon": "CYNA32X",
             "prettyname": "Cybernetic Armor",
-            "description": "A suit of armor that directly interfaces and combines with the wearer [DARKRED]permanently.[END] The resistance this armor provides is nothing short of incredible, but it can never be removed without killing the wearer. While some people are adverse to the idea of permanently becoming a living cybernetic weapon, sometimes it's the only way you're gonna survive the mess ahead of you. Make a choice.",
+            "description": [
+              "A suit of armor that directly interfaces and combines with the wearer [DARKRED]permanently.[END] The resistance this armor provides is nothing short of incredible, but it can never be removed without killing the wearer. While some people are adverse to the idea of permanently becoming a living cybernetic weapon, sometimes it's the only way you're gonna survive the mess ahead of you. Make a choice."
+            ],
             "protection": "70",
             "renprotection": "80",
             "resistances": {
@@ -4722,7 +5026,9 @@
             "tier": "Unique",
             "icon": "CYNA32X",
             "prettyname": "Cybernetic Armor",
-            "description": "A suit of armor that directly interfaces and combines with the wearer [DARKRED]permanently.[END] The resistance this armor provides is nothing short of incredible, but it can never be removed without killing the wearer. While some people are adverse to the idea of permanently becoming a living cybernetic weapon, sometimes it's the only way you're gonna survive the mess ahead of you. Make a choice.",
+            "description": [
+              "A suit of armor that directly interfaces and combines with the wearer [DARKRED]permanently.[END] The resistance this armor provides is nothing short of incredible, but it can never be removed without killing the wearer. While some people are adverse to the idea of permanently becoming a living cybernetic weapon, sometimes it's the only way you're gonna survive the mess ahead of you. Make a choice."
+            ],
             "protection": "70",
             "renprotection": "80",
             "resistances": {
@@ -4762,7 +5068,9 @@
             "tier": "Unique",
             "icon": "CYNA32X",
             "prettyname": "Cybernetic Armor",
-            "description": "A suit of armor that directly interfaces and combines with the wearer [DARKRED]permanently.[END] The resistance this armor provides is nothing short of incredible, but it can never be removed without killing the wearer. While some people are adverse to the idea of permanently becoming a living cybernetic weapon, sometimes it's the only way you're gonna survive the mess ahead of you. Make a choice.",
+            "description": [
+              "A suit of armor that directly interfaces and combines with the wearer [DARKRED]permanently.[END] The resistance this armor provides is nothing short of incredible, but it can never be removed without killing the wearer. While some people are adverse to the idea of permanently becoming a living cybernetic weapon, sometimes it's the only way you're gonna survive the mess ahead of you. Make a choice."
+            ],
             "protection": "70",
             "renprotection": "80",
             "resistances": {
@@ -4803,7 +5111,10 @@
             "tier": "Unique",
             "icon": "JETP32X",
             "prettyname": "Jetpack",
-            "description": "Designed for use in the often crazy and always hazardous terrain of Hell, this jetpack will help you get anywhere you need to, and in style!\n\n (Also breaks levels, don't blame me if you fall out the entire level or something.)",
+            "description": [
+              "Designed for use in the often crazy and always hazardous terrain of Hell, this jetpack will help you get anywhere you need to, and in style!\n\n",
+              " (Also breaks levels, don't blame me if you fall out the entire level or something.)"
+            ],
             "protection": "5",
             "renprotection": "8",
             "resistances": {
@@ -4844,7 +5155,9 @@
             "tier": "Unique",
             "icon": "ENUC32X",
             "prettyname": "Nuclear Powerarmor",
-            "description": "A bulky set of powerarmor, clearly not of UAC manufacture, this armor is powered by a small microfusion reactor on it's heavily armor back. It's obvious it was designed to be used in extremely hazardous enviroments, and that'll serve you well.",
+            "description": [
+              "A bulky set of powerarmor, clearly not of UAC manufacture, this armor is powered by a small microfusion reactor on it's heavily armor back. It's obvious it was designed to be used in extremely hazardous enviroments, and that'll serve you well."
+            ],
             "protection": "50",
             "renprotection": "75",
             "resistances": {
@@ -4885,7 +5198,9 @@
             "tier": "Unique",
             "icon": "MALK32X",
             "prettyname": "Malek's Armor",
-            "description": "The heavy armor of a long-dead warrior who fought against Hell in ages past. The armor is infused with the soul of the warrior, who yearns to battle the demons once more.",
+            "description": [
+              "The heavy armor of a long-dead warrior who fought against Hell in ages past. The armor is infused with the soul of the warrior, who yearns to battle the demons once more."
+            ],
             "protection": "30",
             "renprotection": "45",
             "resistances": {

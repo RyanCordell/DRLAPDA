@@ -1,0 +1,57 @@
+PDA_Local.pagemax = 6;
+
+PDA_Wipe();
+
+switch(PDA_Local.page)
+{
+    case 1: PDA_PrintHeader("PDA_HUDSWITCH_HEADER1", -70); break;
+}
+
+
+if(PDA_Local.page == 1)
+{
+  PDA_SetupBounds();
+  PDA_SetScrollLimit(0);
+  PDA_SetScrollArrows2(0, PDA_RectWidth + 50.0, PDA_ScrollableHeight + 90.0);
+
+  // yes i'm lazy
+  #define makeHuddy(id, name, y, token) /
+    PDA_CreateHUDButton((id), (name), "White", PDA_RectX + 10.1, PDA_Local.scrollingy + 30.1 + (15.0 * (y)), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, (token));
+
+
+  // Status bars
+
+  PDAButton Geoscaper = makeHuddy(50, "Geoscaper", 0, "RLStatusBarGeoscaperHUDType");
+  PDAButton Republic  = makeHuddy(51, "Republic", 1, "RLStatusBarRepublicHUDType");
+  PDAButton Tritium   = makeHuddy(52, "Tritium", 2, "RLStatusBarTritiumHUDType");
+  // PDAButton Geoscaper = PDA_CreateHUDButton(50, "Geoscaper", "White", PDA_RectX + 10.1, PDA_Local.scrollingy + 30.1 + (15.0 * 0), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, "RLStatusBarGeoscaperHUDType");
+  // PDAButton Republic  = PDA_CreateHUDButton(51, "Republic",  "White", PDA_RectX + 10.1, PDA_Local.scrollingy + 30.1 + (15.0 * 1), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, "RLStatusBarRepublicHUDType");
+  // PDAButton Tritium   = PDA_CreateHUDButton(52, "Tritium",   "White", PDA_RectX + 10.1, PDA_Local.scrollingy + 30.1 + (15.0 * 2), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, "RLStatusBarTritiumHUDType");
+
+  PDA_InitButton(Geoscaper, true, 2, strparam("%l:\n", "PDA_SBAR_GEOSCAPER"), "PDA_GEOSCAPER_PIC");
+  PDA_InitButton(Republic,  true, 3, strparam("%l:\n", "PDA_SBAR_REPUBLIC"), "PDA_REPUBLIC_PIC");
+  PDA_InitButton(Tritium,   true, 4, strparam("%l:\n", "PDA_SBAR_TRITIUM"), "PDA_TRITIUM_PIC");
+
+
+  // Normal huds
+  PDAButton Hazard  = PDA_CreateHUDButton(53, "Hazard",  "White", PDA_RectX + 10.1, PDA_Local.scrollingy + 30.1 + (15.0 * 3), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, "")
+  PDAButton Shock   = PDA_CreateHUDButton(54, "Shock",   "White", PDA_RectX + 10.1, PDA_Local.scrollingy + 30.1 + (15.0 * 4), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, "");
+  PDAButton Corrupt = PDA_CreateHUDButton(55, "Corrupt", "White", PDA_RectX + 10.1, PDA_Local.scrollingy + 30.1 + (15.0 * 5), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, "");
+  PDAButton Tracker = PDA_CreateHUDButton(56, "Tracker", "White", PDA_RectX + 10.1, PDA_Local.scrollingy + 30.1 + (15.0 * 6), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, "");
+  PDAButton Fluid   = PDA_CreateHUDButton(57, "Fluid",   "White", PDA_RectX + 10.1, PDA_Local.scrollingy + 30.1 + (15.0 * 7), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, "");
+  PDAButton Staty   = PDA_CreateHUDButton(58, "Staty",   "White", PDA_RectX + 10.1, PDA_Local.scrollingy + 30.1 + (15.0 * 8), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, "");
+  PDAButton Special = PDA_CreateHUDButton(59, "Special", "White", PDA_RectX + 10.1, PDA_Local.scrollingy + 30.1 + (15.0 * 9), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, "");
+
+  PDA_InitButton(Hazard,  true, 5,  strparam("%l:\n", "PDA_FBAR_HAZARD"), "PDA_HAZARD_PIC");
+  PDA_InitButton(Shock,   true, 6,  strparam("%l:\n", "PDA_FBAR_SHOCK"), "PDA_SHOCK_PIC");
+  PDA_InitButton(Corrupt, true, 7,  strparam("%l:\n", "PDA_FBAR_CORRUPT"), "PDA_CORRUPT_PIC");
+  PDA_InitButton(Tracker, true, 8,  strparam("%l:\n", "PDA_FBAR_TRACKER"), "PDA_TRACKER_PIC");
+  PDA_InitButton(Fluid,   true, 9,  strparam("%l:\n", "PDA_FBAR_FLUID")), "PDA_FLUID_PIC";
+  PDA_InitButton(Staty,   true, 10, strparam("%l:\n", "PDA_FBAR_STATY"), "PDA_STATY_PIC");
+  PDA_InitButton(Special, true, 11, strparam("%l:\n", "PDA_FBAR_STATY"), "PDA_SPECIAL_PIC");
+
+  SetFont("STAT_LWR");
+}
+
+PDA_DefaultFont();
+PDA_UnsetScrollWindow();

@@ -5,27 +5,46 @@ PDA_Wipe();
 
 int scrollOffset;
 
+str allAssemblies = StrParam(l:"PDA_ASSEMBLIES");
+str_split(StrParam("%l:", "PDA_SEPARATOR_CHARACTER"), allAssemblies);
+int basicInd    = 0;
+int advancedInd = 0; // should be 33
+int masterInd   = 0; // should be 65
+int masterMax   = 0; // should be 95
+
+int stringArrayIndex = 0;
+int TEXT_OFFSET = 13; // aka length of "PDA_ASSEMBLY_"
+
+while ((stringArray[stringArrayIndex++]) != "") {
+    if (str_find(stringArray[stringArrayIndex], "ADVANCED", TEXT_OFFSET) != -1 && advancedInd == 0) advancedInd = stringArrayIndex;
+    if (str_find(stringArray[stringArrayIndex],   "MASTER", TEXT_OFFSET) != -1 &&   masterInd == 0) masterInd   = stringArrayIndex;
+    masterMax++;
+}
+
+stringArrayIndex = 0;
+masterMax--;
+
 switch (PDA_Local.page) {
     case 1:
         PDA_PrintHeader("PDA_ASSEMBLY_BASIC_NAME", -30);
+        PDA_Local.maxassembliesper = (advancedInd - 1);
         scrollOffset = PDA_Local.maxassembliesper * -5;
-        PDA_Local.maxassembliesper = DRLA_BASICMAX;
-        PDA_Local.assemblyOffset = 0;
-        PDA_Local.tiercolor = "\c[BB]";
+        PDA_Local.assemblyOffset   = basicInd;
+        PDA_Local.tiercolor        = "\c[BB]";
         break;
     case 2:
         PDA_PrintHeader("PDA_ASSEMBLY_ADVANCED_NAME", -30);
+        PDA_Local.maxassembliesper = (masterInd - 1) - advancedInd;
         scrollOffset = PDA_Local.maxassembliesper * -5;
-        PDA_Local.maxassembliesper = DRLA_ADVANCEDMAX;
-        PDA_Local.assemblyOffset = DRLA_BASICMAX;
-        PDA_Local.tiercolor = "\c[AB]";
+        PDA_Local.assemblyOffset   = advancedInd;
+        PDA_Local.tiercolor        = "\c[AB]";
         break;
     case 3:
         PDA_PrintHeader("PDA_ASSEMBLY_MASTER_NAME", -30);
+        PDA_Local.maxassembliesper = masterMax - masterInd;
         scrollOffset = PDA_Local.maxassembliesper * -6;
-        PDA_Local.maxassembliesper = DRLA_MASTERMAX;
-        PDA_Local.assemblyOffset = DRLA_BASICMAX+DRLA_ADVANCEDMAX;
-        PDA_Local.tiercolor = "\c[MB]";
+        PDA_Local.assemblyOffset   = masterInd;
+        PDA_Local.tiercolor        = "\c[MB]";
         break;
     default:
         Print(s:"how da fuk");
@@ -44,7 +63,7 @@ PDA_InitButton(P3, true, 3, "");
 
 int id;
 str icon = "\n";
-str assFormatter = "\n";
+str asmFormatter = "\n";
 float x = PDA_RectX + 0.1, y;
 const int width = 180, height = 7;
 str assemblyCallback = "\n";
@@ -57,19 +76,34 @@ SetFont("STAT_MNO");
 PDA_SetScrollLimit  (scrollOffset);
 PDA_SetScrollArrows2(scrollOffset, PDA_RectWidth + 60.0, PDA_ScrollableHeight + 90.0);
 
-for (int assemblyIndex = 0; assemblyIndex < PDA_Local.maxassembliesper; assemblyIndex++) {
-    id               = PDA_ASSEMBLYIDRANGE + assemblyIndex;
-    y                = PDA_Local.scrollingy + 30.1 + (12.0 * assemblyIndex);
-    icon             = strParam("%l:", strParam("%s:_ICON", DRLA_Assemblies[assemblyIndex + PDA_Local.assemblyOffset][1]));
-    assFormatter     = strParam("%s:%l:", PDA_Local.tiercolor, DRLA_Assemblies[assemblyIndex + PDA_Local.assemblyOffset][1]);
-    assemblyCallback = DRLA_Assemblies[assemblyIndex + PDA_Local.assemblyOffset][1];
-    tooltip          = strParam("%l:\n%l:", "PDA_ASSEMBLY_REQUIREMENTS", strParam("%s:_REQ", DRLA_Assemblies[assemblyIndex + PDA_Local.assemblyOffset][1]));
-    
-    if (PDA_CheckPlayer1Inventory(DRLA_Assemblies[assemblyIndex + PDA_Local.assemblyOffset][0]) || CheckInventory(DRLA_Assemblies[assemblyIndex + PDA_Local.assemblyOffset][0])) {
-        PDAButton button = PDA_CreateAssemblyButton(id, icon, assFormatter, x, y, width, height, assemblyCallback, tooltip);
-        PDA_InitButton(button, false, PDA_ASSEMBLY_DETAIL, "");
+/*
+    If possible, try to avoid vertical modpack lists without a proper text height offsetter.
+*/
+for (int ti = 0, li = 1; ti <= PDA_Local.maxassembliesper; ti+=2, li+=2) {
+    PDAButton button;
+    int aoff             = (PDA_Local.assemblyOffset - 1 < 0) ? 0 : (PDA_Local.assemblyOffset - 1);
+    int offsetIndex      = ((ti - 1) + PDA_Local.assemblyOffset);
+    int tokenIndex       = (ti + aoff);
+    int peekFuture       = (ti + 2);
+    int langIndex        = (li + aoff);
+    str actorToken       = stringArray[tokenIndex];
+    str languagePointer  = stringArray[langIndex ];
+        id               = (PDA_ASSEMBLYIDRANGE + offsetIndex);
+        y                = PDA_Local.scrollingy + 30.1 + (6.0 * (ti - 1)); 
+        icon             = strParam("%l:",    strParam("%s:_ICON", languagePointer));
+        asmFormatter     = strParam("%s:%l:", PDA_Local.tiercolor, languagePointer);
+        assemblyCallback =                                         languagePointer;
+        tooltip          = strParam("%l:\n%l:", "PDA_ASSEMBLY_REQUIREMENTS", strParam("%s:_REQ", languagePointer));
+
+    // Not sure I like these particular checks, but what can ya do.
+    if (peekFuture >= advancedInd && PDA_Local.assemblyOffset < advancedInd) continue;
+    if (peekFuture >= masterInd && PDA_Local.assemblyOffset < masterMax) continue;
+
+    if (PDA_CheckPlayer1Inventory(actorToken) || CheckInventory(actorToken)) {
+        button = PDA_CreateAssemblyButton(id, icon, asmFormatter, x, y, width, height, assemblyCallback, tooltip);
+                 PDA_InitButton(button, false, PDA_ASSEMBLY_DETAIL, "");
     } else { 
-        PDAButton button = PDA_CreateAssemblyButton(id, "PDAUNK", strParam(l:"PDA_ASSEMBLY_UNKNOWN"), x, y, width, height, "", "???");
+        button = PDA_CreateAssemblyButton(id, "PDAUNK", strParam(l:"PDA_ASSEMBLY_UNKNOWN"), x, y, width, height, "", "???");
     }
 }
         

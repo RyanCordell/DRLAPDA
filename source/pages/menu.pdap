@@ -12,19 +12,12 @@ PDA_SetScrollLimit(-30);
 PDA_SetScrollArrows2(-30, PDA_RectWidth + 60.0, PDA_ScrollableHeight + 90.0);
 
 PDAButton PLAYERS    = PDA_CreateMenuButton(PDA_PLAYERS_BUTTON,    "", "MPLYICO", PDA_RectX + 10.1, PDA_Local.scrollingy + menuY + (20.0 * 0), 88, menuBtnHeight);
-
 PDAButton WEAPONS    = PDA_CreateMenuButton(PDA_WEAPONS_BUTTON,    "", "MWEPICO", PDA_RectX + 10.1, PDA_Local.scrollingy + menuY + (20.0 * 1), 88, menuBtnHeight);
-
 PDAButton ARMORS     = PDA_CreateMenuButton(PDA_ARMORS_BUTTON,     "", "MARMICO", PDA_RectX + 10.1, PDA_Local.scrollingy + menuY + (20.0 * 2), 88, menuBtnHeight);
-
 PDAButton ASSEMBLIES = PDA_CreateMenuButton(PDA_ASSEMBLIES_BUTTON, "", "MASMICO", PDA_RectX + 10.1, PDA_Local.scrollingy + menuY + (20.0 * 3), 88, menuBtnHeight);
-
 PDAButton ITEMS      = PDA_CreateMenuButton(PDA_ITEMS_BUTTON,      "", "MITMICO", PDA_RectX + 10.1, PDA_Local.scrollingy + menuY + (20.0 * 4), 88, menuBtnHeight);
-
 PDAButton BESTIARY   = PDA_CreateMenuButton(PDA_BESTIARY_BUTTON,   "", "MBESICO", PDA_RectX + 10.1, PDA_Local.scrollingy + menuY + (20.0 * 5), 88, menuBtnHeight);
-
 PDAButton MISC       = PDA_CreateMenuButton(PDA_MISC_BUTTON,       "", "MMSCICO", PDA_RectX + 10.1, PDA_Local.scrollingy + menuY + (20.0 * 6), 88, menuBtnHeight);
-
 PDAButton HELP       = PDA_CreateMenuButton(PDA_HELP_BUTTON,       "", "MHLPICO", PDA_RectX + 10.1, PDA_Local.scrollingy + menuY + (20.0 * 7), 88, menuBtnHeight);
 
 PDA_InitButton(PLAYERS,    false, PDA_CLASSES,    "Shows all available class information.\n");
