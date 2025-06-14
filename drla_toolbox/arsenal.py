@@ -370,13 +370,13 @@ class Arsenal:
     headerAssemblyMax = 0
     headerUniqueMax = 0
     headerExoticList = ''
-    languageAssemblyList = f'''PDA_ASSEMBLY_REQUIREMENTS = "\cdRequirements:\c-\n";'''
-    languageAssemblyList += 'PDA_ASSEMBLIES='
+    languageAssemblyList = f'''PDA_ASSEMBLY_REQUIREMENTS = "\\cdRequirements:\\c-\\n";\n'''
     basicMax = 0
     advancedMax = 0
     masterMax = 0
     assemblyDescription = ''
 
+    languageAssemblyList += 'PDA_ASSEMBLIES='
     for i, assembly in enumerate(data['assemblies']):
       languageAssemblyList += f'''"RL{assembly['name']}AssemblyLearntToken{self.separatorToken}PDA_ASSEMBLY_{assembly['tier'].upper()}_{assembly['name'].upper()}{self.separatorToken}"'''
       if (i < len(data['assemblies']) - 1):
@@ -418,19 +418,6 @@ class Arsenal:
     languageAssemblyList = re.sub('/\\n(?=(?:[^"]*"[^"]*")*[^"]*$)/gm', '', languageAssemblyList)
     languageAssemblyList = languageAssemblyList.replace('/n', '\\n')
     languageAssemblyList = Arsenal.arsenal_revertColors(self, self.filler, languageAssemblyList)
-
-    languageAssemblyOutput = Arsenal.language_warning + languageAssemblyList
-    if (doOutput):
-      Arsenal.arsenal_doOutput(self, 'language.auto.assemblies')
-      if (self.outputData):
-        with open(self.outputData.name, mode='w', encoding='utf-8') as file:
-          file.write(languageAssemblyOutput)
-
-      self.printLine('[%s] Created language.auto.assemblies\n' % datetime.now().strftime("%H:%M:%S"))
-    else:
-      self.printLine('[%s] Created nothing\n' % datetime.now().strftime("%H:%M:%S"))
-      self.printLine('[%s] %s.\n' % (datetime.now().strftime("%H:%M:%S"), languageAssemblyOutput))
-
   
     for weapon in data['weapons']:
       if (weapon['tier'] == 'Unique' or weapon['tier'] == 'Demonic' or weapon['tier'] == 'Legendary'):
@@ -443,6 +430,29 @@ class Arsenal:
           headerExoticList += f'''"RL{weapon['name']}", "RL{weapon['name']}SniperLearntToken", "RL{weapon['name']}FirestormLearntToken", "RL{weapon['name']}NanoLearntToken"'''
           headerExoticList += '},'
         headerUniqueMax+=1
+
+        
+    languageAssemblyList += f'''
+DRLA_ASSEMBLYMAX="{headerAssemblyMax}";
+DRLA_ASSEMBLYELEMENTS="2";
+DRLA_EXOTICEFFECTS_MAX="{headerUniqueMax}";
+DRLA_EXOTICELEMENTS="4";
+DRLA_BASICMAX="{basicMax}";
+DRLA_ADVANCEDMAX="{advancedMax}";
+DRLA_MASTERMAX="{masterMax}";
+'''
+
+    languageAssemblyOutput = Arsenal.language_warning + languageAssemblyList
+    if (doOutput):
+      Arsenal.arsenal_doOutput(self, 'language.auto.assemblies')
+      if (self.outputData):
+        with open(self.outputData.name, mode='w', encoding='utf-8') as file:
+          file.write(languageAssemblyOutput)
+
+      self.printLine('[%s] Created language.auto.assemblies\n' % datetime.now().strftime("%H:%M:%S"))
+    else:
+      self.printLine('[%s] Created nothing\n' % datetime.now().strftime("%H:%M:%S"))
+      self.printLine('[%s] %s.\n' % (datetime.now().strftime("%H:%M:%S"), languageAssemblyOutput))
 
     assemblyList = {}
     assemblyList['max'] = headerAssemblyMax

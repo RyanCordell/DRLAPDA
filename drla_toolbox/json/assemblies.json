@@ -12,7 +12,7 @@
                 "[WHITE]Combat Knife[END] ->\n [BASIC]Chainsword[END]\n\n"
             ],
             "validlist": [
-                "Combat Knife[END]"
+                "Combat Knife[END]\n"
             ],
             "mods": [
                 "BULK",
@@ -32,7 +32,7 @@
                 "[WHITE]Chainsaw[END] ->\n [BASIC]Nanoedge Saw[END]\n\n"
             ],
             "validlist": [
-                "[WHITE]Chainsaw[END]"
+                "[WHITE]Chainsaw[END]\n"
             ],
             "mods": [
                 "POWER",
@@ -53,7 +53,7 @@
             ],
             "validlist": [
                 "[WHITE]Pistol[END], ",
-                "[PURPLE]Nuclear Plasma Pistol[END]"
+                "[PURPLE]Nuclear Plasma Pistol[END]\n"
             ],
             "mods": [
                 "AGILITY",
@@ -74,7 +74,7 @@
             ],
             "validlist": [
                 "[WHITE]Pistol[END], ",
-                "[WHITE]Battle Rifle[END]"
+                "[WHITE]Battle Rifle[END]\n"
             ],
             "mods": [
                 "TECHNICAL",
@@ -95,7 +95,7 @@
             ],
             "validlist": [
                 "[WHITE]Pistol[END], ",
-                "[WHITE]Double Shotgun[END]"
+                "[WHITE]Double Shotgun[END]\n"
             ],
             "mods": [
                 "POWER",
@@ -115,7 +115,7 @@
                 "[WHITE]Shotgun[END] ->\n [BASIC]Elephant Gun[END]\n\n"
             ],
             "validlist": [
-                "[WHITE]Shotgun[END]"
+                "[WHITE]Shotgun[END]\n"
             ],
             "mods": [
                 "POWER",
@@ -135,7 +135,7 @@
                 "[WHITE]Chaingun[END] ->\n [BASIC]Gatling Gun[END]\n\n"
             ],
             "validlist": [
-                "[WHITE]Chaingun[END]"
+                "[WHITE]Chaingun[END]\n"
             ],
             "mods": [
                 "BULK",
@@ -154,7 +154,7 @@
                 "[WHITE]Rocket Launcher[END] ->\n [BASIC]Micro Launcher[END]\n\n"
             ],
             "validlist": [
-                "[WHITE]Rocket Launcher[END]"
+                "[WHITE]Rocket Launcher[END]\n"
             ],
             "mods": [
                 "TECHNICAL",
@@ -213,7 +213,7 @@
                 "[WHITE]Combat Shotgun[END] ->\n [BASIC]Tactical Shotgun[END]\n\n"
             ],
             "validlist": [
-                "[WHITE]Combat Shotgun[END]"
+                "[WHITE]Combat Shotgun[END]\n"
             ],
             "mods": [
                 "POWER",
@@ -275,7 +275,7 @@
                 "[PURPLE]Super Shotgun[END],\n",
                 "[PURPLE]Assault Shotgun[END], ",
                 "[PURPLE]Plasma Shotgun[END],\n",
-                "[ORANGE]Hunting Shotgun[END]"
+                "[ORANGE]Hunting Shotgun[END]\n"
             ],
             "mods": [
                 "BULK",
@@ -291,10 +291,10 @@
               "A rapid fire area denial weapon, that runs off the fuel in rockets.\nIt can be a very efficient weapon for ammo consumption.\n\n"
             ],
             "valid": [
-                "[PURPLE]Napalm Launcher[END] ->\n [BASIC]Flamethrower[END]"
+                "[PURPLE]Napalm Launcher[END] ->\n [BASIC]Flamethrower[END]\n\n"
             ],
             "validlist": [
-                "[PURPLE]Napalm Launcher[END]"
+                "[PURPLE]Napalm Launcher[END]\n"
             ],
             "mods": [
                 "POWER",
@@ -311,10 +311,10 @@
               "Effective against larger enemies, but smaller enemies will often dodge most of the damage.\n\n"
             ],
             "valid": [
-                "[WHITE]Shotgun[END] ->\n [BASIC]Shrapnel Cannon[END]"
+                "[WHITE]Shotgun[END] ->\n [BASIC]Shrapnel Cannon[END]\n\n"
             ],
             "validlist": [
-                "[WHITE]Shotgun[END]"
+                "[WHITE]Shotgun[END]\n"
             ],
             "mods": [
                 "POWER",
@@ -330,12 +330,12 @@
               "Converts the weapon to a scoped, powerful weapon, capable of dealing extreme damage with pinpoint accuracy.\n\n"
             ],
             "valid": [
-                "[WHITE]Battle Rifle[END] ->\n [BASIC]Sniper Rifle[END]",
-                "[PURPLE]LMG[END] ->\n [BASIC]Bozar[END]"
+                "[WHITE]Battle Rifle[END] ->\n [BASIC]Sniper Rifle[END]\n\n",
+                "[PURPLE]LMG[END] ->\n [BASIC]Bozar[END]\n\n"
             ],
             "validlist": [
-                "[WHITE]Battle Rifle[END]",
-                "[PURPLE]LMG[END]"
+                "[WHITE]Battle Rifle[END], ",
+                "[PURPLE]LMG[END],\n"
             ],
             "mods": [
                 "AGILITY",
@@ -356,9 +356,9 @@
                 "[PURPLE]Nuclear Plasma Rifle[END] ->\n [BASIC]Nuclear Plasma Splitter[END]\n\n"
             ],
             "validlist": [
-                "[WHITE]Battle Rifle[END]",
-                "[PURPLE]Laser Rifle[END]",
-                "[PURPLE]Nuclear Plasma Rifle[END]"
+                "[WHITE]Battle Rifle[END], ",
+                "[PURPLE]Laser Rifle[END],\n",
+                "[PURPLE]Nuclear Plasma Rifle[END]\n"
             ],
             "mods": [
                 "BULK",
@@ -375,10 +375,10 @@
               "'Nuff said.\n\n"
             ],
             "valid": [
-                "[WHITE]Chainsaw[END] ->\n [ADVANCED]Double Chainsaw[END]"
+                "[WHITE]Chainsaw[END] ->\n [ADVANCED]Double Chainsaw[END]\n\n"
             ],
             "validlist": [
-                "[WHITE]Chainsaw[END]"
+                "[WHITE]Chainsaw[END]\n"
             ],
             "mods": [
                 "BULK",
@@ -395,10 +395,10 @@
               "A rocket launcher that gets loaded with drum mags, this weapon is very quick to reload.\nThe rockets are only slightly weaker than normal.\n\n"
             ],
             "valid": [
-                "[WHITE]Rocket Launcher[END] ->\n [ADVANCED]Tactical Rocket Launcher[END]"
+                "[WHITE]Rocket Launcher[END] ->\n [ADVANCED]Tactical Rocket Launcher[END]\n\n"
             ],
             "validlist": [
-                "[WHITE]Rocket Launcher[END]"
+                "[WHITE]Rocket Launcher[END]\n"
             ],
             "mods": [
                 "BULK",
@@ -415,13 +415,13 @@
               "A powerful pistol type that has two barrels and a large magazine size.\nFor some reason, firing only consumes one unit of ammo, don't question it.\n\n"
             ],
             "valid": [
-                "[WHITE]Pistol[END] ->\n [ADVANCED]Storm Pistol[END]",
-                "[PURPLE]Blaster[END] ->\n [ADVANCED]Storm Blaster[END]",
-                "[PURPLE]Combat Pistol[END] ->\n [ADVANCED]Storm Combat Pistol[END]",
-                "[PURPLE]Marksman Pistol[END] ->\n [ADVANCED]Storm Marksman Pistol[END]",
-                "[PURPLE]Handcannon[END] ->\n [ADVANCED]Storm Handcannon[END]",
-                "[PURPLE]Nuclear Plasma Pistol[END] ->\n [ADVANCED]Storm Nuclear Plasma Pistol[END]",
-                "[PURPLE]Uzi[END] ->\n [ADVANCED]Dual Uzis[END]"
+                "[WHITE]Pistol[END] ->\n [ADVANCED]Storm Pistol[END]\n\n",
+                "[PURPLE]Blaster[END] ->\n [ADVANCED]Storm Blaster[END]\n\n",
+                "[PURPLE]Combat Pistol[END] ->\n [ADVANCED]Storm Combat Pistol[END]\n\n",
+                "[PURPLE]Marksman Pistol[END] ->\n [ADVANCED]Storm Marksman Pistol[END]\n\n",
+                "[PURPLE]Handcannon[END] ->\n [ADVANCED]Storm Handcannon[END]\n\n",
+                "[PURPLE]Nuclear Plasma Pistol[END] ->\n [ADVANCED]Storm Nuclear Plasma Pistol[END]\n\n",
+                "[PURPLE]Uzi[END] ->\n [ADVANCED]Dual Uzis[END]\n\n"
             ],
             "validlist": [
                 "[WHITE]Pistol[END], ",
@@ -447,13 +447,13 @@
               "Converts the pistol into a cell-using plasma weapon.\nEnhances already energy-based weapons instead.\n\n"
             ],
             "valid": [
-                "[WHITE]Pistol[END] ->\n [ADVANCED]Plasma Pistol[END]",
-                "[PURPLE]Blaster[END] ->\n [ADVANCED]Overcharged Blaster[END]",
-                "[PURPLE]Combat Pistol[END] ->\n [ADVANCED]Plasma Combat Pistol[END]",
-                "[PURPLE]Marksman Pistol[END] ->\n [ADVANCED]Plasma Marksman Pistol[END]",
-                "[PURPLE]Handcannon[END] ->\n [ADVANCED]Plasma Handcannon[END]",
-                "[PURPLE]Nuclear Plasma Pistol[END] ->\n [ADVANCED]Supercharged Nuclear Plasma Pistol[END]",
-                "[PURPLE]Uzi[END] ->\n [ADVANCED]Plasma Uzi[END]"
+                "[WHITE]Pistol[END] ->\n [ADVANCED]Plasma Pistol[END]\n\n",
+                "[PURPLE]Blaster[END] ->\n [ADVANCED]Overcharged Blaster[END]\n\n",
+                "[PURPLE]Combat Pistol[END] ->\n [ADVANCED]Plasma Combat Pistol[END]\n\n",
+                "[PURPLE]Marksman Pistol[END] ->\n [ADVANCED]Plasma Marksman Pistol[END]\n\n",
+                "[PURPLE]Handcannon[END] ->\n [ADVANCED]Plasma Handcannon[END]\n\n",
+                "[PURPLE]Nuclear Plasma Pistol[END] ->\n [ADVANCED]Supercharged Nuclear Plasma Pistol[END]\n\n",
+                "[PURPLE]Uzi[END] ->\n [ADVANCED]Plasma Uzi[END]\n\n"
             ],
             "validlist": [
                 "[WHITE]Pistol[END], ",
@@ -479,15 +479,15 @@
               "Replaces existing firerate with a very slow one and makes it fire single shots at a time.\nAttacks are three times stronger than normal and extremely accurate.\n\n"
             ],
             "valid": [
-                "[WHITE]Chaingun[END] ->\n [ADVANCED]Precision Chaingun[END]",
-                "[WHITE]Battle Rifle[END] ->\n [ADVANCED]Scoped Rifle[END]",
-                "[WHITE]Plasma Rifle[END] ->\n [ADVANCED]Precision Plasma Rifle[END]",
-                "[PURPLE]Minigun[END] ->\n [ADVANCED]Precision Minigun[END]",
-                "[PURPLE]Laser Rifle[END] ->\n [ADVANCED]Precision Laser Rifle[END]",
-                "[PURPLE]Nuclear Plasma Rifle[END] ->\n [ADVANCED]Precision Nuclear Plasma Rifle[END]",
-                "[PURPLE]Uzi[END] ->\n [ADVANCED]Precision Uzi[END]",
-                "[PURPLE]Infantry Rifle[END] ->\n [ADVANCED]Precision Infantry Rifle[END]",
-                "[PURPLE]LMG[END] ->\n [ADVANCED]Precision LMG[END]"
+                "[WHITE]Chaingun[END] ->\n [ADVANCED]Precision Chaingun[END]\n\n",
+                "[WHITE]Battle Rifle[END] ->\n [ADVANCED]Scoped Rifle[END]\n\n",
+                "[WHITE]Plasma Rifle[END] ->\n [ADVANCED]Precision Plasma Rifle[END]\n\n",
+                "[PURPLE]Minigun[END] ->\n [ADVANCED]Precision Minigun[END]\n\n",
+                "[PURPLE]Laser Rifle[END] ->\n [ADVANCED]Precision Laser Rifle[END]\n\n",
+                "[PURPLE]Nuclear Plasma Rifle[END] ->\n [ADVANCED]Precision Nuclear Plasma Rifle[END]\n\n",
+                "[PURPLE]Uzi[END] ->\n [ADVANCED]Precision Uzi[END]\n\n",
+                "[PURPLE]Infantry Rifle[END] ->\n [ADVANCED]Precision Infantry Rifle[END]\n\n",
+                "[PURPLE]LMG[END] ->\n [ADVANCED]Precision LMG[END]\n\n"
             ],
             "validlist": [
                 "[WHITE]Any [GREEN]rapid-fire[END] or [GREEN]rifle-type [WHITE]weapon.[END]\n"
@@ -507,15 +507,15 @@
               "Removes the full-auto functionality and makes it fire bursts of three shots.\nThe mag size is doubled, attacks are two times stronger than normal, and are less accurate than normal.\n\n"
             ],
             "valid": [
-                "[WHITE]Chaingun[END] ->\n [ADVANCED]Burst Chaingun[END]",
-                "[WHITE]Battle Rifle[END] ->\n [ADVANCED]Burst-fire Rifle[END]",
-                "[WHITE]Plasma Rifle[END] ->\n [ADVANCED]Burst Plasma Rifle[END]",
-                "[PURPLE]Minigun[END] ->\n [ADVANCED]Burst Minigun[END]",
-                "[PURPLE]Laser Rifle[END] ->\n [ADVANCED]Burst Laser Rifle[END]",
-                "[PURPLE]Nuclear Plasma Rifle[END] ->\n [ADVANCED]Burst Nuclear Plasma Rifle[END]",
-                "[PURPLE]Uzi[END] ->\n [ADVANCED]Burst Uzi[END]",
-                "[PURPLE]Infantry Rifle[END] ->\n [ADVANCED]Burst Infantry Rifle[END]",
-                "[PURPLE]LMG[END] ->\n [ADVANCED]Burst LMG[END]"
+                "[WHITE]Chaingun[END] ->\n [ADVANCED]Burst Chaingun[END]\n\n",
+                "[WHITE]Battle Rifle[END] ->\n [ADVANCED]Burst-fire Rifle[END]\n\n",
+                "[WHITE]Plasma Rifle[END] ->\n [ADVANCED]Burst Plasma Rifle[END]\n\n",
+                "[PURPLE]Minigun[END] ->\n [ADVANCED]Burst Minigun[END]\n\n",
+                "[PURPLE]Laser Rifle[END] ->\n [ADVANCED]Burst Laser Rifle[END]\n\n",
+                "[PURPLE]Nuclear Plasma Rifle[END] ->\n [ADVANCED]Burst Nuclear Plasma Rifle[END]\n\n",
+                "[PURPLE]Uzi[END] ->\n [ADVANCED]Burst Uzi[END]\n\n",
+                "[PURPLE]Infantry Rifle[END] ->\n [ADVANCED]Burst Infantry Rifle[END]\n\n",
+                "[PURPLE]LMG[END] ->\n [ADVANCED]Burst LMG[END]\n\n"
             ],
             "validlist": [
                 "[WHITE]Any [GREEN]rapid-fire[END] or [GREEN]rifle-type [WHITE]weapon.[END]\n"
@@ -535,8 +535,8 @@
               "A more powerful version of the BFG.\nMore damage, rays, ammo consumption, charge time and way more carnage.\n\n"
             ],
             "valid": [
-                "[WHITE]BFG 9000[END] ->\n [ADVANCED]VBFG 9000[END]",
-                "[PURPLE]Nuclear BFG 9000[END] ->\n [ADVANCED]Nuclear VBFG 9000[END]"
+                "[WHITE]BFG 9000[END] ->\n [ADVANCED]VBFG 9000[END]\n\n",
+                "[PURPLE]Nuclear BFG 9000[END] ->\n [ADVANCED]Nuclear VBFG 9000[END]\n\n"
             ],
             "validlist": [
                 "[WHITE]Any [GREEN]BFG 9000[END] [WHITE]type.[END]\n"
@@ -584,7 +584,7 @@
                 "[WHITE]Plasma Rifle[END] ->\n [ADVANCED]Hyperblaster[END]\n\n"
             ],
             "validlist": [
-                "[WHITE]Plasma Rifle[END]"
+                "[WHITE]Plasma Rifle[END]\n"
             ],
             "mods": [
                 "AGILITY",
@@ -604,7 +604,7 @@
                 "[WHITE]Double Shotgun[END] ->\n [ADVANCED]Focused Double Shotgun[END]\n\n"
             ],
             "validlist": [
-                "[WHITE]Double Shotgun[END]"
+                "[WHITE]Double Shotgun[END]\n"
             ],
             "mods": [
                 "POWER",
@@ -628,7 +628,7 @@
             "validlist": [
                 "[WHITE]Plasma Rifle[END], ",
                 "[PURPLE]Plasma Shotgun[END],\n",
-                "[PURPLE]Nuclear Plasma Rifle[END]"
+                "[PURPLE]Nuclear Plasma Rifle[END]\n"
             ],
             "mods": [
                 "BULK",
@@ -814,7 +814,7 @@
             "name": "BiggestFuckingGun",
             "tier": "Master",
             "icon": "PDABFGXX",
-            "prettyname": "Demolition Ammo",
+            "prettyname": "Biggest Fucking Gun",
             "description": [
               "The king of BFGs, with unparalleled destructive power and a charge time that'll send you to sleep.\n\n"
             ],
