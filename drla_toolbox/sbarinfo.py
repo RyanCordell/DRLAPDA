@@ -1,4 +1,6 @@
+import sys
 import os.path
+
 from tkinter import filedialog as fd
 from datetime import datetime
 
@@ -7,12 +9,20 @@ def currentTime() -> datetime:
 
 class Sbarinfo:
   variables_in_memory: list[str]
+  data: any
   
   def empty_memory_variables(self):
     self.variables_in_memory = list()
+    
+  def doPrint(self, line):
+    if (hasattr(self, 'printline')): 
+      self.printLine(line)
+    else:
+      print(line)
 
   def directive_MERGE(self, index: int, line: str):
     if (self.inputFile != ''): 
+      # print("line: %s" % line)
       if ("#MERGE" in line):
         self.variables_in_memory = list()
         fileToLoad: str = line.split('"')[1]
@@ -20,43 +30,53 @@ class Sbarinfo:
         fileExists: bool = os.path.exists(loadFilePath)
 
         if (fileExists):
-          self.printLine("[%s] MERGE directive and %s found. Executing\n" % (currentTime(), loadFilePath))
+          self.doPrint("[%s] MERGE @ %s and %s found. Executing\n" % (currentTime(), index, loadFilePath))
           
           with open(loadFilePath, mode='r', encoding='utf-8') as mergeBuffer:
             self.data[index] = mergeBuffer.read() + '\n'
-            Sbarinfo.variable_handler(self, self.data[index])
+            self.data[index] = Sbarinfo.variable_handler(self, self.data[index], index)
+            
 
         else:
-          self.printLine("[%s] %s not found. Skipping directive\n" % (currentTime(), loadFilePath))
+          self.doPrint("[%s] %s not found. Skipping directive\n" % (currentTime(), loadFilePath))
           self.data[index] = ''
   
-  def variable_handler(self, line: str):
+  def variable_handler(self, data: str | list[str], index: int):
     variable_line: list[str] = list()
-
-    if (self.inputFile != ''): 
+    dataLines: list[str] = data.splitlines(keepends=True)
+    
+    for i, line in enumerate(dataLines):
       if ("$" in line):
-        if (line.startswith("$")):
-          self.printLine("[%s] Variable declared \n" % (currentTime()))
+        if (line.lstrip().startswith("$")):
           temp: list[str] = line.split('=') # This should yield $VARIABLE_NAME, AMOUNT;
+          
           variable_line.append(temp[0].strip())
           variable_line.append(temp[1].strip())
           
+          self.doPrint("[%s] Variable %s declared \n" % (currentTime(), variable_line[0]))
+          
           if (len(variable_line) > 0):
-            variable_line[0].replace('$', '')
-            variable_line[1].replace(';', '')
-            
+            variable_line[0] = variable_line[0].replace('$', '')
+            variable_line[1] = variable_line[1].replace(';', '')
 
           self.variables_in_memory.append(variable_line)
-          print("variables_in_memory:", self.variables_in_memory)
+          
           variable_line = list()
+          dataLines[i] = ''
         else:
           if (len(self.variables_in_memory) > 0):
             for index, variable in enumerate(self.variables_in_memory):
-              if (f'${variable}' in line):
-                line.replace(f'${variable}', variable_line)
+              if (f'${variable[0]}' in line):
+                line = line.replace(f'${variable[0]}', variable[1])
+                dataLines[i] = line
+                
+          self.doPrint("[%s] Line changed: %s\n" % (currentTime(), line))
+    
+    return ''.join(dataLines)
 
   def doCompile(self):
-    Sbarinfo.doOutput(self)
+    if (not sys.argv[1:]):
+      Sbarinfo.doOutput(self)
 
     if (self.outputFile): 
       with open(self.inputFile, mode='r', encoding='utf-8') as fullscreenSbarinfo:
@@ -64,14 +84,38 @@ class Sbarinfo:
 
       for index, line in enumerate(self.data):
         Sbarinfo.directive_MERGE(self, index, line)
-      
-      with open(self.outputFile.name, mode='w', encoding='utf-8') as file:
-        file.writelines(self.data)
-        self.data = ''
         
-        self.printLine("[%s] Combiner finished successfully! Resulting file size is: %s bytes\n" % (currentTime(), os.path.getsize(self.outputFile.name)))
+      filePath: str = ''
+      
+      if (hasattr(self.outputFile, 'name')):
+        filePath = self.outputFile.name
+      else:
+        filePath = self.outputFile
+      
+      if (len(filePath) > 0):
+        with open(filePath, mode='w', encoding='utf-8') as file:
+          file.writelines(''.join(self.data))
+          self.data = ''
+          
+          self.doPrint("[%s] Combiner finished successfully! Resulting file size is: %s bytes\n" % (currentTime(), os.path.getsize(self.outputFile)))
+      
+      # if (hasattr(self.outputFile, 'name')):
+      #   with open(self.outputFile.name, mode='w', encoding='utf-8') as file:
+      #     file.writelines(self.data)
+      #     self.data = ''
+          
+      #     self.doPrint("[%s] Combiner finished successfully! Resulting file size is: %s bytes\n" % (currentTime(), os.path.getsize(self.outputFile.name)))
+      # else:
+      #   with open(self.outputFile, mode='w', encoding='utf-8') as file:
+      #     file.writelines(''.join(self.data))
+      #     self.data = ''
+          
+      #     self.doPrint("[%s] Combiner finished successfully! Resulting file size is: %s bytes\n" % (currentTime(), os.path.getsize(self.outputFile)))
 
       Sbarinfo.empty_memory_variables(self)
+      
+    if (sys.argv[1:]):
+      Sbarinfo.doOutput(self)
 
   def doQuasiCompile(self):
     if (self.inputFile): 
@@ -81,39 +125,63 @@ class Sbarinfo:
       for index, line in enumerate(self.data):
         Sbarinfo.directive_MERGE(self, index, line)
       
-      self.printLine("[%s] Data: %s" % (currentTime(), self.data))
+      self.doPrint("[%s] Data: %s" % (currentTime(), self.data))
         
+    
+  def main(self):
+    self.doInput()
+    
+    if (sys.argv[2]):
+        self.outputFile = sys.argv[2]
+        
+    self.doCompile()
 
   def doOutput(self):
-    self.outputFile = fd.asksaveasfile(
-      title='Save file as..',
-      initialdir=self.currentPath,
-      filetypes=(
-        ('Text files', '*.txt'),
-        ('All files', '*.*')
+    if (hasattr(self, 'currentPath') and self.currentPath):
+      self.outputFile = fd.asksaveasfile(
+        title='Save file as..',
+        initialdir=self.currentPath,
+        filetypes=(
+          ('Text files', '*.txt'),
+          ('All files', '*.*')
+        )
       )
-    )
-    if (not self.outputFile): 
-      self.clearResults()
-      self.printLine('[%s] No file chosen\n' % currentTime())
-      self.compileSbarinfo.configure(state='disabled')
-      return 0
+      if (not self.outputFile): 
+        self.clearResults()
+        self.printLine('[%s] No file chosen\n' % currentTime())
+        self.compileSbarinfo.configure(state='disabled')
+        return 0
+    else:
+      with open(sys.argv[2], mode='w', encoding='utf-8') as file:
+        file.write(''.join(self.data))
 
   def doInput(self):
-    self.inputFile = fd.askopenfilename(
-      title='Open a file',
-      initialdir=self.currentPath,
-      filetypes=(
-        ('Text files', '*.skeleton'),
-        ('Text files', '*.txt'),
-        ('All files', '*.*')
-      ),
-      defaultextension='.skeleton'
-    )
+    if (hasattr(self, 'currentPath') and self.currentPath):
+      self.inputFile = fd.askopenfilename(
+        title='Open a file',
+        initialdir=self.currentPath,
+        filetypes=(
+          ('Text files', '*.skeleton'),
+          ('Text files', '*.txt'),
+          ('All files', '*.*')
+        ),
+        defaultextension='.skeleton'
+      )
 
-    self.clearResults()
-    if (self.inputFile):
-      self.compileSbarinfo.configure(state='normal')
-      self.printLine('[%s] File selected: %s\n' % (currentTime(), os.path.normpath(self.inputFile)))
+      self.clearResults()
+      if (self.inputFile):
+        self.compileSbarinfo.configure(state='normal')
+        self.printLine('[%s] File selected: %s\n' % (currentTime(), os.path.normpath(self.inputFile)))
+      else:
+        self.printLine('[%s] No file selected\n' % currentTime())
     else:
-      self.printLine('[%s] No file selected\n' % currentTime())
+      if (sys.argv[1]):
+        self.inputFile = sys.argv[1]
+        # with open(sys.argv[1], mode='r', encoding='utf-8') as file:
+        #   self.inputFile = file
+        #   self.data = file.read(file)
+
+if (__name__ == '__main__'): 
+  # print("sys args: %s" % sys.argv[1:])
+  self = Sbarinfo()
+  self.main()

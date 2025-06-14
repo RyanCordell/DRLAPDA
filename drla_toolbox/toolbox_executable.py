@@ -14,7 +14,7 @@ class Combiner(customtkinter.CTk):
   currentPath = os.path.dirname(os.path.abspath(__file__))
   data = ''
   debug = 0
-  loadedJson: any = dict('')
+  loadedJson: str = ''
   separatorToken: str = ':'
 
   def clearResults(self):
