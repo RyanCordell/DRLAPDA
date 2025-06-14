@@ -16,11 +16,18 @@ class Sbarinfo:
           self.printLine("[%s] MERGE directive and %s found. Executing\n" % (datetime.now().strftime("%H:%M:%S"), loadFilePath))
           with open(loadFilePath, mode='r', encoding='utf-8') as mergeBuffer:
             self.data[index] = mergeBuffer.read() + '\n'
+            Sbarinfo.sbarinfo_variable_handler(self, self.data[index])
             #Eventually include parsing of variables here
 
         else:
           self.printLine("[%s] %s not found. Skipping directive\n" % (datetime.now().strftime("%H:%M:%S"), loadFilePath))
           self.data[index] = ''
+  
+  def sbarinfo_variable_handler(self, line: any):
+    if self.inputFile != '': 
+      if "$VAR" in line:
+        self.printLine("[%s] Variables replaced \n" % (datetime.now().strftime("%H:%M:%S")))
+  
 
   def sbarinfo_doCompile(self):
     Sbarinfo.sbarinfo_doOutput(self)
@@ -36,6 +43,17 @@ class Sbarinfo:
         file.writelines(self.data)
         
         self.printLine("[%s] Combiner finished successfully! Resulting file size is: %s bytes\n" % (datetime.now().strftime("%H:%M:%S"), os.path.getsize(self.outputFile.name)))
+
+  def sbarinfo_doQuasiCompile(self):
+    if (self.inputFile): 
+      with open(self.inputFile, mode='r', encoding='utf-8') as fullscreenSbarinfo:
+        self.data = fullscreenSbarinfo.readlines()
+
+      for index, line in enumerate(self.data):
+        Sbarinfo.sbarinfo_directive_MERGE(self, index, line)
+      
+      self.printLine("[%s] Data: %s" % (datetime.now().strftime("%H:%M:%S"), self.data))
+        
 
   def sbarinfo_doOutput(self):
     self.outputFile = fd.asksaveasfile(
