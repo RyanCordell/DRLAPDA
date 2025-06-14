@@ -3,19 +3,27 @@ import sys
 import customtkinter
 import json
 import re
+
 from tkinter import filedialog as fd
 from tkinter.messagebox import showinfo
 from datetime import datetime
+from typing import Dict, List, Optional, Union
 
 # TODO: Examine memory footprint of all loaded JSON modules (currently around 555KB worth of JSON)
 # TODO: Optimize loading
 # TODO: Perhaps there's a better way to parse and compile all this data instead of smashing it all in memory?
 
-class Arsenal:
-  outputData = ''
-  language_warning = '[enu default]\n\n// Please do not modify this file directly, it\'s specifically compiled and any changes may be lost.\n\n'
+def currentTime() -> datetime:
+  return datetime.now().strftime("%H:%M:%S")
 
-  def arsenal_doInput(self):
+class Arsenal:
+  outputData      : str = ''
+  language_warning: str = '[enu default]\n\n// Please do not modify this file directly, it\'s specifically compiled and any changes may be lost.\n\n'
+  loadedFiles     : str = ''
+
+  def doInput(self):
+    if (not self.currentPath): self.currentPath = os.path.dirname(os.path.realpath(__file__))
+    
     self.inputFiles = fd.askopenfilenames(
       title='Open files',
       initialdir=self.currentPath,
@@ -28,13 +36,12 @@ class Arsenal:
 
     self.clearResults()
     if (self.inputFiles):
-      self.printLine('[%s] Files selected: %s\n' % (datetime.now().strftime("%H:%M:%S"), list(self.inputFiles)))
-      # self.printLine('[%s] File selected: %s\n' % (datetime.now().strftime("%H:%M:%S"), os.path.normpath(self.inputFile)))
+      self.printLine('[%s] Files selected: %s\n' % (currentTime(), list(self.inputFiles)))
+      # self.printLine('[%s] File selected: %s\n' % (currentTime(), os.path.normpath(self.inputFile)))
       self.filler = {}
-      loadedFiles = ''
       for _, file in enumerate(self.inputFiles):
-        self.printLine('[%s] Loaded JSON into filler memory: %s\n' % (datetime.now().strftime("%H:%M:%S"), file))
-        loadedFiles += os.path.basename(file) + '\n'
+        self.printLine('[%s] Loaded JSON into filler memory: %s\n' % (currentTime(), file))
+        self.loadedFiles += os.path.basename(file) + '\n'
 
         if ('data.json' in file):
           with open(os.path.normpath(file), mode='r', encoding='utf-8') as freshdata:
@@ -45,25 +52,25 @@ class Arsenal:
             self.loadedJson.update(json.load(jsonBuffer))
       # self.selected_files.configure(text=loadedFiles)
     else:
-      self.printLine('[%s] No JSON files selected\n' % datetime.now().strftime("%H:%M:%S"))
+      self.printLine('[%s] No JSON files selected\n' % currentTime())
 
-  def arsenal_doQuasiCompile(self):
-    if ('weapons' in self.loadedJson): Arsenal.arsenal_processWeapons(self, self.loadedJson['weapons'], False)
-    if ('equipment' in self.loadedJson): Arsenal.arsenal_processEquipment(self, self.loadedJson['equipment'], False)
-    if ('modeffect' in self.loadedJson): Arsenal.arsenal_processModEffect(self, self.loadedJson['modeffect'], False)
-    if ('assemblies' in self.loadedJson): Arsenal.arsenal_processAssemblies(self, self.loadedJson, False)
+  def doQuasiCompile(self):
+    if ('weapons'    in self.loadedJson): Arsenal.processWeapons(self, self.loadedJson['weapons'], False)
+    if ('equipment'  in self.loadedJson): Arsenal.processEquipment(self, self.loadedJson['equipment'], False)
+    if ('modeffect'  in self.loadedJson): Arsenal.processModEffect(self, self.loadedJson['modeffect'], False)
+    if ('assemblies' in self.loadedJson): Arsenal.processAssemblies(self, self.loadedJson, False)
 
-  def arsenal_clearWindow(self):
-    self.printLine('[%s] Clearing window\n' % datetime.now().strftime("%H:%M:%S"))
+  def clearWindow(self):
+    self.printLine('[%s] Clearing window\n' % currentTime())
     self.clearResults()
 
-  def arsenal_doCompile(self):
-    if ('weapons' in self.loadedJson): Arsenal.arsenal_processWeapons(self, self.loadedJson['weapons'], True)
-    if ('equipment' in self.loadedJson): Arsenal.arsenal_processEquipment(self, self.loadedJson['equipment'], True)
-    if ('modeffect' in self.loadedJson): Arsenal.arsenal_processModEffect(self, self.loadedJson['modeffect'], True)
-    if ('assemblies' in self.loadedJson): Arsenal.arsenal_processAssemblies(self, self.loadedJson, True)
+  def doCompile(self):
+    if ('weapons'    in self.loadedJson): Arsenal.processWeapons(self, self.loadedJson['weapons'], True)
+    if ('equipment'  in self.loadedJson): Arsenal.processEquipment(self, self.loadedJson['equipment'], True)
+    if ('modeffect'  in self.loadedJson): Arsenal.processModEffect(self, self.loadedJson['modeffect'], True)
+    if ('assemblies' in self.loadedJson): Arsenal.processAssemblies(self, self.loadedJson, True)
 
-  def arsenal_doOutput(self, name):
+  def doOutput(self, name):
     self.outputData = fd.asksaveasfile(
       title='Save file as..',
       initialfile=name,
@@ -75,13 +82,13 @@ class Arsenal:
     )
     if (not self.outputData): 
       self.clearResults()
-      self.printLine('[%s] No file chosen\n' % datetime.now().strftime("%H:%M:%S"))
+      self.printLine('[%s] No file chosen\n' % currentTime())
       self.compileArsenal.configure(state='disabled')
       return 0
 
-  def arsenal_revertColors(self, dict, str):
+  def handleColors(self, dict: dict, str: str, method: str):
     if (not str or len(dict) < 1): 
-      self.printLine('[%s] No data found to process\n' % datetime.now().strftime("%H:%M:%S"))
+      self.printLine('[%s] No data found to process\n' % currentTime())
       return 'false'
 
     noColors = 1
@@ -91,84 +98,65 @@ class Arsenal:
         noColors = 0
 
     if (noColors): 
-      self.printLine('[%s] No such property: colors\n' % datetime.now().strftime("%H:%M:%S"))
+      self.printLine('[%s] No such property: colors\n' % currentTime())
       return 'false'
 
     for i in dict:
       if ('colors' in i):
         colors = dict[i].items()
         for colorKey, colorValue in colors:
-          str = str.replace('['+colorKey+']', '\\c'+colorValue)
+          str = str.replace('['+colorKey+']', '\\c'+colorValue if method == 'revert' else '')
 
     return str
 
-  def arsenal_stripColors(self, dict, str):
-    if (not str or len(dict) < 1): 
-      self.printLine('[%s] No data found to process\n' % datetime.now().strftime("%H:%M:%S"))
-      return 'false'
 
-    noColors = 1
-    
-    for i in dict:
-      if ('colors' in i):
-        noColors = 0
-
-    if (noColors): 
-      self.printLine('[%s] No such property: colors\n' % datetime.now().strftime("%H:%M:%S"))
-      return 'false'
-
-    for i in dict:
-      if ('colors' in i):
-        colors = dict[i].items()
-        for colorKey, colorValue in colors:
-          str = str.replace('['+colorKey+']', '')
-
-    return str
-
-  def arsenal_processWeapons(self, weapons, doOutput):
+  def processWeapons(self, weapons, doOutput):
     if (not weapons): return 0
-    self.printLine('[%s] Parsing WEAPONS database\n' % datetime.now().strftime("%H:%M:%S"))
+    self.printLine('[%s] Parsing WEAPONS database\n' % currentTime())
     
-    weaponModEffects = ''
-    weaponModMax = 0
-    demonicWeapons = 0
-    demonicArtifacts = ''
-    weaponLanguage = ''
-    basicModMax = 0
-    advancedModMax = 0
-    masterModMax = 0
-    weaponDescription = ''
-    weaponSDescription = ''
-    weaponMods = ''
+    weaponModMax      : int = 0
+    demonicWeapons    : int = 0
+    basicModMax       : int = 0
+    advancedModMax    : int = 0
+    masterModMax      : int = 0
+    # weaponMods        : str = ''
+    # weaponModEffects  : str = ''
+    # demonicArtifacts  : str = ''
+    # weaponDescription : str = ''
+    # weaponSDescription: str = ''
+    # weaponLanguage    : str = ''
+    weaponLanguage    : list = list()
+    weaponDescription : list = list()
+    weaponSDescription: list = list()
+    demonicArtifacts  : list = list()
+    weaponMods        : list = list()
+    weaponModEffects  : list = list()
+    weaponModList     : dict = {}
     # weaponArtifacts = ''
-    weaponModList = {}
 
     for weapon in weapons:
-      weaponDescription = ''
-      weaponSDescription = ''
-      weaponMods = ''
+      weaponDescription  = list()
+      weaponSDescription = list()
+      weaponMods         = list()
       # weaponArtifacts = ''
+      
       if ('mods' in weapon):
-        weaponModEffects += '{'
-        weaponModEffects += f'"RL{weapon["name"]}", "{weapon["mods"]["bulk"]}", "{weapon["mods"]["power"]}", "{weapon["mods"]["agility"]}", "{weapon["mods"]["technical"]}", "{weapon["mods"]["sniper"]}", "{weapon["mods"]["firestorm"]}", "{weapon["mods"]["nano"]}"'
-        weaponModEffects += '},'
-        weaponModMax+=1
+        weaponModEffects.append('{', f'"RL{weapon["name"]}", "{weapon["mods"]["bulk"]}", "{weapon["mods"]["power"]}", "{weapon["mods"]["agility"]}", "{weapon["mods"]["technical"]}", "{weapon["mods"]["sniper"]}", "{weapon["mods"]["firestorm"]}", "{weapon["mods"]["nano"]}"', '},')
+        weaponModMax     += 1
 
         modsLen = len(weapon['mods'])
         for i, modsFragment in enumerate(weapon['mods']):
           modsFragment = modsFragment.replace('\n', '/n')
-          weaponMods += f'"{weapon['mods'][modsFragment]}{self.separatorToken}"'
+          weaponMods.append(f'"{weapon['mods'][modsFragment]}{self.separatorToken}"')
 
-          if i < modsLen - 1:
-            weaponMods += f'\n'
+          if (i < modsLen - 1):
+            weaponMods.append(f'\n')
 
-        weapon['actualMods'] = weaponMods
+        weapon['actualMods'] = ''.join(weaponMods)
 
       if ('corruptions' in weapon):
-        demonicArtifacts += '{'
-        demonicArtifacts += f'"RL{weapon["name"]}", "{weapon["corruptions"][0]}", "{weapon["corruptions"][1]}", "{weapon["corruptions"][2]}"'
-        demonicArtifacts += '},'
-        demonicWeapons+=1
+        demonicArtifacts.append('{', f'"RL{weapon["name"]}", "{weapon["corruptions"][0]}", "{weapon["corruptions"][1]}", "{weapon["corruptions"][2]}"', '},')
+        demonicWeapons   += 1
 
         # artifactsLen = len(weapon['corruptions'])
         # for i, artifactsFragment in enumerate(weapon['corruptions']):
@@ -181,51 +169,49 @@ class Arsenal:
         # weapon['actualArtifacts'] = weaponArtifacts
       
       if ('tier' in weapon):
-        if (weapon['tier'] == 'Basic'):
-          basicModMax+=1
-        
-        if (weapon['tier'] == 'Advanced'):
-          advancedModMax+=1
-        
-        if (weapon['tier'] == 'Master'):
-          masterModMax+=1
+        match weapon['tier']:
+          case 'Basic':    basicModMax    += 1
+          case 'Advanced': advancedModMax += 1
+          case 'Master':   masterModMax   += 1
+          case _: pass
       
       if ('description' in weapon):
         descLen = len(weapon['description'])
         for i, descFragment in enumerate(weapon['description']):
-          descFragment = descFragment.replace('\n', '/n')
-          weaponDescription += f'"{descFragment}"'
+          descFragment       = descFragment.replace('\n', '/n')
+          weaponDescription.append(f'"{descFragment}"')
 
-          if i < descLen - 1:
-            weaponDescription += f'\n'
+          if (i < descLen - 1):
+            weaponDescription.append(f'\n')
 
-        weapon['actualDescription'] = weaponDescription
+        weapon['actualDescription'] = ''.join(weaponDescription)
       
       if ('specialdesc' in weapon):
         descLen = len(weapon['specialdesc'])
+        
         for i, descFragment in enumerate(weapon['specialdesc']):
-          descFragment = descFragment.replace('\n', '/n')
-          weaponSDescription += f'"{descFragment}"'
+          descFragment        = descFragment.replace('\n', '/n')
+          weaponSDescription.append(f'"{descFragment}"')
 
           if i < descLen - 1:
-            weaponSDescription += f'\n'
+            weaponSDescription.append(f'\n')
 
-        weapon['actualSpecialDesc'] = weaponSDescription
+        weapon['actualSpecialDesc'] = ''.join(weaponSDescription)
 
-      weapon['flatname'] = Arsenal.arsenal_stripColors(self, self.filler, weapon['prettyname'])      
-      weaponLanguage += Arsenal.LANGUAGE_WEAPONS(self, weapon)
-      weaponLanguage += '\n'
+      weapon['flatname'] = Arsenal.handleColors(self, self.filler, weapon['prettyname'], 'strip')
+      weaponLanguage.append(Arsenal.LANGUAGE_WEAPONS(self, weapon))
+      weaponLanguage.append('\n')
 
       
-    weaponModList['max'] = weaponModMax
-    weaponModList['list'] = weaponModEffects
-    weaponModList['dmax'] = demonicWeapons
-    weaponModList['dlist'] = demonicArtifacts
-    weaponModList['basicmax'] = basicModMax
+    weaponModList['max']         = weaponModMax
+    weaponModList['dmax']        = demonicWeapons
+    weaponModList['basicmax']    = basicModMax
     weaponModList['advancedmax'] = advancedModMax
-    weaponModList['mastermax'] = masterModMax
+    weaponModList['mastermax']   = masterModMax
+    weaponModList['list']        = ''.join(weaponModEffects)
+    weaponModList['dlist']       = ''.join(demonicArtifacts)
   
-    # Arsenal.arsenal_doOutput(self, 'modeffects.idb')
+    # Arsenal.doOutput(self, 'modeffects.idb')
     # modEffectsDB = Arsenal.PDA_MOD(self, weaponModList)
     # modEffectsDB = modEffectsDB.replace("'", '"')
 
@@ -233,206 +219,252 @@ class Arsenal:
     #   with open(self.outputData.name, mode='w', encoding='utf-8') as file:
     #     file.write(modEffectsDB)
 
-    # self.printLine('[%s] Created modeffects array list as modeffects.idb\n' % datetime.now().strftime("%H:%M:%S"))
+    # self.printLine('[%s] Created modeffects array list as modeffects.idb\n' % currentTime())
 
-    weaponLanguage = Arsenal.arsenal_revertColors(self, self.filler, weaponLanguage)
+    tempString: str = ''.join(weaponLanguage)
+    tempString = Arsenal.handleColors(self, self.filler, tempString, 'revert')
 
-    weaponLanguage = weaponLanguage.replace('[INNERQUOTE]', '\\"')
-    weaponLanguage = re.sub('/(\n)/g', '\\n', weaponLanguage)
-    weaponLanguage = re.sub('/(;)\\n/gm', ';', weaponLanguage)
-    weaponLanguage = re.sub('/\\n(?=(?:[^"]*"[^"]*")*[^"]*$)/gm', '', weaponLanguage)
-    weaponLanguage = re.sub('/( {3,})\\n/gm', '', weaponLanguage)
-    weaponLanguage = re.sub('/^\\n( {1,})/gm', '', weaponLanguage)
-    weaponLanguage = weaponLanguage.replace('/n', '\\n')
+    tempString = tempString.replace('[INNERQUOTE]', '\\"')
+    tempString = re.sub('/(\n)/g', '\\n', tempString)
+    tempString = re.sub('/(;)\\n/gm', ';', tempString)
+    tempString = re.sub('/\\n(?=(?:[^"]*"[^"]*")*[^"]*$)/gm', '', tempString)
+    tempString = re.sub('/( {3,})\\n/gm', '', tempString)
+    tempString = re.sub('/^\\n( {1,})/gm', '', tempString)
+    tempString = tempString.replace('/n', '\\n')
 
-    languageWeaponOutput = Arsenal.language_warning + weaponLanguage
+    languageWeaponOutput: str = Arsenal.language_warning + tempString
+    
     if (doOutput):
-      Arsenal.arsenal_doOutput(self, 'language.auto.weapons')
+      Arsenal.doOutput(self, 'language.auto.weapons')
+      
       if (self.outputData):
         with open(self.outputData.name, mode='w', encoding='utf-8') as file:
           file.write(languageWeaponOutput)
     
-      self.printLine('[%s] Ending weapons processing. Created language.auto.weapons\n' % datetime.now().strftime("%H:%M:%S"))
+      self.printLine('[%s] Ending weapons processing. Created language.auto.weapons\n' % currentTime())
     else: 
-      self.printLine('[%s] Ending weapons processing.\n' % datetime.now().strftime("%H:%M:%S"))
-      self.printLine('[%s] %s.\n' % (datetime.now().strftime("%H:%M:%S"), languageWeaponOutput))
+      self.printLine('[%s] Ending weapons processing.\n' % currentTime())
+      self.printLine('[%s] %s.\n' % (currentTime(), languageWeaponOutput))
     
-  def arsenal_processEquipment(self, equipment, doOutput):
+  def processEquipment(self, equipment, doOutput):
     if (not equipment): return 0
-    self.printLine('[%s] Reading EQUIPMENT...\n' % datetime.now().strftime("%H:%M:%S"))
+    self.printLine('[%s] Reading EQUIPMENT...\n' % currentTime())
 
-    headerArmorList = ''
-    languageArmorList = ''
-    equipmentMax = 0
-    equipDescription = ''
+    # headerArmorList  : str = ''
+    # languageArmorList: str = ''
+    equipmentMax     : int = 0
+    # equipDescription : str = ''
+    languageArmorList: list = list()
+    headerArmorList  : list = list()
+    equipDescription : list = list()
+    
 
     for equip in equipment:
       equipDescription = ''
-      headerArmorList += '{'
-      headerArmorList += f'''"RL{equip['name']}", "{equip['name'].upper()}"'''
-      headerArmorList += '},'
-      equipmentMax+=1
+      headerArmorList.append('{', f'"RL{equip['name']}", "{equip['name'].upper()}"', '},')
+      # headerArmorList += '{'
+      # headerArmorList += f'''"RL{equip['name']}", "{equip['name'].upper()}"'''
+      # headerArmorList += '},'
+      equipmentMax    += 1
 
       if ('description' in equip):
         for descFragment in equip['description']:
           descFragment = descFragment.replace('\n', '/n')
-          equipDescription += f'"{descFragment}"\n'
-        equip['actualDescription'] = equipDescription
+          equipDescription.append(f'"{descFragment}"\n')
+          # equipDescription += f'"{descFragment}"\n'
+          
+        equip['actualDescription'] = ''.join(equipDescription)
 
-      languageArmorList += Arsenal.LANGUAGE_EQUIPMENT(self, equip)
-      languageArmorList += '\n'
+      languageArmorList.append(Arsenal.LANGUAGE_EQUIPMENT(self, equip))
+      languageArmorList.append('\n')
 
-    equipmentList = {}
-    equipmentList['max'] = equipmentMax
-    equipmentList['list'] = headerArmorList
+    equipmentList: dict   = {}
+    equipmentList['max']  = equipmentMax
+    equipmentList['list'] = ''.join(headerArmorList)
 
     arsenalDB = Arsenal.PDA_ARM(self, equipmentList)
     arsenalDB = arsenalDB.replace("'", '"')
 
+    tempString: str = ''.join(languageArmorList)
+    
     if (doOutput):
-      Arsenal.arsenal_doOutput(self, 'equipment.idb')
+      Arsenal.doOutput(self, 'equipment.idb')
       if (self.outputData):
         with open(self.outputData.name, mode='w', encoding='utf-8') as file:
           file.write(arsenalDB)
 
-      self.printLine('[%s] Created ACS array list for EQUIPMENT as equipment.idb\n' % datetime.now().strftime("%H:%M:%S"))
+      self.printLine('[%s] Created ACS array list for EQUIPMENT as equipment.idb\n' % currentTime())
     else: 
-      self.printLine('[%s] Created ACS array list for EQUIPMENT\n' % datetime.now().strftime("%H:%M:%S"))
-      self.printLine('[%s] %s\n' % (datetime.now().strftime("%H:%M:%S"), arsenalDB))
+      self.printLine('[%s] Created ACS array list for EQUIPMENT\n' % currentTime())
+      self.printLine('[%s] %s\n' % (currentTime(), arsenalDB))
 
     for i in self.filler:
       if ('attributes' in i):
         attributes = self.filler[i].items()
+        
         for attributeKey, attributeValue in attributes:
-          languageArmorList = languageArmorList.replace(attributeKey, attributeValue)
+          tempString = tempString.replace(attributeKey, attributeValue)
 
-    self.printLine('[%s] Keywords translated into attributes\n' % datetime.now().strftime("%H:%M:%S"))
+    self.printLine('[%s] Keywords translated into attributes\n' % currentTime())
 
-    languageArmorList = re.sub('/(\n)/g', '\\n', languageArmorList)
-    languageArmorList = re.sub('/(;)\\n/gm', ';', languageArmorList)
-    languageArmorList = re.sub('/\\n(?=(?:[^"]*"[^"]*")*[^"]*$)/gm', '', languageArmorList)
-    languageArmorList = languageArmorList.replace('/n', '\\n')
-    languageArmorList = Arsenal.arsenal_revertColors(self, self.filler, languageArmorList)
+    tempString = re.sub('/(\n)/g', '\\n', tempString)
+    tempString = re.sub('/(;)\\n/gm', ';', tempString)
+    tempString = re.sub('/\\n(?=(?:[^"]*"[^"]*")*[^"]*$)/gm', '', tempString)
+    
+    tempString = tempString.replace('/n', '\\n')
+    
+    tempString = Arsenal.handleColors(self, self.filler, tempString, 'revert')
 
-    languageArmorOutput = Arsenal.language_warning + languageArmorList
+    languageArmorOutput = Arsenal.language_warning + tempString
+    
     if (doOutput):
-      Arsenal.arsenal_doOutput(self, 'language.auto.equipment')
+      Arsenal.doOutput(self, 'language.auto.equipment')
+      
       if (self.outputData):
         with open(self.outputData.name, mode='w', encoding='utf-8') as file:
           file.write(languageArmorOutput)
-      self.printLine('[%s] Done with processing equipment. Generated language.auto.equipment\n' % datetime.now().strftime("%H:%M:%S"))
+          
+      self.printLine('[%s] Done with processing equipment. Generated language.auto.equipment\n' % currentTime())
     else:
-      self.printLine('[%s] Done with processing equipment.\n' % datetime.now().strftime("%H:%M:%S"))
-      self.printLine('[%s] %s.\n' % (datetime.now().strftime("%H:%M:%S"), languageArmorOutput))
+      self.printLine('[%s] Done with processing equipment.\n' % currentTime())
+      self.printLine('[%s] %s.\n' % (currentTime(), languageArmorOutput))
 
         
-  def arsenal_processModEffect(self, mods, doOutput):
+  def processModEffect(self, mods, doOutput):
     if (not mods): return 0
 
-    modEffectList = ''
+    # modEffectList = ''
+    modEffectList: list = list()
     for mod in mods:
-      if (type(mod['effect']) == str) :
-        modEffectList += f'''{mod['name']} = "{mod['effect']}";'''
-      if (type(mod['effect']) == list or type(mod['effect']) == dict) :
-        modEffectList += f'''{mod['name']} = '''
+      modEffectListLen: int = len(mod['effect'])
         
-        modEffectListLen = len(mod['effect'])
+      if (type(mod['effect']) == str) :
+        # modEffectList += f'''{mod['name']} = "{mod['effect']}";'''
+        modEffectList.append(f'''{mod['name']} = "{mod['effect']}";''')
+        
+      if (type(mod['effect']) == list or type(mod['effect']) == dict) :
+        # modEffectList += f'''{mod['name']} = '''
+        modEffectList.append(f'''{mod['name']} = ''')
+        
         for i, modEffectFragment in enumerate(mod['effect']):
+          # modEffectList += f'"{modEffectFragment}"'
           modEffectFragment = modEffectFragment.replace('\n', '/n')
-          modEffectList += f'"{modEffectFragment}"'
+          modEffectList.append(f'"{modEffectFragment}"')
 
           if i < modEffectListLen - 1:
-            modEffectList += f'\n'
-        modEffectList += f';'
-      modEffectList += '\n'
+            # modEffectList += f'\n'
+            modEffectList.append(f'\n')
+            
+        # modEffectList += f';'
+        modEffectList.append(f';')
+        
+      # modEffectList += '\n'
+      modEffectList.append('\n')
 
-    modEffectList = Arsenal.arsenal_revertColors(self, self.filler, modEffectList)
-
-    languageModOutput = Arsenal.language_warning + modEffectList
+    # modEffectList = Arsenal.handleColors(self, self.filler, ''.join(modEffectList), 'revert')
+    # languageModOutput = Arsenal.language_warning + modEffectList
     
-    self.printLine('[%s] Done parsing mod effects DB.\n' % datetime.now().strftime("%H:%M:%S"))
+    tempString: str = ''.join(modEffectList)
+    tempString = Arsenal.handleColors(self, self.filler, tempString, 'revert')
+    
+    languageModOutput = Arsenal.language_warning + tempString
+    
+    self.printLine('[%s] Done parsing mod effects DB.\n' % currentTime())
 
     if (doOutput):
-      Arsenal.arsenal_doOutput(self, 'language.auto.mods')
+      Arsenal.doOutput(self, 'language.auto.mods')
       if (self.outputData):
         with open(self.outputData.name, mode='w', encoding='utf-8') as file:
           file.write(languageModOutput)
-      self.printLine('[%s] Created language.auto.mods\n' % datetime.now().strftime("%H:%M:%S"))
+      self.printLine('[%s] Created language.auto.mods\n' % currentTime())
     else: 
-      self.printLine('[%s] \n' % datetime.now().strftime("%H:%M:%S"))
-      self.printLine('[%s] %s.\n' % (datetime.now().strftime("%H:%M:%S"), languageModOutput))
+      self.printLine('[%s] \n'  % currentTime())
+      self.printLine('[%s] %s.\n' % (currentTime(), languageModOutput))
 
         
-  def arsenal_processAssemblies(self, data, doOutput):
+  def processAssemblies(self, data, doOutput):
     if (not data): return 0
 
-    headerAssemblyList = ''
-    headerAssemblyMax = 0
-    headerUniqueMax = 0
-    headerExoticList = ''
-    languageAssemblyList = f'''PDA_ASSEMBLY_REQUIREMENTS = "\\cdRequirements:\\c-\\n";\n'''
-    basicMax = 0
-    advancedMax = 0
-    masterMax = 0
-    assemblyDescription = ''
+    headerAssemblyMax   : int = 0
+    headerUniqueMax     : int = 0
+    basicMax            : int = 0
+    advancedMax         : int = 0
+    masterMax           : int = 0
+    # headerExoticList    : str = ''
+    # assemblyDescription : str = ''
+    # headerAssemblyList  : str = ''
+    # languageAssemblyList: str = f'''PDA_ASSEMBLY_REQUIREMENTS = "\\cdRequirements:\\c-\\n";\n'''
+    assemblyDescription : list = list()
+    headerAssemblyList  : list = list()
+    languageAssemblyList: list = list()
+    headerExoticList    : list = list()
 
-    languageAssemblyList += 'PDA_ASSEMBLIES='
+    # languageAssemblyList += 'PDA_ASSEMBLIES='
+    languageAssemblyList.append(f'''PDA_ASSEMBLY_REQUIREMENTS = "\\cdRequirements:\\c-\\n";\n''')
+    languageAssemblyList.append('PDA_ASSEMBLIES=')
     for i, assembly in enumerate(data['assemblies']):
-      languageAssemblyList += f'''"RL{assembly['name']}AssemblyLearntToken{self.separatorToken}PDA_ASSEMBLY_{assembly['tier'].upper()}_{assembly['name'].upper()}{self.separatorToken}"'''
+      # languageAssemblyList += f'''"RL{assembly['name']}AssemblyLearntToken{self.separatorToken}PDA_ASSEMBLY_{assembly['tier'].upper()}_{assembly['name'].upper()}{self.separatorToken}"'''
+      languageAssemblyList.append(f'''"RL{assembly['name']}AssemblyLearntToken{self.separatorToken}PDA_ASSEMBLY_{assembly['tier'].upper()}_{assembly['name'].upper()}{self.separatorToken}"''')
+      
       if (i < len(data['assemblies']) - 1):
-        languageAssemblyList += '\n'
+        # languageAssemblyList += '\n'
+        languageAssemblyList.append('\n')
 
-    languageAssemblyList += ';'
-    languageAssemblyList += '\n'
-    languageAssemblyList += '\n'
-    languageAssemblyList += f'''PDA_SEPARATOR_CHARACTER="{self.separatorToken}";'''
-    languageAssemblyList += '\n'
-    languageAssemblyList += '\n'
+    languageAssemblyList.append(';')
+    languageAssemblyList.append('\n')
+    languageAssemblyList.append('\n')
+    languageAssemblyList.append(f'''PDA_SEPARATOR_CHARACTER="{self.separatorToken}";''')
+    languageAssemblyList.append('\n')
+    languageAssemblyList.append('\n')
 
     for assembly in data['assemblies']:
-      assemblyDescription = ''
-      headerAssemblyList += '{'
-      headerAssemblyList += f'''"RL{assembly['name']}AssemblyLearntToken", "PDA_ASSEMBLY_{assembly['tier'].upper()}_{assembly['name'].upper()}"'''
-      headerAssemblyList += '},'
-      headerAssemblyMax+=1
+      assemblyDescription = list()
+      
+      headerAssemblyList.append('{', f'''"RL{assembly['name']}AssemblyLearntToken", "PDA_ASSEMBLY_{assembly['tier'].upper()}_{assembly['name'].upper()}"''', '},')
+      headerAssemblyMax += 1
 
-      if (assembly['tier'] == 'Basic'): basicMax+=1
-      if (assembly['tier'] == 'Advanced'): advancedMax+=1
-      if (assembly['tier'] == 'Master'): masterMax+=1
+      match assembly['tier']:
+        case 'Basic':    basicMax    += 1
+        case 'Advanced': advancedMax += 1
+        case 'Master':   masterMax   += 1
+        case _: pass
 
       if ('description' in assembly):
         descLen = len(assembly['description'])
+        
         for i, descFragment in enumerate(assembly['description']):
           descFragment = descFragment.replace('\n', '/n')
+          
           if i < descLen - 1:
-            assemblyDescription += f'"{descFragment}"\n'
+            assemblyDescription.append(f'"{descFragment}"\n')
           else:
-            assemblyDescription += f'"{descFragment}"'
-        assembly['actualDescription'] = assemblyDescription
+            assemblyDescription.append(f'"{descFragment}"')
+            
+        assembly['actualDescription'] = ''.join(assemblyDescription)
 
-      languageAssemblyList += Arsenal.LANGUAGE_ASSEMBLIES(self, assembly)
-      languageAssemblyList += '\n'
+      languageAssemblyList.append(Arsenal.LANGUAGE_ASSEMBLIES(self, assembly))
+      languageAssemblyList.append('\n')
 
-    languageAssemblyList = re.sub('/(\n)/g', '\\n', languageAssemblyList)
-    languageAssemblyList = re.sub('/(;)\\n/gm', ';', languageAssemblyList)
-    languageAssemblyList = re.sub('/\\n(?=(?:[^"]*"[^"]*")*[^"]*$)/gm', '', languageAssemblyList)
-    languageAssemblyList = languageAssemblyList.replace('/n', '\\n')
-    languageAssemblyList = Arsenal.arsenal_revertColors(self, self.filler, languageAssemblyList)
+    tempString: str = ''.join(languageAssemblyList)
+    
+    tempString = re.sub('/(\n)/g', '\\n', tempString)
+    tempString = re.sub('/(;)\\n/gm', ';', tempString)
+    tempString = re.sub('/\\n(?=(?:[^"]*"[^"]*")*[^"]*$)/gm', '', tempString)
+    
+    tempString = tempString.replace('/n', '\\n')
+    
+    tempString = Arsenal.handleColors(self, self.filler, tempString, 'revert')
   
     for weapon in data['weapons']:
       if (weapon['tier'] == 'Unique' or weapon['tier'] == 'Demonic' or weapon['tier'] == 'Legendary'):
         if ('unmoddable' in weapon):
-          headerExoticList += '{'
-          headerExoticList += f'''"RL{weapon['name']}", "null", "null", "null"'''
-          headerExoticList += '},'
+          headerExoticList.append('{', f'''"RL{weapon['name']}", "null", "null", "null"''', '},')
         else:
-          headerExoticList += '{'
-          headerExoticList += f'''"RL{weapon['name']}", "RL{weapon['name']}SniperLearntToken", "RL{weapon['name']}FirestormLearntToken", "RL{weapon['name']}NanoLearntToken"'''
-          headerExoticList += '},'
-        headerUniqueMax+=1
-
-        
-    languageAssemblyList += f'''
+          headerExoticList.append('{', f'''"RL{weapon['name']}", "RL{weapon['name']}SniperLearntToken", "RL{weapon['name']}FirestormLearntToken", "RL{weapon['name']}NanoLearntToken"''', '},')
+          
+        headerUniqueMax += 1
+    
+    languageAssemblyList.append(f'''
 DRLA_ASSEMBLYMAX="{headerAssemblyMax}";
 DRLA_ASSEMBLYELEMENTS="2";
 DRLA_EXOTICEFFECTS_MAX="{headerUniqueMax}";
@@ -440,42 +472,47 @@ DRLA_EXOTICELEMENTS="4";
 DRLA_BASICMAX="{basicMax}";
 DRLA_ADVANCEDMAX="{advancedMax}";
 DRLA_MASTERMAX="{masterMax}";
-'''
+''')
 
-    languageAssemblyOutput = Arsenal.language_warning + languageAssemblyList
+    languageAssemblyOutput: str = Arsenal.language_warning + tempString
+    
     if (doOutput):
-      Arsenal.arsenal_doOutput(self, 'language.auto.assemblies')
+      Arsenal.doOutput(self, 'language.auto.assemblies')
+      
       if (self.outputData):
         with open(self.outputData.name, mode='w', encoding='utf-8') as file:
           file.write(languageAssemblyOutput)
 
-      self.printLine('[%s] Created language.auto.assemblies\n' % datetime.now().strftime("%H:%M:%S"))
+      self.printLine('[%s] Created language.auto.assemblies\n' % currentTime())
     else:
-      self.printLine('[%s] Created nothing\n' % datetime.now().strftime("%H:%M:%S"))
-      self.printLine('[%s] %s.\n' % (datetime.now().strftime("%H:%M:%S"), languageAssemblyOutput))
+      self.printLine('[%s] Created nothing\n' % currentTime())
+      self.printLine('[%s] %s.\n' % (currentTime(), languageAssemblyOutput))
 
-    assemblyList = {}
-    assemblyList['max'] = headerAssemblyMax
-    assemblyList['list'] = headerAssemblyList
-    assemblyList['uniquemax'] = headerUniqueMax
-    assemblyList['basicmax'] = basicMax
+    assemblyList: dict          = {}
+    
+    assemblyList['list']        = ''.join(headerAssemblyList)
+    assemblyList['exotics']     = ''.join(headerExoticList)
+    
+    assemblyList['max']         = headerAssemblyMax
+    assemblyList['uniquemax']   = headerUniqueMax
+    assemblyList['basicmax']    = basicMax
     assemblyList['advancedmax'] = advancedMax
-    assemblyList['mastermax'] = masterMax
-    assemblyList['exotics'] = headerExoticList
+    assemblyList['mastermax']   = masterMax
+    
 
-    self.printLine('[%s] Finished compilation\n' % datetime.now().strftime("%H:%M:%S"))
+    self.printLine('[%s] Finished compilation\n' % currentTime())
 
     # assembliesDB = Arsenal.PDA_ASM(self, assemblyList)
     # assembliesDB = assembliesDB.replace("'", '"')
     # if (doOutput):
-    #   Arsenal.arsenal_doOutput(self, 'assemblies.idb')
+    #   Arsenal.doOutput(self, 'assemblies.idb')
     #   if (self.outputData):
     #     with open(self.outputData.name, mode='w', encoding='utf-8') as file:
     #       file.write(assembliesDB)
-    #   self.printLine('[%s] Created assemblies.idb\n' % datetime.now().strftime("%H:%M:%S"))
+    #   self.printLine('[%s] Created assemblies.idb\n' % currentTime())
     # else: 
-    #   self.printLine('[%s] Created nothing\n' % datetime.now().strftime("%H:%M:%S"))
-    #   self.printLine('[%s] %s\n' % (datetime.now().strftime("%H:%M:%S"), assembliesDB))
+    #   self.printLine('[%s] Created nothing\n' % currentTime())
+    #   self.printLine('[%s] %s\n' % (currentTime(), assembliesDB))
 
 
   def PDA_MOD(self, weapons):
@@ -591,28 +628,29 @@ str DRLA_UniqueExoticModEffects[DRLA_EXOTICEFFECTS_MAX][DRLA_EXOTICELEMENTS] = {
 
     bigname = weapon['name'].upper()
 
-    fragment = f'''PDA_WEAPON_{bigname}_ACTOR = "RL{bigname}";\n'''
+    # fragment = f'''PDA_WEAPON_{bigname}_ACTOR = "RL{bigname}";\n'''
+    fragment: list = list(f'''PDA_WEAPON_{bigname}_ACTOR = "RL{bigname}";\n''')
 
     if ('prettyname' in weapon): 
-      fragment += f'''PDA_WEAPON_{bigname}_NAME = "{weapon['prettyname']}";\n'''
-      fragment += f'''PDA_WEAPON_{bigname}_FLATNAME = "{weapon['flatname']}";\n'''
+      fragment.append(f'''PDA_WEAPON_{bigname}_NAME = "{weapon['prettyname']}";\n''')
+      fragment.append(f'''PDA_WEAPON_{bigname}_FLATNAME = "{weapon['flatname']}";\n''')
     if ('actualDescription' in weapon): 
-      fragment += f'''PDA_WEAPON_{bigname}_DESC = {weapon['actualDescription']};\n'''
+      fragment.append(f'''PDA_WEAPON_{bigname}_DESC = {weapon['actualDescription']};\n''')
     if ('specialpretty' in weapon): 
-      fragment += f'''PDA_WEAPON_{bigname}DEMONARTIFACTS_NAME = "{weapon['specialpretty']}";\n'''
+      fragment.append(f'''PDA_WEAPON_{bigname}DEMONARTIFACTS_NAME = "{weapon['specialpretty']}";\n''')
     if ('specialdesc' in weapon): 
-      fragment += f'''PDA_WEAPON_{bigname}DEMONARTIFACTS_DESC = {weapon['actualSpecialDesc']};\n'''
+      fragment.append(f'''PDA_WEAPON_{bigname}DEMONARTIFACTS_DESC = {weapon['actualSpecialDesc']};\n''')
     if ('mods' in weapon): 
-      fragment += f'''PDA_WEAPON_{bigname}_MODS = {weapon['actualMods']};\n'''
+      fragment.append(f'''PDA_WEAPON_{bigname}_MODS = {weapon['actualMods']};\n''')
     # if ('corruptions' in weapon): 
     #   fragment += f'''PDA_ARTIFACT_{bigname}_ARTIFACTS = {weapon['actualArtifacts']};\n'''
 
-    return fragment
+    return ''.join(fragment)
 
   def resPadder(str, len):
     return str.rjust(len, ' ')
 
-  def LANGUAGE_EQUIPMENT(self, equipment): 
+  def LANGUAGE_EQUIPMENT(self, equipment: any): 
     if (not self.filler): 
       print("self.filler is empty")
       return 0
@@ -620,13 +658,13 @@ str DRLA_UniqueExoticModEffects[DRLA_EXOTICEFFECTS_MAX][DRLA_EXOTICELEMENTS] = {
       print("Name not found in equipment")
       return 0
 
-    bigname = equipment['name'].upper()
-    coloredequipment = equipment['prettyname']
-    flatequipment = Arsenal.arsenal_stripColors(self, self.filler, equipment['prettyname'])
+    bigname         : str = equipment['name'].upper()
+    coloredequipment: str = equipment['prettyname']
+    flatequipment   : str = Arsenal.handleColors(self, self.filler, equipment['prettyname'], 'strip')
 
-    atts = ''
+    atts: list = list()
     for attr in equipment['attributes']:
-      atts += f'''" {attr}\\n"'''
+      atts.append(f'''" {attr}\\n"''')
 
     for f in self.filler:
       if ('colors' in f):
@@ -635,17 +673,17 @@ str DRLA_UniqueExoticModEffects[DRLA_EXOTICEFFECTS_MAX][DRLA_EXOTICELEMENTS] = {
           if (colorKey.upper() == equipment['tier'].upper()):
             coloredequipment = f'''\\c{colorValue}{equipment['prettyname']}\\c-'''
 
-    construct = f'''
+    construct: list = list(f'''
 PDA_ARMOR_{bigname}_ICON = "{equipment['icon']}";
 PDA_ARMOR_{bigname}_NAME = "{coloredequipment}";
 PDA_ARMOR_{bigname}_FLATNAME = "{flatequipment}";
 PDA_ARMOR_{bigname}_DESC = {equipment['actualDescription']};
 PDA_ARMOR_{bigname}_PROT = "{Arsenal.resPadder(' ', 4 - len(equipment['protection']))}{equipment['protection']}% [GOLD]Protection[END]";
-PDA_ARMOR_{bigname}_RENPROT = "{Arsenal.resPadder(' ', 4 - len(equipment['renprotection']))}{equipment['renprotection']}% [GOLD]Protection[END]";'''
+PDA_ARMOR_{bigname}_RENPROT = "{Arsenal.resPadder(' ', 4 - len(equipment['renprotection']))}{equipment['renprotection']}% [GOLD]Protection[END]";''')
 
     if 'resistances' in equipment:
-      res = equipment['resistances']
-      construct += f'''
+      res: dict = equipment['resistances']
+      construct.append(f'''
 PDA_ARMOR_{bigname}_RES = 
   "{Arsenal.resPadder(' ', 4 - len(res['melee']))}{res['melee']}% [DARKGRAY]Melee[END]  "
   "{Arsenal.resPadder(' ', 4 - len(res['bullet']))}{res['bullet']}% [GRAY]Bullet[END] \\n"
@@ -654,72 +692,81 @@ PDA_ARMOR_{bigname}_RES =
   "{Arsenal.resPadder(' ', 4 - len(res['plasma']))}{res['plasma']}% [BLUE]Plasma[END] "
   "{Arsenal.resPadder(' ', 4 - len(res['electric']))}{res['electric']}% [YELLOW]Electric[END]\\n"
   "{Arsenal.resPadder(' ', 4 - len(res['poison']))}{res['poison']}% [PURPLE]Poison[END] "
-  "{Arsenal.resPadder(' ', 4 - len(res['radiation']))}{res['radiation']}% [GREEN]Radiation[END]\\n";'''
-      construct += '\n'
+  "{Arsenal.resPadder(' ', 4 - len(res['radiation']))}{res['radiation']}% [GREEN]Radiation[END]\\n";''')
+      construct.append('\n')
     
     if 'cyborgstats' in equipment:
-      cybres = equipment['cyborgstats']['resistances']
-      construct += f'''PDA_ARMOR_{bigname}_CYBRES ='''
-      if 'kinetic' in cybres:   construct += f'''"{Arsenal.resPadder(' ', 4 - len(cybres['kinetic']))}{cybres['kinetic']}% [WHITE]Kinetic Plating[END]\\n"'''
-      if 'thermal' in cybres:   construct += f'''"{Arsenal.resPadder(' ', 4 - len(cybres['thermal']))}{cybres['thermal']}% [RED]Thermal Dampeners[END]\\n"'''
-      if 'refractor' in cybres: construct += f'''"{Arsenal.resPadder(' ', 4 - len(cybres['refractor']))}{cybres['refractor']}% [BLUE]Refractor Field[END]\\n"'''
-      if 'organic' in cybres:   construct += f'''"{Arsenal.resPadder(' ', 4 - len(cybres['organic']))}{cybres['organic']}% [GREEN]Organic Recovery[END]\\n"'''
-      construct += f'''"{Arsenal.resPadder(' ', 4 - len(cybres['hazard']))}{cybres['hazard']}% [YELLOW]Hazard Shielding[END]\\n";'''
+      cybres: dict = equipment['cyborgstats']['resistances']
+      construct.append(f'''PDA_ARMOR_{bigname}_CYBRES =''')
+      if 'kinetic' in cybres:   construct.append(f'''"{Arsenal.resPadder(' ', 4 - len(cybres['kinetic']))}{cybres['kinetic']}% [WHITE]Kinetic Plating[END]\\n"''')
+      if 'thermal' in cybres:   construct.append(f'''"{Arsenal.resPadder(' ', 4 - len(cybres['thermal']))}{cybres['thermal']}% [RED]Thermal Dampeners[END]\\n"''')
+      if 'refractor' in cybres: construct.append(f'''"{Arsenal.resPadder(' ', 4 - len(cybres['refractor']))}{cybres['refractor']}% [BLUE]Refractor Field[END]\\n"''')
+      if 'organic' in cybres:   construct.append(f'''"{Arsenal.resPadder(' ', 4 - len(cybres['organic']))}{cybres['organic']}% [GREEN]Organic Recovery[END]\\n"''')
+      construct.append(f'''"{Arsenal.resPadder(' ', 4 - len(cybres['hazard']))}{cybres['hazard']}% [YELLOW]Hazard Shielding[END]\\n";''')
 
-    construct += f'''
+    construct.append(f'''
 PDA_ARMOR_{bigname}_CYBAUG = "{equipment['cyborgstats']['augment']}";
-PDA_ARMOR_{bigname}_ATTR = {atts};
-    '''
+PDA_ARMOR_{bigname}_ATTR = {''.join(atts)};
+    ''')
 
-    return construct
+    return ''.join(construct)
 
     
-  def LANGUAGE_ASSEMBLIES(self, assembly):
+  def LANGUAGE_ASSEMBLIES(self, assembly: dict):
     if (not self.filler): return 0
     if ('name' not in assembly):
       print('Name not found in assembly data')
       return ''
 
-    bigname = assembly['name'].upper()
-    bigtier = assembly['tier'].upper()
-    coloredname = ''
+    bigname    : str = assembly['name'].upper()
+    bigtier    : str = assembly['tier'].upper()
+    coloredname: str = ''
 
-    mods = ''
-    valid = ''
-    validlist = ''
+    mods     : list[str] = list()
+    valid    : list[str] = list()
+    validlist: list[str] = list()
+    colors   : list[str] = list()
+    
+    descLen  : int = 0
 
     for mod in assembly['mods']:
       for f in self.filler:
         if ('colors' in f):
           colors = self.filler[f].items()
+          
           for colorKey, colorValue in colors:
             if (colorKey.upper() == mod):
-              mods += f'''\\c{colorValue}{mod[0]}\\c-'''
+              mods.append(f'''\\c{colorValue}{mod[0]}\\c-''')
 
     for f in self.filler:
       if ('colors' in f):
         colors = self.filler[f].items()
+        
         for colorKey, colorValue in colors:
           if (colorKey.upper() == assembly['tier'].upper()):
             coloredname = f'''\\c{colorValue}{assembly['prettyname']}\\c-'''
 
     descLen = len(assembly['valid'])
+    
     for i, validassemblies in enumerate(assembly['valid']):
       validassemblies = validassemblies.replace('\n', '/n')
+      
       if i < descLen - 1:
-        valid += f'''"{validassemblies}"\n'''
+        valid.append(f'''"{validassemblies}"\n''')
       else:
-        valid += f'''"{validassemblies}"'''
+        valid.append(f'''"{validassemblies}"''')
 
     descLen = len(assembly['validlist'])
     for i, validweapon in enumerate(assembly['validlist']):
       validweapon = validweapon.replace('\n', '/n')
+      
       if i < descLen - 1:
-        validlist += f'''"{validweapon}"\n'''
+        validlist.append(f'''"{validweapon}"\n''')
       else:
-        validlist += f'''"{validweapon}"'''
+        validlist.append(f'''"{validweapon}"''')
 
-    valid = valid.replace('->', '[YELLOW]->[END]')
+    tempString: str = ''.join(valid)
+    tempString = tempString.replace('->', '[YELLOW]->[END]')
 
     return f'''
 PDA_ASSEMBLY_{bigtier}_{bigname} = "{assembly['prettyname']} [GRAY][[END]{mods}[GRAY]][END]";
@@ -727,7 +774,7 @@ PDA_ASSEMBLY_{bigtier}_{bigname}_NAME = "{coloredname}";
 PDA_ASSEMBLY_{bigtier}_{bigname}_MODS = "[GRAY][[END]{mods}[GRAY]][END]";
 PDA_ASSEMBLY_{bigtier}_{bigname}_ICON = "{assembly['icon']}";
 PDA_ASSEMBLY_{bigtier}_{bigname}_HEIGHT = "0";
-PDA_ASSEMBLY_{bigtier}_{bigname}_DESC = {assembly['actualDescription']}"[GREEN]Valid Weapons:[END]/n"\n{valid};
+PDA_ASSEMBLY_{bigtier}_{bigname}_DESC = {assembly['actualDescription']}"[GREEN]Valid Weapons:[END]/n"\n{tempString};
 PDA_ASSEMBLY_{bigtier}_{bigname}_REQ = {validlist};
     '''
   # };

@@ -9,14 +9,13 @@ customtkinter.set_appearance_mode('dark')
 customtkinter.set_default_color_theme('dark-blue')
 
 class Combiner(customtkinter.CTk):
-  inputFile = ''
-  outputFile = ''
+  inputFile: str = ''
+  outputFile: str= ''
   currentPath = os.path.dirname(os.path.abspath(__file__))
-  arsData = {}
   data = ''
   debug = 0
-  loadedJson = dict('')
-  separatorToken = ':'
+  loadedJson: any = dict('')
+  separatorToken: str = ':'
 
   def clearResults(self):
     self.textbox.configure(state='normal')
@@ -59,17 +58,17 @@ class Combiner(customtkinter.CTk):
     self.frame_label = customtkinter.CTkLabel(self.left_frame, text='SBARINFO Merger', font=('CTkFont', 20))
     self.frame_label.grid(row=0, column=0, padx=20, pady=(10, 20))
 
-    self.openInput = customtkinter.CTkButton(self.left_frame, text='Open input file', command=partial(Sbarinfo.sbarinfo_doInput, self))
+    self.openInput = customtkinter.CTkButton(self.left_frame, text='Open input file', command=partial(Sbarinfo.doInput, self))
     self.openInput.grid(row=2, column=0, padx=40, pady=0)
 
 
-    self.simulateSbarinfoCompile = customtkinter.CTkButton(self.left_frame, text='Build (no output)', command=partial(Sbarinfo.sbarinfo_doQuasiCompile, self))
+    self.simulateSbarinfoCompile = customtkinter.CTkButton(self.left_frame, text='Build (no output)', command=partial(Sbarinfo.doQuasiCompile, self))
     self.simulateSbarinfoCompile.grid(row=5, column=0, padx=40, pady=20)
 
-    self.compileSbarinfo = customtkinter.CTkButton(self.left_frame, text='Compile', command=partial(Sbarinfo.sbarinfo_doCompile, self))
+    self.compileSbarinfo = customtkinter.CTkButton(self.left_frame, text='Compile', command=partial(Sbarinfo.doCompile, self))
     self.compileSbarinfo.grid(row=6, column=0, padx=40, pady=20)
     self.compileSbarinfo.configure(state='disabled')
-    self.clearOutput = customtkinter.CTkButton(self.left_frame, text='Clear output window', command=partial(Arsenal.arsenal_clearWindow, self))
+    self.clearOutput = customtkinter.CTkButton(self.left_frame, text='Clear output window', command=partial(Arsenal.clearWindow, self))
     self.clearOutput.grid(row=7, column=0, padx=40, pady=20)
 
     # Middle
@@ -87,7 +86,7 @@ class Combiner(customtkinter.CTk):
     self.frame_label = customtkinter.CTkLabel(self.right_frame, text='Arsenal Builder', font=('CTkFont', 20))
     self.frame_label.grid(row=0, column=2, padx=20, pady=(10, 40))
 
-    self.openJSON = customtkinter.CTkButton(self.right_frame, text='Open JSON files', command=partial(Arsenal.arsenal_doInput, self))
+    self.openJSON = customtkinter.CTkButton(self.right_frame, text='Open JSON files', command=partial(Arsenal.doInput, self))
     self.openJSON.grid(row=2, column=2, padx=40, pady=(0, 20))
 
     # self.files_label = customtkinter.CTkLabel(self.right_frame, text='Selected files:')
@@ -96,7 +95,7 @@ class Combiner(customtkinter.CTk):
     # self.selected_files = customtkinter.CTkLabel(self.right_frame, text='...')
     # self.selected_files.grid(row=4, column=2, padx=20, pady=(0, 20))
 
-    # self.openFillers = customtkinter.CTkButton(self.right_frame, text='Open Filler files', command=partial(Arsenal.arsenal_doFillerInputs, self))
+    # self.openFillers = customtkinter.CTkButton(self.right_frame, text='Open Filler files', command=partial(Arsenal.doFillerInputs, self))
     # self.openFillers.grid(row=3, column=2, padx=40, pady=(10,0))
 
     self.separatorTokenLabel = customtkinter.CTkLabel(self.right_frame, text='Separator token')
@@ -106,10 +105,10 @@ class Combiner(customtkinter.CTk):
     self.separatorTokenFrame.insert("0.0", self.separatorToken)
     self.separatorTokenFrame.bind(sequence=None, command=self.changeSeparatorToken)
 
-    self.simulateCompile = customtkinter.CTkButton(self.right_frame, text='Build (no output)', command=partial(Arsenal.arsenal_doQuasiCompile, self))
+    self.simulateCompile = customtkinter.CTkButton(self.right_frame, text='Build (no output)', command=partial(Arsenal.doQuasiCompile, self))
     self.simulateCompile.grid(row=6, column=2, padx=40, pady=20)
 
-    self.compileArsenal = customtkinter.CTkButton(self.right_frame, text='Compile', command=partial(Arsenal.arsenal_doCompile, self))
+    self.compileArsenal = customtkinter.CTkButton(self.right_frame, text='Compile', command=partial(Arsenal.doCompile, self))
     self.compileArsenal.grid(row=7, column=2, padx=40, pady=20)
 
 if __name__ == '__main__':
