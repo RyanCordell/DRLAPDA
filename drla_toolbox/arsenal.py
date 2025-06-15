@@ -21,12 +21,17 @@ class Arsenal():
   language_warning: str = f'''[enu default]\n\n//
   Please do not modify this file directly,
   it\'s specifically compiled and any changes may be lost.\n\n'''
-  loaded_files    : str = ''
   data            : Any = ''
   loaded_json     : dict[str, Any] | str = {}
+  loaded_files    : str = ''
   separator_token : str = ':'
   filler          : dict[str, Any] = dict()
+  
   input_files     : list[str] = []
+  output_file     : str = ''
+  
+  colors          : dict[str, Any] = dict()
+  attributes      : dict[str, Any] = dict()
 
 
   def res_padder(self, str: str, len: int) -> str:
@@ -90,7 +95,7 @@ class Arsenal():
 
     if (Arsenal.input_files):
       Arsenal.attempt_print(self, f'{ current_time() } Files selected: {list(Arsenal.input_files)}\n')
-      Arsenal.filler = {}
+      Arsenal.filler: dict[str, Any] = {}
 
       for _, file in enumerate(Arsenal.input_files):
         Arsenal.attempt_print(self, f'{ current_time() } Loaded JSON into filler memory: {file}\n')
@@ -103,6 +108,12 @@ class Arsenal():
         if file:
           with open(os.path.normpath(file), mode='r', encoding='utf-8') as jsonBuffer:
             Arsenal.loaded_json.update(json.load(jsonBuffer))
+            
+    for f in Arsenal.filler:
+      if ('colors' in f):
+        Arsenal.colors = Arsenal.filler[f].items()
+      if ('attributes' in f):
+        Arsenal.attributes = Arsenal.filler[f].items()
     else:
       Arsenal.attempt_print(self, f'{ current_time() } No JSON files selected\n')
 
@@ -112,9 +123,9 @@ class Arsenal():
 
   def do_compile(self):
     if ('weapons'    in Arsenal.loaded_json):
-      Arsenal.processWeapons(self,Arsenal.loaded_json['weapons'], True)
+      Arsenal.process_weapons(self,Arsenal.loaded_json['weapons'], True)
     if ('equipment'  in Arsenal.loaded_json):
-      Arsenal.processEquipment(self, Arsenal.loaded_json['equipment'], True)
+      Arsenal.process_equipment(self, Arsenal.loaded_json['equipment'], True)
     if ('modeffect'  in Arsenal.loaded_json):
       Arsenal.process_mod_effect(self, Arsenal.loaded_json['modeffect'], True)
     if ('assemblies' in Arsenal.loaded_json):
@@ -122,9 +133,9 @@ class Arsenal():
 
   def doQuasiCompile(self):
     if ('weapons'    in Arsenal.loaded_json):
-      Arsenal.processWeapons(self, Arsenal.loaded_json['weapons'], False)
+      Arsenal.process_weapons(self, Arsenal.loaded_json['weapons'], False)
     if ('equipment'  in Arsenal.loaded_json):
-      Arsenal.processEquipment(self, Arsenal.loaded_json['equipment'], False)
+      Arsenal.process_equipment(self, Arsenal.loaded_json['equipment'], False)
     if ('modeffect'  in Arsenal.loaded_json):
       Arsenal.process_mod_effect(self, Arsenal.loaded_json['modeffect'], False)
     if ('assemblies' in Arsenal.loaded_json):
@@ -162,32 +173,18 @@ class Arsenal():
       return Arsenal.output_data
 
 
-  def handle_colors(self, dict: dict[str, Any], str: str, method: str) -> str:
-    if (not str or len(dict) < 1):
+  def handle_colors(self, strToColor: str, method: str) -> str:
+    if (not strToColor or len(Arsenal.colors) < 1):
       Arsenal.attempt_print(self, f'{ current_time() } No data found to process\n')
       return 'false'
 
-    noColors = 1
+    for color_key, color_value in Arsenal.colors.items():
+      strToColor = strToColor.replace('['+color_key+']', '\\c'+color_value if method == 'revert' else '')
 
-    # TODO: Can I shorten this in any way?
-    for i in dict:
-      if ('colors' in i):
-        noColors = 0
-
-    if (noColors):
-      Arsenal.attempt_print(self, f'{ current_time() } No such property: colors\n')
-      return 'false'
-
-    for i in dict:
-      if ('colors' in i):
-        colors = dict[i].items()
-        for color_key, color_value in colors:
-          str = str.replace('['+color_key+']', '\\c'+color_value if method == 'revert' else '')
-
-    return str
+    return strToColor
 
   # -----
-  def processWeapons(self, weapons: dict[str, Any], do_output: bool) -> None | Literal[0]:
+  def process_weapons(self, weapons: dict[str, Any], do_output: bool) -> None | Literal[0]:
     if (not weapons):
       return 0
     Arsenal.attempt_print(self, f'{ current_time() } Parsing WEAPONS database\n')
@@ -281,7 +278,7 @@ class Arsenal():
 
         weapon['actualSpecialDesc'] = ''.join(weapon_s_description)
 
-      weapon['flatname'] = Arsenal.handle_colors(self, Arsenal.filler, weapon['prettyname'], 'strip')
+      weapon['flatname'] = Arsenal.handle_colors(self, weapon['prettyname'], 'strip')
       weapon_language.append(Arsenal.create_weapons_language(self, weapon))
       weapon_language.append('\n')
 
@@ -295,7 +292,7 @@ class Arsenal():
     weapon_mod_list['dlist']       = ''.join(demonic_artifacts)
 
     temp_string: str = ''.join(weapon_language)
-    temp_string = Arsenal.handle_colors(self, Arsenal.filler, temp_string, 'revert')
+    temp_string = Arsenal.handle_colors(self, temp_string, 'revert')
 
     temp_string = temp_string.replace('[INNERQUOTE]', '\\"')
     temp_string = re.sub('/(\n)/g', '\\n', temp_string)
@@ -327,7 +324,7 @@ class Arsenal():
       Arsenal.attempt_print(self, f'{ current_time() } Ending weapons processing.\n')
       Arsenal.attempt_print(self, f'{ current_time() } {language_weapon_output}.\n')
 
-  def processEquipment(self, equipment: dict[str, Any], do_output: bool) -> None | Literal[0]:
+  def process_equipment(self, equipment: dict[str, Any], do_output: bool) -> None | Literal[0]:
     if (not equipment): return 0
     Arsenal.attempt_print(self, f'{ current_time() } Reading EQUIPMENT...\n')
     
@@ -340,7 +337,6 @@ class Arsenal():
     language_armor_list: list[str] = []
     header_armor_list  : list[str] = []
     equip_description : list[str] = []
-
 
     for equip in equipment:
       equip: dict[str, Any]
@@ -393,12 +389,12 @@ class Arsenal():
       Arsenal.attempt_print(self, f'{ current_time() } Created ACS array list for EQUIPMENT\n')
       Arsenal.attempt_print(self, f'{ current_time() } {arsenal_db}\n')
 
-    for i in Arsenal.filler:
-      if ('attributes' in i):
-        attributes = Arsenal.filler[i].items()
+    # for i in Arsenal.filler:
+    #   if ('attributes' in i):
+    #     attributes = Arsenal.filler[i].items()
 
-        for attribute_key, attribute_value in attributes:
-          temp_string = temp_string.replace(attribute_key, attribute_value)
+    for attribute_key, attribute_value in Arsenal.attributes.items():
+      temp_string = temp_string.replace(attribute_key, attribute_value)
 
     Arsenal.attempt_print(self, f'{ current_time() } Keywords translated into attributes\n')
 
@@ -408,7 +404,7 @@ class Arsenal():
 
     temp_string = temp_string.replace('/n', '\\n')
 
-    temp_string = Arsenal.handle_colors(self, Arsenal.filler, temp_string, 'revert')
+    temp_string = Arsenal.handle_colors(self, temp_string, 'revert')
 
     language_armor_output = Arsenal.language_warning + temp_string
 
@@ -460,7 +456,7 @@ class Arsenal():
       mod_effect_list.append('\n')
 
     temp_string: str = ''.join(mod_effect_list)
-    temp_string = Arsenal.handle_colors(self, Arsenal.filler, temp_string, 'revert')
+    temp_string = Arsenal.handle_colors(self, temp_string, 'revert')
 
     language_mod_output: Any | str = Arsenal.language_warning + temp_string
 
@@ -555,7 +551,7 @@ class Arsenal():
 
     temp_string = temp_string.replace('/n', '\\n')
 
-    temp_string = Arsenal.handle_colors(self, Arsenal.filler, temp_string, 'revert')
+    temp_string = Arsenal.handle_colors(self, temp_string, 'revert')
 
     for weapon in data['weapons']:
       weapon: dict[str, Any]
@@ -690,19 +686,19 @@ str DRLA_ArmorSetList[DRLA_ARMORSETMAX] = {{
 
     bigname         : str = equipment['name'].upper()
     coloredequipment: str = equipment['prettyname']
-    flatequipment   : str = Arsenal.handle_colors(self, Arsenal.filler, equipment['prettyname'], 'strip')
+    flatequipment   : str = Arsenal.handle_colors(self, equipment['prettyname'], 'strip')
 
     atts: list[str] = []
     for attr in equipment['attributes']:
       atts.append(f'''" {attr}\\n"''')
     
-    for f in Arsenal.filler:
-      if ('colors' in f):
-        colors = Arsenal.filler[f].items()
+    # for f in Arsenal.filler:
+    #   if ('colors' in f):
+    #     colors = Arsenal.filler[f].items()
 
-        for color_key, color_value in colors:
-          if (color_key.upper() == equipment['tier'].upper()):
-            coloredequipment = f'''\\c{color_value}{equipment['prettyname']}\\c-'''
+    for color_key, color_value in Arsenal.colors.items():
+      if (color_key.upper() == equipment['tier'].upper()):
+        coloredequipment = f'''\\c{color_value}{equipment['prettyname']}\\c-'''
 
     construct: list[str] = list(f'''
 PDA_ARMOR_{bigname}_ICON = "{equipment['icon']}";
@@ -762,26 +758,17 @@ PDA_ARMOR_{bigname}_ATTR = {''.join(atts)};
     mods     : list[str] = []
     valid    : list[str] = []
     validlist: list[str] = []
-    colors   : list[str] = []
 
     descLen  : int = 0
 
     for mod in assembly['mods']:
-      for f in Arsenal.filler:
-        if ('colors' in f):
-          colors = Arsenal.filler[f].items()
-
-          for color_key, color_value in colors:
-            if (color_key.upper() == mod):
-              mods.append(f'''\\c{color_value}{mod[0]}\\c-''')
-
-    for f in Arsenal.filler:
-      if ('colors' in f):
-        colors = Arsenal.filler[f].items()
-
-        for color_key, color_value in colors:
-          if (color_key.upper() == assembly['tier'].upper()):
-            coloredname = f'''\\c{color_value}{assembly['prettyname']}\\c-'''
+      for color_key, color_value in Arsenal.colors.items():
+        if (color_key.upper() == mod):
+          mods.append(f'''\\c{color_value}{mod[0]}\\c-''')
+    
+    for color_key, color_value in Arsenal.colors.items():
+      if (color_key.upper() == assembly['tier'].upper()):
+        coloredname = f'''\\c{color_value}{assembly['prettyname']}\\c-'''
 
     descLen = len(assembly['valid'])
 
