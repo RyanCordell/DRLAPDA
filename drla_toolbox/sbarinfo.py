@@ -175,20 +175,20 @@ class Sbarinfo:
                 file_path = self.output_file
 
             if len(file_path) > 0:
-                with open(file_path, mode="w", encoding="utf-8") as file:
+                with open(file_path, mode="w+", encoding="utf-8") as file:
                     file.writelines("".join(Sbarinfo.data))
-                    Sbarinfo.data = ""
 
-                    Sbarinfo.attempt_print(
-                        self,
-                        f'''{current_time()} finished!
-                        Size is {os.path.getsize(self.output_file)} bytes\n''',
-                    )
+                Sbarinfo.attempt_print(
+                    self,
+                    f'''{current_time()} Finished {file_path} [{os.path.getsize(os.path.normpath(file_path))} bytes]\n''',
+                )
 
             Sbarinfo.empty_memory_variables(self)
 
         if sys.argv[1:]:
             Sbarinfo.process_output(self)
+        
+        Sbarinfo.data = ""
 
     def do_fake_compile(self) -> None:
         if self.input_file:
