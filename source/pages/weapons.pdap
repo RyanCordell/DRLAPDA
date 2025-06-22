@@ -97,12 +97,12 @@ if (stricmp(CheckInventory(currentWeapon), "None") != 0) {
             ),
 
             HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 
-            10.0, 
+            0.0, 
             20.0 + (20.0 * 1), 
             0, 1.0);
         
         PDAButton Goto2 = PDA_CreateButton(61, "Modpack Effects" , "TMODICON", 
-            /*x*/10.0, 
+            /*x*/0.0, 
             /*y*/20.0 + (20.0 * 6), 
             /*bw*/82, /*bh*/16, 
             /*gw*/16, /*gh*/19);

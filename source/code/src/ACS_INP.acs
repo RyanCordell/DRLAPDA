@@ -60,8 +60,8 @@ SCRIPT "PDA_MouseController" (void)
           
         oldMouseY = PDA_LocalMouse.y;
         
-        PDA_LocalMouse.m1 = (buttons[PlayerNumber()] & (_ACTION))     ? true : false;
-        PDA_LocalMouse.m2 = (buttons[PlayerNumber()] & (_BACK)) ? true : false;
+        PDA_LocalMouse.m1 = (buttons[PlayerNumber()] & (_ACTION)) ? true : false;
+        PDA_LocalMouse.m2 = (buttons[PlayerNumber()] & (_BACK))   ? true : false;
 
         // kd: I AM REINFORCEMENTS FROM A DIFFERENT DIMENSION
         fixed mouse_sensitivity    = GetOddSensitivityCVarFixed("mouse_sensitivity", 1.0);

@@ -27,18 +27,18 @@ if(PDA_Local.page == 1)
         StrParam(
         "%l:\n" // First time?
         "%l:\n" // Controls
-        "(\cd%k: / %k:\c-) %l:\n"
-        "(\cd%k: / %k:\c-) %l:\n"
+        "(\cd%k: / %k:\c-) \n%l:\n"
+        "(\cd%k: / %k:\c-) \n%l:\n"
         "\cgIf mouse look is disabled..\c-\n"
-        "(\cd%k:\c-) or (\cd%k:\c-) %l:\n"
-        "(\cd%k:\c-) or (\cd%k:\c-) %l:\n",
+        "(\cd%k: / %k:\c-) %l:\n"
+        "(\cd%k: / %k:\c-) %l:\n",
         (GetUserCvar(PlayerNumber(), "DRLA_PDA_firsttime") ? "PDA_PDAHELP_FIRSTTIME" : "PDA_BLANK"), "PDA_PDAHELP_CONTROLS",
         "+attack", "+use", "PDA_PDAHELP_MOUSE1", "+altattack", "+jump", "PDA_PDAHELP_MOUSE2",
-        "+lookup", "+lookdown", "PDA_PDAHELP_YAXIS",
-        "+left", "+right", "PDA_PDAHELP_XAXIS"),
+        "+forward", "+back", "PDA_PDAHELP_YAXIS",
+        "+moveleft", "+moveright", "PDA_PDAHELP_XAXIS"),
         HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 
-        PDA_SCREEN_X + 10.0 + X_LEFT_EDGE, 
-        20.0 + Y_TOP_EDGE + (20.0 * 1),
+        10.0, 
+        20.0 + (20.0 * 1),
         0, 1.0);
 }
 if(PDA_Local.page == 2)
@@ -49,8 +49,8 @@ if(PDA_Local.page == 2)
             "invuse", "+zoom", "PDA_DRLAHELP_DROPITEM", "+use", "PDA_DRLAHELP_BACKPACK", "PDA_DRLAHELP_CRATE"
         ),
         HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 
-        PDA_SCREEN_X + 10.0 + X_LEFT_EDGE, 
-        20.0 + Y_TOP_EDGE + (20.0 * 1),
+        10.0, 
+        20.0 + (20.0 * 1),
         0, 1.0);
 }
 

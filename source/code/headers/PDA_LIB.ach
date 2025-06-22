@@ -245,6 +245,10 @@ const float PDA_MENU_ICON_LEFT_X  = 20 + X_LEFT_EDGE,
 const float PDA_MENU_TEXT_LEFT_X  = PDA_MENU_ICON_LEFT_X + 30.0,
 			PDA_MENU_TEXT_RIGHT_X = PDA_MENU_ICON_RIGHT_X + 30.0;
 
+// I suppose that this magic constant is the only way I'll be able to beat the default font position vs rendering nuisance..
+// Currently, this is based off how new res and old res interact. Sticking with old res, no offset is required. With the new res, however...
+// Multplying the graphics value with NEW_RESOLUTION_X seems to yield very promising results, just 1px off however
+const int BULLSHIT_OFFSET = 5;
 
 const float PDA_NormalY = PDA_SCREEN_Y;
 

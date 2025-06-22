@@ -116,19 +116,19 @@ function fixed max (fixed x, fixed y) {
     return (x < y) ? y : x;
 }
 
-
 function void HudMessageParallax(str text, int type, int id, int color, fixed x, fixed y, fixed holdTime, fixed alpha) {
     // fixed finalY = (int)((acceleratedScrolling) ? PDA_Local.scrollingy * NEW_RESOLUTION_Y : PDA_Local.scrollingy);
-    fixed _x = (int)(PDA_SCREEN_X + x) + X_LEFT_EDGE;
+    fixed _x =       (int)((int)(PDA_SCREEN_X + x) * NEW_RESOLUTION_X) + X_LEFT_EDGE;
     fixed _y = (int)((int)(PDA_Local.scrollingy * NEW_RESOLUTION_Y) + y) + Y_TOP_EDGE;
-    HudMessage(s:text; type, id, color, _x, _Y, holdTime, alpha);
+    HudMessage(s:text; type, id, color, _x, _Y, holdTime, alpha); 
+
     log("text (x: %f:, y: %f:)", _x, _y);
 }
 
 #define assignButtonParams(a, b) \
     PDA_SetupBounds(); \
     (a).id = id; \
-    (a).x = (int)(PDA_SCREEN_X + x) + X_LEFT_EDGE; \
+    (a).x = (int)((PDA_SCREEN_X * NEW_RESOLUTION_X) + (x * NEW_RESOLUTION_X)) + X_LEFT_EDGE; \
     (a).y = (int)(PDA_Local.scrollingy + y) + Y_TOP_EDGE;  \
     (a).width = width; \
     (a).height = height; \
@@ -136,9 +136,9 @@ function void HudMessageParallax(str text, int type, int id, int color, fixed x,
     (a).label = (b); \
 
 #define CheckBounds(a) \
-    PDA_LocalMouse.x >= a.x && PDA_LocalMouse.x <= a.x + a.width \
+    PDA_LocalMouse.x >= (a).x - 1 && PDA_LocalMouse.x <= (a).x + (a).width \
     && \
-    PDA_LocalMouse.y >= a.y - 2 && PDA_LocalMouse.y <= a.y + a.height \
+    PDA_LocalMouse.y >= (a).y - 2 && PDA_LocalMouse.y <= (a).y + (a).height \
 
 #define buttonBoundsDefault(a) \
     if (CheckBounds(a)) { \
@@ -185,18 +185,19 @@ function void PDA_NOPONG (void) {
 function void PDA_SetupBounds (void) {
     SetHudSize(NEW_RESOLUTION_WIDTH, NEW_RESOLUTION_HEIGHT);
 
-    int x = PDA_SCREEN_X;
+    int x = PDA_SCREEN_X + 4;
     int y = PDA_SCROLLABLE_Y;
     int w = PDA_SCREEN_WIDTH * NEW_RESOLUTION_X;
     int h = PDA_SCROLLABLE_HEIGHT;
+    int ww = (PDA_SCREEN_WIDTH * NEW_RESOLUTION_X) - PDA_SCREEN_X;
 
     // SetHudClipRect(PDA_SCREEN_X, PDA_SCROLLABLE_Y+15, PDA_SCREEN_WIDTH+80, PDA_SCROLLABLE_HEIGHT+65, PDA_SCREEN_WIDTH+10);
-    SetHudClipRect(x, y, w, h, w);
+    SetHudClipRect(x, y, w, h, ww);
 
     if (debug) { 
         DrawBorder(PDA_SCREEN_X * NEW_RESOLUTION_X, PDA_SCROLLABLE_Y, 
                 PDA_SCREEN_WIDTH * NEW_RESOLUTION_X, PDA_SCROLLABLE_HEIGHT);
-        SetHudClipRect(x, y, w, h, w);
+        SetHudClipRect(x, y, w, h, ww);
         // log("cliprect (x: %d:, y: %d:, w: %d:, h: %d:)", x, y, w, h);
     }
     
@@ -337,12 +338,14 @@ function PDAButton PDA_CreateButton (int id, str label, str graphic, float x, fl
     assignButtonParams(thisButton, label)
     buttonBoundsDefault(thisButton)
 
+    // Currently, multiplying X with NEW_RESOLUTION_X doesn't yield the same effect as the below offset
+    // thisButton.x += BULLSHIT_OFFSET;
     const float X_MARGIN = 1.0;
 
     thisButton.graphic      = graphic;
     thisButton.graphicFlags = HUDMSG_ALPHA;
     thisButton.graphicID    = thisButton.id;
-    thisButton.graphicX     = (int)(thisButton.x * NEW_RESOLUTION_X) + (int)(gw);
+    thisButton.graphicX     = (int)((thisButton.x * NEW_RESOLUTION_X) + (gw * NEW_RESOLUTION_X));
     thisButton.graphicY     = PDA_SCREEN_Y + (int)(thisButton.y * NEW_RESOLUTION_Y) - (int)(gh / 2);
 
     thisButton.textFont     = PDA_FONT_SLIM;
@@ -355,9 +358,9 @@ function PDAButton PDA_CreateButton (int id, str label, str graphic, float x, fl
 
     if (debug) {
         int x = thisButton.x,
-            y = thisButton.y * NEW_RESOLUTION_Y, 
-            w = width * NEW_RESOLUTION_X,
-            h = height * NEW_RESOLUTION_Y;
+            y = thisButton.y * NEW_RESOLUTION_Y,
+            w = width        * NEW_RESOLUTION_X,
+            h = height       * NEW_RESOLUTION_Y;
         log("btn-gfx (x: %f:, y: %f:, w: %d:, h: %d:)", x, y, w, h);
         DrawBorder(x, y, w, h);
         PDA_SetupBounds();
