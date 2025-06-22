@@ -86,7 +86,7 @@ function void DisplayIcon (str Sprite, int ID, fixed X, fixed Y, fixed DelayTime
 function void DisplayArmorIcon (str Sprite, int ID, fixed X, fixed Y, fixed Alpha) {
     SetFont(StrParam("%l:", Sprite));
     HudMessage(s:"A\n"; HUDMSG_ALPHA, ID, CR_UNTRANSLATED, X, Y, 0, Alpha);
-	SetFont("STAT_MNO");
+	SetFont(USED_PDA_FONT);
 }
 
 function int batoi (str stri)  { 
@@ -120,16 +120,16 @@ function fixed max (fixed x, fixed y) {
 function void HudMessageParallax(str text, int type, int id, int color, fixed x, fixed y, fixed holdTime, fixed alpha) {
     // fixed finalY = (int)((acceleratedScrolling) ? PDA_Local.scrollingy * NEW_RESOLUTION_Y : PDA_Local.scrollingy);
     fixed _x = (int)(PDA_SCREEN_X + x) + X_LEFT_EDGE;
-    fixed _y = (int)(PDA_Local.scrollingy * NEW_RESOLUTION_Y) + y,
+    fixed _y = (int)((int)(PDA_Local.scrollingy * NEW_RESOLUTION_Y) + y) + Y_TOP_EDGE;
     HudMessage(s:text; type, id, color, _x, _Y, holdTime, alpha);
-    log("text (x: %d:, y: %d:)", _x, _y)
+    log("text (x: %f:, y: %f:)", _x, _y);
 }
 
 #define assignButtonParams(a, b) \
     PDA_SetupBounds(); \
     (a).id = id; \
     (a).x = (int)(PDA_SCREEN_X + x) + X_LEFT_EDGE; \
-    (a).y = (int)(PDA_Local.scrollingy) + y; \
+    (a).y = (int)(PDA_Local.scrollingy + y) + Y_TOP_EDGE;  \
     (a).width = width; \
     (a).height = height; \
     (a).oldstate = (a).state; \
@@ -158,7 +158,7 @@ function void HudMessageParallax(str text, int type, int id, int color, fixed x,
             PDA_LocalMouse.state = mouse_default; \
         } \
     } \
-    log("btn-col (x: %d:, y: %d:, w: %d:, h: %d:)", (a).x, (a).y, (a).x + (a).width, (a).y + (a).height); \
+    log("btn-col (x: %f:, y: %f:, w: %d:, h: %d:)", (a).x, (a).y, (a).width, (a).height); \
 
 // Onto other stuff
 
@@ -187,20 +187,18 @@ function void PDA_SetupBounds (void) {
 
     int x = PDA_SCREEN_X;
     int y = PDA_SCROLLABLE_Y;
-    int w = PDA_SCREEN_WIDTH;
+    int w = PDA_SCREEN_WIDTH * NEW_RESOLUTION_X;
     int h = PDA_SCROLLABLE_HEIGHT;
 
     // SetHudClipRect(PDA_SCREEN_X, PDA_SCROLLABLE_Y+15, PDA_SCREEN_WIDTH+80, PDA_SCROLLABLE_HEIGHT+65, PDA_SCREEN_WIDTH+10);
     SetHudClipRect(x, y, w, h, w);
 
-    // if (debug) { 
-    DrawBorder(PDA_SCREEN_X * NEW_RESOLUTION_X, PDA_SCROLLABLE_Y, 
-               PDA_SCREEN_WIDTH * NEW_RESOLUTION_X, PDA_SCROLLABLE_HEIGHT);
-
-    SetHudClipRect(x, y, w, h, w);
-
-    // log("cliprect (x: %d:, y: %d:, w: %d:, h: %d:)", x, y, w, h);
-    // }
+    if (debug) { 
+        DrawBorder(PDA_SCREEN_X * NEW_RESOLUTION_X, PDA_SCROLLABLE_Y, 
+                PDA_SCREEN_WIDTH * NEW_RESOLUTION_X, PDA_SCROLLABLE_HEIGHT);
+        SetHudClipRect(x, y, w, h, w);
+        // log("cliprect (x: %d:, y: %d:, w: %d:, h: %d:)", x, y, w, h);
+    }
     
 }
 
@@ -360,7 +358,7 @@ function PDAButton PDA_CreateButton (int id, str label, str graphic, float x, fl
             y = thisButton.y * NEW_RESOLUTION_Y, 
             w = width * NEW_RESOLUTION_X,
             h = height * NEW_RESOLUTION_Y;
-        log("btn-gfx (x: %d:, y: %d:, w: %d:, h: %d:)", x, y, w, h);
+        log("btn-gfx (x: %f:, y: %f:, w: %d:, h: %d:)", x, y, w, h);
         DrawBorder(x, y, w, h);
         PDA_SetupBounds();
     }
@@ -397,7 +395,7 @@ function PDAButton PDA_CreateAssemblyButton (int id, str graphic, str label, flo
                 PDA_SCREEN_X + X_LEFT_EDGE, (int)(PDA_LocalMouse.y * NEW_RESOLUTION_Y) + 10.0 + Y_TOP_EDGE, 
                 0, 0.9);
 
-            SetFont("STAT_MNO");
+            SetFont(USED_PDA_FONT);
             SetHudSize(500, 400);
             SetHudClipRect(
                 PDA_FLOATING_TOOLTIP_X, PDA_FLOATING_TOOLTIP_Y, 
@@ -420,7 +418,7 @@ function PDAButton PDA_CreateAssemblyButton (int id, str graphic, str label, flo
     thisButton.graphicX = (int)(thisButton.x * NEW_RESOLUTION_X) + 25.0 + X_LEFT_EDGE;
     thisButton.graphicY = graphicy + 20.0;
 
-    thisButton.textFont = "STAT_MNO";
+    thisButton.textFont = USED_PDA_FONT;
     thisButton.textFlags = HUDMSG_ALPHA;
     thisButton.textID = thisButton.id - 40;
     thisButton.finalX = (int)(thisButton.x * NEW_RESOLUTION_X) + 50.0 + X_LEFT_EDGE;
@@ -455,20 +453,13 @@ function PDAButton PDA_CreateBeastButton (int id, str label, str color, float x,
     int graphicy = (int)(thisButton.y * NEW_RESOLUTION_Y) + 0.0;
     int texty = (int)(thisButton.y * NEW_RESOLUTION_Y) + 0.0;
 
-    if (debug) {
-        SetHudClipRect((int)thisButton.x, (int)thisButton.y, thisButton.width, thisButton.height);
-        SetFont("BTNBG");
-        HudMessage(s:"A\n"; HUDMSG_ALPHA, (thisButton.id) + 20, CR_UNTRANSLATED, thisButton.x, thisButton.y, 0, thisButton.alpha);
-        log("CREATE X %f: Y %f: W %i: H %i:", thisButton.x, thisButton.y, thisButton.width, thisButton.height);
-    }
-   
     thisButton.graphic = "PLON";
     thisButton.graphicFlags = HUDMSG_ALPHA;
     thisButton.graphicID = thisButton.id;
     thisButton.graphicX = (thisButton.x * NEW_RESOLUTION_X) + 5.0;
     thisButton.graphicY = graphicy + X_LEFT_EDGE;
 
-    thisButton.textFont = "STAT_MNO";
+    thisButton.textFont = USED_PDA_FONT;
     thisButton.textFlags = HUDMSG_ALPHA | HUDMSG_COLORSTRING;
     thisButton.textID = (thisButton.id) + 20;
     thisButton.finalX = (thisButton.x * NEW_RESOLUTION_X) + 10.0;
@@ -510,7 +501,7 @@ function PDAButton PDA_CreateHUDButton (int id, str label, str color, float x, f
     thisButton.graphicX = (thisButton.x * NEW_RESOLUTION_X) + 5.0;
     thisButton.graphicY = graphicY + X_LEFT_EDGE;
 
-    thisButton.textFont = "STAT_MNO";
+    thisButton.textFont = USED_PDA_FONT;
     thisButton.textFlags = HUDMSG_ALPHA | HUDMSG_COLORSTRING;
     thisButton.textID = (thisButton.id) + 20;
     thisButton.finalX = (thisButton.x * NEW_RESOLUTION_X) + 10.0;
@@ -543,7 +534,7 @@ function PDAButton PDA_DisplayArmor (int id, str label, str graphic, float x, fl
             PDA_SCREEN_X + X_LEFT_EDGE, (int)(PDA_LocalMouse.y * NEW_RESOLUTION_Y) + 20.0 + Y_TOP_EDGE, 
             0, 0.9);
 
-        SetFont("STAT_MNO");
+        SetFont(USED_PDA_FONT);
         HudMessage(s:thisButton.tooltip; HUDMSG_ALPHA, PDA_TOOLTIPID - 1, CR_UNTRANSLATED, 
         PDA_SCREEN_X + 10.0 + X_LEFT_EDGE, (int)(PDA_LocalMouse.y * NEW_RESOLUTION_Y) + 30.0 + Y_TOP_EDGE, 
         0, thisButton.alpha);
@@ -556,7 +547,7 @@ function PDAButton PDA_DisplayArmor (int id, str label, str graphic, float x, fl
     fixed ylabeloff = 3.0;
 
     int graphicy = (int)(thisButton.y * NEW_RESOLUTION_Y) + 0.0;
-    int texty = (int)(thisButton.y * NEW_RESOLUTION_Y) + 0.0;
+    int texty    = (int)(thisButton.y * NEW_RESOLUTION_Y) + 0.0;
 
     // SetFont(StrParam("%l:", thisButton.graphic));
     thisButton.graphic = StrParam("%l:", thisButton.graphic); // I don't think this will work the way I think it will.
@@ -565,7 +556,7 @@ function PDAButton PDA_DisplayArmor (int id, str label, str graphic, float x, fl
     thisButton.graphicX = (int)(thisButton.x * NEW_RESOLUTION_X) - 5.0 + X_LEFT_EDGE;
     thisButton.graphicY = graphicy + (height / 2) + 3.0;
 
-    thisButton.textFont = "STAT_LWR";
+    thisButton.textFont = PDA_FONT_LOWER;
     thisButton.textFlags = HUDMSG_ALPHA;
     thisButton.textID = (thisButton.id) + 1;
     thisButton.finalX = (int)(thisButton.x * NEW_RESOLUTION_X) + 35.0 + X_LEFT_EDGE;
@@ -589,7 +580,7 @@ function PDAButton PDA_CreateModPackDisplay (int id, str graphic, float x, float
     thisButton.graphicY = 0.0;
 
     thisButton.textFlags = HUDMSG_ALPHA;
-    thisButton.textFont = "STAT_MNO";
+    thisButton.textFont = USED_PDA_FONT;
     thisButton.finalX = PDA_SCREEN_X + 35.0 + X_LEFT_EDGE;
 
     if (debug) {
@@ -693,9 +684,10 @@ function void PDA_InitScrollingButton (PDAButton button, int incat, int catpage,
                     SetHudClipRect(
                         PDA_MENU_TOOLTIP_X,     PDA_MENU_TOOLTIP_Y, 
                         PDA_MENU_TOOLTIP_WIDTH, PDA_MENU_TOOLTIP_HEIGHT, 
-                        PDA_MENU_TOOLTIP_WIDTH)
-                        ;
-                    HudMessage(s:message; HUDMSG_PLAIN, PDA_CAT_DESCRIPTION, CR_UNTRANSLATED, PDA_TOOLTIP_X + X_LEFT_EDGE, PDA_TOOLTIP_Y + Y_TOP_EDGE, 0);
+                        PDA_MENU_TOOLTIP_WIDTH
+                    );
+                    HudMessage(s:message; HUDMSG_PLAIN, PDA_CAT_DESCRIPTION, CR_UNTRANSLATED, 
+                    PDA_MENU_TOOLTIP_X + X_LEFT_EDGE, PDA_MENU_TOOLTIP_Y + Y_TOP_EDGE, 0);
                     PDA_SetupBounds();
                 }
                 break;

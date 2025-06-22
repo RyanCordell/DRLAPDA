@@ -5,6 +5,14 @@ str USED_PDA_FONT  = "STAT_MNO";
 str PDA_FONT_LOWER = "STAT_LWR";
 str PDA_FONT_SLIM  = "PDAFONT";
 
+/*
+    %s: string
+    %b: bool
+    %d: decimal
+    %f: float/fixed?
+    %x: hex
+*/
+
 // Ha! You don't want arrays for every player in MP? MUDA MUDA MUDA MUDA
 // [marrub] #define MAX_MUDADA 0x7FFFFFFF
 

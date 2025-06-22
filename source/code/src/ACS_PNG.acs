@@ -703,7 +703,7 @@ script "PongClient" (void)
 		
 		//draw the score
 		
-		SetFont(PDA_FONT_DEFAULT);
+		SetFont(USED_PDA_FONT);
 		drawy = SCORELINE;
         
         HudMessage(scoreboard,
@@ -854,7 +854,7 @@ script "PongLoop" (int mpPartner)
         
 		//draw the score
 		
-		SetFont(PDA_FONT_DEFAULT);
+		SetFont(USED_PDA_FONT);
 		
         HudMessage(scoreboard,
         (p1score[pl] > p2score[pl]) ? "\cf" : "\c-", p1score[pl],

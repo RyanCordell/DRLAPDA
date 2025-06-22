@@ -98,12 +98,12 @@ if (stricmp(CheckInventory(currentWeapon), "None") != 0) {
 
             HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 
             10.0, 
-            20.0 + (20.0 * 1) + Y_TOP_EDGE, 
+            20.0 + (20.0 * 1), 
             0, 1.0);
         
         PDAButton Goto2 = PDA_CreateButton(61, "Modpack Effects" , "TMODICON", 
             /*x*/10.0, 
-            /*y*/20.0 + (20.0 * 6) + Y_TOP_EDGE, 
+            /*y*/20.0 + (20.0 * 6), 
             /*bw*/82, /*bh*/16, 
             /*gw*/16, /*gh*/19);
                           PDA_InitButton(Goto2, true, 2, "", false);
@@ -135,8 +135,8 @@ if (stricmp(CheckInventory(currentWeapon), "None") != 0) {
             "\n\n"
             "%l:\c[Cyan]%i:",
             (PDA_IsNotDemonic) 
-                    ? (CheckInventory(strParam("%s:DemonArtifacts", currentWeapon)) ? PDA_Weapon_DualName_Printer : PDA_Weapon_Name_Printer) 
-                    : PDA_Weapon_Name_Printer,
+                ? (CheckInventory(strParam("%s:DemonArtifacts", currentWeapon)) ? PDA_Weapon_DualName_Printer : PDA_Weapon_Name_Printer) 
+                : PDA_Weapon_Name_Printer,
             PDA_Weapon_Bulk_Quantity, PDA_Weapon_Power_Quantity, PDA_Weapon_Agility_Quantity, PDA_Weapon_Technical_Quantity,
             PDA_Weapon_Sniper_Quantity, PDA_Weapon_Firestorm_Quantity, PDA_Weapon_Nano_Quantity,
             (PDA_IsNotDemonic) ? 0 : PDA_Weapon_Artifact_Quantity,

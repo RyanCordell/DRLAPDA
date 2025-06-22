@@ -44,11 +44,11 @@ SCRIPT "PDA_MouseController" (void)
     const int ACTIVATOR = -1;
     
     SetHudSize(MIN_HUD_W, MIN_HUD_Y, 0);
-    SetHudClipRect(
-        PDA_SCREEN_X, PDA_SCREEN_Y, 
-        PDA_SCREEN_WIDTH, PDA_SCREEN_HEIGHT, 
-        PDA_SCREEN_WIDTH
-    );
+    // SetHudClipRect(
+    //     PDA_SCREEN_X, PDA_SCREEN_Y, 
+    //     PDA_SCREEN_WIDTH, PDA_SCREEN_HEIGHT, 
+    //     PDA_SCREEN_WIDTH
+    // );
     
     const int _ACTION = BT_ATTACK|BT_USE;
     const int _BACK   = BT_ALTATTACK|BT_JUMP;
@@ -99,11 +99,11 @@ SCRIPT "PDA_MouseController" (void)
 
         if (PDA_LocalMouse.y < VMIN) {
             PDA_LocalMouse.y = VMIN;
-            if (PDA_Local.scrollingy < PDA_SCREEN_Y) PDA_Local.scrollingy += 2.0;
+            if (PDA_Local.scrollingy < PDA_SCREEN_Y)       PDA_Local.scrollingy += 2.0 * yScale;
         }
         if (PDA_LocalMouse.y > VMAX) {
             PDA_LocalMouse.y = VMAX;
-            if (PDA_Local.scrollingy > PDA_Local.maxtexty) PDA_Local.scrollingy -= 2.0;
+            if (PDA_Local.scrollingy > PDA_Local.maxtexty) PDA_Local.scrollingy -= 2.0 * yScale;
         }
         
         if (PDA_LocalMouse.state == mouse_default) localCursor = (buttons[PlayerNumber()] & _ACTION) ? "PDACURS" : "PDACUR";

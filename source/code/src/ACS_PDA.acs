@@ -337,11 +337,11 @@ SCRIPT "PDA_Core" (void) {
     
     while (PDA_Local.active) {
         SetHudSize(320,200,0);
-        SetHudClipRect(
-            PDA_SCREEN_X, PDA_SCREEN_Y,
-            PDA_SCREEN_WIDTH, PDA_SCREEN_HEIGHT, 
-            PDA_SCREEN_WIDTH
-        );
+        // SetHudClipRect(
+        //     PDA_SCREEN_X, PDA_SCREEN_Y,
+        //     PDA_SCREEN_WIDTH, PDA_SCREEN_HEIGHT, 
+        //     PDA_SCREEN_WIDTH
+        // );
 
         PDA_DefaultFont();
 
@@ -404,18 +404,17 @@ SCRIPT "PDA_Core" (void) {
         
         PDA_DefaultFont();
 
-        int freelook = GetCvar("sv_freelook");
-        int nofreelook = GetCvar("sv_nofreelook");
-        if (freelook == 1 || nofreelook == 1) {
-            HudMessage(s:"\cgWARNING!\c- The PDA will not function properly with \cb\"Allow freelook\"\c- disabled! Sorry about that."; 
-            HUDMSG_PLAIN, PDA_PLAYERS_BUTTON, CR_GREEN, (PDA_SCREEN_X) + 10.1, (PDA_SCREEN_Y) + 35.1, 0);
-            HudMessage(s:"Find either \cb\"sv_freelook\"\c-, \cb\"sv_nofreelook\"\c-, or \cbenable mouselook under Mouse Options\c- to rectify this."; 
-            HUDMSG_PLAIN, PDA_WEAPONS_BUTTON, CR_GREEN, (PDA_SCREEN_X) + 10.1, (PDA_SCREEN_Y) + 60.1, 0);
-        }
+        // int freelook = GetCvar("sv_freelook");
+        // int nofreelook = GetCvar("sv_nofreelook");
+        // if (freelook == 1 || nofreelook == 1) {
+        //     HudMessage(s:"\cgWARNING!\c- The PDA will not function properly with \cb\"Allow freelook\"\c- disabled! Sorry about that."; 
+        //     HUDMSG_PLAIN, PDA_PLAYERS_BUTTON, CR_GREEN, (PDA_SCREEN_X) + 10.1, (PDA_SCREEN_Y) + 35.1, 0);
+        //     HudMessage(s:"Find either \cb\"sv_freelook\"\c-, \cb\"sv_nofreelook\"\c-, or \cbenable mouselook under Mouse Options\c- to rectify this."; 
+        //     HUDMSG_PLAIN, PDA_WEAPONS_BUTTON, CR_GREEN, (PDA_SCREEN_X) + 10.1, (PDA_SCREEN_Y) + 60.1, 0);
+        // }
 
         for (int t = 0; t < DRLA_DIFFICULTYTIERS; t++) {
-            for (int m = 0; m < DRLA_MONSTER_PAGE_MAX; m++)
-            {
+            for (int m = 0; m < DRLA_MONSTER_PAGE_MAX; m++) {
                 oldCheck[t][m] = monsterCheck[t][m];
             }
         }

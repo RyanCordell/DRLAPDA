@@ -372,7 +372,7 @@ if(PDA_Local.page == EQUIPMENT_PAGE_INFO) {
     enclaveSetName = (PDA_ManyHax) ? strParam("%l:\n\n", "PDA_ARMOR_EnclaveSetBonusActive_SETNAME") : "";
     enclaveSetDesc = (PDA_ManyHax) ? strParam("%l:\n\n", "PDA_ARMOR_EnclaveSetBonusActive_SETDESC") : "";
 
-    SetFont(PDA_FONT_DEFAULT);
+    SetFont(USED_PDA_FONT);
 
     if (localShowArmor && localHasArmor) {
         HudMessage(

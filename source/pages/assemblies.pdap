@@ -71,7 +71,7 @@ str tooltip = "\n";
 
 PDA_SetupBounds();
 
-SetFont(PDA_FONT_DEFAULT);
+SetFont(USED_PDA_FONT);
 
 PDA_SetScrollLimit  (scrollOffset);
 PDA_SetScrollArrows2(scrollOffset, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);

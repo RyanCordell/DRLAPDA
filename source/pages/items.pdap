@@ -48,11 +48,11 @@ if(GetCvar("DRLA_specialstarts") != 2)
 
     SetHudSize(NEW_RESOLUTION_WIDTH,NEW_RESOLUTION_HEIGHT);
     
-    SetHudClipRect(
-        PDA_SCREEN_X, PDA_SCROLLABLE_Y+15, 
-        PDA_SCREEN_WIDTH+80, PDA_SCROLLABLE_HEIGHT+65, 
-        PDA_SCREEN_WIDTH-30
-    );
+    // SetHudClipRect(
+    //     PDA_SCREEN_X, PDA_SCROLLABLE_Y+15, 
+    //     PDA_SCREEN_WIDTH+80, PDA_SCROLLABLE_HEIGHT+65, 
+    //     PDA_SCREEN_WIDTH-30
+    // );
     PDA_SetScrollLimit(-200);
     PDA_SetScrollArrows2(-200, PDA_SCREEN_WIDTH + 50.0, PDA_SCROLLABLE_HEIGHT + 90.0);
     

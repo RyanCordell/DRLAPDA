@@ -36,7 +36,7 @@ if (StrCmp(PDA_Local.detailFetch[0], "null") != 0) {
     DisplayIcon(strParam("%l:", icon), PDA_INFO2ID, PDA_SCREEN_WIDTH - 50.0 + X_LEFT_EDGE, PDA_Local.scrollingy + 110.0 + Y_TOP_EDGE, 0, 0.8);
 
     // EXPERIMENTS
-    SetFont(PDA_FONT_DEFAULT);
+    SetFont(USED_PDA_FONT);
     HudMessage(
                 "\cdName:\c- %l:\n"
                 "\cdNo. of Kills:\c- %i:\n"
@@ -52,7 +52,7 @@ if (StrCmp(PDA_Local.detailFetch[0], "null") != 0) {
 } else {
     PDA_SetScrollLimit(0);
 
-    SetFont(PDA_FONT_DEFAULT);
+    SetFont(USED_PDA_FONT);
     HudMessage("%l:\n"
                "%l:\n"
                "%l:\n"
