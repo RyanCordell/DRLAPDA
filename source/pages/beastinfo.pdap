@@ -23,7 +23,7 @@ int count  = 0;
 if (StrCmp(PDA_Local.detailFetch[0], "null") != 0) {
 
     PDA_SetScrollLimit(-100);
-    PDA_SetScrollArrows2(-100, PDA_RectWidth + 60.0, PDA_ScrollableHeight + 90.0);
+    PDA_SetScrollArrows2(-100, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
 
     count  = PDA_Local.detailFetch[1];
     name   = strParam("%s:_NAME",       PDA_Local.detailFetch[0]);
@@ -33,10 +33,10 @@ if (StrCmp(PDA_Local.detailFetch[0], "null") != 0) {
     info   = strParam("%s:_MISC",       PDA_Local.detailFetch[0]);
     
     // Monster icon
-    DisplayIcon(strParam("%l:", icon), PDA_INFO2ID, PDA_RectWidth - 50.1, PDA_Local.scrollingy + 110.1, 0, 0.8);
+    DisplayIcon(strParam("%l:", icon), PDA_INFO2ID, PDA_SCREEN_WIDTH - 50.0 + X_LEFT_EDGE, PDA_Local.scrollingy + 110.0 + Y_TOP_EDGE, 0, 0.8);
 
     // EXPERIMENTS
-    SetFont("STAT_MNO");
+    SetFont(PDA_FONT_DEFAULT);
     HudMessage(
                 "\cdName:\c- %l:\n"
                 "\cdNo. of Kills:\c- %i:\n"
@@ -48,11 +48,11 @@ if (StrCmp(PDA_Local.detailFetch[0], "null") != 0) {
                 health,
                 res,
                 info;
-                HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, PDA_RectX + 5.1, PDA_Local.scrollingy + 20.1 + (20.0 * 1), 0);
+                HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, PDA_SCREEN_X + 5.0 + X_LEFT_EDGE, PDA_Local.scrollingy + 20.0 + Y_TOP_EDGE + (20.0 * 1), 0);
 } else {
     PDA_SetScrollLimit(0);
 
-    SetFont("STAT_MNO");
+    SetFont(PDA_FONT_DEFAULT);
     HudMessage("%l:\n"
                "%l:\n"
                "%l:\n"
@@ -63,7 +63,7 @@ if (StrCmp(PDA_Local.detailFetch[0], "null") != 0) {
                "PDA_BESTIARY_DEFAULT_HEALTH",
                "PDA_BESTIARY_DEFAULT_RESISTANCES",
                "PDA_BESTIARY_DEFAULT_DESC";
-                HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, PDA_RectX + 5.1, PDA_RectY + 20.1 + (20.0 * 1), 0);
+                HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, PDA_SCREEN_X + 5.0 + X_LEFT_EDGE, PDA_SCREEN_Y + 20.0 + Y_TOP_EDGE + (20.0 * 1), 0);
 }
 
 PDA_UnsetScrollWindow();

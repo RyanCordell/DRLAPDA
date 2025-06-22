@@ -5,136 +5,158 @@
 /** Thanks to HeXaGoN for the maths behind the mouse cursor here! */
 /** TODO: Account for "Prescale Mouse Movement" option being off */
 
+// TODO: If scrolling to the bottom or top, scroll automatically
+
 SCRIPT "PDA_MouseController" (void)
 {
     const int anymask =
         BT_FORWARD | BT_BACK | BT_ATTACK | BT_ALTATTACK | BT_MOVERIGHT | BT_RIGHT | BT_MOVELEFT | BT_LEFT;
     int buttons[MAX_PLAYERS], oldbuttons[MAX_PLAYERS];
     
-    int mHUDX = 320,
-        mHUDY = 200;
+    int MIN_HUD_W = 320,
+        MIN_HUD_Y = 200;
         
     str graphic[MAX_PLAYERS] = {"","","","","","","",""};
+
+    #define localCursor graphic[PlayerNumber()]
     
     fixed xScale, yScale;
-    fixed mx = (mHUDX/2),
-          my = (mHUDY/2);
+    fixed mx = (MIN_HUD_W/2),
+          my = (MIN_HUD_Y/2);
           
     int oldMouseY = 0;
     
-    if(GameType() == GAME_SINGLE_PLAYER)
+    if (GameType() == GAME_SINGLE_PLAYER)
         inverted = GetCVar("invertmouse");
 
     //#define sensitivity 8
     
-    const int HMIN = 0 + PDA_RectX;
-    const int VMIN = 0 + PDA_RectY;
-    const int HMAX = PDA_RectWidth  + PDA_RectX - 7;
-    const int VMAX = PDA_RectHeight + PDA_RectY - 26;
+    const int HMIN = 0 + PDA_SCREEN_X;
+    const int VMIN = 0 + PDA_SCREEN_Y;
+    const int HMAX = PDA_SCREEN_WIDTH  + PDA_SCREEN_X - 7;
+    const int VMAX = PDA_SCREEN_HEIGHT + PDA_SCREEN_Y - 7;
     
-    int xSensitivity = GetCvar("DRLA_PDA_sensitivity_x"),
-          ySensitivity = GetCvar("DRLA_PDA_sensitivity_y");
+    int PDA_X_sensitivity = GetCvar("DRLA_PDA_sensitivity_x"),
+        PDA_Y_sensitivity = GetCvar("DRLA_PDA_sensitivity_y");
     
     int vBuffer = 0;
     int myoff;
+    const int ACTIVATOR = -1;
     
-    SetHudSize(mHUDX,mHUDY,0);
-    SetHudClipRect(PDA_RectX, PDA_RectY, PDA_RectWidth, PDA_RectHeight, PDA_RectWidth);
+    SetHudSize(MIN_HUD_W, MIN_HUD_Y, 0);
+    SetHudClipRect(
+        PDA_SCREEN_X, PDA_SCREEN_Y, 
+        PDA_SCREEN_WIDTH, PDA_SCREEN_HEIGHT, 
+        PDA_SCREEN_WIDTH
+    );
     
+    const int _ACTION = BT_ATTACK|BT_USE;
+    const int _BACK   = BT_ALTATTACK|BT_JUMP;
+
     while(PDA_Local.active)
     {
-                                     buttons[PlayerNumber()] = GetPlayerInput(-1, INPUT_BUTTONS);
-        PDA_LocalMouse.oldState = oldbuttons[PlayerNumber()] = GetPlayerInput(-1, INPUT_OLDBUTTONS);
+                                     buttons[PlayerNumber()] = GetPlayerInput(ACTIVATOR, INPUT_BUTTONS);
+        PDA_LocalMouse.oldState = oldbuttons[PlayerNumber()] = GetPlayerInput(ACTIVATOR, INPUT_OLDBUTTONS);
           
         oldMouseY = PDA_LocalMouse.y;
         
-        PDA_LocalMouse.m1 = (buttons[PlayerNumber()] & BT_ATTACK)    ? true : false;
-        PDA_LocalMouse.m2 = (buttons[PlayerNumber()] & BT_ALTATTACK) ? true : false;
-        
-//        xScale = 2.5 / (GetCVarFixed("m_yaw")   * GetCVarFixed("mouse_sensitivity"));
-//        yScale = 5.0 / (GetCVarFixed("m_pitch") * GetCVarFixed("mouse_sensitivity"));
+        PDA_LocalMouse.m1 = (buttons[PlayerNumber()] & (_ACTION))     ? true : false;
+        PDA_LocalMouse.m2 = (buttons[PlayerNumber()] & (_BACK)) ? true : false;
 
         // kd: I AM REINFORCEMENTS FROM A DIFFERENT DIMENSION
         fixed mouse_sensitivity    = GetOddSensitivityCVarFixed("mouse_sensitivity", 1.0);
-        fixed x_sensitivity        = GetOddSensitivityCVarFixed("m_sensitivity_x", 2.5);
-        fixed y_sensitivity        = GetOddSensitivityCVarFixed("m_sensitivity_y", 5.0);
+        fixed x_sensitivity        = GetOddSensitivityCVarFixed("m_sensitivity_x",   2.5);
+        fixed y_sensitivity        = GetOddSensitivityCVarFixed("m_sensitivity_y",   5.0);
         fixed total_sensitivity    = max(x_sensitivity, y_sensitivity) * mouse_sensitivity;
-        // log("max: %f: ", max(x_sensitivity, y_sensitivity));
-        // log("mouse_sensitivity: %f: | x_sensitivity: %f: | y_sensitivity: %f: | total_sensitivity: %f: ", mouse_sensitivity, x_sensitivity, y_sensitivity, total_sensitivity);
         
         xScale = GetCVarFixed("m_yaw")   * total_sensitivity;
         yScale = GetCVarFixed("m_pitch") * total_sensitivity;
         // kd: aight now back to Ryan coding
         
-        PDA_LocalMouse.x -= (GetPlayerInputFixed(-1, INPUT_YAW) << xSensitivity) * xScale;
-        // log("INPUT_PITCH: %f: | xsense: %f: | xScale: %f: | LMX: %f: ", GetPlayerInputFixed(-1, INPUT_YAW), xSensitivity, xScale, PDA_LocalMouse.x);
+        /*
+            Cursor should:
+                DEFAULT when ???
+                POINTER when over a clickable object
+                GRAB    when idle
+                HOLDER  when dragging screen around
+        */
+        fixed playerX = GetPlayerInputFixed(ACTIVATOR, INPUT_YAW)   - (GetPlayerInputFixed(ACTIVATOR, INPUT_SIDEMOVE)    / PDA_X_sensitivity);
+        fixed playerY = GetPlayerInputFixed(ACTIVATOR, INPUT_PITCH) + (GetPlayerInputFixed(ACTIVATOR, INPUT_FORWARDMOVE) / PDA_Y_sensitivity);
+
+        PDA_LocalMouse.x -= (playerX << PDA_X_sensitivity) * xScale;
+
+        if (inverted) {
+            PDA_LocalMouse.y += (playerY << PDA_Y_sensitivity) * yScale;
+        } else {
+            PDA_LocalMouse.y -= (playerY << PDA_Y_sensitivity) * yScale;
+        }
+
+        log("mouse [%d:, %d:], max %d:, scrolly: %d:", PDA_LocalMouse.x, PDA_LocalMouse.y, PDA_Local.maxtexty, PDA_Local.scrollingy);
         
-        if(inverted)
-            PDA_LocalMouse.y += (GetPlayerInputFixed(-1, INPUT_PITCH) << ysensitivity) * yScale;
-        else
-            PDA_LocalMouse.y -= (GetPlayerInputFixed(-1, INPUT_PITCH) << ysensitivity) * yScale;
-        
-        if(PDA_LocalMouse.x < HMIN) PDA_LocalMouse.x = HMIN;
-        if(PDA_LocalMouse.y < VMIN) PDA_LocalMouse.y = VMIN;
-        if(PDA_LocalMouse.x > HMAX) PDA_LocalMouse.x = HMAX;
-        if(PDA_LocalMouse.y > VMAX) PDA_LocalMouse.y = VMAX;
-        
-        if(PDA_LocalMouse.state == mouse_default) graphic[PlayerNumber()] = (buttons[PlayerNumber()] & BT_ATTACK) ? "PDACURS" : "PDACUR";
-        else if(PDA_LocalMouse.state == mouse_pointer) graphic[PlayerNumber()] = "PDAPNT";
-        
-        if(!PDA_Local.pongrunning)
-        {
-            DisplayIcon(graphic[PlayerNumber()], PDA_CURSORID, PDA_LocalMouse.x + 0.1, PDA_LocalMouse.y + 0.1, 0, (buttons[PlayerNumber()] & BT_ATTACK) ? 0.8 : 1);
+        if (PDA_LocalMouse.x < HMIN) PDA_LocalMouse.x = HMIN;
+        if (PDA_LocalMouse.x > HMAX) PDA_LocalMouse.x = HMAX;
+
+
+        if (PDA_LocalMouse.y < VMIN) {
+            PDA_LocalMouse.y = VMIN;
+            if (PDA_Local.scrollingy < PDA_SCREEN_Y) PDA_Local.scrollingy += 2.0;
+        }
+        if (PDA_LocalMouse.y > VMAX) {
+            PDA_LocalMouse.y = VMAX;
+            if (PDA_Local.scrollingy > PDA_Local.maxtexty) PDA_Local.scrollingy -= 2.0;
         }
         
-        if(PDA_LocalMouse.m1)
+        if (PDA_LocalMouse.state == mouse_default) localCursor = (buttons[PlayerNumber()] & _ACTION) ? "PDACURS" : "PDACUR";
+   else if (PDA_LocalMouse.state == mouse_pointer) localCursor = "PDAPNT";
+   else if (PDA_LocalMouse.state == mouse_grab)    localCursor = "PDAGRB";
+   else if (PDA_LocalMouse.state == mouse_holding) localCursor = "PDAHLD";
+        
+        if (!PDA_Local.pongrunning)
         {
-            vBuffer = PDA_LocalMouse.y - oldMouseY;
+            DisplayIcon(localCursor, PDA_CURSORID, PDA_LocalMouse.x + 0.1, PDA_LocalMouse.y + 0.1, 0, (buttons[PlayerNumber()] & _ACTION) ? 0.8 : 1);
+        }
+        
+        if (PDA_LocalMouse.m1)
+        {
+            vBuffer               = PDA_LocalMouse.y - oldMouseY;
             PDA_Local.scrollingy += vBuffer;
-            myoff = vBuffer;
+            myoff                 = vBuffer;
             
-            if(PDA_Local.scrollingy < PDA_Local.maxtexty) PDA_Local.scrollingy = PDA_Local.maxtexty;
-            if(PDA_Local.scrollingy > VMIN) PDA_Local.scrollingy = VMIN;
-            
-            //log("scrollingy: %f: | VMIN: %i: | maxtexty: %f: | scrollableheight: %f: | VMIN: %i:", PDA_Local.scrollingy, VMIN, PDA_Local.maxtexty, PDA_ScrollableHeight, VMAX);
+            if (PDA_Local.scrollingy < PDA_Local.maxtexty) PDA_Local.scrollingy = PDA_Local.maxtexty;
+            if (PDA_Local.scrollingy > VMIN)               PDA_Local.scrollingy = VMIN;
         }
         
-        if(PDA_LocalMouse.m2 && !(oldButtons[PlayerNumber()] & BT_ALTATTACK))
+        // Right mouse click
+        if (PDA_LocalMouse.m2 && !(oldButtons[PlayerNumber()] & _BACK))
         {
             PDA_LocalMouse.state = mouse_default;
             PDA_PlaySound("UI/PDA/Cancel", "pda/soldier", 80);
             
-            if(PDA_Local.category == PDA_ASSEMBLY_DETAIL)
-            {
+            // Step back into previous page
+            if (PDA_Local.category == PDA_ASSEMBLY_DETAIL) {
                 PDA_Local.category = PDA_ASSEMBLIES;
             }
-            else if(PDA_Local.category == PDA_BESTIARY && PDA_Local.page > 1)
-            {
+            else if (PDA_Local.category == PDA_BESTIARY && PDA_Local.page > 1) {
                 PDA_Local.page = 1;
             }
-            else if(PDA_Local.category == PDA_BESTIARY_DETAIL)
-            {
+            else if (PDA_Local.category == PDA_BESTIARY_DETAIL) {
                 PDA_Local.category = PDA_BESTIARY;
             }
-            else if(PDA_Local.category == PDA_PONG)
-            {
-                PDA_Local.category = PDA_MISC;
+            else if (PDA_Local.category == PDA_PONG) {
                 ACS_NamedExecute("QuitPong",0);
+                PDA_Local.category = PDA_MISC;
             }
-            else if(PDA_Local.category == PDA_HELP)
-            {
+            else if (PDA_Local.category == PDA_HELP) {
                 SetUserCVar(PlayerNumber(), "DRLA_PDA_firsttime", false);
                 PDA_Wipe();
                 PDA_Local.category = PDA_MENU;
                 PDA_Local.page = 0;
             }
-            else if(PDA_Local.category == PDA_CREDITS)
-            {
+            else if (PDA_Local.category == PDA_CREDITS) {
                 PDA_Local.category = PDA_MENU;
                 PDA_Local.page = 0;
             }
-            else
-            {
+            else {
                 PDA_Local.category = PDA_MENU;
                 PDA_Local.page = 0;
             }

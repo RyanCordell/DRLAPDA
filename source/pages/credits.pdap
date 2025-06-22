@@ -7,8 +7,8 @@ PDA_PrintHeader("PDA_CREDITS_HEADER", 0);
 //PDA_SetScrollLimit(0);
 PDA_SetScrollWindow(0);
 
-SetFont("STAT_MNO");
-HudMessage("%l:", "PDA_DEV_TEAM"; HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, (PDA_RectX) + 120.4, (int)PDA_Local.creditsroll + PDA_NormalY + 20.1 + (10.0 * 1), 0);
+SetFont(PDA_FONT_DEFAULT);
+HudMessage("%l:", "PDA_DEV_TEAM"; HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, (PDA_SCREEN_X) + 120.0 + X_CENTER_TEXT_CENTER, (int)PDA_Local.creditsroll + PDA_NormalY + 20.0 + Y_TOP_EDGE + (10.0 * 1), 0);
 
 
 if(PDA_LocalMouse.m1) PDA_Local.creditsroll -= 2.35;

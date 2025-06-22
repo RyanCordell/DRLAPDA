@@ -639,8 +639,8 @@ script "QuitPong" (void)
         PDA_NOPONG();
         PDA_Local.page = 1;
         PDA_Local.pongrunning = false;
-        HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_PONG_TOPBORD, CR_UNTRANSLATED, PDA_RectX + 5.1, PDA_RectY + 19.0, 0.0);
-        HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_PONG_BOTBORD, CR_UNTRANSLATED, PDA_RectX + 5.1, PDA_RectHeight - 0.0, 0.0);
+        HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_PONG_TOPBORD, CR_UNTRANSLATED, PDA_SCREEN_X + 5.1, PDA_SCREEN_Y + 19.0, 0.0);
+        HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_PONG_BOTBORD, CR_UNTRANSLATED, PDA_SCREEN_X + 5.1, PDA_SCREEN_HEIGHT - 0.0, 0.0);
     }
 }
 
@@ -662,8 +662,8 @@ script "PongClient" (void)
             PDA_Wipe();
             PDA_NOPONG();
             PDA_Local.page = 1;
-            HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_PONG_TOPBORD, CR_UNTRANSLATED, PDA_RectX + 5.1, PDA_RectY + 19.0, 0.0);
-            HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_PONG_BOTBORD, CR_UNTRANSLATED, PDA_RectX + 5.1, PDA_RectHeight - 0.0, 0.0);
+            HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_PONG_TOPBORD, CR_UNTRANSLATED, PDA_SCREEN_X + 5.1, PDA_SCREEN_Y + 19.0, 0.0);
+            HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_PONG_BOTBORD, CR_UNTRANSLATED, PDA_SCREEN_X + 5.1, PDA_SCREEN_HEIGHT - 0.0, 0.0);
 			terminate;
 		}
 		//guest quit
@@ -673,8 +673,8 @@ script "PongClient" (void)
             PDA_Wipe();
             PDA_NOPONG();
             PDA_Local.page = 1;
-            HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_PONG_TOPBORD, CR_UNTRANSLATED, PDA_RectX + 5.1, PDA_RectY + 19.0, 0.0);
-            HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_PONG_BOTBORD, CR_UNTRANSLATED, PDA_RectX + 5.1, PDA_RectHeight - 0.0, 0.0);
+            HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_PONG_TOPBORD, CR_UNTRANSLATED, PDA_SCREEN_X + 5.1, PDA_SCREEN_Y + 19.0, 0.0);
+            HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_PONG_BOTBORD, CR_UNTRANSLATED, PDA_SCREEN_X + 5.1, PDA_SCREEN_HEIGHT - 0.0, 0.0);
 			terminate;
 		}
 		
@@ -703,16 +703,16 @@ script "PongClient" (void)
 		
 		//draw the score
 		
-		SetFont("STAT_MNO");
+		SetFont(PDA_FONT_DEFAULT);
 		drawy = SCORELINE;
         
         HudMessage(scoreboard,
         (p1score[pl] > p2score[pl]) ? "\cf" : "\c-", p1score[pl],
-        (p2score[pl] > p1score[pl]) ? "\cf" : "\c-", p2score[pl]; HUDMSG_PLAIN, PDA_PONG_PLAYERSCORE, CR_UNTRANSLATED, PDA_RectX + 50.1, drawy, 0.0);
+        (p2score[pl] > p1score[pl]) ? "\cf" : "\c-", p2score[pl]; HUDMSG_PLAIN, PDA_PONG_PLAYERSCORE, CR_UNTRANSLATED, PDA_SCREEN_X + 50.1, drawy, 0.0);
         
         SetFont("PBORD");
-        HudMessage(s:"A"; HUDMSG_PLAIN, PDA_PONG_TOPBORD, CR_UNTRANSLATED, PDA_RectX + 5.1, PDA_RectY + 19.0, 0.0);
-        HudMessage(s:"A"; HUDMSG_PLAIN, PDA_PONG_BOTBORD, CR_UNTRANSLATED, PDA_RectX + 5.1, PDA_RectHeight - 0.0, 0.0);
+        HudMessage(s:"A"; HUDMSG_PLAIN, PDA_PONG_TOPBORD, CR_UNTRANSLATED, PDA_SCREEN_X + 5.1, PDA_SCREEN_Y + 19.0, 0.0);
+        HudMessage(s:"A"; HUDMSG_PLAIN, PDA_PONG_BOTBORD, CR_UNTRANSLATED, PDA_SCREEN_X + 5.1, PDA_SCREEN_HEIGHT - 0.0, 0.0);
 		SetFont("");
 		
 		delay(1);
@@ -734,8 +734,8 @@ script "PongLoop" (int mpPartner)
             PDA_Wipe();
             PDA_NOPONG();
             PDA_Local.page = 1;
-            HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_PONG_TOPBORD, CR_UNTRANSLATED, PDA_RectX + 5.1, PDA_RectY + 19.0, 0.0);
-            HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_PONG_BOTBORD, CR_UNTRANSLATED, PDA_RectX + 5.1, PDA_RectHeight - 0.0, 0.0);
+            HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_PONG_TOPBORD, CR_UNTRANSLATED, PDA_SCREEN_X + 5.1, PDA_SCREEN_Y + 19.0, 0.0);
+            HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_PONG_BOTBORD, CR_UNTRANSLATED, PDA_SCREEN_X + 5.1, PDA_SCREEN_HEIGHT - 0.0, 0.0);
             quitMode[pl] = -1;
 			terminate;
 		}
@@ -747,8 +747,8 @@ script "PongLoop" (int mpPartner)
             PDA_Wipe();
             PDA_NOPONG();
             PDA_Local.page = 1;
-            HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_PONG_TOPBORD, CR_UNTRANSLATED, PDA_RectX + 5.1, PDA_RectY + 19.0, 0.0);
-            HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_PONG_BOTBORD, CR_UNTRANSLATED, PDA_RectX + 5.1, PDA_RectHeight - 0.0, 0.0);
+            HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_PONG_TOPBORD, CR_UNTRANSLATED, PDA_SCREEN_X + 5.1, PDA_SCREEN_Y + 19.0, 0.0);
+            HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_PONG_BOTBORD, CR_UNTRANSLATED, PDA_SCREEN_X + 5.1, PDA_SCREEN_HEIGHT - 0.0, 0.0);
             quitMode[pl] = -1;
 			terminate;
 		}
@@ -854,15 +854,15 @@ script "PongLoop" (int mpPartner)
         
 		//draw the score
 		
-		SetFont("STAT_MNO");
+		SetFont(PDA_FONT_DEFAULT);
 		
         HudMessage(scoreboard,
         (p1score[pl] > p2score[pl]) ? "\cf" : "\c-", p1score[pl],
-        (p2score[pl] > p1score[pl]) ? "\cf" : "\c-", p2score[pl]; HUDMSG_PLAIN, PDA_PONG_PLAYERSCORE, CR_UNTRANSLATED, PDA_RectX + 50.1, SCORELINE, 0.0);
+        (p2score[pl] > p1score[pl]) ? "\cf" : "\c-", p2score[pl]; HUDMSG_PLAIN, PDA_PONG_PLAYERSCORE, CR_UNTRANSLATED, PDA_SCREEN_X + 50.1, SCORELINE, 0.0);
         
         SetFont("PBORD");
-        HudMessage(s:"A"; HUDMSG_PLAIN, PDA_PONG_TOPBORD, CR_UNTRANSLATED, PDA_RectX + 5.1, PDA_RectY + 19.0, 0.0);
-        HudMessage(s:"A"; HUDMSG_PLAIN, PDA_PONG_BOTBORD, CR_UNTRANSLATED, PDA_RectX + 5.1, PDA_RectHeight - 0.0, 0.0);
+        HudMessage(s:"A"; HUDMSG_PLAIN, PDA_PONG_TOPBORD, CR_UNTRANSLATED, PDA_SCREEN_X + 5.1, PDA_SCREEN_Y + 19.0, 0.0);
+        HudMessage(s:"A"; HUDMSG_PLAIN, PDA_PONG_BOTBORD, CR_UNTRANSLATED, PDA_SCREEN_X + 5.1, PDA_SCREEN_HEIGHT - 0.0, 0.0);
 		SetFont("");
 		
 		

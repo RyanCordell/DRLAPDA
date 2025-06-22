@@ -215,6 +215,19 @@ script "PDA_GSInit" open {
 }
 // Display terminal
 SCRIPT "PDA_Display" (void) net {
+    int PDA_THEME = GetUserCVar(PlayerNumber(), "DRLA_PDA_theme");
+    str pdaGraphic = "RLZPDA2";
+    switch (PDA_THEME) {
+        case THEME_SLIM:
+            pdaGraphic = "RLZPDA3";
+            break;
+        case THEME_BULKY:
+        default:
+            pdaGraphic = "RLZPDA2";
+            break;
+    }
+
+    USED_PDA_FONT = GetUserCVarString(PlayerNumber(), "DRLA_PDA_font");
     SetHudSize(320,200,0);
     PDA_HasEquipment();
     
@@ -246,7 +259,7 @@ SCRIPT "PDA_Display" (void) net {
 
         FadeTo(0, 0, 0, 0.5, 0.0);
 
-        DisplayIcon("RLZPDA2", PDA_ID, 0.5, 0.5, 0, 1);
+        DisplayIcon(pdaGraphic, PDA_ID, 0.5, 0.5, 0, 1);
         
         PDA_PlaySound("UI/PDA/Online", "pda/soldieropen", 80);
 
@@ -324,7 +337,11 @@ SCRIPT "PDA_Core" (void) {
     
     while (PDA_Local.active) {
         SetHudSize(320,200,0);
-        SetHudClipRect(PDA_RectX, PDA_RectY, PDA_RectWidth, PDA_RectHeight, PDA_RectWidth);
+        SetHudClipRect(
+            PDA_SCREEN_X, PDA_SCREEN_Y,
+            PDA_SCREEN_WIDTH, PDA_SCREEN_HEIGHT, 
+            PDA_SCREEN_WIDTH
+        );
 
         PDA_DefaultFont();
 
@@ -391,9 +408,9 @@ SCRIPT "PDA_Core" (void) {
         int nofreelook = GetCvar("sv_nofreelook");
         if (freelook == 1 || nofreelook == 1) {
             HudMessage(s:"\cgWARNING!\c- The PDA will not function properly with \cb\"Allow freelook\"\c- disabled! Sorry about that."; 
-            HUDMSG_PLAIN, PDA_PLAYERS_BUTTON, CR_GREEN, (PDA_RectX) + 10.1, (PDA_RectY) + 35.1, 0);
+            HUDMSG_PLAIN, PDA_PLAYERS_BUTTON, CR_GREEN, (PDA_SCREEN_X) + 10.1, (PDA_SCREEN_Y) + 35.1, 0);
             HudMessage(s:"Find either \cb\"sv_freelook\"\c-, \cb\"sv_nofreelook\"\c-, or \cbenable mouselook under Mouse Options\c- to rectify this."; 
-            HUDMSG_PLAIN, PDA_WEAPONS_BUTTON, CR_GREEN, (PDA_RectX) + 10.1, (PDA_RectY) + 60.1, 0);
+            HUDMSG_PLAIN, PDA_WEAPONS_BUTTON, CR_GREEN, (PDA_SCREEN_X) + 10.1, (PDA_SCREEN_Y) + 60.1, 0);
         }
 
         for (int t = 0; t < DRLA_DIFFICULTYTIERS; t++) {

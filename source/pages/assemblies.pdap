@@ -51,30 +51,30 @@ switch (PDA_Local.page) {
         break;
 }
 
-PDAButton P1 = PDA_CreateTab(50, "1", "PTAB", PDA_RectX + 0.1 + (12.0 * 0), PDA_RectY + 1.1, 12, 12);
-PDAButton P2 = PDA_CreateTab(51, "2", "PTAB", PDA_RectX + 0.1 + (12.0 * 1), PDA_RectY + 1.1, 12, 12);
-PDAButton P3 = PDA_CreateTab(52, "3", "PTAB", PDA_RectX + 0.1 + (12.0 * 2), PDA_RectY + 1.1, 12, 12);
+PDAButton P1 = PDA_CreateTab(50, "1", "PTAB", X_LEFT_EDGE + (12.0 * 0), PDA_SCREEN_Y + 1.0 + Y_TOP_EDGE, 12, 12);
+PDAButton P2 = PDA_CreateTab(51, "2", "PTAB", X_LEFT_EDGE + (12.0 * 1), PDA_SCREEN_Y + 1.0 + Y_TOP_EDGE, 12, 12);
+PDAButton P3 = PDA_CreateTab(52, "3", "PTAB", X_LEFT_EDGE + (12.0 * 2), PDA_SCREEN_Y + 1.0 + Y_TOP_EDGE, 12, 12);
 
-PDA_InitButton(P1, true, 1, "");
-PDA_InitButton(P2, true, 2, "");
-PDA_InitButton(P3, true, 3, "");
+PDA_InitButton(P1, true, 1, "", false);
+PDA_InitButton(P2, true, 2, "", false);
+PDA_InitButton(P3, true, 3, "", false);
 
 //PDA_SetScrollWindow (scrollOffset);
 
 int id;
 str icon = "\n";
 str asmFormatter = "\n";
-float x = PDA_RectX + 0.1, y;
+float x = PDA_SCREEN_X + X_LEFT_EDGE, y;
 const int width = 180, height = 7;
 str assemblyCallback = "\n";
 str tooltip = "\n";
 
 PDA_SetupBounds();
 
-SetFont("STAT_MNO");
+SetFont(PDA_FONT_DEFAULT);
 
 PDA_SetScrollLimit  (scrollOffset);
-PDA_SetScrollArrows2(scrollOffset, PDA_RectWidth + 60.0, PDA_ScrollableHeight + 90.0);
+PDA_SetScrollArrows2(scrollOffset, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
 
 /*
     If possible, try to avoid vertical modpack lists without a proper text height offsetter.
@@ -89,7 +89,7 @@ for (int ti = 0, li = 1; ti <= PDA_Local.maxassembliesper; ti+=2, li+=2) {
     str actorToken       = stringArray[tokenIndex];
     str languagePointer  = stringArray[langIndex ];
         id               = (PDA_ASSEMBLYIDRANGE + offsetIndex);
-        y                = PDA_Local.scrollingy + 30.1 + (6.0 * (ti - 1)); 
+        y                = PDA_Local.scrollingy + 30.0 + Y_TOP_EDGE + (6.0 * (ti - 1)); 
         icon             = strParam("%l:",    strParam("%s:_ICON", languagePointer));
         asmFormatter     = strParam("%s:%l:", PDA_Local.tiercolor, languagePointer);
         assemblyCallback =                                         languagePointer;
@@ -104,10 +104,10 @@ for (int ti = 0, li = 1; ti <= PDA_Local.maxassembliesper; ti+=2, li+=2) {
 
     if (PDA_CheckPlayer1Inventory(actorToken) || CheckInventory(actorToken)) {
         button = PDA_CreateAssemblyButton(id, icon,     asmFormatter,                       x, y, width, height, assemblyCallback, tooltip);
-                 PDA_InitButton(button, false, PDA_ASSEMBLY_DETAIL, "");
+                 PDA_InitButton(button, false, PDA_ASSEMBLY_DETAIL, "", false);
     } else { 
         button = PDA_CreateAssemblyButton(id, "PDAUNK", strParam(l:"PDA_ASSEMBLY_UNKNOWN"), x, y, width, height, "",               "???");
-                 PDA_InitButton(button, true, PDA_Local.page, "");
+                 PDA_InitButton(button, true, PDA_Local.page, "", false);
     }
 }
         

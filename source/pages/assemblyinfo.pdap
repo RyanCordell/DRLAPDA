@@ -13,7 +13,7 @@ PDA_PrintHeader("PDA_DETAILEDASSEMBLY_HEADER", -30);
 
 PDA_SetupBounds();
 PDA_SetScrollLimit  (-100);
-PDA_SetScrollArrows2(-100, PDA_RectWidth + 60.0, PDA_ScrollableHeight + 90.0);
+PDA_SetScrollArrows2(-100, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
 
 str icon;
 str name;
@@ -29,7 +29,7 @@ if (StrCmp(PDA_Local.detailFetch[0], "null") != 0) {
     desc  = strParam("%s:_DESC",   PDA_Local.detailFetch[0]);
     textH = strParam("%s:_HEIGHT", PDA_Local.detailFetch[0]);
     
-    DisplayArmorIcon(icon, PDA_INFOID, PDA_RectX + 150.1, PDA_Local.scrollingy + 40.1 + (20.0 * 1), 1);
+    DisplayArmorIcon(icon, PDA_INFOID, PDA_SCREEN_X + 150.0 + X_LEFT_EDGE, PDA_Local.scrollingy + 40.0 + Y_TOP_EDGE + (20.0 * 1), 1);
 
     HudMessage(
         "%l:\n"
@@ -38,11 +38,11 @@ if (StrCmp(PDA_Local.detailFetch[0], "null") != 0) {
         name,
         mods,
         desc;
-        HUDMSG_PLAIN, PDA_INFO2ID, CR_WHITE, (PDA_RectX) + 10.1, (PDA_Local.scrollingy) + 50.1 + (20.0 * 1), 0);
+        HUDMSG_PLAIN, PDA_INFO2ID, CR_WHITE, (PDA_SCREEN_X) + 10.0 + X_LEFT_EDGE, (PDA_Local.scrollingy) + 50.0 + Y_TOP_EDGE + (20.0 * 1), 0);
         
     if (strCmp(strParam("%l:", textH), textH) != 0) {
         PDA_SetScrollLimit(-1 * batoi(strParam("%l:", textH)));
-        PDA_SetScrollArrows2(-1 * batoi(strParam("%l:", textH)), PDA_RectWidth + 60.0, PDA_ScrollableHeight + 90.0);
+        PDA_SetScrollArrows2(-1 * batoi(strParam("%l:", textH)), PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
     }
 } else {
     HudMessage(
@@ -52,7 +52,7 @@ if (StrCmp(PDA_Local.detailFetch[0], "null") != 0) {
         "PDA_ASSEMBLY_NOTFOUND_NAME",
         "PDA_ASSEMBLY_NOTFOUND_MODS",
         "PDA_ASSEMBLY_NOTFOUND_DESC";
-        HUDMSG_PLAIN, PDA_INFO2ID, CR_WHITE, (PDA_RectX) + 10.1, (PDA_Local.scrollingy) + 50.1 + (20.0 * 1), 0);
+        HUDMSG_PLAIN, PDA_INFO2ID, CR_WHITE, (PDA_SCREEN_X) + 10.0 + X_LEFT_EDGE, (PDA_Local.scrollingy) + 50.0 + Y_TOP_EDGE + (20.0 * 1), 0);
 }
 
 PDA_UnsetScrollWindow();

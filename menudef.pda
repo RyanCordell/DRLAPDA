@@ -1,0 +1,38 @@
+
+//==============================================================================
+//				PDA OPTIONS
+
+OptionMenu "DRLAPDAMenu"
+{
+	Title "PDA OPTIONS"
+	StaticText 	""
+	StaticText 	""
+	StaticText 	"PDA Options", 1
+	Option "PDA Appearance", "DRLA_PDA_theme", "PDAThemes"
+	Option "PDA Font",       "DRLA_PDA_font",  "PDAFonts"
+
+	Option "PDA Beep Sounds",     "DRLA_PDA_soldier",  "PDASoundType"
+	Option "PDA First Time Help", "DRLA_PDA_firsttime", "PDAHelpType"
+
+  Slider "PDA X sensitivity", "DRLA_PDA_sensitivity_x", 5, 12, 1
+  Slider "PDA Y sensitivity", "DRLA_PDA_sensitivity_y", 5, 12, 1
+
+	Option "PDA Background Fade", "DRLA_PDA_fade", "PDAFadeType"
+	StaticText 	""
+	SafeCommand "Wipe all weapon info",	"rl_wipeassemblies"
+}
+
+OptionValue "PDAThemes"
+{
+	0, "Default/Bulky"
+	1, "Slim"
+}
+
+
+OptionString "PDAFonts"
+{
+  "STAT_LWR", "Default/PDA"
+	"STAT_MNO", "PDA Wider"
+	"SMALLFONT", "Smallfont"
+	"PDAFONT", "PDA Menu Slim"
+}

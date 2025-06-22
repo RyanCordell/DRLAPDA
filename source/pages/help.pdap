@@ -9,11 +9,12 @@ switch(PDA_Local.page)
     case 2: PDA_PrintHeader("PDA_DRLAHELP_HEADER", -40); break;
 }
 
-PDAButton P1 = PDA_CreateTab(50, "1", "PTAB", PDA_RectX + 0.1 + (12.0 * 0), PDA_RectY + 1.1, 12, 12);
-PDAButton P2 = PDA_CreateTab(51, "2", "PTAB", PDA_RectX + 0.1 + (12.0 * 1), PDA_RectY + 1.1, 12, 12);
+PDAButton P1 = PDA_CreateTab(50, "1", "PTAB", X_LEFT_EDGE + (12.0 * 0), PDA_SCREEN_Y + 1.0 + Y_TOP_EDGE, 12, 12);
+               PDA_InitButton(P1, true, 1, "", false);
 
-PDA_InitButton(P1, true, 1, "");
-PDA_InitButton(P2, true, 2, "");
+PDAButton P2 = PDA_CreateTab(51, "2", "PTAB", X_LEFT_EDGE + (12.0 * 1), PDA_SCREEN_Y + 1.0 + Y_TOP_EDGE, 12, 12);
+               PDA_InitButton(P2, true, 2, "", false);
+
 
 PDA_SetupBounds();
 PDA_DefaultFont();
@@ -22,25 +23,35 @@ PDA_SetScrollLimit(-100);
 
 if(PDA_Local.page == 1)
 {
-    HudMessage( 
-                "%l:\n" // First time?
-                "%l:\n" // Controls
-                "(\cd%k:\c-) %l:\n"
-                "(\cd%k:\c-) %l:\n"
-                "\cgIf mouse look is disabled..\c-\n"
-                "(\cd%k:\c-) or (\cd%k:\c-) %l:\n"
-                "(\cd%k:\c-) or (\cd%k:\c-) %l:\n",
-                (GetUserCvar(PlayerNumber(), "DRLA_PDA_firsttime") ? "PDA_PDAHELP_FIRSTTIME" : "PDA_BLANK"), "PDA_PDAHELP_CONTROLS",
-                "+attack", "PDA_PDAHELP_MOUSE1", "+altattack", "PDA_PDAHELP_MOUSE2",
-                "+lookup", "+lookdown", "PDA_PDAHELP_YAXIS",
-                "+left", "+right", "PDA_PDAHELP_XAXIS";
-                HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, PDA_RectX + 10.1, PDA_Local.scrollingy + 20.1 + (20.0 * 1), 0);
+    HudMessageParallax(
+        StrParam(
+        "%l:\n" // First time?
+        "%l:\n" // Controls
+        "(\cd%k: / %k:\c-) %l:\n"
+        "(\cd%k: / %k:\c-) %l:\n"
+        "\cgIf mouse look is disabled..\c-\n"
+        "(\cd%k:\c-) or (\cd%k:\c-) %l:\n"
+        "(\cd%k:\c-) or (\cd%k:\c-) %l:\n",
+        (GetUserCvar(PlayerNumber(), "DRLA_PDA_firsttime") ? "PDA_PDAHELP_FIRSTTIME" : "PDA_BLANK"), "PDA_PDAHELP_CONTROLS",
+        "+attack", "+use", "PDA_PDAHELP_MOUSE1", "+altattack", "+jump", "PDA_PDAHELP_MOUSE2",
+        "+lookup", "+lookdown", "PDA_PDAHELP_YAXIS",
+        "+left", "+right", "PDA_PDAHELP_XAXIS"),
+        HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 
+        PDA_SCREEN_X + 10.0 + X_LEFT_EDGE, 
+        20.0 + Y_TOP_EDGE + (20.0 * 1),
+        0, 1.0);
 }
 if(PDA_Local.page == 2)
 {
-    HudMessage("\cd(%k:\c-, \cd%k:)\c- %l:\cd(%k:)\c- %l:%l:",
-               "invuse", "+zoom", "PDA_DRLAHELP_DROPITEM", "+use", "PDA_DRLAHELP_BACKPACK", "PDA_DRLAHELP_CRATE";
-               HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, PDA_RectX + 10.1, PDA_Local.scrollingy + 20.1 + (20.0 * 1), 0);
+    HudMessageParallax(
+        StrParam(
+            "\cd(%k:\c-, \cd%k:)\c- %l:\cd(%k:)\c- %l:%l:",
+            "invuse", "+zoom", "PDA_DRLAHELP_DROPITEM", "+use", "PDA_DRLAHELP_BACKPACK", "PDA_DRLAHELP_CRATE"
+        ),
+        HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 
+        PDA_SCREEN_X + 10.0 + X_LEFT_EDGE, 
+        20.0 + Y_TOP_EDGE + (20.0 * 1),
+        0, 1.0);
 }
 
 // Get rid of it once we're done.

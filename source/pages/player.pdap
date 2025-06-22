@@ -7,11 +7,11 @@ switch(PDA_Local.page)
     case 2: PDA_PrintHeader("PDA_CLASS_HEADER2", 0); break;
 }
     
-PDAButton P1 = PDA_CreateTab(50, "1", "PTAB", PDA_RectX + 0.1 + (12.0 * 0), PDA_RectY + 1.1, 12, 12);
-PDAButton P2 = PDA_CreateTab(51, "2", "PTAB", PDA_RectX + 0.1 + (12.0 * 1), PDA_RectY + 1.1, 12, 12);
+PDAButton P1 = PDA_CreateTab(50, "1", "PTAB", X_LEFT_EDGE + (12.0 * 0), PDA_SCREEN_Y + 1.0 + Y_TOP_EDGE, 12, 12);
+PDAButton P2 = PDA_CreateTab(51, "2", "PTAB", X_LEFT_EDGE + (12.0 * 1), PDA_SCREEN_Y + 1.0 + Y_TOP_EDGE, 12, 12);
 
-PDA_InitButton(P1, true, 1, "");
-PDA_InitButton(P2, true, 2, "");
+PDA_InitButton(P1, true, 1, "", false);
+PDA_InitButton(P2, true, 2, "", false);
 
 PDA_SetupBounds();
 
@@ -29,7 +29,7 @@ if(GetActorclass(0) != "None")
       classIcon = "PPDAUNK";
       
     SetFont(classIcon);
-    HudMessage(s:"A\n"; HUDMSG_ALPHA, PDA_INFOID, CR_UNTRANSLATED,  PDA_RectWidth + 5.2,  (PDA_ScrollableHeight) +5.1, 0, 0.45);
+    HudMessage(s:"A\n"; HUDMSG_ALPHA, PDA_INFOID, CR_UNTRANSLATED,  PDA_SCREEN_WIDTH + 5.0 + X_RIGHT_EDGE, (PDA_SCROLLABLE_HEIGHT) + 5.0 + Y_TOP_EDGE, 0, 0.45);
     
     PDA_DefaultFont();
 
@@ -50,18 +50,18 @@ if(GetActorclass(0) != "None")
         HudMessage("\cd%l:\c-\n\n%l:",
                     PDA_Class_Name_Printer,
                     PDA_Class_Ability_Printer;
-                    HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, (PDA_RectX) + 10.1, PDA_Local.scrollingy + 20.1 + (20.0 * 1), 0);
+                    HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, (PDA_SCREEN_X) + 10.0 + X_LEFT_EDGE, PDA_Local.scrollingy + 20.0 + Y_TOP_EDGE + (20.0 * 1), 0);
     }
     // Class backstory
     if(PDA_Local.page == 2)
     {
         PDA_SetScrollLimit(-1 * batoi(StrParam("%l:", PDA_Class_Story_Height)));
-        PDA_SetScrollArrows2(-1 * batoi(StrParam("%l:", PDA_Class_Story_Height)), PDA_RectWidth + 60.0, PDA_ScrollableHeight + 90.0);
+        PDA_SetScrollArrows2(-1 * batoi(StrParam("%l:", PDA_Class_Story_Height)), PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
 
         HudMessage("\cd%l:\c-\n\n%l:",
                     PDA_Class_Name_Printer,
                     PDA_Class_Story_Printer;
-                    HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, (PDA_RectX) + 10.1, PDA_Local.scrollingy + 20.1 + (20.0 * 1), 0);
+                    HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, (PDA_SCREEN_X) + 10.0 + X_LEFT_EDGE, PDA_Local.scrollingy + 20.0 + Y_TOP_EDGE + (20.0 * 1), 0);
     }
 }
 // Get rid of it once we're done.
