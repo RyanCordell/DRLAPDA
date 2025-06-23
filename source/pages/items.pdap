@@ -4,7 +4,7 @@ if(GetCvar("DRLA_specialstarts") == 2)
 
     PDA_Wipe();
 
-    PDA_SetupBounds();
+    PDA_SetupScreenBounds();
 
     #define DUKE2X 0.0 + X_LEFT_EDGE
     #define DUKE2Y 0.0 + Y_TOP_EDGE
@@ -26,17 +26,17 @@ if(GetCvar("DRLA_specialstarts") != 2)
 
     PDA_PrintHeader("PDA_ITEMS_HEADER", +20);
 
-    PDAButton P1  = PDA_CreateTab(50, "1" , "PTAB", X_LEFT_EDGE + (12.0 * 0), PDA_SCREEN_Y + 1.0 + Y_TOP_EDGE, 12, 12);
-    PDAButton P2  = PDA_CreateTab(51, "2" , "PTAB", X_LEFT_EDGE + (12.0 * 1), PDA_SCREEN_Y + 1.0 + Y_TOP_EDGE, 12, 12);
-    PDAButton P3  = PDA_CreateTab(52, "3" , "PTAB", X_LEFT_EDGE + (12.0 * 2), PDA_SCREEN_Y + 1.0 + Y_TOP_EDGE, 12, 12);
-    PDAButton P4  = PDA_CreateTab(53, "4" , "PTAB", X_LEFT_EDGE + (12.0 * 3), PDA_SCREEN_Y + 1.0 + Y_TOP_EDGE, 12, 12);
-    PDAButton P5  = PDA_CreateTab(54, "5" , "PTAB", X_LEFT_EDGE + (12.0 * 4), PDA_SCREEN_Y + 1.0 + Y_TOP_EDGE, 12, 12);
+    PDAButton P1  = PDA_CreateTab(50, "1" , "PTAB", 12.0 * 0    , 6.0, 12, 6);
+                    PDA_InitButton(P1, true, 1, "", false);
+    PDAButton P2  = PDA_CreateTab(51, "2" , "PTAB", 12.0 * 1 + 2, 6.0, 12, 6);
+                    PDA_InitButton(P2, true, 2, "", false);
+    PDAButton P3  = PDA_CreateTab(52, "3" , "PTAB", 12.0 * 2 + 4, 6.0, 12, 6);
+                    PDA_InitButton(P3, true, 3, "", false);
+    PDAButton P4  = PDA_CreateTab(53, "4" , "PTAB", 12.0 * 3 + 6, 6.0, 12, 6);
+                    PDA_InitButton(P4, true, 4, "", false);
+    PDAButton P5  = PDA_CreateTab(54, "5" , "PTAB", 12.0 * 4 + 8, 6.0, 12, 6);
+                    PDA_InitButton(P5, true, 5, "", false);
 
-    PDA_InitButton(P1, true, 1, "", false);
-    PDA_InitButton(P2, true, 2, "", false);
-    PDA_InitButton(P3, true, 3, "", false);
-    PDA_InitButton(P4, true, 4, "", false);
-    PDA_InitButton(P5, true, 5, "", false);
 
 
     int y = 0;

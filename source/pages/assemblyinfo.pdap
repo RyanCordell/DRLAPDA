@@ -11,7 +11,7 @@ if (!PDA_Local.playonce) {
 
 PDA_PrintHeader("PDA_DETAILEDASSEMBLY_HEADER", -30);
 
-PDA_SetupBounds();
+PDA_SetupScreenBounds();
 PDA_SetScrollLimit  (-100);
 PDA_SetScrollArrows2(-100, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
 

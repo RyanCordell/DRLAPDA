@@ -10,7 +10,7 @@ switch(PDA_Local.page)
 
 if(PDA_Local.page == 1)
 {
-  PDA_SetupBounds();
+  PDA_SetupScreenBounds();
   PDA_SetScrollLimit(0);
   PDA_SetScrollArrows2(0, PDA_SCREEN_WIDTH + 50.0, PDA_SCROLLABLE_HEIGHT + 90.0);
 

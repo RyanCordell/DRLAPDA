@@ -19,16 +19,16 @@ case 3:
     break;
 }
 
-// PDAButton P1 = PDA_CreateTab(50, "1", "PTAB", X_LEFT_EDGE + (12.0 * 0), PDA_SCREEN_Y + 1.0 + Y_TOP_EDGE, 12, 12);
-//                PDA_InitButton(P1, true, 1, "", false);
+PDAButton P1 = PDA_CreateTab(50, "1", "PTAB", 12.0 * 0    , 6.0, 12, 6);
+               PDA_InitButton(P1, true, 1, "", false);
 
-// PDAButton P2 = PDA_CreateTab(51, "2", "PTAB", X_LEFT_EDGE + (12.0 * 1), PDA_SCREEN_Y + 1.0 + Y_TOP_EDGE, 12, 12);
-//                PDA_InitButton(P2, true, 2, "", false);
+PDAButton P2 = PDA_CreateTab(51, "2", "PTAB", 12.0 * 1 + 2, 6.0, 12, 6);
+               PDA_InitButton(P2, true, 2, "", false);
 
-// PDAButton P3 = PDA_CreateTab(52, "3", "PTAB", X_LEFT_EDGE + (12.0 * 2), PDA_SCREEN_Y + 1.0 + Y_TOP_EDGE, 12, 12);
-//                PDA_InitButton(P3, true, 3, "", false);
+PDAButton P3 = PDA_CreateTab(52, "3", "PTAB", 12.0 * 2 + 4, 6.0, 12, 6);
+               PDA_InitButton(P3, true, 3, "", false);
 
-PDA_SetupBounds();
+PDA_SetupScreenBounds();
 PDA_DefaultFont();
 
 #define WEAPON_PAGE_STORY 1
@@ -102,16 +102,18 @@ if (stricmp(CheckInventory(currentWeapon), "None") != 0) {
             0, 1.0);
         
         PDAButton Goto2 = PDA_CreateButton(61, "Modpack Effects" , "TMODICON", 
-            /*x*/0.0, 
-            /*y*/20.0 + (20.0 * 6), 
+            10.0, 
+            20.0 + (20.0 * 4), 
             /*bw*/82, /*bh*/16, 
             /*gw*/16, /*gh*/19);
                           PDA_InitButton(Goto2, true, 2, "", false);
-        // PDAButton Goto2 = PDA_CreateButton(61, "Modpack Effects" , "TMODICON", 10.0 + X_LEFT_EDGE, 60.0 + (20.0 * 1) + Y_TOP_EDGE, 64, 8, 0.0, 0.0);
-        //                   PDA_InitButton(Goto2, true, 2, "", false);
 
-        // PDAButton Goto3 = PDA_CreateButton(62, "Artifact Effects", "DMNAICON", 10.0 + X_LEFT_EDGE, 60.0 + (20.0 * 2) + Y_TOP_EDGE, 64, 8, 0.0, 0.0);
-        //                   PDA_InitScrollingButton(Goto3, true, 3, "", false, false);
+        PDAButton Goto3 = PDA_CreateButton(62, "Artifact Effects", "DMNAICON", 
+            10.0, 
+            20.0 + (20.0 * 5),
+            82, 16, 
+            16, 19);
+                          PDA_InitButton(Goto3, true, 3, "", false);
     }
 
     if (PDA_Local.page == WEAPON_PAGE_MODPACK_EFFECTS) {

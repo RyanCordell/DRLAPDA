@@ -23,7 +23,7 @@ int kcount;
 int page = PDA_Local.page - 2;
 
 // Make ???? buttons instead of blank spaces for undiscovered enemies
-PDA_SetupBounds();
+PDA_SetupScreenBounds();
 
 fixed newY = (PDA_Local.scrollingy * NEW_RESOLUTION_Y) + (34.0 * NEW_RESOLUTION_Y) + Y_TOP_EDGE;
 

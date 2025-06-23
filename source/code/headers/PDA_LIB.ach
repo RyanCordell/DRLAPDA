@@ -1,5 +1,5 @@
 /** VARIABLES */
-bool debug = true;
+bool debug = false;
 
 str USED_PDA_FONT  = "STAT_MNO";
 str PDA_FONT_LOWER = "STAT_LWR";
@@ -147,16 +147,16 @@ struct PDAButton {
     int id;
     float x;
     float y;
-    
+
     int width;
     int height;
-    
+
     int state;
     int oldstate;
-    
+
     str label;
     str graphic;
-    
+
     str tooltip;
 
     fixed alpha;
@@ -165,12 +165,14 @@ struct PDAButton {
     int graphicFlags;
     float graphicX;
     float graphicY;
-    
+
     str textFont;
     int textID;
     int textFlags;
     float finalX;
     float finalY;
+
+    str type;
 }
 PDAButton PDA_Button[MAX_PLAYERS][512];
 
@@ -458,7 +460,7 @@ str DRLA_BackpackList[DRLA_BACKPACKMAX][2] = {
 #define PDA_SetMonsterLimit(a)  if (PDA_Local.monsterpage > (a)) PDA_Local.monsterpage = (a)
 #define PDA_DefaultFont() 		SetFont(USED_PDA_FONT);
 
-#define PDA_PrintHeader(a, b) 	HudMessage(l:(a); HUDMSG_PLAIN, PDA_INFOTOPID, CR_GREEN, (PDA_SCREEN_X) + 100.0 + X_LEFT_EDGE + (b), (PDA_SCREEN_Y) + Y_TOP_EDGE, 0)
+#define PDA_PrintHeader(a, b) 	HudMessage(l:(a); HUDMSG_PLAIN, PDA_INFOTOPID, CR_GREEN, PDA_SCREEN_X + 100.0 + (b) + X_LEFT_EDGE, (PDA_SCREEN_Y) + 2.0 + Y_TOP_EDGE, 0)
 
 /** PONG stuff */
 //where the sscore is drawn

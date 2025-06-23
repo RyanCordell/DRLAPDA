@@ -7,13 +7,13 @@ switch(PDA_Local.page)
     case 2: PDA_PrintHeader("PDA_CLASS_HEADER2", 0); break;
 }
     
-PDAButton P1 = PDA_CreateTab(50, "1", "PTAB", X_LEFT_EDGE + (12.0 * 0), PDA_SCREEN_Y + 1.0 + Y_TOP_EDGE, 12, 12);
-PDAButton P2 = PDA_CreateTab(51, "2", "PTAB", X_LEFT_EDGE + (12.0 * 1), PDA_SCREEN_Y + 1.0 + Y_TOP_EDGE, 12, 12);
+PDAButton P1 = PDA_CreateTab(50, "1", "PTAB", 12.0 * 0    , 6.0, 12, 6);
+               PDA_InitButton(P1, true, 1, "", false);
 
-PDA_InitButton(P1, true, 1, "", false);
-PDA_InitButton(P2, true, 2, "", false);
+PDAButton P2 = PDA_CreateTab(51, "2", "PTAB", 12.0 * 1 + 2, 6.0, 12, 6);
+               PDA_InitButton(P2, true, 2, "", false);
 
-PDA_SetupBounds();
+PDA_SetupScreenBounds();
 
 // Concatenate things together depending on player class. Used to retrieve class specific info.
 if(GetActorclass(0) != "None")

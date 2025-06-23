@@ -91,7 +91,7 @@ SCRIPT "PDA_MouseController" (void)
             PDA_LocalMouse.y -= (playerY << PDA_Y_sensitivity) * yScale;
         }
 
-        log("mouse [%d:, %d:], max %d:, scrolly: %d:", PDA_LocalMouse.x, PDA_LocalMouse.y, PDA_Local.maxtexty, PDA_Local.scrollingy);
+        if (debug) log("mouse [%d:, %d:], max %d:, scrolly: %d:", PDA_LocalMouse.x, PDA_LocalMouse.y, PDA_Local.maxtexty, PDA_Local.scrollingy);
         
         if (PDA_LocalMouse.x < HMIN) PDA_LocalMouse.x = HMIN;
         if (PDA_LocalMouse.x > HMAX) PDA_LocalMouse.x = HMAX;

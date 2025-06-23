@@ -9,8 +9,8 @@ switch (PDA_Local.page) {
     case 2: PDA_PrintHeader("PDA_ARMOR_HEADER2", -15); break;
 }
 
-PDAButton P1 = PDA_CreateTab(50, "1", "PTAB", X_LEFT_EDGE + (12.0 * 0), PDA_SCREEN_Y + 1.0 + Y_TOP_EDGE, 12, 12);
-PDAButton P2 = PDA_CreateTab(51, "2", "PTAB", X_LEFT_EDGE + (12.0 * 1), PDA_SCREEN_Y + 1.0 + Y_TOP_EDGE, 12, 12);
+PDAButton P1 = PDA_CreateTab(50, "1", "PTAB", 12.0 * 0    , 6.0, 12, 6);
+PDAButton P2 = PDA_CreateTab(51, "2", "PTAB", 12.0 * 1 + 2, 6.0, 12, 6);
 
 PDA_InitButton(P1, true, 1, "", false);
 PDA_InitButton(P2, true, 2, "", false);
@@ -27,7 +27,7 @@ if(CheckInventory("DRPGDRLAActive")) {
 // Show that this is scrollable
 
 //SetHudSize(NEW_RESOLUTION_WIDTH,NEW_RESOLUTION_HEIGHT);
-PDA_SetupBounds();
+PDA_SetupScreenBounds();
 SetFont(PDA_FONT_LOWER);
 
 #define EQUIPMENT_PAGE_ONHAND 1

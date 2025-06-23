@@ -11,7 +11,7 @@ if (!PDA_Local.playonce) {
 
 PDA_PrintHeader("PDA_DETAILEDBEAST_HEADER", -30);
 
-PDA_SetupBounds();
+PDA_SetupScreenBounds();
 
 str name   = "N/A\n",
     icon   = "N/A\n",

@@ -117,19 +117,22 @@ function fixed max (fixed x, fixed y) {
 }
 
 function void HudMessageParallax(str text, int type, int id, int color, fixed x, fixed y, fixed holdTime, fixed alpha) {
-    // fixed finalY = (int)((acceleratedScrolling) ? PDA_Local.scrollingy * NEW_RESOLUTION_Y : PDA_Local.scrollingy);
-    fixed _x =       (int)((int)(PDA_SCREEN_X + x) * NEW_RESOLUTION_X) + X_LEFT_EDGE;
-    fixed _y = (int)((int)(PDA_Local.scrollingy * NEW_RESOLUTION_Y) + y) + Y_TOP_EDGE;
-    HudMessage(s:text; type, id, color, _x, _Y, holdTime, alpha); 
+    int _xTemp = (PDA_SCREEN_X + x) * NEW_RESOLUTION_X;
+    int _yTemp = (PDA_Local.scrollingy * NEW_RESOLUTION_Y) + y;
+    fixed _x = _xTemp + X_LEFT_EDGE;
+    fixed _y = _yTemp + Y_TOP_EDGE;
+    HudMessage(s:text; type, id, color, _x, _y, holdTime, alpha); 
 
     log("text (x: %f:, y: %f:)", _x, _y);
 }
 
+// int _xTemp = (PDA_SCREEN_X * NEW_RESOLUTION_X) + (x * NEW_RESOLUTION_X);
 #define assignButtonParams(a, b) \
-    PDA_SetupBounds(); \
+    int _xTemp = PDA_SCREEN_X + x; \
+    int _yTemp = PDA_Local.scrollingy + y; \
     (a).id = id; \
-    (a).x = (int)((PDA_SCREEN_X * NEW_RESOLUTION_X) + (x * NEW_RESOLUTION_X)) + X_LEFT_EDGE; \
-    (a).y = (int)(PDA_Local.scrollingy + y) + Y_TOP_EDGE;  \
+    (a).x = _xTemp + X_LEFT_EDGE; \
+    (a).y = _yTemp + Y_TOP_EDGE; \
     (a).width = width; \
     (a).height = height; \
     (a).oldstate = (a).state; \
@@ -158,7 +161,7 @@ function void HudMessageParallax(str text, int type, int id, int color, fixed x,
             PDA_LocalMouse.state = mouse_default; \
         } \
     } \
-    log("btn-col (x: %f:, y: %f:, w: %d:, h: %d:)", (a).x, (a).y, (a).width, (a).height); \
+    if (debug) log("btn-col (x: %f:, y: %f:, w: %d:, h: %d:)", (a).x, (a).y, (a).width, (a).height); \
 
 // Onto other stuff
 
@@ -182,7 +185,19 @@ function void PDA_NOPONG (void) {
 	}
 }
 
-function void PDA_SetupBounds (void) {
+function void PDA_SetupHeaderBounds (void) {
+    SetHudSize(NEW_RESOLUTION_WIDTH, NEW_RESOLUTION_HEIGHT);
+
+    int x = PDA_SCREEN_X + 4;
+    int y = PDA_SCREEN_Y;
+    int w = PDA_SCREEN_WIDTH * NEW_RESOLUTION_X;
+    int h = PDA_SCREEN_Y + 38;
+    int ww = (PDA_SCREEN_WIDTH * NEW_RESOLUTION_X) - PDA_SCREEN_X;
+
+    SetHudClipRect(x, y, w, h, ww);
+}
+
+function void PDA_SetupScreenBounds (void) {
     SetHudSize(NEW_RESOLUTION_WIDTH, NEW_RESOLUTION_HEIGHT);
 
     int x = PDA_SCREEN_X + 4;
@@ -199,8 +214,64 @@ function void PDA_SetupBounds (void) {
                 PDA_SCREEN_WIDTH * NEW_RESOLUTION_X, PDA_SCROLLABLE_HEIGHT);
         SetHudClipRect(x, y, w, h, ww);
         // log("cliprect (x: %d:, y: %d:, w: %d:, h: %d:)", x, y, w, h);
-    }
+    }   
+}
+
+function void PDA_SetupFloatingTooltip (str graphic, str tooltip) {
+    SetFont(graphic);
+    int _xTemp = (PDA_SCREEN_X + 20) * NEW_RESOLUTION_X;
+    int _yTemp = PDA_LocalMouse.y * NEW_RESOLUTION_Y + 20;
+
+    HudMessage(s:"A\n"; HUDMSG_ALPHA, PDA_TOOLTIPID, CR_UNTRANSLATED, 
+        _xTemp + X_LEFT_EDGE, _yTemp + Y_TOP_EDGE, 
+        0, 0.9);
     
+    SetFont(USED_PDA_FONT);
+    // SetHudSize(500, 400);
+    // _yTemp = PDA_LocalMouse.y * (400 / OLD_RESOLUTION_HEIGHT);
+    // SetHudClipRect(
+    //     PDA_FLOATING_TOOLTIP_X, PDA_FLOATING_TOOLTIP_Y, 
+    //     PDA_FLOATING_TOOLTIP_WIDTH, PDA_SCROLLABLE_HEIGHT, 
+    //     PDA_FLOATING_TOOLTIP_WRAP
+    // );
+
+    SetHudClipRect(
+        PDA_SCREEN_X + 4, PDA_SCROLLABLE_Y, 
+        PDA_SCREEN_WIDTH * NEW_RESOLUTION_X, PDA_SCROLLABLE_HEIGHT, 
+        PDA_FLOATING_TOOLTIP_WRAP
+    );
+
+    _yTemp = PDA_LocalMouse.y * NEW_RESOLUTION_Y;
+
+    const float xOffset = 20.0;
+    const float yOffset = 30.0;
+
+    float _ttX = _xTemp + xOffset + X_LEFT_EDGE;
+    float _ttY = _yTemp + yOffset + Y_TOP_EDGE;
+
+    HudMessage("%s:", tooltip; HUDMSG_ALPHA, PDA_TOOLTIPID - 1, CR_UNTRANSLATED, 
+    _ttX, _ttY, 0.0, 1.0);
+}
+
+function void PDA_SetupPageTooltip (str graphic, str tooltip, float alpha) {
+    SetHudClipRect(
+        PDA_FLOATING_TOOLTIP_GRAPHIC_X, PDA_FLOATING_TOOLTIP_GRAPHIC_Y, 
+        PDA_FLOATING_TOOLTIP_GRAPHIC_WIDTH, PDA_FLOATING_TOOLTIP_GRAPHIC_HEIGHT, 
+        PDA_FLOATING_TOOLTIP_GRAPHIC_WRAP
+    );
+
+    SetFont(graphic);
+    HudMessage(s:"A\n"; HUDMSG_ALPHA, PDA_TOOLTIPID, CR_UNTRANSLATED, 
+        PDA_SCREEN_X + X_LEFT_EDGE, (int)(PDA_LocalMouse.y * NEW_RESOLUTION_Y) + 20.0 + Y_TOP_EDGE, 
+        0, 0.9);
+    
+    SetFont(USED_PDA_FONT);
+    HudMessage(s:tooltip; HUDMSG_ALPHA, PDA_TOOLTIPID - 1, CR_UNTRANSLATED, 
+    10.0, 
+    (int)(PDA_LocalMouse.y * NEW_RESOLUTION_Y) + 30.0, 
+    0, alpha);
+
+    PDA_SetupScreenBounds();
 }
 
 function void PDA_SetCategory (int category) {
@@ -301,7 +372,7 @@ function PDAButton PDA_CreateMenuButton (int id, str label, str graphic, float x
 
     if (debug) {
         DrawBorder(thisButton.x * NEW_RESOLUTION_X, thisButton.y * NEW_RESOLUTION_Y, width * NEW_RESOLUTION_X, height * NEW_RESOLUTION_Y);
-        PDA_SetupBounds();
+        PDA_SetupScreenBounds();
     }
     // log("gx: %d: | gw: %d: | fx: %d:", thisButton.graphicX, gw, thisButton.finalX);
     return thisButton;
@@ -310,25 +381,37 @@ function PDAButton PDA_CreateMenuButton (int id, str label, str graphic, float x
 function PDAButton PDA_CreateTab (int id, str label, str graphic, float x, float y, int width, int height) {
     #define thisButton PDA_LocalButton[id]
     assignButtonParams(thisButton, label)
-    thisButton.y       = y; // Override as this isn't meant to scroll
-    thisButton.graphic = graphic;
-    thisButton.alpha   = 0.6;
-
     buttonBoundsDefault(thisButton)
 
-    fixed xlabeloff = (strcmp(thisButton.graphic, "PTAB") == 0) ? 4.0 : 0.0;
-    fixed ylabeloff = (strcmp(thisButton.graphic, "PTAB") == 0) ? 3.0 : 0.0;
+    thisButton.y       = PDA_SCREEN_Y + y + Y_TOP_EDGE; // Override as this isn't meant to scroll
+    thisButton.alpha   = 0.6;
 
+    fixed xlabeloff = (strcmp(graphic, "PTAB") == 0) ? 5.0 : 0.0;
+    fixed ylabeloff = (strcmp(graphic, "PTAB") == 0) ? 5.0 : 0.0;
+
+    thisButton.graphic      = graphic;
     thisButton.graphicFlags = HUDMSG_ALPHA;
     thisButton.graphicID    = thisButton.id;
-    thisButton.graphicX     = thisButton.x;
-    thisButton.graphicY     = thisButton.y;
+    int _gxTemp             = thisButton.x * NEW_RESOLUTION_X;
+    thisButton.graphicX     = _gxTemp + X_LEFT_EDGE;
+    int _gyTemp             = thisButton.y * NEW_RESOLUTION_Y;
+    thisButton.graphicY     = _gyTemp + Y_TOP_EDGE;
+    thisButton.type         = "tab";
 
     thisButton.textFont     = PDA_FONT_SLIM;
     thisButton.textFlags    = HUDMSG_ALPHA;
-    thisButton.textID       = (thisButton.id) + 20;
-    thisButton.finalX       = thisButton.x + xlabeloff;
-    thisButton.finalY       = thisButton.y + ylabeloff;
+    thisButton.textID       = thisButton.graphicID + 10;
+    thisButton.finalX       = (int)thisButton.graphicX + xlabeloff;
+    thisButton.finalY       = (int)thisButton.graphicY + ylabeloff;
+
+    if (debug) {
+        int x = thisButton.x * NEW_RESOLUTION_X,
+            y = thisButton.y * NEW_RESOLUTION_Y,
+            w = width        * NEW_RESOLUTION_X,
+            h = height       * NEW_RESOLUTION_Y;
+        log("tab (x: %f:, y: %f:, w: %d:, h: %d:)", x, y, w, h);
+        DrawBorder(x, y, w, h);
+    }
 
     return thisButton;
 }
@@ -338,32 +421,32 @@ function PDAButton PDA_CreateButton (int id, str label, str graphic, float x, fl
     assignButtonParams(thisButton, label)
     buttonBoundsDefault(thisButton)
 
-    // Currently, multiplying X with NEW_RESOLUTION_X doesn't yield the same effect as the below offset
-    // thisButton.x += BULLSHIT_OFFSET;
     const float X_MARGIN = 1.0;
 
     thisButton.graphic      = graphic;
     thisButton.graphicFlags = HUDMSG_ALPHA;
     thisButton.graphicID    = thisButton.id;
-    thisButton.graphicX     = (int)((thisButton.x * NEW_RESOLUTION_X) + (gw * NEW_RESOLUTION_X));
-    thisButton.graphicY     = PDA_SCREEN_Y + (int)(thisButton.y * NEW_RESOLUTION_Y) - (int)(gh / 2);
+    int _gxTemp             = thisButton.x * NEW_RESOLUTION_X;
+    thisButton.graphicX     = _gxTemp + X_LEFT_EDGE;
+    int _gyTemp             = thisButton.y * NEW_RESOLUTION_Y;
+    thisButton.graphicY     = PDA_SCREEN_Y + _gyTemp - (int)(gh / 2);
+    thisButton.type         = "generic";
 
     thisButton.textFont     = PDA_FONT_SLIM;
     thisButton.textFlags    = HUDMSG_ALPHA;
     thisButton.textID       = thisButton.graphicID + 20;
-    thisButton.finalX       = thisButton.graphicX + (int)(X_MARGIN * NEW_RESOLUTION_X) + X_LEFT_EDGE;
+    int _fxTemp             = (int)thisButton.graphicX + (gw + X_MARGIN) * NEW_RESOLUTION_X;
+    thisButton.finalX       = _fxTemp + X_LEFT_EDGE;
     thisButton.finalY       = thisButton.graphicY;
-    // thisButton.finalX       = (int)(thisButton.graphicX + gw      ) + X_MARGIN + X_LEFT_EDGE;
-    // thisButton.finalY       = (int)(thisButton.graphicY + (gh / 2));
 
     if (debug) {
-        int x = thisButton.x,
+        int x = thisButton.x * NEW_RESOLUTION_X,
             y = thisButton.y * NEW_RESOLUTION_Y,
             w = width        * NEW_RESOLUTION_X,
             h = height       * NEW_RESOLUTION_Y;
         log("btn-gfx (x: %f:, y: %f:, w: %d:, h: %d:)", x, y, w, h);
         DrawBorder(x, y, w, h);
-        PDA_SetupBounds();
+        PDA_SetupScreenBounds();
     }
     // log("gx: %d: | gw: %d: | fx: %d:", thisButton.graphicX, gw, thisButton.finalX);
     return thisButton;
@@ -372,11 +455,29 @@ function PDAButton PDA_CreateButton (int id, str label, str graphic, float x, fl
 function PDAButton PDA_CreateAssemblyButton (int id, str graphic, str label, float x, float y, int width, int height, str assembly, str tooltip) {
     #define thisButton PDA_LocalButton[id]
     assignButtonParams(thisButton, label)
-    thisButton.graphic = graphic;
-    thisButton.tooltip = tooltip;
-
     buttonBoundsDefault(thisButton)
 
+    int graphicy = (int)(thisButton.y * NEW_RESOLUTION_Y) + 0.0;
+    int texty = (int)(thisButton.y * NEW_RESOLUTION_Y) + 0.0;
+
+    const int X_MARGIN = 12.0;
+
+    thisButton.graphic      = graphic;
+    thisButton.graphicFlags = HUDMSG_ALPHA;
+    thisButton.graphicID    = thisButton.id;
+    int _gxTemp             = (thisButton.x) * NEW_RESOLUTION_X;
+    thisButton.graphicX     = _gxTemp + X_LEFT_EDGE;
+    thisButton.graphicY     = graphicy + 20.0;
+    thisButton.type         = "assembly";
+
+    thisButton.textFont  = USED_PDA_FONT;
+    thisButton.textFlags = HUDMSG_ALPHA;
+    thisButton.textID    = thisButton.id - 40;
+    int _fxTemp          = (int)thisButton.graphicX * NEW_RESOLUTION_X;
+    thisButton.finalX    = _fxTemp + X_MARGIN + X_LEFT_EDGE;
+    thisButton.finalY    = texty + 4.0;
+
+    thisButton.tooltip = tooltip;
     if (CheckBounds(thisButton)) {
         if (PDA_LocalMouse.m1 && !(PDA_LocalMouse.oldState & BT_ATTACK)) {
             PDA_Local.detailFetch[0] = assembly;
@@ -388,48 +489,34 @@ function PDAButton PDA_CreateAssemblyButton (int id, str graphic, str label, flo
 
         // Open tooltip
         if (strCmp(thisButton.tooltip, "") != 0 && strCmp(assembly, "") != 0) {
-            SetHudClipRect(
-                PDA_FLOATING_TOOLTIP_GRAPHIC_X, PDA_FLOATING_TOOLTIP_GRAPHIC_Y, 
-                PDA_FLOATING_TOOLTIP_GRAPHIC_WIDTH, PDA_FLOATING_TOOLTIP_GRAPHIC_HEIGHT, 
-                PDA_FLOATING_TOOLTIP_GRAPHIC_WRAP
-            );
-            SetFont("PTIPM");
-            HudMessage(s:"A\n"; HUDMSG_ALPHA, PDA_TOOLTIPID, CR_UNTRANSLATED, 
-                PDA_SCREEN_X + X_LEFT_EDGE, (int)(PDA_LocalMouse.y * NEW_RESOLUTION_Y) + 10.0 + Y_TOP_EDGE, 
-                0, 0.9);
+            PDA_SetupFloatingTooltip("PTIPM", thisButton.tooltip);
+            // SetHudClipRect(
+            //     PDA_FLOATING_TOOLTIP_GRAPHIC_X, PDA_FLOATING_TOOLTIP_GRAPHIC_Y, 
+            //     PDA_FLOATING_TOOLTIP_GRAPHIC_WIDTH, PDA_FLOATING_TOOLTIP_GRAPHIC_HEIGHT, 
+            //     PDA_FLOATING_TOOLTIP_GRAPHIC_WRAP
+            // );
+            // SetFont("PTIPM");
+            // HudMessage(s:"A\n"; HUDMSG_ALPHA, PDA_TOOLTIPID, CR_UNTRANSLATED, 
+            //     PDA_SCREEN_X + X_LEFT_EDGE, (int)(PDA_LocalMouse.y * NEW_RESOLUTION_Y) + 10.0 + Y_TOP_EDGE, 
+            //     0, 0.9);
 
-            SetFont(USED_PDA_FONT);
-            SetHudSize(500, 400);
-            SetHudClipRect(
-                PDA_FLOATING_TOOLTIP_X, PDA_FLOATING_TOOLTIP_Y, 
-                PDA_FLOATING_TOOLTIP_WIDTH, PDA_FLOATING_TOOLTIP_HEIGHT, 
-                PDA_FLOATING_TOOLTIP_WRAP
-            );
-            HudMessage("%s:", thisButton.tooltip; HUDMSG_ALPHA, PDA_TOOLTIPID - 1, CR_UNTRANSLATED, 
-                PDA_SCREEN_X + 20.0 + X_LEFT_EDGE, (int)(PDA_LocalMouse.y * (400 / OLD_RESOLUTION_HEIGHT)) + 30.0 + Y_TOP_EDGE, 
-                0, 1.0);
-            
-            PDA_SetupBounds();
+            // SetFont(USED_PDA_FONT);
+            // SetHudSize(500, 400);
+            // SetHudClipRect(
+            //     PDA_FLOATING_TOOLTIP_X, PDA_FLOATING_TOOLTIP_Y, 
+            //     PDA_FLOATING_TOOLTIP_WIDTH, PDA_FLOATING_TOOLTIP_HEIGHT, 
+            //     PDA_FLOATING_TOOLTIP_WRAP
+            // );
+            // HudMessage("%s:", thisButton.tooltip; HUDMSG_ALPHA, PDA_TOOLTIPID - 1, CR_UNTRANSLATED, 
+            //     PDA_SCREEN_X + 20.0 + X_LEFT_EDGE, (int)(PDA_LocalMouse.y * (400 / OLD_RESOLUTION_HEIGHT)) + 30.0 + Y_TOP_EDGE, 
+            //     0, 1.0);
+            PDA_SetupScreenBounds();
         }
     }
 
-    int graphicy = (int)(thisButton.y * NEW_RESOLUTION_Y) + 0.0;
-    int texty = (int)(thisButton.y * NEW_RESOLUTION_Y) + 0.0;
-
-    thisButton.graphicFlags = HUDMSG_ALPHA;
-    thisButton.graphicID = thisButton.id;
-    thisButton.graphicX = (int)(thisButton.x * NEW_RESOLUTION_X) + 25.0 + X_LEFT_EDGE;
-    thisButton.graphicY = graphicy + 20.0;
-
-    thisButton.textFont = USED_PDA_FONT;
-    thisButton.textFlags = HUDMSG_ALPHA;
-    thisButton.textID = thisButton.id - 40;
-    thisButton.finalX = (int)(thisButton.x * NEW_RESOLUTION_X) + 50.0 + X_LEFT_EDGE;
-    thisButton.finalY = texty + 4.0;
-
     if (debug) {
         DrawBorder(thisButton.x * NEW_RESOLUTION_X, thisButton.y * NEW_RESOLUTION_Y, width * NEW_RESOLUTION_X, height * NEW_RESOLUTION_Y);
-        PDA_SetupBounds();
+        PDA_SetupScreenBounds();
     }
     return thisButton;
 }
@@ -453,24 +540,25 @@ function PDAButton PDA_CreateBeastButton (int id, str label, str color, float x,
     }
 
     thisButton.alpha = (thisButton.state == button_hovered) ? 1 : 0.6;
-    int graphicy = (int)(thisButton.y * NEW_RESOLUTION_Y) + 0.0;
-    int texty = (int)(thisButton.y * NEW_RESOLUTION_Y) + 0.0;
+    int graphicy     = (int)(thisButton.y * NEW_RESOLUTION_Y) + 0.0;
+    int texty        = (int)(thisButton.y * NEW_RESOLUTION_Y) + 0.0;
 
-    thisButton.graphic = "PLON";
+    thisButton.graphic      = "PLON";
     thisButton.graphicFlags = HUDMSG_ALPHA;
-    thisButton.graphicID = thisButton.id;
-    thisButton.graphicX = (thisButton.x * NEW_RESOLUTION_X) + 5.0;
-    thisButton.graphicY = graphicy + X_LEFT_EDGE;
+    thisButton.graphicID    = thisButton.id;
+    thisButton.graphicX     = (thisButton.x * NEW_RESOLUTION_X) + 5.0;
+    thisButton.graphicY     = graphicy + X_LEFT_EDGE;
+    thisButton.type         = "beast";
 
-    thisButton.textFont = USED_PDA_FONT;
+    thisButton.textFont  = USED_PDA_FONT;
     thisButton.textFlags = HUDMSG_ALPHA | HUDMSG_COLORSTRING;
-    thisButton.textID = (thisButton.id) + 20;
-    thisButton.finalX = (thisButton.x * NEW_RESOLUTION_X) + 10.0;
-    thisButton.finalY = textY + 4.0 + X_LEFT_EDGE;
+    thisButton.textID    = (thisButton.id) + 20;
+    thisButton.finalX    = (thisButton.x * NEW_RESOLUTION_X) + 10.0;
+    thisButton.finalY    = textY + 4.0 + X_LEFT_EDGE;
 
     if (debug) {
         DrawBorder(thisButton.x * NEW_RESOLUTION_X, thisButton.y * NEW_RESOLUTION_Y, width * NEW_RESOLUTION_X, height * NEW_RESOLUTION_Y);
-        PDA_SetupBounds();
+        PDA_SetupScreenBounds();
     }
     return thisButton;
 }
@@ -478,8 +566,6 @@ function PDAButton PDA_CreateBeastButton (int id, str label, str color, float x,
 function PDAButton PDA_CreateHUDButton (int id, str label, str color, float x, float y, int width, int height, float xoff, float yoff, str chosenhud) {
     #define thisButton PDA_LocalButton[id]
     assignButtonParams(thisButton, label)
-    thisButton.graphic = "";
-
     buttonBoundsDefault(thisButton)
 
     if (CheckBounds(thisButton)) {
@@ -496,23 +582,24 @@ function PDAButton PDA_CreateHUDButton (int id, str label, str color, float x, f
 
     thisButton.alpha = (thisButton.state == button_hovered) ? 1 : 0.6;
     int graphicy = (int)(thisButton.y * NEW_RESOLUTION_Y) + 0.0;
-    int texty = (int)(thisButton.y * NEW_RESOLUTION_Y) + 0.0;
+    int texty    = (int)(thisButton.y * NEW_RESOLUTION_Y) + 0.0;
 
-    thisButton.graphic = "PLON";
+    thisButton.graphic      = "PLON";
     thisButton.graphicFlags = HUDMSG_ALPHA;
-    thisButton.graphicID = thisButton.id;
-    thisButton.graphicX = (thisButton.x * NEW_RESOLUTION_X) + 5.0;
-    thisButton.graphicY = graphicY + X_LEFT_EDGE;
+    thisButton.graphicID    = thisButton.id;
+    thisButton.graphicX     = (thisButton.x * NEW_RESOLUTION_X) + 5.0;
+    thisButton.graphicY     = graphicY + X_LEFT_EDGE;
+    thisButton.type         = "hud";
 
-    thisButton.textFont = USED_PDA_FONT;
+    thisButton.textFont  = USED_PDA_FONT;
     thisButton.textFlags = HUDMSG_ALPHA | HUDMSG_COLORSTRING;
-    thisButton.textID = (thisButton.id) + 20;
-    thisButton.finalX = (thisButton.x * NEW_RESOLUTION_X) + 10.0;
-    thisButton.finalY = textY + 4.0 + X_LEFT_EDGE;
+    thisButton.textID    = (thisButton.id) + 20;
+    thisButton.finalX    = (thisButton.x * NEW_RESOLUTION_X) + 10.0;
+    thisButton.finalY    = textY + 4.0 + X_LEFT_EDGE;
 
     if (debug) {
         DrawBorder(thisButton.x * NEW_RESOLUTION_X, thisButton.y * NEW_RESOLUTION_Y, width * NEW_RESOLUTION_X, height * NEW_RESOLUTION_Y);
-        PDA_SetupBounds();
+        PDA_SetupScreenBounds();
     }
     return thisButton;
 }
@@ -520,30 +607,9 @@ function PDAButton PDA_CreateHUDButton (int id, str label, str color, float x, f
 function PDAButton PDA_DisplayArmor (int id, str label, str graphic, float x, float y, int width, int height, str tooltip, fixed opacity) {
     #define thisButton PDA_LocalButton[id]
     assignButtonParams(thisButton, label)
-    thisButton.graphic = graphic;
-    thisButton.tooltip = tooltip;
 
     buttonBoundsDefault(thisButton)
 
-    if (CheckBounds(thisButton) && strCmp(tooltip, "") != 0) {
-        SetHudClipRect(
-            PDA_FLOATING_TOOLTIP_GRAPHIC_X, PDA_FLOATING_TOOLTIP_GRAPHIC_Y, 
-            PDA_FLOATING_TOOLTIP_GRAPHIC_WIDTH, PDA_FLOATING_TOOLTIP_GRAPHIC_HEIGHT, 
-            PDA_FLOATING_TOOLTIP_GRAPHIC_WRAP
-        );
-
-        SetFont("PTIP");
-        HudMessage(s:"A\n"; HUDMSG_ALPHA, PDA_TOOLTIPID, CR_UNTRANSLATED, 
-            PDA_SCREEN_X + X_LEFT_EDGE, (int)(PDA_LocalMouse.y * NEW_RESOLUTION_Y) + 20.0 + Y_TOP_EDGE, 
-            0, 0.9);
-
-        SetFont(USED_PDA_FONT);
-        HudMessage(s:thisButton.tooltip; HUDMSG_ALPHA, PDA_TOOLTIPID - 1, CR_UNTRANSLATED, 
-        PDA_SCREEN_X + 10.0 + X_LEFT_EDGE, (int)(PDA_LocalMouse.y * NEW_RESOLUTION_Y) + 30.0 + Y_TOP_EDGE, 
-        0, thisButton.alpha);
-
-        PDA_SetupBounds();
-    }
 
     thisButton.alpha = (thisButton.state == button_hovered) ? opacity : opacity - 0.15;
     fixed xlabeloff = 4.0;
@@ -553,11 +619,13 @@ function PDAButton PDA_DisplayArmor (int id, str label, str graphic, float x, fl
     int texty    = (int)(thisButton.y * NEW_RESOLUTION_Y) + 0.0;
 
     // SetFont(StrParam("%l:", thisButton.graphic));
-    thisButton.graphic = StrParam("%l:", thisButton.graphic); // I don't think this will work the way I think it will.
+    thisButton.graphic      = graphic;
+    thisButton.graphic      = StrParam("%l:", thisButton.graphic); // I don't think this will work the way I think it will.
     thisButton.graphicFlags = HUDMSG_ALPHA;
-    thisButton.graphicID = thisButton.id;
-    thisButton.graphicX = (int)(thisButton.x * NEW_RESOLUTION_X) - 5.0 + X_LEFT_EDGE;
-    thisButton.graphicY = graphicy + (height / 2) + 3.0;
+    thisButton.graphicID    = thisButton.id;
+    thisButton.graphicX     = (int)(thisButton.x * NEW_RESOLUTION_X) - 5.0 + X_LEFT_EDGE;
+    thisButton.graphicY     = graphicy + (height / 2) + 3.0;
+    thisButton.type         = "armor";
 
     thisButton.textFont = PDA_FONT_LOWER;
     thisButton.textFlags = HUDMSG_ALPHA;
@@ -565,9 +633,15 @@ function PDAButton PDA_DisplayArmor (int id, str label, str graphic, float x, fl
     thisButton.finalX = (int)(thisButton.x * NEW_RESOLUTION_X) + 35.0 + X_LEFT_EDGE;
     thisButton.finalY = texty + (height / 2) + 2.0;
 
+    thisButton.tooltip = tooltip;
+
+    if (CheckBounds(thisButton) && strCmp(tooltip, "") != 0) {
+        // PDA_SetupPageTooltip("PTIP", thisButton.tooltip, thisButton.alpha);
+    }
+
     if (debug) {
         DrawBorder(thisButton.x * NEW_RESOLUTION_X, thisButton.y * NEW_RESOLUTION_Y, width * NEW_RESOLUTION_X, height * NEW_RESOLUTION_Y);
-        PDA_SetupBounds();
+        PDA_SetupScreenBounds();
     }
     return thisButton;
 }
@@ -575,20 +649,21 @@ function PDAButton PDA_DisplayArmor (int id, str label, str graphic, float x, fl
 function PDAButton PDA_CreateModPackDisplay (int id, str graphic, float x, float y, int width, int height, fixed alpha) {
     #define thisButton PDA_LocalButton[id]
     assignButtonParams(thisButton, '')
-    thisButton.graphic = graphic;
-
+    
+    thisButton.graphic      = graphic;
     thisButton.graphicFlags = HUDMSG_ALPHA;
-    thisButton.graphicID = PDA_ASSEMBLYIDRANGE + PDA_MODMAX + thisButton.id;
-    thisButton.graphicX = (int)(thisButton.x * NEW_RESOLUTION_X) + 15.0 + X_LEFT_EDGE;
-    thisButton.graphicY = 0.0;
+    thisButton.graphicID    = PDA_ASSEMBLYIDRANGE + PDA_MODMAX + thisButton.id;
+    thisButton.graphicX     = (int)(thisButton.x * NEW_RESOLUTION_X) + 15.0 + X_LEFT_EDGE;
+    thisButton.graphicY     = 0.0;
+    thisButton.type         = "modpack";
 
     thisButton.textFlags = HUDMSG_ALPHA;
-    thisButton.textFont = USED_PDA_FONT;
-    thisButton.finalX = PDA_SCREEN_X + 35.0 + X_LEFT_EDGE;
+    thisButton.textFont  = USED_PDA_FONT;
+    thisButton.finalX    = PDA_SCREEN_X + 35.0 + X_LEFT_EDGE;
 
     if (debug) {
         DrawBorder(thisButton.x * NEW_RESOLUTION_X, thisButton.y * NEW_RESOLUTION_Y, width * NEW_RESOLUTION_X, height * NEW_RESOLUTION_Y);
-        PDA_SetupBounds();
+        PDA_SetupScreenBounds();
     }
     return thisButton;
 }
@@ -602,7 +677,12 @@ function PDAButton PDA_CreateModPackDisplay (int id, str graphic, float x, float
  * @desc: Takes a given PDAButton declaration, then registers events and functionality for it.
  */
 function void PDA_InitButton (PDAButton button, int incat, int catpage, str message, int onlyVisual) {
-    PDA_SetupBounds();
+    if (button.type != "tab") {
+        PDA_SetupScreenBounds();
+    } else {
+        PDA_SetupHeaderBounds();
+    }
+
     if (incat > 0 && PDA_Local.page == catpage) {
         button.state = button_hovered;
         button.alpha = 1;
@@ -638,7 +718,7 @@ function void PDA_InitButton (PDAButton button, int incat, int catpage, str mess
                     );
                     HudMessage(s:message; HUDMSG_PLAIN, PDA_CAT_DESCRIPTION, CR_UNTRANSLATED, 
                     PDA_MENU_TOOLTIP_X + X_LEFT_EDGE, PDA_MENU_TOOLTIP_Y + Y_TOP_EDGE, 0);
-                    PDA_SetupBounds();
+                    PDA_SetupScreenBounds();
                 }
                 break;
         }
@@ -691,7 +771,7 @@ function void PDA_InitScrollingButton (PDAButton button, int incat, int catpage,
                     );
                     HudMessage(s:message; HUDMSG_PLAIN, PDA_CAT_DESCRIPTION, CR_UNTRANSLATED, 
                     PDA_MENU_TOOLTIP_X + X_LEFT_EDGE, PDA_MENU_TOOLTIP_Y + Y_TOP_EDGE, 0);
-                    PDA_SetupBounds();
+                    PDA_SetupScreenBounds();
                 }
                 break;
         }
@@ -756,7 +836,7 @@ function void PDA_UnsetScrollArrows (void) {
 
 function void PDA_SetScrollWindow (int scrollDownMax) {
 	// SetHudClipRect(PDA_SCREEN_X, PDA_SCROLLABLE_Y, PDA_SCREEN_WIDTH, PDA_SCROLLABLE_HEIGHT, PDA_SCREEN_WIDTH);
-    PDA_SetupBounds();
+    PDA_SetupScreenBounds();
 	PDA_SetScrollArrows2(scrollDownMax, PDA_SCREEN_WIDTH + X_LEFT_EDGE, PDA_SCREEN_HEIGHT + Y_TOP_EDGE);
 }
 

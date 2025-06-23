@@ -35,4 +35,7 @@ OptionString "PDAFonts"
 	"STAT_MNO", "PDA Wider"
 	"SMALLFONT", "Smallfont"
 	"PDAFONT", "PDA Menu Slim"
+	"RLZFONT", "Holographic Font"
+	"RLZFONT2", "Grayscale Holographic Font"
+	"RLZFONT3", "Grayscale Holographic Font (Smaller)"
 }
