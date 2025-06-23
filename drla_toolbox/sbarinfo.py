@@ -22,14 +22,7 @@ from datetime import datetime
 
 from typing import Any, IO
 
-
-def current_time() -> datetime:
-    """
-    Returns the current time as a string in the format "HH:MM:SS"
-    """
-
-    return datetime.now().strftime("%H:%M:%S")
-
+from .utils import current_time, is_invoked_by_combiner, attempt_print
 
 INPUT_FOLDER_ARG: int = 1
 OUTPUT_FOLDER_ARG: int = 2
@@ -47,8 +40,6 @@ class Sbarinfo:
           Combiner, and False otherwise.
         - `empty_memory_variables`: Empties the list of variables in the class' 
           'memory'.
-        - `attempt_print`: Prints a line to the console if the class is not
-          invoked by the Combiner, otherwise it calls the `printLine` method.
         - `main`: Calls the `process_input` method and then the `perform_compile`
           method, only called when invoked via terminal.
         - `process_merge`: Processes any "#MERGE" directives found in the input file.
@@ -71,11 +62,6 @@ class Sbarinfo:
     def empty_memory_variables(self) -> None:
         self.variables_in_memory = []
 
-    def attempt_print(self, line: str) -> None:
-        if Sbarinfo.is_invoked_by_combiner(self) and hasattr(self, "printline"):
-            self.printLine(line)
-        else:
-            print(line)
 
     def main(self):
         self.process_input()
@@ -97,7 +83,7 @@ class Sbarinfo:
                 file_exists: bool = os.path.exists(load_file_path)
 
                 if file_exists:
-                    Sbarinfo.attempt_print(
+                    attempt_print(
                         self,
                         f'{current_time()} MERGE @ {index} and {load_file_path} found. Executing\n'
                     )
@@ -109,7 +95,7 @@ class Sbarinfo:
                         )
 
                 else:
-                    Sbarinfo.attempt_print(
+                    attempt_print(
                         self,
                         f'{current_time()} {load_file_path} not found. Skipping directive\n',
                     )
@@ -130,7 +116,7 @@ class Sbarinfo:
                     variable_line.append(temp[0].strip())
                     variable_line.append(temp[1].strip())
 
-                    Sbarinfo.attempt_print(
+                    attempt_print(
                         self,
                         f'{current_time()} Variable {variable_line[0]} declared \n'
                     )
@@ -150,7 +136,7 @@ class Sbarinfo:
                                 line = line.replace(f'${variable[0]}', variable[1])
                                 data_lines[i] = line
 
-                    Sbarinfo.attempt_print(
+                    attempt_print(
                         self, f'{current_time()} Line changed: {line}\n'
                     )
 
@@ -178,7 +164,7 @@ class Sbarinfo:
                 with open(file_path, mode="w+", encoding="utf-8") as file:
                     file.writelines("".join(Sbarinfo.data))
 
-                Sbarinfo.attempt_print(
+                attempt_print(
                     self,
                     f'''{current_time()} Finished {file_path} [{os.path.getsize(os.path.normpath(file_path))} bytes]\n''',
                 )
@@ -198,7 +184,7 @@ class Sbarinfo:
             for index, line in enumerate(Sbarinfo.data):
                 Sbarinfo.process_merge(self, index, line)
 
-            Sbarinfo.attempt_print(
+            attempt_print(
                 self, f'{current_time()} Data: {Sbarinfo.data}'
             )
 
@@ -214,7 +200,7 @@ class Sbarinfo:
             )
             if not self.output_file:
                 self.clearResults()
-                Sbarinfo.attempt_print(self, f'{current_time()} No file chosen\n')
+                attempt_print(self, f'{current_time()} No file chosen\n')
                 self.compileSbarinfo.configure(state="disabled")
         else:
             with open(sys.argv[OUTPUT_FOLDER_ARG], mode="w", encoding="utf-8") as file:
@@ -242,12 +228,12 @@ class Sbarinfo:
             if self.input_file:
                 if Sbarinfo.is_invoked_by_combiner(self):
                     self.compileSbarinfo.configure(state="normal")
-                Sbarinfo.attempt_print(
+                attempt_print(
                     self,
                     f'{current_time()} File selected: {os.path.normpath(self.input_file)}\n'
                 )
             else:
-                Sbarinfo.attempt_print(self, f'{current_time()} No file selected\n')
+                attempt_print(self, f'{current_time()} No file selected\n')
         else:
             if sys.argv[INPUT_FOLDER_ARG]:
                 self.input_file = sys.argv[INPUT_FOLDER_ARG]

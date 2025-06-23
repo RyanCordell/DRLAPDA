@@ -9,10 +9,7 @@ from datetime import datetime
 
 from typing import Any, Literal
 
-
-def current_time() -> datetime:
-    return datetime.now().strftime("%H:%M:%S")
-
+from .utils import current_time, is_invoked_by_combiner, attempt_print
 
 INPUT_FOLDER_ARG: int = 1
 OUTPUT_FOLDER_ARG: int = 2
@@ -42,8 +39,6 @@ class Arsenal:
     def language_padding(self, value: str) -> str:
         return Arsenal.res_padder(self, " ", 4 - len(value))
 
-    def is_invoked_by_combiner(self) -> bool:
-        return "Combiner" in self.__class__.__name__
 
     def main(self) -> None:
         Arsenal.do_input(self)
@@ -57,21 +52,15 @@ class Arsenal:
 
         Arsenal.do_compile(self)
 
-    def attempt_print(self, line: str) -> None:
-        if Arsenal.is_invoked_by_combiner(self) and hasattr(self, "print_line"):
-            self.print_line(line)
-        else:
-            print(line)
-
     def attempt_clear_results(self) -> None:
-        if Arsenal.is_invoked_by_combiner(self) and hasattr(self, "clear_results"):
+        if is_invoked_by_combiner(self) and hasattr(self, "clear_results"):
             self.clear_results()
 
     def __init__(self):
         self.current_path: str = ""
 
     def do_input(self) -> None:
-        if Arsenal.is_invoked_by_combiner(self) and hasattr(self, "current_path"):
+        if is_invoked_by_combiner(self) and hasattr(self, "current_path"):
 
             if not self.current_path:
                 self.current_path = os.path.dirname(os.path.realpath(__file__))
@@ -101,14 +90,14 @@ class Arsenal:
         Arsenal.attempt_clear_results(self)
 
         if Arsenal.input_files:
-            Arsenal.attempt_print(
+            attempt_print(
                 self,
                 f"{current_time()} Files selected: {list(Arsenal.input_files)}\n",
             )
             Arsenal.filler: dict[str, Any] = {}
 
             for _, file in enumerate(Arsenal.input_files):
-                Arsenal.attempt_print(
+                attempt_print(
                     self, f"{current_time()} Loaded JSON into filler memory: {file}\n"
                 )
                 Arsenal.loaded_files += os.path.basename(file) + "\n"
@@ -131,10 +120,10 @@ class Arsenal:
                 if "attributes" in f:
                     Arsenal.attributes = Arsenal.filler[f]
         else:
-            Arsenal.attempt_print(self, f"{current_time()} No JSON files selected\n")
+            attempt_print(self, f"{current_time()} No JSON files selected\n")
 
     def clearWindow(self):
-        Arsenal.attempt_print(self, line=f"{current_time()} Clearing window\n")
+        attempt_print(self, line=f"{current_time()} Clearing window\n")
         Arsenal.attempt_clear_results(self)
 
     def do_compile(self):
@@ -159,7 +148,7 @@ class Arsenal:
 
     def do_output(self, name: str) -> str | None:
         if (
-            Arsenal.is_invoked_by_combiner(self)
+            is_invoked_by_combiner(self)
             and hasattr(self, "current_path")
             and self.current_path
         ):
@@ -173,7 +162,7 @@ class Arsenal:
 
             if not Arsenal.output_data:
                 Arsenal.attempt_clear_results(self)
-                Arsenal.attempt_print(self, f"{current_time()} No file chosen\n")
+                attempt_print(self, f"{current_time()} No file chosen\n")
 
                 if hasattr(self, "compileArsenal"):
                     self.compileArsenal.configure(state="disabled")
@@ -190,7 +179,7 @@ class Arsenal:
 
     def handle_colors(self, str_to_color: str, method: str) -> str:
         if not str_to_color or len(Arsenal.colors) < 1:
-            Arsenal.attempt_print(
+            attempt_print(
                 self, f"{current_time()} No data found to process\n"
             )
             return "false"
@@ -206,7 +195,7 @@ class Arsenal:
     def process_weapons(
         self, weapons: dict[str, Any], do_output: bool
     ) -> None | Literal[0]:
-        Arsenal.attempt_print(self, f"{current_time()} Parsing WEAPONS database\n")
+        attempt_print(self, f"{current_time()} Parsing WEAPONS database\n")
 
         weapon_mod_max: int = 0
         demonic_weapons: int = 0
@@ -351,27 +340,24 @@ class Arsenal:
                     with open(file_path, mode="w", encoding="utf-8") as file:
                         file.write(language_weapon_output)
 
-            Arsenal.attempt_print(
+            attempt_print(
                 self,
                 f'''{current_time()} Processing weapons completed. Created/updated language.auto.weapons [{os.path.getsize(file_path)} bytes]\n''',
             )
         else:
-            Arsenal.attempt_print(
+            attempt_print(
                 self, f"{current_time()} Ending weapons processing.\n"
             )
-            Arsenal.attempt_print(
+            attempt_print(
                 self, f"{current_time()} {language_weapon_output}.\n"
             )
 
     def process_equipment(
         self, equipment: dict[str, Any], do_output: bool
     ) -> None | Literal[0]:
-        Arsenal.attempt_print(self, f"{current_time()} Reading EQUIPMENT...\n")
+        attempt_print(self, f"{current_time()} Reading EQUIPMENT...\n")
 
-        # header_armor_list  : str = ''
-        # language_armor_list: str = ''
         equipment_max: int = 0
-        # equip_description : str = ''
         language_armor_list: list[str] = []
         header_armor_list: list[str] = []
         equip_description: list[str] = []
@@ -382,9 +368,6 @@ class Arsenal:
             header_armor_list.append("{")
             header_armor_list.append(f'"RL{equip['name']}", "{equip['name'].upper()}"')
             header_armor_list.append("},")
-            # header_armor_list += '{'
-            # header_armor_list += f'''"RL{equip['name']}", "{equip['name'].upper()}"'''
-            # header_armor_list += '},'
             equipment_max += 1
 
             if "description" in equip:
@@ -422,24 +405,20 @@ class Arsenal:
                     with open(file_path, mode="w", encoding="utf-8") as file:
                         file.write(arsenal_db)
 
-            Arsenal.attempt_print(
+            attempt_print(
                 self,
                 f'''{current_time()} Created Equipment ACS array list as equipment.idb [{os.path.getsize(file_path)} bytes]\n''',
             )
         else:
-            Arsenal.attempt_print(
+            attempt_print(
                 self, f"{current_time()} Created ACS array list for EQUIPMENT\n"
             )
-            Arsenal.attempt_print(self, f"{current_time()} {arsenal_db}\n")
-
-        # for i in Arsenal.filler:
-        #   if ('attributes' in i):
-        #     attributes = Arsenal.filler[i]
+            attempt_print(self, f"{current_time()} {arsenal_db}\n")
 
         for attribute_key, attribute_value in Arsenal.attributes.items():
             temp_string = temp_string.replace(attribute_key, attribute_value)
 
-        Arsenal.attempt_print(
+        attempt_print(
             self, f"{current_time()} Keywords translated into attributes\n"
         )
 
@@ -467,15 +446,15 @@ class Arsenal:
                     with open(file_path, mode="w", encoding="utf-8") as file:
                         file.write(language_armor_output)
 
-            Arsenal.attempt_print(
+            attempt_print(
                 self,
                 f'''{current_time()} Finished Equipment. Generated language.auto.equipment [{os.path.getsize(file_path)} bytes]\n''',
             )
         else:
-            Arsenal.attempt_print(
+            attempt_print(
                 self, f"{current_time()} Done with processing equipment.\n"
             )
-            Arsenal.attempt_print(
+            attempt_print(
                 self, f"{current_time()} {language_armor_output}.\n"
             )
 
@@ -510,32 +489,34 @@ class Arsenal:
 
         language_mod_output: Any | str = Arsenal.language_warning + temp_string
 
-        Arsenal.attempt_print(
+        attempt_print(
             self, f"{current_time()} Done parsing mod effects DB.\n"
         )
 
-        if do_output:
-            Arsenal.do_output(self, "language.auto.mods")
 
-            if Arsenal.output_data:
-                file_path: str = ""
+        Arsenal.output_construct(do_output, "language.auto.mods")
+        # if do_output:
+        #     Arsenal.do_output(self, "language.auto.mods")
 
-                if hasattr(Arsenal.output_data, "name"):
-                    file_path = Arsenal.output_data.name
-                else:
-                    file_path = Arsenal.output_data
+        #     if Arsenal.output_data:
+        #         file_path: str = ""
 
-                if len(file_path) > 0:
-                    with open(file_path, mode="w", encoding="utf-8") as file:
-                        file.write(language_mod_output)
+        #         if hasattr(Arsenal.output_data, "name"):
+        #             file_path = Arsenal.output_data.name
+        #         else:
+        #             file_path = Arsenal.output_data
 
-            Arsenal.attempt_print(
-                self,
-                f'''{current_time()} Created language.auto.mods [{os.path.getsize(file_path)} bytes]\n''',
-            )
-        else:
-            Arsenal.attempt_print(self, f"{current_time()} \n")
-            Arsenal.attempt_print(self, f"{current_time()} {language_mod_output}.\n")
+        #         if len(file_path) > 0:
+        #             with open(file_path, mode="w", encoding="utf-8") as file:
+        #                 file.write(language_mod_output)
+
+        #     attempt_print(
+        #         self,
+        #         f'''{current_time()} Created language.auto.mods [{os.path.getsize(file_path)} bytes]\n''',
+        #     )
+        # else:
+        #     attempt_print(self, f"{current_time()} \n")
+        #     attempt_print(self, f"{current_time()} {language_mod_output}.\n")
 
     def process_assemblies(
         self, data: dict[str, Any], do_output: bool
@@ -661,8 +642,49 @@ DRLA_MASTERMAX="{master_max}";
 
         language_assembly_output: str = Arsenal.language_warning + temp_string
 
+        Arsenal.output_construct(self, do_output, "language.auto.assemblies")
+        # if do_output:
+        #     Arsenal.do_output(self, "language.auto.assemblies")
+
+        #     if Arsenal.output_data:
+        #         file_path: str = ""
+
+        #         if hasattr(Arsenal.output_data, "name"):
+        #             file_path = Arsenal.output_data.name
+        #         else:
+        #             file_path = Arsenal.output_data
+
+        #         if len(file_path) > 0:
+        #             with open(file_path, mode="w", encoding="utf-8") as file:
+        #                 file.write(language_assembly_output)
+
+        #     attempt_print(
+        #         self, f"{current_time()} Created language.auto.assemblies\n"
+        #     )
+        # else:
+        #     attempt_print(self, f"{current_time()} Created nothing\n")
+        #     attempt_print(
+        #         self, f"{current_time()} {language_assembly_output}.\n"
+        #     )
+
+        assembly_list: dict[str, Any] = {}
+
+        assembly_list["list"] = "".join(header_assembly_list)
+        assembly_list["exotics"] = "".join(header_exotic_list)
+
+        assembly_list["max"] = header_assembly_max
+        assembly_list["uniquemax"] = header_unique_max
+        assembly_list["basicmax"] = basic_max
+        assembly_list["advancedmax"] = advanced_max
+        assembly_list["mastermax"] = master_max
+
+        attempt_print(self, f"{current_time()} Finished compilation\n")
+
+    # -----
+    
+    def output_construct(self, do_output: bool, output: str) -> None:
         if do_output:
-            Arsenal.do_output(self, "language.auto.assemblies")
+            Arsenal.do_output(self, output)
 
             if Arsenal.output_data:
                 file_path: str = ""
@@ -676,29 +698,14 @@ DRLA_MASTERMAX="{master_max}";
                     with open(file_path, mode="w", encoding="utf-8") as file:
                         file.write(language_assembly_output)
 
-            Arsenal.attempt_print(
-                self, f"{current_time()} Created language.auto.assemblies\n"
+            attempt_print(
+                self, f"{current_time()} Created {output}\n"
             )
         else:
-            Arsenal.attempt_print(self, f"{current_time()} Created nothing\n")
-            Arsenal.attempt_print(
+            attempt_print(self, f"{current_time()} Created nothing\n")
+            attempt_print(
                 self, f"{current_time()} {language_assembly_output}.\n"
             )
-
-        assembly_list: dict[str, Any] = {}
-
-        assembly_list["list"] = "".join(header_assembly_list)
-        assembly_list["exotics"] = "".join(header_exotic_list)
-
-        assembly_list["max"] = header_assembly_max
-        assembly_list["uniquemax"] = header_unique_max
-        assembly_list["basicmax"] = basic_max
-        assembly_list["advancedmax"] = advanced_max
-        assembly_list["mastermax"] = master_max
-
-        Arsenal.attempt_print(self, f"{current_time()} Finished compilation\n")
-
-    # -----
 
     def create_armor_acs_array(self, equipment: dict[str, Any]) -> str:
         # TODO: Export the active set bonuses into a separate JSON, or rely on Equipment instead?
