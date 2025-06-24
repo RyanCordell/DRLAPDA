@@ -9,10 +9,10 @@ switch(PDA_Local.page)
     case 2: PDA_PrintHeader("PDA_DRLAHELP_HEADER", -40); break;
 }
 
-PDAButton P1 = PDA_CreateTab(50, "1", "PTAB", 12.0 * 0, 6.0, 12, 6);
+PDAButton P1 = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
                PDA_InitButton(P1, true, 1, "", false);
 
-PDAButton P2 = PDA_CreateTab(51, "2", "PTAB", 12.0 * 1 + 2, 6.0, 12, 6);
+PDAButton P2 = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
                PDA_InitButton(P2, true, 2, "", false);
 
 

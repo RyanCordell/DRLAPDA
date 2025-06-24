@@ -26,6 +26,13 @@ str PDA_FONT_SLIM  = "PDAFONT";
 #define PDA_GiveEveryoneInventory(name) ACS_NamedExecuteWithResult("PDA_GiveEveryoneInventory", name)
 #define PDA_HistoryMax 16
 
+#define PDA_TAB_START_X 12.0
+#define PDA_TAB_NEXT_X(a) \
+    (PDA_TAB_START_X * (a + 1)) + (2.0 * a)
+#define PDA_TAB_Y 5.0
+#define PDA_TAB_W 12
+#define PDA_TAB_H 7
+
 #define AVAILABLE_HUDS 13
 str playerSelectedHUD[AVAILABLE_HUDS] = {
   "RLStatusBarHUDType",
@@ -299,6 +306,9 @@ enum PDA_IDs {
     PDA_MISC_BUTTON,
     PDA_HELP_BUTTON,
     PDA_CAT_DESCRIPTION = 94,
+
+    PDA_TAB_BUTTONS_START = 95,
+    PDA_TAB_BUTTONS_END = 115,
     
     PDA_BOTTOMID,
     PDA_PEGGLESOSID,

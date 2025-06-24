@@ -39,11 +39,11 @@ switch (PDA_Local.page) {
         PDAButton EXTRA        = PDA_CreateBeastButton(54, "Extra",        "Purple",    10.0 + X_LEFT_EDGE, 30.0 + Y_TOP_EDGE + (15.0 * 4), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, "", "");
         
         // why didn't I make these part of the CreateBeastButton function?
-        if (PDA_Local.newEntry[0]) HudMessage(s:"New!\n"; HUDMSG_ALPHA, 55, CR_GREEN, PDA_SCREEN_X + 120.0 + X_LEFT_EDGE, newY + (21.0 * 0), 0, 0.2 + pulser(2.0));
-        if (PDA_Local.newEntry[1]) HudMessage(s:"New!\n"; HUDMSG_ALPHA, 56, CR_GREEN, PDA_SCREEN_X + 120.0 + X_LEFT_EDGE, newY + (21.0 * 1), 0, 0.2 + pulser(2.0));
-        if (PDA_Local.newEntry[2]) HudMessage(s:"New!\n"; HUDMSG_ALPHA, 57, CR_GREEN, PDA_SCREEN_X + 120.0 + X_LEFT_EDGE, newY + (21.0 * 2), 0, 0.2 + pulser(2.0));
-        if (PDA_Local.newEntry[3]) HudMessage(s:"New!\n"; HUDMSG_ALPHA, 58, CR_GREEN, PDA_SCREEN_X + 120.0 + X_LEFT_EDGE, newY + (21.0 * 3), 0, 0.2 + pulser(2.0));
-        if (PDA_Local.newEntry[4]) HudMessage(s:"New!\n"; HUDMSG_ALPHA, 59, CR_GREEN, PDA_SCREEN_X + 120.0 + X_LEFT_EDGE, newY + (21.0 * 4), 0, 0.2 + pulser(2.0));
+        if (PDA_Local.newEntry[0]) HudMessage(s:"New!\n"; HUDMSG_ALPHA, 55, CR_GREEN, PDA_SCREEN_X + 120.0 + X_LEFT_EDGE, newY + (21.0 * 0), 0, 0.2 + pulser(2.0, 0.59));
+        if (PDA_Local.newEntry[1]) HudMessage(s:"New!\n"; HUDMSG_ALPHA, 56, CR_GREEN, PDA_SCREEN_X + 120.0 + X_LEFT_EDGE, newY + (21.0 * 1), 0, 0.2 + pulser(2.0, 0.59));
+        if (PDA_Local.newEntry[2]) HudMessage(s:"New!\n"; HUDMSG_ALPHA, 57, CR_GREEN, PDA_SCREEN_X + 120.0 + X_LEFT_EDGE, newY + (21.0 * 2), 0, 0.2 + pulser(2.0, 0.59));
+        if (PDA_Local.newEntry[3]) HudMessage(s:"New!\n"; HUDMSG_ALPHA, 58, CR_GREEN, PDA_SCREEN_X + 120.0 + X_LEFT_EDGE, newY + (21.0 * 3), 0, 0.2 + pulser(2.0, 0.59));
+        if (PDA_Local.newEntry[4]) HudMessage(s:"New!\n"; HUDMSG_ALPHA, 59, CR_GREEN, PDA_SCREEN_X + 120.0 + X_LEFT_EDGE, newY + (21.0 * 4), 0, 0.2 + pulser(2.0, 0.59));
 
         PDA_InitButton(NORMAL,       true, 2, strparam("%l:\n", "PDA_DIFFICULTY_UV_OR_LOWER"), false);
         PDA_InitButton(NIGHTMARE,    true, 3, strparam("%l:\n", "PDA_DIFFICULTY_NIGHTMARE"), false);
@@ -69,7 +69,7 @@ switch (PDA_Local.page) {
                 PDAButton button = PDA_CreateBeastButton(50 + i, name, color, PDA_SCREEN_X + X_LEFT_EDGE, PDA_Local.scrollingy + 20.0 + Y_TOP_EDGE + (11.0 * i), (strlen(name) * 10) / 2, BEAST_HEIGHT, 3.0, -3.0, token, CheckPointerInventory(kcount, PlayerNumber()));
 
                 if(button.state == button_hovered){
-                    DisplayIcon(icon, PDA_INFO2ID, PDA_SCREEN_WIDTH - 30.0 + X_LEFT_EDGE, PDA_SCREEN_Y + 100.0 + Y_TOP_EDGE, 0, 0.2 + pulser(2.0));
+                    DisplayIcon(icon, PDA_INFO2ID, PDA_SCREEN_WIDTH - 30.0 + X_LEFT_EDGE, PDA_SCREEN_Y + 100.0 + Y_TOP_EDGE, 0, 0.2 + pulser(2.0, 0.59));
                 }
             } else {
                 PDAButton button = PDA_CreateBeastButton(50 + i, " ????", color, PDA_SCREEN_X + X_LEFT_EDGE, PDA_Local.scrollingy + 20.0 + Y_TOP_EDGE + (11.0 * i), 80, BEAST_HEIGHT, 3.0, -3.0, "null", "");

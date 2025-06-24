@@ -8,15 +8,21 @@ PDA_SetupScreenBounds();
 PDA_SetScrollLimit(0);
 PDA_SetScrollArrows2(0, PDA_SCREEN_WIDTH + 50.0, PDA_SCROLLABLE_HEIGHT + 90.0);
 
-//PDAButton PONG    = PDA_CreateButton(51, "Pong",    "PLON", PDA_SCREEN_X + 10.0 + X_LEFT_EDGE, 30.0 + Y_TOP_EDGE + (14.0 * 0), 32, 8, -3.0 + X_LEFT_EDGE, 0);
-PDAButton CREDITS =   PDA_CreateButton(52, "Credits", "PLON",      PDA_SCREEN_X + 10.0 + X_LEFT_EDGE, 30.0 + Y_TOP_EDGE + (14.0 * 1), 32, 8, -3.0 + X_LEFT_EDGE, 0);
+PDAButton CREDITS =   PDA_CreateButton(49, "Credits", "PLON",      PDA_SCREEN_X + 10.0 + X_LEFT_EDGE, 30.0 + Y_TOP_EDGE + (14.0 * 1), 32, 8, -3.0 + X_LEFT_EDGE, 0);
                       PDA_InitButton(CREDITS, false, PDA_CREDITS,    "All the wonderful people that helped bring this together.\n", false);
 
-PDAButton HUDSWITCH = PDA_CreateButton(53, "HUD Switcher", "PLON", PDA_SCREEN_X + 10.0 + X_LEFT_EDGE, 30.0 + Y_TOP_EDGE + (14.0 * 2), 32, 8, -3.0 + X_LEFT_EDGE, 0);
+PDAButton HUDSWITCH = PDA_CreateButton(50, "HUD Switcher", "PLON", PDA_SCREEN_X + 10.0 + X_LEFT_EDGE, 30.0 + Y_TOP_EDGE + (14.0 * 2), 32, 8, -3.0 + X_LEFT_EDGE, 0);
                       PDA_InitButton(HUDSWITCH, false, PDA_HUDSWITCH,    "Select which HUD you would like to use\n", false);
-//PDAButton JUKEBOX = PDA_CreateButton(50, "Jukebox", "TNT1A0", PDA_SCREEN_X + 10.0 + X_LEFT_EDGE, 30.0 + Y_TOP_EDGE + (14.0 * 2), 32, 12);
-//PDAButton EMAIL   = PDA_CreateButton(53, "Email",   "TNT1A0", PDA_SCREEN_X + 10.0 + X_LEFT_EDGE, 30.0 + Y_TOP_EDGE + (14.0 * 3), 32, 12);
 
+
+
+
+//PDAButton PONG    = PDA_CreateButton(51, "Pong",    "PLON", PDA_SCREEN_X + 10.0 + X_LEFT_EDGE, 30.0 + Y_TOP_EDGE + (14.0 * 0), 32, 8, -3.0 + X_LEFT_EDGE, 0);
 //PDA_InitButton(PONG,    false, PDA_PONG,       "Play Pong! (Temporarily SP only)\n");
+
+//PDAButton JUKEBOX = PDA_CreateButton(50, "Jukebox", "TNT1A0", PDA_SCREEN_X + 10.0 + X_LEFT_EDGE, 30.0 + Y_TOP_EDGE + (14.0 * 2), 32, 12);
 //PDA_InitButton(JUKEBOX, false, PDA_CLASSES,    "Play random music\n");
+
+//PDAButton EMAIL   = PDA_CreateButton(53, "Email",   "TNT1A0", PDA_SCREEN_X + 10.0 + X_LEFT_EDGE, 30.0 + Y_TOP_EDGE + (14.0 * 3), 32, 12);
 //PDA_InitButton(EMAIL,   false, PDA_ASSEMBLIES, "Read up emails\n");
+
