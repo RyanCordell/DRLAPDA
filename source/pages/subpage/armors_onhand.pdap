@@ -1,0 +1,100 @@
+if (localHasBackpack) {
+    PDA_SetScrollLimit(-140);
+    PDA_SetScrollArrows2(-140, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+} else {
+    PDA_SetScrollLimit(-80);
+    PDA_SetScrollArrows2(-80 , PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+}
+
+int id = 0;
+
+const fixed x    = 10.0;
+int width        = 0;
+fixed y          = 0.0;
+const int height = 16;
+fixed initialY   = 30.0;
+
+// Funny that I opted to do this instead of just declaring the message outright..
+HudMessageParallax("No equipment detected", HUDMSG_PLAIN, PDA_NOEQID, CR_UNTRANSLATED, x, 50.0, 0.0, 1.0);
+
+int armorLimit      = 0;
+bool areTheseBoots  = false; // Does Bruno Mars is gay???
+
+localArmorData = setupArmorData(specialArmorTokens);
+localBootsData = setupBootsData();
+localBackpackData = setupBackpackData();
+
+// Note to future self: don't try to merge these first 5 lines for cleanliness sake. Won't work the way you wish it would.
+if (localHasArmor) {
+    HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_NOEQID, CR_UNTRANSLATED, 0, 0, 0);
+    id    = (PDA_WORNARMORS - 4) + (armorLimit * 4);
+    y     = initialY + (height * (armorLimit * 2));
+
+    if (armorLimit > PDA_MAX_ARMOR_IN_INV + 1) armorLimit = 0;
+    else armorLimit++;
+    width = (strLen(localArmorData.name) * 5);
+
+    PDAButton armor = PDA_DisplayArmor(id, strParam("\cdE:\c- %s:", localArmorData.name), localArmorData.graphic, x, y, width, height, localArmorData.tooltip, pulser(2.0, 0.8));
+                        PDA_InitButton(armor, true, 1, "", true);
+}
+
+if (localHasBoots) {
+    HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_NOEQID, CR_UNTRANSLATED, 0, 0, 0);
+    id    = (PDA_WORNARMORS - 4) + (armorLimit * 4);
+    y     = initialY + (height * (armorLimit * 2));
+
+    if (armorLimit > PDA_MAX_ARMOR_IN_INV + 1) armorLimit = 0;
+    else armorLimit++;
+    width = (strLen(localBootsData.name) * 5);
+
+    PDAButton boots = PDA_DisplayArmor(id, strParam("\cdE:\c- %s:", localBootsData.name), localBootsData.graphic, x, y, width, height, localBootsData.tooltip, pulser(2.0, 0.8));
+                        PDA_InitButton(boots, true, 1, "", true);
+}
+// Stashed armors
+for (int armorIndex = 0; armorIndex < DRLA_ARMORMAX; armorIndex++) {
+    #define armorToken DRLA_ArmorList[armorIndex][armor_TOKEN]
+    armorPickupCheck = strParam("%s:Pickup", armorToken);
+    areTheseBoots    = strCmp(armorToken,strParam("%s:Boots", StrTrim(armorToken,0,5))) == 0;
+
+    if (CheckInventory(armorPickupCheck)) {
+        HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_NOEQID, CR_UNTRANSLATED, 0, 0, 0);
+
+        id = (PDA_STASHEDARMORS - 8) + (armorLimit * 2);
+        y  = initialY + (height * (armorLimit*2));
+
+        localArmorData.langEntry = strParam("PDA_ARMOR_%s:", DRLA_ArmorList[armorIndex][armor_ACTOR]);
+        localArmorData.name      = strParam("%l:", strParam("%l:_NAME", localArmorData.langEntry));
+        localArmorData.graphic   = strParam("%l:", strParam("%l:_ICON", localArmorData.langEntry));
+        localArmorData.armorAttr = strParam("%l:", strParam("%l:_ATTR", localArmorData.langEntry));
+        width                    = strLen(localArmorData.name) * 5;
+
+        if (!areTheseBoots) {
+            localArmorData.tooltip = strParam(
+                "\cdStats:\c-\n"
+                "%l:\n" // 1*
+                "%l:\n" // 2*
+                "%l:", // 3*
+                (!isRenegade) // 1
+                    ? strParam("%l:_PROT",    localArmorData.langEntry) 
+                    : strParam("%l:_RENPROT", localArmorData.langEntry),
+                strParam("%l:_RES", localArmorData.langEntry),  // 2
+                localArmorData.armorAttr // 3
+            );
+        } else {
+            localArmorData.tooltip = strParam(
+                "\cdStats:\c-\n"
+                "%l:\n\n" // 1*
+                "%l:", // 2*
+                strParam("%l:_PROT", localArmorData.langEntry), // 1
+                localArmorData.armorAttr // 2
+            );
+        }
+
+        PDAButton stashed = PDA_DisplayArmor(id, localArmorData.name, localArmorData.graphic, x, y, width, height, localArmorData.tooltip, 0.6);
+        PDA_InitButton(stashed, true, 1, "", true);
+
+        if (armorLimit > PDA_MAX_ARMOR_IN_INV + 1) armorLimit = 0;
+        else armorLimit++;
+    }
+}
+PDA_DefaultFont();

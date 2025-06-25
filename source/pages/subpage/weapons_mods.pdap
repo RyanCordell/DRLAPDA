@@ -1,0 +1,66 @@
+// Every weapon and assembly tier has their own max amount of mod packs applicable. Set that up.
+PDA_EstablishModLimits();
+
+PDA_SetScrollLimit(-30);
+PDA_SetScrollArrows2(-30, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+
+PDAButton button[PDA_MODMAX - 1] = {'', '', '', '', '', '', ''};
+
+int playerHazMod[PDA_MODMAX] = { PDA_Weapon_Bulk_Quantity, PDA_Weapon_Power_Quantity, PDA_Weapon_Agility_Quantity, PDA_Weapon_Technical_Quantity, PDA_Weapon_Sniper_Quantity, PDA_Weapon_Firestorm_Quantity, PDA_Weapon_Nano_Quantity };
+
+// DisplayIcon(currentWeapon, PDA_ID, 0.5, 0.5, 0, 1);
+// HudMessageParallax("bert");
+// EndHudMessage(HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 10.0 + X_LEFT_EDGE, NEW_RESOLUTION_Y + 20.0 + Y_TOP_EDGE + (20.0 * 1), 0);
+
+HudMessageParallax(
+    StrParam("%l:\n"
+    "[\c[LightBlue]%i:B \c[Red]%i:P \c[Green]%i:A \c[Yellow]%i:T \c[Purple]%i:S \c[Orange]%i:F \c[White]%i:N \cr%i:D\c-]"
+    "\n\n"
+    "%l:\c[Cyan]%i:",
+    (PDA_IsNotDemonic) 
+        ? (CheckInventory(strParam("%s:DemonArtifacts", currentWeapon)) ? PDA_Weapon_DualName_Printer : PDA_Weapon_Name_Printer) 
+        : PDA_Weapon_Name_Printer,
+    PDA_Weapon_Bulk_Quantity, PDA_Weapon_Power_Quantity, PDA_Weapon_Agility_Quantity, PDA_Weapon_Technical_Quantity,
+    PDA_Weapon_Sniper_Quantity, PDA_Weapon_Firestorm_Quantity, PDA_Weapon_Nano_Quantity,
+    (PDA_IsNotDemonic) ? 0 : PDA_Weapon_Artifact_Quantity,
+    "PDA_MODPACK_MAXSUPPORTED",
+    PDA_Local.maxmodlimit),
+
+    HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 
+    /*x*/ 10.0, 
+    /*y*/ 20.0 + (20.0 * 1), 
+    0.0, 1.0
+);
+
+// I am so sorry.
+float modYOffset = 20.0;
+fixed modAlpha = 0.6;
+
+str weaponModsEntry = StrParam("%l:", StrParam("PDA_WEAPON_%s:_MODS", trimmedCurrentWeapon));
+str_split(StrParam("%l:", "PDA_SEPARATOR_CHARACTER"), weaponModsEntry);
+
+for (int modPack = PDA_MODMIN; modPack < PDA_MODMAX - 1; modPack++) {
+    if (modPack < mi_sniper) modYOffset = 10.0 + X_LEFT_EDGE;
+    else                     modYOffset = 12.0 + X_LEFT_EDGE;
+
+    str selectedMod = StrParam("%s:MODICON", strMid(stringArray[modPack], 9, 1));
+
+    modAlpha = 1;
+    // modAlpha = 0.5;
+    // if (playerHazMod[modPack] > 0) modAlpha = 1;
+    
+    #define modButton button[modPack]
+    modButton = PDA_CreateModPackDisplay(modPack, selectedMod, 
+                /*x*/ 5.0 + X_LEFT_EDGE, /*y*/ 80.0 + (29.0 * modPack), 
+                16, 24, modAlpha);
+                PDA_InitButton(modButton, true, WEAPON_PAGE_MODPACK_EFFECTS, '', true);
+
+    SetFont(modButton.textFont);
+    HudMessageParallax(
+        StrParam("%l:", stringArray[modPack]), 
+        modButton.textFlags, PDA_ASSEMBLYIDRANGE + modPack, CR_UNTRANSLATED, 
+        modButton.finalX, 80.0 + (29.0 * modPack) + Y_TOP_EDGE,
+        0.0, modAlpha);
+}
+
+PDA_DefaultFont();

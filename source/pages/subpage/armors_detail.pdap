@@ -1,0 +1,177 @@
+PDA_SetScrollLimit(-160);
+PDA_SetScrollArrows2(-160, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+
+fixed playerIconY       = 40.0 + Y_TOP_EDGE;
+
+// bool specialArmorTokens = CheckInventory("RLEnclaveSetBonusActive") || 
+//                           CheckInventory("PowerRLPrototypeAssaultShieldProtection") || 
+//                           CheckInventory("PowerRLOverchargeSystemProtection") || 
+//                           CheckInventory("RLCyberneticArmorModdedToken");
+
+
+// Armor / Boots / Suit display
+fixed y          = 0.0;
+fixed initialY   = 30.0;
+const int height = 16;
+int width        = 60;
+
+bool PDA_ManyHax    = false;
+int pdaStrTrimValue = 0;
+
+const float inAlpha = 0.7;
+
+DisplayIconParallax("PDAPLYR", PDA_PLYR_ICON, playerIconX, 40.0, 0.0, 1.0);
+
+localArmorData    = setupArmorData(specialArmorTokens);
+localBootsData    = setupBootsData();
+localBackpackData = setupBackpackData();
+
+// No point to this in the detail info, I guess
+localArmorData.tooltip    = "";
+localBootsData.tooltip    = "";
+localBackpackData.tooltip = "";
+
+if(armorButton.state == button_clicked) {
+    if (localABoolField != 1) localABoolField = 1;
+}
+
+if(bootsButton.state == button_clicked) {
+    if (localABoolField != 2) localABoolField = 2;
+}
+
+if(backpackButton.state == button_clicked) {
+    if (localABoolField != 4) localABoolField = 4;
+}
+
+localShowArmor    = (localABoolField & 1);
+localShowBoots    = (localABoolField & 1<<1);
+localShowBackpack = (localABoolField & 1<<2);
+
+if (localHasArmor) {
+    DisplayIconParallax("PDAPARM", PDA_PLYR_ICON - 1, playerIconX, 40.0, 0.0, showArmor ? 1.0 : 0.5);
+
+    width       = strLen(localArmorData.name) * 5;
+    armorButton = PDA_DisplayArmor(PDA_PLYR_ICON - 5, localArmorData.name, localArmorData.graphic, 
+        equippedArmorX, 20.0, 
+        width, height, 
+        localArmorData.tooltip, localShowArmor ? pulser(2.0, 0.8) : inAlpha);
+                  PDA_InitButton(armorButton, true, 2, "", true);
+}
+
+if (localHasBackpack) {
+    DisplayIconParallax("PDAPBCK", PDA_PLYR_ICON - 2, playerIconX, 40.0, 0.0, showBackpack ? 1.0 : 0.5);
+
+    width          = strLen(localBackpackData.name) * 5;
+    backpackButton = PDA_DisplayArmor(PDA_PLYR_ICON - 7, localBackpackData.name, localBackpackData.graphic, 
+        equippedBackX, 45.0, 
+        width, height, 
+        localBackpackData.tooltip, localShowBackpack ? pulser(2.0, 0.8) : inAlpha);
+                      PDA_InitButton(backpackButton, true, 2, "", true);
+}
+
+if (localHasBoots) {
+    DisplayIconParallax("PDAPBTS", PDA_PLYR_ICON - 3, playerIconX, 40.0, 0.0, showBoots ? 1.0 : 0.5);
+
+    width       = strLen(localBootsData.name) * 5;
+    bootsButton = PDA_DisplayArmor(PDA_PLYR_ICON - 9, localBootsData.name, localBootsData.graphic, 
+        equippedBootsX, 70.0, 
+        width, height, 
+        localBootsData.tooltip, localShowBoots ? pulser(2.0, 0.8) : inAlpha);
+                  PDA_InitButton(bootsButton, true, 2, "", true);
+}
+
+if (isRenegade && (StrCmp(StrTrim(GetArmorInfo(ARMORINFO_CLASSNAME),2,0),StrParam(s:StrTrim(GetArmorInfo(ARMORINFO_CLASSNAME),2,10),s:"Renegade"))) == 0)
+    pdaStrTrimValue = 10;
+else
+    pdaStrTrimValue = 0;
+
+//armorDesc =  StrParam("PDA_ARMOR_%s:_DESC", StrTrim(GetArmorInfo(ARMORINFO_CLASSNAME),2,pdaStrTrimValue));
+
+// Armor
+for (int setIndex = 0; setIndex < DRLA_ARMORSETMAX; setIndex++) {
+    if(CheckInventory(DRLA_ArmorSetList[setIndex])) {
+        if(CheckInventory("RLEnclaveSetBonusActive") && CheckInventory("RLNuclearWeaponSetBonusActive"))
+            PDA_ManyHax = true;
+
+        str trimmedList = strTrim(DRLA_ArmorSetList[setIndex],2,0);
+
+        setName = strParam("%l:\n\n", (PDA_ManyHax)
+            ? "PDA_ARMOR_NuclearWeaponSetBonusActive_SETNAME"
+            : strParam("PDA_ARMOR_%s:_SETNAME", trimmedList));
+        setDesc = strParam("%l:\n\n", (PDA_ManyHax)
+            ? "PDA_ARMOR_NuclearWeaponSetBonusActive_SETDESC"
+            : strParam("PDA_ARMOR_%s:_SETDESC", trimmedList));
+    }
+}
+
+enclaveSetName = (PDA_ManyHax) ? strParam("%l:\n\n", "PDA_ARMOR_EnclaveSetBonusActive_SETNAME") : "";
+enclaveSetDesc = (PDA_ManyHax) ? strParam("%l:\n\n", "PDA_ARMOR_EnclaveSetBonusActive_SETDESC") : "";
+
+SetFont(USED_PDA_FONT);
+
+if (localShowArmor && localHasArmor) {
+    HudMessage(
+                "%s:" // Armor section
+                "%s:" // Protection header
+                "%l:" // Protection value
+                "%s:" // Resistances header
+                "%l:" // Resistances value
+                "%s:" // Attributes header
+                "%l:" // Attributes value
+                "%s:" // Description header
+                " %l:" // Description value
+                "%s:" // Set bonus header
+                " %l:" // Bitch hacks for Enclave/Nuclear set
+                " %l:" // Bitch hacks for Enclave/Nuclear set
+                " %l:" // Set name
+                " %l:" // Set desc
+                ,
+                "\cgARMOR\c-\n",
+                "\crProtection:\c-\n",
+                localArmorData.armorVal,
+
+                "\crResistances:\c-\n",
+                strParam("%l:\n", localArmorData.armorRes),
+
+                "\crAttributes:\c-\n",
+                strParam("%l:\n\n", localArmorData.armorAttr),
+
+                "\crDescription:\c-\n",
+                strParam(" %l:\n\n", localArmorData.armorDesc),
+
+                "\crSet bonus:\c-\n",
+                enclaveSetName,
+                enclaveSetDesc,
+                setName,
+                setDesc;
+                HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, PDA_SCREEN_X + 10.0 + X_LEFT_EDGE, (int)(PDA_Local.scrollingY * NEW_RESOLUTION_Y) + 140.0 + Y_TOP_EDGE, 0);
+} else if (localShowBoots && localHasBoots) {
+    HudMessage(
+                "%s:" // Boots section
+                "%s:" // Boots protection header
+                "%l:" // Boots protection value
+                "%s:" // Boots attributes header
+                "%l:" // Boots attributes value
+                "%s:" // Boots description header
+                "%l:" // Boots description value
+                ,
+                "\cgBOOTS\c-\n",
+                "\crProtection:\c-\n",
+                localBootsData.bootsVal,
+                "\crAttributes:\c-\n",
+                strParam("%l:\n", localBootsData.bootsAttr),
+                "\crDescription:\c-\n",
+                strParam("%l:\n", localBootsData.bootsDesc);
+                HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, PDA_SCREEN_X + 10.0 + X_LEFT_EDGE, (int)(PDA_Local.scrollingY * NEW_RESOLUTION_Y) + 140.0 + Y_TOP_EDGE, 0);
+} else if (localShowBackpack && localHasBackpack) {
+    HudMessage(
+                "%s:" // Backpack
+                "%s:" // Backpack description header
+                "%l:" // Backpack value
+                ,
+
+                "\cgBACKPACK\c-\n",
+                "\crDescription:\c-\n",
+                localBackpackData.backpackVal;
+                HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, PDA_SCREEN_X + 10.0 + X_LEFT_EDGE, (int)(PDA_Local.scrollingY * NEW_RESOLUTION_Y) + 140.0 + Y_TOP_EDGE, 0);
+}

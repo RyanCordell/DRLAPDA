@@ -16,7 +16,7 @@ if(PDA_Local.page == 1)
 
   // yes i'm lazy
   #define makeHuddy(id, name, y, token) /
-    PDA_CreateHUDButton((id), (name), "White", PDA_SCREEN_X + 10.0 + X_LEFT_EDGE, PDA_Local.scrollingy + 30.0 + Y_TOP_EDGE + (15.0 * (y)), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, (token));
+    PDA_CreateHUDButton((id), (name), "White", PDA_SCREEN_X + 10.0 + X_LEFT_EDGE, PDA_Local.scrollingY + 30.0 + Y_TOP_EDGE + (15.0 * (y)), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, (token));
 
 
   // Status bars
@@ -24,9 +24,9 @@ if(PDA_Local.page == 1)
   PDAButton Geoscaper = makeHuddy(50, "Geoscaper", 0, "RLStatusBarGeoscaperHUDType");
   PDAButton Republic  = makeHuddy(51, "Republic", 1, "RLStatusBarRepublicHUDType");
   PDAButton Tritium   = makeHuddy(52, "Tritium", 2, "RLStatusBarTritiumHUDType");
-  // PDAButton Geoscaper = PDA_CreateHUDButton(50, "Geoscaper", "White", PDA_SCREEN_X + 10.0 + X_LEFT_EDGE, PDA_Local.scrollingy + 30.0 + Y_TOP_EDGE + (15.0 * 0), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, "RLStatusBarGeoscaperHUDType");
-  // PDAButton Republic  = PDA_CreateHUDButton(51, "Republic",  "White", PDA_SCREEN_X + 10.0 + X_LEFT_EDGE, PDA_Local.scrollingy + 30.0 + Y_TOP_EDGE + (15.0 * 1), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, "RLStatusBarRepublicHUDType");
-  // PDAButton Tritium   = PDA_CreateHUDButton(52, "Tritium",   "White", PDA_SCREEN_X + 10.0 + X_LEFT_EDGE, PDA_Local.scrollingy + 30.0 + Y_TOP_EDGE + (15.0 * 2), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, "RLStatusBarTritiumHUDType");
+  // PDAButton Geoscaper = PDA_CreateHUDButton(50, "Geoscaper", "White", PDA_SCREEN_X + 10.0 + X_LEFT_EDGE, PDA_Local.scrollingY + 30.0 + Y_TOP_EDGE + (15.0 * 0), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, "RLStatusBarGeoscaperHUDType");
+  // PDAButton Republic  = PDA_CreateHUDButton(51, "Republic",  "White", PDA_SCREEN_X + 10.0 + X_LEFT_EDGE, PDA_Local.scrollingY + 30.0 + Y_TOP_EDGE + (15.0 * 1), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, "RLStatusBarRepublicHUDType");
+  // PDAButton Tritium   = PDA_CreateHUDButton(52, "Tritium",   "White", PDA_SCREEN_X + 10.0 + X_LEFT_EDGE, PDA_Local.scrollingY + 30.0 + Y_TOP_EDGE + (15.0 * 2), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, "RLStatusBarTritiumHUDType");
 
   PDA_InitButton(Geoscaper, true, 2, strparam("%l:\n", "PDA_SBAR_GEOSCAPER"), "PDA_GEOSCAPER_PIC", false);
   PDA_InitButton(Republic,  true, 3, strparam("%l:\n", "PDA_SBAR_REPUBLIC"), "PDA_REPUBLIC_PIC", false);

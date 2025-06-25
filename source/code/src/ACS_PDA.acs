@@ -193,7 +193,7 @@ script "PDA_GSInit" open {
       
       PDA_Info[i].texty = 0;
       PDA_Info[i].maxtexty = -200;
-      PDA_Info[i].scrollingy = 20.0;
+      PDA_Info[i].scrollingY = 20.0;
       
       PDA_Info[i].clicked = false;
       PDA_Info[i].newEntry[0] = false;
@@ -333,7 +333,7 @@ SCRIPT "PDA_Respawn" RESPAWN {
 }
 
 SCRIPT "PDA_Core" (void) {  
-    PDA_Local.scrollingy = 20.0;
+    PDA_Local.scrollingY = 20.0;
     
     while (PDA_Local.active) {
         SetHudSize(320,200,0);

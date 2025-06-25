@@ -85,7 +85,7 @@ function void DisplayIcon (str Sprite, int ID, fixed X, fixed Y, fixed DelayTime
 }
 function void DisplayIconParallax (str Sprite, int ID, fixed X, fixed Y, fixed DelayTime, fixed Alpha) {
     SetFont(Sprite);
-    int _yTemp = PDA_Local.scrollingy * NEW_RESOLUTION_Y + Y;
+    int _yTemp = PDA_Local.scrollingY * NEW_RESOLUTION_Y + Y;
     HudMessage(s:"A\n"; HUDMSG_ALPHA, ID, CR_UNTRANSLATED, X, _yTemp + Y_TOP_EDGE, DelayTime, Alpha);
 	PDA_DefaultFont();
 }
@@ -125,7 +125,7 @@ function fixed max (fixed x, fixed y) {
 
 function void HudMessageParallax(str text, int type, int id, int color, fixed x, fixed y, fixed holdTime, fixed alpha) {
     int _xTemp = (PDA_SCREEN_X + x) * NEW_RESOLUTION_X;
-    int _yTemp = (PDA_Local.scrollingy * NEW_RESOLUTION_Y) + y;
+    int _yTemp = (PDA_Local.scrollingY * NEW_RESOLUTION_Y) + y;
     fixed _x = _xTemp + X_LEFT_EDGE;
     fixed _y = _yTemp + Y_TOP_EDGE;
     HudMessage(s:text; type, id, color, _x, _y, holdTime, alpha);
@@ -152,7 +152,7 @@ function int SetInventory (str Item, int Count) {
 // int _xTemp = (PDA_SCREEN_X * NEW_RESOLUTION_X) + (x * NEW_RESOLUTION_X);
 #define assignButtonParams(a, b) \
     int _xTemp = PDA_SCREEN_X + x; \
-    int _yTemp = PDA_Local.scrollingy + y; \
+    int _yTemp = PDA_Local.scrollingY + y; \
     (a).id = id; \
     (a).x = _xTemp + X_LEFT_EDGE; \
     (a).y = _yTemp + Y_TOP_EDGE; \
@@ -254,7 +254,7 @@ function void PDA_SetupFloatingTooltip (str graphic, str tooltip) {
 
     _yTemp = PDA_LocalMouse.y * NEW_RESOLUTION_Y;
 
-    const float xOffset = 20.0;
+    const float xOffset = 10.0;
     const float yOffset = 30.0;
 
     float _ttX = _xTemp + xOffset + X_LEFT_EDGE;
@@ -300,7 +300,7 @@ function void PDA_SetCategory (int category) {
    }
 
    PDA_Local.texty = 0.0;
-   PDA_Local.scrollingy = PDA_SCREEN_Y;
+   PDA_Local.scrollingY = PDA_SCREEN_Y;
    PDA_Local.category = category;
 }
 
@@ -431,6 +431,43 @@ function PDAButton PDA_CreateButton (int id, str label, str graphic, float x, fl
     #define thisButton PDA_LocalButton[id]
     assignButtonParams(thisButton, label)
     buttonBoundsDefault(thisButton)
+
+    const float X_MARGIN = 1.0;
+
+    thisButton.graphic      = graphic;
+    thisButton.graphicFlags = HUDMSG_ALPHA;
+    thisButton.graphicID    = thisButton.id;
+    int _gxTemp             = thisButton.x * NEW_RESOLUTION_X;
+    thisButton.graphicX     = _gxTemp + X_LEFT_EDGE;
+    int _gyTemp             = thisButton.y * NEW_RESOLUTION_Y;
+    thisButton.graphicY     = PDA_SCREEN_Y + _gyTemp - (int)(gh / 2);
+    thisButton.type         = "generic";
+
+    thisButton.textFont     = PDA_FONT_SLIM;
+    thisButton.textFlags    = HUDMSG_ALPHA;
+    thisButton.textID       = thisButton.graphicID + 20;
+    int _fxTemp             = (int)thisButton.graphicX + (gw + X_MARGIN) * NEW_RESOLUTION_X;
+    thisButton.finalX       = _fxTemp + X_LEFT_EDGE;
+    thisButton.finalY       = thisButton.graphicY;
+
+    if (debug) {
+        int x = thisButton.x * NEW_RESOLUTION_X,
+            y = thisButton.y * NEW_RESOLUTION_Y,
+            w = width        * NEW_RESOLUTION_X,
+            h = height       * NEW_RESOLUTION_Y;
+        log("btn-gfx (x: %f:, y: %f:, w: %d:, h: %d:)", x, y, w, h);
+        DrawBorder(x, y, w, h);
+        PDA_SetupScreenBounds();
+    }
+    // log("gx: %d: | gw: %d: | fx: %d:", thisButton.graphicX, gw, thisButton.finalX);
+    return thisButton;
+}
+
+function PDAButton PDA_CreateFixedButton (int id, str label, str graphic, float x, float y, int width, int height, float gw, float gh) {
+    #define thisButton PDA_LocalButton[id]
+    assignButtonParams(thisButton, label)
+    buttonBoundsDefault(thisButton)
+    thisButton.y = y;
 
     const float X_MARGIN = 1.0;
 
@@ -624,8 +661,9 @@ function PDAButton PDA_DisplayArmor (int id, str label, str graphic, float x, fl
     thisButton.tooltip = tooltip;
 
     if (CheckBounds(thisButton) && strCmp(tooltip, "") != 0) {
-        // PDA_SetupPageTooltip("PTIP", thisButton.tooltip, thisButton.alpha);
+        PDA_SetupFloatingTooltip("PTIP", thisButton.tooltip);
     }
+    thisButton.alpha = opacity;
 
     if (debug) {
         DrawBorder(thisButton.x * NEW_RESOLUTION_X, thisButton.y * NEW_RESOLUTION_Y, width * NEW_RESOLUTION_X, height * NEW_RESOLUTION_Y);
@@ -669,11 +707,11 @@ function void PDA_InitButton (PDAButton button, int incat, int catpage, str mess
         PDA_SetupScreenBounds();
     } else {
         PDA_SetupHeaderBounds();
-    }
 
-    if (incat > 0 && PDA_Local.page == catpage) {
-        button.state = button_hovered;
-        button.alpha = 1;
+        if (incat > 0 && PDA_Local.page == catpage) {
+            button.state = button_hovered;
+            button.alpha = 1;
+        }
     }
 
     // TODO: Move buttonBoundsDefault call here, but avoid repeated sound spam and mouse state glitchiness
@@ -691,7 +729,7 @@ function void PDA_InitButton (PDAButton button, int incat, int catpage, str mess
                 if (incat) {
                     if(PDA_Local.category != 0 && PDA_Local.page >= 0) {
                         PDA_Local.page = catpage;
-                        PDA_Local.scrollingy = 20.0;
+                        PDA_Local.scrollingY = 20.0;
                         PDA_LocalMouse.state = mouse_default;
                     }
                 }
@@ -724,6 +762,7 @@ function void PDA_InitButton (PDAButton button, int incat, int catpage, str mess
             button.alpha = (button.state == button_hovered) ? pulser(2.0, 0.8) : 0.6;
         }
     }
+    
     fixed xlabeloff = (strcmp(button.graphic, "PTAB") == 0) ? 4.0 : 0.0;
     fixed ylabeloff = (strcmp(button.graphic, "PTAB") == 0) ? 3.0 : 0.0;
 
@@ -754,7 +793,7 @@ function void PDA_InitScrollingButton (PDAButton button, int incat, int catpage,
                 if (incat) {
                     if(PDA_Local.category != 0 && PDA_Local.page >= 0) {
                         PDA_Local.page = catpage;
-                        PDA_Local.scrollingy = 20.0;
+                        PDA_Local.scrollingY = 20.0;
                     }
                 }
                 PDA_LocalMouse.state = mouse_default;
@@ -790,21 +829,21 @@ function void PDA_InitScrollingButton (PDAButton button, int incat, int catpage,
 
 // Setup scrolling arrows for pages with lots of text
 function void PDA_SetScrollArrows (int scrollDownMax) {
-	if(PDA_Local.scrollingy >= 0)
+	if(PDA_Local.scrollingY >= 0)
 		DisplayIcon("RLZARU", PDA_SCROLLUPID, PDA_SCREEN_WIDTH + X_LEFT_EDGE, PDA_SCREEN_HEIGHT + Y_TOP_EDGE, 0, 0.0);
 	else
 		DisplayIcon("RLZARU", PDA_SCROLLUPID, PDA_SCREEN_WIDTH + X_LEFT_EDGE, PDA_SCREEN_Y + 10.0 + Y_TOP_EDGE, 0, 0.5);
 
 
-	if(PDA_Local.scrollingy <= scrollDownMax)
+	if(PDA_Local.scrollingY <= scrollDownMax)
 		DisplayIcon("RLZARD", PDA_SCROLLDNID, PDA_SCREEN_WIDTH + X_LEFT_EDGE, PDA_SCREEN_HEIGHT + Y_TOP_EDGE, 0, 0.0);
 	else
 		DisplayIcon("RLZARD", PDA_SCROLLDNID, PDA_SCREEN_WIDTH + X_LEFT_EDGE, PDA_SCREEN_HEIGHT + Y_TOP_EDGE, 0, 0.5);
 }
 
 function void PDA_SetScrollArrows2 (int scrollDownMax, float x, float y) {
-    bool notbot = PDA_Local.scrollingy > scrollDownMax;
-    bool nottop = PDA_Local.scrollingy < 0;
+    bool notbot = PDA_Local.scrollingY > scrollDownMax;
+    bool nottop = PDA_Local.scrollingY < 0;
 
     if(notbot) DisplayIcon("RLZARD", PDA_SCROLLDNID, x, y, 0, 0.5);
     if(nottop) DisplayIcon("RLZARU", PDA_SCROLLUPID, x, PDA_SCREEN_Y + 40.0 + Y_TOP_EDGE, 0, 0.5);
@@ -828,24 +867,24 @@ function void PDA_UnsetScrollWindow (void) {
 
 // Instead of clogging up the script, just do it here.
 function void PDA_EstablishModLimits (void) {
-	if (CheckInventory("RLStandardWeaponToken") || CheckInventory("RLExoticWeaponToken")) {
-		PDA_Local.maxmodlimit = 4;
-  }
+    if (CheckInventory("RLStandardWeaponToken") || CheckInventory("RLExoticWeaponToken")) {
+        PDA_Local.maxmodlimit = 4;
+    }
 
 	if (CheckInventory("RLSuperiorWeaponToken") || CheckInventory("RLBasicAssemblyTypeWeapon")) {
 		PDA_Local.maxmodlimit = 2;
-  }
+    }
 
-	if (CheckInventory("RLUniqueWeaponToken") || CheckInventory("RLDemonicWeaponToken") || CheckInventory("RLLegendaryWeaponToken") || CheckInventory("RLAdvancedAssemblyTypeWeapon")) {
-		if (StrCmp(GetWeapon(),"RLDuke2Rifle") == 0 || StrCmp(GetWeapon(),"RLChameleonRifle") == 0 || StrCmp(GetWeapon(),"RLWidowmakerSMG") == 0)
+    if (CheckInventory("RLUniqueWeaponToken") || CheckInventory("RLDemonicWeaponToken") || CheckInventory("RLLegendaryWeaponToken") || CheckInventory("RLAdvancedAssemblyTypeWeapon")) {
+        if (StrCmp(GetWeapon(),"RLDuke2Rifle") == 0 || StrCmp(GetWeapon(),"RLChameleonRifle") == 0 || StrCmp(GetWeapon(),"RLWidowmakerSMG") == 0)
 			PDA_Local.maxmodlimit = 3;
 		else
 			PDA_Local.maxmodlimit = 1;
-  }
+    }
 
 	if (CheckInventory("RLMasterAssemblyTypeWeapon") || CheckInventory("RLSuperiorAssembledWeaponToken")) {
 		PDA_Local.maxmodlimit = 0;
-  }
+    }
 }
 
 
@@ -905,10 +944,17 @@ function PDA_ArmorData setupArmorData (int specialArmorTokens) {
         localArmorData.armorAttr = strParam("%l:", strParam("%l:_ATTR", localArmorData.langEntry));
         localArmorData.armorDesc = strParam("%l:", strParam("%l:_DESC", localArmorData.langEntry));
         localArmorData.armorVal  = strParam("%l:\n\n",
-                    (!isRenegade) ? strParam("%l:_PROT", localArmorData.langEntry) : strParam("%l:_RENPROT", localArmorData.langEntry));
-        localArmorData.tooltip   = strParam("%l:\n%l:\n%l:",
-                    (!isRenegade) ? strParam("%l:_PROT", localArmorData.langEntry) : strParam("%l:_RENPROT", localArmorData.langEntry),
-                    localArmorData.armorRes, localArmorData.armorAttr);
+                    (!isRenegade) ? strParam("%l:_PROT", localArmorData.langEntry) 
+                                  : strParam("%l:_RENPROT", localArmorData.langEntry));
+        localArmorData.tooltip   = strParam(
+            "\cdStats:\c-\n"
+            "%l:\n"
+            "%l:\n"
+            "%l:",
+            (!isRenegade) ? strParam("%l:_PROT", localArmorData.langEntry) 
+                          : strParam("%l:_RENPROT", localArmorData.langEntry),
+            localArmorData.armorRes, localArmorData.armorAttr
+        );
     }
 
     return localArmorData;
@@ -919,27 +965,18 @@ function PDA_BootsData setupBootsData (void) {
     #define bootsActor DRLA_ArmorList[localBootsIndex][armor_ACTOR]
 
     localBootsData.langEntry = strParam("PDA_ARMOR_%s:", bootsActor);
-
-    // if(CheckInventory("RLEnclaveSetBonusActive")) {
-    //     localBootsData.langEntry = strParam("PDA_ARMOR_BOOSTED_%s:", bootsActor);
-    // } else  {
-    //     localBootsData.langEntry = strParam("PDA_ARMOR_%s:", bootsActor);
-    // }
-    localBootsData.bootsVal = strParam("%l:\n\n", strParam("%l:_PROT", CheckInventory("RLEnclaveSetBonusActive") ? strParam("PDA_ARMOR_BOOSTED_%s:", bootsActor) : localBootsData.langEntry));
-    // if (CheckInventory("RLEnclaveSetBonusActive")) {
-    //     localBootsData.bootsVal = strParam("%l:\n\n",  strParam("%l:_PROT", strParam("PDA_ARMOR_BOOSTED_%s:", bootsActor)));
-        // langEntry = strParam("PDA_ARMOR_BOOSTED_%s:", bootsActor);
-
-    // } else {
-    //     localBootsData.bootsVal = strParam("%l:\n\n",  strParam("%l:_PROT", localBootsData.langEntry));
-        // langEntry = strParam("PDA_ARMOR_%s:", bootsActor);
-    // }
-
+    localBootsData.bootsVal  = strParam("%l:\n\n", strParam("%l:_PROT", CheckInventory("RLEnclaveSetBonusActive") ? strParam("PDA_ARMOR_BOOSTED_%s:", bootsActor) : localBootsData.langEntry));
     localBootsData.name      = strParam("%l:", strParam("%l:_NAME", localBootsData.langEntry));
     localBootsData.graphic   = strParam("%l:", strParam("%l:_ICON", localBootsData.langEntry));
     localBootsData.bootsAttr = strParam("%l:", strParam("%l:_ATTR", localBootsData.langEntry));
     localBootsData.bootsDesc = strParam("%l:", strParam("%l:_DESC", localBootsData.langEntry));
-    localBootsData.tooltip   = strParam("%l:\n\n%l:", strParam("%l:_PROT", localBootsData.langEntry), localBootsData.bootsAttr);
+    localBootsData.tooltip   = strParam(
+        "\cdStats:\c-\n"
+        "%l:\n\n"
+        "%l:", 
+        strParam("%l:_PROT", localBootsData.langEntry), 
+        localBootsData.bootsAttr
+    );
 
     return localBootsData;
 }

@@ -119,7 +119,8 @@ struct PDAInfo {
    
    float texty;
    float maxtexty;
-   float scrollingy;
+   float scrollingY;
+   float oldScrollingY;
    float creditsroll;
    
    str tiercolor;
@@ -135,6 +136,7 @@ struct PDAInfo {
    str detailFetch[8];
    
    int maxmodlimit;
+   int scrollYDelta;
 }
 PDAInfo PDA_Info[MAX_PLAYERS];
 
@@ -500,7 +502,7 @@ str DRLA_BackpackList[DRLA_BACKPACKMAX][2] = {
 #define Array_Size(array) 		(sizeof((array))/sizeof((array[0][0])))
 
 #define PDA_SetScrollLimit(a)  	PDA_Local.maxtexty = (a)
-#define PDA_ResetScroll()       PDA_Local.scrollingy = PDA_SCREEN_Y;
+#define PDA_ResetScroll()       PDA_Local.scrollingY = PDA_SCREEN_Y;
 #define PDA_SetMonsterLimit(a)  if (PDA_Local.monsterpage > (a)) PDA_Local.monsterpage = (a)
 #define PDA_DefaultFont() 		SetFont(USED_PDA_FONT);
 

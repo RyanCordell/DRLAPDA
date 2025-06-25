@@ -50,7 +50,7 @@ if(GetActorclass(0) != "None")
         HudMessage("\cd%l:\c-\n\n%l:",
                     PDA_Class_Name_Printer,
                     PDA_Class_Ability_Printer;
-                    HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, (PDA_SCREEN_X) + 10.0 + X_LEFT_EDGE, PDA_Local.scrollingy + 20.0 + Y_TOP_EDGE + (20.0 * 1), 0);
+                    HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, (PDA_SCREEN_X) + 10.0 + X_LEFT_EDGE, PDA_Local.scrollingY + 20.0 + Y_TOP_EDGE + (20.0 * 1), 0);
     }
     // Class backstory
     if(PDA_Local.page == 2)
@@ -61,7 +61,7 @@ if(GetActorclass(0) != "None")
         HudMessage("\cd%l:\c-\n\n%l:",
                     PDA_Class_Name_Printer,
                     PDA_Class_Story_Printer;
-                    HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, (PDA_SCREEN_X) + 10.0 + X_LEFT_EDGE, PDA_Local.scrollingy + 20.0 + Y_TOP_EDGE + (20.0 * 1), 0);
+                    HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, (PDA_SCREEN_X) + 10.0 + X_LEFT_EDGE, PDA_Local.scrollingY + 20.0 + Y_TOP_EDGE + (20.0 * 1), 0);
     }
 }
 // Get rid of it once we're done.

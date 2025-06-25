@@ -33,7 +33,7 @@ if (StrCmp(PDA_Local.detailFetch[0], "null") != 0) {
     info   = strParam("%s:_MISC",       PDA_Local.detailFetch[0]);
     
     // Monster icon
-    DisplayIcon(strParam("%l:", icon), PDA_INFO2ID, PDA_SCREEN_WIDTH - 50.0 + X_LEFT_EDGE, PDA_Local.scrollingy + 110.0 + Y_TOP_EDGE, 0, 0.8);
+    DisplayIcon(strParam("%l:", icon), PDA_INFO2ID, PDA_SCREEN_WIDTH - 50.0 + X_LEFT_EDGE, PDA_Local.scrollingY + 110.0 + Y_TOP_EDGE, 0, 0.8);
 
     // EXPERIMENTS
     SetFont(USED_PDA_FONT);
@@ -48,7 +48,7 @@ if (StrCmp(PDA_Local.detailFetch[0], "null") != 0) {
                 health,
                 res,
                 info;
-                HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, PDA_SCREEN_X + 5.0 + X_LEFT_EDGE, PDA_Local.scrollingy + 20.0 + Y_TOP_EDGE + (20.0 * 1), 0);
+                HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, PDA_SCREEN_X + 5.0 + X_LEFT_EDGE, PDA_Local.scrollingY + 20.0 + Y_TOP_EDGE + (20.0 * 1), 0);
 } else {
     PDA_SetScrollLimit(0);
 
