@@ -33,9 +33,27 @@ SetFont(PDA_FONT_LOWER);
 #define EQUIPMENT_PAGE_ONHAND 1
 #define EQUIPMENT_PAGE_INFO 2
 
-function setupArmorData() {
+str armorNamePrinter = "\n";
+str bootsNamePrinter = "\n";
 
-}
+// Set
+str enclaveSetName = "\n",
+    enclaveSetDesc = "\n";
+str setName        = "N/A\n",
+    setDesc        = "\n\n";
+
+str armorPickupCheck = "\n";
+str armorWornCheck   = "\n";
+
+const fixed playerIconX = PDA_SCREEN_X + 20.0 + X_LEFT_EDGE;
+// time for crime
+const fixed equippedArmorX = playerIconX + 35.0;
+const fixed equippedBackX  = playerIconX + 33.0;
+const fixed equippedBootsX = playerIconX + 30.0;
+
+PDAButton armorButton, bootsButton, backpackButton;
+
+#define bootsActor DRLA_ArmorList[localBootsIndex][armor_ACTOR]
 
 if (PDA_Local.page == EQUIPMENT_PAGE_ONHAND) {
     if (localHasBackpack) {
@@ -47,110 +65,56 @@ if (PDA_Local.page == EQUIPMENT_PAGE_ONHAND) {
     }
 
     int id = 0;
-    str langEntry = "N/A\n";
-    str name = "\n";
-    str graphic = "\n";
-    str attr = "N/A\n";
-    str res = "N/A\n";
 
     const fixed x    = 10.0;
     int width        = 0;
     fixed y          = 0.0;
     const int height = 16;
     fixed initialY   = 30.0;
-    str tooltip      = "\n";
 
     // Funny that I opted to do this instead of just declaring the message outright..
     HudMessageParallax("No equipment detected", HUDMSG_PLAIN, PDA_NOEQID, CR_UNTRANSLATED, x, 50.0, 0.0, 1.0);
 
     int armorLimit       = 0;
-    str armorPickupCheck = "\n";
-    str armorWornCheck   = "\n";
     bool boots           = false;
 
-    bool specialArmorTokens = CheckInventory("RLEnclaveSetBonusActive") || CheckInventory("PowerRLPrototypeAssaultShieldProtection") || CheckInventory("PowerRLOverchargeSystemProtection") || CheckInventory("RLCyberneticArmorModdedToken") || CheckInventory("RLDeathFromAboveSetBonusActive") || CheckInventory("PowerRLInquisitorsSetBonusProtection");
+    bool specialArmorTokens = CheckInventory("RLEnclaveSetBonusActive")                 ||
+                              CheckInventory("PowerRLPrototypeAssaultShieldProtection") ||
+                              CheckInventory("PowerRLOverchargeSystemProtection")       ||
+                              CheckInventory("RLCyberneticArmorModdedToken")            ||
+                              CheckInventory("RLDeathFromAboveSetBonusActive")          ||
+                              CheckInventory("PowerRLInquisitorsSetBonusProtection");
+    
+    localArmorData = setupArmorData(specialArmorTokens);
+    localBootsData = setupBootsData();
+    localBackpackData = setupBackpackData();
 
-    if (localHasArmor) {
+    if (localHasArmor || localHasBoots) {
         HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_NOEQID, CR_UNTRANSLATED, 0, 0, 0);
-        tooltip = "";
-
-        if (specialArmorTokens) {
-            if (CheckInventory("RLEnclaveSetBonusActive")) {
-                langEntry = strParam("PDA_ARMOR_%s:COMPLETE", DRLA_ArmorList[localArmorIndex][armor_ACTOR]);
-            } else {
-                langEntry = strParam("PDA_ARMOR_BOOSTED_%s:", DRLA_ArmorList[localArmorIndex][armor_ACTOR]);
-            }
-            res = strParam("%l:", strParam("%l:_RES", langEntry));
-        } else {
-            langEntry = strParam("PDA_ARMOR_%s:", DRLA_ArmorList[localArmorIndex][armor_ACTOR]);
-            res = strParam("%l:", strParam("%l:_RES", langEntry));
-
-            if(CheckInventory("PowerRLReactiveShieldSystemMelee"))
-                res = "PDA_ARMOR_REACTIVESHIELDSYSTEM_MELEE";
-
-            if(CheckInventory("PowerRLReactiveShieldSystemBullet"))
-                res = "PDA_ARMOR_REACTIVESHIELDSYSTEM_BULLET";
-
-            if(CheckInventory("PowerRLReactiveShieldSystemFire"))
-                res = "PDA_ARMOR_REACTIVESHIELDSYSTEM_FIRE";
-
-            if(CheckInventory("PowerRLReactiveShieldSystemPlasma"))
-                res = "PDA_ARMOR_REACTIVESHIELDSYSTEM_PLASMA";
-        }
-        if (specialArmorTokens && stricmp(strLeft(DRLA_ArmorList[localArmorIndex][armor_TOKEN], 17), "RLCyberneticArmor") == 0) {
-            name    = "PDA_ARMOR_CYBERNETICARMOR_NAME";
-            graphic = "PDA_ARMOR_CYBERNETICARMOR_ICON";
-            attr    = "PDA_ARMOR_CYBERNETICARMOR_ATTR";
-            tooltip = strParam("%l:\n%l:\n%l:",
-                    (!isRenegade) ? "PDA_ARMOR_CYBERNETICARMOR_PROT" : "PDA_ARMOR_CYBERNETICARMOR_RENPROT", res, attr);
-        } else {
-            name    = strParam("%l:", strParam("%l:_NAME", langEntry));
-            graphic = strParam("%l:", strParam("%l:_ICON", langEntry));
-            attr    = strParam("%l:", strParam("%l:_ATTR",  langEntry));
-            tooltip = strParam("%l:\n%l:\n%l:",
-                        (!isRenegade) ? strParam("%l:_PROT", langEntry) : strParam("%l:_RENPROT", langEntry),
-                        res, attr);
-        }
-
-        width = (strLen(name) * 5);
         id    = (PDA_WORNARMORS - 4) + (armorLimit * 4);
-        y     = initialY + (height * (armorLimit*2));
+        y     = initialY + (height * (armorLimit * 2));
 
-        PDAButton armor = PDA_DisplayArmor(id, strParam("\cdE:\c- %s:", name), graphic, x, y, width, height, tooltip, 1.0);
-                          PDA_InitButton(armor, true, 1, "", true);
-
-        if (armorLimit > PDA_MAX_ARMOR_IN_INV+1) armorLimit = 0;
+        if (armorLimit > PDA_MAX_ARMOR_IN_INV + 1) armorLimit = 0;
         else armorLimit++;
+    }
+    if (localHasArmor) {
+        width = (strLen(localArmorData.name) * 5);
+
+        PDAButton armor = PDA_DisplayArmor(id, strParam("\cdE:\c- %s:", localArmorData.name), localArmorData.graphic, x, y, width, height, localArmorData.tooltip, 1.0);
+                          PDA_InitButton(armor, true, 1, "", true);
     }
 
     if (localHasBoots) {
-        tooltip = "";
-        HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_NOEQID, CR_UNTRANSLATED, 0, 0, 0);
+        width = (strLen(localBootsData.name) * 5);
 
-        if(CheckInventory("RLEnclaveSetBonusActive")) {
-            langEntry = strParam("PDA_ARMOR_BOOSTED_%s:", DRLA_ArmorList[localBootsIndex][armor_ACTOR]);
-        } else  {
-            langEntry = strParam("PDA_ARMOR_%s:", DRLA_ArmorList[localBootsIndex][armor_ACTOR]);
-        }
-        name    = strParam("%l:", strParam("%l:_NAME", langEntry));
-        graphic = strParam("%l:", strParam("%l:_ICON", langEntry));
-        attr    = strParam("%l:", strParam("%l:_ATTR", langEntry));
-        tooltip = strParam("%l:\n\n%l:", strParam("%l:_PROT", langEntry), attr);
-
-        width = (strLen(name) * 5);
-        id    = (PDA_WORNARMORS - 4) + (armorLimit * 4);
-        y     = initialY + (height * (armorLimit*2));
-
-        PDAButton boots = PDA_DisplayArmor(id, strParam("\cdE:\c- %s:", name), graphic, x, y, width, height, tooltip, 1.0);
-        PDA_InitButton(boots, true, 1, "", true);
-
-        if (armorLimit > PDA_MAX_ARMOR_IN_INV+1) armorLimit = 0;
-        else armorLimit++;
+        PDAButton boots = PDA_DisplayArmor(id, strParam("\cdE:\c- %s:", localBootsData.name), localBootsData.graphic, x, y, width, height, localBootsData.tooltip, 1.0);
+                          PDA_InitButton(boots, true, 1, "", true);
     }
     // Stashed armors
     for (int armorIndex = 0; armorIndex < DRLA_ARMORMAX; armorIndex++) {
-        armorPickupCheck = strParam("%s:Pickup", DRLA_ArmorList[armorIndex][armor_TOKEN]);
-        boots = strCmp(DRLA_ArmorList[armorIndex][armor_TOKEN],strParam("%s:Boots", StrTrim(DRLA_ArmorList[armorIndex][armor_TOKEN],0,5))) == 0;
+        #define armorToken DRLA_ArmorList[armorIndex][armor_TOKEN]
+        armorPickupCheck = strParam("%s:Pickup", armorToken);
+        boots            = strCmp(armorToken,strParam("%s:Boots", StrTrim(armorToken,0,5))) == 0;
 
         if (CheckInventory(armorPickupCheck)) {
             HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_NOEQID, CR_UNTRANSLATED, 0, 0, 0);
@@ -158,28 +122,28 @@ if (PDA_Local.page == EQUIPMENT_PAGE_ONHAND) {
             id = (PDA_STASHEDARMORS - 8) + (armorLimit * 2);
             y  = initialY + (height * (armorLimit*2));
 
-            langEntry = strParam("PDA_ARMOR_%s:", DRLA_ArmorList[armorIndex][armor_ACTOR]);
-            name      = strParam("%l:", strParam("%l:_NAME", langEntry));
-            graphic   = strParam("%l:", strParam("%l:_ICON", langEntry));
-            attr      = strParam("%l:", strParam("%l:_ATTR", langEntry));
-            width     = strLen(name) * 5;
+            localArmorData.langEntry = strParam("PDA_ARMOR_%s:", DRLA_ArmorList[armorIndex][armor_ACTOR]);
+            localArmorData.name      = strParam("%l:", strParam("%l:_NAME", localArmorData.langEntry));
+            localArmorData.graphic   = strParam("%l:", strParam("%l:_ICON", localArmorData.langEntry));
+            localArmorData.armorAttr = strParam("%l:", strParam("%l:_ATTR", localArmorData.langEntry));
+            width     = strLen(localArmorData.name) * 5;
 
             if (!boots) {
-                tooltip = strParam("%l:\n%l:\n%l:",
-                        (!isRenegade) ? strParam("%l:_PROT", langEntry) : strParam("%l:_RENPROT", langEntry),
-                        strParam("%l:_RES", langEntry), attr);
+                localArmorData.tooltip = strParam("%l:\n%l:\n%l:",
+                        (!isRenegade) ? strParam("%l:_PROT", localArmorData.langEntry) : strParam("%l:_RENPROT", localArmorData.langEntry),
+                        strParam("%l:_RES", localArmorData.langEntry), localArmorData.armorAttr);
             } else {
-                tooltip = strParam("%l:\n\n%l:",
-                        strParam("%l:_PROT", langEntry), attr);
+                localArmorData.tooltip = strParam("%l:\n\n%l:",
+                        strParam("%l:_PROT", localArmorData.langEntry), localArmorData.armorAttr);
             }
             /*tooltip   = strParam("%l:\n%l:\n%l:\n",
                         (!boots) ? ((!isRenegade) ? strParam("%l:_PROT", langEntry) : strParam("%l:_RENPROT", langEntry)) : "",
                         (!boots) ? strParam("%l:_RES", langEntry) : strParam("%l:_PROT", langEntry), attr);*/
 
-            PDAButton stashed = PDA_DisplayArmor(id, name, graphic, x, y, width, height, tooltip, 1.0);
+            PDAButton stashed = PDA_DisplayArmor(id, localArmorData.name, localArmorData.graphic, x, y, width, height, localArmorData.tooltip, 1.0);
             PDA_InitButton(stashed, true, 1, "", true);
 
-            if (armorLimit > PDA_MAX_ARMOR_IN_INV+1) armorLimit = 0;
+            if (armorLimit > PDA_MAX_ARMOR_IN_INV + 1) armorLimit = 0;
             else armorLimit++;
         }
     }
@@ -191,153 +155,52 @@ if(PDA_Local.page == EQUIPMENT_PAGE_INFO) {
     PDA_SetScrollLimit(-160);
     PDA_SetScrollArrows2(-160, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
 
-    const fixed playerIconX = PDA_SCREEN_X + 20.0 + X_LEFT_EDGE;
-    fixed playerIconY = 40.0 + Y_TOP_EDGE;
-
-    str armorNamePrinter = "\n";
-    str bootsNamePrinter = "\n";
+    fixed playerIconY       = 40.0 + Y_TOP_EDGE;
 
     bool specialArmorTokens = CheckInventory("RLEnclaveSetBonusActive") || CheckInventory("PowerRLPrototypeAssaultShieldProtection") || CheckInventory("PowerRLOverchargeSystemProtection") || CheckInventory("RLCyberneticArmorModdedToken");
 
-    // time for crime
-    const fixed equippedArmorX = playerIconX + 35.0;
-    const fixed equippedBackX  = playerIconX + 33.0;
-    const fixed equippedBootsX = playerIconX + 30.0;
 
     // Armor / Boots / Suit display
-    str langEntry    = "N/A\n";
-    str name         = "N/A\n";
-    str graphic      = "\n";
     fixed y          = 0.0;
     fixed initialY   = 30.0;
     const int height = 16;
     int width        = 60;
-    str tooltip      = "\n";
-
-    // Armor
-    str armorVal  = "N/A\n",
-        armorRes  = "N/A\n",
-        armorAttr = "N/A\n",
-        armorDesc = "N/A\n";
-
-    // Boots
-    str bootsVal  = "N/A\n",
-        bootsAttr = "N/A\n",
-        bootsDesc = "N/A\n";
-
-    // Set
-    str enclaveSetName = "\n",
-        enclaveSetDesc = "\n";
-    str setName        = "N/A\n",
-        setDesc        = "\n\n";
-
-    // Backpack
-    str backpackVal = "N/A\n";
 
     bool PDA_ManyHax    = false;
     int pdaStrTrimValue = 0;
-    PDAButton armorButton, bootsButton, backpackButton;
 
     const float inAlpha = 0.4;
 
     DisplayIconParallax("PDAPLYR", PDA_PLYR_ICON, playerIconX, 40.0, 0.0, 1.0);
 
+    localArmorData = setupArmorData(specialArmorTokens);
+    localBootsData = setupBootsData();
+    localBackpackData = setupBackpackData();
+
     if (localHasArmor) {
         DisplayIconParallax("PDAPARM", PDA_PLYR_ICON - 1, playerIconX, 40.0, 0.0, showArmor ? 1.0 : 0.5);
-        tooltip = "";
 
-        if (specialArmorTokens) {
-            armorRes  = strParam("%l:_RES", langEntry);
+        width     = (strLen(localArmorData.name) * 5);
 
-            if (CheckInventory("RLEnclaveSetBonusActive")) {
-                langEntry = strParam("PDA_ARMOR_%s:COMPLETE", DRLA_ArmorList[localArmorIndex][armor_ACTOR]);
-            } else {
-                langEntry = strParam("PDA_ARMOR_BOOSTED_%s:", DRLA_ArmorList[localArmorIndex][armor_ACTOR]);
-            }
-        } else {
-            langEntry = strParam("PDA_ARMOR_%s:", DRLA_ArmorList[localArmorIndex][armor_ACTOR]);
-            armorRes  = strParam("%l:_RES", langEntry);
-
-            if (CheckInventory("PowerRLReactiveShieldSystemMelee"))
-                armorRes = "PDA_ARMOR_REACTIVESHIELDSYSTEM_MELEE";
-
-            if (CheckInventory("PowerRLReactiveShieldSystemBullet"))
-                armorRes = "PDA_ARMOR_REACTIVESHIELDSYSTEM_BULLET";
-
-            if (CheckInventory("PowerRLReactiveShieldSystemFire"))
-                armorRes = "PDA_ARMOR_REACTIVESHIELDSYSTEM_FIRE";
-
-            if (CheckInventory("PowerRLReactiveShieldSystemPlasma"))
-                armorRes = "PDA_ARMOR_REACTIVESHIELDSYSTEM_PLASMA";
-        }
-
-        if (specialArmorTokens && stricmp(strLeft(DRLA_ArmorList[localArmorIndex][armor_TOKEN], 17), "RLCyberneticArmor") == 0) {
-            name      = "PDA_ARMOR_CYBERNETICARMOR_NAME";
-            graphic   = "PDA_ARMOR_CYBERNETICARMOR_ICON";
-            armorAttr = "PDA_ARMOR_CYBERNETICARMOR_ATTR";
-            armorDesc = "PDA_ARMOR_CYBERNETICARMOR_DESC";
-            if (CheckInventory("RLCyberneticArmorModdedToken")) {
-                if (CheckInventory("RLCyberneticArmorBulkToken"))      armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORBULK_RES";
-                if (CheckInventory("RLCyberneticArmorPowerToken"))     armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORPOWER_RES";
-                if (CheckInventory("RLCyberneticArmorAgilityToken"))   armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORAGILITY_RES";
-                if (CheckInventory("RLCyberneticArmorTechnicalToken")) armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORTECHNICAL_RES";
-                if (CheckInventory("RLCyberneticArmorSniperToken"))    armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORSNIPER_RES";
-                if (CheckInventory("RLCyberneticArmorFirestormToken")) armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORFIRESTORM_RES";
-                if (CheckInventory("RLCyberneticArmorNanoToken"))      armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORNANO_RES";
-                if (CheckInventory("RLCyberneticArmorOnyxToken"))      armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORONYX_RES";
-            }
-            armorVal  = strParam("%l:\n\n",
-                    (!isRenegade) ? "PDA_ARMOR_CYBERNETICARMOR_PROT" : "PDA_ARMOR_CYBERNETICARMOR_RENPROT");
-        } else {
-            name      = strParam("%l:", strParam("%l:_NAME", langEntry));
-            graphic   = strParam("%l:", strParam("%l:_ICON", langEntry));
-            armorAttr = strParam("%l:", strParam("%l:_ATTR", langEntry));
-            armorDesc = strParam("%l:", strParam("%l:_DESC", langEntry));
-            armorVal  = strParam("%l:\n\n",
-                    (!isRenegade) ? strParam("%l:_PROT", langEntry) : strParam("%l:_RENPROT", langEntry));
-        }
-
-        width     = (strLen(name) * 5);
-
-        armorButton = PDA_DisplayArmor(PDA_PLYR_ICON - 5, name, graphic, equippedArmorX, 20.0, width, height, tooltip, inAlpha);
+        armorButton = PDA_DisplayArmor(PDA_PLYR_ICON - 5, localArmorData.name, localArmorData.graphic, equippedArmorX, 20.0, width, height, localArmorData.tooltip, inAlpha);
                       PDA_InitButton(armorButton, true, 2, "", true);
     }
 
     if (localHasBackpack) {
         DisplayIconParallax("PDAPBCK", PDA_PLYR_ICON - 2, playerIconX, 40.0, 0.0, showBackpack ? 1.0 : 0.5);
 
-        name    = strParam("%l:", strParam("PDA_BACKPACK_%s:_NAME", DRLA_BackpackList[localBackpackIndex][1]));
-        graphic = strParam("%l:", strParam("PDA_BACKPACK_%s:_ICON", DRLA_BackpackList[localBackpackIndex][1]));
-        tooltip = "";
+        width       = (strLen(localBackpackData.name) * 5);
 
-        backpackVal = strParam("%l:", strParam("PDA_BACKPACK_%s:_DESC", DRLA_BackpackList[localBackpackIndex][1]));
-        width       = (strLen(name) * 5);
-
-        backpackButton = PDA_DisplayArmor(PDA_PLYR_ICON - 7, name, graphic, equippedBackX, 45.0, width, height, tooltip, inAlpha);
+        backpackButton = PDA_DisplayArmor(PDA_PLYR_ICON - 7, localBackpackData.name, localBackpackData.graphic, equippedBackX, 45.0, width, height, localBackpackData.tooltip, inAlpha);
                          PDA_InitButton(backpackButton, true, 2, "", true);
     }
 
     if (localHasBoots) {
         DisplayIconParallax("PDAPBTS", PDA_PLYR_ICON - 3, playerIconX, 40.0, 0.0, showBoots ? 1.0 : 0.5);
 
-        langEntry = strParam("PDA_ARMOR_%s:", DRLA_ArmorList[localBootsIndex][armor_ACTOR]);
+        width   = (strLen(localBootsData.name) * 5);
 
-        name    = strParam("%l:", strParam("%l:_NAME", langEntry));
-        graphic = strParam("%l:", strParam("%l:_ICON", langEntry));
-
-        // bootsVal = strParam("%l:\n\n", strParam("%l:_PROT", CheckInventory("RLEnclaveSetBonusActive") ? strParam("PDA_ARMOR_BOOSTED_%s:", DRLA_ArmorList[localBootsIndex][armor_ACTOR]) : langEntry));
-        if (CheckInventory("RLEnclaveSetBonusActive")) {
-            bootsVal = strParam("%l:\n\n",  strParam("%l:_PROT", strParam("PDA_ARMOR_BOOSTED_%s:", DRLA_ArmorList[localBootsIndex][armor_ACTOR])));
-        } else {
-            bootsVal = strParam("%l:\n\n",  strParam("%l:_PROT", langEntry));
-        }
-        bootsAttr = strParam("%l:", strParam("%l:_ATTR", langEntry));
-        bootsDesc = strParam("%l:", strParam("%l:_DESC", langEntry));
-
-        width   = (strLen(name) * 5);
-        tooltip = "";
-
-        bootsButton = PDA_DisplayArmor(PDA_PLYR_ICON - 9, name, graphic, equippedBootsX, 70.0, width, height, tooltip, inAlpha);
+        bootsButton = PDA_DisplayArmor(PDA_PLYR_ICON - 9, localBootsData.name, localBootsData.graphic, equippedBootsX, 70.0, width, height, localBootsData.tooltip, inAlpha);
                       PDA_InitButton(bootsButton, true, 2, "", true);
     }
 
@@ -356,11 +219,11 @@ if(PDA_Local.page == EQUIPMENT_PAGE_INFO) {
 
             str trimmedList = strTrim(DRLA_ArmorSetList[setIndex],2,0);
 
-            setName = strParam("%l:\n\n", (PDA_ManyHax) 
-                ? "PDA_ARMOR_NuclearWeaponSetBonusActive_SETNAME" 
+            setName = strParam("%l:\n\n", (PDA_ManyHax)
+                ? "PDA_ARMOR_NuclearWeaponSetBonusActive_SETNAME"
                 : strParam("PDA_ARMOR_%s:_SETNAME", trimmedList));
-            setDesc = strParam("%l:\n\n", (PDA_ManyHax) 
-                ? "PDA_ARMOR_NuclearWeaponSetBonusActive_SETDESC" 
+            setDesc = strParam("%l:\n\n", (PDA_ManyHax)
+                ? "PDA_ARMOR_NuclearWeaponSetBonusActive_SETDESC"
                 : strParam("PDA_ARMOR_%s:_SETDESC", trimmedList));
         }
     }
@@ -406,16 +269,16 @@ if(PDA_Local.page == EQUIPMENT_PAGE_INFO) {
                    ,
                     "\cgARMOR\c-\n",
                     "\crProtection:\c-\n",
-                    armorVal,
+                    localArmorData.armorVal,
 
                     "\crResistances:\c-\n",
-                    strParam("%l:\n", armorRes),
+                    strParam("%l:\n", localArmorData.armorRes),
 
                     "\crAttributes:\c-\n",
-                    strParam("%l:\n\n", armorAttr),
+                    strParam("%l:\n\n", localArmorData.armorAttr),
 
                     "\crDescription:\c-\n",
-                    strParam(" %l:\n\n", armorDesc),
+                    strParam(" %l:\n\n", localArmorData.armorDesc),
 
                     "\crSet bonus:\c-\n",
                     enclaveSetName,
@@ -435,11 +298,11 @@ if(PDA_Local.page == EQUIPMENT_PAGE_INFO) {
                    ,
                     "\cgBOOTS\c-\n",
                     "\crProtection:\c-\n",
-                    bootsVal,
+                    localBootsData.bootsVal,
                     "\crAttributes:\c-\n",
-                    strParam("%l:\n", bootsAttr),
+                    strParam("%l:\n", localBootsData.bootsAttr),
                     "\crDescription:\c-\n",
-                    strParam("%l:\n", bootsDesc);
+                    strParam("%l:\n", localBootsData.bootsDesc);
                     HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, PDA_SCREEN_X + 10.0 + X_LEFT_EDGE, (int)(PDA_Local.scrollingy * NEW_RESOLUTION_Y) + 140.0 + Y_TOP_EDGE, 0);
     } else if (localShowBackpack && localHasBackpack) {
         HudMessage(
@@ -450,7 +313,7 @@ if(PDA_Local.page == EQUIPMENT_PAGE_INFO) {
 
                     "\cgBACKPACK\c-\n",
                     "\crDescription:\c-\n",
-                    backpackVal;
+                    localBackpackData.backpackVal;
                     HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, PDA_SCREEN_X + 10.0 + X_LEFT_EDGE, (int)(PDA_Local.scrollingy * NEW_RESOLUTION_Y) + 140.0 + Y_TOP_EDGE, 0);
     }
 }

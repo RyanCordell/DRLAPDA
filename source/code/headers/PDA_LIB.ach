@@ -197,6 +197,40 @@ struct PDAWeapon {
     bool isDemonic;
 }
 
+struct PDA_ArmorData {
+    str armorRes;
+    str langEntry;
+    str name;
+    str graphic;
+    str armorAttr;
+    str armorDesc;
+    str armorVal;
+    str tooltip;
+};
+       PDA_ArmorData   _ad[MAX_PLAYERS][1];
+#define localArmorData _ad[PlayerNumber()][0]
+
+struct PDA_BootsData {
+    str name;
+    str graphic;
+    str bootsAttr;
+    str bootsDesc;
+    str bootsVal;
+    str langEntry;
+    str tooltip;
+};
+       PDA_BootsData   _bd[MAX_PLAYERS][1];
+#define localBootsData _bd[PlayerNumber()][0]
+
+struct PDA_BackpackData {
+    str name;
+    str graphic;
+    str tooltip;
+    str backpackVal;
+};
+       PDA_BackpackData   _bpd[MAX_PLAYERS][1];
+#define localBackpackData _bpd[PlayerNumber()][0]
+
 #define X_CENTER                 0.0
 #define X_LEFT_EDGE              0.1
 #define X_RIGHT_EDGE             0.2
