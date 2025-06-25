@@ -25,7 +25,6 @@ for (int setPerkIndex = 0; setPerkIndex < DRLA_NUCLEARMAX; setPerkIndex++) {
 
 // TODO: throw gun icon on this page
 
-float _tyTemp = 20.0 + (20.0 * 1);
 HudMessageParallax(
     StrParam(
         "%s:" // Tech perk
@@ -42,7 +41,7 @@ HudMessageParallax(
     ),
 
     HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 
-    10.0, _tyTemp, 
+    10.0, 20.0 + (20.0 * 1), 
     0, 1.0);
 
 if (PDA_Local.scrollYDelta == -1) {

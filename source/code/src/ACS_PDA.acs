@@ -4,19 +4,21 @@
 
 #include "zcommon.acs"
 #library "ACS_PDA"     // [marrub] This should be after zcommon.acs. (Don't ask me why.)
+
 #include "../headers/PDA_LIB.ach" // Stores IDs, arrays and other things the PDA uses.
 
 /** PDA Databases */
-// #include "../database/assemblies.idb" // Assemblies
 #include "../database/equipment.idb" // Armors, boots, and etc.
-// #include "../database/modeffects.idb" // Modpack effects on weapons
 
-/** Includes for other stuff */
 #include "../headers/PDA_BES.ach" // i'm da
 #include "../headers/PDA_ITM.ach" // Stores information about the many items in DRLA
 #include "../headers/PDA_FNC.ach"
 #include "ACS_INP.acs" // PDA input tracker, made separate for better responsiveness
 #include "ACS_PNG.acs" // PDA Pong minigame
+
+
+global str 43:weaponval;
+global str 44:armorval;
 
 // [marrub] This is a pretty cool hack
 script "PDA_CheckPlayer1Inventory" (str name) {
@@ -36,8 +38,6 @@ script "PDA_SetEveryoneInventory" (str name) {
    SetResultValue(1);
 }
 
-global str 43:weaponval;
-global str 44:armorval;
 script "DRLA_HUD_InfoHandler" ENTER {
     while (true) {
         bool IsNotDemonic = false;
@@ -58,9 +58,9 @@ script "DRLA_HUD_InfoHandler" ENTER {
             Weapon_Nano_Quantity      = CheckInventory(StrParam("%s:NanoMod", currentWeapon)),
             Weapon_Artifact_Quantity  = CheckInventory(StrParam("%s:DemonArtifacts", currentWeapon));
         
-        str weaponName = (IsNotDemonic) ? 
-                        (CheckInventory(strParam("%s:DemonArtifacts", currentWeapon)) ? 
-                            Weapon_DualName_Printer 
+        str weaponName = (IsNotDemonic) 
+                        ? (CheckInventory(strParam("%s:DemonArtifacts", currentWeapon)) 
+                            ? Weapon_DualName_Printer 
                             : Weapon_Name_Printer) 
                         : Weapon_Name_Printer;
         str modsOn     = StrParam("%l: ", weaponName);
@@ -194,6 +194,7 @@ script "PDA_GSInit" open {
       PDA_Info[i].texty = 0;
       PDA_Info[i].maxtexty = -200;
       PDA_Info[i].scrollingY = 20.0;
+      PDA_Info[i].scrollYDelta = 0;
       
       PDA_Info[i].clicked = false;
       PDA_Info[i].newEntry[0] = false;
@@ -213,10 +214,12 @@ script "PDA_GSInit" open {
       PDA_Mouse[i].pollRate = 1;*/
    }
 }
+
 // Display terminal
 SCRIPT "PDA_Display" (void) net {
     int PDA_THEME = GetUserCVar(PlayerNumber(), "DRLA_PDA_theme");
     str pdaGraphic = "RLZPDA2";
+    
     switch (PDA_THEME) {
         case THEME_SLIM:
             pdaGraphic = "RLZPDA3";
@@ -337,11 +340,6 @@ SCRIPT "PDA_Core" (void) {
     
     while (PDA_Local.active) {
         SetHudSize(320,200,0);
-        // SetHudClipRect(
-        //     PDA_SCREEN_X, PDA_SCREEN_Y,
-        //     PDA_SCREEN_WIDTH, PDA_SCREEN_HEIGHT, 
-        //     PDA_SCREEN_WIDTH
-        // );
 
         PDA_DefaultFont();
 
@@ -403,15 +401,6 @@ SCRIPT "PDA_Core" (void) {
         }
         
         PDA_DefaultFont();
-
-        // int freelook = GetCvar("sv_freelook");
-        // int nofreelook = GetCvar("sv_nofreelook");
-        // if (freelook == 1 || nofreelook == 1) {
-        //     HudMessage(s:"\cgWARNING!\c- The PDA will not function properly with \cb\"Allow freelook\"\c- disabled! Sorry about that."; 
-        //     HUDMSG_PLAIN, PDA_PLAYERS_BUTTON, CR_GREEN, (PDA_SCREEN_X) + 10.1, (PDA_SCREEN_Y) + 35.1, 0);
-        //     HudMessage(s:"Find either \cb\"sv_freelook\"\c-, \cb\"sv_nofreelook\"\c-, or \cbenable mouselook under Mouse Options\c- to rectify this."; 
-        //     HUDMSG_PLAIN, PDA_WEAPONS_BUTTON, CR_GREEN, (PDA_SCREEN_X) + 10.1, (PDA_SCREEN_Y) + 60.1, 0);
-        // }
 
         for (int t = 0; t < DRLA_DIFFICULTYTIERS; t++) {
             for (int m = 0; m < DRLA_MONSTER_PAGE_MAX; m++) {

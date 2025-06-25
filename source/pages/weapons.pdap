@@ -9,13 +9,13 @@ int perkoffset = 1;
 switch (PDA_Local.page)
 {
 case 1:
-    PDA_PrintHeader("PDA_WEAPON_HEADER", -50);
+    PDA_PrintHeader("PDA_WEAPON_HEADER", 0);
     break;
 case 2:
-    PDA_PrintHeader("PDA_MODPACK_HEADER", -20);
+    PDA_PrintHeader("PDA_MODPACK_HEADER", -10);
     break;
 case 3:
-    PDA_PrintHeader("PDA_DEMONARTIFACT_HEADER", -40);
+    PDA_PrintHeader("PDA_DEMONARTIFACT_HEADER", -20);
     break;
 }
 

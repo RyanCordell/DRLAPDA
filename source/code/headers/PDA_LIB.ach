@@ -508,6 +508,26 @@ str DRLA_BackpackList[DRLA_BACKPACKMAX][2] = {
 
 #define PDA_PrintHeader(a, b) 	HudMessage(l:(a); HUDMSG_PLAIN, PDA_INFOTOPID, CR_GREEN, PDA_SCREEN_X + 100.0 + (b) + X_LEFT_EDGE, (PDA_SCREEN_Y) + 2.0 + Y_TOP_EDGE, 0)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /** PONG stuff */
 //where the sscore is drawn
 #define SCORELINE       PDA_SCREEN_Y + X_LEFT_EDGE

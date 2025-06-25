@@ -674,23 +674,34 @@ function PDAButton PDA_DisplayArmor (int id, str label, str graphic, float x, fl
 
 function PDAButton PDA_CreateModPackDisplay (int id, str graphic, float x, float y, int width, int height, fixed alpha) {
     #define thisButton PDA_LocalButton[id]
-    assignButtonParams(thisButton, '')
+    assignButtonParams(thisButton, StrParam("%l:", stringArray[id]))
 
     thisButton.graphic      = graphic;
     thisButton.graphicFlags = HUDMSG_ALPHA;
     thisButton.graphicID    = PDA_ASSEMBLYIDRANGE + PDA_MODMAX + thisButton.id;
-    thisButton.graphicX     = (int)(thisButton.x * NEW_RESOLUTION_X) + 15.0 + X_LEFT_EDGE;
-    thisButton.graphicY     = 0.0;
+    int _gfxTemp            = thisButton.x * NEW_RESOLUTION_X + 15.0;
+    thisButton.graphicX     = _gfxTemp + X_LEFT_EDGE;
+    int _gfyTemp            = thisButton.y * NEW_RESOLUTION_Y;
+    thisButton.graphicY     = _gfyTemp + Y_TOP_EDGE;
     thisButton.type         = "modpack";
 
     thisButton.textFlags = HUDMSG_ALPHA;
     thisButton.textFont  = USED_PDA_FONT;
-    thisButton.finalX    = PDA_SCREEN_X + 35.0 + X_LEFT_EDGE;
+    thisButton.textID    = PDA_ASSEMBLYIDRANGE + thisButton.id;
+    int _fxTemp          = thisButton.graphicX;
+    thisButton.finalX    = _fxTemp + 5.0 + X_LEFT_EDGE;
+    int _fyTemp          = thisButton.graphicY;
+    thisButton.finalY    = _fyTemp + 2.0 + Y_TOP_EDGE;
 
     if (debug) {
         DrawBorder(thisButton.x * NEW_RESOLUTION_X, thisButton.y * NEW_RESOLUTION_Y, width * NEW_RESOLUTION_X, height * NEW_RESOLUTION_Y);
         PDA_SetupScreenBounds();
     }
+
+    // SetFont(thisButton.textFont);
+    // HudMessage("%l:", stringArray[id]; thisButton.textFlags, PDA_ASSEMBLYIDRANGE + id, CR_UNTRANSLATED, 
+    //     thisButton.finalX, thisButton.finalY,
+    //     0.0, 1.0);
     return thisButton;
 }
 
@@ -762,6 +773,8 @@ function void PDA_InitButton (PDAButton button, int incat, int catpage, str mess
             button.alpha = (button.state == button_hovered) ? pulser(2.0, 0.8) : 0.6;
         }
     }
+
+    if (debug) log("button %s: %f: [%f:, %f:] [%f:, %f:]", button.graphic, button.alpha, button.graphicX, button.graphicY, button.finalX, button.finalY);
     
     fixed xlabeloff = (strcmp(button.graphic, "PTAB") == 0) ? 4.0 : 0.0;
     fixed ylabeloff = (strcmp(button.graphic, "PTAB") == 0) ? 3.0 : 0.0;
