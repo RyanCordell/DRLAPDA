@@ -33,6 +33,9 @@ str PDA_FONT_SLIM  = "PDAFONT";
 #define PDA_TAB_W 12
 #define PDA_TAB_H 7
 
+#define PDA_MENU_BTN_W 88
+#define PDA_MENU_BTN_H 16
+
 #define AVAILABLE_HUDS 13
 str playerSelectedHUD[AVAILABLE_HUDS] = {
   "RLStatusBarHUDType",
@@ -149,6 +152,8 @@ struct PDAMouse {
     
     int state;
     int oldstate;
+
+    bool scrolling;
 }
 PDAMouse PDA_Mouse[MAX_PLAYERS];
 
@@ -178,8 +183,12 @@ struct PDAButton {
     str textFont;
     int textID;
     int textFlags;
+    float textX;
+    float textY;
+
     float finalX;
     float finalY;
+    float scrollY;
 
     str type;
 }
@@ -506,7 +515,10 @@ str DRLA_BackpackList[DRLA_BACKPACKMAX][2] = {
 #define PDA_SetMonsterLimit(a)  if (PDA_Local.monsterpage > (a)) PDA_Local.monsterpage = (a)
 #define PDA_DefaultFont() 		SetFont(USED_PDA_FONT);
 
-#define PDA_PrintHeader(a, b) 	HudMessage(l:(a); HUDMSG_PLAIN, PDA_INFOTOPID, CR_GREEN, PDA_SCREEN_X + 100.0 + (b) + X_LEFT_EDGE, (PDA_SCREEN_Y) + 2.0 + Y_TOP_EDGE, 0)
+#define PDA_PrintHeader(a, b) \
+SetHudSize(320,200,0); \
+PDA_DefaultFont(); \
+HudMessage(l:(a); HUDMSG_PLAIN, PDA_INFOTOPID, CR_GREEN, PDA_SCREEN_X + 100.0 + (b) + X_LEFT_EDGE, (PDA_SCREEN_Y) + 2.0 + Y_TOP_EDGE, 0); \
 
 
 

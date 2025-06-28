@@ -177,10 +177,6 @@ SCRIPT "HeyADollar" enter {
     ACS_NamedExecuteAlways("DRLA_HUDStyleChanger", 0);
 }
 
-SCRIPT "SyncPDA" (void) net {
-    // doPDASync();
-}
-
 // [marrub] Static init stuff
 script "PDA_GSInit" open {
    for(int i = 0; i < MAX_PLAYERS; i++) {
@@ -274,7 +270,7 @@ SCRIPT "PDA_Display" (void) net {
         PDA_Local.active = true;
     } else {
         PDA_NOPONG();
-        PDA_Wipe();
+        PDA_Wipe("PDA_Display Terminate");
         ACS_NamedExecuteAlways("QuitPong",0);
         PDA_UnsetScrollArrows();
         DisplayIcon("RLZPDA", PDA_ID, 0.5, 0.5, 0, 0);
@@ -295,7 +291,7 @@ SCRIPT "PDA_Display" (void) net {
 SCRIPT "PDA_YOUAREDEADnotbigsurprise" DEATH {
     if (PDA_Local.active) {
         PDA_NOPONG();
-        PDA_Wipe();
+        PDA_Wipe("Player Death");
         ACS_NamedExecuteAlways("QuitPong",0);
         PDA_UnsetScrollArrows();
         DisplayIcon("RLZPDA", PDA_ID, 0.5, 0.5, 0, 0);
@@ -317,7 +313,7 @@ SCRIPT "PDA_YOUAREDEADnotbigsurprise" DEATH {
 SCRIPT "PDA_Respawn" RESPAWN {
     if (PDA_Local.active) {
         PDA_NOPONG();
-        PDA_Wipe();
+        PDA_Wipe("Respawn");
         ACS_NamedExecuteAlways("QuitPong",0);
         PDA_UnsetScrollArrows();
         DisplayIcon("RLZPDA", PDA_ID, 0.5, 0.5, 0, 0);
@@ -335,82 +331,138 @@ SCRIPT "PDA_Respawn" RESPAWN {
     }
 }
 
+
+function void page_menu (void) {
+    if (PDA_Local.category != PDA_MENU) return;
+    #include "../../pages/menu.pdap"
+}
+
+function void page_player (void) {
+    if (PDA_Local.category != PDA_CLASSES) return;
+    #include "../../pages/player.pdap"
+}
+
+function void page_weapons (void) {
+    if (PDA_Local.category != PDA_WEAPONS) return;
+    #include "../../pages/weapons.pdap"
+}
+
+function void page_armors (void) {
+    if (PDA_Local.category != PDA_ARMORS) return;
+   #include "../../pages/armors.pdap"
+}
+
+function void page_assemblies (void) {
+    if (PDA_Local.category != PDA_ASSEMBLIES) return;
+    #include "../../pages/assemblies.pdap"
+}
+
+function void page_bestiary (void) {
+    if (PDA_Local.category != PDA_BESTIARY) return;
+    checkMonsterKillCount();
+    updateOldMonsterKillCount();
+    #include "../../pages/bestiary.pdap"
+}
+
+function void page_items (void) {
+    if (PDA_Local.category != PDA_ITEMS) return;
+    #include "../../pages/items.pdap"
+}
+
+function void page_help (void) {
+    if (PDA_Local.category != PDA_HELP) return;
+    #include "../../pages/help.pdap"
+}
+
+function void page_misc (void) {
+    if (PDA_Local.category != PDA_MISC) return;
+    #include "../../pages/misc.pdap"
+}
+
+function void page_pong (void) {
+    if (PDA_Local.category != PDA_PONG) return;
+    #include "../../pages/pong.pdap"
+}
+
+function void page_credits (void) {
+    if (PDA_Local.category != PDA_CREDITS) return;
+    #include "../../pages/credits.pdap"
+}
+
+function void page_assembly_info (void) {
+    if (PDA_Local.category != PDA_ASSEMBLY_DETAIL) return;
+    #include "../../pages/assemblyinfo.pdap"
+}
+
+function void page_monster_info (void) {
+    if (PDA_Local.category != PDA_BESTIARY_DETAIL) return;
+    checkMonsterKillCount();
+    updateOldMonsterKillCount();
+    #include "../../pages/beastinfo.pdap"
+}
+
 SCRIPT "PDA_Core" (void) {  
     PDA_Local.scrollingY = 20.0;
+    SetHudSize(320,200,0);
+
+    if (PDA_Local.active) {
+        if (GetUserCvar(PlayerNumber(), "DRLA_PDA_firsttime") != FALSE) PDA_SetCategory(PDA_HELP);
+        PDA_DefaultFont();
+    }
+    
+    #include "PDA_STC.acs"
     
     while (PDA_Local.active) {
-        SetHudSize(320,200,0);
-
-        PDA_DefaultFont();
-
-        PDA_Wipe();
-
-        if (GetUserCvar(PlayerNumber(), "DRLA_PDA_firsttime") != FALSE) PDA_SetCategory(PDA_HELP);
-        
-        for (int t = 0; t < DRLA_DIFFICULTYTIERS; t++) {
-            for (int m = 0; m < DRLA_MONSTER_PAGE_MAX; m++) {
-                monsterCheck[t][m] = CheckInventory(StrParam(s:DRLA_Bestiary[t][m][beast_TOKEN],s:"KillCounter"));
-                
-                if (oldCheck[t][m] != monsterCheck[t][m] && oldCheck[t][m] < 2 && monsterCheck[t][m] < 2) {
-                    PDA_Local.newEntry[t] = true;
-                }
-            }
-        }
+        Delay(PDA_Responsiveness);
         
         switch (PDA_Local.category) {
             case PDA_MENU:
-                #include "../../pages/menu.pdap"
+                page_menu();
                 break;
             case PDA_CLASSES:
-                #include "../../pages/player.pdap"
+                page_player();
                 break;
             case PDA_WEAPONS:
-                #include "../../pages/weapons.pdap"
+                page_weapons();
                 break;
             case PDA_ARMORS:
-                #include "../../pages/armors.pdap"
+                page_armors();
                 break;
             case PDA_ASSEMBLIES:
-                #include "../../pages/assemblies.pdap"
+                page_assemblies();
                 break;
             case PDA_BESTIARY:
-                #include "../../pages/bestiary.pdap"
+                page_bestiary();
                 break;
             case PDA_ITEMS:
-                #include "../../pages/items.pdap"
+                page_items();
                 break;
             case PDA_HELP:
-                #include "../../pages/help.pdap"
+                page_help();
                 break;
             case PDA_MISC:
-                #include "../../pages/misc.pdap"
+                page_misc();
                 break;
             
             case PDA_PONG:
-                #include "../../pages/pong.pdap"
+                page_menu();
                 break;
             case PDA_CREDITS:
-                #include "../../pages/credits.pdap"
+                page_credits();
                 break;
             case PDA_ASSEMBLY_DETAIL:
-                #include "../../pages/assemblyinfo.pdap"
+                page_assembly_info();
                 break;
             case PDA_BESTIARY_DETAIL:
-                #include "../../pages/beastinfo.pdap"
+                page_monster_info();
+                break;
+            default:
+                log("how'd you get here?");
                 break;
         }
-        
-        PDA_DefaultFont();
-
-        for (int t = 0; t < DRLA_DIFFICULTYTIERS; t++) {
-            for (int m = 0; m < DRLA_MONSTER_PAGE_MAX; m++) {
-                oldCheck[t][m] = monsterCheck[t][m];
-            }
-        }
-
-        SetHudClipRect(0,0,0,0,0);
-        Delay(PDA_Responsiveness);
     }
+    PDA_Wipe("PDA_Core End");
+    SetHudClipRect(0,0,0,0,0);
 }
 
 #include "ACS_WRT.acs"

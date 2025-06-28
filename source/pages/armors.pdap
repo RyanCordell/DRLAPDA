@@ -1,7 +1,5 @@
 PDA_Local.pagemax = 2;
 
-PDA_Wipe();
-
 #define PDA_ArmorXOffset 40.0 + X_LEFT_EDGE
 
 switch (PDA_Local.page) {
@@ -9,12 +7,16 @@ switch (PDA_Local.page) {
     case 2: PDA_PrintHeader("PDA_ARMOR_HEADER2", -15); break;
 }
 
-PDAButton P1 = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-PDAButton P2 = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
 
-PDA_InitButton(P1, true, 1, "", false);
-PDA_InitButton(P2, true, 2, "", false);
+PDA_ButtonHandler(PDA_TAB_BUTTONS_START   , true, 1, "", false);
+PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 1, true, 2, "", false);
 
+if (PDA_LocalMouse.scrolling) {
+    PDAButton ARMORS_TAB_1 = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDAButton ARMORS_TAB_2 = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+}
+
+// Not the renegade of funk, unfortunately..
 bool isRenegade = false;
 
 if(CheckInventory("DRPGDRLAActive")) {
@@ -71,5 +73,5 @@ if(PDA_Local.page == EQUIPMENT_PAGE_INFO) {
     #include "../../pages/subpage/armors_detail.pdap"
 }
 
-PDA_DefaultFont();
-PDA_UnsetScrollWindow();
+// PDA_DefaultFont();
+// PDA_UnsetScrollWindow();

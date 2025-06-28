@@ -1,8 +1,5 @@
 PDA_Local.pagemax = 6;
 
-// We don't need garbage from other categories or pages to leak.
-PDA_Wipe();
-
 str color;
 
 switch (PDA_Local.page) {
@@ -58,7 +55,6 @@ switch (PDA_Local.page) {
         for (int i = 0; i < DRLA_MONSTER_PAGE_MAX; i++) {
             kcount = StrParam("%s:KillCounter", DRLA_Bestiary[page][i][beast_TOKEN]);
             monsterCheck[page][i] = CheckInventory(kcount);
-            //log("%s:: %i: %i:", DRLA_Bestiary[page][i][beast_TOKEN], monsterCheck[page][i], CheckInventory(kcount));
             
             if(CheckInventory(kcount) > 0)
             {
@@ -80,4 +76,4 @@ switch (PDA_Local.page) {
 }
 
 // Get rid of it once we're done.
-PDA_UnsetScrollWindow();
+// PDA_UnsetScrollWindow();

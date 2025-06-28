@@ -1,6 +1,5 @@
 PDA_Local.pagemax = 1;
 
-PDA_Wipe();
 str detailedAssemblyStringer;
 
 if (!PDA_Local.playonce) {
@@ -66,4 +65,4 @@ if (StrCmp(PDA_Local.detailFetch[0], "null") != 0) {
                 HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, PDA_SCREEN_X + 5.0 + X_LEFT_EDGE, PDA_SCREEN_Y + 20.0 + Y_TOP_EDGE + (20.0 * 1), 0);
 }
 
-PDA_UnsetScrollWindow();
+// PDA_UnsetScrollWindow();

@@ -93,17 +93,15 @@ SCRIPT "PDA_MouseController" (void)
             PDA_LocalMouse.y -= (playerY << PDA_Y_sensitivity) * yScale;
         }
 
-        if (debug) log("mouse [%d:, %d:], max %d:, scrolly: %d:", PDA_LocalMouse.x, PDA_LocalMouse.y, PDA_Local.maxtexty, PDA_Local.scrollingY);
-        
         if (PDA_LocalMouse.x < HMIN) PDA_LocalMouse.x = HMIN;
         if (PDA_LocalMouse.x > HMAX) PDA_LocalMouse.x = HMAX;
-
 
         if (PDA_LocalMouse.y < VMIN) {
             PDA_LocalMouse.y = VMIN;
 
             if (PDA_Local.scrollingY < PDA_SCREEN_Y) {
                 PDA_Local.scrollingY += 2.0 * yScale;
+                PDA_LocalMouse.scrolling = true;
                 PDA_Local.scrollYDelta = setScrollDelta();
             }
         }
@@ -112,6 +110,7 @@ SCRIPT "PDA_MouseController" (void)
 
             if (PDA_Local.scrollingY > PDA_Local.maxtexty) {
                 PDA_Local.scrollingY -= 2.0 * yScale;
+                PDA_LocalMouse.scrolling = true;
                 PDA_Local.scrollYDelta = setScrollDelta();
             }
         }
@@ -132,6 +131,7 @@ SCRIPT "PDA_MouseController" (void)
             PDA_Local.scrollingY += vBuffer;
             myoff                 = vBuffer;
             PDA_Local.scrollYDelta = setScrollDelta();
+            PDA_LocalMouse.scrolling = true;
             
             if (PDA_Local.scrollingY < PDA_Local.maxtexty) PDA_Local.scrollingY = PDA_Local.maxtexty;
             if (PDA_Local.scrollingY > VMIN)               PDA_Local.scrollingY = VMIN;
@@ -145,37 +145,42 @@ SCRIPT "PDA_MouseController" (void)
             
             // Step back into previous page
             if (PDA_Local.category == PDA_ASSEMBLY_DETAIL) {
-                PDA_Local.category = PDA_ASSEMBLIES;
+                // PDA_Local.category = PDA_ASSEMBLIES;
+                PDA_SetCategory(PDA_ASSEMBLIES);
             }
             else if (PDA_Local.category == PDA_BESTIARY && PDA_Local.page > 1) {
-                PDA_Local.page = 1;
+                PDA_SetPage(1);
             }
             else if (PDA_Local.category == PDA_BESTIARY_DETAIL) {
-                PDA_Local.category = PDA_BESTIARY;
+                // PDA_Local.category = PDA_BESTIARY;
+                PDA_SetCategory(PDA_BESTIARY);
             }
             else if (PDA_Local.category == PDA_PONG) {
                 ACS_NamedExecute("QuitPong",0);
-                PDA_Local.category = PDA_MISC;
+                PDA_SetCategory(PDA_MISC);
+                // PDA_Local.category = PDA_MISC;
             }
             else if (PDA_Local.category == PDA_HELP) {
                 SetUserCVar(PlayerNumber(), "DRLA_PDA_firsttime", false);
-                PDA_Wipe();
-                PDA_Local.category = PDA_MENU;
-                PDA_Local.page = 0;
+                PDA_SetCategory(PDA_MENU);
+                // PDA_Local.category = PDA_MENU;
+                PDA_SetPage(1);
             }
             else if (PDA_Local.category == PDA_CREDITS) {
-                PDA_Local.category = PDA_MENU;
-                PDA_Local.page = 0;
+                PDA_SetCategory(PDA_MENU);
+                // PDA_Local.category = PDA_MENU;
+                PDA_SetPage(1);
             }
             else {
-                PDA_Local.category = PDA_MENU;
-                PDA_Local.page = 0;
+                PDA_SetCategory(PDA_MENU);
+                // PDA_Local.category = PDA_MENU;
+                PDA_SetPage(1);
             }
             PDA_ResetScroll();
         }
         
-        PDA_Local.oldScrollingY = PDA_Local.scrollingY;
         Delay(1);
+        PDA_Local.oldScrollingY = PDA_Local.scrollingY;
 
         vBuffer = 0;
         PDA_LocalMouse.m1 = false;

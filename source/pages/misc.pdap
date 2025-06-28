@@ -1,7 +1,5 @@
 PDA_Local.pagemax = 1;
 
-PDA_Wipe();
-
 PDA_PrintHeader("PDA_MISC_HEADER", 10);
 
 PDA_SetupScreenBounds();

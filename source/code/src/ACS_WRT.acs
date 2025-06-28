@@ -7,15 +7,14 @@
 SCRIPT "DRLA_AssemblyGlobalizer" ENTER {
 	bool dowrite;
 
-    /** Fetch all available assembly and exotic mod effect data from ini */
+    // Fetch all available assembly and exotic mod effect data from (g/vk/z)doom's ini
     DRLA_FetchStoredInfo[PlayerNumber()] = GetUserCVarString(PlayerNumber(), "DRLA_knownassemblies");
-    // DRLA_FetchExoticInfo[PlayerNumber()] = GetUserCVarString(PlayerNumber(), "DRLA_knownexoticeffects");
 
     int masterMax   = 0;
     str allAssemblies = StrParam(l:"PDA_ASSEMBLIES");
     str_split(StrParam("%l:", "PDA_SEPARATOR_CHARACTER"), allAssemblies);
     int ai = 0;
-    int TEXT_OFFSET = 13; // aka length of "PDA_ASSEMBLY_"
+    int TEXT_OFFSET = 13; // "PDA_ASSEMBLY_" string length
     if (stringArray[0] != "") {
         while ((stringArray[ai++]) != "") {
             if (ai % 2 == 0) masterMax++;
@@ -48,28 +47,38 @@ SCRIPT "DRLA_AssemblyGlobalizer" ENTER {
         
         DRLA_OldAssemblyState[PlayerNumber()][ti] = CheckInventory(actorToken);
     }
+}
 
-    /*
-     * UPDATE
-     * 
-     * Update old state with what was read from the ini. Any change afterwards will trigger an ini write.
-     */
-     
-    while (true) {
-        for (int ti = 0, at = 0; ti < masterMax, at < masterMax * 2; ti++, at += 2) {
-            actorToken = stringArray[at];
+SCRIPT "DRLA_UpdateAssemblyDB" (void) {
+    // Fetch all available assembly and exotic mod effect data from (g/vk/z)doom's ini
+    DRLA_FetchStoredInfo[PlayerNumber()] = GetUserCVarString(PlayerNumber(), "DRLA_knownassemblies");
 
-            DRLA_AssemblyState[PlayerNumber()][ti] = CheckInventory(actorToken);
-
-            if (DRLA_AssemblyState[PlayerNumber()][ti] != DRLA_OldAssemblyState[PlayerNumber()][ti]) {
-                dowrite = true;
-            }
+    int masterMax   = 0;
+    str allAssemblies = StrParam(l:"PDA_ASSEMBLIES");
+    str_split(StrParam("%l:", "PDA_SEPARATOR_CHARACTER"), allAssemblies);
+    int ai = 0;
+    int TEXT_OFFSET = 13; // "PDA_ASSEMBLY_" string length
+    if (stringArray[0] != "") {
+        while ((stringArray[ai++]) != "") {
+            if (ai % 2 == 0) masterMax++;
         }
+    }
 
-        Delay(2);
+    int DRLA_AssemblyState[MAX_PLAYERS][ASSEMBLY_MAX],
+        DRLA_OldAssemblyState[MAX_PLAYERS][ASSEMBLY_MAX];
 
-    // WRITE --------------------------------------------------
-        if (dowrite) {
+    str DRLA_CurrentAssemblerState[MAX_PLAYERS] = {{"","","","","","","",""}};
+
+    str actorToken = "";
+
+    // Read from INI. Any changes will trigger a write over instead.
+    // READ --------------------------------------------------- 
+    for (int ti = 0, at = 0; ti < masterMax, at < masterMax * 2; ti++, at += 2) {
+        actorToken = stringArray[at];
+
+        DRLA_AssemblyState[PlayerNumber()][ti] = CheckInventory(actorToken);
+
+        if (DRLA_AssemblyState[PlayerNumber()][ti] != DRLA_OldAssemblyState[PlayerNumber()][ti]) {
             DRLA_CurrentAssemblerState[PlayerNumber()] = "";
             
             for (int ti = 0; ti < masterMax; ti++) {
@@ -79,10 +88,8 @@ SCRIPT "DRLA_AssemblyGlobalizer" ENTER {
             }
 
             SetUserCVarString(PlayerNumber(), "DRLA_knownassemblies", DRLA_CurrentAssemblerState[PlayerNumber()]);
-
-            // Sanity delay.
-            dowrite = false;
-            Delay(15);
         }
     }
+
+    // WRITE --------------------------------------------------
 }

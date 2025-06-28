@@ -1,17 +1,17 @@
 // We don't need garbage from other categories or pages to leak.
-PDA_Wipe();
-
 switch(PDA_Local.page)
 {
     case 1: PDA_PrintHeader("PDA_CLASS_HEADER1", 5); break;
     case 2: PDA_PrintHeader("PDA_CLASS_HEADER2", 0); break;
 }
     
-PDAButton P1 = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-               PDA_InitButton(P1, true, 1, "", false);
+PDA_ButtonHandler(PDA_TAB_BUTTONS_START, true, 1, "", false);
+PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 1, true, 2, "", false);
 
-PDAButton P2 = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-               PDA_InitButton(P2, true, 2, "", false);
+if (PDA_LocalMouse.scrolling) {
+    PDAButton PLAYER_TAB_1 = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDAButton PLAYER_TAB_2 = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+}
 
 PDA_SetupScreenBounds();
 
@@ -65,5 +65,5 @@ if(GetActorclass(0) != "None")
     }
 }
 // Get rid of it once we're done.
-PDA_UnsetScrollWindow();
+// PDA_UnsetScrollWindow();
 

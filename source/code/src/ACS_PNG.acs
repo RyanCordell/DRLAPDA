@@ -576,7 +576,7 @@ script "PongInit" (void)
 	paddle2y[pl] = random(GAMEFIELDSTART+8, GAMEFIELDEND-PADDLEHEIGHT-8);
 	
 	//start host gameloop
-    PDA_Wipe();
+    //PDA_Wipe();
     PDA_Local.page = 6;
 	ACS_NamedExecuteAlways("PongLoop", 0, guestpl);
 	SetPlayerProperty(false, true, PROP_TOTALLYFROZEN);
@@ -610,7 +610,7 @@ script "DisconnectQuitPong" (int pl) DISCONNECT
 		//inform host
 		quitMode[mpPlayer2[pl]] = 2;
 	}
-    PDA_Wipe();
+    //PDA_Wipe();
     PDA_NOPONG();
     PDA_Local.page = 1;
 }
@@ -635,7 +635,7 @@ script "QuitPong" (void)
             //print("guest quit");
             quitMode[mpPlayer2[pl]] = 2;
         }
-        PDA_Wipe();
+        //PDA_Wipe();
         PDA_NOPONG();
         PDA_Local.page = 1;
         PDA_Local.pongrunning = false;
@@ -659,7 +659,7 @@ script "PongClient" (void)
 		{
 			//print(s:"Host has left the game!");
 			mpPlayer2[pl] = -1;
-            PDA_Wipe();
+            //PDA_Wipe();
             PDA_NOPONG();
             PDA_Local.page = 1;
             HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_PONG_TOPBORD, CR_UNTRANSLATED, PDA_SCREEN_X + 5.1, PDA_SCREEN_Y + 19.0, 0.0);
@@ -670,7 +670,7 @@ script "PongClient" (void)
 		else if (quitMode[hostpl] == 2)
 		{
 			mpPlayer2[pl] = -1;
-            PDA_Wipe();
+            //PDA_Wipe();
             PDA_NOPONG();
             PDA_Local.page = 1;
             HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_PONG_TOPBORD, CR_UNTRANSLATED, PDA_SCREEN_X + 5.1, PDA_SCREEN_Y + 19.0, 0.0);
@@ -731,7 +731,7 @@ script "PongLoop" (int mpPartner)
 		if (quitMode[pl] == 1)
 		{
 			mpPlayer1[pl] = -1;
-            PDA_Wipe();
+            //PDA_Wipe();
             PDA_NOPONG();
             PDA_Local.page = 1;
             HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_PONG_TOPBORD, CR_UNTRANSLATED, PDA_SCREEN_X + 5.1, PDA_SCREEN_Y + 19.0, 0.0);
@@ -744,7 +744,7 @@ script "PongLoop" (int mpPartner)
 		{
 			//print(s:"Guest has left the game!");
 			mpPlayer1[pl] = -1;
-            PDA_Wipe();
+            //PDA_Wipe();
             PDA_NOPONG();
             PDA_Local.page = 1;
             HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_PONG_TOPBORD, CR_UNTRANSLATED, PDA_SCREEN_X + 5.1, PDA_SCREEN_Y + 19.0, 0.0);

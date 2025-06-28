@@ -1,7 +1,5 @@
 PDA_Local.pagemax = 3;
 
-PDA_Wipe();
-
 str classperkdisplayed  = "\n",
     weaponperkdisplayed = "\n";
 int perkoffset = 1;
@@ -19,14 +17,15 @@ case 3:
     break;
 }
 
-PDAButton P1 = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-               PDA_InitButton(P1, true, 1, "", false);
+PDA_ButtonHandler(PDA_TAB_BUTTONS_START    , true, 1, "", false);
+PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 1, true, 2, "", false);
+PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 2, true, 3, "", false);
 
-PDAButton P2 = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-               PDA_InitButton(P2, true, 2, "", false);
-
-PDAButton P3 = PDA_CreateTab(PDA_TAB_BUTTONS_START + 2, "3", "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-               PDA_InitButton(P3, true, 3, "", false);
+if (PDA_LocalMouse.scrolling) {
+    PDAButton WEAPONS_TAB_1 = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDAButton WEAPONS_TAB_2 = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDAButton WEAPONS_TAB_3 = PDA_CreateTab(PDA_TAB_BUTTONS_START + 2, "3", "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+}
 
 PDA_SetupScreenBounds();
 PDA_DefaultFont();
@@ -71,4 +70,4 @@ if (stricmp(CheckInventory(currentWeapon), "None") != 0) {
     }
 }
 
-PDA_UnsetScrollWindow();
+// PDA_UnsetScrollWindow();

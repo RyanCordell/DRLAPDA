@@ -1,6 +1,7 @@
 #define STRING_ARRAY_MAX 1024
 str stringArray[STRING_ARRAY_MAX];
 
+// TODO: handle redraws via a more manual update method
 
 #define pulser(a, b) (b ? b : 0.59) + sin(Timer() * 0.99) / (a)
 
@@ -72,8 +73,6 @@ function void DrawBorder (int X, int Y, int Width, int Height) {
 	PrintSpriteAlpha("BarVert", 0, X,             Y,              0.05, 0.3);
 	PrintSpriteAlpha("BarVert", 0, X + Width - 1, Y,              0.05, 0.3);
 	PrintSpriteAlpha("BarHorz", 0, X,             Y + Height - 1, 0.05, 0.3);
-    // log("border (x: %d:, y: %d:, w: %d:, h: %d:)", X, Y, X + Width - 1, Y + Height - 1);
-	// SetHudClipRect(0, 0, 0, 0);
 	SetFont("");
 }
 
@@ -129,8 +128,6 @@ function void HudMessageParallax(str text, int type, int id, int color, fixed x,
     fixed _x = _xTemp + X_LEFT_EDGE;
     fixed _y = _yTemp + Y_TOP_EDGE;
     HudMessage(s:text; type, id, color, _x, _y, holdTime, alpha);
-
-    if (debug) log("text (x: %f:, y: %f:)", _x, _y);
 }
 
 function int CheckPointerInventory (str item, int pn) {
@@ -149,13 +146,34 @@ function int SetInventory (str Item, int Count) {
     return n;
 }
 
+function void checkMonsterKillCount (void) {
+    for (int t = 0; t < DRLA_DIFFICULTYTIERS; t++) {
+        for (int m = 0; m < DRLA_MONSTER_PAGE_MAX; m++) {
+            monsterCheck[t][m] = CheckInventory(StrParam(s:DRLA_Bestiary[t][m][beast_TOKEN],s:"KillCounter"));
+            
+            if (oldCheck[t][m] != monsterCheck[t][m] && oldCheck[t][m] < 2 && monsterCheck[t][m] < 2) {
+                PDA_Local.newEntry[t] = true;
+            }
+        }
+    }
+}
+
+function void updateOldMonsterKillCount (void) {
+    for (int t = 0; t < DRLA_DIFFICULTYTIERS; t++) {
+        for (int m = 0; m < DRLA_MONSTER_PAGE_MAX; m++) {
+            oldCheck[t][m] = monsterCheck[t][m];
+        }
+    }
+}
+
+
 // int _xTemp = (PDA_SCREEN_X * NEW_RESOLUTION_X) + (x * NEW_RESOLUTION_X);
 #define assignButtonParams(a, b) \
     int _xTemp = PDA_SCREEN_X + x; \
     int _yTemp = PDA_Local.scrollingY + y; \
     (a).id = id; \
-    (a).x = _xTemp + X_LEFT_EDGE; \
-    (a).y = _yTemp + Y_TOP_EDGE; \
+    (a).x = _xTemp; \
+    (a).y = _yTemp; \
     (a).width = width; \
     (a).height = height; \
     (a).oldstate = (a).state; \
@@ -172,6 +190,7 @@ function int SetInventory (str Item, int Count) {
         PDA_LocalMouse.state = mouse_pointer; \
         if ((a).state != (a).oldstate) { \
             PDA_PlaySound("UI/PDA/Select", "pda/soldier", 80); \
+            (a).oldstate = (a).state; \
         } \
         if (PDA_LocalMouse.m1 && !(PDA_LocalMouse.oldState & BT_ATTACK)) { \
             PDA_PlaySound("UI/PDA/ChangePage", "pda/soldier", 80); \
@@ -182,9 +201,9 @@ function int SetInventory (str Item, int Count) {
         PDA_Local.playonce = false; \
         if ((a).state != (a).oldstate) { \
             PDA_LocalMouse.state = mouse_default; \
+            (a).oldstate = (a).state; \
         } \
     } \
-    if (debug) log("btn-col (x: %f:, y: %f:, w: %d:, h: %d:)", (a).x, (a).y, (a).width, (a).height); \
 
 // Onto other stuff
 
@@ -192,11 +211,21 @@ function void PDA_PlaySound (str PDA_Sound, str soldier, int volume) {
     LocalAmbientSound(!GetCVar("DRLA_PDA_soldier") ? PDA_Sound : soldier, volume);
 }
 
-function void PDA_Wipe (void) {
-	for(int wipeIndex = PDA_CURSORID; wipeIndex <= PDA_LASTID; wipeIndex++) {
-		HudMessage(s:"\n"; HUDMSG_ALPHA, wipeIndex, CR_UNTRANSLATED, 0, 0, 0, 0);
+function void PDA_Wipe (str caller) {
+	for(int wipeIndex = -5; wipeIndex <= PDA_LASTID; wipeIndex++) {
+		HudMessage(s:"\n"; HUDMSG_ALPHA, wipeIndex, CR_UNTRANSLATED, 0, 0, 1.0, 0.0);
+		HudMessage(s:"\n"; HUDMSG_PLAIN, wipeIndex, CR_UNTRANSLATED, 0, 0, 1.0, 0.0);
 	}
 }
+
+function void PDA_UnsetScrollWindow (void) {
+	SetHudClipRect(PDA_SCREEN_X, PDA_SCREEN_Y, PDA_SCREEN_WIDTH, PDA_SCREEN_HEIGHT, PDA_SCREEN_WIDTH);
+}
+
+#define afterPageDefaults(a) \
+    PDA_Wipe((a)); \
+    PDA_DefaultFont(); \
+    PDA_UnsetScrollWindow(); \
 
 function void PDA_NOPONG (void) {
 	for(int wipeIndex = PDA_PONG_LEFTPADDLE; wipeIndex <= PDA_PONG_AISCORE; wipeIndex++) {
@@ -217,6 +246,7 @@ function void PDA_SetupHeaderBounds (void) {
 }
 
 function void PDA_SetupScreenBounds (void) {
+    SetHudClipRect(0,0,0,0,0);
     SetHudSize(NEW_RESOLUTION_WIDTH, NEW_RESOLUTION_HEIGHT);
 
     int x = PDA_SCREEN_X + 4;
@@ -231,7 +261,6 @@ function void PDA_SetupScreenBounds (void) {
         DrawBorder(PDA_SCREEN_X * NEW_RESOLUTION_X, PDA_SCROLLABLE_Y,
                 PDA_SCREEN_WIDTH * NEW_RESOLUTION_X, PDA_SCROLLABLE_HEIGHT);
         SetHudClipRect(x, y, w, h, ww);
-        // log("cliprect (x: %d:, y: %d:, w: %d:, h: %d:)", x, y, w, h);
     }
 }
 
@@ -286,22 +315,28 @@ function void PDA_SetupPageTooltip (str graphic, str tooltip, float alpha) {
 }
 
 function void PDA_SetCategory (int category) {
-   if (PDA_Local.category == category) {
-      return;
-   }
+    afterPageDefaults("PDA_SetCategory");
+    if (PDA_Local.category == category) {
+        return;
+    }
 
-   if (category == PDA_CREDITS) {
-      PDA_Local.creditsroll = 120;
-   }
+    if (category == PDA_CREDITS) {
+        PDA_Local.creditsroll = 120;
+    }
 
-   if (PDA_Local.category == PDA_PONG) {
-      PDA_NOPONG();
-      PDA_Local.pongrunning = false;
-   }
+    if (PDA_Local.category == PDA_PONG) {
+        PDA_NOPONG();
+        PDA_Local.pongrunning = false;
+    }
 
-   PDA_Local.texty = 0.0;
-   PDA_Local.scrollingY = PDA_SCREEN_Y;
-   PDA_Local.category = category;
+    PDA_Local.texty = 0.0;
+    PDA_Local.scrollingY = PDA_SCREEN_Y;
+    PDA_Local.category = category;
+}
+
+function void PDA_SetPage (int page_num) {
+    PDA_Local.page = page_num;
+    afterPageDefaults("PDA_SetPage");
 }
 
 function void PDA_HasEquipment (void) {
@@ -354,17 +389,15 @@ function void PDA_HasEquipment (void) {
 function PDAButton PDA_CreateMenuButton (int id, str label, str graphic, float x, float y, int width, int height) {
     #define thisButton PDA_LocalButton[id]
     assignButtonParams(thisButton, label)
-    buttonBoundsDefault(thisButton)
+    // buttonBoundsDefault(thisButton)
 
     // Expand upon default bounds check with additional functionality
-    if (CheckBounds(thisButton)) {
-        if (PDA_LocalMouse.m1 && !(PDA_LocalMouse.oldState & BT_ATTACK)) {
-            PDA_ResetScroll();
-        }
-    }
+    // if (CheckBounds(thisButton)) {
+    //     if (PDA_LocalMouse.m1 && !(PDA_LocalMouse.oldState & BT_ATTACK)) {
+    //         PDA_ResetScroll();
+    //     }
+    // }
 
-    int graphicy = (int)(thisButton.y * NEW_RESOLUTION_Y) + 0.0;
-    int texty    = (int)(thisButton.y * NEW_RESOLUTION_Y) + 0.0;
 
     fixed xlabeloff = (strcmp(thisButton.graphic, "PTAB") == 0) ? 4.0 : 0.0;
     fixed ylabeloff = (strcmp(thisButton.graphic, "PTAB") == 0) ? 3.0 : 0.0;
@@ -372,27 +405,29 @@ function PDAButton PDA_CreateMenuButton (int id, str label, str graphic, float x
     thisButton.graphic      = graphic;
     thisButton.graphicFlags = HUDMSG_ALPHA;
     thisButton.graphicID    = thisButton.id;
-    thisButton.graphicX     = (thisButton.x * NEW_RESOLUTION_X);
-    thisButton.graphicY     = graphicy + 10.0;
+    int _gfxTemp            = thisButton.x * NEW_RESOLUTION_X;
+    thisButton.graphicX     = _gfxTemp + X_LEFT_EDGE;
+    int _gfyTemp            = thisButton.y * NEW_RESOLUTION_Y;
+    thisButton.graphicY     = _gfyTemp + 10.0;
 
     thisButton.textFont     = PDA_FONT_SLIM;
     thisButton.textFlags    = HUDMSG_ALPHA;
     thisButton.textID       = thisButton.graphicID + 20;
-    thisButton.finalX       = thisButton.graphicX + (xlabeloff * NEW_RESOLUTION_X);
-    thisButton.finalY       = texty + (ylabeloff * NEW_RESOLUTION_Y);
+    thisButton.textX        = thisButton.graphicX + (xlabeloff * NEW_RESOLUTION_X);
+    int _tyTemp             = thisButton.y * NEW_RESOLUTION_Y;
+    thisButton.textY        = _tyTemp + (ylabeloff * NEW_RESOLUTION_Y);
 
     if (debug) {
         DrawBorder(thisButton.x * NEW_RESOLUTION_X, thisButton.y * NEW_RESOLUTION_Y, width * NEW_RESOLUTION_X, height * NEW_RESOLUTION_Y);
         PDA_SetupScreenBounds();
     }
-    // log("gx: %d: | gw: %d: | fx: %d:", thisButton.graphicX, gw, thisButton.finalX);
     return thisButton;
 }
 
 function PDAButton PDA_CreateTab (int id, str label, str graphic, float x, float y, int width, int height) {
     #define thisButton PDA_LocalButton[id]
     assignButtonParams(thisButton, label)
-    buttonBoundsDefault(thisButton)
+    // buttonBoundsDefault(thisButton)
 
     thisButton.y       = PDA_SCREEN_Y + y + Y_TOP_EDGE; // Override as this isn't meant to scroll
     thisButton.alpha   = 0.6;
@@ -412,15 +447,14 @@ function PDAButton PDA_CreateTab (int id, str label, str graphic, float x, float
     thisButton.textFont     = PDA_FONT_SLIM;
     thisButton.textFlags    = HUDMSG_ALPHA;
     thisButton.textID       = thisButton.graphicID + 10;
-    thisButton.finalX       = (int)thisButton.graphicX + xlabeloff;
-    thisButton.finalY       = (int)thisButton.graphicY + ylabeloff;
+    thisButton.textX       = (int)thisButton.graphicX + xlabeloff;
+    thisButton.textY       = (int)thisButton.graphicY + ylabeloff;
 
     if (debug) {
         int x = thisButton.x * NEW_RESOLUTION_X,
             y = thisButton.y * NEW_RESOLUTION_Y,
             w = width        * NEW_RESOLUTION_X,
             h = height       * NEW_RESOLUTION_Y;
-        log("tab (x: %f:, y: %f:, w: %d:, h: %d:)", x, y, w, h);
         DrawBorder(x, y, w, h);
     }
 
@@ -430,7 +464,7 @@ function PDAButton PDA_CreateTab (int id, str label, str graphic, float x, float
 function PDAButton PDA_CreateButton (int id, str label, str graphic, float x, float y, int width, int height, float gw, float gh) {
     #define thisButton PDA_LocalButton[id]
     assignButtonParams(thisButton, label)
-    buttonBoundsDefault(thisButton)
+    // buttonBoundsDefault(thisButton)
 
     const float X_MARGIN = 1.0;
 
@@ -447,26 +481,24 @@ function PDAButton PDA_CreateButton (int id, str label, str graphic, float x, fl
     thisButton.textFlags    = HUDMSG_ALPHA;
     thisButton.textID       = thisButton.graphicID + 20;
     int _fxTemp             = (int)thisButton.graphicX + (gw + X_MARGIN) * NEW_RESOLUTION_X;
-    thisButton.finalX       = _fxTemp + X_LEFT_EDGE;
-    thisButton.finalY       = thisButton.graphicY;
+    thisButton.textX       = _fxTemp + X_LEFT_EDGE;
+    thisButton.textY       = thisButton.graphicY;
 
     if (debug) {
         int x = thisButton.x * NEW_RESOLUTION_X,
             y = thisButton.y * NEW_RESOLUTION_Y,
             w = width        * NEW_RESOLUTION_X,
             h = height       * NEW_RESOLUTION_Y;
-        log("btn-gfx (x: %f:, y: %f:, w: %d:, h: %d:)", x, y, w, h);
         DrawBorder(x, y, w, h);
         PDA_SetupScreenBounds();
     }
-    // log("gx: %d: | gw: %d: | fx: %d:", thisButton.graphicX, gw, thisButton.finalX);
     return thisButton;
 }
 
 function PDAButton PDA_CreateFixedButton (int id, str label, str graphic, float x, float y, int width, int height, float gw, float gh) {
     #define thisButton PDA_LocalButton[id]
     assignButtonParams(thisButton, label)
-    buttonBoundsDefault(thisButton)
+    // buttonBoundsDefault(thisButton)
     thisButton.y = y;
 
     const float X_MARGIN = 1.0;
@@ -484,26 +516,24 @@ function PDAButton PDA_CreateFixedButton (int id, str label, str graphic, float 
     thisButton.textFlags    = HUDMSG_ALPHA;
     thisButton.textID       = thisButton.graphicID + 20;
     int _fxTemp             = (int)thisButton.graphicX + (gw + X_MARGIN) * NEW_RESOLUTION_X;
-    thisButton.finalX       = _fxTemp + X_LEFT_EDGE;
-    thisButton.finalY       = thisButton.graphicY;
+    thisButton.textX       = _fxTemp + X_LEFT_EDGE;
+    thisButton.textY       = thisButton.graphicY;
 
     if (debug) {
         int x = thisButton.x * NEW_RESOLUTION_X,
             y = thisButton.y * NEW_RESOLUTION_Y,
             w = width        * NEW_RESOLUTION_X,
             h = height       * NEW_RESOLUTION_Y;
-        log("btn-gfx (x: %f:, y: %f:, w: %d:, h: %d:)", x, y, w, h);
         DrawBorder(x, y, w, h);
         PDA_SetupScreenBounds();
     }
-    // log("gx: %d: | gw: %d: | fx: %d:", thisButton.graphicX, gw, thisButton.finalX);
     return thisButton;
 }
 
 function PDAButton PDA_CreateAssemblyButton (int id, str graphic, str label, float x, float y, int width, int height, str assembly, str tooltip) {
     #define thisButton PDA_LocalButton[id]
     assignButtonParams(thisButton, label)
-    buttonBoundsDefault(thisButton)
+    // buttonBoundsDefault(thisButton)
 
 
     const int X_MARGIN = 12.0;
@@ -522,8 +552,8 @@ function PDAButton PDA_CreateAssemblyButton (int id, str graphic, str label, flo
     thisButton.textID    = thisButton.id - 40;
     int _fxTemp          = (int)thisButton.graphicX * NEW_RESOLUTION_X;
     int _fyTemp          = (int)(thisButton.y * NEW_RESOLUTION_Y) + 0.0;
-    thisButton.finalX    = _fxTemp + X_MARGIN + X_LEFT_EDGE;
-    thisButton.finalY    = _fyTemp + 4.0;
+    thisButton.textX    = _fxTemp + X_MARGIN + X_LEFT_EDGE;
+    thisButton.textY    = _fyTemp + 4.0;
 
     thisButton.tooltip = tooltip;
     if (CheckBounds(thisButton)) {
@@ -554,7 +584,7 @@ function PDAButton PDA_CreateBeastButton (int id, str label, str color, float x,
     assignButtonParams(thisButton, label)
     thisButton.graphic = "";
 
-    buttonBoundsDefault(thisButton)
+    // buttonBoundsDefault(thisButton)
 
     if (CheckBounds(thisButton)) {
         if (PDA_LocalMouse.m1 && !(PDA_LocalMouse.oldState & BT_ATTACK)) {
@@ -580,9 +610,9 @@ function PDAButton PDA_CreateBeastButton (int id, str label, str color, float x,
     thisButton.textFont  = USED_PDA_FONT;
     thisButton.textFlags = HUDMSG_ALPHA | HUDMSG_COLORSTRING;
     thisButton.textID    = (thisButton.id) + 20;
-    thisButton.finalX    = (thisButton.x * NEW_RESOLUTION_X) + 10.0;
+    thisButton.textX    = (thisButton.x * NEW_RESOLUTION_X) + 10.0;
     int texty        = (int)(thisButton.y * NEW_RESOLUTION_Y) + 0.0;
-    thisButton.finalY    = textY + 4.0 + X_LEFT_EDGE;
+    thisButton.textY    = textY + 4.0 + X_LEFT_EDGE;
 
     if (debug) {
         DrawBorder(thisButton.x * NEW_RESOLUTION_X, thisButton.y * NEW_RESOLUTION_Y, width * NEW_RESOLUTION_X, height * NEW_RESOLUTION_Y);
@@ -594,7 +624,7 @@ function PDAButton PDA_CreateBeastButton (int id, str label, str color, float x,
 function PDAButton PDA_CreateHUDButton (int id, str label, str color, float x, float y, int width, int height, float xoff, float yoff, str chosenhud) {
     #define thisButton PDA_LocalButton[id]
     assignButtonParams(thisButton, label)
-    buttonBoundsDefault(thisButton)
+    // buttonBoundsDefault(thisButton)
 
     if (CheckBounds(thisButton)) {
         if (PDA_LocalMouse.m1 && !(PDA_LocalMouse.oldState & BT_ATTACK)) {
@@ -621,9 +651,9 @@ function PDAButton PDA_CreateHUDButton (int id, str label, str color, float x, f
     thisButton.textFont  = USED_PDA_FONT;
     thisButton.textFlags = HUDMSG_ALPHA | HUDMSG_COLORSTRING;
     thisButton.textID    = (thisButton.id) + 20;
-    thisButton.finalX    = (thisButton.x * NEW_RESOLUTION_X) + 10.0;
+    thisButton.textX    = (thisButton.x * NEW_RESOLUTION_X) + 10.0;
     int _tyTemp          = thisButton.y * NEW_RESOLUTION_Y;
-    thisButton.finalY    = _tyTemp + 4.0 + X_LEFT_EDGE;
+    thisButton.textY    = _tyTemp + 4.0 + X_LEFT_EDGE;
 
     if (debug) {
         DrawBorder(thisButton.x * NEW_RESOLUTION_X, thisButton.y * NEW_RESOLUTION_Y, width * NEW_RESOLUTION_X, height * NEW_RESOLUTION_Y);
@@ -635,7 +665,7 @@ function PDAButton PDA_CreateHUDButton (int id, str label, str color, float x, f
 function PDAButton PDA_DisplayArmor (int id, str label, str graphic, float x, float y, int width, int height, str tooltip, fixed opacity) {
     #define thisButton PDA_LocalButton[id]
     assignButtonParams(thisButton, label)
-    buttonBoundsDefault(thisButton)
+    // buttonBoundsDefault(thisButton)
 
     // thisButton.alpha = (thisButton.state == button_hovered) ? opacity : opacity - 0.15;
     thisButton.alpha = opacity;
@@ -655,8 +685,8 @@ function PDAButton PDA_DisplayArmor (int id, str label, str graphic, float x, fl
     thisButton.textID    = (thisButton.id) + 1;
     int _fxTemp          = thisButton.x * NEW_RESOLUTION_X;
     int _fyTemp          = thisButton.y * NEW_RESOLUTION_Y;
-    thisButton.finalX    = _fxTemp + 35.0 + X_LEFT_EDGE;
-    thisButton.finalY    = _fyTemp + (height / 2) + 2.0;
+    thisButton.textX    = _fxTemp + 35.0 + X_LEFT_EDGE;
+    thisButton.textY    = _fyTemp + (height / 2) + 2.0;
 
     thisButton.tooltip = tooltip;
 
@@ -689,9 +719,9 @@ function PDAButton PDA_CreateModPackDisplay (int id, str graphic, float x, float
     thisButton.textFont  = USED_PDA_FONT;
     thisButton.textID    = PDA_ASSEMBLYIDRANGE + thisButton.id;
     int _fxTemp          = thisButton.graphicX;
-    thisButton.finalX    = _fxTemp + 5.0 + X_LEFT_EDGE;
+    thisButton.textX    = _fxTemp + 5.0 + X_LEFT_EDGE;
     int _fyTemp          = thisButton.graphicY;
-    thisButton.finalY    = _fyTemp + 2.0 + Y_TOP_EDGE;
+    thisButton.textY    = _fyTemp + 2.0 + Y_TOP_EDGE;
 
     if (debug) {
         DrawBorder(thisButton.x * NEW_RESOLUTION_X, thisButton.y * NEW_RESOLUTION_Y, width * NEW_RESOLUTION_X, height * NEW_RESOLUTION_Y);
@@ -700,7 +730,7 @@ function PDAButton PDA_CreateModPackDisplay (int id, str graphic, float x, float
 
     // SetFont(thisButton.textFont);
     // HudMessage("%l:", stringArray[id]; thisButton.textFlags, PDA_ASSEMBLYIDRANGE + id, CR_UNTRANSLATED, 
-    //     thisButton.finalX, thisButton.finalY,
+    //     thisButton.textX, thisButton.textY,
     //     0.0, 1.0);
     return thisButton;
 }
@@ -721,27 +751,29 @@ function void PDA_InitButton (PDAButton button, int incat, int catpage, str mess
 
         if (incat > 0 && PDA_Local.page == catpage) {
             button.state = button_hovered;
+            button.oldstate = button_hovered;
             button.alpha = 1;
         }
     }
 
-    // TODO: Move buttonBoundsDefault call here, but avoid repeated sound spam and mouse state glitchiness
-
+    buttonBoundsDefault(button);
     if (!onlyVisual) {
         switch (button.state) {
             case button_clicked:
                 if (!incat) {
                     PDA_SetCategory(catpage);
                     if(PDA_Local.category != PDA_ASSEMBLY_DETAIL) {
-                        PDA_Local.page = 1;
+                        PDA_SetPage(1);
                         PDA_LocalMouse.state = mouse_default;
+                        PDA_LocalMouse.oldstate = PDA_LocalMouse.state;
                     }
                 }
                 if (incat) {
                     if(PDA_Local.category != 0 && PDA_Local.page >= 0) {
-                        PDA_Local.page = catpage;
+                        PDA_SetPage(catpage);
                         PDA_Local.scrollingY = 20.0;
                         PDA_LocalMouse.state = mouse_default;
+                        PDA_LocalMouse.oldstate = PDA_LocalMouse.state;
                     }
                 }
                 break;
@@ -774,42 +806,47 @@ function void PDA_InitButton (PDAButton button, int incat, int catpage, str mess
         }
     }
 
-    if (debug) log("button %s: %f: [%f:, %f:] [%f:, %f:]", button.graphic, button.alpha, button.graphicX, button.graphicY, button.finalX, button.finalY);
-    
     fixed xlabeloff = (strcmp(button.graphic, "PTAB") == 0) ? 4.0 : 0.0;
     fixed ylabeloff = (strcmp(button.graphic, "PTAB") == 0) ? 3.0 : 0.0;
 
     PrintSpriteAlpha(button.graphic, button.graphicID, button.graphicX, button.graphicY, 0, button.alpha);
 
     SetFont(button.textFont);
-    HudMessage(s:button.label; button.textFlags, button.textID, CR_UNTRANSLATED, button.finalX, button.finalY, 0, button.alpha);
+    HudMessage(s:button.label; button.textFlags, button.textID, CR_UNTRANSLATED, button.textX, button.textY, 1.0, button.alpha);
 }
+function void PDA_ButtonHandler (int id, int incat, int catpage, str message, int onlyVisual) {
+    if (PDA_LocalButton[id].type != "tab") {
+        PDA_SetupScreenBounds();
+    } else {
+        PDA_SetupHeaderBounds();
 
-// This function should probably be avoided, as all buttons have native scrolling built in
-function void PDA_InitScrollingButton (PDAButton button, int incat, int catpage, str message, int onlyVisual, int accelScroll) {
-    if (incat > 0 && PDA_Local.page == catpage) {
-        button.state = button_hovered;
-        button.alpha = 1;
+        if (incat > 0 && PDA_Local.page == catpage) {
+            PDA_LocalButton[id].state = button_hovered;
+            PDA_LocalButton[id].alpha = 1;
+        }
     }
 
-    // TODO: Move buttonBoundsDefault call here, but avoid repeated sound spam and mouse state glitchiness
+    buttonBoundsDefault(PDA_LocalButton[id]);
 
     if (!onlyVisual) {
-        switch (button.state) {
+        switch (PDA_LocalButton[id].state) {
             case button_clicked:
                 if (!incat) {
                     PDA_SetCategory(catpage);
                     if(PDA_Local.category != PDA_ASSEMBLY_DETAIL) {
-                        PDA_Local.page = 1;
+                        PDA_SetPage(1);
+                        PDA_LocalMouse.state = mouse_default;
+                        PDA_LocalMouse.oldstate = PDA_LocalMouse.state;
                     }
                 }
                 if (incat) {
                     if(PDA_Local.category != 0 && PDA_Local.page >= 0) {
-                        PDA_Local.page = catpage;
+                        PDA_SetPage(catpage);
                         PDA_Local.scrollingY = 20.0;
+                        PDA_LocalMouse.state = mouse_default;
+                        PDA_LocalMouse.oldstate = PDA_LocalMouse.state;
                     }
                 }
-                PDA_LocalMouse.state = mouse_default;
                 break;
             case button_hovered:
                 if (strcmp(message, "") != 0) {
@@ -828,16 +865,26 @@ function void PDA_InitScrollingButton (PDAButton button, int incat, int catpage,
     }
 
     // Handle the button rendering here
-    button.alpha = (button.state == button_hovered) ? 1 : 0.6;
-    fixed xlabeloff = (strcmp(button.graphic, "PTAB") == 0) ? 4.0 : 0.0;
-    fixed ylabeloff = (strcmp(button.graphic, "PTAB") == 0) ? 3.0 : 0.0;
+    if (PDA_LocalButton[id].type == "assembly") {
+        if (PDA_LocalButton[id].tooltip != "???") {
+            PDA_LocalButton[id].alpha = (PDA_LocalButton[id].state == button_hovered) ? pulser(2.0, 0.8) : 0.6;
+        } else {
+            PDA_LocalButton[id].alpha = 1.0;
+        }
+    } else {
+        if (PDA_LocalButton[id].type != "tab" && PDA_LocalButton[id].type != "armor") {
+            PDA_LocalButton[id].alpha = (PDA_LocalButton[id].state == button_hovered) ? pulser(2.0, 0.8) : 0.6;
+        }
+    }
+    
+    fixed xlabeloff = (strcmp(PDA_LocalButton[id].graphic, "PTAB") == 0) ? 4.0 : 0.0;
+    fixed ylabeloff = (strcmp(PDA_LocalButton[id].graphic, "PTAB") == 0) ? 3.0 : 0.0;
 
-    // SetFont(button.graphic);
-    // HudMessageParallax("A\n", button.graphicFlags, button.graphicID, CR_UNTRANSLATED, button.graphicX, button.graphicY, 0, button.alpha, accelScroll);
-    PrintSpriteAlpha(button.graphic, button.graphicID, button.graphicX, button.graphicY, 0, button.alpha);
+    PrintSpriteAlpha(PDA_LocalButton[id].graphic, PDA_LocalButton[id].graphicID, PDA_LocalButton[id].graphicX, PDA_LocalButton[id].graphicY, 0.05, PDA_LocalButton[id].alpha);
+    // PrintSprite(PDA_LocalButton[id].graphic, PDA_LocalButton[id].graphicID, PDA_LocalButton[id].graphicX, PDA_LocalButton[id].graphicY, 0.1);
 
-    SetFont(button.textFont);
-    HudMessage(s:button.label; button.textFlags, button.textID, CR_UNTRANSLATED, button.finalX, button.finalY, 0, button.alpha, accelScroll);
+    SetFont(PDA_LocalButton[id].textFont);
+    HudMessage(s:PDA_LocalButton[id].label; PDA_LocalButton[id].textFlags, PDA_LocalButton[id].textID, CR_UNTRANSLATED, PDA_LocalButton[id].textX, PDA_LocalButton[id].textY, 1.0, PDA_LocalButton[id].alpha);
 }
 
 // Setup scrolling arrows for pages with lots of text
@@ -872,10 +919,6 @@ function void PDA_SetScrollWindow (int scrollDownMax) {
 	// SetHudClipRect(PDA_SCREEN_X, PDA_SCROLLABLE_Y, PDA_SCREEN_WIDTH, PDA_SCROLLABLE_HEIGHT, PDA_SCREEN_WIDTH);
     PDA_SetupScreenBounds();
 	PDA_SetScrollArrows2(scrollDownMax, PDA_SCREEN_WIDTH + X_LEFT_EDGE, PDA_SCREEN_HEIGHT + Y_TOP_EDGE);
-}
-
-function void PDA_UnsetScrollWindow (void) {
-	SetHudClipRect(PDA_SCREEN_X, PDA_SCREEN_Y, PDA_SCREEN_WIDTH, PDA_SCREEN_HEIGHT, PDA_SCREEN_WIDTH);
 }
 
 // Instead of clogging up the script, just do it here.
@@ -1006,3 +1049,4 @@ function PDA_BackpackData setupBackpackData (void) {
 
     return localBackpackData;
 }
+

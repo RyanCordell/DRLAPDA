@@ -2,8 +2,6 @@ if(GetCvar("DRLA_specialstarts") == 2)
 {
     PDA_Local.pagemax = 3;
 
-    PDA_Wipe();
-
     PDA_SetupScreenBounds();
 
     #define DUKE2X 0.0 + X_LEFT_EDGE
@@ -22,21 +20,21 @@ if(GetCvar("DRLA_specialstarts") != 2)
 {
     PDA_Local.pagemax = DRLA_GROUPQUANTITY;
 
-    PDA_Wipe();
-
     PDA_PrintHeader("PDA_ITEMS_HEADER", +20);
 
-    PDAButton P1  = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1" , "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-                    PDA_InitButton(P1, true, 1, "", false);
-    PDAButton P2  = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2" , "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-                    PDA_InitButton(P2, true, 2, "", false);
-    PDAButton P3  = PDA_CreateTab(PDA_TAB_BUTTONS_START + 2, "3" , "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-                    PDA_InitButton(P3, true, 3, "", false);
-    PDAButton P4  = PDA_CreateTab(PDA_TAB_BUTTONS_START + 3, "4" , "PTAB", PDA_TAB_NEXT_X(3), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-                    PDA_InitButton(P4, true, 4, "", false);
-    PDAButton P5  = PDA_CreateTab(PDA_TAB_BUTTONS_START + 4, "5" , "PTAB", PDA_TAB_NEXT_X(4), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-                    PDA_InitButton(P5, true, 5, "", false);
+    PDA_ButtonHandler(PDA_TAB_BUTTONS_START    , true, 1, "", false);
+    PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 1, true, 2, "", false);
+    PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 2, true, 3, "", false);
+    PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 3, true, 4, "", false);
+    PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 4, true, 5, "", false);
 
+    if (PDA_LocalMouse.scrolling) {
+        PDAButton ITEMS_TAB_1  = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1" , "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+        PDAButton ITEMS_TAB_2  = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2" , "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+        PDAButton ITEMS_TAB_3  = PDA_CreateTab(PDA_TAB_BUTTONS_START + 2, "3" , "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+        PDAButton ITEMS_TAB_4  = PDA_CreateTab(PDA_TAB_BUTTONS_START + 3, "4" , "PTAB", PDA_TAB_NEXT_X(3), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+        PDAButton ITEMS_TAB_5  = PDA_CreateTab(PDA_TAB_BUTTONS_START + 4, "5" , "PTAB", PDA_TAB_NEXT_X(4), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    }
 
 
     int y = 0;
@@ -76,6 +74,6 @@ if(GetCvar("DRLA_specialstarts") != 2)
             //}
         }
     }
-    PDA_DefaultFont();
-    PDA_UnsetScrollWindow();
+    // PDA_DefaultFont();
+    // PDA_UnsetScrollWindow();
 }

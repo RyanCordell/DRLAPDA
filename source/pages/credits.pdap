@@ -1,7 +1,5 @@
 PDA_Local.pagemax = 1;
 
-PDA_Wipe();
-
 PDA_PrintHeader("PDA_CREDITS_HEADER", 0);
 
 //PDA_SetScrollLimit(0);
@@ -17,5 +15,5 @@ else PDA_Local.creditsroll -= 0.35;
 if(PDA_Local.creditsroll < -1070)
     PDA_Local.creditsroll = 120;
 
-PDA_DefaultFont();
-PDA_UnsetScrollWindow();
+// PDA_DefaultFont();
+// PDA_UnsetScrollWindow();

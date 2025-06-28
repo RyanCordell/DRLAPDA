@@ -1,8 +1,6 @@
 
 PDA_Local.pagemax = 3;
 
-PDA_Wipe();
-
 int scrollOffset;
 
 str allAssemblies = StrParam(l:"PDA_ASSEMBLIES");
@@ -51,14 +49,15 @@ switch (PDA_Local.page) {
         break;
 }
 
-PDAButton P1 = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y, 8, 6);
-               PDA_InitButton(P1, true, 1, "", false);
+PDA_ButtonHandler(PDA_TAB_BUTTONS_START    , true, 1, "", false);
+PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 1, true, 2, "", false);
+PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 2, true, 3, "", false);
 
-PDAButton P2 = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y, 8, 6);
-               PDA_InitButton(P2, true, 2, "", false);
-
-PDAButton P3 = PDA_CreateTab(PDA_TAB_BUTTONS_START + 2, "3", "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y, 8, 6);
-               PDA_InitButton(P3, true, 3, "", false);
+if (PDA_LocalMouse.scrolling) {
+    PDAButton ASSEMBLIES_TAB_1 = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y, 8, 6);
+    PDAButton ASSEMBLIES_TAB_2 = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y, 8, 6);
+    PDAButton ASSEMBLIES_TAB_3 = PDA_CreateTab(PDA_TAB_BUTTONS_START + 2, "3", "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y, 8, 6);
+}
 
 //PDA_SetScrollWindow (scrollOffset);
 
@@ -97,19 +96,15 @@ for (int ti = 0, li = 1; ti <= PDA_Local.maxassembliesper; ti+=2, li+=2) {
         assemblyCallback =                                         languagePointer;
         tooltip          = strParam("%l:\n%l:", "PDA_ASSEMBLY_REQUIREMENTS", strParam("%s:_REQ", languagePointer));
 
-    // Not sure I like these particular checks, but what can ya do.
     if (peekFuture >= advancedInd && PDA_Local.assemblyOffset < advancedInd) continue;
     if (peekFuture >= masterInd && PDA_Local.assemblyOffset < masterMax) continue;
 
-    // log("assemblyCallback [%s:] | tooltip:\n %s:", assemblyCallback, tooltip);
-    // log("----------------------------");
-
     if (PDA_CheckPlayer1Inventory(actorToken) || CheckInventory(actorToken)) {
         button = PDA_CreateAssemblyButton(id, icon,     asmFormatter,                       assemblyX, assemblyY, width, height, assemblyCallback, tooltip);
-                 PDA_InitButton(button, false, PDA_ASSEMBLY_DETAIL, "", false);
+                 PDA_ButtonHandler(id, false, PDA_ASSEMBLY_DETAIL, "", false);
     } else { 
         button = PDA_CreateAssemblyButton(id, "PDAUNK", strParam(l:"PDA_ASSEMBLY_UNKNOWN"), assemblyX, assemblyY, width, height, "",               "???");
-                 PDA_InitButton(button, true, PDA_Local.page, "", false);
+                 PDA_ButtonHandler(id, true, PDA_Local.page, "", false);
     }
 }
 
@@ -122,7 +117,7 @@ if (PDA_Local.page > 1) {
         10.0, assemblyY + 10.0, 
         82, 16, 
         20, 15);
-    PDA_InitButton(GotoPrevious, true, PDA_Local.page - 1, "", false);
+    PDA_ButtonHandler(60, true, PDA_Local.page - 1, "", false);
 }
 
 if (PDA_Local.page < 3) {
@@ -130,8 +125,8 @@ if (PDA_Local.page < 3) {
         nextButtonX, assemblyY + 10.0, 
         82, 16, 
         20, 15);
-    PDA_InitButton(GotoNext, true, PDA_Local.page + 1, "", false);
+    PDA_ButtonHandler(61, true, PDA_Local.page + 1, "", false);
 }
         
-PDA_DefaultFont();
-PDA_UnsetScrollWindow();
+// PDA_DefaultFont();
+// PDA_UnsetScrollWindow();

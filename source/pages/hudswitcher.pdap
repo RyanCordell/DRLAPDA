@@ -1,12 +1,9 @@
 PDA_Local.pagemax = 6;
 
-PDA_Wipe();
-
 switch(PDA_Local.page)
 {
     case 1: PDA_PrintHeader("PDA_HUDSWITCH_HEADER1", -70); break;
 }
-
 
 if(PDA_Local.page == 1)
 {
@@ -53,5 +50,5 @@ if(PDA_Local.page == 1)
   SetFont(PDA_FONT_LOWER);
 }
 
-PDA_DefaultFont();
-PDA_UnsetScrollWindow();
+// PDA_DefaultFont();
+// PDA_UnsetScrollWindow();
