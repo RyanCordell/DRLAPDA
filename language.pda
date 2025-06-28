@@ -60,7 +60,7 @@ PDA_CLASS_HEADER2 =
 	"Backstory";
 
 PDA_WEAPON_HEADER =
-	"Current weapon & perks";
+	"Weapon info";
 PDA_WEAPON_PERKUNAVAILABLE =
 	"Class perk does not apply to this weapon";
 
@@ -70,7 +70,7 @@ PDA_MODPACK_MAXSUPPORTED =
 	"Max supported mods: ";
 
 PDA_DEMONARTIFACT_HEADER =
-	"Applied demon artifacts";
+	"Applied artifacts";
 PDA_DEMONARTIFACTS_ZERO =
 	"Zero artifacts";
 PDA_DEMONARTIFACTS_ONE =
