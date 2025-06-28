@@ -8,11 +8,9 @@ if (!PDA_Local.playonce) {
     PDA_Local.playonce = true;
 }
 
-PDA_PrintHeader("PDA_DETAILEDASSEMBLY_HEADER", -30);
+PDA_HEADER_STR = "PDA_DETAILEDASSEMBLY_HEADER"; PDA_HEADER_X = -30;
 
-PDA_SetupScreenBounds();
-PDA_SetScrollLimit  (-100);
-PDA_SetScrollArrows2(-100, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+// PDA_SetupScreenBounds();
 
 str icon;
 str name;

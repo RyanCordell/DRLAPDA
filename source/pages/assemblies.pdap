@@ -1,8 +1,7 @@
 
 PDA_Local.pagemax = 3;
 
-int scrollOffset;
-
+// TODO: Take these out and have them work when called statically
 str allAssemblies = StrParam(l:"PDA_ASSEMBLIES");
 str_split(StrParam("%l:", "PDA_SEPARATOR_CHARACTER"), allAssemblies);
 int basicInd    = 0;
@@ -11,7 +10,7 @@ int masterInd   = 0; // should be 65
 int masterMax   = 0; // should be 95
 
 int stringArrayIndex = 0;
-int TEXT_OFFSET = 13; // aka length of "PDA_ASSEMBLY_"
+int TEXT_OFFSET = 13; // "PDA_ASSEMBLY_" string length
 
 while ((stringArray[stringArrayIndex++]) != "") {
     if (str_find(stringArray[stringArrayIndex], "ADVANCED", TEXT_OFFSET) != -1 && advancedInd == 0) advancedInd = stringArrayIndex;
@@ -21,45 +20,17 @@ while ((stringArray[stringArrayIndex++]) != "") {
 
 stringArrayIndex = 0;
 masterMax--;
-
-switch (PDA_Local.page) {
-    case 1:
-        PDA_PrintHeader("PDA_ASSEMBLY_BASIC_NAME", -30);
-        PDA_Local.maxassembliesper = (advancedInd - 1);
-        scrollOffset               = PDA_Local.maxassembliesper * -5;
-        PDA_Local.assemblyOffset   = basicInd;
-        PDA_Local.tiercolor        = "\c[BB]";
-        break;
-    case 2:
-        PDA_PrintHeader("PDA_ASSEMBLY_ADVANCED_NAME", -30);
-        PDA_Local.maxassembliesper = (masterInd - 1) - advancedInd;
-        scrollOffset               = PDA_Local.maxassembliesper * -5;
-        PDA_Local.assemblyOffset   = advancedInd;
-        PDA_Local.tiercolor        = "\c[AB]";
-        break;
-    case 3:
-        PDA_PrintHeader("PDA_ASSEMBLY_MASTER_NAME", -30);
-        PDA_Local.maxassembliesper = masterMax - masterInd;
-        scrollOffset               = PDA_Local.maxassembliesper * -6;
-        PDA_Local.assemblyOffset   = masterInd;
-        PDA_Local.tiercolor        = "\c[MB]";
-        break;
-    default:
-        Print(s:"how da fuk");
-        break;
-}
+// ----
 
 PDA_ButtonHandler(PDA_TAB_BUTTONS_START    , true, 1, "", false);
 PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 1, true, 2, "", false);
 PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 2, true, 3, "", false);
 
 if (PDA_LocalMouse.scrolling) {
-    PDAButton ASSEMBLIES_TAB_1 = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y, 8, 6);
-    PDAButton ASSEMBLIES_TAB_2 = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y, 8, 6);
-    PDAButton ASSEMBLIES_TAB_3 = PDA_CreateTab(PDA_TAB_BUTTONS_START + 2, "3", "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y, 8, 6);
+    PDA_LocalButton[PDA_TAB_BUTTONS_START    ] = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y, 8, 6);
+    PDA_LocalButton[PDA_TAB_BUTTONS_START + 1] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y, 8, 6);
+    PDA_LocalButton[PDA_TAB_BUTTONS_START + 2] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 2, "3", "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y, 8, 6);
 }
-
-//PDA_SetScrollWindow (scrollOffset);
 
 int id;
 str icon = "\n";
@@ -73,12 +44,10 @@ const int width = 180,
 str assemblyCallback = "\n";
 str tooltip = "\n";
 
-PDA_SetupScreenBounds();
+// PDA_SetupScreenBounds();
 
 SetFont(USED_PDA_FONT);
 
-PDA_SetScrollLimit  (scrollOffset);
-PDA_SetScrollArrows2(scrollOffset, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
 
 for (int ti = 0, li = 1; ti <= PDA_Local.maxassembliesper; ti+=2, li+=2) {
     PDAButton button;

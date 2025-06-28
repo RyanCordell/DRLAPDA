@@ -1,6 +1,4 @@
 
-//PDA_SetScrollWindow(-140);
-PDA_SetScrollLimit(-50);
 
 classperkdisplayed  = StrParam("> \c[Yellow]%l:", "PDA_WEAPON_PERKUNAVAILABLE");
 bool canDisassemble = (GetActorClass(0) == "DoomRLTechnician" && !CheckInventory("RLStandardWeaponToken"));

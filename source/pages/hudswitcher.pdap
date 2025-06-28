@@ -2,12 +2,12 @@ PDA_Local.pagemax = 6;
 
 switch(PDA_Local.page)
 {
-    case 1: PDA_PrintHeader("PDA_HUDSWITCH_HEADER1", -70); break;
+    case 1: PDA_HEADER_STR = "PDA_HUDSWITCH_HEADER1", -70); break;
 }
 
 if(PDA_Local.page == 1)
 {
-  PDA_SetupScreenBounds();
+  // PDA_SetupScreenBounds();
   PDA_SetScrollLimit(0);
   PDA_SetScrollArrows2(0, PDA_SCREEN_WIDTH + 50.0, PDA_SCROLLABLE_HEIGHT + 90.0);
 

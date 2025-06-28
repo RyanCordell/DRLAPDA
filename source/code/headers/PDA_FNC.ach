@@ -67,6 +67,13 @@ function void PrintSpriteAlpha (str Sprite, int ID, fixed X, fixed Y, fixed Dela
     HudMessage("A\n"; HUDMSG_ALPHA, ID, CR_UNTRANSLATED, X, Y, DelayTime, Alpha);
 }
 
+// TODO: This currently gets hidden thanks to the SetupBounds calls throughout various buttons..
+function void PDA_PrintHeader(void) {
+    SetHudSize(320,200,0);
+    PDA_DefaultFont();
+    HudMessage(l:PDA_HEADER_STR; HUDMSG_PLAIN, PDA_INFOTOPID, CR_GREEN, PDA_SCREEN_X + 100.0 + PDA_HEADER_X + X_LEFT_EDGE, PDA_SCREEN_Y + 2.0 + Y_TOP_EDGE, 0.0);
+}
+
 function void DrawBorder (int X, int Y, int Width, int Height) {
 	SetHudClipRect(X, Y, Width, Height);
 	PrintSpriteAlpha("BarHorz", 0, X,             Y,              0.05, 0.3);
@@ -311,7 +318,186 @@ function void PDA_SetupPageTooltip (str graphic, str tooltip, float alpha) {
     (int)(PDA_LocalMouse.y * NEW_RESOLUTION_Y) + 30.0,
     0, alpha);
 
-    PDA_SetupScreenBounds();
+    // PDA_SetupScreenBounds();
+}
+
+// Setup scrolling arrows for pages with lots of text
+function void PDA_SetScrollArrows (int scrollDownMax) {
+	if(PDA_Local.scrollingY >= 0)
+		DisplayIcon("RLZARU", PDA_SCROLLUPID, PDA_SCREEN_WIDTH + X_LEFT_EDGE, PDA_SCREEN_HEIGHT + Y_TOP_EDGE, 0, 0.0);
+	else
+		DisplayIcon("RLZARU", PDA_SCROLLUPID, PDA_SCREEN_WIDTH + X_LEFT_EDGE, PDA_SCREEN_Y + 10.0 + Y_TOP_EDGE, 0, 0.5);
+
+
+	if(PDA_Local.scrollingY <= scrollDownMax)
+		DisplayIcon("RLZARD", PDA_SCROLLDNID, PDA_SCREEN_WIDTH + X_LEFT_EDGE, PDA_SCREEN_HEIGHT + Y_TOP_EDGE, 0, 0.0);
+	else
+		DisplayIcon("RLZARD", PDA_SCROLLDNID, PDA_SCREEN_WIDTH + X_LEFT_EDGE, PDA_SCREEN_HEIGHT + Y_TOP_EDGE, 0, 0.5);
+}
+
+function void PDA_SetScrollArrows2 (int scrollDownMax, float x, float y) {
+    bool notbot = PDA_Local.scrollingY > scrollDownMax;
+    bool nottop = PDA_Local.scrollingY < 0;
+
+    if(notbot) DisplayIcon("RLZARD", PDA_SCROLLDNID, x, y, 0, 0.5);
+    if(nottop) DisplayIcon("RLZARU", PDA_SCROLLUPID, x, PDA_SCREEN_Y + 40.0 + Y_TOP_EDGE, 0, 0.5);
+}
+
+// THEN ERASE THEM FROM REALITY
+function void PDA_UnsetScrollArrows (void) {
+	DisplayIcon("RLZARU", PDA_SCROLLUPID, PDA_SCREEN_WIDTH + X_LEFT_EDGE, PDA_SCREEN_Y + 10.0 + Y_TOP_EDGE, 0, 0);
+	DisplayIcon("RLZARD", PDA_SCROLLDNID, PDA_SCREEN_WIDTH + X_LEFT_EDGE, PDA_SCREEN_HEIGHT + 0.0 + Y_TOP_EDGE, 0, 0);
+}
+
+function void PDA_ChangeScrolling (void) {
+    switch (PDA_Local.category) {
+        case PDA_MENU:
+            PDA_SetScrollLimit(-90);
+            PDA_SetScrollArrows2(-30, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+            break;
+
+        case PDA_CLASSES:
+            switch (PDA_Local.page) {
+                case CLASSES_PAGE_PERKS:
+                    PDA_SetScrollLimit(20);
+                    break;
+                case CLASSES_PAGE_STORY:
+                    // PDA_SetScrollLimit(-1 * batoi(StrParam("%l:", PDA_Class_Story_Height)));
+                    // PDA_SetScrollArrows2(-1 * batoi(StrParam("%l:", PDA_Class_Story_Height)), PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+                    PDA_SetScrollLimit(120);
+                    PDA_SetScrollArrows2(120, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+                    break;
+            }
+            break;
+
+        case PDA_WEAPONS:
+            switch (PDA_Local.page) {
+                case WEAPON_PAGE_STORY:
+                    PDA_SetScrollLimit(-50);
+                    break;
+                case WEAPON_PAGE_MODPACK_EFFECTS:
+                    PDA_SetScrollLimit(-30);
+                    PDA_SetScrollArrows2(-30, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+                    break;
+                case WEAPON_PAGE_ARTIFACT_EFFECTS:
+                    PDA_SetScrollLimit(-80);
+                    PDA_SetScrollArrows2(-80, PDA_SCREEN_WIDTH + 50.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+                    break;
+            }
+            break;
+            
+        case PDA_BESTIARY:
+            PDA_SetScrollLimit(-240);
+            PDA_SetScrollWindow(-240);
+
+            switch (PDA_Local.page) {
+                case BESTIARY_PAGE_LIST:
+                    PDA_SetScrollLimit(20);
+                    PDA_SetScrollArrows2(0, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+                    break;
+                default: 
+                    PDA_SetScrollLimit(-60);
+                    PDA_SetScrollArrows2(-60, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+                    break;
+            }
+            break;
+        case PDA_ARMORS:
+            switch (PDA_Local.page) {
+                case EQUIPMENT_PAGE_ONHAND:
+                    if (localHasBackpack) {
+                        PDA_SetScrollLimit(-140);
+                        PDA_SetScrollArrows2(-140, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+                    } else {
+                        PDA_SetScrollLimit(-80);
+                        PDA_SetScrollArrows2(-80 , PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+                    }
+                    break;
+                case EQUIPMENT_PAGE_INFO:
+                    PDA_SetScrollLimit(-160);
+                    PDA_SetScrollArrows2(-160, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+                    break;
+            }
+            break;
+
+        case PDA_ASSEMBLIES:
+            const int scrollOffset = 150;
+            PDA_SetScrollLimit  (scrollOffset);
+            PDA_SetScrollArrows2(scrollOffset, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+
+            str allAssemblies = StrParam(l:"PDA_ASSEMBLIES");
+            str_split(StrParam("%l:", "PDA_SEPARATOR_CHARACTER"), allAssemblies);
+            int basicInd    = 0;
+            int advancedInd = 0; // Should be 33
+            int masterInd   = 0; // Should be 65
+            int masterMax   = 0; // Should be 95
+
+            int stringArrayIndex = 0;
+            int TEXT_OFFSET = 13; // aka length of "PDA_ASSEMBLY_"
+            
+            while ((stringArray[stringArrayIndex++]) != "") {
+                if (str_find(stringArray[stringArrayIndex], "ADVANCED", TEXT_OFFSET) != -1 && advancedInd == 0) advancedInd = stringArrayIndex;
+                if (str_find(stringArray[stringArrayIndex],   "MASTER", TEXT_OFFSET) != -1 &&   masterInd == 0) masterInd   = stringArrayIndex;
+                masterMax++;
+            }
+            stringArrayIndex = 0;
+            masterMax--;
+
+            switch (PDA_Local.page) {
+                case ASSEMBLY_PAGE_BASIC:
+                    PDA_HEADER_STR = "PDA_ASSEMBLY_BASIC_NAME"; PDA_HEADER_X = -30;
+                    PDA_Local.maxassembliesper = (advancedInd - 1);
+                    PDA_Local.assemblyOffset   = basicInd;
+                    PDA_Local.tiercolor        = "\c[BB]";
+                    // scrollOffset               = PDA_Local.maxassembliesper * -5;
+                    break;
+                case ASSEMBLY_PAGE_ADVANCED:
+                    PDA_HEADER_STR = "PDA_ASSEMBLY_ADVANCED_NAME"; PDA_HEADER_X = -30;
+                    PDA_Local.maxassembliesper = (masterInd - 1) - advancedInd;
+                    PDA_Local.assemblyOffset   = advancedInd;
+                    PDA_Local.tiercolor        = "\c[AB]";
+                    // scrollOffset               = PDA_Local.maxassembliesper * -5;
+                    break;
+                case ASSEMBLY_PAGE_MASTER:
+                    PDA_HEADER_STR = "PDA_ASSEMBLY_MASTER_NAME"; PDA_HEADER_X = -30;
+                    PDA_Local.maxassembliesper = masterMax - masterInd;
+                    PDA_Local.assemblyOffset   = masterInd;
+                    PDA_Local.tiercolor        = "\c[MB]";
+                    // scrollOffset               = PDA_Local.maxassembliesper * -6;
+                    break;
+                default:
+                    Print(s:"how da fuk");
+                    break;
+            }
+            break;
+
+        case PDA_HELP:
+            PDA_SetScrollLimit(-100);
+            break;
+        case PDA_MISC:
+            PDA_SetScrollLimit(0);
+            PDA_SetScrollArrows2(0, PDA_SCREEN_WIDTH + 50.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+            break;
+
+        case PDA_ITEMS:
+            PDA_SetScrollLimit(-200);
+            PDA_SetScrollArrows2(-200, PDA_SCREEN_WIDTH + 50.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+            break;
+        case PDA_ASSEMBLY_DETAIL:
+            PDA_SetScrollLimit  (-100);
+            PDA_SetScrollArrows2(-100, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+            break;
+        case PDA_BESTIARY_DETAIL:
+            if (StrCmp(PDA_Local.detailFetch[0], "null") != 0) {
+                PDA_SetScrollLimit(-100);
+                PDA_SetScrollArrows2(-100, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+            } else {
+                PDA_SetScrollLimit(0);
+            }
+            break;
+        case PDA_CREDITS:
+            PDA_SetScrollWindow(0);
+            break;
+    }
 }
 
 function void PDA_SetCategory (int category) {
@@ -332,11 +518,14 @@ function void PDA_SetCategory (int category) {
     PDA_Local.texty = 0.0;
     PDA_Local.scrollingY = PDA_SCREEN_Y;
     PDA_Local.category = category;
+    PDA_ChangeScrolling();
 }
+
 
 function void PDA_SetPage (int page_num) {
     PDA_Local.page = page_num;
     afterPageDefaults("PDA_SetPage");
+    PDA_ChangeScrolling();
 }
 
 function void PDA_HasEquipment (void) {
@@ -568,7 +757,7 @@ function PDAButton PDA_CreateAssemblyButton (int id, str graphic, str label, flo
         // Open tooltip
         if (strCmp(thisButton.tooltip, "") != 0 && strCmp(assembly, "") != 0) {
             PDA_SetupFloatingTooltip("PTIPM", thisButton.tooltip);
-            PDA_SetupScreenBounds();
+            // PDA_SetupScreenBounds();
         }
     }
 
@@ -745,9 +934,9 @@ function PDAButton PDA_CreateModPackDisplay (int id, str graphic, float x, float
  */
 function void PDA_InitButton (PDAButton button, int incat, int catpage, str message, int onlyVisual) {
     if (button.type != "tab") {
-        PDA_SetupScreenBounds();
+        // PDA_SetupScreenBounds();
     } else {
-        PDA_SetupHeaderBounds();
+        // PDA_SetupHeaderBounds();
 
         if (incat > 0 && PDA_Local.page == catpage) {
             button.state = button_hovered;
@@ -787,7 +976,7 @@ function void PDA_InitButton (PDAButton button, int incat, int catpage, str mess
                     );
                     HudMessage(s:message; HUDMSG_PLAIN, PDA_CAT_DESCRIPTION, CR_UNTRANSLATED,
                     PDA_MENU_TOOLTIP_X + X_LEFT_EDGE, PDA_MENU_TOOLTIP_Y + Y_TOP_EDGE, 0);
-                    PDA_SetupScreenBounds();
+                    // PDA_SetupScreenBounds();
                 }
                 break;
         }
@@ -816,9 +1005,9 @@ function void PDA_InitButton (PDAButton button, int incat, int catpage, str mess
 }
 function void PDA_ButtonHandler (int id, int incat, int catpage, str message, int onlyVisual) {
     if (PDA_LocalButton[id].type != "tab") {
-        PDA_SetupScreenBounds();
+        // PDA_SetupScreenBounds();
     } else {
-        PDA_SetupHeaderBounds();
+        // PDA_SetupHeaderBounds();
 
         if (incat > 0 && PDA_Local.page == catpage) {
             PDA_LocalButton[id].state = button_hovered;
@@ -858,7 +1047,7 @@ function void PDA_ButtonHandler (int id, int incat, int catpage, str message, in
                     );
                     HudMessage(s:message; HUDMSG_PLAIN, PDA_CAT_DESCRIPTION, CR_UNTRANSLATED,
                     PDA_MENU_TOOLTIP_X + X_LEFT_EDGE, PDA_MENU_TOOLTIP_Y + Y_TOP_EDGE, 0);
-                    PDA_SetupScreenBounds();
+                    // PDA_SetupScreenBounds();
                 }
                 break;
         }
@@ -887,37 +1076,10 @@ function void PDA_ButtonHandler (int id, int incat, int catpage, str message, in
     HudMessage(s:PDA_LocalButton[id].label; PDA_LocalButton[id].textFlags, PDA_LocalButton[id].textID, CR_UNTRANSLATED, PDA_LocalButton[id].textX, PDA_LocalButton[id].textY, 1.0, PDA_LocalButton[id].alpha);
 }
 
-// Setup scrolling arrows for pages with lots of text
-function void PDA_SetScrollArrows (int scrollDownMax) {
-	if(PDA_Local.scrollingY >= 0)
-		DisplayIcon("RLZARU", PDA_SCROLLUPID, PDA_SCREEN_WIDTH + X_LEFT_EDGE, PDA_SCREEN_HEIGHT + Y_TOP_EDGE, 0, 0.0);
-	else
-		DisplayIcon("RLZARU", PDA_SCROLLUPID, PDA_SCREEN_WIDTH + X_LEFT_EDGE, PDA_SCREEN_Y + 10.0 + Y_TOP_EDGE, 0, 0.5);
-
-
-	if(PDA_Local.scrollingY <= scrollDownMax)
-		DisplayIcon("RLZARD", PDA_SCROLLDNID, PDA_SCREEN_WIDTH + X_LEFT_EDGE, PDA_SCREEN_HEIGHT + Y_TOP_EDGE, 0, 0.0);
-	else
-		DisplayIcon("RLZARD", PDA_SCROLLDNID, PDA_SCREEN_WIDTH + X_LEFT_EDGE, PDA_SCREEN_HEIGHT + Y_TOP_EDGE, 0, 0.5);
-}
-
-function void PDA_SetScrollArrows2 (int scrollDownMax, float x, float y) {
-    bool notbot = PDA_Local.scrollingY > scrollDownMax;
-    bool nottop = PDA_Local.scrollingY < 0;
-
-    if(notbot) DisplayIcon("RLZARD", PDA_SCROLLDNID, x, y, 0, 0.5);
-    if(nottop) DisplayIcon("RLZARU", PDA_SCROLLUPID, x, PDA_SCREEN_Y + 40.0 + Y_TOP_EDGE, 0, 0.5);
-}
-
-// THEN ERASE THEM FROM REALITY
-function void PDA_UnsetScrollArrows (void) {
-	DisplayIcon("RLZARU", PDA_SCROLLUPID, PDA_SCREEN_WIDTH + X_LEFT_EDGE, PDA_SCREEN_Y + 10.0 + Y_TOP_EDGE, 0, 0);
-	DisplayIcon("RLZARD", PDA_SCROLLDNID, PDA_SCREEN_WIDTH + X_LEFT_EDGE, PDA_SCREEN_HEIGHT + 0.0 + Y_TOP_EDGE, 0, 0);
-}
 
 function void PDA_SetScrollWindow (int scrollDownMax) {
 	// SetHudClipRect(PDA_SCREEN_X, PDA_SCROLLABLE_Y, PDA_SCREEN_WIDTH, PDA_SCROLLABLE_HEIGHT, PDA_SCREEN_WIDTH);
-    PDA_SetupScreenBounds();
+    // PDA_SetupScreenBounds();
 	PDA_SetScrollArrows2(scrollDownMax, PDA_SCREEN_WIDTH + X_LEFT_EDGE, PDA_SCREEN_HEIGHT + Y_TOP_EDGE);
 }
 

@@ -1,12 +1,4 @@
-PDA_SetScrollLimit(-160);
-PDA_SetScrollArrows2(-160, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
 
-fixed playerIconY       = 40.0 + Y_TOP_EDGE;
-
-// bool specialArmorTokens = CheckInventory("RLEnclaveSetBonusActive") || 
-//                           CheckInventory("PowerRLPrototypeAssaultShieldProtection") || 
-//                           CheckInventory("PowerRLOverchargeSystemProtection") || 
-//                           CheckInventory("RLCyberneticArmorModdedToken");
 
 
 // Armor / Boots / Suit display
@@ -16,9 +8,10 @@ const int height = 16;
 int width        = 60;
 
 bool PDA_ManyHax    = false;
-int pdaStrTrimValue = 0;
+// int pdaStrTrimValue = 0;
 
 const float inAlpha = 0.7;
+const fixed playerIconX = PDA_SCREEN_X + 20.0 + X_LEFT_EDGE;
 
 DisplayIconParallax("PDAPLYR", PDA_PLYR_ICON, playerIconX, 40.0, 0.0, 1.0);
 
@@ -31,61 +24,84 @@ localArmorData.tooltip    = "";
 localBootsData.tooltip    = "";
 localBackpackData.tooltip = "";
 
-if(armorButton.state == button_clicked) {
-    if (localABoolField != 1) localABoolField = 1;
-}
-
-if(bootsButton.state == button_clicked) {
-    if (localABoolField != 2) localABoolField = 2;
-}
-
-if(backpackButton.state == button_clicked) {
-    if (localABoolField != 4) localABoolField = 4;
-}
 
 localShowArmor    = (localABoolField & 1);
 localShowBoots    = (localABoolField & 1<<1);
 localShowBackpack = (localABoolField & 1<<2);
 
 if (localHasArmor) {
-    DisplayIconParallax("PDAPARM", PDA_PLYR_ICON - 1, playerIconX, 40.0, 0.0, showArmor ? 1.0 : 0.5);
+    const fixed equippedArmorX = playerIconX + 35.0;
+    // Not the renegade of funk, unfortunately..
+    bool isRenegade = false;
+         isRenegade = (CheckActorClass(0, CheckInventory("DRPGDRLAActive") ? "DoomRLRenegadeRPG" : "DoomRLRenegade") == true);
+
+    // if(CheckInventory("DRPGDRLAActive")) {
+    //     isRenegade = (CheckActorClass(0,"DoomRLRenegadeRPG") == true);
+    // } else {
+    //     isRenegade = (CheckActorClass(0,"DoomRLRenegade") == true);
+    // }
+
+    DisplayIconParallax("PDAPARM", PDA_PLAYER_BODY_ICON, playerIconX, 40.0, 0.0, showArmor ? 1.0 : 0.5);
 
     width       = strLen(localArmorData.name) * 5;
-    armorButton = PDA_DisplayArmor(PDA_PLYR_ICON - 5, localArmorData.name, localArmorData.graphic, 
-        equippedArmorX, 20.0, 
-        width, height, 
-        localArmorData.tooltip, localShowArmor ? pulser(2.0, 0.8) : inAlpha);
-                  PDA_InitButton(armorButton, true, 2, "", true);
+    if (PDA_LocalMouse.scrolling) {
+        PDA_LocalButton[PDA_PLAYER_ARMOR_ICON] = PDA_DisplayArmor(PDA_PLAYER_ARMOR_ICON, localArmorData.name, localArmorData.graphic, 
+                    equippedArmorX, 20.0, 
+                    width, height, 
+                    localArmorData.tooltip, localShowArmor ? pulser(2.0, 0.8) : inAlpha);
+    }
+    PDA_ButtonHandler(PDA_PLAYER_ARMOR_ICON, true, 2, "", true);
+    if(PDA_LocalButton[PDA_PLAYER_ARMOR_ICON].state == button_clicked) {
+        if (localABoolField != 1) localABoolField = 1;
+    }
 }
 
 if (localHasBackpack) {
+    const fixed equippedBackX  = playerIconX + 33.0;
     DisplayIconParallax("PDAPBCK", PDA_PLYR_ICON - 2, playerIconX, 40.0, 0.0, showBackpack ? 1.0 : 0.5);
 
     width          = strLen(localBackpackData.name) * 5;
-    backpackButton = PDA_DisplayArmor(PDA_PLYR_ICON - 7, localBackpackData.name, localBackpackData.graphic, 
-        equippedBackX, 45.0, 
-        width, height, 
-        localBackpackData.tooltip, localShowBackpack ? pulser(2.0, 0.8) : inAlpha);
-                      PDA_InitButton(backpackButton, true, 2, "", true);
+    if (PDA_LocalMouse.scrolling) {
+        PDA_LocalButton[PDA_PLAYER_BACKPACK_ICON] = PDA_DisplayArmor(PDA_PLAYER_BACKPACK_ICON, localBackpackData.name, localBackpackData.graphic, 
+                        equippedBackX, 45.0, 
+                        width, height, 
+                        localBackpackData.tooltip, localShowBackpack ? pulser(2.0, 0.8) : inAlpha);
+    }
+    PDA_ButtonHandler(PDA_PLAYER_BACKPACK_ICON, true, 2, "", true);
+    if(PDA_LocalButton[PDA_PLAYER_BACKPACK_ICON].state == button_clicked) {
+        if (localABoolField != 4) localABoolField = 4;
+    }
+
 }
 
 if (localHasBoots) {
+    const fixed equippedBootsX = playerIconX + 30.0;
     DisplayIconParallax("PDAPBTS", PDA_PLYR_ICON - 3, playerIconX, 40.0, 0.0, showBoots ? 1.0 : 0.5);
 
     width       = strLen(localBootsData.name) * 5;
-    bootsButton = PDA_DisplayArmor(PDA_PLYR_ICON - 9, localBootsData.name, localBootsData.graphic, 
-        equippedBootsX, 70.0, 
-        width, height, 
-        localBootsData.tooltip, localShowBoots ? pulser(2.0, 0.8) : inAlpha);
-                  PDA_InitButton(bootsButton, true, 2, "", true);
+    
+    if (PDA_LocalMouse.scrolling) {
+        PDA_LocalButton[PDA_PLAYER_BOOTS_ICON] = PDA_DisplayArmor(PDA_PLAYER_BOOTS_ICON, localBootsData.name, localBootsData.graphic, 
+                    equippedBootsX, 70.0, 
+                    width, height, 
+                    localBootsData.tooltip, localShowBoots ? pulser(2.0, 0.8) : inAlpha);
+    }
+    PDA_ButtonHandler(PDA_PLAYER_BOOTS_ICON, true, 2, "", true);
+    
+    if(PDA_LocalButton[PDA_PLAYER_BOOTS_ICON].state == button_clicked) {
+        if (localABoolField != 2) localABoolField = 2;
+    }
 }
 
-if (isRenegade && (StrCmp(StrTrim(GetArmorInfo(ARMORINFO_CLASSNAME),2,0),StrParam(s:StrTrim(GetArmorInfo(ARMORINFO_CLASSNAME),2,10),s:"Renegade"))) == 0)
-    pdaStrTrimValue = 10;
-else
-    pdaStrTrimValue = 0;
+// if (isRenegade && (StrCmp(StrTrim(GetArmorInfo(ARMORINFO_CLASSNAME),2,0),StrParam(s:StrTrim(GetArmorInfo(ARMORINFO_CLASSNAME),2,10),s:"Renegade"))) == 0)
+//     pdaStrTrimValue = 10;
+// else
+//     pdaStrTrimValue = 0;
 
 //armorDesc =  StrParam("PDA_ARMOR_%s:_DESC", StrTrim(GetArmorInfo(ARMORINFO_CLASSNAME),2,pdaStrTrimValue));
+
+str equipment_set_name        = "N/A\n",
+    equipment_set_description = "\n\n";
 
 // Armor
 for (int setIndex = 0; setIndex < DRLA_ARMORSETMAX; setIndex++) {
@@ -95,17 +111,17 @@ for (int setIndex = 0; setIndex < DRLA_ARMORSETMAX; setIndex++) {
 
         str trimmedList = strTrim(DRLA_ArmorSetList[setIndex],2,0);
 
-        setName = strParam("%l:\n\n", (PDA_ManyHax)
-            ? "PDA_ARMOR_NuclearWeaponSetBonusActive_SETNAME"
-            : strParam("PDA_ARMOR_%s:_SETNAME", trimmedList));
-        setDesc = strParam("%l:\n\n", (PDA_ManyHax)
-            ? "PDA_ARMOR_NuclearWeaponSetBonusActive_SETDESC"
-            : strParam("PDA_ARMOR_%s:_SETDESC", trimmedList));
+        equipment_set_name = strParam("%l:\n\n", (PDA_ManyHax)
+            ? "PDA_ARMOR_NuclearWeaponSetBonusActive_equipment_set_name"
+            : strParam("PDA_ARMOR_%s:_equipment_set_name", trimmedList));
+        equipment_set_description = strParam("%l:\n\n", (PDA_ManyHax)
+            ? "PDA_ARMOR_NuclearWeaponSetBonusActive_equipment_set_description"
+            : strParam("PDA_ARMOR_%s:_equipment_set_description", trimmedList));
     }
 }
 
-enclaveSetName = (PDA_ManyHax) ? strParam("%l:\n\n", "PDA_ARMOR_EnclaveSetBonusActive_SETNAME") : "";
-enclaveSetDesc = (PDA_ManyHax) ? strParam("%l:\n\n", "PDA_ARMOR_EnclaveSetBonusActive_SETDESC") : "";
+str enclaveequipment_set_name = (PDA_ManyHax) ? strParam("%l:\n\n", "PDA_ARMOR_EnclaveSetBonusActive_equipment_set_name") : "";
+str enclaveequipment_set_description = (PDA_ManyHax) ? strParam("%l:\n\n", "PDA_ARMOR_EnclaveSetBonusActive_equipment_set_description") : "";
 
 SetFont(USED_PDA_FONT);
 
@@ -140,10 +156,10 @@ if (localShowArmor && localHasArmor) {
                 strParam(" %l:\n\n", localArmorData.armorDesc),
 
                 "\crSet bonus:\c-\n",
-                enclaveSetName,
-                enclaveSetDesc,
-                setName,
-                setDesc;
+                enclaveequipment_set_name,
+                enclaveequipment_set_description,
+                equipment_set_name,
+                equipment_set_description;
                 HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, PDA_SCREEN_X + 10.0 + X_LEFT_EDGE, (int)(PDA_Local.scrollingY * NEW_RESOLUTION_Y) + 140.0 + Y_TOP_EDGE, 0);
 } else if (localShowBoots && localHasBoots) {
     HudMessage(

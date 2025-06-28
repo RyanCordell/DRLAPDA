@@ -2,8 +2,8 @@ PDA_Local.pagemax = 2;
 
 switch(PDA_Local.page)
 {
-    case 1: PDA_PrintHeader("PDA_PDAHELP_HEADER", -10); break;
-    case 2: PDA_PrintHeader("PDA_DRLAHELP_HEADER", -40); break;
+    case 1: PDA_HEADER_STR = "PDA_PDAHELP_HEADER"; PDA_HEADER_X = -10; break;
+    case 2: PDA_HEADER_STR = "PDA_DRLAHELP_HEADER"; PDA_HEADER_X = -40; break;
 }
 
 PDA_ButtonHandler(PDA_TAB_BUTTONS_START    , true, 1, "", false);
@@ -15,10 +15,8 @@ if (PDA_LocalMouse.scrolling) {
 }
 
 
-PDA_SetupScreenBounds();
+// PDA_SetupScreenBounds();
 PDA_DefaultFont();
-
-PDA_SetScrollLimit(-100);
 
 if(PDA_Local.page == 1)
 {

@@ -7,13 +7,13 @@ int perkoffset = 1;
 switch (PDA_Local.page)
 {
 case 1:
-    PDA_PrintHeader("PDA_WEAPON_HEADER", 0);
+    PDA_HEADER_STR = "PDA_WEAPON_HEADER"; PDA_HEADER_X = 0;
     break;
 case 2:
-    PDA_PrintHeader("PDA_MODPACK_HEADER", -10);
+    PDA_HEADER_STR = "PDA_MODPACK_HEADER"; PDA_HEADER_X = -10;
     break;
 case 3:
-    PDA_PrintHeader("PDA_DEMONARTIFACT_HEADER", -20);
+    PDA_HEADER_STR = "PDA_DEMONARTIFACT_HEADER"; PDA_HEADER_X = -20;
     break;
 }
 
@@ -27,12 +27,8 @@ if (PDA_LocalMouse.scrolling) {
     PDAButton WEAPONS_TAB_3 = PDA_CreateTab(PDA_TAB_BUTTONS_START + 2, "3", "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
 }
 
-PDA_SetupScreenBounds();
+// PDA_SetupScreenBounds();
 PDA_DefaultFont();
-
-#define WEAPON_PAGE_STORY 1
-#define WEAPON_PAGE_MODPACK_EFFECTS 2
-#define WEAPON_PAGE_ARTIFACT_EFFECTS 3
 
 bool canAnim = true;
 str currentWeapon = GetWeapon();

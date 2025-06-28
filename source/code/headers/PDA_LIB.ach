@@ -299,12 +299,10 @@ const float PDA_MENU_ICON_LEFT_X  = 20 + X_LEFT_EDGE,
 const float PDA_MENU_TEXT_LEFT_X  = PDA_MENU_ICON_LEFT_X + 30.0,
 			PDA_MENU_TEXT_RIGHT_X = PDA_MENU_ICON_RIGHT_X + 30.0;
 
-// I suppose that this magic constant is the only way I'll be able to beat the default font position vs rendering nuisance..
-// Currently, this is based off how new res and old res interact. Sticking with old res, no offset is required. With the new res, however...
-// Multplying the graphics value with NEW_RESOLUTION_X seems to yield very promising results, just 1px off however
-const int BULLSHIT_OFFSET = 5;
-
 const float PDA_NormalY = PDA_SCREEN_Y;
+
+str PDA_HEADER_STR = "PDA_MENU_HEADER";
+int PDA_HEADER_X   = 0;
 
 #define BEAST_WIDTH 85
 #define BEAST_HEIGHT 8
@@ -342,6 +340,7 @@ enum PDA_MouseState {
 enum PDA_IDs {
     PDA_CURSORID = 2,
     
+    // Header
     PDA_PLAYERS_BUTTON = 40,
     PDA_WEAPONS_BUTTON,
     PDA_ARMORS_BUTTON,
@@ -359,6 +358,11 @@ enum PDA_IDs {
     PDA_PEGGLESOSID,
     PDA_PAGENUMID,
       
+    PDA_PLAYER_BODY_ICON = 150,
+    PDA_PLAYER_ARMOR_ICON = 151,
+    PDA_PLAYER_BACKPACK_ICON = 154,
+    PDA_PLAYER_BOOTS_ICON = 156,
+
     // Assembly iterator ID range
     PDA_ASSEMBLYIDRANGE = PDA_PAGENUMID + 48,
     PDA_WORNARMORS = PDA_ASSEMBLYIDRANGE + 512, // excessive range, but you never know.
@@ -371,8 +375,6 @@ enum PDA_IDs {
     PDA_INFO3ID,
     PDA_INFO2ID,
     PDA_INFOID,
-    // Header
-    PDA_INFOTOPID,
     // Scrolling arrows
     PDA_SCROLLDNID,
     PDA_SCROLLUPID,
@@ -386,6 +388,7 @@ enum PDA_IDs {
     PDA_PONG_BOTBORD,
     PDA_PONG_PLAYERSCORE,
     PDA_PONG_AISCORE,
+    PDA_INFOTOPID,
     // PDA display
     PDA_ID,
     PDA_REALLYLASTID,
@@ -424,6 +427,32 @@ enum PDA_Categories {
 	PDA_PONG,
 	PDA_CREDITS,
 	PDA_HUDSWITCH,
+}
+
+enum PDA_Weapon_Pages {
+    WEAPON_PAGE_STORY = 1,
+    WEAPON_PAGE_MODPACK_EFFECTS,
+    WEAPON_PAGE_ARTIFACT_EFFECTS,
+}
+
+enum PDA_Assembly_Pages {
+    ASSEMBLY_PAGE_BASIC = 1,
+    ASSEMBLY_PAGE_ADVANCED,
+    ASSEMBLY_PAGE_MASTER,
+}
+
+enum PDA_Bestiary_Pages {
+    BESTIARY_PAGE_DIFFICULTIES = 1,
+    BESTIARY_PAGE_LIST,
+}
+
+enum PDA_Classes_Pages {
+    CLASSES_PAGE_PERKS = 1,
+    CLASSES_PAGE_STORY,
+}
+enum PDA_Equipment_Pages {
+    EQUIPMENT_PAGE_ONHAND = 1,
+    EQUIPMENT_PAGE_INFO,
 }
 
 enum armor_enum {
@@ -515,11 +544,14 @@ str DRLA_BackpackList[DRLA_BACKPACKMAX][2] = {
 #define PDA_SetMonsterLimit(a)  if (PDA_Local.monsterpage > (a)) PDA_Local.monsterpage = (a)
 #define PDA_DefaultFont() 		SetFont(USED_PDA_FONT);
 
-#define PDA_PrintHeader(a, b) \
-SetHudSize(320,200,0); \
-PDA_DefaultFont(); \
-HudMessage(l:(a); HUDMSG_PLAIN, PDA_INFOTOPID, CR_GREEN, PDA_SCREEN_X + 100.0 + (b) + X_LEFT_EDGE, (PDA_SCREEN_Y) + 2.0 + Y_TOP_EDGE, 0); \
-
+function int checkSpecialArmorTokens(void) {
+    return CheckInventory("RLEnclaveSetBonusActive")                 ||
+           CheckInventory("PowerRLPrototypeAssaultShieldProtection") ||
+           CheckInventory("PowerRLOverchargeSystemProtection")       ||
+           CheckInventory("RLCyberneticArmorModdedToken")            ||
+           CheckInventory("RLDeathFromAboveSetBonusActive")          ||
+           CheckInventory("PowerRLInquisitorsSetBonusProtection");
+}
 
 
 

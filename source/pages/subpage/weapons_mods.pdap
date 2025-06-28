@@ -1,10 +1,7 @@
 // Every weapon and assembly tier has their own max amount of mod packs applicable. Set that up.
 PDA_EstablishModLimits();
 
-PDA_SetScrollLimit(-30);
-PDA_SetScrollArrows2(-30, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
-
-PDAButton button[PDA_MODMAX - 1] = {'', '', '', '', '', '', ''};
+PDAButton button[PDA_MODMAX - 1] = {0,0,0,0,0,0,0};
 
 int playerHazMod[PDA_MODMAX] = { PDA_Weapon_Bulk_Quantity, PDA_Weapon_Power_Quantity, PDA_Weapon_Agility_Quantity, PDA_Weapon_Technical_Quantity, PDA_Weapon_Sniper_Quantity, PDA_Weapon_Firestorm_Quantity, PDA_Weapon_Nano_Quantity };
 

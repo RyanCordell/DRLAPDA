@@ -8,9 +8,9 @@ if (!PDA_Local.playonce) {
     PDA_Local.playonce = true;
 }
 
-PDA_PrintHeader("PDA_DETAILEDBEAST_HEADER", -30);
+PDA_HEADER_STR = "PDA_DETAILEDBEAST_HEADER"; PDA_HEADER_X = -30;
 
-PDA_SetupScreenBounds();
+// PDA_SetupScreenBounds();
 
 str name   = "N/A\n",
     icon   = "N/A\n",
@@ -20,10 +20,6 @@ str name   = "N/A\n",
 int count  = 0;
 
 if (StrCmp(PDA_Local.detailFetch[0], "null") != 0) {
-
-    PDA_SetScrollLimit(-100);
-    PDA_SetScrollArrows2(-100, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
-
     count  = PDA_Local.detailFetch[1];
     name   = strParam("%s:_NAME",       PDA_Local.detailFetch[0]);
     icon   = strParam("%s:_ICON",       PDA_Local.detailFetch[0]);
@@ -49,7 +45,6 @@ if (StrCmp(PDA_Local.detailFetch[0], "null") != 0) {
                 info;
                 HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, PDA_SCREEN_X + 5.0 + X_LEFT_EDGE, PDA_Local.scrollingY + 20.0 + Y_TOP_EDGE + (20.0 * 1), 0);
 } else {
-    PDA_SetScrollLimit(0);
 
     SetFont(USED_PDA_FONT);
     HudMessage("%l:\n"

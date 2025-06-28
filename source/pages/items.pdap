@@ -2,7 +2,7 @@ if(GetCvar("DRLA_specialstarts") == 2)
 {
     PDA_Local.pagemax = 3;
 
-    PDA_SetupScreenBounds();
+    // PDA_SetupScreenBounds();
 
     #define DUKE2X 0.0 + X_LEFT_EDGE
     #define DUKE2Y 0.0 + Y_TOP_EDGE
@@ -20,7 +20,7 @@ if(GetCvar("DRLA_specialstarts") != 2)
 {
     PDA_Local.pagemax = DRLA_GROUPQUANTITY;
 
-    PDA_PrintHeader("PDA_ITEMS_HEADER", +20);
+    PDA_HEADER_STR = "PDA_ITEMS_HEADER"; PDA_HEADER_X = +20;
 
     PDA_ButtonHandler(PDA_TAB_BUTTONS_START    , true, 1, "", false);
     PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 1, true, 2, "", false);
@@ -51,8 +51,6 @@ if(GetCvar("DRLA_specialstarts") != 2)
     //     PDA_SCREEN_WIDTH+80, PDA_SCROLLABLE_HEIGHT+65, 
     //     PDA_SCREEN_WIDTH-30
     // );
-    PDA_SetScrollLimit(-200);
-    PDA_SetScrollArrows2(-200, PDA_SCREEN_WIDTH + 50.0, PDA_SCROLLABLE_HEIGHT + 90.0);
     
     for(int itemIndex = 0; itemIndex < DRLA_ITEMSMAX; itemIndex++)
     {

@@ -41,7 +41,7 @@ script "PDA_SetEveryoneInventory" (str name) {
 script "DRLA_HUD_InfoHandler" ENTER {
     while (true) {
         bool IsNotDemonic = false;
-            IsNotDemonic  = !CheckInventory("RLDemonicWeaponToken");
+             IsNotDemonic  = !CheckInventory("RLDemonicWeaponToken");
         
         str currentWeapon        = GetWeapon();
         str trimmedCurrentWeapon = StrTrim(currentWeapon, 2, 0);
@@ -171,6 +171,27 @@ function void doPDASync (void) {
     //         if (CheckInventory(DRLA_UniqueExoticModEffects[w][e])) PDA_SetEveryoneInventory(DRLA_UniqueExoticModEffects[w][e]);
     // }
 }
+
+function void reset_pda_stuff (str location) {
+        PDA_NOPONG();
+        PDA_Wipe(location);
+        ACS_NamedExecuteAlways("QuitPong",0);
+        PDA_UnsetScrollArrows();
+        DisplayIcon("RLZPDA", PDA_ID, 0.5, 0.5, 0, 0);
+        
+        SetPlayerProperty(0,0,PROP_TOTALLYFROZEN);
+        TakeInventory("RLSynthFireDisabled",1);
+        FadeTo(0, 0, 0, 0.0, 0.0);
+        
+        if(PDA_Local.category == PDA_CREDITS) SetMusic("*");
+      
+        PDA_PlaySound("UI/PDA/Offline", "pda/soldierclose", 80);
+      
+        PDA_Local.pongrunning = false;
+        PDA_Local.active = false;
+}
+
+
 SCRIPT "HeyADollar" enter {
     doPDASync();
     GiveInventory("RLHUDStyleChanger", 1);
@@ -269,65 +290,20 @@ SCRIPT "PDA_Display" (void) net {
 
         PDA_Local.active = true;
     } else {
-        PDA_NOPONG();
-        PDA_Wipe("PDA_Display Terminate");
-        ACS_NamedExecuteAlways("QuitPong",0);
-        PDA_UnsetScrollArrows();
-        DisplayIcon("RLZPDA", PDA_ID, 0.5, 0.5, 0, 0);
-        
-        SetPlayerProperty(0,0,PROP_TOTALLYFROZEN);
-        TakeInventory("RLSynthFireDisabled",1);
-        FadeTo(0, 0, 0, 0.0, 0.0);
-        
-        if (PDA_Local.category == PDA_CREDITS) SetMusic("*");
-      
-        PDA_PlaySound("UI/PDA/Offline", "pda/soldierclose", 80);
-      
-        PDA_Local.pongrunning = false;
-        PDA_Local.active = false;   
+        reset_pda_stuff("PDA_Display Terminate");
     }
 }
 
 SCRIPT "PDA_YOUAREDEADnotbigsurprise" DEATH {
     if (PDA_Local.active) {
-        PDA_NOPONG();
-        PDA_Wipe("Player Death");
-        ACS_NamedExecuteAlways("QuitPong",0);
-        PDA_UnsetScrollArrows();
-        DisplayIcon("RLZPDA", PDA_ID, 0.5, 0.5, 0, 0);
-        
-        SetPlayerProperty(0,0,PROP_TOTALLYFROZEN);
-        TakeInventory("RLSynthFireDisabled",1);
-        FadeTo(0, 0, 0, 0.0, 0.0);
-        
-        if (PDA_Local.category == PDA_CREDITS) SetMusic("*");
-      
-        PDA_PlaySound("UI/PDA/Offline", "pda/soldierclose", 80);
-      
-        PDA_Local.pongrunning = false;
-        PDA_Local.active = false;
+        reset_pda_stuff("Player Death");
     }
 }
 
 /** Attempt to eliminate problems that result from dying w/ PDA*/
 SCRIPT "PDA_Respawn" RESPAWN {
     if (PDA_Local.active) {
-        PDA_NOPONG();
-        PDA_Wipe("Respawn");
-        ACS_NamedExecuteAlways("QuitPong",0);
-        PDA_UnsetScrollArrows();
-        DisplayIcon("RLZPDA", PDA_ID, 0.5, 0.5, 0, 0);
-        
-        SetPlayerProperty(0,0,PROP_TOTALLYFROZEN);
-        TakeInventory("RLSynthFireDisabled",1);
-        FadeTo(0, 0, 0, 0.0, 0.0);
-        
-        if(PDA_Local.category == PDA_CREDITS) SetMusic("*");
-      
-        PDA_PlaySound("UI/PDA/Offline", "pda/soldierclose", 80);
-      
-        PDA_Local.pongrunning = false;
-        PDA_Local.active = false;
+        reset_pda_stuff("Respawn");
     }
 }
 
@@ -403,7 +379,6 @@ function void page_monster_info (void) {
 
 SCRIPT "PDA_Core" (void) {  
     PDA_Local.scrollingY = 20.0;
-    SetHudSize(320,200,0);
 
     if (PDA_Local.active) {
         if (GetUserCvar(PlayerNumber(), "DRLA_PDA_firsttime") != FALSE) PDA_SetCategory(PDA_HELP);
@@ -411,10 +386,10 @@ SCRIPT "PDA_Core" (void) {
     }
     
     #include "PDA_STC.acs"
+
+    PDA_SetupScreenBounds();
     
     while (PDA_Local.active) {
-        Delay(PDA_Responsiveness);
-        
         switch (PDA_Local.category) {
             case PDA_MENU:
                 page_menu();
@@ -460,7 +435,11 @@ SCRIPT "PDA_Core" (void) {
                 log("how'd you get here?");
                 break;
         }
+        SetHudSize(320,200,0);
+        PDA_PrintHeader();
+        Delay(PDA_Responsiveness);
     }
+    PDA_HEADER_STR = "";
     PDA_Wipe("PDA_Core End");
     SetHudClipRect(0,0,0,0,0);
 }

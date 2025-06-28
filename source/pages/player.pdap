@@ -1,29 +1,24 @@
 // We don't need garbage from other categories or pages to leak.
 switch(PDA_Local.page)
 {
-    case 1: PDA_PrintHeader("PDA_CLASS_HEADER1", 5); break;
-    case 2: PDA_PrintHeader("PDA_CLASS_HEADER2", 0); break;
+    case 1: PDA_HEADER_STR = "PDA_CLASS_HEADER1"; PDA_HEADER_X = 5; break;
+    case 2: PDA_HEADER_STR = "PDA_CLASS_HEADER2"; PDA_HEADER_X = 0; break;
 }
     
 PDA_ButtonHandler(PDA_TAB_BUTTONS_START, true, 1, "", false);
 PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 1, true, 2, "", false);
 
 if (PDA_LocalMouse.scrolling) {
-    PDAButton PLAYER_TAB_1 = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-    PDAButton PLAYER_TAB_2 = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDA_LocalButton[PDA_TAB_BUTTONS_START    ] = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDA_LocalButton[PDA_TAB_BUTTONS_START + 1] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
 }
 
-PDA_SetupScreenBounds();
-
-// Concatenate things together depending on player class. Used to retrieve class specific info.
 if(GetActorclass(0) != "None")
 {
-    str PDA_Class_Name_Printer, PDA_Class_Ability_Printer, PDA_Class_Story_Printer, PDA_Class_Story_Height, PDA_Class_Icon;
+    str PDA_Class_Name_Printer, PDA_Class_Ability_Printer, PDA_Class_Story_Printer, PDA_Class_Story_Height;
     int PDA_Class_TrimValue = 0;
     
-    PDA_Class_Icon = StrParam("PDA_CLASS_%s:_ICON", StrTrim(GetActorClass(0),0,PDA_Class_TrimValue));
-
-    str classIcon = StrParam("%l:", PDA_Class_Icon);
+    str classIcon = StrParam("%l:", StrParam("PDA_CLASS_%s:_ICON", StrTrim(GetActorClass(0),0,PDA_Class_TrimValue)));
 
     if(stricmp(classIcon, "PDA_", 4) == 0) 
       classIcon = "PPDAUNK";
@@ -38,30 +33,35 @@ if(GetActorclass(0) != "None")
     else
         PDA_Class_TrimValue = 0;
 
-        PDA_Class_Name_Printer    = StrParam("PDA_CLASS_%s:_NAME", StrTrim(GetActorClass(0),0,PDA_Class_TrimValue));
+        PDA_Class_Name_Printer    = StrParam("PDA_CLASS_%s:_NAME"     , StrTrim(GetActorClass(0),0,PDA_Class_TrimValue));
         PDA_Class_Ability_Printer = StrParam("PDA_CLASS_%s:_ABILITIES", StrTrim(GetActorClass(0),0,PDA_Class_TrimValue));
-        PDA_Class_Story_Printer   = StrParam("PDA_CLASS_%s:_STORY", StrTrim(GetActorClass(0),0,PDA_Class_TrimValue));
-        PDA_Class_Story_Height    = StrParam("PDA_CLASS_%s:_HEIGHT", StrTrim(GetActorClass(0),0,PDA_Class_TrimValue));
+        PDA_Class_Story_Printer   = StrParam("PDA_CLASS_%s:_STORY"    , StrTrim(GetActorClass(0),0,PDA_Class_TrimValue));
+        PDA_Class_Story_Height    = StrParam("PDA_CLASS_%s:_HEIGHT"   , StrTrim(GetActorClass(0),0,PDA_Class_TrimValue));
 
     // Class perks
-    if(PDA_Local.page == 1)
+    if(PDA_Local.page == CLASSES_PAGE_PERKS)
     {
-        PDA_SetScrollLimit(20);
-        HudMessage("\cd%l:\c-\n\n%l:",
-                    PDA_Class_Name_Printer,
-                    PDA_Class_Ability_Printer;
-                    HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, (PDA_SCREEN_X) + 10.0 + X_LEFT_EDGE, PDA_Local.scrollingY + 20.0 + Y_TOP_EDGE + (20.0 * 1), 0);
+        HudMessageParallax(
+            StrParam(
+                "\cd%l:\c-\n\n"
+                "%l:",
+                PDA_Class_Name_Printer,
+                PDA_Class_Ability_Printer
+            ),
+            HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), 0);
     }
     // Class backstory
-    if(PDA_Local.page == 2)
+    if(PDA_Local.page == CLASSES_PAGE_STORY)
     {
-        PDA_SetScrollLimit(-1 * batoi(StrParam("%l:", PDA_Class_Story_Height)));
-        PDA_SetScrollArrows2(-1 * batoi(StrParam("%l:", PDA_Class_Story_Height)), PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
 
-        HudMessage("\cd%l:\c-\n\n%l:",
-                    PDA_Class_Name_Printer,
-                    PDA_Class_Story_Printer;
-                    HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, (PDA_SCREEN_X) + 10.0 + X_LEFT_EDGE, PDA_Local.scrollingY + 20.0 + Y_TOP_EDGE + (20.0 * 1), 0);
+        HudMessageParallax(
+            StrParam(
+                "\cd%l:\c-\n\n"
+                "%l:",
+                PDA_Class_Name_Printer,
+                PDA_Class_Story_Printer
+            ),
+            HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), 0);
     }
 }
 // Get rid of it once we're done.

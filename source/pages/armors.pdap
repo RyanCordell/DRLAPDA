@@ -1,68 +1,19 @@
 PDA_Local.pagemax = 2;
 
-#define PDA_ArmorXOffset 40.0 + X_LEFT_EDGE
-
 switch (PDA_Local.page) {
-    case 1: PDA_PrintHeader("PDA_ARMOR_HEADER1", -20); break;
-    case 2: PDA_PrintHeader("PDA_ARMOR_HEADER2", -15); break;
+    case 1: PDA_HEADER_STR = "PDA_ARMOR_HEADER1"; PDA_HEADER_X = -20; break;
+    case 2: PDA_HEADER_STR = "PDA_ARMOR_HEADER2"; PDA_HEADER_X = -15; break;
 }
-
 
 PDA_ButtonHandler(PDA_TAB_BUTTONS_START   , true, 1, "", false);
 PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 1, true, 2, "", false);
 
 if (PDA_LocalMouse.scrolling) {
-    PDAButton ARMORS_TAB_1 = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-    PDAButton ARMORS_TAB_2 = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDA_LocalButton[PDA_TAB_BUTTONS_START    ] = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDA_LocalButton[PDA_TAB_BUTTONS_START + 1] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
 }
 
-// Not the renegade of funk, unfortunately..
-bool isRenegade = false;
-
-if(CheckInventory("DRPGDRLAActive")) {
-    isRenegade = (CheckActorClass(0,"DoomRLRenegadeRPG") == true);
-} else {
-    isRenegade = (CheckActorClass(0,"DoomRLRenegade") == true);
-}
-
-// Armors & Boots in inventory
-// Show that this is scrollable
-
-//SetHudSize(NEW_RESOLUTION_WIDTH,NEW_RESOLUTION_HEIGHT);
-PDA_SetupScreenBounds();
-SetFont(PDA_FONT_LOWER);
-
-#define EQUIPMENT_PAGE_ONHAND 1
-#define EQUIPMENT_PAGE_INFO 2
-
-str armorNamePrinter = "\n";
-str bootsNamePrinter = "\n";
-
-// Set
-str enclaveSetName = "\n",
-    enclaveSetDesc = "\n";
-str setName        = "N/A\n",
-    setDesc        = "\n\n";
-
-str armorPickupCheck = "\n";
-str armorWornCheck   = "\n";
-
-const fixed playerIconX = PDA_SCREEN_X + 20.0 + X_LEFT_EDGE;
-// time for crime
-const fixed equippedArmorX = playerIconX + 35.0;
-const fixed equippedBackX  = playerIconX + 33.0;
-const fixed equippedBootsX = playerIconX + 30.0;
-
-PDAButton armorButton, bootsButton, backpackButton;
-
-#define bootsActor DRLA_ArmorList[localBootsIndex][armor_ACTOR]
-
-bool specialArmorTokens = CheckInventory("RLEnclaveSetBonusActive")                   ||
-                            CheckInventory("PowerRLPrototypeAssaultShieldProtection") ||
-                            CheckInventory("PowerRLOverchargeSystemProtection")       ||
-                            CheckInventory("RLCyberneticArmorModdedToken")            ||
-                            CheckInventory("RLDeathFromAboveSetBonusActive")          ||
-                            CheckInventory("PowerRLInquisitorsSetBonusProtection");
+bool specialArmorTokens = checkSpecialArmorTokens();
 
 if (PDA_Local.page == EQUIPMENT_PAGE_ONHAND) {
     #include "../../pages/subpage/armors_onhand.pdap"
@@ -72,6 +23,3 @@ if (PDA_Local.page == EQUIPMENT_PAGE_ONHAND) {
 if(PDA_Local.page == EQUIPMENT_PAGE_INFO) {
     #include "../../pages/subpage/armors_detail.pdap"
 }
-
-// PDA_DefaultFont();
-// PDA_UnsetScrollWindow();
