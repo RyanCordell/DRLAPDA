@@ -380,57 +380,57 @@ function void page_monster_info (void) {
 SCRIPT "PDA_Core" (void) {  
     PDA_Local.scrollingY = 20.0;
 
-    if (PDA_Local.active) {
-        if (GetUserCvar(PlayerNumber(), "DRLA_PDA_firsttime") != FALSE) PDA_SetCategory(PDA_HELP);
-        PDA_DefaultFont();
-    }
+    // if (PDA_Local.active) {
+    //     if (GetUserCvar(PlayerNumber(), "DRLA_PDA_firsttime") != FALSE) PDA_SetCategory(PDA_HELP);
+    //     PDA_DefaultFont();
+    // }
     
     #include "PDA_STC.acs"
 
     
     while (PDA_Local.active) {
-        PDA_PrintHeader();
+        // PDA_PrintHeader();
         switch (PDA_Local.category) {
-            case PDA_MENU:
-                page_menu();
-                break;
-            case PDA_CLASSES:
-                page_player();
-                break;
-            case PDA_WEAPONS:
-                page_weapons();
-                break;
-            case PDA_ARMORS:
-                page_armors();
-                break;
-            case PDA_ASSEMBLIES:
-                page_assemblies();
-                break;
-            case PDA_BESTIARY:
-                page_bestiary();
-                break;
-            case PDA_ITEMS:
-                page_items();
-                break;
-            case PDA_HELP:
-                page_help();
-                break;
-            case PDA_MISC:
-                page_misc();
-                break;
+            // case PDA_MENU:
+            //     page_menu();
+            //     break;
+            // case PDA_CLASSES:
+            //     page_player();
+            //     break;
+            // case PDA_WEAPONS:
+            //     page_weapons();
+            //     break;
+            // case PDA_ARMORS:
+            //     page_armors();
+            //     break;
+            // case PDA_ASSEMBLIES:
+            //     page_assemblies();
+            //     break;
+            // case PDA_BESTIARY:
+            //     page_bestiary();
+            //     break;
+            // case PDA_ITEMS:
+            //     page_items();
+            //     break;
+            // case PDA_HELP:
+            //     page_help();
+            //     break;
+            // case PDA_MISC:
+            //     page_misc();
+            //     break;
             
-            case PDA_PONG:
-                page_menu();
-                break;
-            case PDA_CREDITS:
-                page_credits();
-                break;
-            case PDA_ASSEMBLY_DETAIL:
-                page_assembly_info();
-                break;
-            case PDA_BESTIARY_DETAIL:
-                page_monster_info();
-                break;
+            // case PDA_PONG:
+            //     page_menu();
+            //     break;
+            // case PDA_CREDITS:
+            //     page_credits();
+            //     break;
+            // case PDA_ASSEMBLY_DETAIL:
+            //     page_assembly_info();
+            //     break;
+            // case PDA_BESTIARY_DETAIL:
+            //     page_monster_info();
+            //     break;
             default:
                 log("how'd you get here?");
                 break;

@@ -2,9 +2,6 @@ PDA_Local.pagemax = 1;
 
 const int MENU_OFFSET = 20.0 + Y_TOP_EDGE;
 
-PDA_HEADER_STR = "PDA_MENU_HEADER";
-PDA_HEADER_X = 0;
-
 PDA_ButtonHandler(PDA_PLAYERS_BUTTON,    false, PDA_CLASSES,    "Shows all available class information.\n", false);
 PDA_ButtonHandler(PDA_WEAPONS_BUTTON,    false, PDA_WEAPONS,    "Shows all available weapon information.\nWeapon name, available modpack effects and miscellaneous info.\n", false);
 PDA_ButtonHandler(PDA_ARMORS_BUTTON,     false, PDA_ARMORS,     "Shows all available armor information.\nArmor name, resistances and what have you.\n", false);

@@ -1,17 +1,5 @@
 PDA_Local.pagemax = 6;
 
-str color;
-
-switch (PDA_Local.page) {
-    case 1: PDA_HEADER_STR = "PDA_BESTIARY_HEADER";    PDA_HEADER_X =   0;                      break;
-    case 2: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_UV"; PDA_HEADER_X = -40; color = "White";     break;
-    case 3: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_NM"; PDA_HEADER_X = -40; color = "Brick";     break;
-    case 4: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_TP"; PDA_HEADER_X = -50; color = "LightBlue"; break;
-    case 5: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_AR"; PDA_HEADER_X = -40; color = "Gold";      break;
-    case 6: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_SP"; PDA_HEADER_X = -40; color = "Purple";    break;
-}
-
-
 str token, name, icon;
 int kcount;
 
@@ -58,13 +46,13 @@ switch (PDA_Local.page) {
                 name  = strParam("%l:",strParam("%l:_NAME", token));
                 icon  = strParam("%l:",strParam("%l:_ICON", token));
 
-                PDAButton button = PDA_CreateBeastButton(PDA_BEAST_UV + i, name, color, PDA_SCREEN_X + X_LEFT_EDGE, PDA_Local.scrollingY + 20.0 + Y_TOP_EDGE + (11.0 * i), (strlen(name) * 10) / 2, BEAST_HEIGHT, 3.0, -3.0, token, CheckPointerInventory(kcount, PlayerNumber()));
+                PDAButton button = PDA_CreateBeastButton(PDA_BEAST_UV + i, name, difficulty_color, PDA_SCREEN_X + X_LEFT_EDGE, PDA_Local.scrollingY + 20.0 + Y_TOP_EDGE + (11.0 * i), (strlen(name) * 10) / 2, BEAST_HEIGHT, 3.0, -3.0, token, CheckPointerInventory(kcount, PlayerNumber()));
 
                 if(button.state == button_hovered){
                     DisplayIcon(icon, PDA_INFO2ID, PDA_SCREEN_WIDTH - 30.0 + X_LEFT_EDGE, PDA_SCREEN_Y + 100.0 + Y_TOP_EDGE, 0, 0.2 + pulser(2.0, 0.59));
                 }
             } else {
-                PDAButton button = PDA_CreateBeastButton(PDA_BEAST_UV + i, " ????", color, PDA_SCREEN_X + X_LEFT_EDGE, PDA_Local.scrollingY + 20.0 + Y_TOP_EDGE + (11.0 * i), 80, BEAST_HEIGHT, 3.0, -3.0, "null", "");
+                PDAButton button = PDA_CreateBeastButton(PDA_BEAST_UV + i, " ????", difficulty_color, PDA_SCREEN_X + X_LEFT_EDGE, PDA_Local.scrollingY + 20.0 + Y_TOP_EDGE + (11.0 * i), 80, BEAST_HEIGHT, 3.0, -3.0, "null", "");
             }
         }
         PDA_Local.newEntry[page] = false;

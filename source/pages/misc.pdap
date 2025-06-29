@@ -1,6 +1,5 @@
 PDA_Local.pagemax = 1;
 
-PDA_HEADER_STR = "PDA_MISC_HEADER"; PDA_HEADER_X = 10;
 
 // PDA_SetupScreenBounds();
 
@@ -9,9 +8,6 @@ PDAButton CREDITS =   PDA_CreateButton(49, "Credits", "PLON",      PDA_SCREEN_X 
 
 PDAButton HUDSWITCH = PDA_CreateButton(50, "HUD Switcher", "PLON", PDA_SCREEN_X + 10.0 + X_LEFT_EDGE, 30.0 + Y_TOP_EDGE + (14.0 * 2), 32, 8, -3.0 + X_LEFT_EDGE, 0);
                       PDA_InitButton(HUDSWITCH, false, PDA_HUDSWITCH,    "Select which HUD you would like to use\n", false);
-
-
-
 
 //PDAButton PONG    = PDA_CreateButton(51, "Pong",    "PLON", PDA_SCREEN_X + 10.0 + X_LEFT_EDGE, 30.0 + Y_TOP_EDGE + (14.0 * 0), 32, 8, -3.0 + X_LEFT_EDGE, 0);
 //PDA_InitButton(PONG,    false, PDA_PONG,       "Play Pong! (Temporarily SP only)\n");

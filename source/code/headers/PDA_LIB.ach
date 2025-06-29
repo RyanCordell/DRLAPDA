@@ -564,6 +564,51 @@ str DRLA_BackpackList[DRLA_BACKPACKMAX][2] = {
 // str icon_static_WeaponMods[PDA_MODMAX - 1] = { "BMODICON", "PMODICON", "AMODICON", "TMODICON", "SMODICON", "FMODICON", "NMODICON" };
 // str icon_animated_WeaponMods[PDA_MODMAX - 1] = { "PDABMOD", "PDAPMOD", "PDAAMOD", "PDATMOD", "PDASMOD", "PDAFMOD", "PDANMOD" };
 
+str PDA_Class_Name_Printer, PDA_Class_Ability_Printer, PDA_Class_Story_Printer, PDA_Class_Story_Height;
+int PDA_Class_TrimValue = 0;
+
+str enemy_info_name   = "N/A\n",
+    enemy_info_icon   = "N/A\n",
+    enemy_info_health = "N/A\n",
+    enemy_info_res    = "N/A\n",
+    enemy_info_info   = "N/A\n";
+int enemy_count  = 0;
+
+str assembly_info_icon;
+str assembly_info_name;
+str assembly_info_mods;
+str assembly_info_desc;
+str assembly_info_textH;
+str assembly_info_ar[12];
+
+str PDA_Weapon_Name_Printer,
+    PDA_Weapon_Desc_Printer;
+
+str PDA_Weapon_DualName_Printer,
+    PDA_Weapon_DualDesc_Printer;
+
+int PDA_Weapon_Bulk_Quantity,
+    PDA_Weapon_Power_Quantity,
+    PDA_Weapon_Agility_Quantity,
+    PDA_Weapon_Technical_Quantity,
+    PDA_Weapon_Sniper_Quantity,
+    PDA_Weapon_Firestorm_Quantity,
+    PDA_Weapon_Nano_Quantity,
+    PDA_Weapon_Artifact_Quantity;
+
+str currentWeapon;
+str trimmedCurrentWeapon;
+
+str class_perk_displayed  = "\n",
+    weapon_perk_displayed = "\n";
+
+str difficulty_color;
+
+bool PDA_IsNotDemonic = false;
+
+// Not the renegade of funk, unfortunately..
+bool isRenegade = false;
+
 // FUNCTIONS --------------------
 
 #define StrTrim(a,b,c)			StrMid((a),(b),StrLen((a)) - (c))

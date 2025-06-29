@@ -20,8 +20,6 @@ if(GetCvar("DRLA_specialstarts") != 2)
 {
     PDA_Local.pagemax = DRLA_GROUPQUANTITY;
 
-    PDA_HEADER_STR = "PDA_ITEMS_HEADER"; PDA_HEADER_X = +20;
-
     PDA_ButtonHandler(PDA_TAB_BUTTONS_START    , true, 1, "", false);
     PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 1, true, 2, "", false);
     PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 2, true, 3, "", false);
@@ -29,28 +27,18 @@ if(GetCvar("DRLA_specialstarts") != 2)
     PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 4, true, 5, "", false);
 
     if (PDA_LocalMouse.scrolling) {
-        PDAButton ITEMS_TAB_1  = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1" , "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-        PDAButton ITEMS_TAB_2  = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2" , "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-        PDAButton ITEMS_TAB_3  = PDA_CreateTab(PDA_TAB_BUTTONS_START + 2, "3" , "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-        PDAButton ITEMS_TAB_4  = PDA_CreateTab(PDA_TAB_BUTTONS_START + 3, "4" , "PTAB", PDA_TAB_NEXT_X(3), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-        PDAButton ITEMS_TAB_5  = PDA_CreateTab(PDA_TAB_BUTTONS_START + 4, "5" , "PTAB", PDA_TAB_NEXT_X(4), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+        PDA_LocalButton[PDA_TAB_BUTTONS_START    ] = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1" , "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+        PDA_LocalButton[PDA_TAB_BUTTONS_START + 1] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2" , "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+        PDA_LocalButton[PDA_TAB_BUTTONS_START + 2] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 2, "3" , "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+        PDA_LocalButton[PDA_TAB_BUTTONS_START + 3] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 3, "4" , "PTAB", PDA_TAB_NEXT_X(3), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+        PDA_LocalButton[PDA_TAB_BUTTONS_START + 4] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 4, "5" , "PTAB", PDA_TAB_NEXT_X(4), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
     }
 
-
-    int y = 0;
     int ItemLimit = 0;
 
     int DRLA_PageOffset;
 
-    //SetHudSize(420,280);
-
     SetHudSize(NEW_RESOLUTION_WIDTH,NEW_RESOLUTION_HEIGHT);
-    
-    // SetHudClipRect(
-    //     PDA_SCREEN_X, PDA_SCROLLABLE_Y+15, 
-    //     PDA_SCREEN_WIDTH+80, PDA_SCROLLABLE_HEIGHT+65, 
-    //     PDA_SCREEN_WIDTH-30
-    // );
     
     for(int itemIndex = 0; itemIndex < DRLA_ITEMSMAX; itemIndex++)
     {

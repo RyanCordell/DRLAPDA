@@ -8,48 +8,35 @@ if (!PDA_Local.playonce) {
     PDA_Local.playonce = true;
 }
 
-PDA_HEADER_STR = "PDA_DETAILEDASSEMBLY_HEADER"; PDA_HEADER_X = -30;
-
-// PDA_SetupScreenBounds();
-
-str icon;
-str name;
-str mods;
-str desc;
-str textH;
-str ar[12];
-
 if (StrCmp(PDA_Local.detailFetch[0], "null") != 0) {
-    icon  = strParam("%s:_ICON",   PDA_Local.detailFetch[0]);
-    name  = strParam("%s:_NAME",   PDA_Local.detailFetch[0]);
-    mods  = strParam("%s:_MODS",   PDA_Local.detailFetch[0]);
-    desc  = strParam("%s:_DESC",   PDA_Local.detailFetch[0]);
-    textH = strParam("%s:_HEIGHT", PDA_Local.detailFetch[0]);
-    
-    DisplayArmorIcon(icon, PDA_INFOID, PDA_SCREEN_X + 150.0 + X_LEFT_EDGE, PDA_Local.scrollingY + 40.0 + Y_TOP_EDGE + (20.0 * 1), 1);
+    DisplayArmorIcon(assembly_info_icon, PDA_INFOID, PDA_SCREEN_X + 150.0 + X_LEFT_EDGE, PDA_Local.scrollingY + 40.0 + Y_TOP_EDGE + (20.0 * 1), 1);
 
-    HudMessage(
-        "%l:\n"
-        "%l:\n\n\n"
-        "%l:\n",
-        name,
-        mods,
-        desc;
-        HUDMSG_PLAIN, PDA_INFO2ID, CR_WHITE, (PDA_SCREEN_X) + 10.0 + X_LEFT_EDGE, (PDA_Local.scrollingY) + 50.0 + Y_TOP_EDGE + (20.0 * 1), 0);
+    HudMessageParallax(
+        StrParam(
+            "%l:\n"
+            "%l:\n\n\n"
+            "%l:\n",
+            assembly_info_name,
+            assembly_info_mods,
+            assembly_info_desc
+        ),
+        HUDMSG_PLAIN, PDA_INFO2ID, CR_WHITE, 10.0, 50.0 + (20.0 * 1), 0.0, 1.0);
         
-    if (strCmp(strParam("%l:", textH), textH) != 0) {
-        PDA_SetScrollLimit(-1 * batoi(strParam("%l:", textH)));
-        PDA_SetScrollArrows2(-1 * batoi(strParam("%l:", textH)), PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+    if (strCmp(strParam("%l:", assembly_info_textH), assembly_info_textH) != 0) {
+        PDA_SetScrollLimit(-1 * batoi(strParam("%l:", assembly_info_textH)));
+        PDA_SetScrollArrows2(-1 * batoi(strParam("%l:", assembly_info_textH)), PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
     }
 } else {
-    HudMessage(
-        "%l:\n"
-        "%l:\n\n\n"
-        "%l:\n",
-        "PDA_ASSEMBLY_NOTFOUND_NAME",
-        "PDA_ASSEMBLY_NOTFOUND_MODS",
-        "PDA_ASSEMBLY_NOTFOUND_DESC";
-        HUDMSG_PLAIN, PDA_INFO2ID, CR_WHITE, (PDA_SCREEN_X) + 10.0 + X_LEFT_EDGE, (PDA_Local.scrollingY) + 50.0 + Y_TOP_EDGE + (20.0 * 1), 0);
+    HudMessageParallax(
+        StrParam(
+            "%l:\n"
+            "%l:\n\n\n"
+            "%l:\n",
+            "PDA_ASSEMBLY_NOTFOUND_NAME",
+            "PDA_ASSEMBLY_NOTFOUND_MODS",
+            "PDA_ASSEMBLY_NOTFOUND_DESC"
+        ),
+        HUDMSG_PLAIN, PDA_INFO2ID, CR_WHITE, 10.0, 50.0 + (20.0 * 1), 0.0, 1.0);
 }
 
 // PDA_UnsetScrollWindow();
