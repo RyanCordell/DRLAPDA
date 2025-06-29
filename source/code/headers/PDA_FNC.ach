@@ -1,5 +1,3 @@
-#define STRING_ARRAY_MAX 1024
-str stringArray[STRING_ARRAY_MAX];
 
 // TODO: handle redraws via a more manual update method
 
@@ -252,9 +250,8 @@ function void PDA_PlaySound (str PDA_Sound, str soldier, int volume) {
 }
 
 function void PDA_Wipe (str caller) {
-	for(int wipeIndex = -5; wipeIndex <= PDA_LASTID; wipeIndex++) {
+	for(int wipeIndex = 0; wipeIndex <= PDA_LASTID; wipeIndex++) {
 		HudMessage(s:"\n"; HUDMSG_ALPHA, wipeIndex, CR_UNTRANSLATED, 0, 0, 1.0, 0.0);
-		HudMessage(s:"\n"; HUDMSG_PLAIN, wipeIndex, CR_UNTRANSLATED, 0, 0, 1.0, 0.0);
 	}
 }
 
@@ -485,27 +482,65 @@ function void PDA_SetDataPerPage (void) {
             break;
 
         case PDA_WEAPONS:
-            currentWeapon        = GetWeapon();
-            trimmedCurrentWeapon = StrTrim(currentWeapon, 2, 0);
-            class_perk_displayed = StrParam("> \c[Yellow]%l:", "PDA_WEAPON_PERKUNAVAILABLE");
+            current_weapon         = GetWeapon() ? GetWeapon() : "None";
+            current_weapon_trimmed = StrTrim(current_weapon, 2, 0);
+            class_perk_displayed   = StrParam("> \c[Yellow]%l:", "PDA_WEAPON_PERKUNAVAILABLE");
 
-            if (stricmp(CheckInventory(currentWeapon), "None") != 0) {
-                PDA_Weapon_Name_Printer = StrParam("PDA_WEAPON_%s:_NAME", trimmedCurrentWeapon),
-                PDA_Weapon_Desc_Printer = StrParam("PDA_WEAPON_%s:_DESC", trimmedCurrentWeapon);
+            weapon_can_disassemble    = (GetActorClass(0) == "DoomRLTechnician" && !CheckInventory("RLStandardWeaponToken"));
+            weapon_supports_artifacts = CheckInventory(StrParam("%s:DemonArtifacts", current_weapon));
 
-                PDA_Weapon_DualName_Printer = StrParam("PDA_WEAPON_%s:DEMONARTIFACTS_NAME", trimmedCurrentWeapon),
-                PDA_Weapon_DualDesc_Printer = StrParam("PDA_WEAPON_%s:DEMONARTIFACTS_DESC", trimmedCurrentWeapon);
+            // Checks for player perks that influence weapons
+            for (int perkIndex = 0; perkIndex < DRLA_WEAPONPERKMAX; perkIndex++) {
+                if (CheckInventory(DRLA_WeaponPerkList[perkIndex][0]) && CheckInventory(DRLA_WeaponPerkList[perkIndex][2])) {
+                    class_perk_displayed = strParam("> \c[Yellow]%s:", DRLA_WeaponPerkList[perkIndex][1]);
+                }
+            }
+            // Checks for unique weapon + armor set perks
+            // I should get a better name for this loop's max at some point..
+            for (int setPerkIndex = 0; setPerkIndex < DRLA_NUCLEARMAX; setPerkIndex++) {
+                if (CheckInventory(DRLA_WeaponSetList[setPerkIndex][0]) && (current_weapon == DRLA_NuclearCheckList[setPerkIndex])) {
+                    weapon_perk_displayed = strParam("> \c[Yellow]%s:", DRLA_WeaponSetList[0][1]);
+                }
+                if (CheckInventory("RLCerberusSetBonusActive") && (current_weapon == DRLA_TristarCheckList[setPerkIndex])) {
+                    weapon_perk_displayed = strParam("> \c[Yellow]%s:", DRLA_WeaponSetList[1][1]);
+                }
+            }
 
-                PDA_Weapon_Bulk_Quantity      = CheckInventory(StrParam("%s:BulkMod", currentWeapon)),
-                PDA_Weapon_Power_Quantity     = CheckInventory(StrParam("%s:PowerMod", currentWeapon)),
-                PDA_Weapon_Agility_Quantity   = CheckInventory(StrParam("%s:AgilityMod", currentWeapon)),
-                PDA_Weapon_Technical_Quantity = CheckInventory(StrParam("%s:TechnicalMod", currentWeapon)),
-                PDA_Weapon_Sniper_Quantity    = CheckInventory(StrParam("%s:SniperMod", currentWeapon)),
-                PDA_Weapon_Firestorm_Quantity = CheckInventory(StrParam("%s:FirestormMod", currentWeapon)),
-                PDA_Weapon_Nano_Quantity      = CheckInventory(StrParam("%s:NanoMod", currentWeapon)),
-                PDA_Weapon_Artifact_Quantity  = CheckInventory(StrParam("%s:DemonArtifacts", currentWeapon));
+            log("%s: | %s:", current_weapon, GetWeapon());
 
-                PDA_IsNotDemonic = !CheckInventory("RLDemonicWeaponToken");
+            if (stricmp(current_weapon, "None") != 0) {
+                // PDA_Weapon_Name_Printer = "name";
+                // PDA_Weapon_Desc_Printer = "desc";
+
+                // PDA_Weapon_DualName_Printer = "dual name";
+                // PDA_Weapon_DualDesc_Printer = "dual desc";
+
+                PDA_Weapon_Bulk_Quantity      = 0;
+                PDA_Weapon_Power_Quantity     = 0;
+                PDA_Weapon_Agility_Quantity   = 0;
+                PDA_Weapon_Technical_Quantity = 0;
+                PDA_Weapon_Sniper_Quantity    = 0;
+                PDA_Weapon_Firestorm_Quantity = 0;
+                PDA_Weapon_Nano_Quantity      = 0;
+                PDA_Weapon_Artifact_Quantity  = 0;
+
+                PDA_IsNotDemonic = true;
+        //         // PDA_Weapon_Name_Printer = StrParam("PDA_WEAPON_%s:_NAME", current_weapon_trimmed),
+        //         // PDA_Weapon_Desc_Printer = StrParam("PDA_WEAPON_%s:_DESC", current_weapon_trimmed);
+
+        //         // PDA_Weapon_DualName_Printer = StrParam("PDA_WEAPON_%s:DEMONARTIFACTS_NAME", current_weapon_trimmed),
+        //         // PDA_Weapon_DualDesc_Printer = StrParam("PDA_WEAPON_%s:DEMONARTIFACTS_DESC", current_weapon_trimmed);
+
+        //         // PDA_Weapon_Bulk_Quantity      = CheckInventory(StrParam("%s:BulkMod", current_weapon)),
+        //         // PDA_Weapon_Power_Quantity     = CheckInventory(StrParam("%s:PowerMod", current_weapon)),
+        //         // PDA_Weapon_Agility_Quantity   = CheckInventory(StrParam("%s:AgilityMod", current_weapon)),
+        //         // PDA_Weapon_Technical_Quantity = CheckInventory(StrParam("%s:TechnicalMod", current_weapon)),
+        //         // PDA_Weapon_Sniper_Quantity    = CheckInventory(StrParam("%s:SniperMod", current_weapon)),
+        //         // PDA_Weapon_Firestorm_Quantity = CheckInventory(StrParam("%s:FirestormMod", current_weapon)),
+        //         // PDA_Weapon_Nano_Quantity      = CheckInventory(StrParam("%s:NanoMod", current_weapon)),
+        //         // PDA_Weapon_Artifact_Quantity  = CheckInventory(StrParam("%s:DemonArtifacts", current_weapon));
+
+        //         // PDA_IsNotDemonic = !CheckInventory("RLDemonicWeaponToken");
             }
             switch (PDA_Local.page) {
                 case WEAPON_PAGE_STORY:
@@ -528,12 +563,6 @@ function void PDA_SetDataPerPage (void) {
                 case 4: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_TP"; PDA_HEADER_X = -50; difficulty_color = "LightBlue"; break;
                 case 5: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_AR"; PDA_HEADER_X = -40; difficulty_color = "Gold";      break;
                 case 6: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_SP"; PDA_HEADER_X = -40; difficulty_color = "Purple";    break;
-            }
-            switch (PDA_Local.page) {
-                case BESTIARY_PAGE_LIST:
-                    break;
-                default: 
-                    break;
             }
             break;
         case PDA_ARMORS:
@@ -561,21 +590,18 @@ function void PDA_SetDataPerPage (void) {
             break;
 
         case PDA_ASSEMBLIES:
-            allAssemblies = StrParam(l:"PDA_ASSEMBLIES");
-            str_split(StrParam("%l:", "PDA_SEPARATOR_CHARACTER"), allAssemblies);
-            basicInd    = 0;
-            advancedInd = 0; // Should be 33
-            masterInd   = 0; // Should be 65
-            masterMax   = 0; // Should be 95
+            all_assemblies = StrParam(l:"PDA_ASSEMBLIES");
+            str_split(separator_character, all_assemblies);
 
-            int stringArrayIndex = 0;
-            int TEXT_OFFSET = 13; // aka length of "PDA_ASSEMBLY_"
+            log("%s: %s: %s: %s:", stringArray[0], stringArray[1], stringArray[2], stringArray[3]);
             
-            while ((stringArray[stringArrayIndex++]) != "") {
-                if (str_find(stringArray[stringArrayIndex], "ADVANCED", TEXT_OFFSET) != -1 && advancedInd == 0) advancedInd = stringArrayIndex;
-                if (str_find(stringArray[stringArrayIndex],   "MASTER", TEXT_OFFSET) != -1 &&   masterInd == 0) masterInd   = stringArrayIndex;
-                masterMax++;
-            }
+            // while (stringArray[stringArrayIndex] != "") {
+            //     if (str_find(stringArray[stringArrayIndex], "ADVANCED", TEXT_OFFSET) != -1 && advancedInd == 0) advancedInd = stringArrayIndex;
+            //     if (str_find(stringArray[stringArrayIndex],   "MASTER", TEXT_OFFSET) != -1 &&   masterInd == 0) masterInd   = stringArrayIndex;
+            //     masterMax++;
+            //     stringArrayIndex++;
+            //     delay(1);
+            // }
             stringArrayIndex = 0;
             masterMax--;
 
@@ -585,21 +611,21 @@ function void PDA_SetDataPerPage (void) {
                     PDA_Local.maxassembliesper = (advancedInd - 1);
                     PDA_Local.assemblyOffset   = basicInd;
                     PDA_Local.tiercolor        = "\c[BB]";
-                    // scrollOffset               = PDA_Local.maxassembliesper * -5;
+        //             // scrollOffset               = PDA_Local.maxassembliesper * -5;
                     break;
                 case ASSEMBLY_PAGE_ADVANCED:
                     PDA_HEADER_STR = "PDA_ASSEMBLY_ADVANCED_NAME"; PDA_HEADER_X = -30;
                     PDA_Local.maxassembliesper = (masterInd - 1) - advancedInd;
                     PDA_Local.assemblyOffset   = advancedInd;
                     PDA_Local.tiercolor        = "\c[AB]";
-                    // scrollOffset               = PDA_Local.maxassembliesper * -5;
+        //             // scrollOffset               = PDA_Local.maxassembliesper * -5;
                     break;
                 case ASSEMBLY_PAGE_MASTER:
                     PDA_HEADER_STR = "PDA_ASSEMBLY_MASTER_NAME"; PDA_HEADER_X = -30;
                     PDA_Local.maxassembliesper = masterMax - masterInd;
                     PDA_Local.assemblyOffset   = masterInd;
                     PDA_Local.tiercolor        = "\c[MB]";
-                    // scrollOffset               = PDA_Local.maxassembliesper * -6;
+        //             // scrollOffset               = PDA_Local.maxassembliesper * -6;
                     break;
                 default:
                     Print(s:"how da fuk");
@@ -621,7 +647,7 @@ function void PDA_SetDataPerPage (void) {
             break;
         case PDA_ASSEMBLY_DETAIL:
             PDA_HEADER_STR = "PDA_DETAILEDASSEMBLY_HEADER"; PDA_HEADER_X = -30;
-            if (StrCmp(PDA_Local.detailFetch[0], "null") != 0) {
+            if (stricmp(PDA_Local.detailFetch[0], "null") != 0) {
                 assembly_info_icon  = strParam("%s:_ICON",   PDA_Local.detailFetch[0]);
                 assembly_info_name  = strParam("%s:_NAME",   PDA_Local.detailFetch[0]);
                 assembly_info_mods  = strParam("%s:_MODS",   PDA_Local.detailFetch[0]);
@@ -631,12 +657,14 @@ function void PDA_SetDataPerPage (void) {
             break;
         case PDA_BESTIARY_DETAIL:
             PDA_HEADER_STR = "PDA_DETAILEDBEAST_HEADER"; PDA_HEADER_X = -30;
-            enemy_count       = PDA_Local.detailFetch[1];
-            enemy_info_name   = strParam("%s:_NAME",       PDA_Local.detailFetch[0]);
-            enemy_info_icon   = strParam("%s:_ICON",       PDA_Local.detailFetch[0]);
-            enemy_info_health = strParam("%s:_HEALTH",     PDA_Local.detailFetch[0]);
-            enemy_info_res    = strParam("%s:_RESISTANCE", PDA_Local.detailFetch[0]);
-            enemy_info_info   = strParam("%s:_MISC",       PDA_Local.detailFetch[0]);
+            if (stricmp(PDA_Local.detailFetch[0], "null") != 0) {
+                enemy_count       = PDA_Local.detailFetch[1];
+                enemy_info_name   = strParam("%s:_NAME",       PDA_Local.detailFetch[0]);
+                enemy_info_icon   = strParam("%s:_ICON",       PDA_Local.detailFetch[0]);
+                enemy_info_health = strParam("%s:_HEALTH",     PDA_Local.detailFetch[0]);
+                enemy_info_res    = strParam("%s:_RESISTANCE", PDA_Local.detailFetch[0]);
+                enemy_info_info   = strParam("%s:_MISC",       PDA_Local.detailFetch[0]);
+            }
             break;
         case PDA_CREDITS:
             PDA_HEADER_STR = "PDA_CREDITS_HEADER"; PDA_HEADER_X = 0;
@@ -738,7 +766,7 @@ function void PDA_ChangeScrolling (void) {
             PDA_SetScrollArrows2(-100, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
             break;
         case PDA_BESTIARY_DETAIL:
-            if (StrCmp(PDA_Local.detailFetch[0], "null") != 0) {
+            if (stricmp(PDA_Local.detailFetch[0], "null") != 0) {
                 PDA_SetScrollLimit(-100);
                 PDA_SetScrollArrows2(-100, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
             } else {
@@ -769,16 +797,19 @@ function void PDA_SetCategory (int category) {
     PDA_Local.texty = 0.0;
     PDA_Local.scrollingY = PDA_SCREEN_Y;
     PDA_Local.category = category;
-    PDA_ChangeScrolling();
-    // PDA_SetDataPerPage();
 }
 
 
 function void PDA_SetPage (int page_num) {
     PDA_Local.page = page_num;
     afterPageDefaults("PDA_SetPage");
+    PDA_OnChange();
+}
+
+function void PDA_OnChange (void) {
     PDA_ChangeScrolling();
-    // PDA_SetDataPerPage();
+    PDA_SetDataPerPage();
+
 }
 
 function void PDA_HasEquipment (void) {

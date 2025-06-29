@@ -100,7 +100,7 @@ SCRIPT "PDA_MouseController" (void)
             PDA_LocalMouse.scrolling = false;
         }
 
-        log("scrollY %f: | minY %f: | maxY %f: | s? %d: | m? %d:", PDA_Local.scrollingY, VMIN, PDA_Local.max_text_y, PDA_LocalMouse.scrolling, PDA_LocalMouse.moving);
+        // log("scrollY %f: | minY %f: | maxY %f: | s? %d: | m? %d:", PDA_Local.scrollingY, VMIN, PDA_Local.max_text_y, PDA_LocalMouse.scrolling, PDA_LocalMouse.moving);
 
         if (PDA_LocalMouse.x < HMIN) PDA_LocalMouse.x = HMIN;
         if (PDA_LocalMouse.x > HMAX) PDA_LocalMouse.x = HMAX;
@@ -121,8 +121,6 @@ SCRIPT "PDA_MouseController" (void)
                 PDA_LocalMouse.scrolling = true;
                 PDA_Local.scrollingY -= 2.0 * yScale;
                 PDA_Local.scrollYDelta = setScrollDelta();
-            } else {
-                PDA_LocalMouse.scrolling = false;                
             }
         }
         

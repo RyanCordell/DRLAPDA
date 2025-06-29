@@ -43,23 +43,23 @@ script "DRLA_HUD_InfoHandler" ENTER {
         bool IsNotDemonic = false;
              IsNotDemonic  = !CheckInventory("RLDemonicWeaponToken");
         
-        str currentWeapon        = GetWeapon();
-        str trimmedCurrentWeapon = StrTrim(currentWeapon, 2, 0);
-        int Weapon_Name_Printer  = StrParam("PDA_WEAPON_%s:_FLATNAME", trimmedCurrentWeapon);
+        str current_weapon         = GetWeapon();
+        str current_weapon_trimmed = StrTrim(current_weapon, 2, 0);
+        int Weapon_Name_Printer    = StrParam("PDA_WEAPON_%s:_FLATNAME", current_weapon_trimmed);
 
-        int Weapon_DualName_Printer = StrParam("PDA_WEAPON_%s:DEMONARTIFACTS_FLATNAME", trimmedCurrentWeapon);
+        int Weapon_DualName_Printer = StrParam("PDA_WEAPON_%s:DEMONARTIFACTS_FLATNAME", current_weapon_trimmed);
 
-        int Weapon_Bulk_Quantity      = CheckInventory(StrParam("%s:BulkMod", currentWeapon)),
-            Weapon_Power_Quantity     = CheckInventory(StrParam("%s:PowerMod", currentWeapon)),
-            Weapon_Agility_Quantity   = CheckInventory(StrParam("%s:AgilityMod", currentWeapon)),
-            Weapon_Technical_Quantity = CheckInventory(StrParam("%s:TechnicalMod", currentWeapon)),
-            Weapon_Sniper_Quantity    = CheckInventory(StrParam("%s:SniperMod", currentWeapon)),
-            Weapon_Firestorm_Quantity = CheckInventory(StrParam("%s:FirestormMod", currentWeapon)),
-            Weapon_Nano_Quantity      = CheckInventory(StrParam("%s:NanoMod", currentWeapon)),
-            Weapon_Artifact_Quantity  = CheckInventory(StrParam("%s:DemonArtifacts", currentWeapon));
+        int Weapon_Bulk_Quantity      = CheckInventory(StrParam("%s:BulkMod", current_weapon)),
+            Weapon_Power_Quantity     = CheckInventory(StrParam("%s:PowerMod", current_weapon)),
+            Weapon_Agility_Quantity   = CheckInventory(StrParam("%s:AgilityMod", current_weapon)),
+            Weapon_Technical_Quantity = CheckInventory(StrParam("%s:TechnicalMod", current_weapon)),
+            Weapon_Sniper_Quantity    = CheckInventory(StrParam("%s:SniperMod", current_weapon)),
+            Weapon_Firestorm_Quantity = CheckInventory(StrParam("%s:FirestormMod", current_weapon)),
+            Weapon_Nano_Quantity      = CheckInventory(StrParam("%s:NanoMod", current_weapon)),
+            Weapon_Artifact_Quantity  = CheckInventory(StrParam("%s:DemonArtifacts", current_weapon));
         
         str weaponName = (IsNotDemonic) 
-                        ? (CheckInventory(strParam("%s:DemonArtifacts", currentWeapon)) 
+                        ? (CheckInventory(strParam("%s:DemonArtifacts", current_weapon)) 
                             ? Weapon_DualName_Printer 
                             : Weapon_Name_Printer) 
                         : Weapon_Name_Printer;
@@ -145,8 +145,8 @@ function void doPDASync (void) {
     }
 
     int masterMax   = 0;
-    str allAssemblies = StrParam(l:"PDA_ASSEMBLIES");
-    str_split(StrParam("%l:", "PDA_SEPARATOR_CHARACTER"), allAssemblies);
+    all_assemblies = StrParam(l:"PDA_ASSEMBLIES");
+    str_split(separator_character, all_assemblies);
     int ai = 0;
     int TEXT_OFFSET = 13; // aka length of "PDA_ASSEMBLY_"
     str actorToken = "";
@@ -380,57 +380,58 @@ function void page_monster_info (void) {
 SCRIPT "PDA_Core" (void) {  
     PDA_Local.scrollingY = 20.0;
 
-    // if (PDA_Local.active) {
-    //     if (GetUserCvar(PlayerNumber(), "DRLA_PDA_firsttime") != FALSE) PDA_SetCategory(PDA_HELP);
-    //     PDA_DefaultFont();
-    // }
+    if (PDA_Local.active) {
+        if (GetUserCvar(PlayerNumber(), "DRLA_PDA_firsttime") != FALSE) PDA_SetCategory(PDA_HELP);
+        PDA_DefaultFont();
+    }
     
     #include "PDA_STC.acs"
 
+    separator_character = StrParam("%l:", "PDA_SEPARATOR_CHARACTER");
     
     while (PDA_Local.active) {
-        // PDA_PrintHeader();
+        PDA_PrintHeader();
         switch (PDA_Local.category) {
-            // case PDA_MENU:
-            //     page_menu();
-            //     break;
-            // case PDA_CLASSES:
-            //     page_player();
-            //     break;
-            // case PDA_WEAPONS:
-            //     page_weapons();
-            //     break;
-            // case PDA_ARMORS:
-            //     page_armors();
-            //     break;
-            // case PDA_ASSEMBLIES:
-            //     page_assemblies();
-            //     break;
-            // case PDA_BESTIARY:
-            //     page_bestiary();
-            //     break;
-            // case PDA_ITEMS:
-            //     page_items();
-            //     break;
-            // case PDA_HELP:
-            //     page_help();
-            //     break;
-            // case PDA_MISC:
-            //     page_misc();
-            //     break;
+            case PDA_MENU:
+                page_menu();
+                break;
+            case PDA_CLASSES:
+                page_player();
+                break;
+            case PDA_WEAPONS:
+                page_weapons();
+                break;
+            case PDA_ARMORS:
+                page_armors();
+                break;
+            case PDA_ASSEMBLIES:
+                page_assemblies();
+                break;
+            case PDA_BESTIARY:
+                page_bestiary();
+                break;
+            case PDA_ITEMS:
+                page_items();
+                break;
+            case PDA_HELP:
+                page_help();
+                break;
+            case PDA_MISC:
+                page_misc();
+                break;
             
-            // case PDA_PONG:
-            //     page_menu();
-            //     break;
-            // case PDA_CREDITS:
-            //     page_credits();
-            //     break;
-            // case PDA_ASSEMBLY_DETAIL:
-            //     page_assembly_info();
-            //     break;
-            // case PDA_BESTIARY_DETAIL:
-            //     page_monster_info();
-            //     break;
+            case PDA_PONG:
+                page_menu();
+                break;
+            case PDA_CREDITS:
+                page_credits();
+                break;
+            case PDA_ASSEMBLY_DETAIL:
+                page_assembly_info();
+                break;
+            case PDA_BESTIARY_DETAIL:
+                page_monster_info();
+                break;
             default:
                 log("how'd you get here?");
                 break;

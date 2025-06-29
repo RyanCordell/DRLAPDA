@@ -112,15 +112,6 @@ str DRLA_FetchStoredInfo[MAX_PLAYERS],
     DRLA_FetchFirestormInfo[MAX_PLAYERS],
     DRLA_FetchNanoInfo[MAX_PLAYERS];
 
-str allAssemblies = " ";
-int basicInd    = 0;
-int advancedInd = 0; // should be 33
-int masterInd   = 0; // should be 65
-int masterMax   = 0; // should be 95
-
-int stringArrayIndex;
-int TEXT_OFFSET = 13; // aka length of "PDA_ASSEMBLY_"
-
 struct PDAInfo {
    bool active;
    bool pongrunning;
@@ -326,6 +317,72 @@ int PDA_HEADER_X   = 0;
 
 int monsterCheck[5][DRLA_MONSTER_PAGE_MAX],
     oldCheck[5][DRLA_MONSTER_PAGE_MAX];
+
+#define STRING_ARRAY_MAX 2048
+str stringArray[STRING_ARRAY_MAX];
+int stringArrayIndex = 0;
+
+
+str all_assemblies = "x";
+
+int basicInd    = 0;
+int advancedInd = 0; // should be 33
+int masterInd   = 0; // should be 65
+int masterMax   = 0; // should be 95
+
+int TEXT_OFFSET = 13; // aka length of "PDA_ASSEMBLY_"
+    
+str PDA_Class_Name_Printer    = " ",
+    PDA_Class_Ability_Printer = " ",
+    PDA_Class_Story_Printer   = " ",
+    PDA_Class_Story_Height    = " ";
+int PDA_Class_TrimValue       = 0;
+
+str enemy_info_name   = "N/A\n",
+    enemy_info_icon   = "N/A\n",
+    enemy_info_health = "N/A\n",
+    enemy_info_res    = "N/A\n",
+    enemy_info_info   = "N/A\n";
+int enemy_count       = 0;
+
+str assembly_info_icon = " ";
+str assembly_info_name = " ";
+str assembly_info_mods = " ";
+str assembly_info_desc = " ";
+str assembly_info_textH = "1";
+// str assembly_info_ar[12];
+
+str PDA_Weapon_Name_Printer = "name";
+str PDA_Weapon_Desc_Printer = "desc";
+
+str PDA_Weapon_DualName_Printer = "dual name";
+str PDA_Weapon_DualDesc_Printer = "dual desc";
+
+int PDA_Weapon_Bulk_Quantity      = 0;
+int PDA_Weapon_Power_Quantity     = 0;
+int PDA_Weapon_Agility_Quantity   = 0;
+int PDA_Weapon_Technical_Quantity = 0;
+int PDA_Weapon_Sniper_Quantity    = 0;
+int PDA_Weapon_Firestorm_Quantity = 0;
+int PDA_Weapon_Nano_Quantity      = 0;
+int PDA_Weapon_Artifact_Quantity  = 0;
+
+str current_weapon        = "None";
+str current_weapon_trimmed = "None";
+
+str class_perk_displayed  = "\n",
+    weapon_perk_displayed = "\n";
+
+str difficulty_color = " ";
+
+bool PDA_IsNotDemonic = false;
+bool weapon_can_disassemble    = false;
+bool weapon_supports_artifacts = false;
+
+str separator_character = ":"; // by default.
+
+// Not the renegade of funk, unfortunately..
+bool isRenegade = false;
 
 /** 
  * PDA IDs
@@ -563,51 +620,6 @@ str DRLA_BackpackList[DRLA_BACKPACKMAX][2] = {
 /** Mod icons for the PDA */
 // str icon_static_WeaponMods[PDA_MODMAX - 1] = { "BMODICON", "PMODICON", "AMODICON", "TMODICON", "SMODICON", "FMODICON", "NMODICON" };
 // str icon_animated_WeaponMods[PDA_MODMAX - 1] = { "PDABMOD", "PDAPMOD", "PDAAMOD", "PDATMOD", "PDASMOD", "PDAFMOD", "PDANMOD" };
-
-str PDA_Class_Name_Printer, PDA_Class_Ability_Printer, PDA_Class_Story_Printer, PDA_Class_Story_Height;
-int PDA_Class_TrimValue = 0;
-
-str enemy_info_name   = "N/A\n",
-    enemy_info_icon   = "N/A\n",
-    enemy_info_health = "N/A\n",
-    enemy_info_res    = "N/A\n",
-    enemy_info_info   = "N/A\n";
-int enemy_count  = 0;
-
-str assembly_info_icon;
-str assembly_info_name;
-str assembly_info_mods;
-str assembly_info_desc;
-str assembly_info_textH;
-str assembly_info_ar[12];
-
-str PDA_Weapon_Name_Printer,
-    PDA_Weapon_Desc_Printer;
-
-str PDA_Weapon_DualName_Printer,
-    PDA_Weapon_DualDesc_Printer;
-
-int PDA_Weapon_Bulk_Quantity,
-    PDA_Weapon_Power_Quantity,
-    PDA_Weapon_Agility_Quantity,
-    PDA_Weapon_Technical_Quantity,
-    PDA_Weapon_Sniper_Quantity,
-    PDA_Weapon_Firestorm_Quantity,
-    PDA_Weapon_Nano_Quantity,
-    PDA_Weapon_Artifact_Quantity;
-
-str currentWeapon;
-str trimmedCurrentWeapon;
-
-str class_perk_displayed  = "\n",
-    weapon_perk_displayed = "\n";
-
-str difficulty_color;
-
-bool PDA_IsNotDemonic = false;
-
-// Not the renegade of funk, unfortunately..
-bool isRenegade = false;
 
 // FUNCTIONS --------------------
 

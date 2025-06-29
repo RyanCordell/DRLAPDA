@@ -7,9 +7,9 @@ PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 1, true, 2, "", false);
 PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 2, true, 3, "", false);
 
 if (PDA_LocalMouse.scrolling) {
-    PDAButton WEAPONS_TAB_1 = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-    PDAButton WEAPONS_TAB_2 = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-    PDAButton WEAPONS_TAB_3 = PDA_CreateTab(PDA_TAB_BUTTONS_START + 2, "3", "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDA_LocalButton[PDA_TAB_BUTTONS_START    ] = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDA_LocalButton[PDA_TAB_BUTTONS_START + 1] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDA_LocalButton[PDA_TAB_BUTTONS_START + 2] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 2, "3", "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
 }
 
 // PDA_SetupScreenBounds();
@@ -17,21 +17,18 @@ PDA_DefaultFont();
 
 bool canAnim = true;
 
-if (stricmp(CheckInventory(currentWeapon), "None") != 0) {
-
-    PDA_IsNotDemonic = !CheckInventory("RLDemonicWeaponToken");
-
+if (stricmp(current_weapon, "None") != 0) {
     if (PDA_Local.page == WEAPON_PAGE_STORY) {
         #include "../../pages/subpage/weapons_story.pdap"
     }
 
-    if (PDA_Local.page == WEAPON_PAGE_MODPACK_EFFECTS) {
-        #include "../../pages/subpage/weapons_mods.pdap"
+    // if (PDA_Local.page == WEAPON_PAGE_MODPACK_EFFECTS) {
+    //     #include "../../pages/subpage/weapons_mods.pdap"
         
-    }
-    if (PDA_Local.page == WEAPON_PAGE_ARTIFACT_EFFECTS) {
-        #include "../../pages/subpage/weapons_artifacts.pdap"
-    }
+    // }
+    // if (PDA_Local.page == WEAPON_PAGE_ARTIFACT_EFFECTS) {
+    //     #include "../../pages/subpage/weapons_artifacts.pdap"
+    // }
 }
 
 // PDA_UnsetScrollWindow();

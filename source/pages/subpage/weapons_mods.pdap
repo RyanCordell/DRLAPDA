@@ -1,50 +1,50 @@
-// Every weapon and assembly tier has their own max amount of mod packs applicable. Set that up.
-PDA_EstablishModLimits();
+// // Every weapon and assembly tier has their own max amount of mod packs applicable. Set that up.
+// PDA_EstablishModLimits();
 
-PDAButton button[PDA_MODMAX - 1] = {0,0,0,0,0,0,0};
+// PDAButton button[PDA_MODMAX - 1] = {0,0,0,0,0,0,0};
 
-int playerHazMod[PDA_MODMAX] = { PDA_Weapon_Bulk_Quantity, PDA_Weapon_Power_Quantity, PDA_Weapon_Agility_Quantity, PDA_Weapon_Technical_Quantity, PDA_Weapon_Sniper_Quantity, PDA_Weapon_Firestorm_Quantity, PDA_Weapon_Nano_Quantity };
+// int playerHazMod[PDA_MODMAX] = { PDA_Weapon_Bulk_Quantity, PDA_Weapon_Power_Quantity, PDA_Weapon_Agility_Quantity, PDA_Weapon_Technical_Quantity, PDA_Weapon_Sniper_Quantity, PDA_Weapon_Firestorm_Quantity, PDA_Weapon_Nano_Quantity };
 
-// DisplayIcon(currentWeapon, PDA_ID, 0.5, 0.5, 0, 1);
+// // DisplayIcon(current_weapon, PDA_ID, 0.5, 0.5, 0, 1);
 
-HudMessageParallax(
-    StrParam("%l:\n"
-    "[\c[LightBlue]%i:B \c[Red]%i:P \c[Green]%i:A \c[Yellow]%i:T \c[Purple]%i:S \c[Orange]%i:F \c[White]%i:N \cr%i:D\c-]"
-    "\n\n"
-    "%l:\c[Cyan]%i:",
-    (PDA_IsNotDemonic) 
-        ? (CheckInventory(strParam("%s:DemonArtifacts", currentWeapon)) ? PDA_Weapon_DualName_Printer : PDA_Weapon_Name_Printer) 
-        : PDA_Weapon_Name_Printer,
-    PDA_Weapon_Bulk_Quantity, PDA_Weapon_Power_Quantity, PDA_Weapon_Agility_Quantity, PDA_Weapon_Technical_Quantity,
-    PDA_Weapon_Sniper_Quantity, PDA_Weapon_Firestorm_Quantity, PDA_Weapon_Nano_Quantity,
-    (PDA_IsNotDemonic) ? 0 : PDA_Weapon_Artifact_Quantity,
-    "PDA_MODPACK_MAXSUPPORTED",
-    PDA_Local.maxmodlimit),
+// HudMessageParallax(
+//     StrParam("%l:\n"
+//     "[\c[LightBlue]%i:B \c[Red]%i:P \c[Green]%i:A \c[Yellow]%i:T \c[Purple]%i:S \c[Orange]%i:F \c[White]%i:N \cr%i:D\c-]"
+//     "\n\n"
+//     "%l:\c[Cyan]%i:",
+//     (PDA_IsNotDemonic) 
+//         ? (CheckInventory(strParam("%s:DemonArtifacts", current_weapon)) ? PDA_Weapon_DualName_Printer : PDA_Weapon_Name_Printer) 
+//         : PDA_Weapon_Name_Printer,
+//     PDA_Weapon_Bulk_Quantity, PDA_Weapon_Power_Quantity, PDA_Weapon_Agility_Quantity, PDA_Weapon_Technical_Quantity,
+//     PDA_Weapon_Sniper_Quantity, PDA_Weapon_Firestorm_Quantity, PDA_Weapon_Nano_Quantity,
+//     (PDA_IsNotDemonic) ? 0 : PDA_Weapon_Artifact_Quantity,
+//     "PDA_MODPACK_MAXSUPPORTED",
+//     PDA_Local.maxmodlimit),
 
-    HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 
-    /*x*/ 10.0, 
-    /*y*/ 20.0 + (20.0 * 1), 
-    0.0, 1.0
-);
+//     HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 
+//     /*x*/ 10.0, 
+//     /*y*/ 20.0 + (20.0 * 1), 
+//     0.0, 1.0
+// );
 
-// I am so sorry.
-fixed modAlpha = 0.6;
+// // I am so sorry.
+// fixed modAlpha = 0.6;
 
-str weaponModsEntry = StrParam("%l:", StrParam("PDA_WEAPON_%s:_MODS", trimmedCurrentWeapon));
-str_split(StrParam("%l:", "PDA_SEPARATOR_CHARACTER"), weaponModsEntry);
+// str weaponModsEntry = StrParam("%l:", StrParam("PDA_WEAPON_%s:_MODS", current_weapon_trimmed));
+// str_split(separator_character, weaponModsEntry);
 
-// TODO: make applied mods pulse in opacity
-for (int modPack = PDA_MODMIN; modPack < PDA_MODMAX - 1; modPack++) {
+// // TODO: make applied mods pulse in opacity
+// for (int modPack = PDA_MODMIN; modPack < PDA_MODMAX - 1; modPack++) {
 
-    str selectedMod = StrParam("%s:MODICON", strMid(stringArray[modPack], 9, 1));
+//     str selectedMod = StrParam("%s:MODICON", strMid(stringArray[modPack], 9, 1));
 
-    float modY = 55.0 + (24.0 * modPack);
+//     float modY = 55.0 + (24.0 * modPack);
 
-    #define modButton button[modPack]
-    modButton = PDA_CreateModPackDisplay(modPack, selectedMod, 
-                10.0, modY,
-                16, 24, 1.0);
-                PDA_InitButton(modButton, true, WEAPON_PAGE_MODPACK_EFFECTS, '', true);
-}
+//     #define modButton button[modPack]
+//     modButton = PDA_CreateModPackDisplay(modPack, selectedMod, 
+//                 10.0, modY,
+//                 16, 24, 1.0);
+//                 PDA_InitButton(modButton, true, WEAPON_PAGE_MODPACK_EFFECTS, '', true);
+// }
 
-PDA_DefaultFont();
+// PDA_DefaultFont();

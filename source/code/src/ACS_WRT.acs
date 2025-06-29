@@ -11,8 +11,8 @@ SCRIPT "DRLA_AssemblyGlobalizer" ENTER {
     DRLA_FetchStoredInfo[PlayerNumber()] = GetUserCVarString(PlayerNumber(), "DRLA_knownassemblies");
 
     int masterMax   = 0;
-    str allAssemblies = StrParam(l:"PDA_ASSEMBLIES");
-    str_split(StrParam("%l:", "PDA_SEPARATOR_CHARACTER"), allAssemblies);
+    str all_assemblies = StrParam(l:"PDA_ASSEMBLIES");
+    str_split(separator_character, all_assemblies);
     int ai = 0;
     int TEXT_OFFSET = 13; // "PDA_ASSEMBLY_" string length
     if (stringArray[0] != "") {
@@ -54,8 +54,8 @@ SCRIPT "DRLA_UpdateAssemblyDB" (void) {
     DRLA_FetchStoredInfo[PlayerNumber()] = GetUserCVarString(PlayerNumber(), "DRLA_knownassemblies");
 
     int masterMax   = 0;
-    str allAssemblies = StrParam(l:"PDA_ASSEMBLIES");
-    str_split(StrParam("%l:", "PDA_SEPARATOR_CHARACTER"), allAssemblies);
+    str all_assemblies = StrParam(l:"PDA_ASSEMBLIES");
+    str_split(separator_character, all_assemblies);
     int ai = 0;
     int TEXT_OFFSET = 13; // "PDA_ASSEMBLY_" string length
     if (stringArray[0] != "") {
