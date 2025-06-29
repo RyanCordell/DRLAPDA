@@ -112,6 +112,15 @@ str DRLA_FetchStoredInfo[MAX_PLAYERS],
     DRLA_FetchFirestormInfo[MAX_PLAYERS],
     DRLA_FetchNanoInfo[MAX_PLAYERS];
 
+str allAssemblies = " ";
+int basicInd    = 0;
+int advancedInd = 0; // should be 33
+int masterInd   = 0; // should be 65
+int masterMax   = 0; // should be 95
+
+int stringArrayIndex;
+int TEXT_OFFSET = 13; // aka length of "PDA_ASSEMBLY_"
+
 struct PDAInfo {
    bool active;
    bool pongrunning;
@@ -121,7 +130,7 @@ struct PDAInfo {
    int pagemax;
    
    float texty;
-   float maxtexty;
+   float max_text_y;
    float scrollingY;
    float oldScrollingY;
    float creditsroll;
@@ -146,6 +155,8 @@ PDAInfo PDA_Info[MAX_PLAYERS];
 struct PDAMouse {
     int x;
     int y;
+    int oldX;
+    int oldY;
     
     bool m1;
     bool m2;
@@ -154,6 +165,7 @@ struct PDAMouse {
     int oldstate;
 
     bool scrolling;
+    bool moving;
 }
 PDAMouse PDA_Mouse[MAX_PLAYERS];
 
@@ -208,6 +220,7 @@ struct PDAWeapon {
     bool isDemonic;
 }
 
+#define ARMOR_DATA 1
 struct PDA_ArmorData {
     str armorRes;
     str langEntry;
@@ -221,6 +234,17 @@ struct PDA_ArmorData {
        PDA_ArmorData   _ad[MAX_PLAYERS][1];
 #define localArmorData _ad[PlayerNumber()][0]
 
+#define BACKPACK_DATA 2
+struct PDA_BackpackData {
+    str name;
+    str graphic;
+    str tooltip;
+    str backpackVal;
+};
+       PDA_BackpackData   _bpd[MAX_PLAYERS][1];
+#define localBackpackData _bpd[PlayerNumber()][0]
+
+#define BOOTS_DATA 3
 struct PDA_BootsData {
     str name;
     str graphic;
@@ -233,14 +257,6 @@ struct PDA_BootsData {
        PDA_BootsData   _bd[MAX_PLAYERS][1];
 #define localBootsData _bd[PlayerNumber()][0]
 
-struct PDA_BackpackData {
-    str name;
-    str graphic;
-    str tooltip;
-    str backpackVal;
-};
-       PDA_BackpackData   _bpd[MAX_PLAYERS][1];
-#define localBackpackData _bpd[PlayerNumber()][0]
 
 #define X_CENTER                 0.0
 #define X_LEFT_EDGE              0.1
@@ -349,6 +365,20 @@ enum PDA_IDs {
     PDA_BESTIARY_BUTTON,
     PDA_MISC_BUTTON,
     PDA_HELP_BUTTON,
+
+    PDA_BEAST_UV = 50,
+    PDA_BEAST_NM = 51,
+    PDA_BEAST_TP = 52,
+    PDA_BEAST_AG = 53,
+    PDA_BEAST_EX = 54,
+
+    PDA_PREV_PAGE = 60,
+    PDA_NEXT_PAGE,
+    PDA_MODS_PAGE = PDA_PREV_PAGE,
+    PDA_ARTIFACTS_PAGE = PDA_NEXT_PAGE,
+
+
+
     PDA_CAT_DESCRIPTION = 94,
 
     PDA_TAB_BUTTONS_START = 95,
@@ -539,7 +569,7 @@ str DRLA_BackpackList[DRLA_BACKPACKMAX][2] = {
 #define StrTrim(a,b,c)			StrMid((a),(b),StrLen((a)) - (c))
 #define Array_Size(array) 		(sizeof((array))/sizeof((array[0][0])))
 
-#define PDA_SetScrollLimit(a)  	PDA_Local.maxtexty = (a)
+#define PDA_SetScrollLimit(a)  	PDA_Local.max_text_y = (a)
 #define PDA_ResetScroll()       PDA_Local.scrollingY = PDA_SCREEN_Y;
 #define PDA_SetMonsterLimit(a)  if (PDA_Local.monsterpage > (a)) PDA_Local.monsterpage = (a)
 #define PDA_DefaultFont() 		SetFont(USED_PDA_FONT);

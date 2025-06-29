@@ -209,7 +209,7 @@ script "PDA_GSInit" open {
       PDA_Info[i].pagemax = 0;
       
       PDA_Info[i].texty = 0;
-      PDA_Info[i].maxtexty = -200;
+      PDA_Info[i].max_text_y = -200;
       PDA_Info[i].scrollingY = 20.0;
       PDA_Info[i].scrollYDelta = 0;
       
@@ -387,9 +387,9 @@ SCRIPT "PDA_Core" (void) {
     
     #include "PDA_STC.acs"
 
-    PDA_SetupScreenBounds();
     
     while (PDA_Local.active) {
+        PDA_PrintHeader();
         switch (PDA_Local.category) {
             case PDA_MENU:
                 page_menu();
@@ -435,8 +435,6 @@ SCRIPT "PDA_Core" (void) {
                 log("how'd you get here?");
                 break;
         }
-        SetHudSize(320,200,0);
-        PDA_PrintHeader();
         Delay(PDA_Responsiveness);
     }
     PDA_HEADER_STR = "";

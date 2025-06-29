@@ -93,6 +93,15 @@ SCRIPT "PDA_MouseController" (void)
             PDA_LocalMouse.y -= (playerY << PDA_Y_sensitivity) * yScale;
         }
 
+        if (PDA_LocalMouse.x != PDA_LocalMouse.oldX || PDA_LocalMouse.y != PDA_LocalMouse.oldY) 
+            PDA_LocalMouse.moving = true;
+        else {
+            PDA_LocalMouse.moving = false;
+            PDA_LocalMouse.scrolling = false;
+        }
+
+        log("scrollY %f: | minY %f: | maxY %f: | s? %d: | m? %d:", PDA_Local.scrollingY, VMIN, PDA_Local.max_text_y, PDA_LocalMouse.scrolling, PDA_LocalMouse.moving);
+
         if (PDA_LocalMouse.x < HMIN) PDA_LocalMouse.x = HMIN;
         if (PDA_LocalMouse.x > HMAX) PDA_LocalMouse.x = HMAX;
 
@@ -100,18 +109,20 @@ SCRIPT "PDA_MouseController" (void)
             PDA_LocalMouse.y = VMIN;
 
             if (PDA_Local.scrollingY < PDA_SCREEN_Y) {
-                PDA_Local.scrollingY += 2.0 * yScale;
                 PDA_LocalMouse.scrolling = true;
+                PDA_Local.scrollingY += 2.0 * yScale;
                 PDA_Local.scrollYDelta = setScrollDelta();
             }
         }
         if (PDA_LocalMouse.y > VMAX) {
             PDA_LocalMouse.y = VMAX;
 
-            if (PDA_Local.scrollingY > PDA_Local.maxtexty) {
-                PDA_Local.scrollingY -= 2.0 * yScale;
+            if (PDA_Local.scrollingY > PDA_Local.max_text_y) {
                 PDA_LocalMouse.scrolling = true;
+                PDA_Local.scrollingY -= 2.0 * yScale;
                 PDA_Local.scrollYDelta = setScrollDelta();
+            } else {
+                PDA_LocalMouse.scrolling = false;                
             }
         }
         
@@ -127,14 +138,24 @@ SCRIPT "PDA_MouseController" (void)
         
         if (PDA_LocalMouse.m1)
         {
-            vBuffer               = PDA_LocalMouse.y - oldMouseY;
-            PDA_Local.scrollingY += vBuffer;
-            myoff                 = vBuffer;
-            PDA_Local.scrollYDelta = setScrollDelta();
+            vBuffer                  = PDA_LocalMouse.y - oldMouseY;
+            myoff                    = vBuffer;
+            PDA_Local.scrollingY    += vBuffer;
+            PDA_Local.scrollYDelta   = setScrollDelta();
             PDA_LocalMouse.scrolling = true;
             
-            if (PDA_Local.scrollingY < PDA_Local.maxtexty) PDA_Local.scrollingY = PDA_Local.maxtexty;
-            if (PDA_Local.scrollingY > VMIN)               PDA_Local.scrollingY = VMIN;
+            if (PDA_Local.scrollingY < PDA_Local.max_text_y) PDA_Local.scrollingY = PDA_Local.max_text_y;
+            if (PDA_Local.scrollingY > VMIN)                 PDA_Local.scrollingY = VMIN; 
+        }
+
+        if (!PDA_LocalMouse.m1 && oldButtons[PlayerNumber()] & (_ACTION)) {
+            PDA_LocalMouse.scrolling = false;
+        }
+
+        if (PDA_LocalMouse.scrolling) {
+            if (PDA_Local.scrollingY < PDA_Local.max_text_y || PDA_Local.scrollingY > VMIN) {
+                PDA_LocalMouse.scrolling = false;
+            }
         }
         
         // Right mouse click
@@ -181,6 +202,9 @@ SCRIPT "PDA_MouseController" (void)
         
         Delay(1);
         PDA_Local.oldScrollingY = PDA_Local.scrollingY;
+        PDA_LocalMouse.moving = false;
+        PDA_LocalMouse.oldX = PDA_LocalMouse.x;
+        PDA_LocalMouse.oldy = PDA_LocalMouse.y;
 
         vBuffer = 0;
         PDA_LocalMouse.m1 = false;

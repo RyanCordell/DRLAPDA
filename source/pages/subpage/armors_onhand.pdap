@@ -30,8 +30,11 @@ if (localHasArmor) {
     else armorLimit++;
     width = (strLen(localArmorData.name) * 5);
 
-    PDAButton armor = PDA_DisplayArmor(id, strParam("\cdE:\c- %s:", localArmorData.name), localArmorData.graphic, x, y, width, height, localArmorData.tooltip, pulser(2.0, 0.8));
-                        PDA_InitButton(armor, true, 1, "", true);
+    // PDAButton armor = PDA_DisplayArmor(id, strParam("\cdE:\c- %s:", localArmorData.name), localArmorData.graphic, x, y, width, height, localArmorData.tooltip, pulser(2.0, 0.8));
+    PDA_ButtonHandler(id, true, 1, "", true);
+    if (PDA_LocalMouse.scrolling) {
+        PDA_LocalButton[id] = PDA_DisplayArmor(id, ARMOR_DATA, x, y, height, pulser(2.0, 0.8));
+    }
 }
 
 if (localHasBoots) {
@@ -43,14 +46,18 @@ if (localHasBoots) {
     else armorLimit++;
     width = (strLen(localBootsData.name) * 5);
 
-    PDAButton boots = PDA_DisplayArmor(id, strParam("\cdE:\c- %s:", localBootsData.name), localBootsData.graphic, x, y, width, height, localBootsData.tooltip, pulser(2.0, 0.8));
-                        PDA_InitButton(boots, true, 1, "", true);
+    // PDAButton boots = PDA_DisplayArmor(id, strParam("\cdE:\c- %s:", localBootsData.name), localBootsData.graphic, x, y, width, height, localBootsData.tooltip, pulser(2.0, 0.8));
+    PDA_ButtonHandler(id, true, 1, "", true);
+    if (PDA_LocalMouse.scrolling) {
+        PDA_LocalButton[id] = PDA_DisplayArmor(id, BOOTS_DATA, x, y, height, pulser(2.0, 0.8));
+    }
 }
 
 str armorPickupCheck = "\n";
 // Stashed armors
 for (int armorIndex = 0; armorIndex < DRLA_ARMORMAX; armorIndex++) {
     #define armorToken DRLA_ArmorList[armorIndex][armor_TOKEN]
+
     armorPickupCheck = strParam("%s:Pickup", armorToken);
     areTheseBoots    = strCmp(armorToken,strParam("%s:Boots", StrTrim(armorToken,0,5))) == 0;
 
@@ -90,8 +97,9 @@ for (int armorIndex = 0; armorIndex < DRLA_ARMORMAX; armorIndex++) {
             );
         }
 
-        PDAButton stashed = PDA_DisplayArmor(id, localArmorData.name, localArmorData.graphic, x, y, width, height, localArmorData.tooltip, 0.6);
-        PDA_InitButton(stashed, true, 1, "", true);
+        // PDAButton stashed = PDA_DisplayArmor(id, localArmorData.name, localArmorData.graphic, x, y, width, height, localArmorData.tooltip, 0.6);
+        PDA_ButtonHandler(id, true, 1, "", true);
+        PDAButton stashed = PDA_DisplayArmorOverride(id, localArmorData, x, y, height, 0.6);
 
         if (armorLimit > PDA_MAX_ARMOR_IN_INV + 1) armorLimit = 0;
         else armorLimit++;

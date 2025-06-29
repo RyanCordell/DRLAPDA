@@ -15,88 +15,60 @@ const fixed playerIconX = PDA_SCREEN_X + 20.0 + X_LEFT_EDGE;
 
 DisplayIconParallax("PDAPLYR", PDA_PLYR_ICON, playerIconX, 40.0, 0.0, 1.0);
 
-localArmorData    = setupArmorData(specialArmorTokens);
-localBootsData    = setupBootsData();
-localBackpackData = setupBackpackData();
-
-// No point to this in the detail info, I guess
-localArmorData.tooltip    = "";
-localBootsData.tooltip    = "";
-localBackpackData.tooltip = "";
-
 
 localShowArmor    = (localABoolField & 1);
 localShowBoots    = (localABoolField & 1<<1);
 localShowBackpack = (localABoolField & 1<<2);
 
 if (localHasArmor) {
-    const fixed equippedArmorX = playerIconX + 35.0;
     // Not the renegade of funk, unfortunately..
     bool isRenegade = false;
          isRenegade = (CheckActorClass(0, CheckInventory("DRPGDRLAActive") ? "DoomRLRenegadeRPG" : "DoomRLRenegade") == true);
 
-    // if(CheckInventory("DRPGDRLAActive")) {
-    //     isRenegade = (CheckActorClass(0,"DoomRLRenegadeRPG") == true);
-    // } else {
-    //     isRenegade = (CheckActorClass(0,"DoomRLRenegade") == true);
-    // }
-
     DisplayIconParallax("PDAPARM", PDA_PLAYER_BODY_ICON, playerIconX, 40.0, 0.0, showArmor ? 1.0 : 0.5);
 
-    width       = strLen(localArmorData.name) * 5;
-    if (PDA_LocalMouse.scrolling) {
-        PDA_LocalButton[PDA_PLAYER_ARMOR_ICON] = PDA_DisplayArmor(PDA_PLAYER_ARMOR_ICON, localArmorData.name, localArmorData.graphic, 
-                    equippedArmorX, 20.0, 
-                    width, height, 
-                    localArmorData.tooltip, localShowArmor ? pulser(2.0, 0.8) : inAlpha);
-    }
+    width = strLen(localArmorData.name) * 5;
     PDA_ButtonHandler(PDA_PLAYER_ARMOR_ICON, true, 2, "", true);
-    if(PDA_LocalButton[PDA_PLAYER_ARMOR_ICON].state == button_clicked) {
+
+    if (PDA_LocalMouse.scrolling) {
+        PDA_LocalButton[PDA_PLAYER_ARMOR_ICON] = PDA_DisplayArmor(PDA_PLAYER_ARMOR_ICON, ARMOR_DATA,
+                        playerIconX + 35.0, 20.0, height, localShowArmor ? pulser(2.0, 0.8) : inAlpha);
+    }
+    if (PDA_LocalButton[PDA_PLAYER_ARMOR_ICON].state == button_clicked) {
         if (localABoolField != 1) localABoolField = 1;
     }
 }
 
 if (localHasBackpack) {
-    const fixed equippedBackX  = playerIconX + 33.0;
     DisplayIconParallax("PDAPBCK", PDA_PLYR_ICON - 2, playerIconX, 40.0, 0.0, showBackpack ? 1.0 : 0.5);
 
-    width          = strLen(localBackpackData.name) * 5;
-    if (PDA_LocalMouse.scrolling) {
-        PDA_LocalButton[PDA_PLAYER_BACKPACK_ICON] = PDA_DisplayArmor(PDA_PLAYER_BACKPACK_ICON, localBackpackData.name, localBackpackData.graphic, 
-                        equippedBackX, 45.0, 
-                        width, height, 
-                        localBackpackData.tooltip, localShowBackpack ? pulser(2.0, 0.8) : inAlpha);
-    }
+    width = strLen(localBackpackData.name) * 5;
     PDA_ButtonHandler(PDA_PLAYER_BACKPACK_ICON, true, 2, "", true);
-    if(PDA_LocalButton[PDA_PLAYER_BACKPACK_ICON].state == button_clicked) {
+
+    if (PDA_LocalMouse.scrolling) {
+        PDA_LocalButton[PDA_PLAYER_BACKPACK_ICON] = PDA_DisplayArmor(PDA_PLAYER_BACKPACK_ICON, BACKPACK_DATA, 
+                        playerIconX + 33.0, 45.0, height, localShowBackpack ? pulser(2.0, 0.8) : inAlpha);
+    }
+    if (PDA_LocalButton[PDA_PLAYER_BACKPACK_ICON].state == button_clicked) {
         if (localABoolField != 4) localABoolField = 4;
     }
 
 }
 
 if (localHasBoots) {
-    const fixed equippedBootsX = playerIconX + 30.0;
     DisplayIconParallax("PDAPBTS", PDA_PLYR_ICON - 3, playerIconX, 40.0, 0.0, showBoots ? 1.0 : 0.5);
 
-    width       = strLen(localBootsData.name) * 5;
-    
-    if (PDA_LocalMouse.scrolling) {
-        PDA_LocalButton[PDA_PLAYER_BOOTS_ICON] = PDA_DisplayArmor(PDA_PLAYER_BOOTS_ICON, localBootsData.name, localBootsData.graphic, 
-                    equippedBootsX, 70.0, 
-                    width, height, 
-                    localBootsData.tooltip, localShowBoots ? pulser(2.0, 0.8) : inAlpha);
-    }
+    width = strLen(localBootsData.name) * 5;
     PDA_ButtonHandler(PDA_PLAYER_BOOTS_ICON, true, 2, "", true);
     
-    if(PDA_LocalButton[PDA_PLAYER_BOOTS_ICON].state == button_clicked) {
+    if (PDA_LocalMouse.scrolling) {
+        PDA_LocalButton[PDA_PLAYER_BOOTS_ICON] = PDA_DisplayArmor(PDA_PLAYER_BOOTS_ICON, BOOTS_DATA, 
+                        playerIconX + 30.0, 70.0, height, localShowBoots ? pulser(2.0, 0.8) : inAlpha);
+    }
+    if (PDA_LocalButton[PDA_PLAYER_BOOTS_ICON].state == button_clicked) {
         if (localABoolField != 2) localABoolField = 2;
     }
 }
-
-// if (isRenegade && (StrCmp(StrTrim(GetArmorInfo(ARMORINFO_CLASSNAME),2,0),StrParam(s:StrTrim(GetArmorInfo(ARMORINFO_CLASSNAME),2,10),s:"Renegade"))) == 0)
-//     pdaStrTrimValue = 10;
-// else
-//     pdaStrTrimValue = 0;
 
 //armorDesc =  StrParam("PDA_ARMOR_%s:_DESC", StrTrim(GetArmorInfo(ARMORINFO_CLASSNAME),2,pdaStrTrimValue));
 

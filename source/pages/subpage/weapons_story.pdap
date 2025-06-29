@@ -43,15 +43,15 @@ HudMessageParallax(
     0, 1.0);
 
 if (PDA_Local.scrollYDelta == -1) {
-    PDAButton Goto2 = PDA_CreateFixedButton(61, "Modpack Effects" , "MODICON", 
+    PDA_LocalButton[PDA_MODS_PAGE] = PDA_CreateFixedButton(PDA_MODS_PAGE, "Modpack Effects" , "MODICON", 
         10.0, PDA_SCREEN_HEIGHT, 
         82, 16, 
         16, 19);
-                    PDA_InitButton(Goto2, true, 2, "", false);
+                    PDA_ButtonHandler(PDA_MODS_PAGE, true, 2, "", false);
 
-    PDAButton Goto3 = PDA_CreateFixedButton(62, "Artifact Effects", "DMNAICON", 
+    PDA_LocalButton[PDA_ARTIFACTS_PAGE] = PDA_CreateFixedButton(PDA_ARTIFACTS_PAGE, "Artifact Effects", "DMNAICON", 
         PDA_SCREEN_WIDTH - 82 - 20, PDA_SCREEN_HEIGHT,
         82, 16, 
         38, 40);
-                    PDA_InitButton(Goto3, true, 3, "", false);
+                    PDA_ButtonHandler(PDA_ARTIFACTS_PAGE, true, 3, "", false);
 }

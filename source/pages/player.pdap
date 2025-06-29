@@ -48,7 +48,7 @@ if(GetActorclass(0) != "None")
                 PDA_Class_Name_Printer,
                 PDA_Class_Ability_Printer
             ),
-            HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), 0);
+            HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), 0.0, 1.0);
     }
     // Class backstory
     if(PDA_Local.page == CLASSES_PAGE_STORY)
@@ -61,7 +61,7 @@ if(GetActorclass(0) != "None")
                 PDA_Class_Name_Printer,
                 PDA_Class_Story_Printer
             ),
-            HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), 0);
+            HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), 0.0, 1.0);
     }
 }
 // Get rid of it once we're done.
