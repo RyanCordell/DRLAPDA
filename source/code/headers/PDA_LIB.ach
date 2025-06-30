@@ -5,6 +5,12 @@ str USED_PDA_FONT  = "STAT_MNO";
 str PDA_FONT_LOWER = "STAT_LWR";
 str PDA_FONT_SLIM  = "PDAFONT";
 
+bool buttonInteracted = false;
+bool inverted = false;
+
+str PDA_HEADER_STR = "PDA_MENU_HEADER";
+int PDA_HEADER_X   = 0;
+
 /*
     %s: string
     %b: bool
@@ -13,30 +19,9 @@ str PDA_FONT_SLIM  = "PDAFONT";
     %x: hex
 */
 
-// Ha! You don't want arrays for every player in MP? MUDA MUDA MUDA MUDA
-// [marrub] #define MAX_MUDADA 0x7FFFFFFF
+#include "PDA_CST.ach"
+#include "PDA_ENM.ach"
 
-#define MAX_PLAYERS 8
-#define PDA_Responsiveness 1
-#define PDA_Local PDA_Info[PlayerNumber()]
-#define PDA_LocalMouse PDA_Mouse[PlayerNumber()]
-#define PDA_LocalButton PDA_Button[PlayerNumber()]
-#define PDA_CheckPlayer1Inventory(name) ACS_NamedExecuteWithResult("PDA_CheckPlayer1Inventory", name)
-#define PDA_SetEveryoneInventory(name)  ACS_NamedExecuteWithResult("PDA_SetEveryoneInventory",  name)
-#define PDA_GiveEveryoneInventory(name) ACS_NamedExecuteWithResult("PDA_GiveEveryoneInventory", name)
-#define PDA_HistoryMax 16
-
-#define PDA_TAB_START_X 12.0
-#define PDA_TAB_NEXT_X(a) \
-    (PDA_TAB_START_X * (a + 1)) + (2.0 * a)
-#define PDA_TAB_Y 5.0
-#define PDA_TAB_W 12
-#define PDA_TAB_H 7
-
-#define PDA_MENU_BTN_W 88
-#define PDA_MENU_BTN_H 16
-
-#define AVAILABLE_HUDS 13
 str playerSelectedHUD[AVAILABLE_HUDS] = {
   "RLStatusBarHUDType",
   "RLStatusBarAltHUDType",
@@ -55,62 +40,39 @@ str playerSelectedHUD[AVAILABLE_HUDS] = {
   "RLFullscreenTrackerHUDType"
 };
 
-#define PDA_MODMIN  0
-#define PDA_MODMAX  8
-
-#define PDA_LocalUniqueModEffect PDA_PrintWhichUnique[PlayerNumber()]
 str PDA_PrintWhichUnique[MAX_PLAYERS][PDA_MODMAX];
-
-#define PDA_LocalWeaponModEffect PDA_PrintWhichBasic[PlayerNumber()]
 str PDA_PrintWhichBasic[MAX_PLAYERS][PDA_MODMAX];
-
-// #define BASICMODMAX 4
-// #define UNIMODMAX 3
 
 // #define PDA_LocalWeaponModEffect PDA_PrintWhichBasic[PlayerNumber()]
 // str PDA_PrintWhichBasic[MAX_PLAYERS][BASICMODMAX];
 
 // #define PDA_LocalUniqueModEffect PDA_PrintWhichUnique[PlayerNumber()]
 // str PDA_PrintWhichUnique[MAX_PLAYERS][UNIMODMAX];
-bool buttonInteracted = false;
-bool inverted = false;
     
-int gArmorIndex[MAX_PLAYERS],
-    gBootsIndex[MAX_PLAYERS],
-    gBackpackIndex[MAX_PLAYERS];
-#define localArmorIndex    gArmorIndex[PlayerNumber()]
-#define localBootsIndex    gBootsIndex[PlayerNumber()]
-#define localBackpackIndex gBackpackIndex[PlayerNumber()]
+int gArmorIndex[MAX_PLAYERS]    = {0,0,0,0,0,0,0,0},
+    gBootsIndex[MAX_PLAYERS]    = {0,0,0,0,0,0,0,0},
+    gBackpackIndex[MAX_PLAYERS] = {0,0,0,0,0,0,0,0};
 
-bool showArmor[MAX_PLAYERS],
-     showBoots[MAX_PLAYERS],
-     showBackpack[MAX_PLAYERS];
-#define localShowArmor    showArmor[PlayerNumber()]
-#define localShowBoots    showBoots[PlayerNumber()]
-#define localShowBackpack showBackpack[PlayerNumber()]
+bool showArmor[MAX_PLAYERS]    = {false, false, false, false, false, false, false, false},
+     showBoots[MAX_PLAYERS]    = {false, false, false, false, false, false, false, false},
+     showBackpack[MAX_PLAYERS] = {false, false, false, false, false, false, false, false};
 
-bool hasArmor[MAX_PLAYERS],
-     hasBoots[MAX_PLAYERS],
-     hasBackpack[MAX_PLAYERS];
-#define localHasArmor    hasArmor[PlayerNumber()]
-#define localHasBoots    hasBoots[PlayerNumber()]
-#define localHasBackpack hasBackpack[PlayerNumber()]
+bool hasArmor[MAX_PLAYERS]    = {false, false, false, false, false, false, false, false},
+     hasBoots[MAX_PLAYERS]    = {false, false, false, false, false, false, false, false},
+     hasBackpack[MAX_PLAYERS] = {false, false, false, false, false, false, false, false};
      
-bool gotOneEquipFirst[MAX_PLAYERS];
-#define localOneEquipFirst gotOneEquipFirst[PlayerNumber()]
+bool gotOneEquipFirst[MAX_PLAYERS] = {false, false, false, false, false, false, false, false};
 
-int aBoolField[MAX_PLAYERS];
-#define localABoolField aBoolField[PlayerNumber()]
+int aBoolField[MAX_PLAYERS] = {0,0,0,0,0,0,0,0};
 //bool showSuit = true;
 
-int modPackIndex[MAX_PLAYERS];
-#define localmodPackIndex modPackIndex[PlayerNumber()]
+int modPackIndex[MAX_PLAYERS] = {0,0,0,0,0,0,0,0};
 
-str DRLA_FetchStoredInfo[MAX_PLAYERS],
-    DRLA_FetchExoticInfo[MAX_PLAYERS],
-    DRLA_FetchSniperInfo[MAX_PLAYERS],
-    DRLA_FetchFirestormInfo[MAX_PLAYERS],
-    DRLA_FetchNanoInfo[MAX_PLAYERS];
+str DRLA_FetchStoredInfo[MAX_PLAYERS]    = {"","","","","","","",""},
+    DRLA_FetchExoticInfo[MAX_PLAYERS]    = {"","","","","","","",""},
+    DRLA_FetchSniperInfo[MAX_PLAYERS]    = {"","","","","","","",""},
+    DRLA_FetchFirestormInfo[MAX_PLAYERS] = {"","","","","","","",""},
+    DRLA_FetchNanoInfo[MAX_PLAYERS]      = {"","","","","","","",""};
 
 struct PDAInfo {
    bool active;
@@ -211,7 +173,6 @@ struct PDAWeapon {
     bool isDemonic;
 }
 
-#define ARMOR_DATA 1
 struct PDA_ArmorData {
     str armorRes;
     str langEntry;
@@ -221,21 +182,17 @@ struct PDA_ArmorData {
     str armorDesc;
     str armorVal;
     str tooltip;
-};
-       PDA_ArmorData   _ad[MAX_PLAYERS][1];
-#define localArmorData _ad[PlayerNumber()][0]
+}
+       PDA_ArmorData _ad[MAX_PLAYERS][1];
 
-#define BACKPACK_DATA 2
 struct PDA_BackpackData {
     str name;
     str graphic;
     str tooltip;
     str backpackVal;
-};
-       PDA_BackpackData   _bpd[MAX_PLAYERS][1];
-#define localBackpackData _bpd[PlayerNumber()][0]
+}
+       PDA_BackpackData _bpd[MAX_PLAYERS][1];
 
-#define BOOTS_DATA 3
 struct PDA_BootsData {
     str name;
     str graphic;
@@ -244,84 +201,17 @@ struct PDA_BootsData {
     str bootsVal;
     str langEntry;
     str tooltip;
-};
-       PDA_BootsData   _bd[MAX_PLAYERS][1];
-#define localBootsData _bd[PlayerNumber()][0]
+}
+       PDA_BootsData _bd[MAX_PLAYERS][1];
 
 
-#define X_CENTER                 0.0
-#define X_LEFT_EDGE              0.1
-#define X_RIGHT_EDGE             0.2
-#define X_CENTER_TEXT_CENTER     0.4
-#define X_LEFT_EDGE_TEXT_CENTER  0.5
-#define X_RIGHT_EDGE_TEXT_CENTER 0.6
 
-#define Y_CENTER      0.0
-#define Y_TOP_EDGE    0.1
-#define Y_BOTTOM_EDGE 0.2
-
-// PDA size
-// const float NEW_RESOLUTION_WIDTH = 384, NEW_RESOLUTION_HEIGHT = 288;  // 380 / 320 = 1.1875  |  260 / 200 = 1.3
-const float NEW_RESOLUTION_WIDTH = 400, NEW_RESOLUTION_HEIGHT = 300;
-
-const float OLD_RESOLUTION_WIDTH = 320, OLD_RESOLUTION_HEIGHT = 200; 
-            
-const float NEW_RESOLUTION_X = NEW_RESOLUTION_WIDTH / OLD_RESOLUTION_WIDTH;
-const float NEW_RESOLUTION_Y = NEW_RESOLUTION_HEIGHT / OLD_RESOLUTION_HEIGHT; 
-
-// The following four constants are all based off the RLZPDA2 graphic itself.
-const int   PDA_SCREEN_X      = 18, // 17 pixels from graphic left start + 1 px screen padding
-			PDA_SCREEN_Y      = 20, // 19 pixels from graphic top start + 1 px screen padding.
-			PDA_SCREEN_WIDTH  = 255, // Should be 256, taking into account 1px screen padding...
-			PDA_SCREEN_HEIGHT = 162, // Should be 162, taking into account 1px screen padding...
-            PDA_SCREEN_HEADER = 13;
-// -------------
-const int 	PDA_SCROLLABLE_Y      = (PDA_SCREEN_HEADER + PDA_SCREEN_Y) * NEW_RESOLUTION_Y  - 1,
-			PDA_SCROLLABLE_HEIGHT = (PDA_SCREEN_HEIGHT                 * NEW_RESOLUTION_Y) - PDA_SCREEN_Y + 1;
-// -------------
-const int   PDA_FLOATING_TOOLTIP_GRAPHIC_X      = PDA_SCREEN_X,
-            PDA_FLOATING_TOOLTIP_GRAPHIC_Y      = PDA_SCROLLABLE_Y      + 15,
-            PDA_FLOATING_TOOLTIP_GRAPHIC_WIDTH  = PDA_SCREEN_WIDTH      + 80,
-            PDA_FLOATING_TOOLTIP_GRAPHIC_HEIGHT = PDA_SCROLLABLE_HEIGHT + 60,
-            PDA_FLOATING_TOOLTIP_GRAPHIC_WRAP   = PDA_SCROLLABLE_HEIGHT + 10;
-
-const int   PDA_FLOATING_TOOLTIP_X      = PDA_SCREEN_X,
-            PDA_FLOATING_TOOLTIP_Y      = PDA_SCROLLABLE_Y      + 15,
-            PDA_FLOATING_TOOLTIP_WIDTH  = PDA_SCREEN_WIDTH      + 80,
-            PDA_FLOATING_TOOLTIP_HEIGHT = PDA_SCROLLABLE_HEIGHT + 165,
-            PDA_FLOATING_TOOLTIP_WRAP   = PDA_SCROLLABLE_HEIGHT + 10;
-// -------------
-const int   PDA_MENU_TOOLTIP_X      = 180,
-            PDA_MENU_TOOLTIP_Y      = 80,
-            PDA_MENU_TOOLTIP_WIDTH  = 115,
-            PDA_MENU_TOOLTIP_HEIGHT = 158;
-// -------------
-const int 	PDA_MAX_ARMOR_IN_INV = 4,
-			PDA_MAX_ARMOR_WORN   = 2,
-			PDA_MAX_MOD_PACKS    = 7;
-
-const float PDA_MENU_ICON_LEFT_X  = 20 + X_LEFT_EDGE,
-			PDA_MENU_ICON_RIGHT_X = 140.0 + X_LEFT_EDGE;
-
-const float PDA_MENU_TEXT_LEFT_X  = PDA_MENU_ICON_LEFT_X + 30.0,
-			PDA_MENU_TEXT_RIGHT_X = PDA_MENU_ICON_RIGHT_X + 30.0;
-
-const float PDA_NormalY = PDA_SCREEN_Y;
-
-str PDA_HEADER_STR = "PDA_MENU_HEADER";
-int PDA_HEADER_X   = 0;
-
-#define BEAST_WIDTH 85
-#define BEAST_HEIGHT 8
-#define DRLA_MONSTER_PAGE_MAX 19
 
 int monsterCheck[5][DRLA_MONSTER_PAGE_MAX],
     oldCheck[5][DRLA_MONSTER_PAGE_MAX];
 
-#define STRING_ARRAY_MAX 2048
 str stringArray[STRING_ARRAY_MAX];
 int stringArrayIndex = 0;
-
 
 str all_assemblies = "x";
 
@@ -332,17 +222,17 @@ int masterMax   = 0; // should be 95
 
 int TEXT_OFFSET = 13; // aka length of "PDA_ASSEMBLY_"
     
-str PDA_Class_Name_Printer    = " ",
-    PDA_Class_Ability_Printer = " ",
-    PDA_Class_Story_Printer   = " ",
-    PDA_Class_Story_Height    = " ";
+str PDA_Class_Name_Printer    = " ";
+str PDA_Class_Ability_Printer = " ";
+str PDA_Class_Story_Printer   = " ";
+str PDA_Class_Story_Height    = " ";
 int PDA_Class_TrimValue       = 0;
 
-str enemy_info_name   = "N/A\n",
-    enemy_info_icon   = "N/A\n",
-    enemy_info_health = "N/A\n",
-    enemy_info_res    = "N/A\n",
-    enemy_info_info   = "N/A\n";
+str enemy_info_name   = "N/A\n";
+str enemy_info_icon   = "N/A\n";
+str enemy_info_health = "N/A\n";
+str enemy_info_res    = "N/A\n";
+str enemy_info_info   = "N/A\n";
 int enemy_count       = 0;
 
 str assembly_info_icon = " ";
@@ -367,7 +257,7 @@ int PDA_Weapon_Firestorm_Quantity = 0;
 int PDA_Weapon_Nano_Quantity      = 0;
 int PDA_Weapon_Artifact_Quantity  = 0;
 
-str current_weapon        = "None";
+str current_weapon         = "None";
 str current_weapon_trimmed = "None";
 
 str class_perk_displayed  = "\n",
@@ -375,7 +265,7 @@ str class_perk_displayed  = "\n",
 
 str difficulty_color = " ";
 
-bool PDA_IsNotDemonic = false;
+bool PDA_IsNotDemonic          = false;
 bool weapon_can_disassemble    = false;
 bool weapon_supports_artifacts = false;
 
@@ -384,185 +274,6 @@ str separator_character = ":"; // by default.
 // Not the renegade of funk, unfortunately..
 bool isRenegade = false;
 
-/** 
- * PDA IDs
- * 
- * Ideally, this would be automatically generated to avoid compat issues, not unlike DoomRPG.
- */
-
-/** Sort by ascending order. */
-
-enum PDA_Theme_State {
-    THEME_BULKY = 0,
-    THEME_SLIM
-}
-
-enum PDA_ButtonState {
-    button_none = 0,
-    button_hovered,
-    button_clicked,
-}
-
-enum PDA_MouseState {
-    mouse_default = 0,
-    mouse_pointer,
-    mouse_grab,
-    mouse_holding,
-}
-
-enum PDA_IDs {
-    PDA_CURSORID = 2,
-    
-    // Header
-    PDA_PLAYERS_BUTTON = 40,
-    PDA_WEAPONS_BUTTON,
-    PDA_ARMORS_BUTTON,
-    PDA_ASSEMBLIES_BUTTON,
-    PDA_ITEMS_BUTTON,
-    PDA_BESTIARY_BUTTON,
-    PDA_MISC_BUTTON,
-    PDA_HELP_BUTTON,
-
-    PDA_BEAST_UV = 50,
-    PDA_BEAST_NM = 51,
-    PDA_BEAST_TP = 52,
-    PDA_BEAST_AG = 53,
-    PDA_BEAST_EX = 54,
-
-    PDA_PREV_PAGE = 60,
-    PDA_NEXT_PAGE,
-    PDA_MODS_PAGE = PDA_PREV_PAGE,
-    PDA_ARTIFACTS_PAGE = PDA_NEXT_PAGE,
-
-
-
-    PDA_CAT_DESCRIPTION = 94,
-
-    PDA_TAB_BUTTONS_START = 95,
-    PDA_TAB_BUTTONS_END = 115,
-    
-    PDA_BOTTOMID,
-    PDA_PEGGLESOSID,
-    PDA_PAGENUMID,
-      
-    PDA_PLAYER_BODY_ICON = 150,
-    PDA_PLAYER_ARMOR_ICON = 151,
-    PDA_PLAYER_BACKPACK_ICON = 154,
-    PDA_PLAYER_BOOTS_ICON = 156,
-
-    // Assembly iterator ID range
-    PDA_ASSEMBLYIDRANGE = PDA_PAGENUMID + 48,
-    PDA_WORNARMORS = PDA_ASSEMBLYIDRANGE + 512, // excessive range, but you never know.
-    PDA_STASHEDARMORS = PDA_WORNARMORS + 8,
-    PDA_NOEQID = PDA_STASHEDARMORS + 3,
-    // Modpack ID range
-    PDA_MODIDRANGE = PDA_NOEQID + 7,
-    // Message IDs
-    PDA_INFO4ID,
-    PDA_INFO3ID,
-    PDA_INFO2ID,
-    PDA_INFOID,
-    // Scrolling arrows
-    PDA_SCROLLDNID,
-    PDA_SCROLLUPID,
-    // Cursor
-    PDA_LASTID,
-      
-    PDA_PONG_LEFTPADDLE,
-    PDA_PONG_RIGHTPADDLE,
-    PDA_PONG_BALL,
-    PDA_PONG_TOPBORD,
-    PDA_PONG_BOTBORD,
-    PDA_PONG_PLAYERSCORE,
-    PDA_PONG_AISCORE,
-    PDA_INFOTOPID,
-    // PDA display
-    PDA_ID,
-    PDA_REALLYLASTID,
-
-    // Shared IDs go down here
-    PDA_ARMORINVIDRANGE = PDA_MODIDRANGE,
-    PDA_ARMORWORNIDRANGE = PDA_ASSEMBLYIDRANGE,
-    PDA_MODPACKSELECTID = PDA_PAGENUMID + 1,
-    PDA_MODPACKANIMID = PDA_INFO4ID,
-    PDA_TOOLTIPID = PDA_CAT_DESCRIPTION,
-    PDA_PLYR_ICON = PDA_ASSEMBLYIDRANGE,
-}
-
-
-// ARRAYS --------------------
-
-// PDA categories - these are all the unique sections you can wind up at
-enum PDA_Categories {
-	// Accessibles
-	PDA_MENU = 0,
-	PDA_CLASSES,
-	PDA_WEAPONS,
-	PDA_ASSEMBLIES,
-	PDA_ARMORS,
-	PDA_BESTIARY,
-	PDA_HELP,
-	PDA_ITEMS,
-	PDA_MISC,
-	PDA_MENUMAX, // Always keep this as the last element in the accessible areas
-
-	// Normally unaccessible
-	PDA_ASSEMBLY_DETAIL,
-    PDA_BESTIARY_DETAIL,
-	
-	// Accessible through Misc
-	PDA_PONG,
-	PDA_CREDITS,
-	PDA_HUDSWITCH,
-}
-
-enum PDA_Weapon_Pages {
-    WEAPON_PAGE_STORY = 1,
-    WEAPON_PAGE_MODPACK_EFFECTS,
-    WEAPON_PAGE_ARTIFACT_EFFECTS,
-}
-
-enum PDA_Assembly_Pages {
-    ASSEMBLY_PAGE_BASIC = 1,
-    ASSEMBLY_PAGE_ADVANCED,
-    ASSEMBLY_PAGE_MASTER,
-}
-
-enum PDA_Bestiary_Pages {
-    BESTIARY_PAGE_DIFFICULTIES = 1,
-    BESTIARY_PAGE_LIST,
-}
-
-enum PDA_Classes_Pages {
-    CLASSES_PAGE_PERKS = 1,
-    CLASSES_PAGE_STORY,
-}
-enum PDA_Equipment_Pages {
-    EQUIPMENT_PAGE_ONHAND = 1,
-    EQUIPMENT_PAGE_INFO,
-}
-
-enum armor_enum {
-	armor_TOKEN = 0,
-	armor_ACTOR,
-}
-
-enum bestiary_enum {
-    beast_TOKEN = 0,
-    beast_ACTOR,
-}
-
-enum weaponmod_enum {
-	mi_bulk = 0,
-	mi_power,
-	mi_agility,
-	mi_technical,
-	mi_sniper,
-	mi_firestorm,
-	mi_nano,
-}
-
-#define	DRLA_MENUMAXELEMENTS 2
 str DRLA_MenuOptions[PDA_MENUMAX][DRLA_MENUMAXELEMENTS] = {
 	{"MPLYICO", "Classes"},
 	{"MWEPICO", "Weapons"},
@@ -575,8 +286,6 @@ str DRLA_MenuOptions[PDA_MENUMAX][DRLA_MENUMAXELEMENTS] = {
 };
 
 // Is it worth making a separate header file for just these weapon definitions?
-// TODO: Unhardcode this
-#define DRLA_WEAPONPERKMAX 5
 str DRLA_WeaponPerkList[DRLA_WEAPONPERKMAX][3] = {
 	{"RLAmmochainPerk",    "Ammochain (Marine)",        "RLRapidfireTypeWeapon"     },
 	{"RLSharpshooterPerk", "Sharpshooter (Scout)",      "RLPistolTypeWeapon"        },
@@ -586,13 +295,11 @@ str DRLA_WeaponPerkList[DRLA_WEAPONPERKMAX][3] = {
 };
 
 // TODO: Unhardcode this?
-#define DRLA_WEAPONSETMAX 2
 str DRLA_WeaponSetList[DRLA_WEAPONSETMAX][2] = {
 	{"RLNuclearWeaponSetBonusActive", "\cfFURIOUS FUSION\c-"  },
 	{"RLCerberusSetBonusActive",      "\cfTRINITY GUARDIAN\c-"}
 };
 
-#define DRLA_NUCLEARMAX 16
 str DRLA_NuclearCheckList[DRLA_NUCLEARMAX] = {
 	"RLNuclearPlasmaPistol", "RLNuclearPlasmaRifle", "RLNuclearBFG9000", "RLNuclearOnslaught", "RLNuclearPlasmaRevolver",
 	"RLHighPowerNuclearPlasmaPistol", "RLHighPowerNuclearPlasmaRifle", "RLHighPowerNuclearBFG9000", "RLStormNuclearPlasmaPistol",
@@ -600,14 +307,10 @@ str DRLA_NuclearCheckList[DRLA_NUCLEARMAX] = {
 	"RLBurstCannonNuclearPlasmaRifle", "RLNuclearBiggestFuckingGun"
 };
 
-// TODO: Unhardcode this?
-#define DRLA_TRISTARMAX 3
-str DRLA_TristarCheckList[DRLA_TRISTARMAX] =
-{
+str DRLA_TristarCheckList[DRLA_TRISTARMAX] = {
 	"RLTristarBlaster", "RLHighPowerTristarBlaster", "RLNanomanufactureAmmoTristarBlaster"
 };
 
-#define DRLA_BACKPACKMAX 6
 str DRLA_BackpackList[DRLA_BACKPACKMAX][2] = {
     {"RLBackpack", "BASIC"},
     {"RLCombatBackpackToken", "COMBAT"},
@@ -617,126 +320,164 @@ str DRLA_BackpackList[DRLA_BACKPACKMAX][2] = {
     {"RLNuclearBackpackToken", "NUCLEAR"}
 };
 
-/** Mod icons for the PDA */
-// str icon_static_WeaponMods[PDA_MODMAX - 1] = { "BMODICON", "PMODICON", "AMODICON", "TMODICON", "SMODICON", "FMODICON", "NMODICON" };
-// str icon_animated_WeaponMods[PDA_MODMAX - 1] = { "PDABMOD", "PDAPMOD", "PDAAMOD", "PDATMOD", "PDASMOD", "PDAFMOD", "PDANMOD" };
+str DRLA_Bestiary[DRLA_DIFFICULTYTIERS][DRLA_MONSTERMAX][DRLA_BESTIARYELEMENTS] =
+{
+	// UV and below
+	{
+		{"RLFormerHuman", "PDA_BES_STANDARD_ZOMBIEMAN"},
+		{"RLFormerSergeant", "PDA_BES_STANDARD_SHOTGUNGUY"},
+		{"RLFormerCommando", "PDA_BES_STANDARD_CHAINGUNGUY"},
+		{"RLFormerCaptain", "PDA_BES_STANDARD_CAPTAIN"},
+		{"RLImp", "PDA_BES_STANDARD_IMP"},
+		{"RLDemon", "PDA_BES_STANDARD_DEMON"},
+		{"RLSpectre", "PDA_BES_STANDARD_SPECTRE"},
+		{"RLLostSoul", "PDA_BES_STANDARD_LOSTSOUL"},
+		{"RLCacodemon", "PDA_BES_STANDARD_CACODEMON"},
+		{"RLHellKnight", "PDA_BES_STANDARD_HELLKNIGHT"},
+		{"RLBaronOfHell", "PDA_BES_STANDARD_BARONOFHELL"},
+		{"RLArachnotron", "PDA_BES_STANDARD_ARACHNOTRON"},
+		{"RLPainElemental", "PDA_BES_STANDARD_PAINELEMENTAL"},
+		{"RLRevenant", "PDA_BES_STANDARD_REVENANT"},
+		{"RLMancubus", "PDA_BES_STANDARD_MANCUBUS"},
+		{"RLArchvile", "PDA_BES_STANDARD_ARCHVILE"},
+		{"RLCyberdemon", "PDA_BES_STANDARD_CYBERDEMON"},
+		{"RLSpiderMastermind", "PDA_BES_STANDARD_SPIDERMASTERMIND"},
+		{"RLBruiserBrother", "PDA_BES_STANDARD_WILDCARD"},
+	},
+
+	// Nightmare
+	{
+		{"RLEliteHuman", "PDA_BES_NIGHTMARE_ZOMBIEMAN"},
+		{"RLEliteSergeant", "PDA_BES_NIGHTMARE_SHOTGUNGUY"},
+		{"RLEliteCommando", "PDA_BES_NIGHTMARE_CHAINGUNGUY"},
+		{"RLEliteCaptain", "PDA_BES_NIGHTMARE_CAPTAIN"},
+		{"RLNightmareImp", "PDA_BES_NIGHTMARE_IMP"},
+		{"RLNightmareDemon", "PDA_BES_NIGHTMARE_DEMON"},
+		{"RLNightmareSpectre", "PDA_BES_NIGHTMARE_SPECTRE"},
+		{"RLNightmareLostSoul", "PDA_BES_NIGHTMARE_LOSTSOUL"},
+		{"RLNightmareCacodemon", "PDA_BES_NIGHTMARE_CACODEMON"},
+		{"RLNightmareHellKnight", "PDA_BES_NIGHTMARE_HELLKNIGHT"},
+		{"RLNightmareBaronOfHell", "PDA_BES_NIGHTMARE_BARONOFHELL"},
+		{"RLNightmareArachnotron", "PDA_BES_NIGHTMARE_ARACHNOTRON"},
+		{"RLNightmarePainElemental", "PDA_BES_NIGHTMARE_PAINELEMENTAL"},
+		{"RLNightmareRevenant", "PDA_BES_NIGHTMARE_REVENANT"},
+		{"RLNightmareMancubus", "PDA_BES_NIGHTMARE_MANCUBUS"},
+		{"RLNightmareArchvile", "PDA_BES_NIGHTMARE_ARCHVILE"},
+		{"RLNightmareCyberdemon", "PDA_BES_NIGHTMARE_CYBERDEMON"},
+		{"RLNightmareSpiderMastermind", "PDA_BES_NIGHTMARE_SPIDERMASTERMIND"},
+		{"RLAgonyElemental", "PDA_BES_NIGHTMARE_WILDCARD"},
+	},
+
+	// Technophobia
+	{
+		{"RLFormerCyborg", "PDA_BES_TECHNOPHOBIA_ZOMBIEMAN"},
+		{"RLFormerSergeantCyborg", "PDA_BES_TECHNOPHOBIA_SHOTGUNGUY"},
+		{"RLFormerCommandoCyborg", "PDA_BES_TECHNOPHOBIA_CHAINGUNGUY"},
+		{"RLFormerCaptainCyborg", "PDA_BES_TECHNOPHOBIA_CAPTAIN"},
+		{"RLCyberneticImp", "PDA_BES_TECHNOPHOBIA_IMP"},
+		{"RLCyberneticDemon", "PDA_BES_TECHNOPHOBIA_DEMON"},
+		{"RLCyberneticSpectre", "PDA_BES_TECHNOPHOBIA_SPECTRE"},
+		{"RLCyberneticLostSoul", "PDA_BES_TECHNOPHOBIA_LOSTSOUL"},
+		{"RLCyberneticCacodemon", "PDA_BES_TECHNOPHOBIA_CACODEMON"},
+		{"RLCyberneticHellKnight", "PDA_BES_TECHNOPHOBIA_HELLKNIGHT"},
+		{"RLCyberneticBaronOfHell", "PDA_BES_TECHNOPHOBIA_BARONOFHELL"},
+		{"RLCyberneticArachnotron", "PDA_BES_TECHNOPHOBIA_ARACHNOTRON"},
+		{"RLCyberneticPainElemental", "PDA_BES_TECHNOPHOBIA_PAINELEMENTAL"},
+		{"RLCyberneticRevenant", "PDA_BES_TECHNOPHOBIA_REVENANT"},
+		{"RLCyberneticMancubus", "PDA_BES_TECHNOPHOBIA_MANCUBUS"},
+		{"RLCyberneticArchvile", "PDA_BES_TECHNOPHOBIA_ARCHVILE"},
+		{"RLCyberneticCyberdemon", "PDA_BES_TECHNOPHOBIA_CYBERDEMON"},
+		{"RLCyberneticSpiderMastermind", "PDA_BES_TECHNOPHOBIA_SPIDERMASTERMIND"},
+		{"RLTerminator", "PDA_BES_TECHNOPHOBIA_WILDCARD"},
+	},
+
+	// Armageddon
+	{
+		{"RLFormerAssaultTrooper", "PDA_BES_ARMAGEDDON_ZOMBIEMAN"},
+		{"RLFormerOverwatch", "PDA_BES_ARMAGEDDON_SHOTGUNGUY"},
+		{"RLFormerShocktrooper", "PDA_BES_ARMAGEDDON_CHAINGUNGUY"},
+		{"RLFormerBaseCommander", "PDA_BES_ARMAGEDDON_CAPTAIN"},
+		{"RLArmageddonImp", "PDA_BES_ARMAGEDDON_IMP"},
+		{"RLArmageddonDemon", "PDA_BES_ARMAGEDDON_DEMON"},
+		{"RLArmageddonSpectre", "PDA_BES_ARMAGEDDON_SPECTRE"},
+		{"RLArmageddonLostSoul", "PDA_BES_ARMAGEDDON_LOSTSOUL"},
+		{"RLArmageddonCacodemon", "PDA_BES_ARMAGEDDON_CACODEMON"},
+		{"RLArmageddonHellKnight", "PDA_BES_ARMAGEDDON_HELLKNIGHT"},
+		{"RLArmageddonBaronOfHell", "PDA_BES_ARMAGEDDON_BARONOFHELL"},
+		{"RLArmageddonArachnotron", "PDA_BES_ARMAGEDDON_ARACHNOTRON"},
+		{"RLArmageddonPainElemental", "PDA_BES_ARMAGEDDON_PAINELEMENTAL"},
+		{"RLArmageddonRevenant", "PDA_BES_ARMAGEDDON_REVENANT"},
+		{"RLArmageddonMancubus", "PDA_BES_ARMAGEDDON_MANCUBUS"},
+		{"RLArmageddonArchvile", "PDA_BES_ARMAGEDDON_ARCHVILE"},
+		{"RLArmageddonCyberdemon", "PDA_BES_ARMAGEDDON_CYBERDEMON"},
+		{"RLArmageddonSpiderMastermind", "PDA_BES_ARMAGEDDON_SPIDERMASTERMIND"},
+		{"RLAbominant", "PDA_BES_ARMAGEDDON_WILDCARD"},
+	},
+	
+	// speshul
+	{
+		{"RLEliteScout", "PDA_BES_SPECIAL_SCOUT"},
+		{"RLUACDefenceDrone", "PDA_BES_SPECIAL_DEFENCEDRONE"},
+	}
+};
+
+str DRLA_ItemInfo[DRLA_ITEMSMAX][DRLA_ITEMELEMENTS] =
+{
+    //Supposed to be just filler, not really accessed
+    {"TNT1A0", "PDA_ITEMS_UNKNOWN_NAME", "PDA_ITEMS_UNKNOWN_DESC"},
+
+    // Page 1
+    {"PDA_ITEMS_CLIP_ICON",      "PDA_ITEMS_CLIP_NAME",      "PDA_ITEMS_CLIP_DESC"      },
+    {"PDA_ITEMS_SHELL_ICON",     "PDA_ITEMS_SHELL_NAME",     "PDA_ITEMS_SHELL_DESC"     },
+    {"PDA_ITEMS_ROCKET_ICON",    "PDA_ITEMS_ROCKET_NAME",    "PDA_ITEMS_ROCKET_DESC"    },
+    {"PDA_ITEMS_CELL_ICON",      "PDA_ITEMS_CELL_NAME",      "PDA_ITEMS_CELL_DESC"      },
+    {"PDA_ITEMS_CLIPBOX_ICON",   "PDA_ITEMS_CLIPBOX_NAME",   "PDA_ITEMS_CLIPBOX_DESC"   },
+    {"PDA_ITEMS_SHELLBOX_ICON",  "PDA_ITEMS_SHELLBOX_NAME",  "PDA_ITEMS_SHELLBOX_DESC"  },
+    {"PDA_ITEMS_ROCKETBOX_ICON", "PDA_ITEMS_ROCKETBOX_NAME", "PDA_ITEMS_ROCKETBOX_DESC" },
+    {"PDA_ITEMS_CELLPACK_ICON",  "PDA_ITEMS_CELLPACK_NAME",  "PDA_ITEMS_CELLPACK_DESC"  },
+
+    // Page 2
+    {"PDA_ITEMS_STIMPACK_ICON",   "PDA_ITEMS_STIMPACK_NAME",   "PDA_ITEMS_STIMPACK_DESC"   },
+    {"PDA_ITEMS_MEDIKIT_ICON",    "PDA_ITEMS_MEDIKIT_NAME",    "PDA_ITEMS_MEDIKIT_DESC"    },
+    {"PDA_ITEMS_ARMOR_ICON",      "PDA_ITEMS_ARMOR_NAME",      "PDA_ITEMS_ARMOR_DESC"      },
+    {"PDA_ITEMS_BOOTS_ICON",      "PDA_ITEMS_BOOTS_NAME",      "PDA_ITEMS_BOOTS_DESC"      },
+    {"PDA_ITEMS_BERSERK_ICON",    "PDA_ITEMS_BERSERK_NAME",    "PDA_ITEMS_BERSERK_DESC"    },
+    {"PDA_ITEMS_RADSUIT_ICON",    "PDA_ITEMS_RADSUIT_NAME",    "PDA_ITEMS_RADSUIT_DESC"    },
+    {"PDA_ITEMS_LIGHTAMP_ICON",   "PDA_ITEMS_LIGHTAMP_NAME",   "PDA_ITEMS_LIGHTAMP_DESC"   },
+    {"PDA_ITEMS_BLURSPHERE_ICON", "PDA_ITEMS_BLURSPHERE_NAME", "PDA_ITEMS_BLURSPHERE_DESC" },
+
+    // Page 3
+    {"PDA_ITEMS_HEALTHBONUS_ICON",           "PDA_ITEMS_HEALTHBONUS_NAME",           "PDA_ITEMS_HEALTHBONUS_DESC"           },
+    {"PDA_ITEMS_ARMORBONUS_ICON",            "PDA_ITEMS_ARMORBONUS_NAME",            "PDA_ITEMS_ARMORBONUS_DESC"            },
+    {"PDA_ITEMS_SOULSPHERE_ICON",            "PDA_ITEMS_SOULSPHERE_NAME",            "PDA_ITEMS_SOULSPHERE_DESC"            },
+    {"PDA_ITEMS_MEGASPHERE_ICON",            "PDA_ITEMS_MEGASPHERE_NAME",            "PDA_ITEMS_MEGASPHERE_DESC"            },
+    {"PDA_ITEMS_INVULNERABILITYSPHERE_ICON", "PDA_ITEMS_INVULNERABILITYSPHERE_NAME", "PDA_ITEMS_INVULNERABILITYSPHERE_DESC" },
+    {"PDA_ITEMS_SUPPLYCRATE_ICON",           "PDA_ITEMS_SUPPLYCRATE_NAME",           "PDA_ITEMS_SUPPLYCRATE_DESC"           },
+    {"PDA_ITEMS_BACKPACK_ICON",              "PDA_ITEMS_BACKPACK_NAME",              "PDA_ITEMS_BACKPACK_DESC"              },
+    {"PDA_ITEMS_KEYS_ICON",                  "PDA_ITEMS_KEYS_NAME",                  "PDA_ITEMS_KEYS_DESC"                  },
+
+    // Page 4
+    {"PDA_ITEMS_COMPUTERMAP_ICON",       "PDA_ITEMS_COMPUTERMAP_NAME",       "PDA_ITEMS_COMPUTERMAP_DESC"       },
+    {"PDA_ITEMS_TRACKINGMAP_ICON",       "PDA_ITEMS_TRACKINGMAP_NAME",       "PDA_ITEMS_TRACKINGMAP_DESC"       },
+    {"PDA_ITEMS_BLUEPRINTCOMPUTER_ICON", "PDA_ITEMS_BLUEPRINTCOMPUTER_NAME", "PDA_ITEMS_BLUEPRINTCOMPUTER_DESC" },
+    {"PDA_ITEMS_BACKPACKS_ICON",         "PDA_ITEMS_BACKPACKS_NAME",         "PDA_ITEMS_BACKPACKS_DESC"         },
+    {"PDA_ITEMS_BULKMODPACK_ICON",       "PDA_ITEMS_BULKMODPACK_NAME",       "PDA_ITEMS_BULKMODPACK_DESC"       },
+    {"PDA_ITEMS_POWERMODPACK_ICON",      "PDA_ITEMS_POWERMODPACK_NAME",      "PDA_ITEMS_POWERMODPACK_DESC"      },
+    {"PDA_ITEMS_AGILITYMODPACK_ICON",    "PDA_ITEMS_AGILITYMODPACK_NAME",    "PDA_ITEMS_AGILITYMODPACK_DESC"    },
+    {"PDA_ITEMS_TECHNICALMODPACK_ICON",  "PDA_ITEMS_TECHNICALMODPACK_NAME",  "PDA_ITEMS_TECHNICALMODPACK_DESC"  },
+
+    // Page 5
+    {"PDA_ITEMS_SNIPERMODPACK_ICON",    "PDA_ITEMS_SNIPERMODPACK_NAME",    "PDA_ITEMS_SNIPERMODPACK_DESC"    },
+    {"PDA_ITEMS_FIRESTORMMODPACK_ICON", "PDA_ITEMS_FIRESTORMMODPACK_NAME", "PDA_ITEMS_FIRESTORMMODPACK_DESC" },
+    {"PDA_ITEMS_NANOMODPACK_ICOM",      "PDA_ITEMS_NANOMODPACK_NAME",      "PDA_ITEMS_NANOMODPACK_DESC"      },
+    {"PDA_ITEMS_ONYXMODPACK_ICON",      "PDA_ITEMS_ONYXMODPACK_NAME",      "PDA_ITEMS_ONYXMODPACK_DESC"      },
+    {"PDA_ITEMS_ARMORMODPACK_ICON",     "PDA_ITEMS_ARMORMODPACK_NAME",     "PDA_ITEMS_ARMORMODPACK_DESC"     },
+    {"PDA_ITEMS_DEMONARTIFACT_ICON",    "PDA_ITEMS_DEMONARTIFACT_NAME",    "PDA_ITEMS_DEMONARTIFACT_DESC"    },
+    {"PDA_ITEMS_SKULLS_ICON",           "PDA_ITEMS_SKULLS_NAME",           "PDA_ITEMS_SKULLS_DESC"           },
+    {"PDA_ITEMS_PHASEDEVICES_ICON",     "PDA_ITEMS_PHASEDEVICES_NAME",     "PDA_ITEMS_PHASEDEVICES_DESC"     },
+};
 
 // FUNCTIONS --------------------
-
-#define StrTrim(a,b,c)			StrMid((a),(b),StrLen((a)) - (c))
-#define Array_Size(array) 		(sizeof((array))/sizeof((array[0][0])))
-
-#define PDA_SetScrollLimit(a)  	PDA_Local.max_text_y = (a)
-#define PDA_ResetScroll()       PDA_Local.scrollingY = PDA_SCREEN_Y;
-#define PDA_SetMonsterLimit(a)  if (PDA_Local.monsterpage > (a)) PDA_Local.monsterpage = (a)
-#define PDA_DefaultFont() 		SetFont(USED_PDA_FONT);
-
-function int checkSpecialArmorTokens(void) {
-    return CheckInventory("RLEnclaveSetBonusActive")                 ||
-           CheckInventory("PowerRLPrototypeAssaultShieldProtection") ||
-           CheckInventory("PowerRLOverchargeSystemProtection")       ||
-           CheckInventory("RLCyberneticArmorModdedToken")            ||
-           CheckInventory("RLDeathFromAboveSetBonusActive")          ||
-           CheckInventory("PowerRLInquisitorsSetBonusProtection");
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/** PONG stuff */
-//where the sscore is drawn
-#define SCORELINE       PDA_SCREEN_Y + X_LEFT_EDGE
-
-#define MAXPADDLESPEED  18.0
-
-//velocity in pixels/tic (for virtual resolution)
-#define VELOCITY        4.0
-
-//you get terrible values from the pitch so high sensitivity
-#define MOUSESEN        56.0
-
-//start of the game field
-#define GAMEFIELDSTART 	PDA_SCREEN_Y + 20
-//end of the game field
-#define GAMEFIELDEND 	PDA_SCREEN_HEIGHT
-//#define GAMEFIELDSTART  32
-//#define GAMEFIELDEND    200
-
-//start of the horizontal area
-#define GAMEFIELDLEFT 	PDA_SCREEN_X
-#define GAMEFIELDRIGHT 	PDA_SCREEN_WIDTH + 20
-//#define GAMEFIELDLEFT 0
-//#define GAMEFIELDRIGHT 320
-
-//Where the left paddle is drawn
-#define LEFTPADDLEDRAW 	PDA_SCREEN_X + 14
-#define RIGHTPADDLEDRAW	PDA_SCREEN_WIDTH + 4
-//#define LEFTPADDLEDRAW 4
-//Where the left paddle is tested for hits
-#define LEFTPADDLE      (LEFTPADDLEDRAW + PADDLEWIDTH)
-//Where the right paddle is tested and drawn
-#define RIGHTPADDLE     (RIGHTPADDLEDRAW - PADDLEWIDTH)
-
-//needs graphics resized to fit values here
-#define PADDLEHEIGHT    24
-#define PADDLEWIDTH     4
-#define BALLSIZE        4
-
-//AI target reaction times
-#define LOWREACTIONTIME  1
-#define HIGHREACTIONTIME 4
-
-//Amount of ticks per frame
-#define PONGSPEED 1
-
-bool errorbit = false;
-
-#define scoreboard "\cdYOU: [%s:%i:\cd] | NME: [%s:%i:\cd]"
-
-struct ballmove
-{
-	fixed x;
-	fixed y;
-	fixed velx;
-	fixed vely;
-	fixed angle;
-}
-
-int playernumtoconst[] = {AAPTR_PLAYER1, AAPTR_PLAYER2, AAPTR_PLAYER3, AAPTR_PLAYER4, AAPTR_PLAYER5, AAPTR_PLAYER6, AAPTR_PLAYER7, AAPTR_PLAYER8};
-
-fixed ballx[MAX_PLAYERS], bally[MAX_PLAYERS];
-fixed velx[MAX_PLAYERS], vely[MAX_PLAYERS];
-
-int p1score[MAX_PLAYERS], p2score[MAX_PLAYERS];
-
-fixed paddle1y[MAX_PLAYERS], paddle2y[MAX_PLAYERS];
-
-fixed currentAITarget[MAX_PLAYERS];
-int currentAITargTime[MAX_PLAYERS];
-
-int mpChallenges[MAX_PLAYERS];
-int myChallenge[MAX_PLAYERS];
-
-int mpPlayer1[MAX_PLAYERS];
-int mpPlayer2[MAX_PLAYERS];
-
-int quitMode[MAX_PLAYERS];
-
+#include "PDA_MCRO.ach"
 
 // EOF

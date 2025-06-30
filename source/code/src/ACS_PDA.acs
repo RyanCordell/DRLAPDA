@@ -7,14 +7,11 @@
 
 #include "../headers/PDA_LIB.ach" // Stores IDs, arrays and other things the PDA uses.
 
-/** PDA Databases */
 #include "../database/equipment.idb" // Armors, boots, and etc.
 
-#include "../headers/PDA_BES.ach" // i'm da
-#include "../headers/PDA_ITM.ach" // Stores information about the many items in DRLA
 #include "../headers/PDA_FNC.ach"
+
 #include "ACS_INP.acs" // PDA input tracker, made separate for better responsiveness
-#include "ACS_PNG.acs" // PDA Pong minigame
 
 
 global str 43:weaponval;

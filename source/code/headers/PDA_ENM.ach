@@ -1,0 +1,174 @@
+/** 
+ * PDA IDs
+ * 
+ * Ideally, this would be automatically generated to avoid compat issues, not unlike DoomRPG.
+ */
+
+/** Sort by ascending order. */
+
+enum PDA_Theme_State {
+    THEME_BULKY = 0,
+    THEME_SLIM
+}
+
+enum PDA_ButtonState {
+    button_none = 0,
+    button_hovered,
+    button_clicked,
+}
+
+enum PDA_MouseState {
+    mouse_default = 0,
+    mouse_pointer,
+    mouse_grab,
+    mouse_holding,
+}
+
+enum PDA_IDs {
+    PDA_CURSORID = 2,
+    
+    // Header
+    PDA_PLAYERS_BUTTON = 40,
+    PDA_WEAPONS_BUTTON,
+    PDA_ARMORS_BUTTON,
+    PDA_ASSEMBLIES_BUTTON,
+    PDA_ITEMS_BUTTON,
+    PDA_BESTIARY_BUTTON,
+    PDA_MISC_BUTTON,
+    PDA_HELP_BUTTON,
+
+    PDA_BEAST_UV = 50,
+    PDA_BEAST_NM = 51,
+    PDA_BEAST_TP = 52,
+    PDA_BEAST_AG = 53,
+    PDA_BEAST_EX = 54,
+
+    PDA_PREV_PAGE = 60,
+    PDA_NEXT_PAGE,
+    PDA_MODS_PAGE = PDA_PREV_PAGE,
+    PDA_ARTIFACTS_PAGE = PDA_NEXT_PAGE,
+
+
+
+    PDA_CAT_DESCRIPTION = 94,
+
+    PDA_TAB_BUTTONS_START = 95,
+    PDA_TAB_BUTTONS_END = 115,
+    
+    PDA_BOTTOMID,
+    PDA_PEGGLESOSID,
+    PDA_PAGENUMID,
+      
+    PDA_PLAYER_BODY_ICON = 150,
+    PDA_PLAYER_ARMOR_ICON = 151,
+    PDA_PLAYER_BACKPACK_ICON = 154,
+    PDA_PLAYER_BOOTS_ICON = 156,
+
+    // Assembly iterator ID range
+    PDA_ASSEMBLYIDRANGE = PDA_PAGENUMID + 48,
+    PDA_WORNARMORS = PDA_ASSEMBLYIDRANGE + 512, // excessive range, but you never know.
+    PDA_STASHEDARMORS = PDA_WORNARMORS + 8,
+    PDA_NOEQID = PDA_STASHEDARMORS + 3,
+    // Modpack ID range
+    PDA_MODIDRANGE = PDA_NOEQID + 7,
+    // Message IDs
+    PDA_INFO4ID,
+    PDA_INFO3ID,
+    PDA_INFO2ID,
+    PDA_INFOID,
+    // Scrolling arrows
+    PDA_SCROLLDNID,
+    PDA_SCROLLUPID,
+    // Cursor
+    PDA_LASTID,
+      
+    PDA_PONG_LEFTPADDLE,
+    PDA_PONG_RIGHTPADDLE,
+    PDA_PONG_BALL,
+    PDA_PONG_TOPBORD,
+    PDA_PONG_BOTBORD,
+    PDA_PONG_PLAYERSCORE,
+    PDA_PONG_AISCORE,
+    PDA_INFOTOPID,
+    // PDA display
+    PDA_ID,
+    PDA_REALLYLASTID,
+
+    // Shared IDs go down here
+    PDA_ARMORINVIDRANGE = PDA_MODIDRANGE,
+    PDA_ARMORWORNIDRANGE = PDA_ASSEMBLYIDRANGE,
+    PDA_MODPACKSELECTID = PDA_PAGENUMID + 1,
+    PDA_MODPACKANIMID = PDA_INFO4ID,
+    PDA_TOOLTIPID = PDA_CAT_DESCRIPTION,
+    PDA_PLYR_ICON = PDA_ASSEMBLYIDRANGE,
+}
+
+// PDA categories - these are all the unique sections you can wind up at
+enum PDA_Categories {
+	// Accessibles
+	PDA_MENU = 0,
+	PDA_CLASSES,
+	PDA_WEAPONS,
+	PDA_ASSEMBLIES,
+	PDA_ARMORS,
+	PDA_BESTIARY,
+	PDA_HELP,
+	PDA_ITEMS,
+	PDA_MISC,
+	PDA_MENUMAX, // Always keep this as the last element in the accessible areas
+
+	// Normally unaccessible
+	PDA_ASSEMBLY_DETAIL,
+    PDA_BESTIARY_DETAIL,
+	
+	// Accessible through Misc
+	PDA_PONG,
+	PDA_CREDITS,
+	PDA_HUDSWITCH,
+}
+
+enum PDA_Weapon_Pages {
+    WEAPON_PAGE_STORY = 1,
+    WEAPON_PAGE_MODPACK_EFFECTS,
+    WEAPON_PAGE_ARTIFACT_EFFECTS,
+}
+
+enum PDA_Assembly_Pages {
+    ASSEMBLY_PAGE_BASIC = 1,
+    ASSEMBLY_PAGE_ADVANCED,
+    ASSEMBLY_PAGE_MASTER,
+}
+
+enum PDA_Bestiary_Pages {
+    BESTIARY_PAGE_DIFFICULTIES = 1,
+    BESTIARY_PAGE_LIST,
+}
+
+enum PDA_Classes_Pages {
+    CLASSES_PAGE_PERKS = 1,
+    CLASSES_PAGE_STORY,
+}
+enum PDA_Equipment_Pages {
+    EQUIPMENT_PAGE_ONHAND = 1,
+    EQUIPMENT_PAGE_INFO,
+}
+
+enum armor_enum {
+	armor_TOKEN = 0,
+	armor_ACTOR,
+}
+
+enum bestiary_enum {
+    beast_TOKEN = 0,
+    beast_ACTOR,
+}
+
+enum weaponmod_enum {
+	mi_bulk = 0,
+	mi_power,
+	mi_agility,
+	mi_technical,
+	mi_sniper,
+	mi_firestorm,
+	mi_nano,
+}

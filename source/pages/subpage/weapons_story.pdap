@@ -1,7 +1,6 @@
 
 // TODO: throw gun icon on this page
-HudMessageParallax(
-    StrParam(
+HudMessage(
         "%s:" // Tech perk
         "%s:" // Non-Tech Class perk
         "\n"
@@ -14,22 +13,22 @@ HudMessageParallax(
         weapon_perk_displayed//,
         // (weapon_supports_artifacts) ? PDA_Weapon_DualName_Printer : PDA_Weapon_Name_Printer//,
         // (weapon_supports_artifacts) ? PDA_Weapon_DualDesc_Printer : PDA_Weapon_Desc_Printer
-    ),
+    ;
 
-    HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 
+    HUDMSG_ALPHA, PDA_INFOID, CR_UNTRANSLATED, 
     10.0, 20.0 + (20.0 * 1), 
     0, 1.0);
 
-if (PDA_Local.scrollYDelta == -1) {
-    PDA_LocalButton[PDA_MODS_PAGE] = PDA_CreateFixedButton(PDA_MODS_PAGE, "Modpack Effects" , "MODICON", 
-        10.0, PDA_SCREEN_HEIGHT, 
-        82, 16, 
-        16, 19);
-                    PDA_ButtonHandler(PDA_MODS_PAGE, true, 2, "", false);
+// if (PDA_Local.scrollYDelta == -1) {
+//     PDA_LocalButton[PDA_MODS_PAGE] = PDA_CreateFixedButton(PDA_MODS_PAGE, "Modpack Effects" , "MODICON", 
+//         10.0, PDA_SCREEN_HEIGHT, 
+//         82, 16, 
+//         16, 19);
+//                     PDA_ButtonHandler(PDA_MODS_PAGE, true, 2, "", false);
 
-    PDA_LocalButton[PDA_ARTIFACTS_PAGE] = PDA_CreateFixedButton(PDA_ARTIFACTS_PAGE, "Artifact Effects", "DMNAICON", 
-        PDA_SCREEN_WIDTH - 82 - 20, PDA_SCREEN_HEIGHT,
-        82, 16, 
-        38, 40);
-                    PDA_ButtonHandler(PDA_ARTIFACTS_PAGE, true, 3, "", false);
-}
+//     PDA_LocalButton[PDA_ARTIFACTS_PAGE] = PDA_CreateFixedButton(PDA_ARTIFACTS_PAGE, "Artifact Effects", "DMNAICON", 
+//         PDA_SCREEN_WIDTH - 82 - 20, PDA_SCREEN_HEIGHT,
+//         82, 16, 
+//         38, 40);
+//                     PDA_ButtonHandler(PDA_ARTIFACTS_PAGE, true, 3, "", false);
+// }

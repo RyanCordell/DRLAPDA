@@ -1,7 +1,6 @@
 
 // TODO: handle redraws via a more manual update method
 
-#define pulser(a, b) (b ? b : 0.59) + sin(Timer() * 0.99) / (a)
 
 function void clearStringArray (void) {
     for (int i = 0; i < STRING_ARRAY_MAX; i++) stringArray[i] = "";
@@ -182,6 +181,15 @@ function int SetInventory (str Item, int Count) {
         TakeInventory(Item, -n);
 
     return n;
+}
+
+function int checkSpecialArmorTokens(void) {
+    return CheckInventory("RLEnclaveSetBonusActive")                 ||
+           CheckInventory("PowerRLPrototypeAssaultShieldProtection") ||
+           CheckInventory("PowerRLOverchargeSystemProtection")       ||
+           CheckInventory("RLCyberneticArmorModdedToken")            ||
+           CheckInventory("RLDeathFromAboveSetBonusActive")          ||
+           CheckInventory("PowerRLInquisitorsSetBonusProtection");
 }
 
 function void checkMonsterKillCount (void) {
@@ -508,23 +516,23 @@ function void PDA_SetDataPerPage (void) {
 
             log("%s: | %s:", current_weapon, GetWeapon());
 
-            if (stricmp(current_weapon, "None") != 0) {
+            // if (stricmp(current_weapon, "None") != 0) {
                 // PDA_Weapon_Name_Printer = "name";
                 // PDA_Weapon_Desc_Printer = "desc";
 
                 // PDA_Weapon_DualName_Printer = "dual name";
                 // PDA_Weapon_DualDesc_Printer = "dual desc";
 
-                PDA_Weapon_Bulk_Quantity      = 0;
-                PDA_Weapon_Power_Quantity     = 0;
-                PDA_Weapon_Agility_Quantity   = 0;
-                PDA_Weapon_Technical_Quantity = 0;
-                PDA_Weapon_Sniper_Quantity    = 0;
-                PDA_Weapon_Firestorm_Quantity = 0;
-                PDA_Weapon_Nano_Quantity      = 0;
-                PDA_Weapon_Artifact_Quantity  = 0;
+                // PDA_Weapon_Bulk_Quantity      = 0;
+                // PDA_Weapon_Power_Quantity     = 0;
+                // PDA_Weapon_Agility_Quantity   = 0;
+                // PDA_Weapon_Technical_Quantity = 0;
+                // PDA_Weapon_Sniper_Quantity    = 0;
+                // PDA_Weapon_Firestorm_Quantity = 0;
+                // PDA_Weapon_Nano_Quantity      = 0;
+                // PDA_Weapon_Artifact_Quantity  = 0;
 
-                PDA_IsNotDemonic = true;
+                // PDA_IsNotDemonic = true;
         //         // PDA_Weapon_Name_Printer = StrParam("PDA_WEAPON_%s:_NAME", current_weapon_trimmed),
         //         // PDA_Weapon_Desc_Printer = StrParam("PDA_WEAPON_%s:_DESC", current_weapon_trimmed);
 
@@ -541,7 +549,7 @@ function void PDA_SetDataPerPage (void) {
         //         // PDA_Weapon_Artifact_Quantity  = CheckInventory(StrParam("%s:DemonArtifacts", current_weapon));
 
         //         // PDA_IsNotDemonic = !CheckInventory("RLDemonicWeaponToken");
-            }
+            // }
             switch (PDA_Local.page) {
                 case WEAPON_PAGE_STORY:
                     PDA_HEADER_STR = "PDA_WEAPON_HEADER"; PDA_HEADER_X = 0;
@@ -779,6 +787,11 @@ function void PDA_ChangeScrolling (void) {
     }
 }
 
+function void PDA_OnChange (void) {
+    PDA_ChangeScrolling();
+    PDA_SetDataPerPage();
+}
+
 function void PDA_SetCategory (int category) {
     afterPageDefaults("PDA_SetCategory");
     if (PDA_Local.category == category) {
@@ -797,6 +810,7 @@ function void PDA_SetCategory (int category) {
     PDA_Local.texty = 0.0;
     PDA_Local.scrollingY = PDA_SCREEN_Y;
     PDA_Local.category = category;
+    PDA_OnChange();
 }
 
 
@@ -804,12 +818,6 @@ function void PDA_SetPage (int page_num) {
     PDA_Local.page = page_num;
     afterPageDefaults("PDA_SetPage");
     PDA_OnChange();
-}
-
-function void PDA_OnChange (void) {
-    PDA_ChangeScrolling();
-    PDA_SetDataPerPage();
-
 }
 
 function void PDA_HasEquipment (void) {
