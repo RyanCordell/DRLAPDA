@@ -19,8 +19,8 @@
 
 // shortening array calls
 
-#define PDA_Local PDA_Info[PlayerNumber()]
-#define PDA_LocalMouse PDA_Mouse[PlayerNumber()]
+#define PDA_Local       PDA_Info[PlayerNumber()]
+#define PDA_LocalMouse  PDA_Mouse[PlayerNumber()]
 #define PDA_LocalButton PDA_Button[PlayerNumber()]
 
 #define localArmorData    _ad[PlayerNumber()][0]

@@ -22,13 +22,13 @@ if (stricmp(current_weapon, "None") != 0) {
         #include "../../pages/subpage/weapons_story.pdap"
     }
 
-    // if (PDA_Local.page == WEAPON_PAGE_MODPACK_EFFECTS) {
-    //     #include "../../pages/subpage/weapons_mods.pdap"
+    if (PDA_Local.page == WEAPON_PAGE_MODPACK_EFFECTS) {
+        #include "../../pages/subpage/weapons_mods.pdap"
         
-    // }
-    // if (PDA_Local.page == WEAPON_PAGE_ARTIFACT_EFFECTS) {
-    //     #include "../../pages/subpage/weapons_artifacts.pdap"
-    // }
+    }
+    if (PDA_Local.page == WEAPON_PAGE_ARTIFACT_EFFECTS) {
+        #include "../../pages/subpage/weapons_artifacts.pdap"
+    }
 }
 
 // PDA_UnsetScrollWindow();

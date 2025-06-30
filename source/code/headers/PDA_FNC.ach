@@ -516,40 +516,24 @@ function void PDA_SetDataPerPage (void) {
 
             log("%s: | %s:", current_weapon, GetWeapon());
 
-            // if (stricmp(current_weapon, "None") != 0) {
-                // PDA_Weapon_Name_Printer = "name";
-                // PDA_Weapon_Desc_Printer = "desc";
+            if (stricmp(current_weapon, "None") != 0) {
+                PDA_Weapon_Name_Printer = StrParam("PDA_WEAPON_%s:_NAME", current_weapon_trimmed),
+                PDA_Weapon_Desc_Printer = StrParam("PDA_WEAPON_%s:_DESC", current_weapon_trimmed);
 
-                // PDA_Weapon_DualName_Printer = "dual name";
-                // PDA_Weapon_DualDesc_Printer = "dual desc";
+                PDA_Weapon_DualName_Printer = StrParam("PDA_WEAPON_%s:DEMONARTIFACTS_NAME", current_weapon_trimmed),
+                PDA_Weapon_DualDesc_Printer = StrParam("PDA_WEAPON_%s:DEMONARTIFACTS_DESC", current_weapon_trimmed);
 
-                // PDA_Weapon_Bulk_Quantity      = 0;
-                // PDA_Weapon_Power_Quantity     = 0;
-                // PDA_Weapon_Agility_Quantity   = 0;
-                // PDA_Weapon_Technical_Quantity = 0;
-                // PDA_Weapon_Sniper_Quantity    = 0;
-                // PDA_Weapon_Firestorm_Quantity = 0;
-                // PDA_Weapon_Nano_Quantity      = 0;
-                // PDA_Weapon_Artifact_Quantity  = 0;
+                PDA_Weapon_Bulk_Quantity      = CheckInventory(StrParam("%s:BulkMod", current_weapon)),
+                PDA_Weapon_Power_Quantity     = CheckInventory(StrParam("%s:PowerMod", current_weapon)),
+                PDA_Weapon_Agility_Quantity   = CheckInventory(StrParam("%s:AgilityMod", current_weapon)),
+                PDA_Weapon_Technical_Quantity = CheckInventory(StrParam("%s:TechnicalMod", current_weapon)),
+                PDA_Weapon_Sniper_Quantity    = CheckInventory(StrParam("%s:SniperMod", current_weapon)),
+                PDA_Weapon_Firestorm_Quantity = CheckInventory(StrParam("%s:FirestormMod", current_weapon)),
+                PDA_Weapon_Nano_Quantity      = CheckInventory(StrParam("%s:NanoMod", current_weapon)),
+                PDA_Weapon_Artifact_Quantity  = CheckInventory(StrParam("%s:DemonArtifacts", current_weapon));
 
-                // PDA_IsNotDemonic = true;
-        //         // PDA_Weapon_Name_Printer = StrParam("PDA_WEAPON_%s:_NAME", current_weapon_trimmed),
-        //         // PDA_Weapon_Desc_Printer = StrParam("PDA_WEAPON_%s:_DESC", current_weapon_trimmed);
-
-        //         // PDA_Weapon_DualName_Printer = StrParam("PDA_WEAPON_%s:DEMONARTIFACTS_NAME", current_weapon_trimmed),
-        //         // PDA_Weapon_DualDesc_Printer = StrParam("PDA_WEAPON_%s:DEMONARTIFACTS_DESC", current_weapon_trimmed);
-
-        //         // PDA_Weapon_Bulk_Quantity      = CheckInventory(StrParam("%s:BulkMod", current_weapon)),
-        //         // PDA_Weapon_Power_Quantity     = CheckInventory(StrParam("%s:PowerMod", current_weapon)),
-        //         // PDA_Weapon_Agility_Quantity   = CheckInventory(StrParam("%s:AgilityMod", current_weapon)),
-        //         // PDA_Weapon_Technical_Quantity = CheckInventory(StrParam("%s:TechnicalMod", current_weapon)),
-        //         // PDA_Weapon_Sniper_Quantity    = CheckInventory(StrParam("%s:SniperMod", current_weapon)),
-        //         // PDA_Weapon_Firestorm_Quantity = CheckInventory(StrParam("%s:FirestormMod", current_weapon)),
-        //         // PDA_Weapon_Nano_Quantity      = CheckInventory(StrParam("%s:NanoMod", current_weapon)),
-        //         // PDA_Weapon_Artifact_Quantity  = CheckInventory(StrParam("%s:DemonArtifacts", current_weapon));
-
-        //         // PDA_IsNotDemonic = !CheckInventory("RLDemonicWeaponToken");
-            // }
+                PDA_IsNotDemonic = !CheckInventory("RLDemonicWeaponToken");
+            }
             switch (PDA_Local.page) {
                 case WEAPON_PAGE_STORY:
                     PDA_HEADER_STR = "PDA_WEAPON_HEADER"; PDA_HEADER_X = 0;
@@ -603,13 +587,13 @@ function void PDA_SetDataPerPage (void) {
 
             log("%s: %s: %s: %s:", stringArray[0], stringArray[1], stringArray[2], stringArray[3]);
             
-            // while (stringArray[stringArrayIndex] != "") {
-            //     if (str_find(stringArray[stringArrayIndex], "ADVANCED", TEXT_OFFSET) != -1 && advancedInd == 0) advancedInd = stringArrayIndex;
-            //     if (str_find(stringArray[stringArrayIndex],   "MASTER", TEXT_OFFSET) != -1 &&   masterInd == 0) masterInd   = stringArrayIndex;
-            //     masterMax++;
-            //     stringArrayIndex++;
-            //     delay(1);
-            // }
+            while (stringArray[stringArrayIndex] != "") {
+                if (str_find(stringArray[stringArrayIndex], "ADVANCED", TEXT_OFFSET) != -1 && advancedInd == 0) advancedInd = stringArrayIndex;
+                if (str_find(stringArray[stringArrayIndex],   "MASTER", TEXT_OFFSET) != -1 &&   masterInd == 0) masterInd   = stringArrayIndex;
+                masterMax++;
+                stringArrayIndex++;
+                delay(1);
+            }
             stringArrayIndex = 0;
             masterMax--;
 
@@ -680,7 +664,6 @@ function void PDA_SetDataPerPage (void) {
     }
 }
 
-// TODO: doing more than just scrolling atm, have to refactor
 function void PDA_ChangeScrolling (void) {
     switch (PDA_Local.category) {
         case PDA_MENU:

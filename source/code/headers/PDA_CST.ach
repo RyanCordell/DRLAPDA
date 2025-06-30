@@ -70,9 +70,9 @@ const float NEW_RESOLUTION_Y = NEW_RESOLUTION_HEIGHT / OLD_RESOLUTION_HEIGHT;
 
 // The following four constants are all based off the RLZPDA2 graphic itself.
 const int   PDA_SCREEN_X      = 18, // 17 pixels from graphic left start + 1 px screen padding
-			PDA_SCREEN_Y      = 20, // 19 pixels from graphic top start + 1 px screen padding.
-			PDA_SCREEN_WIDTH  = 255, // Should be 256, taking into account 1px screen padding...
-			PDA_SCREEN_HEIGHT = 162, // Should be 162, taking into account 1px screen padding...
+			      PDA_SCREEN_Y      = 20, // 19 pixels from graphic top start + 1 px screen padding.
+			      PDA_SCREEN_WIDTH  = 255, // Should be 256, taking into account 1px screen padding...
+			      PDA_SCREEN_HEIGHT = 162, // Should be 162, taking into account 1px screen padding...
             PDA_SCREEN_HEADER = 13;
 // -------------
 const int 	PDA_SCROLLABLE_Y      = (PDA_SCREEN_HEADER + PDA_SCREEN_Y) * NEW_RESOLUTION_Y  - 1,
@@ -100,9 +100,9 @@ const int 	PDA_MAX_ARMOR_IN_INV = 4,
 			      PDA_MAX_MOD_PACKS    = 7;
 
 const float PDA_MENU_ICON_LEFT_X  = 20 + X_LEFT_EDGE,
-			PDA_MENU_ICON_RIGHT_X = 140.0 + X_LEFT_EDGE;
+			      PDA_MENU_ICON_RIGHT_X = 140.0 + X_LEFT_EDGE;
 
 const float PDA_MENU_TEXT_LEFT_X  = PDA_MENU_ICON_LEFT_X + 30.0,
-			PDA_MENU_TEXT_RIGHT_X = PDA_MENU_ICON_RIGHT_X + 30.0;
+			      PDA_MENU_TEXT_RIGHT_X = PDA_MENU_ICON_RIGHT_X + 30.0;
 
 const float PDA_NormalY = PDA_SCREEN_Y;

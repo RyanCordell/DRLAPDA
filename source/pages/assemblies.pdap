@@ -27,53 +27,53 @@ str assembly_tooltip = "\n";
 
 // SetFont(USED_PDA_FONT);
 for (int ti = 0, li = 1; ti <= PDA_Local.maxassembliesper; ti+=2, li+=2) {
-    // PDAButton button;
-    // int aoff               = (PDA_Local.assemblyOffset - 1 < 0) ? 0 : (PDA_Local.assemblyOffset - 1);
-    // int offsetIndex        = ((ti - 1) + PDA_Local.assemblyOffset);
-    // int tokenIndex         = (ti + aoff);
-    // int peekFuture         = (ti + 2);
-    // int langIndex          = (li + aoff);
-    // str actorToken         = stringArray[tokenIndex];
-    // str languagePointer    = stringArray[langIndex ];
-    //     assembly_id        = (PDA_ASSEMBLYIDRANGE + offsetIndex);
-    //     assemblyY          = 30.0 + (6.0 * (ti - 1)); 
-    //     assembly_icon      = strParam("%l:",    strParam("%s:_assembly_icon", languagePointer));
-    //     assembly_colorizer = strParam("%s:%l:", PDA_Local.tiercolor, languagePointer);
-    //     assembly_callback  = languagePointer;
-    //     assembly_tooltip   = strParam("%l:\n%l:", "PDA_ASSEMBLY_REQUIREMENTS", strParam("%s:_REQ", languagePointer));
+    PDAButton button;
+    int aoff               = (PDA_Local.assemblyOffset - 1 < 0) ? 0 : (PDA_Local.assemblyOffset - 1);
+    int offsetIndex        = ((ti - 1) + PDA_Local.assemblyOffset);
+    int tokenIndex         = (ti + aoff);
+    int peekFuture         = (ti + 2);
+    int langIndex          = (li + aoff);
+    str actorToken         = stringArray[tokenIndex];
+    str languagePointer    = stringArray[langIndex ];
+        assembly_id        = (PDA_ASSEMBLYIDRANGE + offsetIndex);
+        assemblyY          = 30.0 + (6.0 * (ti - 1)); 
+        assembly_icon      = strParam("%l:",    strParam("%s:_assembly_icon", languagePointer));
+        assembly_colorizer = strParam("%s:%l:", PDA_Local.tiercolor, languagePointer);
+        assembly_callback  = languagePointer;
+        assembly_tooltip   = strParam("%l:\n%l:", "PDA_ASSEMBLY_REQUIREMENTS", strParam("%s:_REQ", languagePointer));
 
-    // if (peekFuture >= advancedInd && PDA_Local.assemblyOffset < advancedInd) continue;
-    // if (peekFuture >= masterInd && PDA_Local.assemblyOffset < masterMax) continue;
+    if (peekFuture >= advancedInd && PDA_Local.assemblyOffset < advancedInd) continue;
+    if (peekFuture >= masterInd && PDA_Local.assemblyOffset < masterMax) continue;
 
-    // if (PDA_CheckPlayer1Inventory(actorToken) || CheckInventory(actorToken)) {
-    //     button = PDA_CreateAssemblyButton(assembly_id, assembly_icon, assembly_colorizer, assemblyX, assemblyY, width, height, assembly_callback, assembly_tooltip);
-    //              PDA_ButtonHandler(assembly_id, false, PDA_ASSEMBLY_DETAIL, "", false);
-    // } else { 
-    //     button = PDA_CreateAssemblyButton(assembly_id, "PDAUNK", strParam(l:"PDA_ASSEMBLY_UNKNOWN"), assemblyX, assemblyY, width, height, "",               "???");
-    //              PDA_ButtonHandler(assembly_id, true, PDA_Local.page, "", false);
-    // }
+    if (PDA_CheckPlayer1Inventory(actorToken) || CheckInventory(actorToken)) {
+        button = PDA_CreateAssemblyButton(assembly_id, assembly_icon, assembly_colorizer, assemblyX, assemblyY, width, height, assembly_callback, assembly_tooltip);
+                 PDA_ButtonHandler(assembly_id, false, PDA_ASSEMBLY_DETAIL, "", false);
+    } else { 
+        button = PDA_CreateAssemblyButton(assembly_id, "PDAUNK", strParam(l:"PDA_ASSEMBLY_UNKNOWN"), assemblyX, assemblyY, width, height, "",               "???");
+                 PDA_ButtonHandler(assembly_id, true, PDA_Local.page, "", false);
+    }
 }
 
-// if (PDA_LocalMouse.scrolling) {
-//     float nextButtonX = 10.0;
-//     if (PDA_Local.page > 1 && PDA_Local.page < 3) nextButtonX = PDA_SCREEN_WIDTH + PDA_SCREEN_X - 82;
+if (PDA_LocalMouse.scrolling) {
+    float nextButtonX = 10.0;
+    if (PDA_Local.page > 1 && PDA_Local.page < 3) nextButtonX = PDA_SCREEN_WIDTH + PDA_SCREEN_X - 82;
     
-//     if (PDA_Local.page > 1) {
-//         PDA_LocalButton[PDA_PREV_PAGE] = PDA_CreateButton(60, "Previous tier" , "A_PREV", 
-//             10.0, assemblyY + 10.0, 
-//             82, 16, 
-//             20, 15);
-//         PDA_ButtonHandler(60, true, PDA_Local.page - 1, "", false);
-//     }
+    if (PDA_Local.page > 1) {
+        PDA_LocalButton[PDA_PREV_PAGE] = PDA_CreateButton(60, "Previous tier" , "A_PREV", 
+            10.0, assemblyY + 10.0, 
+            82, 16, 
+            20, 15);
+        PDA_ButtonHandler(60, true, PDA_Local.page - 1, "", false);
+    }
 
-//     if (PDA_Local.page < 3) {
-//         PDA_LocalButton[PDA_NEXT_PAGE] = PDA_CreateButton(61, "Next tier" , "A_NEXT", 
-//             nextButtonX, assemblyY + 10.0, 
-//             82, 16, 
-//             20, 15);
-//         PDA_ButtonHandler(61, true, PDA_Local.page + 1, "", false);
-//     }
-// }
+    if (PDA_Local.page < 3) {
+        PDA_LocalButton[PDA_NEXT_PAGE] = PDA_CreateButton(61, "Next tier" , "A_NEXT", 
+            nextButtonX, assemblyY + 10.0, 
+            82, 16, 
+            20, 15);
+        PDA_ButtonHandler(61, true, PDA_Local.page + 1, "", false);
+    }
+}
         
 // PDA_DefaultFont();
 // PDA_UnsetScrollWindow();
