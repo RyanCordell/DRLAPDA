@@ -158,6 +158,7 @@ struct PDAButton {
     str type;
 }
 PDAButton PDA_Button[MAX_PLAYERS][512];
+PDAButton assembly_button[128];
 
 struct PDAWeapon {
     int id;

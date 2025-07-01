@@ -175,7 +175,7 @@ SCRIPT "PDA_MouseController" (void)
                 PDA_SetCategory(PDA_BESTIARY);
             }
             else if (PDA_Local.category == PDA_PONG) {
-                ACS_NamedExecute("QuitPong",0);
+                // ACS_NamedExecute("QuitPong",0);
                 PDA_SetCategory(PDA_MISC);
                 // PDA_Local.category = PDA_MISC;
             }

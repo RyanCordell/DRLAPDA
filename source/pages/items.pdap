@@ -38,28 +38,29 @@ if(GetCvar("DRLA_specialstarts") != 2)
 
     int DRLA_PageOffset;
 
-    SetHudSize(NEW_RESOLUTION_WIDTH,NEW_RESOLUTION_HEIGHT);
-    
     for(int itemIndex = 0; itemIndex < DRLA_ITEMSMAX; itemIndex++)
     {
         if(ItemLimit < 8)
         {
             if(PDA_Local.page == 1) DRLA_PageOffset = 1;
-            if(PDA_Local.page > 1)  DRLA_PageOffset = (8*(PDA_Local.page - 1) + 1);
+            if(PDA_Local.page > 1)  DRLA_PageOffset = (8 * (PDA_Local.page - 1) + 1);
 
-            //if(strcmp(DRLA_ItemInfo[itemIndex+DRLA_PageOffset][0], "PowerMod") != 0)
-            //{
-                // Item icon
-                DisplayIcon(strParam("%l:", DRLA_ItemInfo[itemIndex+DRLA_PageOffset][0]), PDA_INFOTOPID - (ItemLimit+1), 
-                20.0 + X_LEFT_EDGE + (PDA_SCREEN_X), PDA_Local.scrollingY + 50.0 + Y_TOP_EDGE + (50.0 * ItemLimit), 0, 1);
+            // Item icon
+            DisplayIconParallax(
+                strParam("%l:", DRLA_ItemInfo[itemIndex + DRLA_PageOffset][0]), 
+                PDA_ITEMS_END - (ItemLimit+1), 
+                PDA_SCREEN_X + 30.0 + X_LEFT_EDGE, 50.0 + (50.0 * ItemLimit), 0.0, 1.0);
 
-                // Item name + desc
-                HudMessage("%l:\cu%l:\c-\n", DRLA_ItemInfo[itemIndex+DRLA_PageOffset][1], DRLA_ItemInfo[itemIndex+DRLA_PageOffset][2]; HUDMSG_PLAIN, PDA_INFOTOPID - (ItemLimit+9), CR_UNTRANSLATED, 
-                40.0 + X_LEFT_EDGE + (PDA_SCREEN_X), PDA_Local.scrollingY + 40.0 + Y_TOP_EDGE + (50.0 * ItemLimit), 0);
-                ItemLimit++;
-            //}
+            // Item name + desc
+            HudMessageParallax(
+                StrParam(
+                    "%l:"
+                    "%l:\n", 
+                DRLA_ItemInfo[itemIndex + DRLA_PageOffset][1], DRLA_ItemInfo[itemIndex + DRLA_PageOffset][2]), 
+                HUDMSG_PLAIN, PDA_ITEMS_END - (ItemLimit+9), CR_UNTRANSLATED, 
+                40.0, 40.0 + (50.0 * ItemLimit), 0.0, 1.0);
+
+            ItemLimit++;
         }
     }
-    // PDA_DefaultFont();
-    // PDA_UnsetScrollWindow();
 }

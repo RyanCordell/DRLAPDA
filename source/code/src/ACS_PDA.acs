@@ -172,7 +172,7 @@ function void doPDASync (void) {
 function void reset_pda_stuff (str location) {
         PDA_NOPONG();
         PDA_Wipe(location);
-        ACS_NamedExecuteAlways("QuitPong",0);
+        // ACS_NamedExecuteAlways("QuitPong",0);
         PDA_UnsetScrollArrows();
         DisplayIcon("RLZPDA", PDA_ID, 0.5, 0.5, 0, 0);
         

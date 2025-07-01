@@ -93,7 +93,7 @@ function void PDA_SetupScreenBounds (void) {
     int y = PDA_SCROLLABLE_Y;
     int w = PDA_SCREEN_WIDTH * NEW_RESOLUTION_X;
     int h = PDA_SCROLLABLE_HEIGHT;
-    int ww = (PDA_SCREEN_WIDTH * NEW_RESOLUTION_X) - PDA_SCREEN_X;
+    int ww = (PDA_SCREEN_WIDTH * NEW_RESOLUTION_X) - (PDA_SCREEN_X * 3);
 
     SetHudClipRect(x, y, w, h, ww);
 
@@ -258,7 +258,7 @@ function void PDA_PlaySound (str PDA_Sound, str soldier, int volume) {
 }
 
 function void PDA_Wipe (str caller) {
-	for(int wipeIndex = 0; wipeIndex <= PDA_LASTID; wipeIndex++) {
+	for(int wipeIndex = 0; wipeIndex <= PDA_INFOTOPID; wipeIndex++) {
 		HudMessage(s:"\n"; HUDMSG_ALPHA, wipeIndex, CR_UNTRANSLATED, 0, 0, 1.0, 0.0);
 	}
 }
@@ -514,8 +514,6 @@ function void PDA_SetDataPerPage (void) {
                 }
             }
 
-            log("%s: | %s:", current_weapon, GetWeapon());
-
             if (stricmp(current_weapon, "None") != 0) {
                 PDA_Weapon_Name_Printer = StrParam("PDA_WEAPON_%s:_NAME", current_weapon_trimmed),
                 PDA_Weapon_Desc_Printer = StrParam("PDA_WEAPON_%s:_DESC", current_weapon_trimmed);
@@ -585,14 +583,10 @@ function void PDA_SetDataPerPage (void) {
             all_assemblies = StrParam(l:"PDA_ASSEMBLIES");
             str_split(separator_character, all_assemblies);
 
-            log("%s: %s: %s: %s:", stringArray[0], stringArray[1], stringArray[2], stringArray[3]);
-            
-            while (stringArray[stringArrayIndex] != "") {
+            while (stringArray[stringArrayIndex++] != "") {
                 if (str_find(stringArray[stringArrayIndex], "ADVANCED", TEXT_OFFSET) != -1 && advancedInd == 0) advancedInd = stringArrayIndex;
                 if (str_find(stringArray[stringArrayIndex],   "MASTER", TEXT_OFFSET) != -1 &&   masterInd == 0) masterInd   = stringArrayIndex;
                 masterMax++;
-                stringArrayIndex++;
-                delay(1);
             }
             stringArrayIndex = 0;
             masterMax--;
@@ -603,21 +597,18 @@ function void PDA_SetDataPerPage (void) {
                     PDA_Local.maxassembliesper = (advancedInd - 1);
                     PDA_Local.assemblyOffset   = basicInd;
                     PDA_Local.tiercolor        = "\c[BB]";
-        //             // scrollOffset               = PDA_Local.maxassembliesper * -5;
                     break;
                 case ASSEMBLY_PAGE_ADVANCED:
                     PDA_HEADER_STR = "PDA_ASSEMBLY_ADVANCED_NAME"; PDA_HEADER_X = -30;
                     PDA_Local.maxassembliesper = (masterInd - 1) - advancedInd;
                     PDA_Local.assemblyOffset   = advancedInd;
                     PDA_Local.tiercolor        = "\c[AB]";
-        //             // scrollOffset               = PDA_Local.maxassembliesper * -5;
                     break;
                 case ASSEMBLY_PAGE_MASTER:
                     PDA_HEADER_STR = "PDA_ASSEMBLY_MASTER_NAME"; PDA_HEADER_X = -30;
                     PDA_Local.maxassembliesper = masterMax - masterInd;
                     PDA_Local.assemblyOffset   = masterInd;
                     PDA_Local.tiercolor        = "\c[MB]";
-        //             // scrollOffset               = PDA_Local.maxassembliesper * -6;
                     break;
                 default:
                     Print(s:"how da fuk");
@@ -735,7 +726,7 @@ function void PDA_ChangeScrolling (void) {
             break;
 
         case PDA_ASSEMBLIES:
-            const int scrollOffset = 150;
+            int scrollOffset = -8 * PDA_Local.maxassembliesper;
             PDA_SetScrollLimit  (scrollOffset);
             PDA_SetScrollArrows2(scrollOffset, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
             break;
@@ -899,6 +890,7 @@ function PDAButton PDA_CreateMenuButton (int id, str label, str graphic, float x
     thisButton.graphicX     = _gfxTemp + X_LEFT_EDGE;
     int _gfyTemp            = thisButton.y * NEW_RESOLUTION_Y;
     thisButton.graphicY     = _gfyTemp + 10.0;
+    thisButton.type         = "menu";
 
     thisButton.textFont     = PDA_FONT_SLIM;
     thisButton.textFlags    = HUDMSG_ALPHA;
@@ -1023,32 +1015,30 @@ function PDAButton PDA_CreateFixedButton (int id, str label, str graphic, float 
 function PDAButton PDA_CreateAssemblyButton (int id, str graphic, str label, float x, float y, int width, int height, str assembly, str tooltip) {
     #define thisButton PDA_LocalButton[id]
     assignButtonParams(thisButton, label)
-    // buttonBoundsDefault(thisButton)
-
 
     const int X_MARGIN = 12.0;
 
     thisButton.graphic      = graphic;
     thisButton.graphicFlags = HUDMSG_ALPHA;
     thisButton.graphicID    = thisButton.id;
-    int _gxTemp             = (thisButton.x) * NEW_RESOLUTION_X;
-    int _gyTemp             = (int)(thisButton.y * NEW_RESOLUTION_Y) + 0.0;
+    int _gxTemp             = thisButton.x * NEW_RESOLUTION_X;
     thisButton.graphicX     = _gxTemp + X_LEFT_EDGE;
+    int _gyTemp             = thisButton.y * NEW_RESOLUTION_Y;
     thisButton.graphicY     = _gyTemp + 20.0;
     thisButton.type         = "assembly";
 
     thisButton.textFont  = USED_PDA_FONT;
     thisButton.textFlags = HUDMSG_ALPHA;
     thisButton.textID    = thisButton.id - 40;
-    int _fxTemp          = (int)thisButton.graphicX * NEW_RESOLUTION_X;
-    int _fyTemp          = (int)(thisButton.y * NEW_RESOLUTION_Y) + 0.0;
+    int _fxTemp          = thisButton.graphicX * NEW_RESOLUTION_X;
     thisButton.textX     = _fxTemp + X_MARGIN + X_LEFT_EDGE;
+    int _fyTemp          = thisButton.y * NEW_RESOLUTION_Y;
     thisButton.textY     = _fyTemp + 4.0;
 
     thisButton.tooltip = tooltip;
     if (CheckBounds(thisButton)) {
         if (PDA_LocalMouse.m1 && !(PDA_LocalMouse.oldState & BT_ATTACK)) {
-            PDA_Local.detailFetch[0] = assembly;
+            if (assembly) PDA_Local.detailFetch[0] = assembly;
 
             if (strCmp(PDA_Local.detailFetch[0], "") != 0 ) {
                 PDA_SetCategory(PDA_ASSEMBLY_DETAIL);
@@ -1056,10 +1046,10 @@ function PDAButton PDA_CreateAssemblyButton (int id, str graphic, str label, flo
         }
 
         // Open tooltip
-        if (strCmp(thisButton.tooltip, "") != 0 && strCmp(assembly, "") != 0) {
+        // if (strCmp(thisButton.tooltip, "") != 0 && strCmp(assembly, "") != 0) {
             // PDA_SetupFloatingTooltip("PTIPM", thisButton.tooltip);
             // PDA_SetupScreenBounds();
-        }
+        // }
     }
 
     if (debug) {
@@ -1446,7 +1436,8 @@ function void PDA_ButtonHandler (int id, int incat, int catpage, str message, in
     fixed xlabeloff = (strcmp(PDA_LocalButton[id].graphic, "PTAB") == 0) ? 4.0 : 0.0;
     fixed ylabeloff = (strcmp(PDA_LocalButton[id].graphic, "PTAB") == 0) ? 3.0 : 0.0;
 
-    PrintSpriteAlpha(PDA_LocalButton[id].graphic, PDA_LocalButton[id].graphicID, PDA_LocalButton[id].graphicX, PDA_LocalButton[id].graphicY, 0.05, PDA_LocalButton[id].alpha);
+    fixed holdtime = (PDA_LocalButton[id].type == "menu") ? 0.05 : 0.0;
+    PrintSpriteAlpha(PDA_LocalButton[id].graphic, PDA_LocalButton[id].graphicID, PDA_LocalButton[id].graphicX, PDA_LocalButton[id].graphicY, holdtime, PDA_LocalButton[id].alpha);
     // PrintSprite(PDA_LocalButton[id].graphic, PDA_LocalButton[id].graphicID, PDA_LocalButton[id].graphicX, PDA_LocalButton[id].graphicY, 0.1);
 
     SetFont(PDA_LocalButton[id].textFont);

@@ -80,6 +80,7 @@ enum PDA_IDs {
     PDA_SCROLLDNID,
     PDA_SCROLLUPID,
     // Cursor
+    PDA_ITEMS_END = PDA_SCROLLUPID + 256,
     PDA_LASTID,
       
     PDA_PONG_LEFTPADDLE,
