@@ -5,11 +5,10 @@ import json
 import re
 
 from tkinter import filedialog as fd
-from datetime import datetime
 
 from typing import Any, Literal
 
-from .utils import current_time, is_invoked_by_combiner, attempt_print
+from utils import current_time, is_invoked_by_combiner, attempt_print
 
 INPUT_FOLDER_ARG: int = 1
 OUTPUT_FOLDER_ARG: int = 2
@@ -18,9 +17,11 @@ SEPARATOR_ARG: int = 3
 
 class Arsenal:
     output_data: str = ""
-    language_warning: str = '''[enu default]\n\n//
-  Please do not modify this file directly,
-  it\'s specifically compiled and any changes may be lost.\n\n'''
+    language_warning: str = '''
+[enu default]\n\n/*
+Please do not modify this file directly,
+it\'s specifically compiled and any changes may be lost.
+*/\n'''
     data: Any = ""
     loaded_json: dict[str, Any] | str = {}
     loaded_files: str = ""
@@ -186,7 +187,7 @@ class Arsenal:
 
         for color_key, color_value in Arsenal.colors.items():
             str_to_color = str_to_color.replace(
-                "[" + color_key + "]", "\\c" + color_value if method == "revert" else ""
+                "[" + color_key + "]", "\c" + color_value if method == "revert" else "" # type: ignore
             )
 
         return str_to_color
@@ -243,7 +244,7 @@ class Arsenal:
                 for i, mods_fragment in enumerate(weapon["mods"]):
                     mods_fragment: str = mods_fragment.replace("\n", "/n")
                     weapon_mods.append(
-                        f'"{weapon['mods'][mods_fragment]}{self.separator_token}"'
+                        f'''"{weapon['mods'][mods_fragment]}{self.separator_token}"'''
                     )
 
                     if i < mods_len - 1:
@@ -493,8 +494,7 @@ class Arsenal:
             self, f"{current_time()} Done parsing mod effects DB.\n"
         )
 
-
-        Arsenal.output_construct(do_output, "language.auto.mods")
+        Arsenal.output_construct(self, do_output, language_mod_output, "language.auto.mods")
         # if do_output:
         #     Arsenal.do_output(self, "language.auto.mods")
 
@@ -538,12 +538,14 @@ class Arsenal:
         language_assembly_list.append("PDA_ASSEMBLIES=\"")
         for i, assembly in enumerate(data["assemblies"]):
             language_assembly_list.append(f'''RL{assembly['name']}AssemblyLearntToken{self.separator_token}PDA_ASSEMBLY_{assembly['tier'].upper()}_{assembly['name'].upper()}{self.separator_token}''')
+            language_assembly_list.append('"')
 
             if i < len(data["assemblies"]) - 1:
                 # language_assembly_list += '\n'
                 language_assembly_list.append("\n")
+                language_assembly_list.append('"')
 
-        language_assembly_list.append("\";")
+        language_assembly_list.append(";")
         language_assembly_list.append("\n")
         language_assembly_list.append("\n")
         language_assembly_list.append(
@@ -576,6 +578,7 @@ class Arsenal:
                     pass
 
             if "description" in assembly:
+                
                 desc_len = len(assembly["description"])
 
                 for i, desc_fragment in enumerate(assembly["description"]):
@@ -642,7 +645,7 @@ DRLA_MASTERMAX="{master_max}";
 
         language_assembly_output: str = Arsenal.language_warning + temp_string
 
-        Arsenal.output_construct(self, do_output, "language.auto.assemblies")
+        Arsenal.output_construct(self, do_output, language_assembly_output, "language.auto.assemblies")
         # if do_output:
         #     Arsenal.do_output(self, "language.auto.assemblies")
 
@@ -682,7 +685,7 @@ DRLA_MASTERMAX="{master_max}";
 
     # -----
     
-    def output_construct(self, do_output: bool, output: str) -> None:
+    def output_construct(self, do_output: bool, input: str, output: str) -> None:
         if do_output:
             Arsenal.do_output(self, output)
 
@@ -696,7 +699,7 @@ DRLA_MASTERMAX="{master_max}";
 
                 if len(file_path) > 0:
                     with open(file_path, mode="w", encoding="utf-8") as file:
-                        file.write(language_assembly_output)
+                        file.write(input)
 
             attempt_print(
                 self, f"{current_time()} Created {output}\n"
@@ -704,7 +707,7 @@ DRLA_MASTERMAX="{master_max}";
         else:
             attempt_print(self, f"{current_time()} Created nothing\n")
             attempt_print(
-                self, f"{current_time()} {language_assembly_output}.\n"
+                self, f"{current_time()} {input}.\n"
             )
 
     def create_armor_acs_array(self, equipment: dict[str, Any]) -> str:
@@ -869,9 +872,10 @@ PDA_ARMOR_{bigname}_RES =
                 f'''"{Arsenal.language_padding(self, cybres['hazard'])}{cybres['hazard']}% [YELLOW]Hazard Shielding[END]\\n";'''
             )
 
+        temp_atts_string: str = ''.join(atts)
         construct.append(f'''
 PDA_ARMOR_{bigname}_CYBAUG = "{equipment['cyborgstats']['augment']}";
-PDA_ARMOR_{bigname}_ATTR = {''.join(atts)};
+PDA_ARMOR_{bigname}_ATTR = {temp_atts_string};
     ''')
 
         return "".join(construct)
@@ -896,7 +900,7 @@ PDA_ARMOR_{bigname}_ATTR = {''.join(atts)};
         for mod in assembly["mods"]:
             for color_key, color_value in Arsenal.colors.items():
                 if color_key.upper() == mod:
-                    mods.append(f'''\\c{color_value}{mod[0]}\\c-''')
+                    mods.append(f'\\c{color_value}{mod[0]}\\c-')
 
         for color_key, color_value in Arsenal.colors.items():
             if color_key.upper() == assembly["tier"].upper():
@@ -922,15 +926,18 @@ PDA_ARMOR_{bigname}_ATTR = {''.join(atts)};
 
         temp_string: str = "".join(valid)
         temp_string = temp_string.replace("->", "[YELLOW]->[END]")
+        
+        temp_mods_string: str = "".join(mods)
+        temp_list_string: str = ''.join(validlist)
 
         return f'''
-PDA_ASSEMBLY_{bigtier}_{bigname} = "{assembly['prettyname']} [GRAY][[END]{mods}[GRAY]][END]";
+PDA_ASSEMBLY_{bigtier}_{bigname} = "{assembly['prettyname']} [GRAY][[END]{temp_mods_string}[GRAY]][END]";
 PDA_ASSEMBLY_{bigtier}_{bigname}_NAME = "{coloredname}";
-PDA_ASSEMBLY_{bigtier}_{bigname}_MODS = "[GRAY][[END]{mods}[GRAY]][END]";
+PDA_ASSEMBLY_{bigtier}_{bigname}_MODS = "[GRAY][[END]{temp_mods_string}[GRAY]][END]";
 PDA_ASSEMBLY_{bigtier}_{bigname}_ICON = "{assembly['icon']}";
 PDA_ASSEMBLY_{bigtier}_{bigname}_HEIGHT = "0";
 PDA_ASSEMBLY_{bigtier}_{bigname}_DESC = {assembly['actualDescription']}"[GREEN]Valid Weapons:[END]/n"\n{temp_string};
-PDA_ASSEMBLY_{bigtier}_{bigname}_REQ = {''.join(validlist)};
+PDA_ASSEMBLY_{bigtier}_{bigname}_REQ = {temp_list_string};
     '''
 
     # -----
