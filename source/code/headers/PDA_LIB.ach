@@ -208,8 +208,8 @@ struct PDA_BootsData {
 
 
 
-int monsterCheck[5][DRLA_MONSTER_PAGE_MAX],
-    oldCheck[5][DRLA_MONSTER_PAGE_MAX];
+int monsterCheck[NUM_DIFFICULTIES][DRLA_MONSTER_PAGE_MAX],
+        oldCheck[NUM_DIFFICULTIES][DRLA_MONSTER_PAGE_MAX];
 
 str stringArray[STRING_ARRAY_MAX];
 int stringArrayIndex = 0;
@@ -219,7 +219,7 @@ str all_assemblies = "x";
 int basicInd    = 0;
 int advancedInd = 0; // should be 33
 int masterInd   = 0; // should be 65
-int masterMax   = 0; // should be 95
+int masterMax   = 0; // should be 95 as of 1.1.5 or earlier
 
 int TEXT_OFFSET = 13; // aka length of "PDA_ASSEMBLY_"
     
@@ -236,18 +236,18 @@ str enemy_info_res    = "N/A\n";
 str enemy_info_info   = "N/A\n";
 int enemy_count       = 0;
 
-str assembly_info_icon = " ";
-str assembly_info_name = " ";
-str assembly_info_mods = " ";
-str assembly_info_desc = " ";
+str assembly_info_icon  = " ";
+str assembly_info_name  = " ";
+str assembly_info_mods  = " ";
+str assembly_info_desc  = " ";
 str assembly_info_textH = "1";
 // str assembly_info_ar[12];
 
-str PDA_Weapon_Name_Printer = "name";
-str PDA_Weapon_Desc_Printer = "desc";
+str PDA_Weapon_Name_Printer = " ";
+str PDA_Weapon_Desc_Printer = " ";
 
-str PDA_Weapon_DualName_Printer = "dual name";
-str PDA_Weapon_DualDesc_Printer = "dual desc";
+str PDA_Weapon_DualName_Printer = " ";
+str PDA_Weapon_DualDesc_Printer = " ";
 
 int PDA_Weapon_Bulk_Quantity      = 0;
 int PDA_Weapon_Power_Quantity     = 0;

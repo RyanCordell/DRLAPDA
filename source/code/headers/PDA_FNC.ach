@@ -74,6 +74,7 @@ function void DrawBorder (int X, int Y, int Width, int Height) {
 }
 
 function void PDA_SetupHeaderBounds (void) {
+    PDA_Wipe("PDA_SetupHeaderBounds");
     SetHudSize(NEW_RESOLUTION_WIDTH, NEW_RESOLUTION_HEIGHT);
 
     int x = PDA_SCREEN_X + 4;
@@ -86,7 +87,8 @@ function void PDA_SetupHeaderBounds (void) {
 }
 
 function void PDA_SetupScreenBounds (void) {
-    SetHudClipRect(0,0,0,0,0);
+    // SetHudClipRect(0,0,0,0,0);
+    PDA_Wipe("PDA_SetupScreenBounds"); // at least this finally seemed to help out w/ retention bugs
     SetHudSize(NEW_RESOLUTION_WIDTH, NEW_RESOLUTION_HEIGHT);
 
     int x = PDA_SCREEN_X + 4;
@@ -225,6 +227,7 @@ function void updateOldMonsterKillCount (void) {
     (a).oldstate = (a).state; \
     (a).label = (b); \
 
+// TODO: height for buttons should actually decrease as they go past the normal scroll area
 #define CheckBounds(a) \
     PDA_LocalMouse.x >= (a).x - 1 && PDA_LocalMouse.x <= (a).x + (a).width \
     && \
@@ -258,8 +261,10 @@ function void PDA_PlaySound (str PDA_Sound, str soldier, int volume) {
 }
 
 function void PDA_Wipe (str caller) {
-	for(int wipeIndex = 0; wipeIndex <= PDA_INFOTOPID; wipeIndex++) {
-		HudMessage(s:"\n"; HUDMSG_ALPHA, wipeIndex, CR_UNTRANSLATED, 0, 0, 1.0, 0.0);
+    // Avoid wiping the header
+	for(int wipeIndex = 0; wipeIndex <= PDA_INFOTOPID - 1; wipeIndex++) {
+		HudMessage(s:"\n"; HUDMSG_PLAIN, wipeIndex, CR_UNTRANSLATED, 0, 0, 0.0, 0.0);
+		HudMessage(s:"\n"; HUDMSG_ALPHA, wipeIndex, CR_UNTRANSLATED, 0, 0, 0.0, 0.0);
 	}
 }
 
@@ -583,6 +588,7 @@ function void PDA_SetDataPerPage (void) {
             all_assemblies = StrParam(l:"PDA_ASSEMBLIES");
             str_split(separator_character, all_assemblies);
 
+            masterMax = 0;
             while (stringArray[stringArrayIndex++] != "") {
                 if (str_find(stringArray[stringArrayIndex], "ADVANCED", TEXT_OFFSET) != -1 && advancedInd == 0) advancedInd = stringArrayIndex;
                 if (str_find(stringArray[stringArrayIndex],   "MASTER", TEXT_OFFSET) != -1 &&   masterInd == 0) masterInd   = stringArrayIndex;
@@ -767,7 +773,7 @@ function void PDA_OnChange (void) {
 }
 
 function void PDA_SetCategory (int category) {
-    afterPageDefaults("PDA_SetCategory");
+    afterPageDefaults("PDA_SetCategory start");
     if (PDA_Local.category == category) {
         return;
     }
@@ -784,6 +790,7 @@ function void PDA_SetCategory (int category) {
     PDA_Local.texty = 0.0;
     PDA_Local.scrollingY = PDA_SCREEN_Y;
     PDA_Local.category = category;
+    afterPageDefaults("PDA_SetCategory end");
     PDA_OnChange();
 }
 
@@ -1436,7 +1443,8 @@ function void PDA_ButtonHandler (int id, int incat, int catpage, str message, in
     fixed xlabeloff = (strcmp(PDA_LocalButton[id].graphic, "PTAB") == 0) ? 4.0 : 0.0;
     fixed ylabeloff = (strcmp(PDA_LocalButton[id].graphic, "PTAB") == 0) ? 3.0 : 0.0;
 
-    fixed holdtime = (PDA_LocalButton[id].type == "menu") ? 0.05 : 0.0;
+    // fixed holdtime = (PDA_LocalButton[id].type == "menu") ? 0.05 : 0.0;
+    fixed holdtime = (PDA_LocalButton[id].type == "menu") ? 0.0 : 0.0;
     PrintSpriteAlpha(PDA_LocalButton[id].graphic, PDA_LocalButton[id].graphicID, PDA_LocalButton[id].graphicX, PDA_LocalButton[id].graphicY, holdtime, PDA_LocalButton[id].alpha);
     // PrintSprite(PDA_LocalButton[id].graphic, PDA_LocalButton[id].graphicID, PDA_LocalButton[id].graphicX, PDA_LocalButton[id].graphicY, 0.1);
 

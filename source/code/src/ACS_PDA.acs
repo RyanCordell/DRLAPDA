@@ -141,7 +141,7 @@ function void doPDASync (void) {
         }
     }
 
-    int masterMax   = 0;
+    int masterMax  = 0;
     all_assemblies = StrParam(l:"PDA_ASSEMBLIES");
     str_split(separator_character, all_assemblies);
     int ai = 0;
@@ -170,22 +170,22 @@ function void doPDASync (void) {
 }
 
 function void reset_pda_stuff (str location) {
-        PDA_NOPONG();
-        PDA_Wipe(location);
-        // ACS_NamedExecuteAlways("QuitPong",0);
-        PDA_UnsetScrollArrows();
-        DisplayIcon("RLZPDA", PDA_ID, 0.5, 0.5, 0, 0);
-        
-        SetPlayerProperty(0,0,PROP_TOTALLYFROZEN);
-        TakeInventory("RLSynthFireDisabled",1);
-        FadeTo(0, 0, 0, 0.0, 0.0);
-        
-        if(PDA_Local.category == PDA_CREDITS) SetMusic("*");
-      
-        PDA_PlaySound("UI/PDA/Offline", "pda/soldierclose", 80);
-      
-        PDA_Local.pongrunning = false;
-        PDA_Local.active = false;
+    PDA_NOPONG();
+    PDA_Wipe(location);
+    // ACS_NamedExecuteAlways("QuitPong",0);
+    PDA_UnsetScrollArrows();
+    DisplayIcon("RLZPDA", PDA_ID, 0.5, 0.5, 0, 0);
+    
+    SetPlayerProperty(0,0,PROP_TOTALLYFROZEN);
+    TakeInventory("RLSynthFireDisabled",1);
+    FadeTo(0, 0, 0, 0.0, 0.0);
+    
+    if(PDA_Local.category == PDA_CREDITS) SetMusic("*");
+    
+    PDA_PlaySound("UI/PDA/Offline", "pda/soldierclose", 80);
+    
+    PDA_Local.pongrunning = false;
+    PDA_Local.active = false;
 }
 
 
@@ -435,7 +435,7 @@ SCRIPT "PDA_Core" (void) {
         }
         Delay(PDA_Responsiveness);
     }
-    PDA_HEADER_STR = "";
+    // PDA_HEADER_STR = "";
     PDA_Wipe("PDA_Core End");
     SetHudClipRect(0,0,0,0,0);
 }

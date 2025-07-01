@@ -18,6 +18,8 @@
 #define PDA_TAB_W 12
 #define PDA_TAB_H 7
 
+#define NUM_DIFFICULTIES 5
+
 #define PDA_MENU_BTN_W 88
 #define PDA_MENU_BTN_H 16
 

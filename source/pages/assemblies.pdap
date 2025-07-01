@@ -50,25 +50,22 @@ for (int ti = 0, li = 1; ti <= PDA_Local.maxassembliesper; ti+=2, li+=2) {
     }
 }
 
-if (PDA_LocalMouse.scrolling) {
-    float nextButtonX = 10.0;
-    if (PDA_Local.page > 1 && PDA_Local.page < 3) nextButtonX = PDA_SCREEN_WIDTH + PDA_SCREEN_X - 82;
-    
-    if (PDA_Local.page > 1) {
-        PDA_LocalButton[PDA_PREV_PAGE] = PDA_CreateButton(60, "Previous tier" , "A_PREV", 
-            10.0, 30.0 + (6.0 * PDA_Local.maxassembliesper - 1), 
-            82, 16, 
-            20, 15);
-        PDA_ButtonHandler(60, true, PDA_Local.page - 1, "", false);
-    }
 
-    if (PDA_Local.page < 3) {
-        PDA_LocalButton[PDA_NEXT_PAGE] = PDA_CreateButton(61, "Next tier" , "A_NEXT", 
-            nextButtonX, 30.0 + (6.0 * PDA_Local.maxassembliesper - 1), 
-            82, 16, 
-            20, 15);
-        PDA_ButtonHandler(61, true, PDA_Local.page + 1, "", false);
-    }
+float nextButtonX = 10.0;
+float paginationY = 35.0 + (6.0 * PDA_Local.maxassembliesper);
+
+if (PDA_Local.page > 1 && PDA_Local.page < 3) nextButtonX = PDA_SCREEN_WIDTH + PDA_SCREEN_X - 82;
+
+// Until something is figured out, this will have to stay without the scrolling check,
+// otherwise a weird button retention bug happens.
+if (PDA_Local.page > 1) {
+    PDA_LocalButton[PDA_PREV_PAGE] = PDA_CreateButton(PDA_PREV_PAGE, "Previous tier" , "A_PREV", 10.0, paginationY, 82, 16, 20, 15);
+    PDA_ButtonHandler(PDA_PREV_PAGE, true, PDA_Local.page - 1, "", false);
+}
+
+if (PDA_Local.page < 3) {
+    PDA_LocalButton[PDA_NEXT_PAGE] = PDA_CreateButton(PDA_NEXT_PAGE, "Next tier" , "A_NEXT", nextButtonX, paginationY, 82, 16, 20, 15);
+    PDA_ButtonHandler(PDA_NEXT_PAGE, true, PDA_Local.page + 1, "", false);
 }
         
 // PDA_DefaultFont();

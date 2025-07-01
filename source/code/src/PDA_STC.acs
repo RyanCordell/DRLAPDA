@@ -22,50 +22,52 @@ switch (PDA_Local.category) {
     PDAButton WEAPONS_TAB_3 = PDA_CreateTab(PDA_TAB_BUTTONS_START + 2, "3", "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
     break;
 
-  // case PDA_BESTIARY:
-  //   PDAButton NORMAL       = PDA_CreateBeastButton(PDA_BEAST_UV, "Normal",       "White",     10.0 + X_LEFT_EDGE, 30.0 + Y_TOP_EDGE + (15.0 * 0), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, "", "");
-  //   PDAButton NIGHTMARE    = PDA_CreateBeastButton(PDA_BEAST_NM, "Nightmare",    "Brick",     10.0 + X_LEFT_EDGE, 30.0 + Y_TOP_EDGE + (15.0 * 1), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, "" , "");
-  //   PDAButton TECHNOPHOBIA = PDA_CreateBeastButton(PDA_BEAST_TP, "Technophobia", "LightBlue", 10.0 + X_LEFT_EDGE, 30.0 + Y_TOP_EDGE + (15.0 * 2), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, "", "");
-  //   PDAButton ARMAGEDDON   = PDA_CreateBeastButton(PDA_BEAST_AG, "Armageddon",   "Gold",      10.0 + X_LEFT_EDGE, 30.0 + Y_TOP_EDGE + (15.0 * 3), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, "", "");
-  //   PDAButton EXTRA        = PDA_CreateBeastButton(PDA_BEAST_EX, "Extra",        "Purple",    10.0 + X_LEFT_EDGE, 30.0 + Y_TOP_EDGE + (15.0 * 4), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, "", "");
-  //   break;
+  case PDA_BESTIARY:
+    PDAButton NORMAL       = PDA_CreateBeastButton(PDA_BEAST_UV, "Normal",       "White",     10.0 + X_LEFT_EDGE, 30.0 + Y_TOP_EDGE + (15.0 * 0), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, "", "");
+    PDAButton NIGHTMARE    = PDA_CreateBeastButton(PDA_BEAST_NM, "Nightmare",    "Brick",     10.0 + X_LEFT_EDGE, 30.0 + Y_TOP_EDGE + (15.0 * 1), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, "" , "");
+    PDAButton TECHNOPHOBIA = PDA_CreateBeastButton(PDA_BEAST_TP, "Technophobia", "LightBlue", 10.0 + X_LEFT_EDGE, 30.0 + Y_TOP_EDGE + (15.0 * 2), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, "", "");
+    PDAButton ARMAGEDDON   = PDA_CreateBeastButton(PDA_BEAST_AG, "Armageddon",   "Gold",      10.0 + X_LEFT_EDGE, 30.0 + Y_TOP_EDGE + (15.0 * 3), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, "", "");
+    PDAButton EXTRA        = PDA_CreateBeastButton(PDA_BEAST_EX, "Extra",        "Purple",    10.0 + X_LEFT_EDGE, 30.0 + Y_TOP_EDGE + (15.0 * 4), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, "", "");
+    break;
     
-  // case PDA_ARMORS:
-  //   bool specialArmorTokens = checkSpecialArmorTokens();
-  //   localArmorData          = setupArmorData(specialArmorTokens);
-  //   localBootsData          = setupBootsData();
-  //   localBackpackData       = setupBackpackData();
+  case PDA_ARMORS:
+    bool specialArmorTokens = checkSpecialArmorTokens();
+    localArmorData          = setupArmorData(specialArmorTokens);
+    localBootsData          = setupBootsData();
+    localBackpackData       = setupBackpackData();
 
-  //   PDAButton ARMORS_TAB_1    = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-  //   PDAButton ARMORS_TAB_2    = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDAButton ARMORS_TAB_1    = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDAButton ARMORS_TAB_2    = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
 
     
-  //   PDAButton ARMOR_BUTTON    = PDA_DisplayArmor(PDA_PLAYER_ARMOR_ICON   , ARMOR_DATA   , PDA_SCREEN_X + 55.0 + X_LEFT_EDGE, 20.0, 16, localShowArmor    ? pulser(2.0, 0.8) : 0.7),
-  //             BACKPACK_BUTTON = PDA_DisplayArmor(PDA_PLAYER_BACKPACK_ICON, BACKPACK_DATA, PDA_SCREEN_X + 53.0 + X_LEFT_EDGE, 45.0, 16, localShowBackpack ? pulser(2.0, 0.8) : 0.7),
-  //             BOOTS_BUTTON    = PDA_DisplayArmor(PDA_PLAYER_BOOTS_ICON   , BOOTS_DATA   , PDA_SCREEN_X + 50.0 + X_LEFT_EDGE, 70.0, 16, localShowBoots    ? pulser(2.0, 0.8) : 0.7);
-  //   break;
+    PDAButton ARMOR_BUTTON    = PDA_DisplayArmor(PDA_PLAYER_ARMOR_ICON   , ARMOR_DATA   , PDA_SCREEN_X + 55.0 + X_LEFT_EDGE, 20.0, 16, localShowArmor    ? pulser(2.0, 0.8) : 0.7),
+              BACKPACK_BUTTON = PDA_DisplayArmor(PDA_PLAYER_BACKPACK_ICON, BACKPACK_DATA, PDA_SCREEN_X + 53.0 + X_LEFT_EDGE, 45.0, 16, localShowBackpack ? pulser(2.0, 0.8) : 0.7),
+              BOOTS_BUTTON    = PDA_DisplayArmor(PDA_PLAYER_BOOTS_ICON   , BOOTS_DATA   , PDA_SCREEN_X + 50.0 + X_LEFT_EDGE, 70.0, 16, localShowBoots    ? pulser(2.0, 0.8) : 0.7);
+    break;
 
-  // case PDA_ASSEMBLIES:
-  //   float nextButtonX = 10.0;
-  //   if (PDA_Local.page > 1 && PDA_Local.page < 3) nextButtonX = PDA_SCREEN_WIDTH + PDA_SCREEN_X - 82;
+  case PDA_ASSEMBLIES:
+    float nextButtonX = 10.0;
+    float paginationY = 35.0 + (6.0 * PDA_Local.maxassembliesper);
+    if (PDA_Local.page > 1 && PDA_Local.page < 3) nextButtonX = PDA_SCREEN_WIDTH + PDA_SCREEN_X - 82;
 
-  //   PDAButton ASSEMBLIES_TAB_1 = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y, PDA_TAB_W, PDA_TAB_H);
-  //   PDAButton ASSEMBLIES_TAB_2 = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y, PDA_TAB_W, PDA_TAB_H);
-  //   PDAButton ASSEMBLIES_TAB_3 = PDA_CreateTab(PDA_TAB_BUTTONS_START + 2, "3", "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y, PDA_TAB_W, PDA_TAB_H);
-  //   PDAButton ASSEMBLIES_PREV_TIER = PDA_CreateButton(PDA_PREV_PAGE, "Previous tier", "A_PREV",        10.0, 100.0, 82, 16, 20, 15);
-  //   PDAButton ASSEMBLIES_NEXT_TIER = PDA_CreateButton(PDA_NEXT_PAGE, "Next tier"    , "A_NEXT", nextButtonX, 100.0, 82, 16, 20, 15);
-  //   break;
+    PDAButton ASSEMBLIES_TAB_1 = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y, PDA_TAB_W, PDA_TAB_H);
+    PDAButton ASSEMBLIES_TAB_2 = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y, PDA_TAB_W, PDA_TAB_H);
+    PDAButton ASSEMBLIES_TAB_3 = PDA_CreateTab(PDA_TAB_BUTTONS_START + 2, "3", "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y, PDA_TAB_W, PDA_TAB_H);
+    
+    PDAButton ASSEMBLIES_PREV_TIER = PDA_CreateButton(PDA_PREV_PAGE, "Previous tier", "A_PREV",        10.0, paginationY, 82, 16, 20, 15);
+    PDAButton ASSEMBLIES_NEXT_TIER = PDA_CreateButton(PDA_NEXT_PAGE, "Next tier"    , "A_NEXT", nextButtonX, paginationY, 82, 16, 20, 15);
+    break;
 
-  // case PDA_HELP:
-  //   PDAButton HELP_TAB_1 = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-  //   PDAButton HELP_TAB_2 = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-  //   break;
+  case PDA_HELP:
+    PDAButton HELP_TAB_1 = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDAButton HELP_TAB_2 = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    break;
 
-  // case PDA_ITEMS:
-  //   PDAButton ITEMS_TAB_1  = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1" , "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-  //   PDAButton ITEMS_TAB_2  = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2" , "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-  //   PDAButton ITEMS_TAB_3  = PDA_CreateTab(PDA_TAB_BUTTONS_START + 2, "3" , "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-  //   PDAButton ITEMS_TAB_4  = PDA_CreateTab(PDA_TAB_BUTTONS_START + 3, "4" , "PTAB", PDA_TAB_NEXT_X(3), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-  //   PDAButton ITEMS_TAB_5  = PDA_CreateTab(PDA_TAB_BUTTONS_START + 4, "5" , "PTAB", PDA_TAB_NEXT_X(4), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-  //   break;
+  case PDA_ITEMS:
+    PDAButton ITEMS_TAB_1  = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1" , "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDAButton ITEMS_TAB_2  = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2" , "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDAButton ITEMS_TAB_3  = PDA_CreateTab(PDA_TAB_BUTTONS_START + 2, "3" , "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDAButton ITEMS_TAB_4  = PDA_CreateTab(PDA_TAB_BUTTONS_START + 3, "4" , "PTAB", PDA_TAB_NEXT_X(3), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDAButton ITEMS_TAB_5  = PDA_CreateTab(PDA_TAB_BUTTONS_START + 4, "5" , "PTAB", PDA_TAB_NEXT_X(4), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    break;
 }
