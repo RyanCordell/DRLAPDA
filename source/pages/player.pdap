@@ -1,11 +1,4 @@
-// We don't need garbage from other categories or pages to leak.
-switch(PDA_Local.page)
-{
-    case 1: PDA_HEADER_STR = "PDA_CLASS_HEADER1"; PDA_HEADER_X = 5; break;
-    case 2: PDA_HEADER_STR = "PDA_CLASS_HEADER2"; PDA_HEADER_X = 0; break;
-}
-    
-PDA_ButtonHandler(PDA_TAB_BUTTONS_START, true, 1, "", false);
+PDA_ButtonHandler(PDA_TAB_BUTTONS_START    , true, 1, "", false);
 PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 1, true, 2, "", false);
 
 if (PDA_LocalMouse.scrolling) {
@@ -15,9 +8,6 @@ if (PDA_LocalMouse.scrolling) {
 
 if(GetActorclass(0) != "None")
 {
-    str PDA_Class_Name_Printer, PDA_Class_Ability_Printer, PDA_Class_Story_Printer, PDA_Class_Story_Height;
-    int PDA_Class_TrimValue = 0;
-    
     str classIcon = StrParam("%l:", StrParam("PDA_CLASS_%s:_ICON", StrTrim(GetActorClass(0),0,PDA_Class_TrimValue)));
 
     if(stricmp(classIcon, "PDA_", 4) == 0) 
@@ -27,16 +17,6 @@ if(GetActorclass(0) != "None")
     HudMessage(s:"A\n"; HUDMSG_ALPHA, PDA_INFOID, CR_UNTRANSLATED,  PDA_SCREEN_WIDTH + 5.0 + X_RIGHT_EDGE, (PDA_SCROLLABLE_HEIGHT) + 5.0 + Y_TOP_EDGE, 0, 0.45);
     
     PDA_DefaultFont();
-
-    if(CheckInventory("DRPGDRLAActive"))
-        PDA_Class_TrimValue = 3;
-    else
-        PDA_Class_TrimValue = 0;
-
-        PDA_Class_Name_Printer    = StrParam("PDA_CLASS_%s:_NAME"     , StrTrim(GetActorClass(0),0,PDA_Class_TrimValue));
-        PDA_Class_Ability_Printer = StrParam("PDA_CLASS_%s:_ABILITIES", StrTrim(GetActorClass(0),0,PDA_Class_TrimValue));
-        PDA_Class_Story_Printer   = StrParam("PDA_CLASS_%s:_STORY"    , StrTrim(GetActorClass(0),0,PDA_Class_TrimValue));
-        PDA_Class_Story_Height    = StrParam("PDA_CLASS_%s:_HEIGHT"   , StrTrim(GetActorClass(0),0,PDA_Class_TrimValue));
 
     // Class perks
     if(PDA_Local.page == CLASSES_PAGE_PERKS)

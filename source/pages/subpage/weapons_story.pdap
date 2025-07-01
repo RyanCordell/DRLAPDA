@@ -1,28 +1,5 @@
 
-
-classperkdisplayed  = StrParam("> \c[Yellow]%l:", "PDA_WEAPON_PERKUNAVAILABLE");
-bool canDisassemble = (GetActorClass(0) == "DoomRLTechnician" && !CheckInventory("RLStandardWeaponToken"));
-bool hasArtifacts   = CheckInventory(StrParam("%s:DemonArtifacts", currentWeapon));
-
-// Checks for player perks that influence weapons
-for (int perkIndex = 0; perkIndex < DRLA_WEAPONPERKMAX; perkIndex++) {
-    if (CheckInventory(DRLA_WeaponPerkList[perkIndex][0]) && CheckInventory(DRLA_WeaponPerkList[perkIndex][2])) {
-        classperkdisplayed = strParam("> \c[Yellow]%s:", DRLA_WeaponPerkList[perkIndex][1]);
-    }
-}
-// Checks for unique weapon + armor set perks
-// I should get a better name for this loop's max at some point..
-for (int setPerkIndex = 0; setPerkIndex < DRLA_NUCLEARMAX; setPerkIndex++) {
-    if (CheckInventory(DRLA_WeaponSetList[setPerkIndex][0]) && (currentWeapon == DRLA_NuclearCheckList[setPerkIndex])) {
-        weaponperkdisplayed = strParam("> \c[Yellow]%s:", DRLA_WeaponSetList[0][1]);
-    }
-    if (CheckInventory("RLCerberusSetBonusActive") && (currentWeapon == DRLA_TristarCheckList[setPerkIndex])) {
-        weaponperkdisplayed = strParam("> \c[Yellow]%s:", DRLA_WeaponSetList[1][1]);
-    }
-}
-
 // TODO: throw gun icon on this page
-
 HudMessageParallax(
     StrParam(
         "%s:" // Tech perk
@@ -30,12 +7,13 @@ HudMessageParallax(
         "\n"
         "%s:" // Weapon perk
         "%l:\n"
-        "\c-%l:\n",
-        (canDisassemble) ? strParam("> \c[Yellow]%s:", DRLA_WeaponPerkList[2][1]) : "",
-        (!canDisassemble) ? classperkdisplayed : "",
-        weaponperkdisplayed,
-        (hasArtifacts) ? PDA_Weapon_DualName_Printer : PDA_Weapon_Name_Printer,
-        (hasArtifacts) ? PDA_Weapon_DualDesc_Printer : PDA_Weapon_Desc_Printer
+        "\c-%l:\n"
+        ,
+        (weapon_can_disassemble) ? strParam("> \c[Yellow]%s:", DRLA_WeaponPerkList[2][1]) : "",
+        (!weapon_can_disassemble) ? class_perk_displayed : "",
+        weapon_perk_displayed,
+        (weapon_supports_artifacts) ? PDA_Weapon_DualName_Printer : PDA_Weapon_Name_Printer,
+        (weapon_supports_artifacts) ? PDA_Weapon_DualDesc_Printer : PDA_Weapon_Desc_Printer
     ),
 
     HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 

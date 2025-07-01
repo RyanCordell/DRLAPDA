@@ -18,11 +18,10 @@ import sys
 import os.path
 
 from tkinter import filedialog as fd
-from datetime import datetime
 
 from typing import Any, IO
 
-from .utils import current_time, is_invoked_by_combiner, attempt_print
+from utils import current_time, is_invoked_by_combiner, attempt_print
 
 INPUT_FOLDER_ARG: int = 1
 OUTPUT_FOLDER_ARG: int = 2

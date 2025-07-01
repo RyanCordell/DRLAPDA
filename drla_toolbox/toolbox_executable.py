@@ -58,14 +58,14 @@ class Combiner(customtkinter.CTk):
     self.frame_label = customtkinter.CTkLabel(self.left_frame, text='SBARINFO Merger', font=('CTkFont', 20))
     self.frame_label.grid(row=0, column=0, padx=20, pady=(10, 20))
 
-    self.openInput = customtkinter.CTkButton(self.left_frame, text='Open input file', command=partial(Sbarinfo.doInput, self))
+    self.openInput = customtkinter.CTkButton(self.left_frame, text='Open input file', command=partial(Sbarinfo.process_input, self))
     self.openInput.grid(row=2, column=0, padx=40, pady=0)
 
 
-    self.simulateSbarinfoCompile = customtkinter.CTkButton(self.left_frame, text='Build (no output)', command=partial(Sbarinfo.doQuasiCompile, self))
+    self.simulateSbarinfoCompile = customtkinter.CTkButton(self.left_frame, text='Build (no output)', command=partial(Sbarinfo.do_fake_compile, self))
     self.simulateSbarinfoCompile.grid(row=5, column=0, padx=40, pady=20)
 
-    self.compileSbarinfo = customtkinter.CTkButton(self.left_frame, text='Compile', command=partial(Sbarinfo.doCompile, self))
+    self.compileSbarinfo = customtkinter.CTkButton(self.left_frame, text='Compile', command=partial(Sbarinfo.perform_compile, self))
     self.compileSbarinfo.grid(row=6, column=0, padx=40, pady=20)
     self.compileSbarinfo.configure(state='disabled')
     self.clearOutput = customtkinter.CTkButton(self.left_frame, text='Clear output window', command=partial(Arsenal.clearWindow, self))
@@ -86,7 +86,7 @@ class Combiner(customtkinter.CTk):
     self.frame_label = customtkinter.CTkLabel(self.right_frame, text='Arsenal Builder', font=('CTkFont', 20))
     self.frame_label.grid(row=0, column=2, padx=20, pady=(10, 40))
 
-    self.openJSON = customtkinter.CTkButton(self.right_frame, text='Open JSON folder', command=partial(Arsenal.doInput, self))
+    self.openJSON = customtkinter.CTkButton(self.right_frame, text='Open JSON folder', command=partial(Arsenal.do_input, self))
     self.openJSON.grid(row=2, column=2, padx=40, pady=(0, 20))
 
     # self.files_label = customtkinter.CTkLabel(self.right_frame, text='Selected files:')
@@ -105,10 +105,10 @@ class Combiner(customtkinter.CTk):
     self.separatorTokenFrame.insert("0.0", self.separatorToken)
     self.separatorTokenFrame.bind(sequence=None, command=self.changeSeparatorToken)
 
-    self.simulateCompile = customtkinter.CTkButton(self.right_frame, text='Build (no output)', command=partial(Arsenal.doQuasiCompile, self))
+    self.simulateCompile = customtkinter.CTkButton(self.right_frame, text='Build (no output)', command=partial(Arsenal.do_quasi_compile, self))
     self.simulateCompile.grid(row=6, column=2, padx=40, pady=20)
 
-    self.compileArsenal = customtkinter.CTkButton(self.right_frame, text='Compile', command=partial(Arsenal.doCompile, self))
+    self.compileArsenal = customtkinter.CTkButton(self.right_frame, text='Compile', command=partial(Arsenal.do_compile, self))
     self.compileArsenal.grid(row=7, column=2, padx=40, pady=20)
 
 if __name__ == '__main__':

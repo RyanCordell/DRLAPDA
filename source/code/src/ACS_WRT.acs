@@ -1,8 +1,10 @@
 #define asciiNumberZero 48
 #define MAX_PLAYERS 8
 #define ASSEMBLY_MAX 300
+#define TEXT_OFFSET 13 // "PDA_ASSEMBLY_" string length
 
 #define strToNumber(a, i)  (int)(GetChar((a), (i)) - asciiNumberZero)
+
 
 SCRIPT "DRLA_AssemblyGlobalizer" ENTER {
 	bool dowrite;
@@ -10,21 +12,15 @@ SCRIPT "DRLA_AssemblyGlobalizer" ENTER {
     // Fetch all available assembly and exotic mod effect data from (g/vk/z)doom's ini
     DRLA_FetchStoredInfo[PlayerNumber()] = GetUserCVarString(PlayerNumber(), "DRLA_knownassemblies");
 
-    int masterMax   = 0;
-    str allAssemblies = StrParam(l:"PDA_ASSEMBLIES");
-    str_split(StrParam("%l:", "PDA_SEPARATOR_CHARACTER"), allAssemblies);
+    int masterMax      = 0;
+    str all_assemblies = StrParam(l:"PDA_ASSEMBLIES");
+    str_split(separator_character, all_assemblies);
     int ai = 0;
-    int TEXT_OFFSET = 13; // "PDA_ASSEMBLY_" string length
     if (stringArray[0] != "") {
         while ((stringArray[ai++]) != "") {
             if (ai % 2 == 0) masterMax++;
         }
     }
-
-    int DRLA_AssemblyState[MAX_PLAYERS][ASSEMBLY_MAX],
-        DRLA_OldAssemblyState[MAX_PLAYERS][ASSEMBLY_MAX];
-
-    str DRLA_CurrentAssemblerState[MAX_PLAYERS] = {{"","","","","","","",""}};
 
     str actorToken = "";
 
@@ -33,10 +29,14 @@ SCRIPT "DRLA_AssemblyGlobalizer" ENTER {
      * 
      * Read data from ini fetched cvars and give the player all the assemblies.
      */
-    for (int ti = 0, at = 0; ti < masterMax, at < masterMax * 2; ti++, at += 2) {
-        actorToken = stringArray[at];
+    for (
+        int token_index = 0,         assembly_token = 0; 
+            token_index < masterMax, assembly_token < masterMax * 2; 
+            token_index++,           assembly_token += 2
+    ) {
+        actorToken = stringArray[assembly_token];
 
-        int stateAt = strToNumber(DRLA_FetchStoredInfo[PlayerNumber()], ti);
+        int stateAt = strToNumber(DRLA_FetchStoredInfo[PlayerNumber()], token_index);
 
         if (stateAt >= 0) { // This avoids the incredibly gross bug of forgotten assemblies returning back
             if (stateAt == 0) 
@@ -44,20 +44,14 @@ SCRIPT "DRLA_AssemblyGlobalizer" ENTER {
             else 
                 GiveInventory(actorToken, 1);
         }
-        
-        DRLA_OldAssemblyState[PlayerNumber()][ti] = CheckInventory(actorToken);
     }
 }
 
-SCRIPT "DRLA_UpdateAssemblyDB" (void) {
-    // Fetch all available assembly and exotic mod effect data from (g/vk/z)doom's ini
-    DRLA_FetchStoredInfo[PlayerNumber()] = GetUserCVarString(PlayerNumber(), "DRLA_knownassemblies");
-
-    int masterMax   = 0;
-    str allAssemblies = StrParam(l:"PDA_ASSEMBLIES");
-    str_split(StrParam("%l:", "PDA_SEPARATOR_CHARACTER"), allAssemblies);
+SCRIPT "DRLA_UpdateINI" (void) {
+    int masterMax      = 0;
+    str all_assemblies = StrParam(l:"PDA_ASSEMBLIES");
+    str_split(separator_character, all_assemblies);
     int ai = 0;
-    int TEXT_OFFSET = 13; // "PDA_ASSEMBLY_" string length
     if (stringArray[0] != "") {
         while ((stringArray[ai++]) != "") {
             if (ai % 2 == 0) masterMax++;
@@ -68,28 +62,54 @@ SCRIPT "DRLA_UpdateAssemblyDB" (void) {
         DRLA_OldAssemblyState[MAX_PLAYERS][ASSEMBLY_MAX];
 
     str DRLA_CurrentAssemblerState[MAX_PLAYERS] = {{"","","","","","","",""}};
-
     str actorToken = "";
 
-    // Read from INI. Any changes will trigger a write over instead.
-    // READ --------------------------------------------------- 
-    for (int ti = 0, at = 0; ti < masterMax, at < masterMax * 2; ti++, at += 2) {
-        actorToken = stringArray[at];
+    // todo: old assembly should read from 
 
-        DRLA_AssemblyState[PlayerNumber()][ti] = CheckInventory(actorToken);
+    #define currentState DRLA_AssemblyState[PlayerNumber()]
+    #define oldState DRLA_OldAssemblyState[PlayerNumber()]
+    #define pendingState DRLA_CurrentAssemblerState[PlayerNumber()]
 
-        if (DRLA_AssemblyState[PlayerNumber()][ti] != DRLA_OldAssemblyState[PlayerNumber()][ti]) {
-            DRLA_CurrentAssemblerState[PlayerNumber()] = "";
-            
-            for (int ti = 0; ti < masterMax; ti++) {
-                if (StrLen(DRLA_CurrentAssemblerState[PlayerNumber()]) <= masterMax) {
-                    DRLA_CurrentAssemblerState[PlayerNumber()] = StrParam(s:DRLA_CurrentAssemblerState[PlayerNumber()], i:DRLA_AssemblyState[PlayerNumber()][ti]);
-                }
-            }
-
-            SetUserCVarString(PlayerNumber(), "DRLA_knownassemblies", DRLA_CurrentAssemblerState[PlayerNumber()]);
-        }
+    // READ ---------------------------------------------------
+    // we read from the ini for existing assemblies 
+    DRLA_FetchStoredInfo[PlayerNumber()] = GetUserCVarString(PlayerNumber(), "DRLA_knownassemblies");
+    for (
+        int token_index = 0; 
+            token_index < masterMax; 
+            token_index++
+    ) {
+        // set old and current to this new state
+        oldState[token_index] = strToNumber(DRLA_FetchStoredInfo[PlayerNumber()], token_index);
+        currentState[token_index] = oldState[token_index];
     }
 
     // WRITE --------------------------------------------------
+    for (
+        int token_index = 0,         assembly_token = 0; 
+            token_index < masterMax, assembly_token < masterMax * 2; 
+            token_index++,           assembly_token += 2
+    ) {
+        actorToken = stringArray[assembly_token];
+
+        // write the current in-game presence of the given token into the appropriate index
+        currentState[token_index] = CheckInventory(actorToken);
+
+        // only write if there's a difference between old and current
+        if (currentState[token_index] != oldState[token_index]) {
+            pendingState = "";
+            
+            // and only in that case do we start constructing the string that we then..
+            for (int sub_index = 0; sub_index < masterMax; sub_index++) {
+                if (StrLen(pendingState) <= masterMax) {
+                    pendingState = StrParam(
+                        s:pendingState, 
+                        i:currentState[sub_index]
+                    );
+                }
+            }
+
+            // write to the ini
+            SetUserCVarString(PlayerNumber(), "DRLA_knownassemblies", pendingState);
+        }
+    }
 }

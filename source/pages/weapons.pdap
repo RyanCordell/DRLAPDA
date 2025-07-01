@@ -1,58 +1,23 @@
 PDA_Local.pagemax = 3;
 
-str classperkdisplayed  = "\n",
-    weaponperkdisplayed = "\n";
 int perkoffset = 1;
-
-switch (PDA_Local.page)
-{
-case 1:
-    PDA_HEADER_STR = "PDA_WEAPON_HEADER"; PDA_HEADER_X = 0;
-    break;
-case 2:
-    PDA_HEADER_STR = "PDA_MODPACK_HEADER"; PDA_HEADER_X = -10;
-    break;
-case 3:
-    PDA_HEADER_STR = "PDA_DEMONARTIFACT_HEADER"; PDA_HEADER_X = -20;
-    break;
-}
 
 PDA_ButtonHandler(PDA_TAB_BUTTONS_START    , true, 1, "", false);
 PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 1, true, 2, "", false);
 PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 2, true, 3, "", false);
 
 if (PDA_LocalMouse.scrolling) {
-    PDAButton WEAPONS_TAB_1 = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-    PDAButton WEAPONS_TAB_2 = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-    PDAButton WEAPONS_TAB_3 = PDA_CreateTab(PDA_TAB_BUTTONS_START + 2, "3", "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDA_LocalButton[PDA_TAB_BUTTONS_START    ] = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDA_LocalButton[PDA_TAB_BUTTONS_START + 1] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDA_LocalButton[PDA_TAB_BUTTONS_START + 2] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 2, "3", "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
 }
 
 // PDA_SetupScreenBounds();
 PDA_DefaultFont();
 
 bool canAnim = true;
-str currentWeapon = GetWeapon();
-str trimmedCurrentWeapon = StrTrim(currentWeapon, 2, 0);
 
-if (stricmp(CheckInventory(currentWeapon), "None") != 0) {
-    str PDA_Weapon_Name_Printer = StrParam("PDA_WEAPON_%s:_NAME", trimmedCurrentWeapon),
-        PDA_Weapon_Desc_Printer = StrParam("PDA_WEAPON_%s:_DESC", trimmedCurrentWeapon);
-
-    str PDA_Weapon_DualName_Printer = StrParam("PDA_WEAPON_%s:DEMONARTIFACTS_NAME", trimmedCurrentWeapon),
-        PDA_Weapon_DualDesc_Printer = StrParam("PDA_WEAPON_%s:DEMONARTIFACTS_DESC", trimmedCurrentWeapon);
-
-    int PDA_Weapon_Bulk_Quantity      = CheckInventory(StrParam("%s:BulkMod", currentWeapon)),
-        PDA_Weapon_Power_Quantity     = CheckInventory(StrParam("%s:PowerMod", currentWeapon)),
-        PDA_Weapon_Agility_Quantity   = CheckInventory(StrParam("%s:AgilityMod", currentWeapon)),
-        PDA_Weapon_Technical_Quantity = CheckInventory(StrParam("%s:TechnicalMod", currentWeapon)),
-        PDA_Weapon_Sniper_Quantity    = CheckInventory(StrParam("%s:SniperMod", currentWeapon)),
-        PDA_Weapon_Firestorm_Quantity = CheckInventory(StrParam("%s:FirestormMod", currentWeapon)),
-        PDA_Weapon_Nano_Quantity      = CheckInventory(StrParam("%s:NanoMod", currentWeapon)),
-        PDA_Weapon_Artifact_Quantity  = CheckInventory(StrParam("%s:DemonArtifacts", currentWeapon));
-
-    bool PDA_IsNotDemonic = false;
-         PDA_IsNotDemonic = !CheckInventory("RLDemonicWeaponToken");
-
+if (stricmp(current_weapon, "None") != 0) {
     if (PDA_Local.page == WEAPON_PAGE_STORY) {
         #include "../../pages/subpage/weapons_story.pdap"
     }

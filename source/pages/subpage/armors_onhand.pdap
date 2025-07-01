@@ -12,15 +12,13 @@ HudMessageParallax("No equipment detected", HUDMSG_PLAIN, PDA_NOEQID, CR_UNTRANS
 int armorLimit      = 0;
 bool areTheseBoots  = false; // Does Bruno Mars is gay???
 
-localArmorData = setupArmorData(specialArmorTokens);
-localBootsData = setupBootsData();
+localArmorData    = setupArmorData(specialArmorTokens);
+localBootsData    = setupBootsData();
 localBackpackData = setupBackpackData();
-bool isRenegade = false;
 
 // Note to future self: don't try to merge these first 5 lines for cleanliness sake. Won't work the way you wish it would.
 if (localHasArmor) {
     // Not the renegade of funk, unfortunately..
-    isRenegade = (CheckActorClass(0, CheckInventory("DRPGDRLAActive") ? "DoomRLRenegadeRPG" : "DoomRLRenegade") == true);
 
     HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_NOEQID, CR_UNTRANSLATED, 0, 0, 0);
     id    = (PDA_WORNARMORS - 4) + (armorLimit * 4);

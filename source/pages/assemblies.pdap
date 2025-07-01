@@ -1,27 +1,6 @@
 
 PDA_Local.pagemax = 3;
 
-// TODO: Take these out and have them work when called statically
-// str allAssemblies = StrParam(l:"PDA_ASSEMBLIES");
-str_split(StrParam("%l:", "PDA_SEPARATOR_CHARACTER"), allAssemblies);
-// int basicInd    = 0;
-// int advancedInd = 0; // should be 33
-// int masterInd   = 0; // should be 65
-// int masterMax   = 0; // should be 95
-
-// int stringArrayIndex = 0;
-// int TEXT_OFFSET = 13; // "PDA_ASSEMBLY_" string length
-
-// while ((stringArray[stringArrayIndex++]) != "") {
-//     if (str_find(stringArray[stringArrayIndex], "ADVANCED", TEXT_OFFSET) != -1 && advancedInd == 0) advancedInd = stringArrayIndex;
-//     if (str_find(stringArray[stringArrayIndex],   "MASTER", TEXT_OFFSET) != -1 &&   masterInd == 0) masterInd   = stringArrayIndex;
-//     masterMax++;
-// }
-
-// stringArrayIndex = 0;
-// masterMax--;
-// ----
-
 PDA_ButtonHandler(PDA_TAB_BUTTONS_START    , true, 1, "", false);
 PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 1, true, 2, "", false);
 PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 2, true, 3, "", false);
@@ -32,46 +11,42 @@ if (PDA_LocalMouse.scrolling) {
     PDA_LocalButton[PDA_TAB_BUTTONS_START + 2] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 2, "3", "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y, 8, 6);
 }
 
-int assembly_id;
-str assembly_icon = "\n";
-str assembly_colorizer = "\n";
+int id = 0;
+str icon = "\n";
+str colored_label = "\n";
 
 float assemblyX = 20.0,
       assemblyY;
 const int width = 180, 
           height = 7;
 
-str assembly_callback = "\n";
-str assembly_tooltip = "\n";
+str callback = "\n";
+str tooltip = "\n";
 
 // PDA_SetupScreenBounds();
 
 // SetFont(USED_PDA_FONT);
 for (int ti = 0, li = 1; ti <= PDA_Local.maxassembliesper; ti+=2, li+=2) {
-    PDAButton button;
     int aoff               = (PDA_Local.assemblyOffset - 1 < 0) ? 0 : (PDA_Local.assemblyOffset - 1);
-    int offsetIndex        = ((ti - 1) + PDA_Local.assemblyOffset);
-    int tokenIndex         = (ti + aoff);
     int peekFuture         = (ti + 2);
-    int langIndex          = (li + aoff);
-    str actorToken         = stringArray[tokenIndex];
-    str languagePointer    = stringArray[langIndex ];
-        assembly_id        = (PDA_ASSEMBLYIDRANGE + offsetIndex);
+    str actorToken         = stringArray[ti + aoff];
+    str languagePointer    = stringArray[li + aoff];
+        id                 = PDA_ASSEMBLYIDRANGE + (ti - 1) + PDA_Local.assemblyOffset;
         assemblyY          = 30.0 + (6.0 * (ti - 1)); 
-        assembly_icon      = strParam("%l:",    strParam("%s:_assembly_icon", languagePointer));
-        assembly_colorizer = strParam("%s:%l:", PDA_Local.tiercolor, languagePointer);
-        assembly_callback  = languagePointer;
-        assembly_tooltip   = strParam("%l:\n%l:", "PDA_ASSEMBLY_REQUIREMENTS", strParam("%s:_REQ", languagePointer));
+        icon               = strParam("%l:",    strParam("%s:_ICON", languagePointer));
+        colored_label      = strParam("%s:%l:\c-", PDA_Local.tiercolor, languagePointer);
+        callback           = languagePointer;
+        tooltip            = strParam("%l:\n%l:", "PDA_ASSEMBLY_REQUIREMENTS", strParam("%s:_REQ", languagePointer));
 
     if (peekFuture >= advancedInd && PDA_Local.assemblyOffset < advancedInd) continue;
-    if (peekFuture >= masterInd && PDA_Local.assemblyOffset < masterMax) continue;
+    if (peekFuture >= masterInd   && PDA_Local.assemblyOffset < masterMax  ) continue;
 
     if (PDA_CheckPlayer1Inventory(actorToken) || CheckInventory(actorToken)) {
-        button = PDA_CreateAssemblyButton(assembly_id, assembly_icon, assembly_colorizer, assemblyX, assemblyY, width, height, assembly_callback, assembly_tooltip);
-                 PDA_ButtonHandler(assembly_id, false, PDA_ASSEMBLY_DETAIL, "", false);
+        assembly_button[ti - 1] = PDA_CreateAssemblyButton(id, icon, colored_label, assemblyX, assemblyY, width, height, callback, tooltip);
+                 PDA_ButtonHandler(id, false, PDA_ASSEMBLY_DETAIL, "", false);
     } else { 
-        button = PDA_CreateAssemblyButton(assembly_id, "PDAUNK", strParam(l:"PDA_ASSEMBLY_UNKNOWN"), assemblyX, assemblyY, width, height, "",               "???");
-                 PDA_ButtonHandler(assembly_id, true, PDA_Local.page, "", false);
+        assembly_button[ti - 1] = PDA_CreateAssemblyButton(id, "PDAUNK", strParam(l:"PDA_ASSEMBLY_UNKNOWN"), assemblyX, assemblyY, width, height, "", "???");
+                 PDA_ButtonHandler(id, true, PDA_Local.page, "", false);
     }
 }
 
@@ -81,7 +56,7 @@ if (PDA_LocalMouse.scrolling) {
     
     if (PDA_Local.page > 1) {
         PDA_LocalButton[PDA_PREV_PAGE] = PDA_CreateButton(60, "Previous tier" , "A_PREV", 
-            10.0, assemblyY + 10.0, 
+            10.0, 30.0 + (6.0 * PDA_Local.maxassembliesper - 1), 
             82, 16, 
             20, 15);
         PDA_ButtonHandler(60, true, PDA_Local.page - 1, "", false);
@@ -89,7 +64,7 @@ if (PDA_LocalMouse.scrolling) {
 
     if (PDA_Local.page < 3) {
         PDA_LocalButton[PDA_NEXT_PAGE] = PDA_CreateButton(61, "Next tier" , "A_NEXT", 
-            nextButtonX, assemblyY + 10.0, 
+            nextButtonX, 30.0 + (6.0 * PDA_Local.maxassembliesper - 1), 
             82, 16, 
             20, 15);
         PDA_ButtonHandler(61, true, PDA_Local.page + 1, "", false);

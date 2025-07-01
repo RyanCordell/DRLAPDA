@@ -1,6 +1,3 @@
-
-
-
 // Armor / Boots / Suit display
 fixed y          = 0.0;
 fixed initialY   = 30.0;
@@ -21,9 +18,6 @@ localShowBoots    = (localABoolField & 1<<1);
 localShowBackpack = (localABoolField & 1<<2);
 
 if (localHasArmor) {
-    // Not the renegade of funk, unfortunately..
-    bool isRenegade = false;
-         isRenegade = (CheckActorClass(0, CheckInventory("DRPGDRLAActive") ? "DoomRLRenegadeRPG" : "DoomRLRenegade") == true);
 
     DisplayIconParallax("PDAPARM", PDA_PLAYER_BODY_ICON, playerIconX, 40.0, 0.0, showArmor ? 1.0 : 0.5);
 

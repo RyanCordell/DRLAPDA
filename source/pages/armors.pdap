@@ -1,10 +1,5 @@
 PDA_Local.pagemax = 2;
 
-switch (PDA_Local.page) {
-    case 1: PDA_HEADER_STR = "PDA_ARMOR_HEADER1"; PDA_HEADER_X = -20; break;
-    case 2: PDA_HEADER_STR = "PDA_ARMOR_HEADER2"; PDA_HEADER_X = -15; break;
-}
-
 PDA_ButtonHandler(PDA_TAB_BUTTONS_START    , true, 1, "", false);
 PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 1, true, 2, "", false);
 
