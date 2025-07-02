@@ -387,7 +387,8 @@ SCRIPT "PDA_Core" (void) {
     separator_character = StrParam("%l:", "PDA_SEPARATOR_CHARACTER");
     
     while (PDA_Local.active) {
-        PDA_PrintHeader();
+        PDA_HandleHeader();
+        
         switch (PDA_Local.category) {
             case PDA_MENU:
                 page_menu();

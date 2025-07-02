@@ -1,85 +1,85 @@
 
 
-// HudMessageParallax(
-//     StrParam("\cf%l:\c-\n", 
-//     "PDA_DEMONARTIFACTS_NOTSUPPORTED"),
-//     HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), 0.0, 1.0);
+HudMessageParallax(
+    StrParam("\cf%l:\c-\n", 
+    "PDA_DEMONARTIFACTS_NOTSUPPORTED"),
+    HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), 0.0, 1.0);
 
-// if (!PDA_IsNotDemonic) {
-//     HudMessageParallax(
-//         StrParam(
-//             "%l:\n[\c[LightBlue]%i:B \c[Red]%i:P \c[Green]%i:A \c[Yellow]%i:T \c[Purple]%i:S \c[Orange]%i:F \c[White]%i:N \cr%i:D\c-]"
-//             "\n\n",
-//             (PDA_IsNotDemonic) ? 
-//             (CheckInventory(strParam("%s:DemonArtifacts", current_weapon)) ? 
-//                 PDA_Weapon_DualName_Printer 
-//                 : PDA_Weapon_Name_Printer) 
-//             : PDA_Weapon_Name_Printer,
-//             PDA_Weapon_Bulk_Quantity, PDA_Weapon_Power_Quantity, PDA_Weapon_Agility_Quantity, PDA_Weapon_Technical_Quantity,
-//             PDA_Weapon_Sniper_Quantity, PDA_Weapon_Firestorm_Quantity, PDA_Weapon_Nano_Quantity,
-//             (PDA_IsNotDemonic) ? 0 : PDA_Weapon_Artifact_Quantity
-//         ),
-//             HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 
-//             10.0, 20.0 + (20.0 * 1), 0.0, 1.0);
+if (!PDA_IsNotDemonic) {
+    HudMessageParallax(
+        StrParam(
+            "%l:\n[\c[LightBlue]%i:B \c[Red]%i:P \c[Green]%i:A \c[Yellow]%i:T \c[Purple]%i:S \c[Orange]%i:F \c[White]%i:N \cr%i:D\c-]"
+            "\n\n",
+            (PDA_IsNotDemonic) ? 
+            (CheckInventory(strParam("%s:DemonArtifacts", current_weapon)) ? 
+                PDA_Weapon_DualName_Printer 
+                : PDA_Weapon_Name_Printer) 
+            : PDA_Weapon_Name_Printer,
+            PDA_Weapon_Bulk_Quantity, PDA_Weapon_Power_Quantity, PDA_Weapon_Agility_Quantity, PDA_Weapon_Technical_Quantity,
+            PDA_Weapon_Sniper_Quantity, PDA_Weapon_Firestorm_Quantity, PDA_Weapon_Nano_Quantity,
+            (PDA_IsNotDemonic) ? 0 : PDA_Weapon_Artifact_Quantity
+        ),
+            HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 
+            10.0, 20.0 + (20.0 * 1), 0.0, 1.0);
         
-//     float artifactsY = 60.0;
+    float artifactsY = 60.0;
 
-//     if (PDA_Weapon_Artifact_Quantity > 0) {
-//         switch (PDA_Weapon_Artifact_Quantity) {
-//             case 1:
-//                 HudMessageParallax(
-//                     StrParam(
-//                         "\cf%l:\c-\n"
-//                         "%l:\n\n",
-//                         "PDA_DEMONARTIFACTS_ONE",
-//                         StrParam("PDA_ARTIFACT_%s:_ONE", current_weapon_trimmed)
-//                     ),
-//                     HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 10.0 + (artifactsY * 1), 0.0, 1.0);
-//                 break;
-//             case 2:
-//                 HudMessageParallax(
-//                     StrParam(
-//                         "\cf%l:\c-\n"
-//                         "%l:\n\n"
-//                         "\c[Red]%l:\c-\n"
-//                         "%l:\n\n",
-//                         "PDA_DEMONARTIFACTS_TWO",
-//                         StrParam("PDA_ARTIFACT_%s:_TWO", current_weapon_trimmed),
-//                         "PDA_DEMONARTIFACTS_ONE",
-//                         StrParam("PDA_ARTIFACT_%s:_ONE", current_weapon_trimmed)
-//                     ),
-//                     HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 10.0 + (artifactsY * 1), 0.0, 1.0);
-//                 break;
-//             case 3:
-//                 HudMessageParallax(
-//                     StrParam(
-//                         "\cf%l:\c-\n"
-//                         "%l:\n\n"
-//                         "\c[Red]%l:\c-\n"
-//                         "%l:\n\n"
-//                         "\c[Red]%l:\c-\n"
-//                         "%l:\n\n",
-//                         "PDA_DEMONARTIFACTS_THREE",
-//                         StrParam("PDA_ARTIFACT_%s:_THREE", current_weapon_trimmed),
-//                         "PDA_DEMONARTIFACTS_TWO",
-//                         StrParam("PDA_ARTIFACT_%s:_TWO", current_weapon_trimmed),
-//                         "PDA_DEMONARTIFACTS_ONE",
-//                         StrParam("PDA_ARTIFACT_%s:_ONE", current_weapon_trimmed)
-//                     ),
-//                     HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 10.0 + (artifactsY * 1), 0.0, 1.0);
-//                 break;
-//         }
-//     }
-//     else {
-//         HudMessageParallax(
-//             StrParam(
-//                 "\c[Red]%l:\c-\n",
-//                 "PDA_DEMONARTIFACTS_ZERO"
-//             ),
-//             HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 10.0 + (artifactsY * 1), 0.0, 1.0);
-//     }
+    if (PDA_Weapon_Artifact_Quantity > 0) {
+        switch (PDA_Weapon_Artifact_Quantity) {
+            case 1:
+                HudMessageParallax(
+                    StrParam(
+                        "\cf%l:\c-\n"
+                        "%l:\n\n",
+                        "PDA_DEMONARTIFACTS_ONE",
+                        StrParam("PDA_ARTIFACT_%s:_ONE", current_weapon_trimmed)
+                    ),
+                    HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 10.0 + (artifactsY * 1), 0.0, 1.0);
+                break;
+            case 2:
+                HudMessageParallax(
+                    StrParam(
+                        "\cf%l:\c-\n"
+                        "%l:\n\n"
+                        "\c[Red]%l:\c-\n"
+                        "%l:\n\n",
+                        "PDA_DEMONARTIFACTS_TWO",
+                        StrParam("PDA_ARTIFACT_%s:_TWO", current_weapon_trimmed),
+                        "PDA_DEMONARTIFACTS_ONE",
+                        StrParam("PDA_ARTIFACT_%s:_ONE", current_weapon_trimmed)
+                    ),
+                    HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 10.0 + (artifactsY * 1), 0.0, 1.0);
+                break;
+            case 3:
+                HudMessageParallax(
+                    StrParam(
+                        "\cf%l:\c-\n"
+                        "%l:\n\n"
+                        "\c[Red]%l:\c-\n"
+                        "%l:\n\n"
+                        "\c[Red]%l:\c-\n"
+                        "%l:\n\n",
+                        "PDA_DEMONARTIFACTS_THREE",
+                        StrParam("PDA_ARTIFACT_%s:_THREE", current_weapon_trimmed),
+                        "PDA_DEMONARTIFACTS_TWO",
+                        StrParam("PDA_ARTIFACT_%s:_TWO", current_weapon_trimmed),
+                        "PDA_DEMONARTIFACTS_ONE",
+                        StrParam("PDA_ARTIFACT_%s:_ONE", current_weapon_trimmed)
+                    ),
+                    HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 10.0 + (artifactsY * 1), 0.0, 1.0);
+                break;
+        }
+    }
+    else {
+        HudMessageParallax(
+            StrParam(
+                "\c[Red]%l:\c-\n",
+                "PDA_DEMONARTIFACTS_ZERO"
+            ),
+            HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 10.0 + (artifactsY * 1), 0.0, 1.0);
+    }
+}
+// for (int weaponIndex = 0; weaponIndex < DRLA_DEMONWEAPONMAX; weaponIndex++) {
+//     if (StrCmp(current_weapon, DRLA_ArtifactEffectList[weaponIndex][0]) == 0) {
+    // }
 // }
-// // for (int weaponIndex = 0; weaponIndex < DRLA_DEMONWEAPONMAX; weaponIndex++) {
-// //     if (StrCmp(current_weapon, DRLA_ArtifactEffectList[weaponIndex][0]) == 0) {
-//     // }
-// // }

@@ -1,12 +1,10 @@
-PDA_Local.pagemax = 1;
-
 if (!PDA_Local.playonce) {
     PDA_PlaySound("UI/PDA/Activate", "pda/soldier", 80);
 
     PDA_Local.playonce = true;
 }
 
-// PDA_SetupScreenBounds();
+
 
 if (StrCmp(PDA_Local.detailFetch[0], "null") != 0) {
     

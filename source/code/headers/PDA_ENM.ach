@@ -27,7 +27,7 @@ enum PDA_MouseState {
 enum PDA_IDs {
     PDA_CURSORID = 2,
     
-    // Header
+    // Menu
     PDA_PLAYERS_BUTTON = 40,
     PDA_WEAPONS_BUTTON,
     PDA_ARMORS_BUTTON,
@@ -37,35 +37,33 @@ enum PDA_IDs {
     PDA_MISC_BUTTON,
     PDA_HELP_BUTTON,
 
+    // Bestiary
     PDA_BEAST_UV = 50,
     PDA_BEAST_NM,
     PDA_BEAST_TP,
     PDA_BEAST_AG,
     PDA_BEAST_EX,
 
+    // Navigation for any page
     PDA_PREV_PAGE,
     PDA_NEXT_PAGE = PDA_PREV_PAGE + 2,
 
+    // Same-same but different for weapons page
     PDA_MODS_PAGE = PDA_PREV_PAGE,
     PDA_ARTIFACTS_PAGE = PDA_NEXT_PAGE,
 
+    // Category description tooltip
     PDA_CAT_DESCRIPTION = 65,
-
-    PDA_TAB_BUTTONS_START = 66,
-    PDA_TAB_BUTTONS_END = 76,
     
-    PDA_BOTTOMID,
-    PDA_PEGGLESOSID,
-    PDA_PAGENUMID,
-      
-    PDA_PLAYER_BODY_ICON = 80,
-    PDA_PLAYER_ARMOR_ICON = 81,
-    PDA_PLAYER_BACKPACK_ICON = 84,
-    PDA_PLAYER_BOOTS_ICON = 86,
+    // Classes/Player IDs
+    PDA_PLAYER_BODY_ICON = 70,
+    PDA_PLAYER_ARMOR_ICON = 71,
+    PDA_PLAYER_BACKPACK_ICON = 74,
+    PDA_PLAYER_BOOTS_ICON = 76,
 
     // Assembly iterator ID range
-    PDA_ASSEMBLYIDRANGE = PDA_PAGENUMID + 48,
-    PDA_WORNARMORS = PDA_ASSEMBLYIDRANGE + 512, // excessive range, but you never know.
+    PDA_ASSEMBLY_ID_END = PDA_PLAYER_BOOTS_ICON + 64,
+    PDA_WORNARMORS = PDA_ASSEMBLY_ID_END + 64,
     PDA_STASHEDARMORS = PDA_WORNARMORS + 8,
     PDA_NOEQID = PDA_STASHEDARMORS + 3,
     // Modpack ID range
@@ -78,7 +76,6 @@ enum PDA_IDs {
     // Scrolling arrows
     PDA_SCROLLDNID,
     PDA_SCROLLUPID,
-    // Cursor
     PDA_ITEMS_END = PDA_SCROLLUPID + 256,
     PDA_LASTID,
       
@@ -89,18 +86,19 @@ enum PDA_IDs {
     PDA_PONG_BOTBORD,
     PDA_PONG_PLAYERSCORE,
     PDA_PONG_AISCORE,
+    // Anything that *must* stay in the PDA header range
     PDA_INFOTOPID,
+    PDA_TAB_BUTTONS_START = PDA_INFOTOPID + 1,
+    PDA_TAB_BUTTONS_END = PDA_TAB_BUTTONS_START + 20,
     // PDA display
     PDA_ID,
     PDA_REALLYLASTID,
 
     // Shared IDs go down here
     PDA_ARMORINVIDRANGE = PDA_MODIDRANGE,
-    PDA_ARMORWORNIDRANGE = PDA_ASSEMBLYIDRANGE,
-    PDA_MODPACKSELECTID = PDA_PAGENUMID + 1,
-    PDA_MODPACKANIMID = PDA_INFO4ID,
+    PDA_ARMORWORNIDRANGE = PDA_ASSEMBLY_ID_END,
     PDA_TOOLTIPID = PDA_CAT_DESCRIPTION,
-    PDA_PLYR_ICON = PDA_ASSEMBLYIDRANGE,
+    PDA_PLYR_ICON = PDA_ASSEMBLY_ID_END,
 }
 
 // PDA categories - these are all the unique sections you can wind up at

@@ -2,7 +2,7 @@ if(GetCvar("DRLA_specialstarts") == 2)
 {
     PDA_Local.pagemax = 3;
 
-    // PDA_SetupScreenBounds();
+    
 
     #define DUKE2X 0.0 + X_LEFT_EDGE
     #define DUKE2Y 0.0 + Y_TOP_EDGE
@@ -18,22 +18,6 @@ if(GetCvar("DRLA_specialstarts") == 2)
 }
 if(GetCvar("DRLA_specialstarts") != 2)
 {
-    PDA_Local.pagemax = DRLA_GROUPQUANTITY;
-
-    PDA_ButtonHandler(PDA_TAB_BUTTONS_START    , true, 1, "", false);
-    PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 1, true, 2, "", false);
-    PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 2, true, 3, "", false);
-    PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 3, true, 4, "", false);
-    PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 4, true, 5, "", false);
-
-    if (PDA_LocalMouse.scrolling) {
-        PDA_LocalButton[PDA_TAB_BUTTONS_START    ] = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1" , "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-        PDA_LocalButton[PDA_TAB_BUTTONS_START + 1] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2" , "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-        PDA_LocalButton[PDA_TAB_BUTTONS_START + 2] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 2, "3" , "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-        PDA_LocalButton[PDA_TAB_BUTTONS_START + 3] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 3, "4" , "PTAB", PDA_TAB_NEXT_X(3), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-        PDA_LocalButton[PDA_TAB_BUTTONS_START + 4] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 4, "5" , "PTAB", PDA_TAB_NEXT_X(4), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-    }
-
     int ItemLimit = 0;
 
     int DRLA_PageOffset;

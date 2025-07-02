@@ -1,17 +1,16 @@
-PDA_Local.pagemax = 6;
-
 str token, name, icon;
 int kcount;
 
 int page = PDA_Local.page - 2;
 
 // Make ???? buttons instead of blank spaces for undiscovered enemies
-// PDA_SetupScreenBounds();
 
-fixed newY = (PDA_Local.scrollingY * NEW_RESOLUTION_Y) + (34.0 * NEW_RESOLUTION_Y) + Y_TOP_EDGE;
+
 
 switch (PDA_Local.page) {
-    case BESTIARY_PAGE_DIFFICULTIES:
+    case BESTIARY_PAGE_DIFFICULTIES: 
+        fixed newY = (PDA_Local.scrollingY * NEW_RESOLUTION_Y) + (34.0 * NEW_RESOLUTION_Y) + Y_TOP_EDGE;
+
         if (PDA_LocalMouse.scrolling) {
             PDA_LocalButton[PDA_BEAST_UV] = PDA_CreateBeastButton(50, "Normal",       "White",     10.0 + X_LEFT_EDGE, 30.0 + Y_TOP_EDGE + (15.0 * 0), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, "", "");
             PDA_LocalButton[PDA_BEAST_NM] = PDA_CreateBeastButton(51, "Nightmare",    "Brick",     10.0 + X_LEFT_EDGE, 30.0 + Y_TOP_EDGE + (15.0 * 1), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, "" , "");

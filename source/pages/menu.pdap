@@ -1,5 +1,3 @@
-PDA_Local.pagemax = 1;
-
 const int MENU_OFFSET = 20.0 + Y_TOP_EDGE;
 
 PDA_ButtonHandler(PDA_PLAYERS_BUTTON,    false, PDA_CLASSES,    "Shows all available class information.\n", false);

@@ -1,4 +1,3 @@
-PDA_Local.pagemax = 1;
 
 
 SetFont(USED_PDA_FONT);

@@ -1,7 +1,6 @@
-PDA_Local.pagemax = 1;
 
 
-// PDA_SetupScreenBounds();
+
 
 PDAButton CREDITS =   PDA_CreateButton(49, "Credits", "PLON",      PDA_SCREEN_X + 10.0 + X_LEFT_EDGE, 30.0 + Y_TOP_EDGE + (14.0 * 1), 32, 8, -3.0 + X_LEFT_EDGE, 0);
                       PDA_InitButton(CREDITS, false, PDA_CREDITS,    "All the wonderful people that helped bring this together.\n", false);

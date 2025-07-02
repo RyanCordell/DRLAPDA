@@ -1,22 +1,5 @@
-PDA_Local.pagemax = 2;
 
-switch(PDA_Local.page)
-{
-    case 1: PDA_HEADER_STR = "PDA_PDAHELP_HEADER"; PDA_HEADER_X = -10; break;
-    case 2: PDA_HEADER_STR = "PDA_DRLAHELP_HEADER"; PDA_HEADER_X = -40; break;
-}
-
-PDA_ButtonHandler(PDA_TAB_BUTTONS_START    , true, 1, "", false);
-PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 1, true, 2, "", false);
-
-if (PDA_LocalMouse.scrolling) {
-    PDAButton HELP_TAB_1 = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-    PDAButton HELP_TAB_2 = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-}
-
-
-// PDA_SetupScreenBounds();
-PDA_DefaultFont();
+// PDA_DefaultFont();
 
 if(PDA_Local.page == 1)
 {
