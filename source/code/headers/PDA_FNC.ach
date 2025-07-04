@@ -1384,7 +1384,7 @@ function void PDA_ButtonHandler (int id, int incat, int catpage, str message, bo
             PDA_LocalButton[id].alpha = 1.0;
         }
     } else {
-        if (PDA_LocalButton[id].type == "modpack" && PDA_LocalButton[id].type != "tab" && PDA_LocalButton[id].type != "armor") {
+        if (PDA_LocalButton[id].type != "modpack" && PDA_LocalButton[id].type != "tab" && PDA_LocalButton[id].type != "armor") {
             PDA_LocalButton[id].alpha = (PDA_LocalButton[id].state == button_hovered) ? pulser(2.0, 0.8) : 0.6;
         }
     }
