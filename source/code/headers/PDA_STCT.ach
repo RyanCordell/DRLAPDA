@@ -1,0 +1,118 @@
+
+struct PDAInfo {
+   bool active;
+   bool pongrunning;
+   
+   int category;
+   int page;
+   int pagemax;
+   
+   float texty;
+   float max_text_y;
+   float scrollingY;
+   float oldScrollingY;
+   float creditsroll;
+   
+   str tiercolor;
+   int assemblyoffset;
+   int currentassembly;
+   int maxassembliesper;
+   
+   bool newEntry[5];
+   
+   bool clicked;
+   bool playonce;
+   
+   str detailFetch[8];
+   
+   int maxmodlimit;
+   int scrollYDelta;
+}
+PDAInfo PDA_Info[MAX_PLAYERS];
+
+struct PDAMouse {
+    int x;
+    int y;
+    int oldX;
+    int oldY;
+    
+    bool m1;
+    bool m2;
+    
+    int state;
+    int oldstate;
+
+    bool scrolling;
+    bool moving;
+}
+PDAMouse PDA_Mouse[MAX_PLAYERS];
+
+
+struct PDAButton {
+    int id;
+    float x;
+    float y;
+
+    int width;
+    int height;
+
+    int state;
+    int oldstate;
+
+    str label;
+    str graphic;
+
+    str tooltip;
+
+    fixed alpha;
+
+    int graphicID;
+    int graphicFlags;
+    float graphicX;
+    float graphicY;
+
+    str textFont;
+    int textColor;
+    int textID;
+    int textFlags;
+    float textX;
+    float textY;
+
+    float finalX;
+    float finalY;
+    float scrollY;
+
+    str type;
+}
+PDAButton PDA_Button[MAX_PLAYERS][256];
+
+struct PDA_ArmorData {
+    str armorRes;
+    str langEntry;
+    str name;
+    str graphic;
+    str armorAttr;
+    str armorDesc;
+    str armorVal;
+    str tooltip;
+}
+PDA_ArmorData _ad[MAX_PLAYERS][1];
+
+struct PDA_BackpackData {
+    str name;
+    str graphic;
+    str tooltip;
+    str backpackVal;
+}
+PDA_BackpackData _bpd[MAX_PLAYERS][1];
+
+struct PDA_BootsData {
+    str name;
+    str graphic;
+    str bootsAttr;
+    str bootsDesc;
+    str bootsVal;
+    str langEntry;
+    str tooltip;
+}
+PDA_BootsData _bd[MAX_PLAYERS][1];

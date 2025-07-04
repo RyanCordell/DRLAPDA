@@ -9,10 +9,10 @@ if (!PDA_Local.playonce) {
 if (StrCmp(PDA_Local.detailFetch[0], "null") != 0) {
     
     // Monster icon
-    DisplayIcon(strParam("%l:", enemy_info_icon), PDA_INFO2ID, PDA_SCREEN_WIDTH - 50.0 + X_LEFT_EDGE, PDA_Local.scrollingY + 110.0 + Y_TOP_EDGE, 0, 0.8);
+    DisplayIcon(StrParam("%l:", PDA_Enemy[PlayerNumber()][1]), PDA_INFO2ID, PDA_SCREEN_WIDTH - 50.0 + X_LEFT_EDGE, PDA_Local.scrollingY + 110.0 + Y_TOP_EDGE, 0, 0.8);
 
     // EXPERIMENTS
-    SetFont(USED_PDA_FONT);
+    SetFont(PDA_FONT[0]);
     HudMessageParallax(
         StrParam(
             "\cdName:\c- %l:\n"
@@ -20,15 +20,15 @@ if (StrCmp(PDA_Local.detailFetch[0], "null") != 0) {
             "\cdHealth:\c- %l:\n"
             "\cdResistances:\c- \n%l:\n"
             "\cdDrops and misc info:\c- \n%l:\n",
-            enemy_info_name,
+            PDA_Enemy[PlayerNumber()][0],
             enemy_count,
-            enemy_info_health,
-            enemy_info_res,
-            enemy_info_info
+            PDA_Enemy[PlayerNumber()][2],
+            PDA_Enemy[PlayerNumber()][3],
+            PDA_Enemy[PlayerNumber()][4]
         ),
         HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 5.0, 20.0 + (20.0 * 1), 0.0, 1.0);
 } else {
-    SetFont(USED_PDA_FONT);
+    SetFont(PDA_FONT[0]);
     HudMessageParallax(
         StrParam(
             "%l:\n"

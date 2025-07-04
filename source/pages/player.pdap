@@ -1,15 +1,13 @@
 if(GetActorclass(0) != "None")
 {
-    str classIcon = StrParam("%l:", StrParam("PDA_CLASS_%s:_ICON", StrTrim(GetActorClass(0),0,PDA_Class_TrimValue)));
 
-    if(stricmp(classIcon, "PDA_", 4) == 0) 
-      classIcon = "PPDAUNK";
+    if(stricmp(PDA_Class[PlayerNumber()][4], "PDA_", 4) == 0) 
+      PDA_Class[PlayerNumber()][4] = "PPDAUNK";
       
-    SetFont(classIcon);
+    SetFont(PDA_Class[PlayerNumber()][4]);
     HudMessage(s:"A\n"; HUDMSG_ALPHA, PDA_INFOID, CR_UNTRANSLATED,  PDA_SCREEN_WIDTH + 5.0 + X_RIGHT_EDGE, (PDA_SCROLLABLE_HEIGHT) + 5.0 + Y_TOP_EDGE, 0, 0.45);
     
     PDA_DefaultFont();
-
     // Class perks
     if(PDA_Local.page == CLASSES_PAGE_PERKS)
     {
@@ -17,21 +15,20 @@ if(GetActorclass(0) != "None")
             StrParam(
                 "\cd%l:\c-\n\n"
                 "%l:",
-                PDA_Class_Name_Printer,
-                PDA_Class_Ability_Printer
+                PDA_Class[PlayerNumber()][0],
+                PDA_Class[PlayerNumber()][1]
             ),
             HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), 0.0, 1.0);
     }
     // Class backstory
     if(PDA_Local.page == CLASSES_PAGE_STORY)
     {
-
         HudMessageParallax(
             StrParam(
                 "\cd%l:\c-\n\n"
                 "%l:",
-                PDA_Class_Name_Printer,
-                PDA_Class_Story_Printer
+                PDA_Class[PlayerNumber()][0],
+                PDA_Class[PlayerNumber()][2]
             ),
             HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), 0.0, 1.0);
     }

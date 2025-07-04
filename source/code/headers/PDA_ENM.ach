@@ -172,3 +172,5 @@ enum weaponmod_enum {
 	mi_firestorm,
 	mi_nano,
 }
+
+// EOF

@@ -6,7 +6,11 @@ PDA_DefaultFont();
 
 bool canAnim = true;
 
-if (stricmp(current_weapon, "None") != 0) {
+// current_weapon_mods = StrParam("%l:", StrParam("PDA_WEAPON_%s:_MODS", player_weapon[1]));
+// str_split(separator_character, current_weapon_mods);
+
+
+if (stricmp(player_weapon[0], "None") != 0) {
     if (PDA_Local.page == WEAPON_PAGE_STORY) {
         #include "../../pages/subpage/weapons_story.pdap"
     }

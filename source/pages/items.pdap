@@ -2,8 +2,6 @@ if(GetCvar("DRLA_specialstarts") == 2)
 {
     PDA_Local.pagemax = 3;
 
-    
-
     #define DUKE2X 0.0 + X_LEFT_EDGE
     #define DUKE2Y 0.0 + Y_TOP_EDGE
 
@@ -31,7 +29,7 @@ if(GetCvar("DRLA_specialstarts") != 2)
 
             // Item icon
             DisplayIconParallax(
-                strParam("%l:", DRLA_ItemInfo[itemIndex + DRLA_PageOffset][0]), 
+                StrParam("%l:", DRLA_ItemInfo[itemIndex + DRLA_PageOffset][0]), 
                 PDA_ITEMS_END - (ItemLimit+1), 
                 PDA_SCREEN_X + 30.0 + X_LEFT_EDGE, 50.0 + (50.0 * ItemLimit), 0.0, 1.0);
 

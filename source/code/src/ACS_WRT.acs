@@ -12,13 +12,13 @@ SCRIPT "DRLA_AssemblyGlobalizer" ENTER {
     // Fetch all available assembly and exotic mod effect data from (g/vk/z)doom's ini
     DRLA_FetchStoredInfo[PlayerNumber()] = GetUserCVarString(PlayerNumber(), "DRLA_knownassemblies");
 
-    int masterMax      = 0;
     str all_assemblies = StrParam(l:"PDA_ASSEMBLIES");
+    
     str_split(separator_character, all_assemblies);
     int ai = 0;
     if (stringArray[0] != "") {
         while ((stringArray[ai++]) != "") {
-            if (ai % 2 == 0) masterMax++;
+            if (ai % 2 == 0) PDA_ModData[PlayerNumber()][3]++;
         }
     }
 
@@ -31,7 +31,7 @@ SCRIPT "DRLA_AssemblyGlobalizer" ENTER {
      */
     for (
         int token_index = 0,         assembly_token = 0; 
-            token_index < masterMax, assembly_token < masterMax * 2; 
+            token_index < PDA_ModData[PlayerNumber()][3], assembly_token < PDA_ModData[PlayerNumber()][3] * 2; 
             token_index++,           assembly_token += 2
     ) {
         actorToken = stringArray[assembly_token];
@@ -48,13 +48,14 @@ SCRIPT "DRLA_AssemblyGlobalizer" ENTER {
 }
 
 SCRIPT "DRLA_UpdateINI" (void) {
-    int masterMax      = 0;
     str all_assemblies = StrParam(l:"PDA_ASSEMBLIES");
     str_split(separator_character, all_assemblies);
+    
     int ai = 0;
+
     if (stringArray[0] != "") {
         while ((stringArray[ai++]) != "") {
-            if (ai % 2 == 0) masterMax++;
+            if (ai % 2 == 0) PDA_ModData[PlayerNumber()][3]++;
         }
     }
 
@@ -75,7 +76,7 @@ SCRIPT "DRLA_UpdateINI" (void) {
     DRLA_FetchStoredInfo[PlayerNumber()] = GetUserCVarString(PlayerNumber(), "DRLA_knownassemblies");
     for (
         int token_index = 0; 
-            token_index < masterMax; 
+            token_index < PDA_ModData[PlayerNumber()][3]; 
             token_index++
     ) {
         // set old and current to this new state
@@ -86,7 +87,7 @@ SCRIPT "DRLA_UpdateINI" (void) {
     // WRITE --------------------------------------------------
     for (
         int token_index = 0,         assembly_token = 0; 
-            token_index < masterMax, assembly_token < masterMax * 2; 
+            token_index < PDA_ModData[PlayerNumber()][3], assembly_token < PDA_ModData[PlayerNumber()][3] * 2; 
             token_index++,           assembly_token += 2
     ) {
         actorToken = stringArray[assembly_token];
@@ -99,8 +100,8 @@ SCRIPT "DRLA_UpdateINI" (void) {
             pendingState = "";
             
             // and only in that case do we start constructing the string that we then..
-            for (int sub_index = 0; sub_index < masterMax; sub_index++) {
-                if (StrLen(pendingState) <= masterMax) {
+            for (int sub_index = 0; sub_index < PDA_ModData[PlayerNumber()][3]; sub_index++) {
+                if (StrLen(pendingState) <= PDA_ModData[PlayerNumber()][3]) {
                     pendingState = StrParam(
                         s:pendingState, 
                         i:currentState[sub_index]

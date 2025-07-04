@@ -6,13 +6,10 @@
 #library "ACS_PDA"     // [marrub] This should be after zcommon.acs. (Don't ask me why.)
 
 #include "../headers/PDA_LIB.ach" // Stores IDs, arrays and other things the PDA uses.
-
 #include "../database/equipment.idb" // Armors, boots, and etc.
-
 #include "../headers/PDA_FNC.ach"
 
 #include "ACS_INP.acs" // PDA input tracker, made separate for better responsiveness
-
 
 global str 43:weaponval;
 global str 44:armorval;
@@ -37,50 +34,47 @@ script "PDA_SetEveryoneInventory" (str name) {
 
 script "DRLA_HUD_InfoHandler" ENTER {
     while (true) {
-        bool IsNotDemonic = false;
-             IsNotDemonic  = !CheckInventory("RLDemonicWeaponToken");
+        weapon_checks[0] = !CheckInventory("RLDemonicWeaponToken");
         
-        str current_weapon         = GetWeapon();
-        str current_weapon_trimmed = StrTrim(current_weapon, 2, 0);
-        int Weapon_Name_Printer    = StrParam("PDA_WEAPON_%s:_FLATNAME", current_weapon_trimmed);
+        player_weapon[0] = GetWeapon();
+        player_weapon[1] = StrTrim(player_weapon[0], 2, 0);
 
-        int Weapon_DualName_Printer = StrParam("PDA_WEAPON_%s:DEMONARTIFACTS_FLATNAME", current_weapon_trimmed);
+        weapon_info[0] = StrParam("PDA_WEAPON_%s:_FLATNAME", player_weapon[1]);
+        weapon_info[1] = StrParam("PDA_WEAPON_%s:DEMONARTIFACTS_FLATNAME", player_weapon[1]);
 
-        int Weapon_Bulk_Quantity      = CheckInventory(StrParam("%s:BulkMod", current_weapon)),
-            Weapon_Power_Quantity     = CheckInventory(StrParam("%s:PowerMod", current_weapon)),
-            Weapon_Agility_Quantity   = CheckInventory(StrParam("%s:AgilityMod", current_weapon)),
-            Weapon_Technical_Quantity = CheckInventory(StrParam("%s:TechnicalMod", current_weapon)),
-            Weapon_Sniper_Quantity    = CheckInventory(StrParam("%s:SniperMod", current_weapon)),
-            Weapon_Firestorm_Quantity = CheckInventory(StrParam("%s:FirestormMod", current_weapon)),
-            Weapon_Nano_Quantity      = CheckInventory(StrParam("%s:NanoMod", current_weapon)),
-            Weapon_Artifact_Quantity  = CheckInventory(StrParam("%s:DemonArtifacts", current_weapon));
+        Weapon_Mod_Quantity[0] = CheckInventory(StrParam("%s:BulkMod", player_weapon[0])),
+        Weapon_Mod_Quantity[1] = CheckInventory(StrParam("%s:PowerMod", player_weapon[0])),
+        Weapon_Mod_Quantity[2] = CheckInventory(StrParam("%s:AgilityMod", player_weapon[0])),
+        Weapon_Mod_Quantity[3] = CheckInventory(StrParam("%s:TechnicalMod", player_weapon[0])),
+        Weapon_Mod_Quantity[4] = CheckInventory(StrParam("%s:SniperMod", player_weapon[0])),
+        Weapon_Mod_Quantity[5] = CheckInventory(StrParam("%s:FirestormMod", player_weapon[0])),
+        Weapon_Mod_Quantity[6] = CheckInventory(StrParam("%s:NanoMod", player_weapon[0])),
+        Weapon_Mod_Quantity[7] = CheckInventory(StrParam("%s:DemonArtifacts", player_weapon[0]));
         
-        str weaponName = (IsNotDemonic) 
-                        ? (CheckInventory(strParam("%s:DemonArtifacts", current_weapon)) 
-                            ? Weapon_DualName_Printer 
-                            : Weapon_Name_Printer) 
-                        : Weapon_Name_Printer;
+        str weaponName = (weapon_checks[0]) 
+                        ? (CheckInventory(StrParam("%s:DemonArtifacts", player_weapon[0])) 
+                            ? weapon_info[1] 
+                            : weapon_info[0]) 
+                        : weapon_info[0];
         str modsOn     = StrParam("%l: ", weaponName);
 
         // Weapons
-        if(Weapon_Power_Quantity || Weapon_Bulk_Quantity || Weapon_Agility_Quantity || Weapon_Technical_Quantity || 
-        Weapon_Sniper_Quantity || Weapon_Firestorm_Quantity || Weapon_Nano_Quantity || Weapon_Artifact_Quantity )
+        if (Weapon_Mod_Quantity[1] || Weapon_Mod_Quantity[0] || Weapon_Mod_Quantity[2] || Weapon_Mod_Quantity[3] || 
+        Weapon_Mod_Quantity[4] || Weapon_Mod_Quantity[5] || Weapon_Mod_Quantity[6] || Weapon_Mod_Quantity[7] )
         {
             modsOn = StrParam("%l: (", weaponName);
-            modsOn = (Weapon_Power_Quantity     > 0) ? StrParam("%s:P%i:\n", modsOn, Weapon_Power_Quantity    ) : StrParam("%s:\n", modsOn);
-            modsOn = (Weapon_Bulk_Quantity      > 0) ? StrParam("%s:B%i:\n", modsOn, Weapon_Bulk_Quantity     ) : StrParam("%s:\n", modsOn);
-            modsOn = (Weapon_Agility_Quantity   > 0) ? StrParam("%s:A%i:\n", modsOn, Weapon_Agility_Quantity  ) : StrParam("%s:\n", modsOn);
-            modsOn = (Weapon_Technical_Quantity > 0) ? StrParam("%s:T%i:\n", modsOn, Weapon_Technical_Quantity) : StrParam("%s:\n", modsOn);
-            modsOn = (Weapon_Sniper_Quantity    > 0) ? StrParam("%s:S%i:\n", modsOn, Weapon_Sniper_Quantity   ) : StrParam("%s:\n", modsOn);
-            modsOn = (Weapon_Firestorm_Quantity > 0) ? StrParam("%s:F%i:\n", modsOn, Weapon_Firestorm_Quantity) : StrParam("%s:\n", modsOn);
-            modsOn = (Weapon_Nano_Quantity      > 0) ? StrParam("%s:N%i:\n", modsOn, Weapon_Nano_Quantity     ) : StrParam("%s:\n", modsOn);
-            modsOn = (Weapon_Artifact_Quantity  > 0) ? StrParam("%s:D%i:\n", modsOn, Weapon_Artifact_Quantity ) : StrParam("%s:\n", modsOn);
+            modsOn = (Weapon_Mod_Quantity[1] > 0) ? StrParam("%s:P%i:\n", modsOn, Weapon_Mod_Quantity[1]    ) : StrParam("%s:\n", modsOn);
+            modsOn = (Weapon_Mod_Quantity[0] > 0) ? StrParam("%s:B%i:\n", modsOn, Weapon_Mod_Quantity[0]     ) : StrParam("%s:\n", modsOn);
+            modsOn = (Weapon_Mod_Quantity[2] > 0) ? StrParam("%s:A%i:\n", modsOn, Weapon_Mod_Quantity[2]  ) : StrParam("%s:\n", modsOn);
+            modsOn = (Weapon_Mod_Quantity[3] > 0) ? StrParam("%s:T%i:\n", modsOn, Weapon_Mod_Quantity[3]) : StrParam("%s:\n", modsOn);
+            modsOn = (Weapon_Mod_Quantity[4] > 0) ? StrParam("%s:S%i:\n", modsOn, Weapon_Mod_Quantity[4]   ) : StrParam("%s:\n", modsOn);
+            modsOn = (Weapon_Mod_Quantity[5] > 0) ? StrParam("%s:F%i:\n", modsOn, Weapon_Mod_Quantity[5]) : StrParam("%s:\n", modsOn);
+            modsOn = (Weapon_Mod_Quantity[6] > 0) ? StrParam("%s:N%i:\n", modsOn, Weapon_Mod_Quantity[6]     ) : StrParam("%s:\n", modsOn);
+            modsOn = (Weapon_Mod_Quantity[7] > 0) ? StrParam("%s:D%i:\n", modsOn, Weapon_Mod_Quantity[7] ) : StrParam("%s:\n", modsOn);
             modsOn = StrParam("%s:)\n", modsOn);
-        } else if(!Weapon_Power_Quantity && !Weapon_Bulk_Quantity && !Weapon_Agility_Quantity && !Weapon_Technical_Quantity && 
-        !Weapon_Sniper_Quantity && !Weapon_Firestorm_Quantity && !Weapon_Nano_Quantity && !Weapon_Artifact_Quantity)
-        {
+        } else if (!Weapon_Mod_Quantity[1] && !Weapon_Mod_Quantity[0] && !Weapon_Mod_Quantity[2] && !Weapon_Mod_Quantity[3] && !Weapon_Mod_Quantity[4] && !Weapon_Mod_Quantity[5] && !Weapon_Mod_Quantity[6] && !Weapon_Mod_Quantity[7]) {
             modsOn = StrParam("%l:", weaponName);
-        };
+        }
         weaponval = modsOn;
 
         // Armor
@@ -131,48 +125,49 @@ script "DRLA_HUDStyleChanger" (void) {
 function void doPDASync (void) {
     for (int page = 0; page < DRLA_DIFFICULTYTIERS; page++) {
         for (int m = 0; m < DRLA_MONSTER_PAGE_MAX; m++) {
-            beast_kill_count = StrParam("%s:KillCounter", DRLA_Bestiary[page][m][beast_TOKEN]);
-            monsterCheck[page][m]  = CheckInventory(beast_kill_count);
+            PDA_ListEnemy[PlayerNumber()][3] = StrParam("%s:KillCounter", DRLA_Bestiary[page][m][beast_TOKEN]);
+            monsterCheck[page][m]  = CheckInventory(PDA_ListEnemy[PlayerNumber()][3]);
 
-            if (CheckPointerInventory(beast_kill_count, PlayerNumber()) > 0) {
-                PDA_SetEveryoneInventory(beast_kill_count);
+            if (CheckPointerInventory(PDA_ListEnemy[PlayerNumber()][3], PlayerNumber()) > 0) {
+                PDA_SetEveryoneInventory(PDA_ListEnemy[PlayerNumber()][3]);
             }
         }
     }
 
-    int masterMax  = 0;
+    PDA_ModData[PlayerNumber()][3]  = 0;
+
     all_assemblies = StrParam(l:"PDA_ASSEMBLIES");
     str_split(separator_character, all_assemblies);
-    int ai = 0;
-    int TEXT_OFFSET = 13; // aka length of "PDA_ASSEMBLY_"
-    str actorToken = "";
-    if (stringArray[0] != "") {
-        while ((stringArray[ai++]) != "") {
-            if (ai % 2 == 0) masterMax++;
-        }
-    }
-    masterMax--;
 
-    for (int ti = 0; ti <= masterMax; ti++) {
-        if (ti % 2 == 0) {
-            actorToken = stringArray[ti];
-        }
-        if (CheckInventory(actorToken)) PDA_SetEveryoneInventory(actorToken);
+    str actorToken = "";
+
+    // if (stringArray[0] != "") {
+    while ((stringArray[stringArrayIndex++]) != "") {
+        if (str_find(stringArray[stringArrayIndex], "ADVANCED", TEXT_OFFSET) != -1 && PDA_ModData[PlayerNumber()][1] == 0) PDA_ModData[PlayerNumber()][1] = stringArrayIndex;
+        if (str_find(stringArray[stringArrayIndex],   "MASTER", TEXT_OFFSET) != -1 &&   PDA_ModData[PlayerNumber()][2] == 0) PDA_ModData[PlayerNumber()][2]   = stringArrayIndex;
+        // if (stringArrayIndex % 2 == 0) {
+        PDA_ModData[PlayerNumber()][3]++;
+        // }
     }
-    // for (int i = 0; i < masterMax; i++) {
-    //     if (CheckInventory(DRLA_Assemblies[i][0])) PDA_SetEveryoneInventory(DRLA_Assemblies[i][0]);
     // }
-    // for (int w = 0; w < DRLA_EXOTICEFFECTS_MAX; w++) {
-    //     for (int e = 1; e < DRLA_EXOTICELEMENTS; e++)
-    //         if (CheckInventory(DRLA_UniqueExoticModEffects[w][e])) PDA_SetEveryoneInventory(DRLA_UniqueExoticModEffects[w][e]);
-    // }
+    stringArrayIndex = 0;
+    PDA_ModData[PlayerNumber()][3]--;
+
+    for (int ti = 0; ti <= PDA_ModData[PlayerNumber()][3]; ti++) {
+        if (ti % 2 == 0) 
+            actorToken = stringArray[ti];
+
+        if (CheckInventory(actorToken)) 
+            PDA_SetEveryoneInventory(actorToken);
+    }
 }
 
 function void reset_pda_stuff (str location) {
     PDA_NOPONG();
-    PDA_Wipe(location);
-    // ACS_NamedExecuteAlways("QuitPong",0);
+    PDA_ClearHeader();
     PDA_UnsetScrollArrows();
+    PDA_SuperWipe(location);
+    // ACS_NamedExecuteAlways("QuitPong",0);
     DisplayIcon("RLZPDA", PDA_ID, 0.5, 0.5, 0, 0);
     
     SetPlayerProperty(0,0,PROP_TOTALLYFROZEN);
@@ -243,21 +238,21 @@ SCRIPT "PDA_Display" (void) net {
             break;
     }
 
-    USED_PDA_FONT = GetUserCVarString(PlayerNumber(), "DRLA_PDA_font");
+    PDA_FONT[0] = GetUserCVarString(PlayerNumber(), "DRLA_PDA_font");
     SetHudSize(320,200,0);
     PDA_HasEquipment();
     
     if (!localOneEquipFirst) {
         if (localHasArmor) {
-            localABoolField = localHasArmor << 0;
+            localEqBoolField = localHasArmor << 0;
             localOneEquipFirst = true;
         }
         if (localHasBoots) {
-            localABoolField = localHasBoots << 1;
+            localEqBoolField = localHasBoots << 1;
             localOneEquipFirst = true;
         }
         if (localHasBackpack) {
-            localABoolField = localHasBackpack << 2;
+            localEqBoolField = localHasBackpack << 2;
             localOneEquipFirst = true;
         }
     }
@@ -384,6 +379,8 @@ SCRIPT "PDA_Core" (void) {
     #include "PDA_STC.acs"
 
     separator_character = StrParam("%l:", "PDA_SEPARATOR_CHARACTER");
+
+    PDA_OnChange();
     
     while (PDA_Local.active) {
         PDA_HandleHeader();
@@ -435,8 +432,6 @@ SCRIPT "PDA_Core" (void) {
         }
         Delay(PDA_Responsiveness);
     }
-    PDA_ClearHeader();
-    PDA_Wipe("PDA_Core End");
     SetHudClipRect(0,0,0,0,0);
 }
 

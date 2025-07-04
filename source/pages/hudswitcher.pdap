@@ -47,7 +47,7 @@ if(PDA_Local.page == 1)
   PDA_InitButton(Staty,   true, 10, strparam("%l:\n", "PDA_FBAR_STATY"), "PDA_STATY_PIC", false);
   PDA_InitButton(Special, true, 11, strparam("%l:\n", "PDA_FBAR_STATY"), "PDA_SPECIAL_PIC", false);
 
-  SetFont(PDA_FONT_LOWER);
+  SetFont(PDA_FONT[1]);
 }
 
 // PDA_DefaultFont();

@@ -9,11 +9,11 @@ HudMessageParallax(
         "%l:\n"
         "\c-%l:\n"
         ,
-        (weapon_can_disassemble) ? strParam("> \c[Yellow]%s:", DRLA_WeaponPerkList[2][1]) : "",
-        (!weapon_can_disassemble) ? class_perk_displayed : "",
-        weapon_perk_displayed,
-        (weapon_supports_artifacts) ? PDA_Weapon_DualName_Printer : PDA_Weapon_Name_Printer,
-        (weapon_supports_artifacts) ? PDA_Weapon_DualDesc_Printer : PDA_Weapon_Desc_Printer
+        (weapon_checks[1]) ? StrParam("> \c[Yellow]%s:", DRLA_WeaponPerkList[2][1]) : "",
+        (!weapon_checks[1]) ? PDA_Class[PlayerNumber()][5] : "",
+        weapon_info[4],
+        (weapon_checks[2]) ? weapon_info[1] : weapon_info[0],
+        (weapon_checks[2]) ? weapon_info[4] : weapon_info[3]
     ),
 
     HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 
@@ -25,11 +25,11 @@ if (PDA_Local.scrollYDelta == -1) {
         10.0, PDA_SCREEN_HEIGHT, 
         82, 16, 
         16, 19);
-                    PDA_ButtonHandler(PDA_MODS_PAGE, true, 2, "", false);
+                    PDA_ButtonHandler(PDA_MODS_PAGE, true, 2, "", false, false);
 
     PDA_LocalButton[PDA_ARTIFACTS_PAGE] = PDA_CreateFixedButton(PDA_ARTIFACTS_PAGE, "Artifact Effects", "DMNAICON", 
         PDA_SCREEN_WIDTH - 82 - 20, PDA_SCREEN_HEIGHT,
         82, 16, 
         38, 40);
-                    PDA_ButtonHandler(PDA_ARTIFACTS_PAGE, true, 3, "", false);
+                    PDA_ButtonHandler(PDA_ARTIFACTS_PAGE, true, 3, "", false, false);
 }

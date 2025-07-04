@@ -1,15 +1,14 @@
 // functions
-
 #define PDA_TAB_NEXT_X(a) \
     (PDA_TAB_START_X * (a + 1)) + (2.0 * a)
 
-#define StrTrim(a,b,c)			StrMid((a),(b),StrLen((a)) - (c))
+#define StrTrim(a,b,c)		StrMid((a),(b),StrLen((a)) - (c))
 #define Array_Size(array) 	(sizeof((array))/sizeof((array[0][0])))
 
 #define PDA_SetScrollLimit(a)  	PDA_Local.max_text_y = (a)
 #define PDA_ResetScroll()       PDA_Local.scrollingY = PDA_SCREEN_Y;
 #define PDA_SetMonsterLimit(a)  if (PDA_Local.monsterpage > (a)) PDA_Local.monsterpage = (a)
-#define PDA_DefaultFont() 		  SetFont(USED_PDA_FONT);
+#define PDA_DefaultFont() 		  SetFont(PDA_FONT[0]);
 
 #define PDA_CheckPlayer1Inventory(name) ACS_NamedExecuteWithResult("PDA_CheckPlayer1Inventory", name)
 #define PDA_SetEveryoneInventory(name)  ACS_NamedExecuteWithResult("PDA_SetEveryoneInventory",  name)
@@ -17,7 +16,19 @@
 
 #define pulser(a, b) (b ? b : 0.59) + sin(Timer() * 0.99) / (a)
 
+
 // shortening array calls
+#define localArmorIndex    global_equipment_index[0][PlayerNumber()]
+#define localBootsIndex    global_equipment_index[1][PlayerNumber()]
+#define localBackpackIndex global_equipment_index[2][PlayerNumber()]
+
+#define localShowArmor     show_equipment[0][PlayerNumber()]
+#define localShowBoots     show_equipment[1][PlayerNumber()]
+#define localShowBackpack  show_equipment[2][PlayerNumber()]
+
+#define localHasArmor      has_equipment[0][PlayerNumber()]
+#define localHasBoots      has_equipment[1][PlayerNumber()]
+#define localHasBackpack   has_equipment[2][PlayerNumber()]
 
 #define PDA_Local       PDA_Info[PlayerNumber()]
 #define PDA_LocalMouse  PDA_Mouse[PlayerNumber()]
@@ -27,19 +38,5 @@
 #define localBackpackData _bpd[PlayerNumber()][0]
 #define localBootsData    _bd[PlayerNumber()][0]
 
-#define localArmorIndex    gArmorIndex[PlayerNumber()]
-#define localBootsIndex    gBootsIndex[PlayerNumber()]
-#define localBackpackIndex gBackpackIndex[PlayerNumber()]
 
-#define localShowArmor     showArmor[PlayerNumber()]
-#define localShowBoots     showBoots[PlayerNumber()]
-#define localShowBackpack  showBackpack[PlayerNumber()]
-#define localHasArmor      hasArmor[PlayerNumber()]
-#define localHasBoots      hasBoots[PlayerNumber()]
-#define localHasBackpack   hasBackpack[PlayerNumber()]
-#define localOneEquipFirst gotOneEquipFirst[PlayerNumber()]
-#define localABoolField    aBoolField[PlayerNumber()]
-#define localmodPackIndex  modPackIndex[PlayerNumber()]
-
-#define PDA_LocalUniqueModEffect PDA_PrintWhichUnique[PlayerNumber()]
-#define PDA_LocalWeaponModEffect PDA_PrintWhichBasic[PlayerNumber()]
+// EOF

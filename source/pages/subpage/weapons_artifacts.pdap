@@ -5,34 +5,34 @@ HudMessageParallax(
     "PDA_DEMONARTIFACTS_NOTSUPPORTED"),
     HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), 0.0, 1.0);
 
-if (!PDA_IsNotDemonic) {
+if (!weapon_checks[0]) {
     HudMessageParallax(
         StrParam(
             "%l:\n[\c[LightBlue]%i:B \c[Red]%i:P \c[Green]%i:A \c[Yellow]%i:T \c[Purple]%i:S \c[Orange]%i:F \c[White]%i:N \cr%i:D\c-]"
             "\n\n",
-            (PDA_IsNotDemonic) ? 
-            (CheckInventory(strParam("%s:DemonArtifacts", current_weapon)) ? 
-                PDA_Weapon_DualName_Printer 
-                : PDA_Weapon_Name_Printer) 
-            : PDA_Weapon_Name_Printer,
-            PDA_Weapon_Bulk_Quantity, PDA_Weapon_Power_Quantity, PDA_Weapon_Agility_Quantity, PDA_Weapon_Technical_Quantity,
-            PDA_Weapon_Sniper_Quantity, PDA_Weapon_Firestorm_Quantity, PDA_Weapon_Nano_Quantity,
-            (PDA_IsNotDemonic) ? 0 : PDA_Weapon_Artifact_Quantity
+            (weapon_checks[0]) ? 
+            (CheckInventory(StrParam("%s:DemonArtifacts", player_weapon[0])) ? 
+                weapon_info[1] 
+                : weapon_info[0]) 
+            : weapon_info[0],
+            Weapon_Mod_Quantity[0], Weapon_Mod_Quantity[1], Weapon_Mod_Quantity[2], Weapon_Mod_Quantity[3],
+            Weapon_Mod_Quantity[4], Weapon_Mod_Quantity[5], Weapon_Mod_Quantity[6],
+            (weapon_checks[0]) ? 0 : Weapon_Mod_Quantity[7]
         ),
             HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 
             10.0, 20.0 + (20.0 * 1), 0.0, 1.0);
         
     float artifactsY = 60.0;
 
-    if (PDA_Weapon_Artifact_Quantity > 0) {
-        switch (PDA_Weapon_Artifact_Quantity) {
+    if (Weapon_Mod_Quantity[7] > 0) {
+        switch (Weapon_Mod_Quantity[7]) {
             case 1:
                 HudMessageParallax(
                     StrParam(
                         "\cf%l:\c-\n"
                         "%l:\n\n",
                         "PDA_DEMONARTIFACTS_ONE",
-                        StrParam("PDA_ARTIFACT_%s:_ONE", current_weapon_trimmed)
+                        StrParam("PDA_ARTIFACT_%s:_ONE", player_weapon[1])
                     ),
                     HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 10.0 + (artifactsY * 1), 0.0, 1.0);
                 break;
@@ -44,9 +44,9 @@ if (!PDA_IsNotDemonic) {
                         "\c[Red]%l:\c-\n"
                         "%l:\n\n",
                         "PDA_DEMONARTIFACTS_TWO",
-                        StrParam("PDA_ARTIFACT_%s:_TWO", current_weapon_trimmed),
+                        StrParam("PDA_ARTIFACT_%s:_TWO", player_weapon[1]),
                         "PDA_DEMONARTIFACTS_ONE",
-                        StrParam("PDA_ARTIFACT_%s:_ONE", current_weapon_trimmed)
+                        StrParam("PDA_ARTIFACT_%s:_ONE", player_weapon[1])
                     ),
                     HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 10.0 + (artifactsY * 1), 0.0, 1.0);
                 break;
@@ -60,11 +60,11 @@ if (!PDA_IsNotDemonic) {
                         "\c[Red]%l:\c-\n"
                         "%l:\n\n",
                         "PDA_DEMONARTIFACTS_THREE",
-                        StrParam("PDA_ARTIFACT_%s:_THREE", current_weapon_trimmed),
+                        StrParam("PDA_ARTIFACT_%s:_THREE", player_weapon[1]),
                         "PDA_DEMONARTIFACTS_TWO",
-                        StrParam("PDA_ARTIFACT_%s:_TWO", current_weapon_trimmed),
+                        StrParam("PDA_ARTIFACT_%s:_TWO", player_weapon[1]),
                         "PDA_DEMONARTIFACTS_ONE",
-                        StrParam("PDA_ARTIFACT_%s:_ONE", current_weapon_trimmed)
+                        StrParam("PDA_ARTIFACT_%s:_ONE", player_weapon[1])
                     ),
                     HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 10.0 + (artifactsY * 1), 0.0, 1.0);
                 break;
@@ -80,6 +80,6 @@ if (!PDA_IsNotDemonic) {
     }
 }
 // for (int weaponIndex = 0; weaponIndex < DRLA_DEMONWEAPONMAX; weaponIndex++) {
-//     if (StrCmp(current_weapon, DRLA_ArtifactEffectList[weaponIndex][0]) == 0) {
+//     if (StrCmp(player_weapon[0], DRLA_ArtifactEffectList[weaponIndex][0]) == 0) {
     // }
 // }

@@ -1,15 +1,8 @@
 /** VARIABLES */
 bool debug = false;
 
-str USED_PDA_FONT  = "STAT_MNO";
-str PDA_FONT_LOWER = "STAT_LWR";
-str PDA_FONT_SLIM  = "PDAFONT";
-
 bool buttonInteracted = false;
 bool inverted = false;
-
-str PDA_HEADER_STR = "PDA_MENU_HEADER";
-int PDA_HEADER_X   = 0;
 
 /*
     %s: string
@@ -22,273 +15,107 @@ int PDA_HEADER_X   = 0;
 #include "PDA_CST.ach"
 #include "PDA_ENM.ach"
 
-str playerSelectedHUD[AVAILABLE_HUDS] = {
-  "RLStatusBarHUDType",
-  "RLStatusBarAltHUDType",
-  "RLStatusBarGeoscaperHUDType",
-  "RLStatusBarRepublicHUDType",
-  "RLStatusBarRigelatinHUDType",
-  "RLStatusBarTritiumHUDType",
+str PDA_FONT[3] = {"STAT_MNO", "STAT_LWR", "PDAFONT"};
 
- // Fullscreen HUD Types
-  "RLFullscreenOriginalHUDType",
-  "RLFullscreenShockHUDType",
-  "RLFullscreenHazardHUDType",
-  "RLFullscreenCorruptHUDType",
-  "RLFullscreenFluidHUDType",
-  "RLFullscreenStatyHUDType",
-  "RLFullscreenTrackerHUDType"
-};
+str PDA_HEADER_STR = "PDA_MENU_HEADER";
+int PDA_HEADER_X   = 0;
+
+bool weapon_checks[3] = {false, false, false};
+
+str player_weapon[2] = {"", ""};
+
+// flatname, demon flatname, ???, desc, demon desc
+str weapon_info[5]   = {"", "", "", "", ""};
+
+// name, abilities, story, height, icon, weapon perk
+str PDA_Class[MAX_PLAYERS][6] = {" ", " ", " ", " ", " ", " "};
+
+// name, icon, health, resistance, misc
+str PDA_Enemy[MAX_PLAYERS][5] = {"N/A\n", "N/A\n", "N/A\n", "N/A\n", "N/A\n"};
+
+// bulk, power, agility, technical, sniper, firestorm, nano, artifact
+int Weapon_Mod_Quantity[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+
+#define STRING_ARRAY_MAX 1024
+str stringArray[STRING_ARRAY_MAX];
+int stringArrayIndex = 0;
+
+#include "PDA_STCT.ach"
 
 str PDA_PrintWhichUnique[MAX_PLAYERS][PDA_MODMAX];
 str PDA_PrintWhichBasic[MAX_PLAYERS][PDA_MODMAX];
-
-// #define PDA_LocalWeaponModEffect PDA_PrintWhichBasic[PlayerNumber()]
-// str PDA_PrintWhichBasic[MAX_PLAYERS][BASICMODMAX];
-
-// #define PDA_LocalUniqueModEffect PDA_PrintWhichUnique[PlayerNumber()]
-// str PDA_PrintWhichUnique[MAX_PLAYERS][UNIMODMAX];
-    
-int gArmorIndex[MAX_PLAYERS]    = {0,0,0,0,0,0,0,0},
-    gBootsIndex[MAX_PLAYERS]    = {0,0,0,0,0,0,0,0},
-    gBackpackIndex[MAX_PLAYERS] = {0,0,0,0,0,0,0,0};
-
-bool showArmor[MAX_PLAYERS]    = {false, false, false, false, false, false, false, false},
-     showBoots[MAX_PLAYERS]    = {false, false, false, false, false, false, false, false},
-     showBackpack[MAX_PLAYERS] = {false, false, false, false, false, false, false, false};
-
-bool hasArmor[MAX_PLAYERS]    = {false, false, false, false, false, false, false, false},
-     hasBoots[MAX_PLAYERS]    = {false, false, false, false, false, false, false, false},
-     hasBackpack[MAX_PLAYERS] = {false, false, false, false, false, false, false, false};
      
 bool gotOneEquipFirst[MAX_PLAYERS] = {false, false, false, false, false, false, false, false};
+#define localOneEquipFirst gotOneEquipFirst[PlayerNumber()]
 
-int aBoolField[MAX_PLAYERS] = {0,0,0,0,0,0,0,0};
-//bool showSuit = true;
+int equipment_bool_field[MAX_PLAYERS] = {0,0,0,0,0,0,0,0};
+#define localEqBoolField    equipment_bool_field[PlayerNumber()]
 
 int modPackIndex[MAX_PLAYERS] = {0,0,0,0,0,0,0,0};
+#define localmodPackIndex  modPackIndex[PlayerNumber()]
 
-str DRLA_FetchStoredInfo[MAX_PLAYERS]    = {"","","","","","","",""},
-    DRLA_FetchExoticInfo[MAX_PLAYERS]    = {"","","","","","","",""},
-    DRLA_FetchSniperInfo[MAX_PLAYERS]    = {"","","","","","","",""},
-    DRLA_FetchFirestormInfo[MAX_PLAYERS] = {"","","","","","","",""},
-    DRLA_FetchNanoInfo[MAX_PLAYERS]      = {"","","","","","","",""};
-
-struct PDAInfo {
-   bool active;
-   bool pongrunning;
-   
-   int category;
-   int page;
-   int pagemax;
-   
-   float texty;
-   float max_text_y;
-   float scrollingY;
-   float oldScrollingY;
-   float creditsroll;
-   
-   str tiercolor;
-   int assemblyoffset;
-   int currentassembly;
-   int maxassembliesper;
-   
-   bool newEntry[5];
-   
-   bool clicked;
-   bool playonce;
-   
-   str detailFetch[8];
-   
-   int maxmodlimit;
-   int scrollYDelta;
-}
-PDAInfo PDA_Info[MAX_PLAYERS];
-
-struct PDAMouse {
-    int x;
-    int y;
-    int oldX;
-    int oldY;
-    
-    bool m1;
-    bool m2;
-    
-    int state;
-    int oldstate;
-
-    bool scrolling;
-    bool moving;
-}
-PDAMouse PDA_Mouse[MAX_PLAYERS];
-
-struct PDAButton {
-    int id;
-    float x;
-    float y;
-
-    int width;
-    int height;
-
-    int state;
-    int oldstate;
-
-    str label;
-    str graphic;
-
-    str tooltip;
-
-    fixed alpha;
-
-    int graphicID;
-    int graphicFlags;
-    float graphicX;
-    float graphicY;
-
-    str textFont;
-    int textColor;
-    int textID;
-    int textFlags;
-    float textX;
-    float textY;
-
-    float finalX;
-    float finalY;
-    float scrollY;
-
-    str type;
-}
-PDAButton PDA_Button[MAX_PLAYERS][512];
-PDAButton assembly_button[32];
-PDAButton beast_button[32];
-
-struct PDAWeapon {
-    int id;
-    
-    str bulkModEffect;
-    str powerModEffect;
-    str agilityModEffect;
-    str technicalModEffect;
-    str sniperModEffect;
-    str firestormModEffect;
-    str nanoModEffect;
-    
-    bool isDemonic;
-}
-
-struct PDA_ArmorData {
-    str armorRes;
-    str langEntry;
-    str name;
-    str graphic;
-    str armorAttr;
-    str armorDesc;
-    str armorVal;
-    str tooltip;
-}
-       PDA_ArmorData _ad[MAX_PLAYERS][1];
-
-struct PDA_BackpackData {
-    str name;
-    str graphic;
-    str tooltip;
-    str backpackVal;
-}
-       PDA_BackpackData _bpd[MAX_PLAYERS][1];
-
-struct PDA_BootsData {
-    str name;
-    str graphic;
-    str bootsAttr;
-    str bootsDesc;
-    str bootsVal;
-    str langEntry;
-    str tooltip;
-}
-       PDA_BootsData _bd[MAX_PLAYERS][1];
-
-
-
+str DRLA_FetchStoredInfo[MAX_PLAYERS] = {"","","","","","","",""};
 
 int monsterCheck[NUM_DIFFICULTIES][DRLA_MONSTER_PAGE_MAX],
         oldCheck[NUM_DIFFICULTIES][DRLA_MONSTER_PAGE_MAX];
 
-str stringArray[STRING_ARRAY_MAX];
-int stringArrayIndex = 0;
-
 str all_assemblies = "x";
 
-int basicInd    = 0;
-int advancedInd = 0; // should be 33
-int masterInd   = 0; // should be 65
-int masterMax   = 0; // should be 95 as of 1.1.5 or earlier
+int PDA_ModData[MAX_PLAYERS][4] = { 0, 0, 0, 0 }; // should be 0, 33, 65, and 95 respectively
 
-int TEXT_OFFSET = 13; // aka length of "PDA_ASSEMBLY_"
-    
-str PDA_Class_Name_Printer    = " ";
-str PDA_Class_Ability_Printer = " ";
-str PDA_Class_Story_Printer   = " ";
-str PDA_Class_Story_Height    = " ";
-int PDA_Class_TrimValue       = 0;
-
-str enemy_info_name   = "N/A\n";
-str enemy_info_icon   = "N/A\n";
-str enemy_info_health = "N/A\n";
-str enemy_info_res    = "N/A\n";
-str enemy_info_info   = "N/A\n";
-int enemy_count       = 0;
+int enemy_count = 0;
 
 // similar to above, but for monster list page
-str beast_token_str   = " ";
-str beast_name_str    = " ";
-str beast_icon        = " ";
-str beast_kill_count  = " ";
+str PDA_ListEnemy[MAX_PLAYERS][4] = {" ", " ", " ", ""};
 int player_kill_count = 0;
 
 fixed beast_x   = 4.0;
-int beast_page  = 0;
-int beast_width = 80;
+// page, width, difficulty color
+int beast_info[3] = {0, 80, CR_UNTRANSLATED};
 
-//
+str PDA_AssemblyInfo[MAX_PLAYERS][5] = {" ", " ", " ", " ", "1"};
 
-str assembly_info_icon  = " ";
-str assembly_info_name  = " ";
-str assembly_info_mods  = " ";
-str assembly_info_desc  = " ";
-str assembly_info_textH = "1";
-// str assembly_info_ar[12];
-
-str PDA_Weapon_Name_Printer = " ";
-str PDA_Weapon_Desc_Printer = " ";
-
-str PDA_Weapon_DualName_Printer = " ";
-str PDA_Weapon_DualDesc_Printer = " ";
-
-int PDA_Weapon_Bulk_Quantity      = 0;
-int PDA_Weapon_Power_Quantity     = 0;
-int PDA_Weapon_Agility_Quantity   = 0;
-int PDA_Weapon_Technical_Quantity = 0;
-int PDA_Weapon_Sniper_Quantity    = 0;
-int PDA_Weapon_Firestorm_Quantity = 0;
-int PDA_Weapon_Nano_Quantity      = 0;
-int PDA_Weapon_Artifact_Quantity  = 0;
-
-str current_weapon         = "None";
-str current_weapon_trimmed = "None";
-
-str class_perk_displayed  = "\n",
-    weapon_perk_displayed = "\n";
-
-int difficulty_color = CR_UNTRANSLATED;
-
-bool PDA_IsNotDemonic          = false;
-bool weapon_can_disassemble    = false;
-bool weapon_supports_artifacts = false;
+// str current_weapon_mods    = " ";
 
 str separator_character = ":"; // by default.
+// str weapon_mods[7] = { "bulk", "power", "agility", "technical", "sniper", "firestorm", "nano" };
 
 // Not the renegade of funk, unfortunately..
 bool isRenegade = false;
+
+
+#define PDA_LocalUniqueModEffect PDA_PrintWhichUnique[PlayerNumber()]
+#define PDA_LocalWeaponModEffect PDA_PrintWhichBasic[PlayerNumber()]
+
+// armors, backpacks, boots
+int global_equipment_index[3][MAX_PLAYERS] = {
+    {0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0},
+};
+
+// armors, backpacks, boots
+bool show_equipment[3][MAX_PLAYERS] = {
+    {false, false, false, false, false, false, false, false},
+    {false, false, false, false, false, false, false, false},
+    {false, false, false, false, false, false, false, false},
+};
+
+// armors, backpacks, boots
+bool has_equipment[3][MAX_PLAYERS] = {
+    {false, false, false, false, false, false, false, false},
+    {false, false, false, false, false, false, false, false},
+    {false, false, false, false, false, false, false, false},
+};
+
+str DRLA_BackpackList[DRLA_BACKPACKMAX][2] = {
+    {"RLBackpack", "BASIC"},
+    {"RLCombatBackpackToken", "COMBAT"},
+    {"RLSpecialistBackpackToken", "SPECIALIST"},
+    {"RLScroungerBackpackToken", "SCROUNGER"},
+    {"RLDedicatedBackpackToken", "DEDICATED"},
+    {"RLNuclearBackpackToken", "NUCLEAR"}
+};
 
 str DRLA_MenuOptions[PDA_MENUMAX][DRLA_MENUMAXELEMENTS] = {
 	{"MPLYICO", "Classes"},
@@ -325,15 +152,6 @@ str DRLA_NuclearCheckList[DRLA_NUCLEARMAX] = {
 
 str DRLA_TristarCheckList[DRLA_TRISTARMAX] = {
 	"RLTristarBlaster", "RLHighPowerTristarBlaster", "RLNanomanufactureAmmoTristarBlaster"
-};
-
-str DRLA_BackpackList[DRLA_BACKPACKMAX][2] = {
-    {"RLBackpack", "BASIC"},
-    {"RLCombatBackpackToken", "COMBAT"},
-    {"RLSpecialistBackpackToken", "SPECIALIST"},
-    {"RLScroungerBackpackToken", "SCROUNGER"},
-    {"RLDedicatedBackpackToken", "DEDICATED"},
-    {"RLNuclearBackpackToken", "NUCLEAR"}
 };
 
 str DRLA_Bestiary[DRLA_DIFFICULTYTIERS][DRLA_MONSTERMAX][DRLA_BESTIARYELEMENTS] =
@@ -493,7 +311,6 @@ str DRLA_ItemInfo[DRLA_ITEMSMAX][DRLA_ITEMELEMENTS] =
     {"PDA_ITEMS_PHASEDEVICES_ICON",     "PDA_ITEMS_PHASEDEVICES_NAME",     "PDA_ITEMS_PHASEDEVICES_DESC"     },
 };
 
-// FUNCTIONS --------------------
 #include "PDA_MCRO.ach"
 
 // EOF

@@ -8,53 +8,45 @@ switch (PDA_Local.page) {
             PDA_LocalButton[PDA_BEAST_EX] = PDA_CreateBeastButton(PDA_BEAST_EX, "Extra",        CR_PURPLE,    10.0, 30.0 + (15.0 * 4), BEAST_DIFFICULTY_WIDTH, BEAST_DIFFICULTY_HEIGHT, -4.0, -3.0, "", "");
         }
         
-        // why didn't I make these part of the CreateBeastButton function?
-        // 2025 - I don't know, past Ryan.
-        // if (PDA_Local.newEntry[0]) HudMessageParallax("New!\n", HUDMSG_ALPHA, 55, CR_GREEN, 100.0, 45.0 + (21.0 * 0), 0, 0.2 + pulser(2.0, 0.59));
-        // if (PDA_Local.newEntry[1]) HudMessageParallax("New!\n", HUDMSG_ALPHA, 56, CR_GREEN, 100.0, 45.0 + (21.0 * 1), 0, 0.2 + pulser(2.0, 0.59));
-        // if (PDA_Local.newEntry[2]) HudMessageParallax("New!\n", HUDMSG_ALPHA, 57, CR_GREEN, 100.0, 45.0 + (21.0 * 2), 0, 0.2 + pulser(2.0, 0.59));
-        // if (PDA_Local.newEntry[3]) HudMessageParallax("New!\n", HUDMSG_ALPHA, 58, CR_GREEN, 100.0, 45.0 + (21.0 * 3), 0, 0.2 + pulser(2.0, 0.59));
-        // if (PDA_Local.newEntry[4]) HudMessageParallax("New!\n", HUDMSG_ALPHA, 59, CR_GREEN, 100.0, 45.0 + (21.0 * 4), 0, 0.2 + pulser(2.0, 0.59));
-
-        PDA_ButtonHandler(PDA_BEAST_UV, true, 2, strparam("%l:\n", "PDA_DIFFICULTY_UV_OR_LOWER") , false);
-        PDA_ButtonHandler(PDA_BEAST_NM, true, 3, strparam("%l:\n", "PDA_DIFFICULTY_NIGHTMARE")   , false);
-        PDA_ButtonHandler(PDA_BEAST_TP, true, 4, strparam("%l:\n", "PDA_DIFFICULTY_TECHNOPHOBIA"), false);
-        PDA_ButtonHandler(PDA_BEAST_AG, true, 5, strparam("%l:\n", "PDA_DIFFICULTY_ARMAGEDDON")  , false);
-        PDA_ButtonHandler(PDA_BEAST_EX, true, 6, strparam("%l:\n", "PDA_DIFFICULTY_EXTRA")       , false);
+        PDA_ButtonHandler(PDA_BEAST_UV, true, 2, strparam("%l:\n", "PDA_DIFFICULTY_UV_OR_LOWER") , false, false);
+        PDA_ButtonHandler(PDA_BEAST_NM, true, 3, strparam("%l:\n", "PDA_DIFFICULTY_NIGHTMARE")   , false, false);
+        PDA_ButtonHandler(PDA_BEAST_TP, true, 4, strparam("%l:\n", "PDA_DIFFICULTY_TECHNOPHOBIA"), false, false);
+        PDA_ButtonHandler(PDA_BEAST_AG, true, 5, strparam("%l:\n", "PDA_DIFFICULTY_ARMAGEDDON")  , false, false);
+        PDA_ButtonHandler(PDA_BEAST_EX, true, 6, strparam("%l:\n", "PDA_DIFFICULTY_EXTRA")       , false, false);
         
         break;
     default:
-        beast_page = PDA_Local.page - 2;
+        beast_info[0] = PDA_Local.page - 2;
         for (int i = 0; i < DRLA_MONSTER_PAGE_MAX; i++) {
-            beast_kill_count            = StrParam("%s:KillCounter", DRLA_Bestiary[beast_page][i][beast_TOKEN]);
-            monsterCheck[beast_page][i] = CheckInventory(beast_kill_count);
+            PDA_ListEnemy[PlayerNumber()][3]            = StrParam("%s:KillCounter", DRLA_Bestiary[beast_info[0]][i][beast_TOKEN]);
+            monsterCheck[beast_info[0]][i] = CheckInventory(PDA_ListEnemy[PlayerNumber()][3]);
 
             fixed beast_y = 30.0 + (16.0 * i);
             
-            if(CheckInventory(beast_kill_count) > 0)
+            if(CheckInventory(PDA_ListEnemy[PlayerNumber()][3]) > 0)
             {
-                beast_token_str   = DRLA_Bestiary[beast_page][i][beast_ACTOR];
-                beast_name_str    = strParam("%l:", strParam("%l:_name", beast_token_str));
-                beast_icon        = strParam("%l:", strParam("%l:_icon", beast_token_str));
-                player_kill_count = CheckPointerInventory(beast_kill_count, PlayerNumber());
-                beast_width       = (strlen(beast_name_str) * 10) / 2;
+                PDA_ListEnemy[PlayerNumber()][0]   = DRLA_Bestiary[beast_info[0]][i][beast_ACTOR];
+                PDA_ListEnemy[PlayerNumber()][1]    = StrParam("%l:", StrParam("%l:_name", PDA_ListEnemy[PlayerNumber()][0]));
+                PDA_ListEnemy[PlayerNumber()][2]        = StrParam("%l:", StrParam("%l:_icon", PDA_ListEnemy[PlayerNumber()][0]));
+                player_kill_count = CheckPointerInventory(PDA_ListEnemy[PlayerNumber()][3], PlayerNumber());
+                beast_info[1]       = (strlen(PDA_ListEnemy[PlayerNumber()][1]) * 10) / 2;
             } else {
-                beast_token_str   = "null";
+                PDA_ListEnemy[PlayerNumber()][0]   = "null";
                 player_kill_count = 0;
-                beast_name_str    = " ????";
+                PDA_ListEnemy[PlayerNumber()][1]    = " ????";
             }
 
-            beast_button[i] = PDA_CreateBeastButton(PDA_BEASTS_ID_END - i, beast_name_str, difficulty_color, 
+            PDA_LocalButton[PDA_BEASTS_ID_END - i] = PDA_CreateBeastButton(PDA_BEASTS_ID_END - i, PDA_ListEnemy[PlayerNumber()][1], beast_info[2], 
                 beast_x, beast_y, 
-                beast_width, 10, 
+                beast_info[1], 10, 
                 3.0, -3.0, 
-                beast_token_str, player_kill_count);
-            PDA_ButtonHandler(PDA_BEASTS_ID_END - i, true, 1, beast_name_str, true);
+                PDA_ListEnemy[PlayerNumber()][0], player_kill_count);
+            PDA_ButtonHandler(PDA_BEASTS_ID_END - i, true, 1, PDA_ListEnemy[PlayerNumber()][1], true, false);
 
-            if(beast_name_str != " ????" && beast_button[i].state == button_hovered){
-                DisplayIcon(beast_icon, PDA_INFO2ID, PDA_SCREEN_WIDTH - 30.0 + X_LEFT_EDGE, PDA_SCREEN_Y + 100.0 + Y_TOP_EDGE, 0, 0.2 + pulser(2.0, 0.59));
+            if(PDA_ListEnemy[PlayerNumber()][1] != " ????" && PDA_LocalButton[PDA_BEASTS_ID_END - i].state == button_hovered){
+                DisplayIcon(PDA_ListEnemy[PlayerNumber()][2], PDA_INFO2ID, PDA_SCREEN_WIDTH - 30.0 + X_LEFT_EDGE, PDA_SCREEN_Y + 100.0 + Y_TOP_EDGE, 0, 0.2 + pulser(2.0, 0.59));
             }
         }
-        PDA_Local.newEntry[beast_page] = false;
+        PDA_Local.newEntry[beast_info[0]] = false;
         break;
 }
