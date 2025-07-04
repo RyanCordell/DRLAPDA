@@ -80,7 +80,7 @@ str PDA_AssemblyInfo[MAX_PLAYERS][5] = {" ", " ", " ", " ", "1"};
 // str current_weapon_mods    = " ";
 
 str separator_character = ":"; // by default.
-// str weapon_mods[7] = { "bulk", "power", "agility", "technical", "sniper", "firestorm", "nano" };
+str weapon_mods[7] = { "b", "p", "a", "t", "s", "f", "n" };
 
 // Not the renegade of funk, unfortunately..
 bool isRenegade = false;

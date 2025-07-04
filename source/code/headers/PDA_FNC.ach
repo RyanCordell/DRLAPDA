@@ -527,6 +527,8 @@ function void PDA_SetDataPerPage (void) {
                 // weapon_info[weapon_info_dualname] = StrParam("PDA_WEAPON_%s:DEMONARTIFACTS_NAME", player_weapon[player_weapon_trimmed]),
                 weapon_info[weapon_info_dualdesc] = StrParam("PDA_WEAPON_%s:DEMONARTIFACTS_DESC", player_weapon[player_weapon_trimmed]);
 
+                str_split(separator_character, StrParam("%l:", StrParam("PDA_WEAPON_%s:_MODS", player_weapon[player_weapon_trimmed])));
+
                 // Weapon_Mod_Quantity[mod_bulk] = CheckInventory(StrParam("%s:BulkMod", player_weapon[player_weapon_current])),
                 // Weapon_Mod_Quantity[mod_power] = CheckInventory(StrParam("%s:PowerMod", player_weapon[player_weapon_current])),
                 // Weapon_Mod_Quantity[mod_agility] = CheckInventory(StrParam("%s:AgilityMod", player_weapon[player_weapon_current])),
@@ -1228,9 +1230,11 @@ function PDAButton PDA_CreateModPackDisplay (int id, str graphic, float x, float
     thisButton.textFont  = PDA_FONT[0];
     thisButton.textID    = PDA_ASSEMBLY_ID_END + thisButton.id;
     int _fxTemp          = thisButton.graphicX;
-    thisButton.textX    = _fxTemp + 5.0 + X_LEFT_EDGE;
+    thisButton.textX     = _fxTemp + 5.0 + X_LEFT_EDGE;
     int _fyTemp          = thisButton.graphicY;
-    thisButton.textY    = _fyTemp + 2.0 + Y_TOP_EDGE;
+    thisButton.textY     = _fyTemp + 2.0 + Y_TOP_EDGE;
+
+    thisButton.alpha = alpha;
 
     if (debug) {
         DrawBorder(thisButton.x * NEW_RESOLUTION_X, thisButton.y * NEW_RESOLUTION_Y, width * NEW_RESOLUTION_X, height * NEW_RESOLUTION_Y);
@@ -1380,7 +1384,7 @@ function void PDA_ButtonHandler (int id, int incat, int catpage, str message, bo
             PDA_LocalButton[id].alpha = 1.0;
         }
     } else {
-        if (PDA_LocalButton[id].type != "tab" && PDA_LocalButton[id].type != "armor") {
+        if (PDA_LocalButton[id].type == "modpack" && PDA_LocalButton[id].type != "tab" && PDA_LocalButton[id].type != "armor") {
             PDA_LocalButton[id].alpha = (PDA_LocalButton[id].state == button_hovered) ? pulser(2.0, 0.8) : 0.6;
         }
     }

@@ -25,13 +25,13 @@ HudMessageParallax(
 for (int modPack = PDA_MODMIN; modPack < PDA_MODMAX - 1; modPack++) {
 
     // str selectedMod = StrParam("%s:MODICON", strMid(stringArray[modPack], 9, 1));
-    // str selectedMod = StrParam("PDA_MODS_%s:_MODICON", weapon_mods[modPack]);
+    str selectedMod = StrParam("%s:MODICON", weapon_mods[modPack]);
 
     float modY = 55.0 + (24.0 * modPack);
 
-    PDA_LocalButton[modPack] = PDA_CreateModPackDisplay(modPack, " ", 
+    PDA_LocalButton[modPack] = PDA_CreateModPackDisplay(modPack, selectedMod, 
                 10.0, modY,
-                16, 24, 0.5);
+                16, 24, (Weapon_Mod_Quantity[modPack] > 0) ? pulser(4.0, 0.9) : 0.5);
                 PDA_ButtonHandler(modPack, true, WEAPON_PAGE_MODPACK_EFFECTS, '', true, false);
 }
 
