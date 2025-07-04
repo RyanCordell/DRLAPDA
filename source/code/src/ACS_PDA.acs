@@ -129,14 +129,13 @@ script "DRLA_HUDStyleChanger" (void) {
 
 /** TODO: This and the below script are redundant, look into it */
 function void doPDASync (void) {
-    int kcount;
     for (int page = 0; page < DRLA_DIFFICULTYTIERS; page++) {
         for (int m = 0; m < DRLA_MONSTER_PAGE_MAX; m++) {
-            kcount = StrParam("%s:KillCounter", DRLA_Bestiary[page][m][beast_TOKEN]);
-            monsterCheck[page][m]  = CheckInventory(kcount);
+            beast_kill_count = StrParam("%s:KillCounter", DRLA_Bestiary[page][m][beast_TOKEN]);
+            monsterCheck[page][m]  = CheckInventory(beast_kill_count);
 
-            if (CheckPointerInventory(kcount, PlayerNumber()) > 0) {
-                PDA_SetEveryoneInventory(kcount);
+            if (CheckPointerInventory(beast_kill_count, PlayerNumber()) > 0) {
+                PDA_SetEveryoneInventory(beast_kill_count);
             }
         }
     }
@@ -436,7 +435,7 @@ SCRIPT "PDA_Core" (void) {
         }
         Delay(PDA_Responsiveness);
     }
-    // PDA_HEADER_STR = "";
+    PDA_ClearHeader();
     PDA_Wipe("PDA_Core End");
     SetHudClipRect(0,0,0,0,0);
 }

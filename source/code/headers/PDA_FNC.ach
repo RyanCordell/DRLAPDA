@@ -131,6 +131,10 @@ function void PDA_PrintHeader (void) {
     PDA_SetupScreenBounds();
 }
 
+function void PDA_ClearHeader (void) {
+    HudMessage(s:""; HUDMSG_PLAIN, PDA_INFOTOPID, CR_GREEN, PDA_SCREEN_X + 100.0 + PDA_HEADER_X + X_LEFT_EDGE, PDA_SCREEN_Y + 2.0 + Y_TOP_EDGE, 0.0);
+}
+
 // Useful for scroll arrows
 function void DisplayIcon (str Sprite, int ID, fixed X, fixed Y, fixed DelayTime, fixed Alpha) {
     SetFont(Sprite);
@@ -668,13 +672,13 @@ function void PDA_ChangeScrolling (void) {
             PDA_SetScrollWindow(-240);
 
             switch (PDA_Local.page) {
-                case BESTIARY_PAGE_LIST:
+                case BESTIARY_PAGE_DIFFICULTIES:
                     PDA_SetScrollLimit(20);
                     PDA_SetScrollArrows2(0, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
                     break;
                 default: 
-                    PDA_SetScrollLimit(-60);
-                    PDA_SetScrollArrows2(-60, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+                    PDA_SetScrollLimit(DRLA_MONSTER_PAGE_MAX * -10);
+                    PDA_SetScrollArrows2(DRLA_MONSTER_PAGE_MAX * -10, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
                     break;
             }
             break;
@@ -1027,7 +1031,7 @@ function PDAButton PDA_CreateAssemblyButton (int id, str graphic, str label, flo
     return thisButton;
 }
 
-function PDAButton PDA_CreateBeastButton (int id, str label, str color, float x, float y, int width, int height, float xoff, float yoff, str beast, str unatcokillphrase) {
+function PDAButton PDA_CreateBeastButton (int id, str label, int color, float x, float y, int width, int height, float xoff, float yoff, str beast, str unatcokillphrase) {
     #define thisButton PDA_LocalButton[id]
     assignButtonParams(thisButton, label)
     thisButton.graphic = "";
@@ -1036,7 +1040,7 @@ function PDAButton PDA_CreateBeastButton (int id, str label, str color, float x,
 
     if (CheckBounds(thisButton)) {
         if (PDA_LocalMouse.m1 && !(PDA_LocalMouse.oldState & BT_ATTACK)) {
-            if (strcmp(beast, "") != 0 ) {
+            if (strcmp(beast, "") != 0 && PDA_Local.page < 6) {
                 PDA_Local.detailFetch[0] = beast;
                 PDA_Local.detailFetch[1] = unatcokillphrase;
 
@@ -1050,21 +1054,25 @@ function PDAButton PDA_CreateBeastButton (int id, str label, str color, float x,
     thisButton.graphic      = "PLON";
     thisButton.graphicFlags = HUDMSG_ALPHA;
     thisButton.graphicID    = thisButton.id;
-    thisButton.graphicX     = (thisButton.x * NEW_RESOLUTION_X) + 5.0;
-    int graphicy     = (int)(thisButton.y * NEW_RESOLUTION_Y) + 0.0;
-    thisButton.graphicY     = graphicy + X_LEFT_EDGE;
+    int _gfxTemp            = thisButton.x * NEW_RESOLUTION_X;
+    thisButton.graphicX     = _gfxTemp + 5.0 + X_LEFT_EDGE;
+    int _gfyTemp            = thisButton.y * NEW_RESOLUTION_Y;
+    thisButton.graphicY     = _gfyTemp;
     thisButton.type         = "beast";
 
     thisButton.textFont  = USED_PDA_FONT;
     thisButton.textFlags = HUDMSG_ALPHA | HUDMSG_COLORSTRING;
+    thisButton.textColor = color;
     thisButton.textID    = (thisButton.id) + 20;
-    thisButton.textX    = (thisButton.x * NEW_RESOLUTION_X) + 10.0;
-    int texty        = (int)(thisButton.y * NEW_RESOLUTION_Y) + 0.0;
-    thisButton.textY    = textY + 4.0 + X_LEFT_EDGE;
+    int _txTemp          = thisButton.x * NEW_RESOLUTION_X;
+    thisButton.textX     = _txTemp + 10.0 + X_LEFT_EDGE;
+    int _tyTemp          = thisButton.y * NEW_RESOLUTION_Y;
+    thisButton.textY     = _tyTemp + 2.0;
 
     if (debug) {
         DrawBorder(thisButton.x * NEW_RESOLUTION_X, thisButton.y * NEW_RESOLUTION_Y, width * NEW_RESOLUTION_X, height * NEW_RESOLUTION_Y);
     }
+
     return thisButton;
 }
 
@@ -1395,6 +1403,16 @@ function void PDA_ButtonHandler (int id, int incat, int catpage, str message, in
             PDA_LocalButton[id].alpha = (PDA_LocalButton[id].state == button_hovered) ? pulser(2.0, 0.8) : 0.6;
         }
     }
+
+    int warningID = id - 50;
+    int newColor = CR_UNTRANSLATED;
+    if (warningID < 0) warningID = 0;
+    if (warningID > 4) warningID = 4;
+    if (PDA_LocalButton[id].type == "beast") {
+        newColor = PDA_LocalButton[id].textColor;
+        if (PDA_Local.newEntry[warningID]) newColor = CR_GOLD;
+    }
+
     
     fixed xlabeloff = (strcmp(PDA_LocalButton[id].graphic, "PTAB") == 0) ? 4.0 : 0.0;
     fixed ylabeloff = (strcmp(PDA_LocalButton[id].graphic, "PTAB") == 0) ? 3.0 : 0.0;
@@ -1405,7 +1423,15 @@ function void PDA_ButtonHandler (int id, int incat, int catpage, str message, in
     // PrintSprite(PDA_LocalButton[id].graphic, PDA_LocalButton[id].graphicID, PDA_LocalButton[id].graphicX, PDA_LocalButton[id].graphicY, 0.1);
 
     SetFont(PDA_LocalButton[id].textFont);
-    HudMessage(s:PDA_LocalButton[id].label; PDA_LocalButton[id].textFlags, PDA_LocalButton[id].textID, CR_UNTRANSLATED, PDA_LocalButton[id].textX, PDA_LocalButton[id].textY, 1.0, PDA_LocalButton[id].alpha);
+    HudMessage(s:PDA_LocalButton[id].label; PDA_LocalButton[id].textFlags, PDA_LocalButton[id].textID, newColor, PDA_LocalButton[id].textX, PDA_LocalButton[id].textY, 1.0, PDA_LocalButton[id].alpha);
+
+    if (PDA_LocalButton[id].type == "beast") {
+        if (PDA_Local.newEntry[warningID] && PDA_Local.page == 1) {
+            HudMessage(s:"New entry!\n"; 
+                HUDMSG_ALPHA, id + 5, CR_GREEN, thisButton.textX + thisButton.width - 10.0, thisButton.textY - 6.0, 0.0, pulser(2.0, 0.8)
+            );
+        }
+    }
 }
 
 function void PDA_HandleHeader(void) {
@@ -1464,12 +1490,12 @@ function void PDA_HandleHeader(void) {
             PDA_Local.pagemax = 6;
 
             switch (PDA_Local.page) {
-                case 1: PDA_HEADER_STR = "PDA_BESTIARY_HEADER";    PDA_HEADER_X = 0;                                   break;
-                case 2: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_UV"; PDA_HEADER_X = -40; difficulty_color = "White";     break;
-                case 3: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_NM"; PDA_HEADER_X = -40; difficulty_color = "Brick";     break;
-                case 4: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_TP"; PDA_HEADER_X = -50; difficulty_color = "LightBlue"; break;
-                case 5: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_AR"; PDA_HEADER_X = -40; difficulty_color = "Gold";      break;
-                case 6: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_SP"; PDA_HEADER_X = -40; difficulty_color = "Purple";    break;
+                case 1: PDA_HEADER_STR = "PDA_BESTIARY_HEADER";    PDA_HEADER_X =   0;                                  break;
+                case 2: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_UV"; PDA_HEADER_X = -40; difficulty_color = CR_WHITE;     break;
+                case 3: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_NM"; PDA_HEADER_X = -30; difficulty_color = CR_BRICK;     break;
+                case 4: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_TP"; PDA_HEADER_X = -50; difficulty_color = CR_LIGHTBLUE; break;
+                case 5: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_AR"; PDA_HEADER_X = -40; difficulty_color = CR_GOLD;      break;
+                case 6: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_SP"; PDA_HEADER_X = -20; difficulty_color = CR_PURPLE;    break;
             }
             break;
         case PDA_ARMORS:

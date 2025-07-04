@@ -146,6 +146,7 @@ struct PDAButton {
     float graphicY;
 
     str textFont;
+    int textColor;
     int textID;
     int textFlags;
     float textX;
@@ -158,7 +159,8 @@ struct PDAButton {
     str type;
 }
 PDAButton PDA_Button[MAX_PLAYERS][512];
-PDAButton assembly_button[128];
+PDAButton assembly_button[32];
+PDAButton beast_button[32];
 
 struct PDAWeapon {
     int id;
@@ -236,6 +238,19 @@ str enemy_info_res    = "N/A\n";
 str enemy_info_info   = "N/A\n";
 int enemy_count       = 0;
 
+// similar to above, but for monster list page
+str beast_token_str   = " ";
+str beast_name_str    = " ";
+str beast_icon        = " ";
+str beast_kill_count  = " ";
+int player_kill_count = 0;
+
+fixed beast_x   = 4.0;
+int beast_page  = 0;
+int beast_width = 80;
+
+//
+
 str assembly_info_icon  = " ";
 str assembly_info_name  = " ";
 str assembly_info_mods  = " ";
@@ -264,7 +279,7 @@ str current_weapon_trimmed = "None";
 str class_perk_displayed  = "\n",
     weapon_perk_displayed = "\n";
 
-str difficulty_color = " ";
+int difficulty_color = CR_UNTRANSLATED;
 
 bool PDA_IsNotDemonic          = false;
 bool weapon_can_disassemble    = false;

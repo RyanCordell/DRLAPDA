@@ -11,8 +11,6 @@ str callback = "\n";
 str tooltip = "\n";
 
 
-
-// SetFont(USED_PDA_FONT);
 for (int ti = 0, li = 1; ti <= PDA_Local.maxassembliesper; ti+=2, li+=2) {
     int aoff               = (PDA_Local.assemblyOffset - 1 < 0) ? 0 : (PDA_Local.assemblyOffset - 1);
     int peekFuture         = (ti + 2);
@@ -55,6 +53,3 @@ if (PDA_Local.page < 3) {
     PDA_LocalButton[PDA_NEXT_PAGE] = PDA_CreateButton(PDA_NEXT_PAGE, "Next tier" , "A_NEXT", nextButtonX, paginationY, 82, 16, 20, 15);
     PDA_ButtonHandler(PDA_NEXT_PAGE, true, PDA_Local.page + 1, "", false);
 }
-        
-// PDA_DefaultFont();
-// PDA_UnsetScrollWindow();

@@ -23,11 +23,11 @@ switch (PDA_Local.category) {
     break;
 
   case PDA_BESTIARY:
-    PDAButton NORMAL       = PDA_CreateBeastButton(PDA_BEAST_UV, "Normal",       "White",     10.0 + X_LEFT_EDGE, 30.0 + Y_TOP_EDGE + (15.0 * 0), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, "", "");
-    PDAButton NIGHTMARE    = PDA_CreateBeastButton(PDA_BEAST_NM, "Nightmare",    "Brick",     10.0 + X_LEFT_EDGE, 30.0 + Y_TOP_EDGE + (15.0 * 1), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, "" , "");
-    PDAButton TECHNOPHOBIA = PDA_CreateBeastButton(PDA_BEAST_TP, "Technophobia", "LightBlue", 10.0 + X_LEFT_EDGE, 30.0 + Y_TOP_EDGE + (15.0 * 2), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, "", "");
-    PDAButton ARMAGEDDON   = PDA_CreateBeastButton(PDA_BEAST_AG, "Armageddon",   "Gold",      10.0 + X_LEFT_EDGE, 30.0 + Y_TOP_EDGE + (15.0 * 3), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, "", "");
-    PDAButton EXTRA        = PDA_CreateBeastButton(PDA_BEAST_EX, "Extra",        "Purple",    10.0 + X_LEFT_EDGE, 30.0 + Y_TOP_EDGE + (15.0 * 4), BEAST_WIDTH, BEAST_HEIGHT, -4.0, -3.0, "", "");
+    PDAButton NORMAL       = PDA_CreateBeastButton(PDA_BEAST_UV, "Normal",       CR_WHITE,     10.0, 30.0 + (15.0 * 0), BEAST_DIFFICULTY_WIDTH, BEAST_DIFFICULTY_HEIGHT, -4.0, -3.0, "", "");
+    PDAButton NIGHTMARE    = PDA_CreateBeastButton(PDA_BEAST_NM, "Nightmare",    CR_BRICK,     10.0, 30.0 + (15.0 * 1), BEAST_DIFFICULTY_WIDTH, BEAST_DIFFICULTY_HEIGHT, -4.0, -3.0, "" , "");
+    PDAButton TECHNOPHOBIA = PDA_CreateBeastButton(PDA_BEAST_TP, "Technophobia", CR_LIGHTBLUE, 10.0, 30.0 + (15.0 * 2), BEAST_DIFFICULTY_WIDTH, BEAST_DIFFICULTY_HEIGHT, -4.0, -3.0, "", "");
+    PDAButton ARMAGEDDON   = PDA_CreateBeastButton(PDA_BEAST_AG, "Armageddon",   CR_GOLD,      10.0, 30.0 + (15.0 * 3), BEAST_DIFFICULTY_WIDTH, BEAST_DIFFICULTY_HEIGHT, -4.0, -3.0, "", "");
+    PDAButton EXTRA        = PDA_CreateBeastButton(PDA_BEAST_EX, "Extra",        CR_PURPLE,    10.0, 30.0 + (15.0 * 4), BEAST_DIFFICULTY_WIDTH, BEAST_DIFFICULTY_HEIGHT, -4.0, -3.0, "", "");
     break;
     
   case PDA_ARMORS:
