@@ -9,11 +9,11 @@ HudMessageParallax(
         "%l:\n"
         "\c-%l:\n"
         ,
-        (weapon_checks[1]) ? StrParam("> \c[Yellow]%s:", DRLA_WeaponPerkList[2][1]) : "",
-        (!weapon_checks[1]) ? PDA_Class[PlayerNumber()][5] : "",
-        weapon_info[4],
-        (weapon_checks[2]) ? weapon_info[1] : weapon_info[0],
-        (weapon_checks[2]) ? weapon_info[4] : weapon_info[3]
+        (weapon_checks[weapon_checks_disasemblable]) ? StrParam("> \c[Yellow]%s:", DRLA_WeaponPerkList[2][1]) : "",
+        (!weapon_checks[weapon_checks_disasemblable]) ? PDA_Class[PlayerNumber()][pda_class_weapon_perk] : "",
+        weapon_info[weapon_info_perk],
+        (weapon_checks[weapon_checks_supports_artifacts]) ? weapon_info[weapon_info_dualname] : weapon_info[weapon_info_name],
+        (weapon_checks[weapon_checks_supports_artifacts]) ? weapon_info[weapon_info_dualdesc] : weapon_info[weapon_info_desc]
     ),
 
     HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 

@@ -1,10 +1,10 @@
 if(GetActorclass(0) != "None")
 {
 
-    if(stricmp(PDA_Class[PlayerNumber()][4], "PDA_", 4) == 0) 
-      PDA_Class[PlayerNumber()][4] = "PPDAUNK";
+    if(stricmp(PDA_Class[PlayerNumber()][pda_class_icon], "PDA_", 4) == 0) 
+      PDA_Class[PlayerNumber()][pda_class_icon] = "PPDAUNK";
       
-    SetFont(PDA_Class[PlayerNumber()][4]);
+    SetFont(PDA_Class[PlayerNumber()][pda_class_icon]);
     HudMessage(s:"A\n"; HUDMSG_ALPHA, PDA_INFOID, CR_UNTRANSLATED,  PDA_SCREEN_WIDTH + 5.0 + X_RIGHT_EDGE, (PDA_SCROLLABLE_HEIGHT) + 5.0 + Y_TOP_EDGE, 0, 0.45);
     
     PDA_DefaultFont();
@@ -15,8 +15,8 @@ if(GetActorclass(0) != "None")
             StrParam(
                 "\cd%l:\c-\n\n"
                 "%l:",
-                PDA_Class[PlayerNumber()][0],
-                PDA_Class[PlayerNumber()][1]
+                PDA_Class[PlayerNumber()][pda_class_name],
+                PDA_Class[PlayerNumber()][pda_class_abilities]
             ),
             HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), 0.0, 1.0);
     }
@@ -27,8 +27,8 @@ if(GetActorclass(0) != "None")
             StrParam(
                 "\cd%l:\c-\n\n"
                 "%l:",
-                PDA_Class[PlayerNumber()][0],
-                PDA_Class[PlayerNumber()][2]
+                PDA_Class[PlayerNumber()][pda_class_name],
+                PDA_Class[PlayerNumber()][pda_class_story]
             ),
             HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), 0.0, 1.0);
     }

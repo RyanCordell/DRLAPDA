@@ -10,6 +10,8 @@ OptionMenu "DRLAPDAMenu"
 	StaticText 	"PDA Options", 1
 	Option "PDA Appearance", "DRLA_PDA_theme", "PDAThemes"
 	Option "PDA Font",       "DRLA_PDA_font",  "PDAFonts"
+	StaticText "It's worth noting that no font outside of the default is properly supported."
+	StaticText 	""
 
 	Option "PDA Beep Sounds",     "DRLA_PDA_soldier",  "PDASoundType"
 	Option "PDA First Time Help", "DRLA_PDA_firsttime", "PDAHelpType"

@@ -20,6 +20,8 @@ str PDA_FONT[3] = {"STAT_MNO", "STAT_LWR", "PDAFONT"};
 str PDA_HEADER_STR = "PDA_MENU_HEADER";
 int PDA_HEADER_X   = 0;
 
+// is demonic, disassemble-able, supports artifacts
+// 1 and 3 are kinda redundant..
 bool weapon_checks[3] = {false, false, false};
 
 str player_weapon[2] = {"", ""};

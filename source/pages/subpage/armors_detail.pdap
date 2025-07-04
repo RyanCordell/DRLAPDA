@@ -19,7 +19,7 @@ localShowBackpack = (localEqBoolField & 1<<2);
 
 if (localHasArmor) {
 
-    DisplayIconParallax("PDAPARM", PDA_PLAYER_BODY_ICON, playerIconX, 40.0, 0.0, show_equipment[0][PlayerNumber()] ? 1.0 : 0.5);
+    DisplayIconParallax("PDAPARM", PDA_PLAYER_BODY_ICON, playerIconX, 40.0, 0.0, show_equipment[equipment_armor][PlayerNumber()] ? 1.0 : 0.5);
 
     width = strLen(localArmorData.name) * 5;
     PDA_ButtonHandler(PDA_PLAYER_ARMOR_ICON, true, 2, "", true, false);
@@ -34,7 +34,7 @@ if (localHasArmor) {
 }
 
 if (localHasBackpack) {
-    DisplayIconParallax("PDAPBCK", PDA_PLYR_ICON - 2, playerIconX, 40.0, 0.0, show_equipment[1][PlayerNumber()] ? 1.0 : 0.5);
+    DisplayIconParallax("PDAPBCK", PDA_PLYR_ICON - 2, playerIconX, 40.0, 0.0, show_equipment[equipment_backpack][PlayerNumber()] ? 1.0 : 0.5);
 
     width = strLen(localBackpackData.name) * 5;
     PDA_ButtonHandler(PDA_PLAYER_BACKPACK_ICON, true, 2, "", true, false);
@@ -50,7 +50,7 @@ if (localHasBackpack) {
 }
 
 if (localHasBoots) {
-    DisplayIconParallax("PDAPBTS", PDA_PLYR_ICON - 3, playerIconX, 40.0, 0.0, show_equipment[2][PlayerNumber()] ? 1.0 : 0.5);
+    DisplayIconParallax("PDAPBTS", PDA_PLYR_ICON - 3, playerIconX, 40.0, 0.0, show_equipment[equipment_boots][PlayerNumber()] ? 1.0 : 0.5);
 
     width = strLen(localBootsData.name) * 5;
     PDA_ButtonHandler(PDA_PLAYER_BOOTS_ICON, true, 2, "", true, false);

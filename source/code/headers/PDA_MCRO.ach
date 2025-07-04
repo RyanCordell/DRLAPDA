@@ -18,17 +18,17 @@
 
 
 // shortening array calls
-#define localArmorIndex    global_equipment_index[0][PlayerNumber()]
-#define localBootsIndex    global_equipment_index[1][PlayerNumber()]
-#define localBackpackIndex global_equipment_index[2][PlayerNumber()]
+#define localArmorIndex    global_equipment_index[equipment_armor][PlayerNumber()]
+#define localBootsIndex    global_equipment_index[equipment_boots][PlayerNumber()]
+#define localBackpackIndex global_equipment_index[equipment_backpack][PlayerNumber()]
 
-#define localShowArmor     show_equipment[0][PlayerNumber()]
-#define localShowBoots     show_equipment[1][PlayerNumber()]
-#define localShowBackpack  show_equipment[2][PlayerNumber()]
+#define localShowArmor     show_equipment[equipment_armor][PlayerNumber()]
+#define localShowBoots     show_equipment[equipment_boots][PlayerNumber()]
+#define localShowBackpack  show_equipment[equipment_backpack][PlayerNumber()]
 
-#define localHasArmor      has_equipment[0][PlayerNumber()]
-#define localHasBoots      has_equipment[1][PlayerNumber()]
-#define localHasBackpack   has_equipment[2][PlayerNumber()]
+#define localHasArmor      has_equipment[equipment_armor][PlayerNumber()]
+#define localHasBoots      has_equipment[equipment_boots][PlayerNumber()]
+#define localHasBackpack   has_equipment[equipment_backpack][PlayerNumber()]
 
 #define PDA_Local       PDA_Info[PlayerNumber()]
 #define PDA_LocalMouse  PDA_Mouse[PlayerNumber()]

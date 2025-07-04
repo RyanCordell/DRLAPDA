@@ -90,7 +90,7 @@ enum PDA_IDs {
     PDA_PONG_AISCORE,
     // Anything that *must* stay in the PDA header range
     PDA_INFOTOPID,
-    PDA_TAB_BUTTONS_START = PDA_INFOTOPID + 1,
+    PDA_TAB_BUTTONS_START = PDA_INFOTOPID + 5,
     PDA_TAB_BUTTONS_END = PDA_TAB_BUTTONS_START + 20,
     // PDA display
     PDA_ID,
@@ -171,6 +171,59 @@ enum weaponmod_enum {
 	mi_sniper,
 	mi_firestorm,
 	mi_nano,
+}
+
+enum weapon_checks_index {
+    weapon_checks_isdemonic = 0,
+    weapon_checks_disasemblable,
+    weapon_checks_supports_artifacts,
+}
+
+enum weapon_info_index {
+    weapon_info_name = 0,
+    weapon_info_dualname,
+    weapon_info_perk,
+    weapon_info_desc,
+    weapon_info_dualdesc,
+}
+
+enum weapon_mod_index {
+    mod_bulk = 0,
+    mod_power,
+    mod_agility,
+    mod_technical,
+    mod_sniper,
+    mod_firestorm,
+    mod_nano,
+    mod_artifact,
+}
+
+enum pda_class_index {
+    pda_class_name = 0,
+    pda_class_abilities,
+    pda_class_story,
+    pda_class_height,
+    pda_class_icon,
+    pda_class_weapon_perk,
+}
+
+enum player_weapon_index {
+    player_weapon_current = 0,
+    player_weapon_trimmed,
+}
+
+enum enemy_index {
+    enemy_name = 0,
+    enemy_icon,
+    enemy_health,
+    enemy_resistance,
+    enemy_misc,
+}
+
+enum equipment_index {
+    equipment_armor = 0,
+    equipment_backpack,
+    equipment_boots,
 }
 
 // EOF
