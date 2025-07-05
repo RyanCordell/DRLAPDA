@@ -60,7 +60,7 @@
 
 #define DRLA_ITEMELEMENTS 3
 
-#define TEXT_OFFSET 13
+#define TEXT_OFFSET 13 // "PDA_ASSEMBLY_" string length
 
 // PDA size
 // const float NEW_RESOLUTION_WIDTH = 384, NEW_RESOLUTION_HEIGHT = 288;  // 380 / 320 = 1.1875  |  260 / 200 = 1.3

@@ -24,8 +24,8 @@ for (int ti = 0, li = 1; ti <= PDA_Local.maxassembliesper; ti+=2, li+=2) {
         callback           = languagePointer;
         tooltip            = StrParam("%l:\n%l:", "PDA_ASSEMBLY_REQUIREMENTS", StrParam("%s:_REQ", languagePointer));
 
-    if (peekFuture >= PDA_ModData[PlayerNumber()][1] && PDA_Local.assemblyOffset < PDA_ModData[PlayerNumber()][1]) continue;
-    if (peekFuture >= PDA_ModData[PlayerNumber()][2]   && PDA_Local.assemblyOffset < PDA_ModData[PlayerNumber()][3]  ) continue;
+    if (peekFuture >= advanced_offset && PDA_Local.assemblyOffset < advanced_offset) continue;
+    if (peekFuture >= master_offset   && PDA_Local.assemblyOffset < master_max     ) continue;
 
     if (PDA_CheckPlayer1Inventory(actorToken) || CheckInventory(actorToken)) {
         PDA_LocalButton[id + ti - 1] = PDA_CreateAssemblyButton(id, icon, colored_label, assemblyX, assemblyY, width, height, callback, tooltip);
@@ -35,7 +35,6 @@ for (int ti = 0, li = 1; ti <= PDA_Local.maxassembliesper; ti+=2, li+=2) {
                  PDA_ButtonHandler(id, true, PDA_Local.page, "", false, false);
     }
 }
-
 
 float nextButtonX = 10.0;
 float paginationY = 35.0 + (6.0 * PDA_Local.maxassembliesper);

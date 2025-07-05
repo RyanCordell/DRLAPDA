@@ -589,32 +589,20 @@ function void PDA_SetDataPerPage (void) {
             break;
 
         case PDA_ASSEMBLIES:
-            // all_assemblies = StrParam(l:"PDA_ASSEMBLIES");
-            // str_split(separator_character, all_assemblies);
-
-            // PDA_ModData[PlayerNumber()][3] = 0;
-            // while (stringArray[stringArrayIndex++] != "") {
-            //     if (str_find(stringArray[stringArrayIndex], "ADVANCED", TEXT_OFFSET) != -1 && PDA_ModData[PlayerNumber()][1] == 0) PDA_ModData[PlayerNumber()][1] = stringArrayIndex;
-            //     if (str_find(stringArray[stringArrayIndex],   "MASTER", TEXT_OFFSET) != -1 &&   PDA_ModData[PlayerNumber()][2] == 0) PDA_ModData[PlayerNumber()][2]   = stringArrayIndex;
-            //     PDA_ModData[PlayerNumber()][3]++;
-            // }
-            // stringArrayIndex = 0;
-            // PDA_ModData[PlayerNumber()][3]--;
-
             switch (PDA_Local.page) {
                 case ASSEMBLY_PAGE_BASIC:
-                    PDA_Local.maxassembliesper = (PDA_ModData[PlayerNumber()][1] - 1);
-                    PDA_Local.assemblyOffset   = PDA_ModData[PlayerNumber()][0];
+                    PDA_Local.maxassembliesper = (advanced_offset - 1);
+                    PDA_Local.assemblyOffset   = basic_offset;
                     PDA_Local.tiercolor        = "\c[BB]";
                     break;
                 case ASSEMBLY_PAGE_ADVANCED:
-                    PDA_Local.maxassembliesper = (PDA_ModData[PlayerNumber()][2] - 1) - PDA_ModData[PlayerNumber()][1];
-                    PDA_Local.assemblyOffset   = PDA_ModData[PlayerNumber()][1];
+                    PDA_Local.maxassembliesper = (master_offset - 1) - advanced_offset;
+                    PDA_Local.assemblyOffset   = advanced_offset;
                     PDA_Local.tiercolor        = "\c[AB]";
                     break;
                 case ASSEMBLY_PAGE_MASTER:
-                    PDA_Local.maxassembliesper = PDA_ModData[PlayerNumber()][3] - PDA_ModData[PlayerNumber()][2];
-                    PDA_Local.assemblyOffset   = PDA_ModData[PlayerNumber()][2];
+                    PDA_Local.maxassembliesper = master_max - master_offset;
+                    PDA_Local.assemblyOffset   = master_offset;
                     PDA_Local.tiercolor        = "\c[MB]";
                     break;
                 default:

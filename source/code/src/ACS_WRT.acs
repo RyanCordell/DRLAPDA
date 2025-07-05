@@ -1,10 +1,7 @@
 #define asciiNumberZero 48
-#define MAX_PLAYERS 8
 #define ASSEMBLY_MAX 300
-#define TEXT_OFFSET 13 // "PDA_ASSEMBLY_" string length
 
 #define strToNumber(a, i)  (int)(GetChar((a), (i)) - asciiNumberZero)
-
 
 SCRIPT "DRLA_AssemblyGlobalizer" ENTER {
 	bool dowrite;
@@ -18,7 +15,7 @@ SCRIPT "DRLA_AssemblyGlobalizer" ENTER {
     int ai = 0;
     if (stringArray[0] != "") {
         while ((stringArray[ai++]) != "") {
-            if (ai % 2 == 0) PDA_ModData[PlayerNumber()][3]++;
+            if (ai % 2 == 0) master_max++;
         }
     }
 
@@ -31,7 +28,7 @@ SCRIPT "DRLA_AssemblyGlobalizer" ENTER {
      */
     for (
         int token_index = 0,         assembly_token = 0; 
-            token_index < PDA_ModData[PlayerNumber()][3], assembly_token < PDA_ModData[PlayerNumber()][3] * 2; 
+            token_index < master_max, assembly_token < master_max * 2; 
             token_index++,           assembly_token += 2
     ) {
         actorToken = stringArray[assembly_token];
@@ -55,14 +52,14 @@ SCRIPT "DRLA_UpdateINI" (void) {
 
     if (stringArray[0] != "") {
         while ((stringArray[ai++]) != "") {
-            if (ai % 2 == 0) PDA_ModData[PlayerNumber()][3]++;
+            if (ai % 2 == 0) master_max += 1;
         }
     }
 
     int DRLA_AssemblyState[MAX_PLAYERS][ASSEMBLY_MAX],
         DRLA_OldAssemblyState[MAX_PLAYERS][ASSEMBLY_MAX];
 
-    str DRLA_CurrentAssemblerState[MAX_PLAYERS] = {{"","","","","","","",""}};
+    str DRLA_CurrentAssemblerState[MAX_PLAYERS] = {{"0","0","0","0","0","0","0","0"}};
     str actorToken = "";
 
     // todo: old assembly should read from 
@@ -76,7 +73,7 @@ SCRIPT "DRLA_UpdateINI" (void) {
     DRLA_FetchStoredInfo[PlayerNumber()] = GetUserCVarString(PlayerNumber(), "DRLA_knownassemblies");
     for (
         int token_index = 0; 
-            token_index < PDA_ModData[PlayerNumber()][3]; 
+            token_index < master_max; 
             token_index++
     ) {
         // set old and current to this new state
@@ -84,33 +81,41 @@ SCRIPT "DRLA_UpdateINI" (void) {
         currentState[token_index] = oldState[token_index];
     }
 
-    // WRITE --------------------------------------------------
+    bool do_writey = false;
     for (
         int token_index = 0,         assembly_token = 0; 
-            token_index < PDA_ModData[PlayerNumber()][3], assembly_token < PDA_ModData[PlayerNumber()][3] * 2; 
+            token_index < master_max, assembly_token < master_max * 2; 
             token_index++,           assembly_token += 2
     ) {
         actorToken = stringArray[assembly_token];
 
-        // write the current in-game presence of the given token into the appropriate index
         currentState[token_index] = CheckInventory(actorToken);
 
         // only write if there's a difference between old and current
         if (currentState[token_index] != oldState[token_index]) {
-            pendingState = "";
-            
-            // and only in that case do we start constructing the string that we then..
-            for (int sub_index = 0; sub_index < PDA_ModData[PlayerNumber()][3]; sub_index++) {
-                if (StrLen(pendingState) <= PDA_ModData[PlayerNumber()][3]) {
-                    pendingState = StrParam(
-                        s:pendingState, 
-                        i:currentState[sub_index]
-                    );
-                }
-            }
-
-            // write to the ini
-            SetUserCVarString(PlayerNumber(), "DRLA_knownassemblies", pendingState);
+            do_writey = true;
         }
+    }
+    pendingState = "";
+    // WRITE --------------------------------------------------
+    for (int token_index = 0; token_index < master_max; token_index++) {
+        if (StrLen(pendingState) <= master_max) {
+            pendingState = StrParam(s:pendingState, b:currentState[token_index]);
+        } else {
+            pendingState = "";
+        }
+        // for (int sub_index = 0; sub_index < master_max; sub_index++) {
+        //     if (currentState[sub_index] < 0 || oldState[sub_index] < 0) continue;
+        //     if (StrLen(pendingState) <= master_max) {
+        //         pendingState = StrParam(s:pendingState, b:currentState[sub_index]);
+        //     } else {
+        //         pendingState = "";
+        //     }
+        // }
+        log("post pendingStateLen %d: | master_max %d:", StrLen(pendingState), master_max);
+        log("pendingState %s:", pendingState);
+
+        // write to the ini
+        // SetUserCVarString(PlayerNumber(), "DRLA_knownassemblies", pendingState);
     }
 }

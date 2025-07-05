@@ -18,33 +18,33 @@ switch (PDA_Local.page) {
     default:
         beast_info[0] = PDA_Local.page - 2;
         for (int i = 0; i < DRLA_MONSTER_PAGE_MAX; i++) {
-            PDA_ListEnemy[PlayerNumber()][3]            = StrParam("%s:KillCounter", DRLA_Bestiary[beast_info[0]][i][beast_TOKEN]);
-            monsterCheck[beast_info[0]][i] = CheckInventory(PDA_ListEnemy[PlayerNumber()][3]);
+            localListEnemy[list_kill_count]            = StrParam("%s:KillCounter", DRLA_Bestiary[beast_info[0]][i][beast_TOKEN]);
+            monsterCheck[beast_info[0]][i] = CheckInventory(localListEnemy[list_kill_count]);
 
             fixed beast_y = 30.0 + (16.0 * i);
             
-            if(CheckInventory(PDA_ListEnemy[PlayerNumber()][3]) > 0)
+            if(CheckInventory(localListEnemy[list_kill_count]) > 0)
             {
-                PDA_ListEnemy[PlayerNumber()][0]   = DRLA_Bestiary[beast_info[0]][i][beast_ACTOR];
-                PDA_ListEnemy[PlayerNumber()][1]    = StrParam("%l:", StrParam("%l:_name", PDA_ListEnemy[PlayerNumber()][0]));
-                PDA_ListEnemy[PlayerNumber()][2]        = StrParam("%l:", StrParam("%l:_icon", PDA_ListEnemy[PlayerNumber()][0]));
-                player_kill_count = CheckPointerInventory(PDA_ListEnemy[PlayerNumber()][3], PlayerNumber());
-                beast_info[1]       = (strlen(PDA_ListEnemy[PlayerNumber()][1]) * 10) / 2;
+                localListEnemy[list_actor]   = DRLA_Bestiary[beast_info[0]][i][beast_ACTOR];
+                localListEnemy[list_name]    = StrParam("%l:", StrParam("%l:_name", localListEnemy[list_actor]));
+                localListEnemy[list_icon]        = StrParam("%l:", StrParam("%l:_icon", localListEnemy[list_actor]));
+                player_kill_count = CheckPointerInventory(localListEnemy[list_kill_count], PlayerNumber());
+                beast_info[1]       = (strlen(localListEnemy[list_name]) * 10) / 2;
             } else {
-                PDA_ListEnemy[PlayerNumber()][0]   = "null";
+                localListEnemy[list_actor]   = "null";
                 player_kill_count = 0;
-                PDA_ListEnemy[PlayerNumber()][1]    = " ????";
+                localListEnemy[list_name]    = " ????";
             }
 
-            PDA_LocalButton[PDA_BEASTS_ID_END - i] = PDA_CreateBeastButton(PDA_BEASTS_ID_END - i, PDA_ListEnemy[PlayerNumber()][1], beast_info[2], 
+            PDA_LocalButton[PDA_BEASTS_ID_END - i] = PDA_CreateBeastButton(PDA_BEASTS_ID_END - i, localListEnemy[list_name], beast_info[2], 
                 beast_x, beast_y, 
                 beast_info[1], 10, 
                 3.0, -3.0, 
-                PDA_ListEnemy[PlayerNumber()][0], player_kill_count);
-            PDA_ButtonHandler(PDA_BEASTS_ID_END - i, true, 1, PDA_ListEnemy[PlayerNumber()][1], true, false);
+                localListEnemy[list_actor], player_kill_count);
+            PDA_ButtonHandler(PDA_BEASTS_ID_END - i, true, 1, localListEnemy[list_name], true, false);
 
-            if(PDA_ListEnemy[PlayerNumber()][1] != " ????" && PDA_LocalButton[PDA_BEASTS_ID_END - i].state == button_hovered){
-                DisplayIcon(PDA_ListEnemy[PlayerNumber()][2], PDA_INFO2ID, PDA_SCREEN_WIDTH - 30.0 + X_LEFT_EDGE, PDA_SCREEN_Y + 100.0 + Y_TOP_EDGE, 0, 0.2 + pulser(2.0, 0.59));
+            if(localListEnemy[list_name] != " ????" && PDA_LocalButton[PDA_BEASTS_ID_END - i].state == button_hovered){
+                DisplayIcon(localListEnemy[list_icon], PDA_INFO2ID, PDA_SCREEN_WIDTH - 30.0 + X_LEFT_EDGE, PDA_SCREEN_Y + 100.0 + Y_TOP_EDGE, 0, 0.2 + pulser(2.0, 0.59));
             }
         }
         PDA_Local.newEntry[beast_info[0]] = false;

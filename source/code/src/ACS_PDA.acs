@@ -125,16 +125,16 @@ script "DRLA_HUDStyleChanger" (void) {
 function void doPDASync (void) {
     for (int page = 0; page < DRLA_DIFFICULTYTIERS; page++) {
         for (int m = 0; m < DRLA_MONSTER_PAGE_MAX; m++) {
-            PDA_ListEnemy[PlayerNumber()][3] = StrParam("%s:KillCounter", DRLA_Bestiary[page][m][beast_TOKEN]);
-            monsterCheck[page][m]  = CheckInventory(PDA_ListEnemy[PlayerNumber()][3]);
+            localListEnemy[list_kill_count] = StrParam("%s:KillCounter", DRLA_Bestiary[page][m][beast_TOKEN]);
+            monsterCheck[page][m]  = CheckInventory(localListEnemy[list_kill_count]);
 
-            if (CheckPointerInventory(PDA_ListEnemy[PlayerNumber()][3], PlayerNumber()) > 0) {
-                PDA_SetEveryoneInventory(PDA_ListEnemy[PlayerNumber()][3]);
+            if (CheckPointerInventory(localListEnemy[list_kill_count], PlayerNumber()) > 0) {
+                PDA_SetEveryoneInventory(localListEnemy[list_kill_count]);
             }
         }
     }
 
-    PDA_ModData[PlayerNumber()][3]  = 0;
+    master_max = 0;
 
     all_assemblies = StrParam(l:"PDA_ASSEMBLIES");
     str_split(separator_character, all_assemblies);
@@ -143,17 +143,17 @@ function void doPDASync (void) {
 
     // if (stringArray[0] != "") {
     while ((stringArray[stringArrayIndex++]) != "") {
-        if (str_find(stringArray[stringArrayIndex], "ADVANCED", TEXT_OFFSET) != -1 && PDA_ModData[PlayerNumber()][1] == 0) PDA_ModData[PlayerNumber()][1] = stringArrayIndex;
-        if (str_find(stringArray[stringArrayIndex],   "MASTER", TEXT_OFFSET) != -1 &&   PDA_ModData[PlayerNumber()][2] == 0) PDA_ModData[PlayerNumber()][2]   = stringArrayIndex;
+        if (str_find(stringArray[stringArrayIndex], "ADVANCED", TEXT_OFFSET) != -1 && advanced_offset == 0) advanced_offset = stringArrayIndex;
+        if (str_find(stringArray[stringArrayIndex],   "MASTER", TEXT_OFFSET) != -1 && master_offset == 0)   master_offset   = stringArrayIndex;
         // if (stringArrayIndex % 2 == 0) {
-        PDA_ModData[PlayerNumber()][3]++;
+        master_max++;
         // }
     }
     // }
     stringArrayIndex = 0;
-    PDA_ModData[PlayerNumber()][3]--;
+    master_max--;
 
-    for (int ti = 0; ti <= PDA_ModData[PlayerNumber()][3]; ti++) {
+    for (int ti = 0; ti <= master_max; ti++) {
         if (ti % 2 == 0) 
             actorToken = stringArray[ti];
 

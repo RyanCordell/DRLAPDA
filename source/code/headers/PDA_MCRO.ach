@@ -38,5 +38,11 @@
 #define localBackpackData _bpd[PlayerNumber()][0]
 #define localBootsData    _bd[PlayerNumber()][0]
 
+#define localModData    PDA_ModData[PlayerNumber()]
+#define basic_offset    localModData[mod_data_basic_offset]
+#define advanced_offset localModData[mod_data_advanced_offset]
+#define master_offset   localModData[mod_data_master_offset]
+#define master_max      localModData[mod_data_master_max]
 
+#define localListEnemy PDA_ListEnemy[PlayerNumber()]
 // EOF

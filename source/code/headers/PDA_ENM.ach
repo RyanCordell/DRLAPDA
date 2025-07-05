@@ -212,12 +212,26 @@ enum player_weapon_index {
     player_weapon_trimmed,
 }
 
+enum mod_data_index {
+    mod_data_basic_offset,
+    mod_data_advanced_offset,
+    mod_data_master_offset,
+    mod_data_master_max,
+}
+
 enum enemy_index {
     enemy_name = 0,
     enemy_icon,
     enemy_health,
     enemy_resistance,
     enemy_misc,
+}
+
+enum list_index {
+    list_actor = 0,
+    list_name,
+    list_icon,
+    list_kill_count,
 }
 
 enum equipment_index {
