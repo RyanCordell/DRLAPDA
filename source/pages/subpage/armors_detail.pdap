@@ -12,22 +12,20 @@ const fixed playerIconX = PDA_SCREEN_X + 20.0 + X_LEFT_EDGE;
 
 DisplayIconParallax("PDAPLYR", PDA_PLYR_ICON, playerIconX, 40.0, 0.0, 1.0);
 
-
 localShowArmor    = (localEqBoolField & 1);
 localShowBoots    = (localEqBoolField & 1<<1);
 localShowBackpack = (localEqBoolField & 1<<2);
 
 if (localHasArmor) {
-
     DisplayIconParallax("PDAPARM", PDA_PLAYER_BODY_ICON, playerIconX, 40.0, 0.0, show_equipment[equipment_armor][PlayerNumber()] ? 1.0 : 0.5);
-
-    width = strLen(localArmorData.name) * 5;
-    PDA_ButtonHandler(PDA_PLAYER_ARMOR_ICON, true, 2, "", true, false);
 
     if (PDA_LocalMouse.scrolling) {
         PDA_LocalButton[PDA_PLAYER_ARMOR_ICON] = PDA_DisplayArmor(PDA_PLAYER_ARMOR_ICON, ARMOR_DATA,
                         playerIconX + 35.0, 20.0, height, localShowArmor ? pulser(2.0, 0.8) : inAlpha);
     }
+
+    PDA_ButtonHandler(PDA_PLAYER_ARMOR_ICON, true, 2, "", false, false);
+    PDA_LocalButton[PDA_PLAYER_ARMOR_ICON].alpha = localShowArmor ? pulser(2.0, 0.8) : inAlpha;
     if (PDA_LocalButton[PDA_PLAYER_ARMOR_ICON].state == button_clicked) {
         if (localEqBoolField != 1) localEqBoolField = 1;
     }
@@ -36,13 +34,13 @@ if (localHasArmor) {
 if (localHasBackpack) {
     DisplayIconParallax("PDAPBCK", PDA_PLYR_ICON - 2, playerIconX, 40.0, 0.0, show_equipment[equipment_backpack][PlayerNumber()] ? 1.0 : 0.5);
 
-    width = strLen(localBackpackData.name) * 5;
-    PDA_ButtonHandler(PDA_PLAYER_BACKPACK_ICON, true, 2, "", true, false);
-
     if (PDA_LocalMouse.scrolling) {
         PDA_LocalButton[PDA_PLAYER_BACKPACK_ICON] = PDA_DisplayArmor(PDA_PLAYER_BACKPACK_ICON, BACKPACK_DATA, 
                         playerIconX + 33.0, 45.0, height, localShowBackpack ? pulser(2.0, 0.8) : inAlpha);
     }
+
+    PDA_ButtonHandler(PDA_PLAYER_BACKPACK_ICON, true, 2, "", false, false);
+    PDA_LocalButton[PDA_PLAYER_BACKPACK_ICON].alpha = localShowBackpack ? pulser(2.0, 0.8) : inAlpha;
     if (PDA_LocalButton[PDA_PLAYER_BACKPACK_ICON].state == button_clicked) {
         if (localEqBoolField != 4) localEqBoolField = 4;
     }
@@ -52,13 +50,13 @@ if (localHasBackpack) {
 if (localHasBoots) {
     DisplayIconParallax("PDAPBTS", PDA_PLYR_ICON - 3, playerIconX, 40.0, 0.0, show_equipment[equipment_boots][PlayerNumber()] ? 1.0 : 0.5);
 
-    width = strLen(localBootsData.name) * 5;
-    PDA_ButtonHandler(PDA_PLAYER_BOOTS_ICON, true, 2, "", true, false);
-    
     if (PDA_LocalMouse.scrolling) {
         PDA_LocalButton[PDA_PLAYER_BOOTS_ICON] = PDA_DisplayArmor(PDA_PLAYER_BOOTS_ICON, BOOTS_DATA, 
                         playerIconX + 30.0, 70.0, height, localShowBoots ? pulser(2.0, 0.8) : inAlpha);
     }
+
+    PDA_ButtonHandler(PDA_PLAYER_BOOTS_ICON, true, 2, "", false, false);
+    PDA_LocalButton[PDA_PLAYER_BOOTS_ICON].alpha = localShowBoots ? pulser(2.0, 0.8) : inAlpha;
     if (PDA_LocalButton[PDA_PLAYER_BOOTS_ICON].state == button_clicked) {
         if (localEqBoolField != 2) localEqBoolField = 2;
     }
@@ -89,71 +87,77 @@ for (int setIndex = 0; setIndex < DRLA_ARMORSETMAX; setIndex++) {
 str enclaveequipment_set_name = (PDA_ManyHax) ? StrParam("%l:\n\n", "PDA_ARMOR_EnclaveSetBonusActive_equipment_set_name") : "";
 str enclaveequipment_set_description = (PDA_ManyHax) ? StrParam("%l:\n\n", "PDA_ARMOR_EnclaveSetBonusActive_equipment_set_description") : "";
 
-SetFont(PDA_FONT[0]);
+SetFont(PDA_FONT[used_font]);
 
 if (localShowArmor && localHasArmor) {
-    HudMessage(
-                "%s:" // Armor section
-                "%s:" // Protection header
-                "%l:" // Protection value
-                "%s:" // Resistances header
-                "%l:" // Resistances value
-                "%s:" // Attributes header
-                "%l:" // Attributes value
-                "%s:" // Description header
-                " %l:" // Description value
-                "%s:" // Set bonus header
-                " %l:" // Bitch hacks for Enclave/Nuclear set
-                " %l:" // Bitch hacks for Enclave/Nuclear set
-                " %l:" // Set name
-                " %l:" // Set desc
-                ,
-                "\cgARMOR\c-\n",
-                "\crProtection:\c-\n",
-                localArmorData.armorVal,
+    HudMessageParallax(
+        StrParam(
+            "%s:" // Armor section
+            "%s:" // Protection header
+            "%l:" // Protection value
+            "%s:" // Resistances header
+            "%l:" // Resistances value
+            "%s:" // Attributes header
+            "%l:" // Attributes value
+            "%s:" // Description header
+            " %l:" // Description value
+            "%s:" // Set bonus header
+            " %l:" // Bitch hacks for Enclave/Nuclear set
+            " %l:" // Bitch hacks for Enclave/Nuclear set
+            " %l:" // Set name
+            " %l:" // Set desc
+            ,
+            "\cgARMOR\c-\n",
+            "\crProtection:\c-\n",
+            localArmorData.armorVal,
 
-                "\crResistances:\c-\n",
-                StrParam("%l:\n", localArmorData.armorRes),
+            "\crResistances:\c-\n",
+            StrParam("%l:\n", localArmorData.armorRes),
 
-                "\crAttributes:\c-\n",
-                StrParam("%l:\n\n", localArmorData.armorAttr),
+            "\crAttributes:\c-\n",
+            StrParam("%l:\n\n", localArmorData.armorAttr),
 
-                "\crDescription:\c-\n",
-                StrParam(" %l:\n\n", localArmorData.armorDesc),
+            "\crDescription:\c-\n",
+            StrParam(" %l:\n\n", localArmorData.armorDesc),
 
-                "\crSet bonus:\c-\n",
-                enclaveequipment_set_name,
-                enclaveequipment_set_description,
-                equipment_set_name,
-                equipment_set_description;
-                HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, PDA_SCREEN_X + 10.0 + X_LEFT_EDGE, (int)(PDA_Local.scrollingY * NEW_RESOLUTION_Y) + 140.0 + Y_TOP_EDGE, 0);
+            "\crSet bonus:\c-\n",
+            enclaveequipment_set_name,
+            enclaveequipment_set_description,
+            equipment_set_name,
+            equipment_set_description
+        ),
+        HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 10.0, 140.0, 0.0, 1.0);
 } else if (localShowBoots && localHasBoots) {
-    HudMessage(
-                "%s:" // Boots section
-                "%s:" // Boots protection header
-                "%l:" // Boots protection value
-                "%s:" // Boots attributes header
-                "%l:" // Boots attributes value
-                "%s:" // Boots description header
-                "%l:" // Boots description value
-                ,
-                "\cgBOOTS\c-\n",
-                "\crProtection:\c-\n",
-                localBootsData.bootsVal,
-                "\crAttributes:\c-\n",
-                StrParam("%l:\n", localBootsData.bootsAttr),
-                "\crDescription:\c-\n",
-                StrParam("%l:\n", localBootsData.bootsDesc);
-                HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, PDA_SCREEN_X + 10.0 + X_LEFT_EDGE, (int)(PDA_Local.scrollingY * NEW_RESOLUTION_Y) + 140.0 + Y_TOP_EDGE, 0);
+    HudMessageParallax(
+        StrParam(
+            "%s:" // Boots section
+            "%s:" // Boots protection header
+            "%l:" // Boots protection value
+            "%s:" // Boots attributes header
+            "%l:" // Boots attributes value
+            "%s:" // Boots description header
+            "%l:" // Boots description value
+            ,
+            "\cgBOOTS\c-\n",
+            "\crProtection:\c-\n",
+            localBootsData.bootsVal,
+            "\crAttributes:\c-\n",
+            StrParam("%l:\n", localBootsData.bootsAttr),
+            "\crDescription:\c-\n",
+            StrParam("%l:\n", localBootsData.bootsDesc)
+        ),
+        HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 10.0, 140.0, 0.0, 1.0);
 } else if (localShowBackpack && localHasBackpack) {
-    HudMessage(
-                "%s:" // Backpack
-                "%s:" // Backpack description header
-                "%l:" // Backpack value
-                ,
+    HudMessageParallax(
+        StrParam(
+            "%s:" // Backpack
+            "%s:" // Backpack description header
+            "%l:" // Backpack value
+            ,
 
-                "\cgBACKPACK\c-\n",
-                "\crDescription:\c-\n",
-                localBackpackData.backpackVal;
-                HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, PDA_SCREEN_X + 10.0 + X_LEFT_EDGE, (int)(PDA_Local.scrollingY * NEW_RESOLUTION_Y) + 140.0 + Y_TOP_EDGE, 0);
+            "\cgBACKPACK\c-\n",
+            "\crDescription:\c-\n",
+            localBackpackData.backpackVal
+        ),
+        HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 10.0, 140.0, 0.0, 1.0);
 }

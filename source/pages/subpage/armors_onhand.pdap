@@ -18,8 +18,6 @@ localBackpackData = setupBackpackData();
 
 // Note to future self: don't try to merge these first 5 lines for cleanliness sake. Won't work the way you wish it would.
 if (localHasArmor) {
-    // Not the renegade of funk, unfortunately..
-
     HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_NOEQID, CR_UNTRANSLATED, 0, 0, 0);
     id    = (PDA_WORNARMORS - 4) + (armorLimit * 4);
     y     = initialY + (height * (armorLimit * 2));
@@ -33,6 +31,7 @@ if (localHasArmor) {
     if (PDA_LocalMouse.scrolling) {
         PDA_LocalButton[id] = PDA_DisplayArmor(id, ARMOR_DATA, x, y, height, pulser(2.0, 0.8));
     }
+    PDA_LocalButton[id].alpha = pulser(2.0, 0.8);
 }
 
 if (localHasBoots) {
@@ -49,6 +48,7 @@ if (localHasBoots) {
     if (PDA_LocalMouse.scrolling) {
         PDA_LocalButton[id] = PDA_DisplayArmor(id, BOOTS_DATA, x, y, height, pulser(2.0, 0.8));
     }
+    PDA_LocalButton[id].alpha = pulser(2.0, 0.8);
 }
 
 str armorPickupCheck = "\n";

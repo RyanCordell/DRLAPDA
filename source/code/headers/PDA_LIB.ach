@@ -24,6 +24,7 @@ int PDA_HEADER_X   = 0;
 // 1 and 3 are kinda redundant..
 bool weapon_checks[3] = {false, false, false};
 
+// full name, trimmed
 str player_weapon[2] = {"", ""};
 
 // flatname, demon flatname, ???, desc, demon desc

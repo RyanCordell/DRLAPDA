@@ -226,4 +226,10 @@ enum equipment_index {
     equipment_boots,
 }
 
+enum pda_font_index {
+    used_font = 0, 
+    lower_font,
+    slim_font
+}
+
 // EOF

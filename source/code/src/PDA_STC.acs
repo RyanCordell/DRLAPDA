@@ -40,9 +40,9 @@ switch (PDA_Local.category) {
     PDAButton ARMORS_TAB_2    = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
 
     
-    PDAButton ARMOR_BUTTON    = PDA_DisplayArmor(PDA_PLAYER_ARMOR_ICON   , ARMOR_DATA   , PDA_SCREEN_X + 55.0 + X_LEFT_EDGE, 20.0, 16, localShowArmor    ? pulser(2.0, 0.8) : 0.7),
-              BACKPACK_BUTTON = PDA_DisplayArmor(PDA_PLAYER_BACKPACK_ICON, BACKPACK_DATA, PDA_SCREEN_X + 53.0 + X_LEFT_EDGE, 45.0, 16, localShowBackpack ? pulser(2.0, 0.8) : 0.7),
-              BOOTS_BUTTON    = PDA_DisplayArmor(PDA_PLAYER_BOOTS_ICON   , BOOTS_DATA   , PDA_SCREEN_X + 50.0 + X_LEFT_EDGE, 70.0, 16, localShowBoots    ? pulser(2.0, 0.8) : 0.7);
+    PDAButton ARMOR_BUTTON    = PDA_DisplayArmor(PDA_PLAYER_ARMOR_ICON   , ARMOR_DATA   , 55.0, 20.0, 16, localShowArmor    ? pulser(2.0, 0.8) : 0.7),
+              BACKPACK_BUTTON = PDA_DisplayArmor(PDA_PLAYER_BACKPACK_ICON, BACKPACK_DATA, 53.0, 45.0, 16, localShowBackpack ? pulser(2.0, 0.8) : 0.7),
+              BOOTS_BUTTON    = PDA_DisplayArmor(PDA_PLAYER_BOOTS_ICON   , BOOTS_DATA   , 50.0, 70.0, 16, localShowBoots    ? pulser(2.0, 0.8) : 0.7);
     break;
 
   case PDA_ASSEMBLIES:
