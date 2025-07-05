@@ -9,15 +9,7 @@ SCRIPT "DRLA_AssemblyGlobalizer" ENTER {
     // Fetch all available assembly and exotic mod effect data from (g/vk/z)doom's ini
     DRLA_FetchStoredInfo[PlayerNumber()] = GetUserCVarString(PlayerNumber(), "DRLA_knownassemblies");
 
-    str all_assemblies = StrParam(l:"PDA_ASSEMBLIES");
-    
-    str_split(separator_character, all_assemblies);
-    int ai = 0;
-    if (stringArray[0] != "") {
-        while ((stringArray[ai++]) != "") {
-            if (ai % 2 == 0) master_max++;
-        }
-    }
+    setAssemblyData();
 
     str actorToken = "";
 
@@ -45,16 +37,7 @@ SCRIPT "DRLA_AssemblyGlobalizer" ENTER {
 }
 
 SCRIPT "DRLA_UpdateINI" (void) {
-    str all_assemblies = StrParam(l:"PDA_ASSEMBLIES");
-    str_split(separator_character, all_assemblies);
-    
-    int ai = 0;
-
-    if (stringArray[0] != "") {
-        while ((stringArray[ai++]) != "") {
-            if (ai % 2 == 0) master_max += 1;
-        }
-    }
+    setAssemblyData();
 
     int DRLA_AssemblyState[MAX_PLAYERS][ASSEMBLY_MAX],
         DRLA_OldAssemblyState[MAX_PLAYERS][ASSEMBLY_MAX];
@@ -82,6 +65,7 @@ SCRIPT "DRLA_UpdateINI" (void) {
     }
 
     bool do_writey = false;
+    // then we do a cheeky little check over to see what's changed
     for (
         int token_index = 0,         assembly_token = 0; 
             token_index < master_max, assembly_token < master_max * 2; 
@@ -96,6 +80,7 @@ SCRIPT "DRLA_UpdateINI" (void) {
             do_writey = true;
         }
     }
+    // and then we emit a happy little accident
     pendingState = "";
     // WRITE --------------------------------------------------
     for (int token_index = 0; token_index < master_max; token_index++) {
@@ -104,18 +89,7 @@ SCRIPT "DRLA_UpdateINI" (void) {
         } else {
             pendingState = "";
         }
-        // for (int sub_index = 0; sub_index < master_max; sub_index++) {
-        //     if (currentState[sub_index] < 0 || oldState[sub_index] < 0) continue;
-        //     if (StrLen(pendingState) <= master_max) {
-        //         pendingState = StrParam(s:pendingState, b:currentState[sub_index]);
-        //     } else {
-        //         pendingState = "";
-        //     }
-        // }
-        log("post pendingStateLen %d: | master_max %d:", StrLen(pendingState), master_max);
-        log("pendingState %s:", pendingState);
-
         // write to the ini
-        // SetUserCVarString(PlayerNumber(), "DRLA_knownassemblies", pendingState);
+        SetUserCVarString(PlayerNumber(), "DRLA_knownassemblies", pendingState);
     }
 }

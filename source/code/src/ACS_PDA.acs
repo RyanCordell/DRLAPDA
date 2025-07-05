@@ -134,25 +134,9 @@ function void doPDASync (void) {
         }
     }
 
-    master_max = 0;
-
-    all_assemblies = StrParam(l:"PDA_ASSEMBLIES");
-    str_split(separator_character, all_assemblies);
+    setAssemblyData();
 
     str actorToken = "";
-
-    // if (stringArray[0] != "") {
-    while ((stringArray[stringArrayIndex++]) != "") {
-        if (str_find(stringArray[stringArrayIndex], "ADVANCED", TEXT_OFFSET) != -1 && advanced_offset == 0) advanced_offset = stringArrayIndex;
-        if (str_find(stringArray[stringArrayIndex],   "MASTER", TEXT_OFFSET) != -1 && master_offset == 0)   master_offset   = stringArrayIndex;
-        // if (stringArrayIndex % 2 == 0) {
-        master_max++;
-        // }
-    }
-    // }
-    stringArrayIndex = 0;
-    master_max--;
-
     for (int ti = 0; ti <= master_max; ti++) {
         if (ti % 2 == 0) 
             actorToken = stringArray[ti];
