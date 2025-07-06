@@ -1,5 +1,5 @@
 #define asciiNumberZero 48
-#define ASSEMBLY_MAX 300
+#define ASSEMBLY_MAX 100
 
 #define strToNumber(a, i)  (int)(GetChar((a), (i)) - asciiNumberZero)
 
@@ -89,7 +89,9 @@ SCRIPT "DRLA_UpdateINI" (void) {
         } else {
             pendingState = "";
         }
-        // write to the ini
+    }
+    // write to the ini
+    if (pendingState != "" && StrLen(pendingState) == master_max) {
         SetUserCVarString(PlayerNumber(), "DRLA_knownassemblies", pendingState);
     }
 }
