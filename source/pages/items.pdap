@@ -1,4 +1,4 @@
-if(GetCvar("DRLA_specialstarts") == 2)
+if (GetCvar("DRLA_specialstarts") == 2)
 {
     PDA_Local.pagemax = 3;
 
@@ -14,18 +14,18 @@ if(GetCvar("DRLA_specialstarts") == 2)
 
     //SetHudSize(320,200);
 }
-if(GetCvar("DRLA_specialstarts") != 2)
+if (GetCvar("DRLA_specialstarts") != 2)
 {
     int ItemLimit = 0;
 
     int DRLA_PageOffset;
 
-    for(int itemIndex = 0; itemIndex < DRLA_ITEMSMAX; itemIndex++)
+    for (int itemIndex = 0; itemIndex < DRLA_ITEMSMAX; itemIndex++)
     {
-        if(ItemLimit < 8)
+        if (ItemLimit < 8)
         {
-            if(PDA_Local.page == 1) DRLA_PageOffset = 1;
-            if(PDA_Local.page > 1)  DRLA_PageOffset = (8 * (PDA_Local.page - 1) + 1);
+            if (PDA_Local.page == 1) DRLA_PageOffset = 1;
+            if (PDA_Local.page > 1)  DRLA_PageOffset = (8 * (PDA_Local.page - 1) + 1);
 
             // Item icon
             DisplayIconParallax(

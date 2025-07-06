@@ -5,7 +5,7 @@ switch(PDA_Local.page)
     case 1: PDA_HEADER_STR = "PDA_HUDSWITCH_HEADER1", -70); break;
 }
 
-if(PDA_Local.page == 1)
+if (PDA_Local.page == 1)
 {
   
   PDA_SetScrollLimit(0);

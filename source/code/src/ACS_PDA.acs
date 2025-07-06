@@ -158,7 +158,7 @@ function void reset_pda_stuff (str location) {
     TakeInventory("RLSynthFireDisabled",1);
     FadeTo(0, 0, 0, 0.0, 0.0);
     
-    if(PDA_Local.category == PDA_CREDITS) SetMusic("*");
+    if (PDA_Local.category == PDA_CREDITS) SetMusic("*");
     
     PDA_PlaySound("UI/PDA/Offline", "pda/soldierclose", 80);
     
@@ -175,7 +175,7 @@ SCRIPT "HeyADollar" enter {
 
 // [marrub] Static init stuff
 script "PDA_GSInit" open {
-   for(int i = 0; i < MAX_PLAYERS; i++) {
+   for (int i = 0; i < MAX_PLAYERS; i++) {
       PDA_Info[i].active = false;
       PDA_Info[i].pongrunning = false;
       
@@ -352,19 +352,18 @@ function void page_monster_info (void) {
     #include "../../pages/beastinfo.pdap"
 }
 
-SCRIPT "PDA_Core" (void) {  
+SCRIPT "PDA_Core" (void) {
+    #include "PDA_STC.acs"
     PDA_Local.scrollingY = 20.0;
 
     if (PDA_Local.active) {
         if (GetUserCvar(PlayerNumber(), "DRLA_PDA_firsttime") != FALSE) PDA_SetCategory(PDA_HELP);
         PDA_DefaultFont();
+
+        separator_character = StrParam("%l:", "PDA_SEPARATOR_CHARACTER");
+
+        PDA_OnChange();
     }
-    
-    #include "PDA_STC.acs"
-
-    separator_character = StrParam("%l:", "PDA_SEPARATOR_CHARACTER");
-
-    PDA_OnChange();
     
     while (PDA_Local.active) {
         PDA_HandleHeader();

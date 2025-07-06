@@ -55,7 +55,7 @@ SCRIPT "PDA_MouseController" (void)
 
     #define setScrollDelta() (PDA_Local.scrollingY > PDA_Local.oldScrollingY) ? 1 : (PDA_Local.scrollingY == PDA_Local.oldScrollingY) ? 0 : -1;
 
-    while(PDA_Local.active)
+    while (PDA_Local.active)
     {
                                      buttons[PlayerNumber()] = GetPlayerInput(ACTIVATOR, INPUT_BUTTONS);
         PDA_LocalMouse.oldState = oldbuttons[PlayerNumber()] = GetPlayerInput(ACTIVATOR, INPUT_OLDBUTTONS);

@@ -23,7 +23,7 @@ switch (PDA_Local.page) {
 
             fixed beast_y = 30.0 + (16.0 * i);
             
-            if(CheckInventory(localListEnemy[list_kill_count]) > 0)
+            if (CheckInventory(localListEnemy[list_kill_count]) > 0)
             {
                 localListEnemy[list_actor]   = DRLA_Bestiary[beast_info[0]][i][beast_ACTOR];
                 localListEnemy[list_name]    = StrParam("%l:", StrParam("%l:_name", localListEnemy[list_actor]));
@@ -43,7 +43,7 @@ switch (PDA_Local.page) {
                 localListEnemy[list_actor], player_kill_count);
             PDA_ButtonHandler(PDA_BEASTS_ID_END - i, true, 1, localListEnemy[list_name], true, false);
 
-            if(localListEnemy[list_name] != " ????" && PDA_LocalButton[PDA_BEASTS_ID_END - i].state == button_hovered){
+            if (localListEnemy[list_name] != " ????" && PDA_LocalButton[PDA_BEASTS_ID_END - i].state == button_hovered){
                 DisplayIcon(localListEnemy[list_icon], PDA_INFO2ID, PDA_SCREEN_WIDTH - 30.0 + X_LEFT_EDGE, PDA_SCREEN_Y + 100.0 + Y_TOP_EDGE, 0, 0.2 + pulser(2.0, 0.59));
             }
         }

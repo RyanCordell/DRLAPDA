@@ -1,7 +1,7 @@
 
 // PDA_DefaultFont();
 
-if(PDA_Local.page == 1)
+if (PDA_Local.page == 1)
 {
     HudMessageParallax(
         StrParam(
@@ -21,7 +21,7 @@ if(PDA_Local.page == 1)
         20.0 + (20.0 * 1),
         0, 1.0);
 }
-if(PDA_Local.page == 2)
+if (PDA_Local.page == 2)
 {
     HudMessageParallax(
         StrParam(

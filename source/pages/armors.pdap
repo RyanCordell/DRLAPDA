@@ -5,6 +5,6 @@ if (PDA_Local.page == EQUIPMENT_PAGE_ONHAND) {
 }
 
 // Detailed information on currently equipped gear (armor, boots, backpack)
-if(PDA_Local.page == EQUIPMENT_PAGE_INFO) {
+if (PDA_Local.page == EQUIPMENT_PAGE_INFO) {
     #include "../../pages/subpage/armors_detail.pdap"
 }

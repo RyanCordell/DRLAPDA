@@ -1,7 +1,7 @@
-if(GetActorclass(0) != "None")
+if (GetActorclass(0) != "None")
 {
 
-    if(stricmp(PDA_Class[PlayerNumber()][pda_class_icon], "PDA_", 4) == 0) 
+    if (stricmp(PDA_Class[PlayerNumber()][pda_class_icon], "PDA_", 4) == 0) 
       PDA_Class[PlayerNumber()][pda_class_icon] = "PPDAUNK";
       
     SetFont(PDA_Class[PlayerNumber()][pda_class_icon]);
@@ -9,7 +9,7 @@ if(GetActorclass(0) != "None")
     
     PDA_DefaultFont();
     // Class perks
-    if(PDA_Local.page == CLASSES_PAGE_PERKS)
+    if (PDA_Local.page == CLASSES_PAGE_PERKS)
     {
         HudMessageParallax(
             StrParam(
@@ -21,7 +21,7 @@ if(GetActorclass(0) != "None")
             HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), 0.0, 1.0);
     }
     // Class backstory
-    if(PDA_Local.page == CLASSES_PAGE_STORY)
+    if (PDA_Local.page == CLASSES_PAGE_STORY)
     {
         HudMessageParallax(
             StrParam(

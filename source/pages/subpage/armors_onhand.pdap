@@ -3,8 +3,10 @@ int id = 0;
 const fixed x    = 10.0;
 int width        = 0;
 fixed y          = 0.0;
-const int height = 16;
+const int height = 34 / NEW_RESOLUTION_Y; // icon height
+const int gap    = 4;
 fixed initialY   = 30.0;
+int _yTemp       = 0;
 
 // Funny that I opted to do this instead of just declaring the message outright..
 HudMessageParallax("No equipment detected", HUDMSG_PLAIN, PDA_NOEQID, CR_UNTRANSLATED, x, 50.0, 0.0, 1.0);
@@ -12,43 +14,47 @@ HudMessageParallax("No equipment detected", HUDMSG_PLAIN, PDA_NOEQID, CR_UNTRANS
 int armorLimit      = 0;
 bool areTheseBoots  = false; // Does Bruno Mars is gay???
 
-localArmorData    = setupArmorData(specialArmorTokens);
-localBootsData    = setupBootsData();
-localBackpackData = setupBackpackData();
+y = initialY;
 
 // Note to future self: don't try to merge these first 5 lines for cleanliness sake. Won't work the way you wish it would.
 if (localHasArmor) {
-    HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_NOEQID, CR_UNTRANSLATED, 0, 0, 0);
+    deleteNoEquipmentMessage();
     id    = (PDA_WORNARMORS - 4) + (armorLimit * 4);
-    y     = initialY + (height * (armorLimit * 2));
-
-    if (armorLimit > PDA_MAX_ARMOR_IN_INV + 1) armorLimit = 0;
-    else armorLimit++;
     width = (strLen(localArmorData.name) * 5);
 
     // PDAButton armor = PDA_DisplayArmor(id, StrParam("\cdE:\c- %s:", localArmorData.name), localArmorData.graphic, x, y, width, height, localArmorData.tooltip, pulser(2.0, 0.8));
-    PDA_ButtonHandler(id, true, 1, "", true, false);
-    if (PDA_LocalMouse.scrolling) {
-        PDA_LocalButton[id] = PDA_DisplayArmor(id, ARMOR_DATA, x, y, height, pulser(2.0, 0.8));
-    }
-    PDA_LocalButton[id].alpha = pulser(2.0, 0.8);
-}
+    // No scrolling check here either, as closing and re-opening the PDA on this page after equipping armor bugs the display otherwise
+    PDA_LocalButton[id] = PDA_DisplayArmor(id, ARMOR_DATA, x, y, height, pulser(2.0, 0.8));
 
-if (localHasBoots) {
-    HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_NOEQID, CR_UNTRANSLATED, 0, 0, 0);
-    id    = (PDA_WORNARMORS - 4) + (armorLimit * 4);
-    y     = initialY + (height * (armorLimit * 2));
+    if (CheckBounds(PDA_LocalButton[id]) && strCmp(PDA_LocalButton[id].tooltip, "") != 0 && PDA_Local.page != EQUIPMENT_PAGE_INFO) {
+        PDA_SetupFloatingTooltip("PTIP", PDA_LocalButton[id].tooltip);
+        PDA_LocalButton[id].alpha = 1.0;
+    }
+
+    PDA_ButtonHandler(id, true, 1, "", false, false);
 
     if (armorLimit > PDA_MAX_ARMOR_IN_INV + 1) armorLimit = 0;
     else armorLimit++;
+    y     += height + gap;
+}
+
+if (localHasBoots) {
+    deleteNoEquipmentMessage();
+    id    = (PDA_WORNARMORS - 4) + (armorLimit * 4);
     width = (strLen(localBootsData.name) * 5);
 
     // PDAButton boots = PDA_DisplayArmor(id, StrParam("\cdE:\c- %s:", localBootsData.name), localBootsData.graphic, x, y, width, height, localBootsData.tooltip, pulser(2.0, 0.8));
-    PDA_ButtonHandler(id, true, 1, "", true, false);
-    if (PDA_LocalMouse.scrolling) {
-        PDA_LocalButton[id] = PDA_DisplayArmor(id, BOOTS_DATA, x, y, height, pulser(2.0, 0.8));
+    PDA_LocalButton[id] = PDA_DisplayArmor(id, BOOTS_DATA, x, y, height, pulser(2.0, 0.8));
+
+    if (CheckBounds(PDA_LocalButton[id]) && strCmp(PDA_LocalButton[id].tooltip, "") != 0 && PDA_Local.page != EQUIPMENT_PAGE_INFO) {
+        PDA_SetupFloatingTooltip("PTIP", PDA_LocalButton[id].tooltip);
+        PDA_LocalButton[id].alpha = 1.0;
     }
-    PDA_LocalButton[id].alpha = pulser(2.0, 0.8);
+
+    PDA_ButtonHandler(id, true, 1, "", false, false);
+    if (armorLimit > PDA_MAX_ARMOR_IN_INV + 1) armorLimit = 0;
+    else armorLimit++;
+    y     += height + gap;
 }
 
 str armorPickupCheck = "\n";
@@ -61,17 +67,14 @@ for (int armorIndex = 0; armorIndex < DRLA_ARMORMAX; armorIndex++) {
 
     if (CheckInventory(armorPickupCheck)) {
         #define isRenegade (CheckActorClass(0, CheckInventory("DRPGDRLAActive") ? "DoomRLRenegadeRPG" : "DoomRLRenegade") == true)
-
-        HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_NOEQID, CR_UNTRANSLATED, 0, 0, 0);
-
-        id = (PDA_STASHEDARMORS - 8) + (armorLimit * 2);
-        y  = initialY + (height * (armorLimit*2));
-
         localArmorData.langEntry = StrParam("PDA_ARMOR_%s:", DRLA_ArmorList[armorIndex][armor_ACTOR]);
         localArmorData.name      = StrParam("%l:", StrParam("%l:_NAME", localArmorData.langEntry));
         localArmorData.graphic   = StrParam("%l:", StrParam("%l:_ICON", localArmorData.langEntry));
         localArmorData.armorAttr = StrParam("%l:", StrParam("%l:_ATTR", localArmorData.langEntry));
-        width                    = strLen(localArmorData.name) * 5;
+
+        deleteNoEquipmentMessage();
+        id    = (PDA_STASHEDARMORS - 8) + (armorLimit * 2);
+        width = strLen(localArmorData.name) * 5;
 
         if (!areTheseBoots) {
             localArmorData.tooltip = StrParam(
@@ -95,12 +98,13 @@ for (int armorIndex = 0; armorIndex < DRLA_ARMORMAX; armorIndex++) {
             );
         }
 
-        // PDAButton stashed = PDA_DisplayArmor(id, localArmorData.name, localArmorData.graphic, x, y, width, height, localArmorData.tooltip, 0.6);
-        PDA_ButtonHandler(id, true, 1, "", true, false);
-        PDAButton stashed = PDA_DisplayArmorOverride(id, localArmorData, x, y, height, 0.6);
+        PDA_LocalButton[id] = PDA_DisplayArmorOverride(id, localArmorData, x, y, height, 0.6);
+
+        PDA_ButtonHandler(id, true, 1, "", false, false);
 
         if (armorLimit > PDA_MAX_ARMOR_IN_INV + 1) armorLimit = 0;
         else armorLimit++;
+        y     += height + gap;
     }
 }
 PDA_DefaultFont();

@@ -69,8 +69,8 @@ str equipment_set_name        = "N/A\n",
 
 // Armor
 for (int setIndex = 0; setIndex < DRLA_ARMORSETMAX; setIndex++) {
-    if(CheckInventory(DRLA_ArmorSetList[setIndex])) {
-        if(CheckInventory("RLEnclaveSetBonusActive") && CheckInventory("RLNuclearWeaponSetBonusActive"))
+    if (CheckInventory(DRLA_ArmorSetList[setIndex])) {
+        if (CheckInventory("RLEnclaveSetBonusActive") && CheckInventory("RLNuclearWeaponSetBonusActive"))
             PDA_ManyHax = true;
 
         str trimmedList = strTrim(DRLA_ArmorSetList[setIndex],2,0);

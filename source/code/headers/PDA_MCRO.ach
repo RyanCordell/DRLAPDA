@@ -30,6 +30,8 @@
     stringArrayIndex = 0; \
     master_max -= 1; \
 
+#define deleteNoEquipmentMessage() HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_NOEQID, CR_UNTRANSLATED, 0, 0, 0);
+
 // shortening array calls
 #define localArmorIndex    global_equipment_index[equipment_armor][PlayerNumber()]
 #define localBootsIndex    global_equipment_index[equipment_boots][PlayerNumber()]
