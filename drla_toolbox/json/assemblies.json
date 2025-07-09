@@ -1099,10 +1099,10 @@
                 "[WHITE]Battle Rifle[END]\n"
             ],
             "mods": [
+                "BULK",
                 "POWER",
-                "AGILITY",
-                "TECHNICAL",
-                "SNIPER"
+                "POWER",
+                "FIRESTORM"
             ]
         },
         {

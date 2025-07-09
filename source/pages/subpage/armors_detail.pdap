@@ -16,6 +16,7 @@ localShowArmor    = (localEqBoolField & 1);
 localShowBoots    = (localEqBoolField & 1<<1);
 localShowBackpack = (localEqBoolField & 1<<2);
 
+// TODO: synchronize X and Y values between PDA_SetDataPerPage and PDA_STC
 if (localHasArmor) {
     DisplayIconParallax("PDAPARM", PDA_PLAYER_BODY_ICON, playerIconX, 40.0, 0.0, show_equipment[equipment_armor][PlayerNumber()] ? 1.0 : 0.5);
 

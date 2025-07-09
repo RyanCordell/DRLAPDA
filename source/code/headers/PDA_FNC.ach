@@ -423,14 +423,12 @@ function PDA_ArmorData setupArmorData (int specialArmorTokens) {
     }
 
     if (specialArmorTokens && stricmp(strLeft(DRLA_ArmorList[localArmorIndex][armor_TOKEN], 17), "RLCyberneticArmor") == 0) {
-        localArmorData.name      = "PDA_ARMOR_CYBERNETICARMOR_NAME";
-        localArmorData.graphic   = "PDA_ARMOR_CYBERNETICARMOR_ICON";
-        localArmorData.armorAttr = "PDA_ARMOR_CYBERNETICARMOR_ATTR";
-        localArmorData.armorDesc = "PDA_ARMOR_CYBERNETICARMOR_DESC";
+        localArmorData.name      = StrParam("%l:", "PDA_ARMOR_CYBERNETICARMOR_NAME");
+        localArmorData.graphic   = StrParam("%l:", "PDA_ARMOR_CYBERNETICARMOR_ICON");
+        localArmorData.armorAttr = StrParam("%l:", "PDA_ARMOR_CYBERNETICARMOR_ATTR");
+        localArmorData.armorDesc = StrParam("%l:", "PDA_ARMOR_CYBERNETICARMOR_DESC");
         localArmorData.armorVal  = StrParam("%l:\n\n",
                 (!renegade_check) ? "PDA_ARMOR_CYBERNETICARMOR_PROT" : "PDA_ARMOR_CYBERNETICARMOR_RENPROT");
-        localArmorData.tooltip   = StrParam("%l:\n%l:\n%l:",
-                (!renegade_check) ? "PDA_ARMOR_CYBERNETICARMOR_PROT" : "PDA_ARMOR_CYBERNETICARMOR_RENPROT", localArmorData.armorRes, localArmorData.armorAttr);
 
         if (CheckInventory("RLCyberneticArmorModdedToken")) {
             if (CheckInventory("RLCyberneticArmorBulkToken"))      localArmorData.armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORBULK_RES";
@@ -442,6 +440,9 @@ function PDA_ArmorData setupArmorData (int specialArmorTokens) {
             if (CheckInventory("RLCyberneticArmorNanoToken"))      localArmorData.armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORNANO_RES";
             if (CheckInventory("RLCyberneticArmorOnyxToken"))      localArmorData.armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORONYX_RES";
         }
+
+        localArmorData.tooltip   = StrParam("%l:\n%l:\n%l:",
+                (!renegade_check) ? "PDA_ARMOR_CYBERNETICARMOR_PROT" : "PDA_ARMOR_CYBERNETICARMOR_RENPROT", localArmorData.armorRes, localArmorData.armorAttr);
     } else {
         localArmorData.name      = StrParam("%l:", StrParam("%l:_NAME", localArmorData.langEntry));
         localArmorData.graphic   = StrParam("%l:", StrParam("%l:_ICON", localArmorData.langEntry));
