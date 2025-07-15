@@ -45,8 +45,6 @@ SCRIPT "DRLA_UpdateINI" (void) {
     str DRLA_CurrentAssemblerState[MAX_PLAYERS] = {{"0","0","0","0","0","0","0","0"}};
     str actorToken = "";
 
-    // todo: old assembly should read from 
-
     #define currentState DRLA_AssemblyState[PlayerNumber()]
     #define oldState DRLA_OldAssemblyState[PlayerNumber()]
     #define pendingState DRLA_CurrentAssemblerState[PlayerNumber()]

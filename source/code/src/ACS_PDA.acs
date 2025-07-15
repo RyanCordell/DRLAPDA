@@ -181,6 +181,7 @@ script "PDA_GSInit" open {
       
       PDA_Info[i].category = 0;
       PDA_Info[i].page = 1;
+      PDA_Info[i].previous_page = 1;
       PDA_Info[i].pagemax = 0;
       
       PDA_Info[i].texty = 0;

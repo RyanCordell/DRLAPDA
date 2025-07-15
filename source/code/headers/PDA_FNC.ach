@@ -1,6 +1,3 @@
-
-// TODO: handle redraws via a more manual update method
-
 function int str_find(str haystack, str needle, int index) {
     int i           = index;
     int haystackLen = StrLen(haystack);
@@ -254,7 +251,6 @@ function int checkSpecialArmorTokens(void) {
     (a).oldstate = (a).state; \
     (a).label = (b); \
 
-// TODO: height for buttons should actually decrease as they go past the normal scroll area
 #define CheckBounds(a) \
     PDA_LocalMouse.x >= (a).x - 1 && PDA_LocalMouse.x <= (a).x + (a).width \
     && \
@@ -340,6 +336,7 @@ function void PDA_SetupFloatingTooltip (str graphic, str tooltip) {
     fixed _ttY = _yTemp + yOffset + Y_TOP_EDGE;
 
     HudMessage("%s:", tooltip; HUDMSG_ALPHA, PDA_TOOLTIPID - 1, CR_UNTRANSLATED, _ttX, _ttY, 0.0, 1.0);
+    PDA_SetupScreenBounds_Wipeless();
     // PDA_SetupScreenBounds();
 }
 
@@ -782,6 +779,7 @@ function void PDA_SetCategory (int category) {
 
 
 function void PDA_SetPage (int page_num) {
+    PDA_Local.previous_page = PDA_Local.page;
     PDA_Local.page = page_num;
     afterPageDefaults("PDA_SetPage");
     PDA_OnChange();
@@ -1013,10 +1011,9 @@ function PDAButton PDA_CreateAssemblyButton (int id, str graphic, str label, flo
         }
 
         // Open tooltip
-        // if (strCmp(thisButton.tooltip, "") != 0 && strCmp(assembly, "") != 0) {
-            // PDA_SetupFloatingTooltip("PTIPM", thisButton.tooltip);
-            
-        // }
+        if (strCmp(thisButton.tooltip, "") != 0 && strCmp(assembly, "") != 0) {
+            PDA_SetupFloatingTooltip("PTIPM", thisButton.tooltip);
+        }
     }
 
     if (debug) {

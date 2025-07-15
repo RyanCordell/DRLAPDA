@@ -6,6 +6,7 @@ struct PDAInfo {
    int category;
    int page;
    int pagemax;
+   int previous_page;
    
    float texty;
    float max_text_y;

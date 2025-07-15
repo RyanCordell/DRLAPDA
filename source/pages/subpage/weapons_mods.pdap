@@ -21,7 +21,6 @@ HudMessageParallax(
     0.0, 1.0
 );
 
-// TODO: make applied mods pulse in opacity
 for (int modPack = PDA_MODMIN; modPack < PDA_MODMAX - 1; modPack++) {
 
     // str selectedMod = StrParam("%s:MODICON", strMid(stringArray[modPack], 9, 1));

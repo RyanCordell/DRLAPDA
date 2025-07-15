@@ -1,17 +1,15 @@
-int id = 0;
-str icon = "\n";
-str colored_label = "\n";
-
 float assemblyX = 20.0,
       assemblyY;
 const int width = 180, 
           height = 7;
 
-str callback = "\n";
-str tooltip = "\n";
-
-
 for (int ti = 0, li = 1; ti <= PDA_Local.maxassembliesper; ti+=2, li+=2) {
+    int id = 0;
+    str icon = "\n";
+    str colored_label = "\n";
+    str callback = "\n";
+    str tooltip = "\n";
+
     int aoff               = (PDA_Local.assemblyOffset - 1 < 0) ? 0 : (PDA_Local.assemblyOffset - 1);
     int peekFuture         = (ti + 2);
     str actorToken         = stringArray[ti + aoff];
@@ -22,18 +20,27 @@ for (int ti = 0, li = 1; ti <= PDA_Local.maxassembliesper; ti+=2, li+=2) {
         icon               = StrParam("%l:",    StrParam("%s:_ICON", languagePointer));
         colored_label      = StrParam("%s:%l:\c-", PDA_Local.tiercolor, languagePointer);
         callback           = languagePointer;
-        tooltip            = StrParam("%l:\n%l:", "PDA_ASSEMBLY_REQUIREMENTS", StrParam("%s:_REQ", languagePointer));
+        tooltip            = StrParam("%l:\n%l:\n%l:", 
+                                StrParam("%s:%l:\c-", PDA_Local.tiercolor, StrParam("%s:_NAME", languagePointer)), 
+                                "PDA_ASSEMBLY_REQUIREMENTS", 
+                                StrParam("%s:_REQ", languagePointer)
+                            );
 
     if (peekFuture >= advanced_offset && PDA_Local.assemblyOffset < advanced_offset) continue;
     if (peekFuture >= master_offset   && PDA_Local.assemblyOffset < master_max     ) continue;
 
-    if (PDA_CheckPlayer1Inventory(actorToken) || CheckInventory(actorToken)) {
-        PDA_LocalButton[id + ti - 1] = PDA_CreateAssemblyButton(id, icon, colored_label, assemblyX, assemblyY, width, height, callback, tooltip);
-                 PDA_ButtonHandler(id, false, PDA_ASSEMBLY_DETAIL, "", false, false);
-    } else { 
-        PDA_LocalButton[id + ti - 1] = PDA_CreateAssemblyButton(id, "PDAUNK", StrParam(l:"PDA_ASSEMBLY_UNKNOWN"), assemblyX, assemblyY, width, height, "", "???");
-                 PDA_ButtonHandler(id, true, PDA_Local.page, "", false, false);
+    int _incat = false;
+    int _catpage = PDA_ASSEMBLY_DETAIL;
+    if (!PDA_CheckPlayer1Inventory(actorToken) || !CheckInventory(actorToken)) {
+        icon = "PDAUNK";
+        colored_label = StrParam(l:"PDA_ASSEMBLY_UNKNOWN");
+        callback = "";
+        tooltip = "???";
+        _incat = true;
+        _catpage = PDA_Local.page;
     }
+    PDA_LocalButton[id + ti - 1] = PDA_CreateAssemblyButton(id, icon, colored_label, assemblyX, assemblyY, width, height, callback, tooltip);
+    PDA_ButtonHandler(id, _incat, _catpage, "", false, false);
 }
 
 float nextButtonX = 10.0;

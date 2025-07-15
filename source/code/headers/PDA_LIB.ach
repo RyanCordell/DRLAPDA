@@ -140,7 +140,6 @@ str DRLA_WeaponPerkList[DRLA_WEAPONPERKMAX][3] = {
 	{"RLFireangelPerk",    "Fireangel (Demolitionist)", "RLEfficientAmmoTypeWeapon" }
 };
 
-// TODO: Unhardcode this?
 str DRLA_WeaponSetList[DRLA_WEAPONSETMAX][2] = {
 	{"RLNuclearWeaponSetBonusActive", "\cfFURIOUS FUSION\c-"  },
 	{"RLCerberusSetBonusActive",      "\cfTRINITY GUARDIAN\c-"}

@@ -1,7 +1,6 @@
 
 str detailedAssemblyStringer;
 
-// TODO: prior assembly page info briefly stays on screen
 if (!PDA_Local.playonce) {
     PDA_PlaySound("UI/PDA/Activate", "pda/soldier", 80);
 

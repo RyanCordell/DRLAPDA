@@ -3,10 +3,6 @@
 #define HOLD_MAX 15
 
 /** Thanks to HeXaGoN for the maths behind the mouse cursor here! */
-/** TODO: Account for "Prescale Mouse Movement" option being off */
-
-// TODO: If scrolling to the bottom or top, scroll automatically
-
 SCRIPT "PDA_MouseController" (void)
 {
     const int anymask =
@@ -173,6 +169,7 @@ SCRIPT "PDA_MouseController" (void)
             else if (PDA_Local.category == PDA_BESTIARY_DETAIL) {
                 // PDA_Local.category = PDA_BESTIARY;
                 PDA_SetCategory(PDA_BESTIARY);
+                PDA_SetPage(PDA_Local.previous_page);
             }
             else if (PDA_Local.category == PDA_PONG) {
                 // ACS_NamedExecute("QuitPong",0);
