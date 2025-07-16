@@ -15,9 +15,13 @@ OUTPUT_FOLDER_ARG: int = 2
 SEPARATOR_ARG: int = 3
 
 
+FIRST_ARTIFACT: int = 0
+SECOND_ARTIFACT: int = 1
+THIRD_ARTIFACT: int = 2
+
 class Arsenal:
     output_data: str = ""
-    language_warning: str = '''
+    language_warning: str = f'''
 [enu default]\n\n/*
 Please do not modify this file directly,
 it\'s specifically compiled and any changes may be lost.
@@ -187,7 +191,7 @@ it\'s specifically compiled and any changes may be lost.
 
         for color_key, color_value in Arsenal.colors.items():
             str_to_color = str_to_color.replace(
-                "[" + color_key + "]", "\c" + color_value if method == "revert" else "" # type: ignore
+                "[" + color_key + "]", "\\c" + color_value if method == "revert" else "" # type: ignore
             )
 
         return str_to_color
@@ -228,15 +232,15 @@ it\'s specifically compiled and any changes may be lost.
             if "mods" in weapon:
                 weapon_mod_effects.append("{")
                 weapon_mod_effects.append(
-                    f'''"RL{weapon["name"]}",
-                                  "{weapon["mods"]["bulk"]}",
-                                  "{weapon["mods"]["power"]}",
-                                  "{weapon["mods"]["agility"]}",
-                                  "{weapon["mods"]["technical"]}",
-                                  "{weapon["mods"]["sniper"]}",
-                                  "{weapon["mods"]["firestorm"]}",
-                                  "{weapon["mods"]["nano"]}"'''
-                )
+f'''"RL{weapon["name"]}",
+"{weapon["mods"]["bulk"]}",
+"{weapon["mods"]["power"]}",
+"{weapon["mods"]["agility"]}",
+"{weapon["mods"]["technical"]}",
+"{weapon["mods"]["sniper"]}",
+"{weapon["mods"]["firestorm"]}",
+"{weapon["mods"]["nano"]}"
+''')
                 weapon_mod_effects.append("},")
                 weapon_mod_max += 1
 
@@ -255,13 +259,11 @@ it\'s specifically compiled and any changes may be lost.
             if "corruptions" in weapon:
                 demonic_artifacts.append("{")
                 demonic_artifacts.append(
-                    f'''
-                    "RL{weapon["name"]}",
-                    "{weapon["corruptions"][0]}",
-                    "{weapon["corruptions"][INPUT_FOLDER_ARG]}",
-                    "{weapon["corruptions"][OUTPUT_FOLDER_ARG]}"
-                    '''
-                )
+f'''"RL{weapon["name"]}",
+"{weapon["corruptions"][FIRST_ARTIFACT]}",
+"{weapon["corruptions"][SECOND_ARTIFACT]}",
+"{weapon["corruptions"][THIRD_ARTIFACT]}"
+''')
                 demonic_artifacts.append("},")
                 demonic_weapons += 1
 
@@ -303,7 +305,7 @@ it\'s specifically compiled and any changes may be lost.
                 self, weapon["prettyname"], "strip"
             )
             weapon_language.append(Arsenal.create_weapons_language(self, weapon))
-            weapon_language.append("\n")
+            weapon_language.append("\n\n")
 
         weapon_mod_list["max"] = weapon_mod_max
         weapon_mod_list["dmax"] = demonic_weapons
@@ -313,7 +315,7 @@ it\'s specifically compiled and any changes may be lost.
         weapon_mod_list["list"] = "".join(weapon_mod_effects)
         weapon_mod_list["dlist"] = "".join(demonic_artifacts)
 
-        temp_string: str = "".join(weapon_language)
+        temp_string: str = "".join(weapon_language).strip()
         temp_string = Arsenal.handle_colors(self, temp_string, "revert")
 
         temp_string = temp_string.replace("[INNERQUOTE]", '\\"')
@@ -548,9 +550,7 @@ it\'s specifically compiled and any changes may be lost.
         language_assembly_list.append(";")
         language_assembly_list.append("\n")
         language_assembly_list.append("\n")
-        language_assembly_list.append(
-            f'''PDA_SEPARATOR_CHARACTER="{self.separator_token}";'''
-        )
+        language_assembly_list.append(f'''PDA_SEPARATOR_CHARACTER="{self.separator_token}";''')
         language_assembly_list.append("\n")
         language_assembly_list.append("\n")
 
@@ -558,12 +558,10 @@ it\'s specifically compiled and any changes may be lost.
             assembly_description = []
 
             header_assembly_list.append("{")
-            header_assembly_list.append(
-                f'''
+            header_assembly_list.append(f'''
                 "RL{assembly['name']}AssemblyLearntToken",
                 "PDA_ASSEMBLY_{assembly['tier'].upper()}_{assembly['name'].upper()}"
-            '''
-            )
+            ''')
             header_assembly_list.append("},")
             header_assembly_max += 1
 
@@ -613,26 +611,21 @@ it\'s specifically compiled and any changes may be lost.
             ):
                 if "unmoddable" in weapon:
                     header_exotic_list.append("{")
-                    header_exotic_list.append(
-                        f'''"RL{weapon['name']}", "null", "null", "null"'''
-                    )
+                    header_exotic_list.append(f'''"RL{weapon['name']}", "null", "null", "null"''')
                     header_exotic_list.append("},")
                 else:
                     header_exotic_list.append("{")
-                    header_exotic_list.append(
-                        f'''
-                        "RL{weapon['name']}",
-                        "RL{weapon['name']}SniperLearntToken",
-                        "RL{weapon['name']}FirestormLearntToken",
-                        "RL{weapon['name']}NanoLearntToken"
-                    '''
-                    )
+                    header_exotic_list.append(f'''
+"RL{weapon['name']}",
+"RL{weapon['name']}SniperLearntToken",
+"RL{weapon['name']}FirestormLearntToken",
+"RL{weapon['name']}NanoLearntToken"
+''')
                     header_exotic_list.append("},")
 
                 header_unique_max += 1
 
-        language_assembly_list.append(
-            f'''
+        language_assembly_list.append(f'''
 DRLA_ASSEMBLYMAX="{header_assembly_max}";
 DRLA_ASSEMBLYELEMENTS="2";
 DRLA_EXOTICEFFECTS_MAX="{header_unique_max}";
@@ -640,8 +633,7 @@ DRLA_EXOTICELEMENTS="4";
 DRLA_BASICMAX="{basic_max}";
 DRLA_ADVANCEDMAX="{advanced_max}";
 DRLA_MASTERMAX="{master_max}";
-'''
-        )
+''')
 
         language_assembly_output: str = Arsenal.language_warning + temp_string
 
@@ -712,7 +704,8 @@ DRLA_MASTERMAX="{master_max}";
 
     def create_armor_acs_array(self, equipment: dict[str, Any]) -> str:
         # TODO: Export the active set bonuses into a separate JSON, or rely on Equipment instead?
-        construct = f'''#library "PDA_ARM"
+        construct: str = f'''
+#library "PDA_ARM"
 
 #define DRLA_ARMORMAX {equipment['max']}
 #define DRLA_ARMORELEMENTS 2
@@ -740,8 +733,7 @@ str DRLA_ArmorSetList[DRLA_ARMORSETMAX] = {{
   "RLAngelicAttireSetBonusActive",
   "RLRainbowSetBonusActive",
   "RLTeslaboltSetBonusActive"
-}};
-    '''
+}};'''
 
         return construct
 
@@ -756,44 +748,21 @@ str DRLA_ArmorSetList[DRLA_ARMORSETMAX] = {{
         fragment: list[str] = list(f'''PDA_WEAPON_{bigname}_ACTOR = "RL{bigname}";\n''')
 
         if "prettyname" in weapon:
-            fragment.append(
-                f'''
-            PDA_WEAPON_{bigname}_NAME = "{weapon['prettyname']}";\n
-            '''
-            )
-            fragment.append(
-                f'''
-            PDA_WEAPON_{bigname}_FLATNAME = "{weapon['flatname']}";\n
-            '''
-            )
+            fragment.append(f'''PDA_WEAPON_{bigname}_NAME = "{weapon['prettyname']}";\n''')
+            fragment.append(f'''PDA_WEAPON_{bigname}_FLATNAME = "{weapon['flatname']}";\n''')
         if "actualDescription" in weapon:
-            fragment.append(
-                f'''
-            PDA_WEAPON_{bigname}_DESC = {weapon['actualDescription']};\n
-            '''
-            )
+            # Note to future self: Don't try to add quote marks here, they're already handled elsewhere.
+            fragment.append(f'''PDA_WEAPON_{bigname}_DESC = {weapon['actualDescription']};\n''')
         if "specialpretty" in weapon:
-            fragment.append(
-                f'''
-            PDA_WEAPON_{bigname}DEMONARTIFACTS_NAME = "{weapon['specialpretty']}";\n
-            '''
-            )
+            fragment.append(f'''PDA_WEAPON_{bigname}DEMONARTIFACTS_NAME = "{weapon['specialpretty']}";\n''')
         if "specialdesc" in weapon:
-            fragment.append(
-                f'''
-            PDA_WEAPON_{bigname}DEMONARTIFACTS_DESC = {weapon['actualSpecialDesc']};\n
-            '''
-            )
+            fragment.append(f'''PDA_WEAPON_{bigname}DEMONARTIFACTS_DESC = {weapon['actualSpecialDesc']};\n''')
         if "mods" in weapon:
-            fragment.append(
-                f'''
-            PDA_WEAPON_{bigname}_MODS = {weapon['actualMods']};\n
-            '''
-            )
+            fragment.append(f'''PDA_WEAPON_{bigname}_MODS = {weapon['actualMods']};\n''')
         # if ('corruptions' in weapon):
-        #   fragment += f'''PDA_ARTIFACT_{bigname}_ARTIFACTS = {weapon['actualArtifacts']};\n'''
+        #     fragment.append(f'''PDA_ARTIFACT_{bigname}_ARTIFACTS = {weapon['actualArtifacts']};''')
 
-        return "".join(fragment)
+        return "".join(fragment).strip()
 
     def create_equipment_language(self, equipment: dict[str, Any]) -> str | Literal[0]:
         if not Arsenal.filler:
@@ -822,19 +791,20 @@ str DRLA_ArmorSetList[DRLA_ARMORSETMAX] = {{
                 coloredequipment = f'''\\c{color_value}{equipment['prettyname']}\\c-'''
 
         construct: list[str] = list(
-            f'''
+f'''
 PDA_ARMOR_{bigname}_ICON = "{equipment['icon']}";
 PDA_ARMOR_{bigname}_NAME = "{coloredequipment}";
 PDA_ARMOR_{bigname}_FLATNAME = "{flatequipment}";
 PDA_ARMOR_{bigname}_DESC = {equipment['actualDescription']};
 PDA_ARMOR_{bigname}_PROT = "{Arsenal.language_padding(self, equipment['protection'])}{equipment['protection']}% [GOLD]Protection[END]";
-PDA_ARMOR_{bigname}_RENPROT = "{Arsenal.language_padding(self, equipment['renprotection'])}{equipment['renprotection']}% [GOLD]Protection[END]";'''
+PDA_ARMOR_{bigname}_RENPROT = "{Arsenal.language_padding(self, equipment['renprotection'])}{equipment['renprotection']}% [GOLD]Protection[END]";
+'''
         )
 
         if "resistances" in equipment:
             res: dict[str, Any] = equipment["resistances"]
             construct.append(
-                f'''
+f'''
 PDA_ARMOR_{bigname}_RES =
   "{Arsenal.language_padding(self, res['melee'])}{res['melee']}% [DARKGRAY]Melee[END]  "
   "{Arsenal.language_padding(self, res['bullet'])}{res['bullet']}% [GRAY]Bullet[END] \\n"
@@ -843,7 +813,8 @@ PDA_ARMOR_{bigname}_RES =
   "{Arsenal.language_padding(self, res['plasma'])}{res['plasma']}% [BLUE]Plasma[END] "
   "{Arsenal.language_padding(self, res['electric'])}{res['electric']}% [YELLOW]Electric[END]\\n"
   "{Arsenal.language_padding(self, res['poison'])}{res['poison']}% [PURPLE]Poison[END] "
-  "{Arsenal.language_padding(self, res['radiation'])}{res['radiation']}% [GREEN]Radiation[END]\\n";'''
+  "{Arsenal.language_padding(self, res['radiation'])}{res['radiation']}% [GREEN]Radiation[END]\\n";
+'''
             )
             construct.append("\n")
 
@@ -873,10 +844,11 @@ PDA_ARMOR_{bigname}_RES =
             )
 
         temp_atts_string: str = ''.join(atts)
-        construct.append(f'''
+        construct.append(
+f'''
 PDA_ARMOR_{bigname}_CYBAUG = "{equipment['cyborgstats']['augment']}";
 PDA_ARMOR_{bigname}_ATTR = {temp_atts_string};
-    ''')
+''')
 
         return "".join(construct)
 
@@ -938,7 +910,7 @@ PDA_ASSEMBLY_{bigtier}_{bigname}_ICON = "{assembly['icon']}";
 PDA_ASSEMBLY_{bigtier}_{bigname}_HEIGHT = "0";
 PDA_ASSEMBLY_{bigtier}_{bigname}_DESC = {assembly['actualDescription']}"[GREEN]Valid Weapons:[END]/n"\n{temp_string};
 PDA_ASSEMBLY_{bigtier}_{bigname}_REQ = {temp_list_string};
-    '''
+'''
 
     # -----
 
