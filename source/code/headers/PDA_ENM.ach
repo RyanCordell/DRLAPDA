@@ -64,7 +64,7 @@ enum PDA_IDs {
     // Various ID ranges
     PDA_ASSEMBLY_ID_END = PDA_PLAYER_BOOTS_ICON + 64,
     PDA_BEASTS_ID_END = PDA_ASSEMBLY_ID_END + 32,
-    PDA_WORNARMORS = PDA_ASSEMBLY_ID_END + 64,
+    PDA_WORNARMORS = PDA_ASSEMBLY_ID_END + 16,
 
     PDA_STASHEDARMORS = PDA_WORNARMORS + 8,
     PDA_NOEQID = PDA_STASHEDARMORS + 3,
@@ -99,7 +99,8 @@ enum PDA_IDs {
     // Shared IDs go down here
     PDA_ARMORINVIDRANGE = PDA_MODIDRANGE,
     PDA_ARMORWORNIDRANGE = PDA_ASSEMBLY_ID_END,
-    PDA_TOOLTIPID = PDA_CAT_DESCRIPTION,
+    PDA_TOOLTIPGFX = PDA_CAT_DESCRIPTION,
+    PDA_TOOLTIPID = PDA_TOOLTIPGFX - 5,
     PDA_PLYR_ICON = PDA_ASSEMBLY_ID_END,
 }
 
@@ -125,6 +126,21 @@ enum PDA_Categories {
 	PDA_PONG,
 	PDA_CREDITS,
 	PDA_HUDSWITCH,
+}
+
+enum PDA_WeaponPerkList_Class {
+    PDA_MARINE_PERK = 0,
+    PDA_SCOUT_PERK,
+    PDA_TECHNICIAN_PERK,
+    PDA_RENEGADE_PERK,
+    PDA_DEMOLITIONIST_PERK,
+    PDA_COMMANDO_PERK
+}
+
+enum PDA_WeaponPerkList {
+    PDA_PERK_ITEM_NAME = 0,
+    PDA_PERK_NICE_NAME,
+    PDA_PERK_ITEM_TOKEN
 }
 
 enum PDA_Weapon_Pages {
@@ -175,7 +191,7 @@ enum weaponmod_enum {
 
 enum weapon_checks_index {
     weapon_checks_isdemonic = 0,
-    weapon_checks_disasemblable,
+    weapon_checks_disassemblable,
     weapon_checks_supports_artifacts,
 }
 

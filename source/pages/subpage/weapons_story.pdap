@@ -1,17 +1,20 @@
+#define canDisassemble weapon_checks[weapon_checks_disassemblable]
+#define isEvil weapon_checks[weapon_checks_supports_artifacts]
+
 HudMessageParallax(
     StrParam(
         "%s:" // Tech perk
         "%s:" // Non-Tech Class perk
         "\n"
         "%s:" // Weapon perk
-        "%l:\n"
-        "\c-%l:\n"
+        "%l:\n" // Name
+        "\cj%l:\c-\n" // Description
         ,
-        (weapon_checks[weapon_checks_disasemblable]) ? StrParam("> \c[Yellow]%s:", DRLA_WeaponPerkList[2][1]) : "",
-        (!weapon_checks[weapon_checks_disasemblable]) ? PDA_Class[PlayerNumber()][pda_class_weapon_perk] : "",
+        (canDisassemble) ? StrParam("> \c[Yellow]%s:", DRLA_WeaponPerkList[PDA_TECHNICIAN_PERK][PDA_PERK_NICE_NAME]) : "",
+        (!canDisassemble) ? PDA_Class[PlayerNumber()][pda_class_weapon_perk] : "",
         weapon_info[weapon_info_perk],
-        (weapon_checks[weapon_checks_supports_artifacts]) ? weapon_info[weapon_info_dualname] : weapon_info[weapon_info_name],
-        (weapon_checks[weapon_checks_supports_artifacts]) ? weapon_info[weapon_info_dualdesc] : weapon_info[weapon_info_desc]
+        (isEvil) ? weapon_info[weapon_info_dualname] : weapon_info[weapon_info_name],
+        (isEvil) ? weapon_info[weapon_info_dualdesc] : weapon_info[weapon_info_desc]
     ),
 
     HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 

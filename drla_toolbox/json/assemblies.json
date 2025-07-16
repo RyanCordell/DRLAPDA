@@ -194,7 +194,7 @@
                 "[ORANGE]RC-P90[END] ->\n [BASIC]RC-P120[END]\n\n"
             ],
             "validlist": [
-                "Any [GREEN]non-shotgun [WHITE]weapon[END].\nMagazine capacity needs to be more than [GOLD]5[END] shots."
+                "Any [GREEN]non-shotgun [WHITE]weapon[END].\nMagazine capacity needs to allow more than [GOLD]5[END] shots."
             ],
             "mods": [
                 "BULK",
@@ -244,7 +244,7 @@
                 "[PURPLE]Super Shotgun[END],\n",
                 "[PURPLE]Assault Shotgun[END], ",
                 "[PURPLE]Plasma Shotgun[END],\n",
-                "[ORANGE]Hunting Shotgun[END],\n"
+                "[ORANGE]Hunting Shotgun[END]\n"
             ],
             "mods": [
                 "POWER",

@@ -39,17 +39,17 @@ script "DRLA_HUD_InfoHandler" ENTER {
         player_weapon[player_weapon_current] = GetWeapon();
         player_weapon[player_weapon_trimmed] = StrTrim(player_weapon[player_weapon_current], 2, 0);
 
-        weapon_info[weapon_info_name] = StrParam("PDA_WEAPON_%s:_FLATNAME", player_weapon[player_weapon_trimmed]);
-        weapon_info[weapon_info_dualname] = StrParam("PDA_WEAPON_%s:DEMONARTIFACTS_FLATNAME", player_weapon[player_weapon_trimmed]);
+        weapon_info[weapon_info_name]     = StrParam("PDA_WEAPON_%s:_NAME", player_weapon[player_weapon_trimmed]);
+        weapon_info[weapon_info_dualname] = StrParam("PDA_WEAPON_%s:DEMONARTIFACTS_NAME", player_weapon[player_weapon_trimmed]);
 
-        Weapon_Mod_Quantity[mod_bulk] = CheckInventory(StrParam("%s:BulkMod", player_weapon[player_weapon_current])),
-        Weapon_Mod_Quantity[mod_power] = CheckInventory(StrParam("%s:PowerMod", player_weapon[player_weapon_current])),
-        Weapon_Mod_Quantity[mod_agility] = CheckInventory(StrParam("%s:AgilityMod", player_weapon[player_weapon_current])),
+        Weapon_Mod_Quantity[mod_bulk]      = CheckInventory(StrParam("%s:BulkMod", player_weapon[player_weapon_current])),
+        Weapon_Mod_Quantity[mod_power]     = CheckInventory(StrParam("%s:PowerMod", player_weapon[player_weapon_current])),
+        Weapon_Mod_Quantity[mod_agility]   = CheckInventory(StrParam("%s:AgilityMod", player_weapon[player_weapon_current])),
         Weapon_Mod_Quantity[mod_technical] = CheckInventory(StrParam("%s:TechnicalMod", player_weapon[player_weapon_current])),
-        Weapon_Mod_Quantity[mod_sniper] = CheckInventory(StrParam("%s:SniperMod", player_weapon[player_weapon_current])),
+        Weapon_Mod_Quantity[mod_sniper]    = CheckInventory(StrParam("%s:SniperMod", player_weapon[player_weapon_current])),
         Weapon_Mod_Quantity[mod_firestorm] = CheckInventory(StrParam("%s:FirestormMod", player_weapon[player_weapon_current])),
-        Weapon_Mod_Quantity[mod_nano] = CheckInventory(StrParam("%s:NanoMod", player_weapon[player_weapon_current])),
-        Weapon_Mod_Quantity[mod_artifact] = CheckInventory(StrParam("%s:DemonArtifacts", player_weapon[player_weapon_current]));
+        Weapon_Mod_Quantity[mod_nano]      = CheckInventory(StrParam("%s:NanoMod", player_weapon[player_weapon_current])),
+        Weapon_Mod_Quantity[mod_artifact]  = CheckInventory(StrParam("%s:DemonArtifacts", player_weapon[player_weapon_current]));
         
         str weaponName = (weapon_checks[weapon_checks_isdemonic]) 
                         ? (CheckInventory(StrParam("%s:DemonArtifacts", player_weapon[player_weapon_current])) 
@@ -63,14 +63,14 @@ script "DRLA_HUD_InfoHandler" ENTER {
         Weapon_Mod_Quantity[mod_sniper] || Weapon_Mod_Quantity[mod_firestorm] || Weapon_Mod_Quantity[mod_nano] || Weapon_Mod_Quantity[mod_artifact] )
         {
             modsOn = StrParam("%l: (", weaponName);
-            modsOn = (Weapon_Mod_Quantity[mod_power] > 0) ? StrParam("%s:P%i:\n", modsOn, Weapon_Mod_Quantity[mod_power]    ) : StrParam("%s:\n", modsOn);
-            modsOn = (Weapon_Mod_Quantity[mod_bulk] > 0) ? StrParam("%s:B%i:\n", modsOn, Weapon_Mod_Quantity[mod_bulk]     ) : StrParam("%s:\n", modsOn);
-            modsOn = (Weapon_Mod_Quantity[mod_agility] > 0) ? StrParam("%s:A%i:\n", modsOn, Weapon_Mod_Quantity[mod_agility]  ) : StrParam("%s:\n", modsOn);
+            modsOn = (Weapon_Mod_Quantity[mod_power]     > 0) ? StrParam("%s:P%i:\n", modsOn, Weapon_Mod_Quantity[mod_power]    ) : StrParam("%s:\n", modsOn);
+            modsOn = (Weapon_Mod_Quantity[mod_bulk]      > 0) ? StrParam("%s:B%i:\n", modsOn, Weapon_Mod_Quantity[mod_bulk]     ) : StrParam("%s:\n", modsOn);
+            modsOn = (Weapon_Mod_Quantity[mod_agility]   > 0) ? StrParam("%s:A%i:\n", modsOn, Weapon_Mod_Quantity[mod_agility]  ) : StrParam("%s:\n", modsOn);
             modsOn = (Weapon_Mod_Quantity[mod_technical] > 0) ? StrParam("%s:T%i:\n", modsOn, Weapon_Mod_Quantity[mod_technical]) : StrParam("%s:\n", modsOn);
-            modsOn = (Weapon_Mod_Quantity[mod_sniper] > 0) ? StrParam("%s:S%i:\n", modsOn, Weapon_Mod_Quantity[mod_sniper]   ) : StrParam("%s:\n", modsOn);
+            modsOn = (Weapon_Mod_Quantity[mod_sniper]    > 0) ? StrParam("%s:S%i:\n", modsOn, Weapon_Mod_Quantity[mod_sniper]   ) : StrParam("%s:\n", modsOn);
             modsOn = (Weapon_Mod_Quantity[mod_firestorm] > 0) ? StrParam("%s:F%i:\n", modsOn, Weapon_Mod_Quantity[mod_firestorm]) : StrParam("%s:\n", modsOn);
-            modsOn = (Weapon_Mod_Quantity[mod_nano] > 0) ? StrParam("%s:N%i:\n", modsOn, Weapon_Mod_Quantity[mod_nano]     ) : StrParam("%s:\n", modsOn);
-            modsOn = (Weapon_Mod_Quantity[mod_artifact] > 0) ? StrParam("%s:D%i:\n", modsOn, Weapon_Mod_Quantity[mod_artifact] ) : StrParam("%s:\n", modsOn);
+            modsOn = (Weapon_Mod_Quantity[mod_nano]      > 0) ? StrParam("%s:N%i:\n", modsOn, Weapon_Mod_Quantity[mod_nano]     ) : StrParam("%s:\n", modsOn);
+            modsOn = (Weapon_Mod_Quantity[mod_artifact]  > 0) ? StrParam("%s:D%i:\n", modsOn, Weapon_Mod_Quantity[mod_artifact] ) : StrParam("%s:\n", modsOn);
             modsOn = StrParam("%s:)\n", modsOn);
         } else if (!Weapon_Mod_Quantity[mod_power] && !Weapon_Mod_Quantity[mod_bulk] && !Weapon_Mod_Quantity[mod_agility] && !Weapon_Mod_Quantity[mod_technical] && !Weapon_Mod_Quantity[mod_sniper] && !Weapon_Mod_Quantity[mod_firestorm] && !Weapon_Mod_Quantity[mod_nano] && !Weapon_Mod_Quantity[mod_artifact]) {
             modsOn = StrParam("%l:", weaponName);

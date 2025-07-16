@@ -314,7 +314,7 @@ function void PDA_SetupFloatingTooltip (str graphic, str tooltip) {
     // int _yTemp = PDA_LocalMouse.y * NEW_RESOLUTION_Y + 10;
     int _yTemp = (PDA_SCREEN_Y + 32) * NEW_RESOLUTION_Y;
 
-    HudMessage(s:"A\n"; HUDMSG_ALPHA, PDA_TOOLTIPID, CR_UNTRANSLATED,
+    HudMessage(s:"A\n"; HUDMSG_ALPHA, PDA_TOOLTIPGFX, CR_UNTRANSLATED,
         _xTemp + X_LEFT_EDGE, _yTemp + Y_TOP_EDGE,
         0, 0.9);
 
@@ -335,7 +335,7 @@ function void PDA_SetupFloatingTooltip (str graphic, str tooltip) {
     fixed _ttX = _xTemp + xOffset + X_LEFT_EDGE;
     fixed _ttY = _yTemp + yOffset + Y_TOP_EDGE;
 
-    HudMessage("%s:", tooltip; HUDMSG_ALPHA, PDA_TOOLTIPID - 1, CR_UNTRANSLATED, _ttX, _ttY, 0.0, 1.0);
+    HudMessage(s:tooltip; HUDMSG_ALPHA, PDA_TOOLTIPID, CR_UNTRANSLATED, _ttX, _ttY, 0.0, 1.0);
     PDA_SetupScreenBounds_Wipeless();
     // PDA_SetupScreenBounds();
 }
@@ -514,7 +514,7 @@ function void PDA_SetDataPerPage (void) {
             player_weapon[player_weapon_trimmed] = StrTrim(player_weapon[player_weapon_current], 2, 0);
             PDA_Class[PlayerNumber()][pda_class_weapon_perk]   = StrParam("> \c[Yellow]%l:", "PDA_WEAPON_PERKUNAVAILABLE");
 
-            weapon_checks[weapon_checks_disasemblable] = (GetActorClass(0) == "DoomRLTechnician" && !CheckInventory("RLStandardWeaponToken"));
+            weapon_checks[weapon_checks_disassemblable] = (GetActorClass(0) == "DoomRLTechnician" && !CheckInventory("RLStandardWeaponToken"));
             weapon_checks[weapon_checks_supports_artifacts] = CheckInventory(StrParam("%s:DemonArtifacts", player_weapon[player_weapon_current]));
 
             if (CheckInventory("RLStandardWeaponToken") || CheckInventory("RLExoticWeaponToken")) {
@@ -554,7 +554,7 @@ function void PDA_SetDataPerPage (void) {
             }
 
             if (stricmp(player_weapon[player_weapon_current], "None") != 0) {
-                weapon_info[weapon_info_desc] = StrParam("PDA_WEAPON_%s:_DESC", player_weapon[player_weapon_trimmed]);
+                weapon_info[weapon_info_desc]     = StrParam("PDA_WEAPON_%s:_DESC", player_weapon[player_weapon_trimmed]);
                 weapon_info[weapon_info_dualdesc] = StrParam("PDA_WEAPON_%s:DEMONARTIFACTS_DESC", player_weapon[player_weapon_trimmed]);
 
                 str_split(separator_character, StrParam("%l:", StrParam("PDA_WEAPON_%s:_MODS", player_weapon[player_weapon_trimmed])));

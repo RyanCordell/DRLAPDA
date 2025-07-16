@@ -8,8 +8,8 @@
             "description": [
                 "[DARKGRAY][INNERQUOTE]Hopefully, you were born with them.[INNERQUOTE][END]\n\n",
                 "[WHITE]Brass knuckles and 100% Grade A Space Marine muscle. They won't do much damage, but at least you won't wake up every beastie in the place while you break jaws.\n",
-                "Your kick move is also a good way to get enemies out of your face.\n",
-                "The UAC's patented Berserk Packs will augment your muscle strength, making your melee attacks deal devastating amounts of damage."
+                "[WHITE]Your kick move is also a good way to get enemies out of your face.\n",
+                "[WHITE]The UAC's patented Berserk Packs will augment your muscle strength, making your melee attacks deal devastating amounts of damage."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_FIST",
@@ -35,7 +35,7 @@
                 "\n",
                 "[DARKGRAY]Chainsaw -- cuts through flesh like a hot knife through butter.[END]\n",
                 "[WHITE]Mars may not need lumberjacks, but this chainsaw is as effective on demon flesh and bone as it is on pinewood back home.\n",
-                "Keep in mind, though, that some enemies can shrug off the damage and continue attacking, leaving you vulnerable."
+                "[WHITE]Keep in mind, though, that some enemies can shrug off the damage and continue attacking, leaving you vulnerable."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_BASEDAMAGE",
@@ -61,7 +61,7 @@
                 "\n",
                 "[DARKGRAY]Your trusty 10mm pistol. It may be nice, but better find something stronger.[END]\n",
                 "[WHITE]Standard UAC pistol, chambered for the 10mm round.\n",
-                "Good for potshots at the odd zombie or three, but when you start seeing stronger foes, it's time to find something better."
+                "[WHITE]Good for potshots at the odd zombie or three, but when you start seeing stronger foes, it's time to find something better."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -87,7 +87,7 @@
                 "\n",
                 "[DARKGRAY]A 12g shotgun -- you gotta love its spread.[END]\n",
                 "[WHITE]This basic long-barreled scattergun takes standard 12-gauge shells, and has proven itself the best friend of many a space marine.\n",
-                "Relatively tight pellet spread makes it usable even at longer ranges, but it only holds one shell at a time, making it a poor choice when coming under sustained fire."
+                "[WHITE]Relatively tight pellet spread makes it usable even at longer ranges, but it only holds one shell at a time, making it a poor choice when coming under sustained fire."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_PELLETCOUNT",
@@ -113,7 +113,7 @@
                 "\n",
                 "[DARKGRAY]Nothing beats the sound of pumping a combat shotgun.[END]\n",
                 "[WHITE]This pump-action shotgun holds multiple shells, but they need to be loaded individually.\n",
-                "Damage randomization per pellet is slightly reduced compared to the standard Shotgun, and the pellet spread is much tighter, making it ideal for quickly dispatching weaker foes."
+                "[WHITE]Damage randomization per pellet is slightly reduced compared to the standard Shotgun, and the pellet spread is much tighter, making it ideal for quickly dispatching weaker foes."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -139,7 +139,7 @@
                 "\n",
                 "[DARKGRAY]Double barreled shotgun -- the perfect weapon for a desperado.[END]\n",
                 "[WHITE]This double-barreled scattergun has had its barrels sawn down, increasing the spread of the pellets it fires.\n",
-                "Best at short range against densely packed groups of enemies, or just one big bastard. The barrels can also be fired independently through the alternate fire mode.[END]"
+                "[WHITE]Best at short range against densely packed groups of enemies, or just one big bastard. The barrels can also be fired independently through the alternate fire mode.[END]"
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_PELLETCOUNT",
@@ -165,7 +165,7 @@
                 "\n",
                 "[DARKGRAY]Chaingun directs heavy firepower onto your opponent making him do the chaingun cha-cha.[END]\n",
                 "[WHITE]An experiment into developing a portable, infantry-level equivalent of a gatling gun resulted in the Chaingun.\n",
-                "Utilizing standard rifle rounds, it fires at an impressive rate without sacrificing accuracy, thanks to the multiple barrel design which prevents heat warping."
+                "[WHITE]Utilizing standard rifle rounds, it fires at an impressive rate without sacrificing accuracy, thanks to the multiple barrel design which prevents heat warping."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -189,7 +189,7 @@
                 "[DARKGREEN]Spread[END]: 2 x 0.5\n",
                 "\n",
                 "[WHITE]The mainstay of ranked officers, the Battle Rifle is a fully-automatic rifle combining superb stopping power, portability and accuracy into an eight-pound package.\n",
-                "Unfortunately, the magazine capacity is half that of the Chaingun, so its a matter of personal preference as to which is superior to the other."
+                "[WHITE]Unfortunately, the magazine capacity is half that of the Chaingun, so its a matter of personal preference as to which is superior to the other."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -215,8 +215,8 @@
                 "\n",
                 "[DARKGRAY]The rocket launcher is the most standard way of blowing things up.[END]\n",
                 "[WHITE]Previously an anti-materiel weapon, this launcher has seen renewed use against some of Hell's tougher monstrosities.\n",
-                "While it can only hold one rocket at a time, a few are generally enough to take down very strong foes, and are excellent at disposing of large clusters of weaker enemies quickly.\n",
-                "Just keep yourself out of the blast radius."
+                "[WHITE]While it can only hold one rocket at a time, a few are generally enough to take down very strong foes, and are excellent at disposing of large clusters of weaker enemies quickly.\n",
+                "[WHITE]Just keep yourself out of the blast radius."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_IMPACTDAMAGE",
@@ -242,7 +242,7 @@
                 "\n",
                 "[DARKGRAY]A plasma rifle shoots multiple rounds of plasma energy -- frying some demon butt![END]\n",
                 "[WHITE]The UAC's foray into limitless, clean energy production did have at least one benefit to humanity.\n",
-                "The Plasma Rifle fires bolts of pure plasma energy at an impressive rate, making it a weapon of choice against Hell's stronger forces.\n"
+                "[WHITE]The Plasma Rifle fires bolts of pure plasma energy at an impressive rate, making it a weapon of choice against Hell's stronger forces.\n"
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -268,8 +268,8 @@
                 "\n",
                 "[DARKGRAY]The Big Fucking Gun. Hell wouldn't be so fun without it.[END]\n",
                 "[WHITE]'Prototype 9703' was the experiment that created the UAC's ultimate weapon against the legions of hel. the BFG 9000.\n",
-                "This weapon launches an extremely powerful plasma blast that disrupts the matter of nearby enemies on impact, thanks to a special field generator in the gun itself.\n",
-                "The field also prevents the gun from disrupting the use. when used at point blank range, it generates a devastating degree of damage."
+                "[WHITE]This weapon launches an extremely powerful plasma blast that disrupts the matter of nearby enemies on impact, thanks to a special field generator in the gun itself.\n",
+                "[WHITE]The field also prevents the gun from disrupting the use. when used at point blank range, it generates a devastating degree of damage."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -290,8 +290,8 @@
                 "    \n",
                 "[DARKGRAY]This is the standard issue rechargeable energy side-arm. Cool![END]\n",
                 "[WHITE]This sidearm houses a microscale energy generator, giving it ten shots before it has to recharge.\n",
-                "While the individual shots are weak, the essentially infinite ammo supply may outweigh that shortcoming.\n",
-                "Firing the gun until no shots remain will result in the generator needing to 'boot up' before it can begin recharging, however."
+                "[WHITE]While the individual shots are weak, the essentially infinite ammo supply may outweigh that shortcoming.\n",
+                "[WHITE]Firing the gun until no shots remain will result in the generator needing to 'boot up' before it can begin recharging, however."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -311,7 +311,7 @@
             "description": [
                 "[DARKGRAY]This is the kind of handgun given to your superiors. Doesn't look like they're using it right now...[END]\n",
                 "[WHITE]A larger clip and better accuracy are the chief improvements of this sidearm versus the standard Pistol.\n",
-                "The firing mechanism has also been finely tuned, resulting in higher damage and a marginally faster rate of fire."
+                "[WHITE]The firing mechanism has also been finely tuned, resulting in higher damage and a marginally faster rate of fire."
             ], 
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -330,8 +330,8 @@
             "capacity": "FOUR_MOD_CAPACITY",
             "description": [
                 "[WHITE]Purported to have been based on a black-market weapon designed for assassination purposes, this pistol is no more\n",
-                "damaging than the standard UAC Pistol, but it is highly accurate, making it an ideal weapon at longer ranges\n",
-                "and a highly prized sidearm for Scouts."
+                "[WHITE]damaging than the standard UAC Pistol, but it is highly accurate, making it an ideal weapon at longer ranges\n",
+                "[WHITE]and a highly prized sidearm for Scouts."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -350,7 +350,7 @@
             "capacity": "FOUR_MOD_CAPACITY",
             "description": [
                 "[WHITE]One look at this sidearm might have you thinking 'Too fancy for me', but the Handcannon proves style need not come at the cost of substance.\n",
-                "The Handcannon's high-caliber rounds will wipe the stupid look off any zombie's face, along with the face."
+                "[WHITE]The Handcannon's high-caliber rounds will wipe the stupid look off any zombie's face, along with the face."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -370,7 +370,7 @@
             "description": [
                 "[DARKGRAY]After the first hellish invasion, weapon engineers designed the super shotgun as the world's first firearm designed to kill demons. And boy does it.[END]\n",
                 "[WHITE]This double-barreled scattergun fires more pellets per shell at the same spread of the Double Shotgun.\n",
-                "The lighter alloy used in the barrels means that despite their length, this shotgun can be loaded as quickly as the Double Shotgun."
+                "[WHITE]The lighter alloy used in the barrels means that despite their length, this shotgun can be loaded as quickly as the Double Shotgun."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_PELLETCOUNT",
@@ -390,7 +390,7 @@
             "description": [
                 "[DARKGRAY]Big, bad and ugly.[END]\n",
                 "[WHITE]A drum-loading scattergun, the Assault Shotgun boasts a fire rate superior to the basic shotgun models and hassle-free reloading.\n",
-                "In addition, the assault shotgun boasts a tighter pellet spread, although it has slightly lower damage randomization than other shotguns."
+                "[WHITE]In addition, the assault shotgun boasts a tighter pellet spread, although it has slightly lower damage randomization than other shotguns."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -410,8 +410,8 @@
             "description": [
                 "[DARKGRAY]Plasma Shotgun, the best of both worlds![END]\n",
                 "[WHITE]One of the UAC's early mistakes in developing plasma-based weaponry resulted in this weapon.\n",
-                "The first prototypes of the Plasma Rifle had faulty chanellers, resulting in the plasma bolts going anywhere but straight ahead.\n",
-                "Realizing their jobs were at stake, the team reworked the weapon to fire a spread of shots and branded it the Plasma Shotgun."
+                "[WHITE]The first prototypes of the Plasma Rifle had faulty chanellers, resulting in the plasma bolts going anywhere but straight ahead.\n",
+                "[WHITE]Realizing their jobs were at stake, the team reworked the weapon to fire a spread of shots and branded it the Plasma Shotgun."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -431,9 +431,9 @@
             "description": [
                 "[DARKGRAY]Now this is a weird weapon.[END]\n",
                 "[WHITE]Intended to be a successor to the BFG, the Tristar Blaster fires three projectiles in a spread, which will explode on impact.\n",
-                "Despite the UAC's efforts, it has not eclipsed its forebearer, due in part to the fact that unlike the BFG, the Tristar's projectiles are \n",
-                "as damaging to the user as they are to anything else.\n",
-                "An ill-timed cross-promotional deal with Cerberus Defense Systems GMBH doesn't seem to have helped matters."
+                "[WHITE]Despite the UAC's efforts, it has not eclipsed its forebearer, due in part to the fact that unlike the BFG, the Tristar's projectiles are \n",
+                "[WHITE]as damaging to the user as they are to anything else.\n",
+                "[WHITE]An ill-timed cross-promotional deal with Cerberus Defense Systems GMBH doesn't seem to have helped matters."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -453,9 +453,9 @@
             "description": [
                 "[DARKGRAY]Spits enough lead into the air to be considered an environmental hazard.[END]\n",
                 "[WHITE]In a much-lauded cost-saving measure, the design team for the UAC Minigun took the Chaingun spec and reworked the cyclical barrel design \n",
-                "to accomodate a much faster rate of fire, as well as improvements to the ammo feeding mechanisms to prevent jamming even during sustained usage.\n",
-                "Suprisingly, the Minigun has similar accuracy stats to the Chaingun on which it is based, despite the increase in rate-of-fire.\n",
-                "Unfortunately, it achieves this through the use of a smaller round, dealing less damage per shot."
+                "[WHITE]to accomodate a much faster rate of fire, as well as improvements to the ammo feeding mechanisms to prevent jamming even during sustained usage.\n",
+                "[WHITE]Suprisingly, the Minigun has similar accuracy stats to the Chaingun on which it is based, despite the increase in rate-of-fire.\n",
+                "[WHITE]Unfortunately, it achieves this through the use of a smaller round, dealing less damage per shot."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -475,9 +475,9 @@
             "description": [
                 "[DARKGRAY]A definitive upgrade to the rocket launcher.[END]\n",
                 "[WHITE]After criticisms regarding the standard Rocket Launcher's single-rocket capacity, the UAC Weapons Department developed this model, which holds \n",
-                "multiple missiles, each needing to be loaded individually due to the design.\n",
-                "The missiles themselves deal explosive damage in a greater radius, thanks to advancements in the charges used, but they fly slower as a result of \n",
-                "reduced propellant capacity."
+                "[WHITE]multiple missiles, each needing to be loaded individually due to the design.\n",
+                "[WHITE]The missiles themselves deal explosive damage in a greater radius, thanks to advancements in the charges used, but they fly slower as a result of \n",
+                "[WHITE]reduced propellant capacity."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -497,8 +497,8 @@
             "description": [
                 "[DARKGRAY]This will surely make a mess![END]\n",
                 "[WHITE]The Napalm Launcher fires a rocket containing flammable gel which bursts on impact, leaving behind long-lasting fires which will \n",
-                "continue to damage targets in the vicinity.\n",
-                "This is one of the newer, more advanced weapons that were developed to counter the next demon invasion."
+                "[WHITE]continue to damage targets in the vicinity.\n",
+                "[WHITE]This is one of the newer, more advanced weapons that were developed to counter the next demon invasion."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_IMPACTDAMAGE",
@@ -518,9 +518,9 @@
             "description": [
                 "[DARKGRAY]With no recoil and pinpoint accuracy, it takes a world-class moron to miss while using a laser rifle.[END]\n",
                 "[WHITE]Laser-based weapons made their first appearance in the latter half of the 21st century, but only mounted to vehicles \n",
-                "that could carry the massive and inefficient batteries needed to power them.\n",
-                "This UAC-developed rifle represents the massive improvements made to the design in terms of rate-of-fire, energy efficiency, portability and combat readiness.\n",
-                "One of the new and advanced weapons that were designed after the first demon invasion."
+                "[WHITE]that could carry the massive and inefficient batteries needed to power them.\n",
+                "[WHITE]This UAC-developed rifle represents the massive improvements made to the design in terms of rate-of-fire, energy efficiency, portability and combat readiness.\n",
+                "[WHITE]One of the new and advanced weapons that were designed after the first demon invasion."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -539,8 +539,8 @@
             "capacity": "FOUR_MOD_CAPACITY",
             "description": [
                 "[WHITE]Nuclear variants of energy-based firearms feature an onboard cell energy generator that replenishes ammo over time, \n",
-                "and this Plasma Pistol represents the degree to which the Nuclear team at the Energy Weapons Division have been able to \n",
-                "downscale the generator without making sacrifices to the original weapon's form and function."
+                "[WHITE]and this Plasma Pistol represents the degree to which the Nuclear team at the Energy Weapons Division have been able to \n",
+                "[WHITE]downscale the generator without making sacrifices to the original weapon's form and function."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -560,10 +560,10 @@
             "description": [
                 "[DARKGRAY]A self-charging plasma rifle -- too bad it can't be manually reloaded.[END]\n",
                 "[WHITE]Concerns about the availability of cell ammo in extended combat drove the Energy Weapons Division to research the \n",
-                "scalability of a cell ammo generator for installation in a weapon, and the first to be prototyped was the rapid-fire, \n",
-                "and thus very ammo-thirsty, Plasma Rifle.\n",
-                "The result has been highly sucessful, the only widespread criticisms voiced by Space Marines being that the weapon must be \n",
-                "equipped to recharge, and that the generator can be a bit slow to do so."
+                "[WHITE]scalability of a cell ammo generator for installation in a weapon, and the first to be prototyped was the rapid-fire, \n",
+                "[WHITE]and thus very ammo-thirsty, Plasma Rifle.\n",
+                "[WHITE]The result has been highly sucessful, the only widespread criticisms voiced by Space Marines being that the weapon must be \n",
+                "[WHITE]equipped to recharge, and that the generator can be a bit slow to do so."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -583,9 +583,9 @@
             "description": [
                 "[DARKGRAY]A self-charging BFG9000! How much more lucky can you get?[END]\n",
                 "[WHITE]After the success of the Nuclear Plasma Rifle, development quickly began on creating an equivalent for the BFG 9000.\n",
-                "While the weapon is equipped, it slowly replenishes cell ammo. Its damage capability remains unaffected.\n",
+                "[WHITE]While the weapon is equipped, it slowly replenishes cell ammo. Its damage capability remains unaffected.\n",
                 "\n",
-                "Users are advised to not tinker with the weapon unless they know what they are doing, as the reactor is only barely stable."
+                "[WHITE]Users are advised to not tinker with the weapon unless they know what they are doing, as the reactor is only barely stable."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -605,8 +605,8 @@
             "description": [
                 "[DARKGRAY]Now this is a weird piece of technology, wonder how it works?[END]\n",
                 "[WHITE]While the Combat Translocator doesn't actually damage its victims, it does remove them as a threat, at least temporarily, \n",
-                "by utilizing UAC teleportation technology to warp the targeted enemy away from the user.\n",
-                "The Mark II comes with various extra modes, allowing the user to teleport themselves around, as well as mark points for later recall."
+                "[WHITE]by utilizing UAC teleportation technology to warp the targeted enemy away from the user.\n",
+                "[WHITE]The Mark II comes with various extra modes, allowing the user to teleport themselves around, as well as mark points for later recall."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -625,7 +625,7 @@
             "capacity": "FOUR_MOD_CAPACITY",
             "description": [
                 "[WHITE]This centuries-old submachine gun is still in production, a testament to the stopping power it provides in its compact form factor.\n",
-                "Inaccurate at longer ranges, the Uzi is best used up close, hosing opponents with a torrent of lead."
+                "[WHITE]Inaccurate at longer ranges, the Uzi is best used up close, hosing opponents with a torrent of lead."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -644,8 +644,8 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]This newly-developed, fully-automatic rifle is intended to replace the aging Battle Rifle design and features significant improvements \n",
-                "in damage capability owing to higher bullet velocity, but it should be noted that bullet deviation due to high recoil has also increased.\n",
-                "Part of the UAC Weapons Department's \\Superior\\ class of weaponry, the Vanguard Rifle is limited to two weapon mods due to stability issues."
+                "[WHITE]in damage capability owing to higher bullet velocity, but it should be noted that bullet deviation due to high recoil has also increased.\n",
+                "[WHITE]Part of the UAC Weapons Department's [SUPERIOR]Superior[END][WHITE] class of weaponry, the Vanguard Rifle is limited to two weapon mods due to stability issues."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -664,9 +664,9 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]During the development of the Vanguard Rifle, Ballistics Division saw the need to create an automatic rifle for marines who needed a greater degree of accuracy at range.\n",
-                "Fine-tuning the weapon's weight and balance, as well as the development of an extended memory-gel stock that molds to the user's shoulder, created an assault weapon with excellent accuracy.\n",
-                "The 2x zoom scope, while not intended for sniping operations, gives the weapon additional range capability.\n",
-                "Like all \\Superior\\-class weaponry, the Marksman Rifle leaves little room for improvement through weapon mods."
+                "[WHITE]Fine-tuning the weapon's weight and balance, as well as the development of an extended memory-gel stock that molds to the user's shoulder, created an assault weapon with excellent accuracy.\n",
+                "[WHITE]The 2x zoom scope, while not intended for sniping operations, gives the weapon additional range capability.\n",
+                "[WHITE]Like all [SUPERIOR]Superior[END][WHITE]-class weaponry, the Marksman Rifle leaves little room for improvement through weapon mods."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -685,10 +685,10 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]One of many weapons the United Aerospace Corporation has acquired the rights to manufacture over its long history, the PP7 is a pistol \n",
-                "with a larger clip and considerably better damage per bullet versus the UAC standard-issue pistol, and can be fired at greater speed to boot.\n",
-                "Horizontal accuracy is a bit tighter as well, but the sheer power this sidearm packs results in greater vertical bullet deviation.\n",
-                "Models of the PP7 are hard to come by, but prized by collectors, particularly those fond of late-20th/early-21st century cinema, strangely enough.\n",
-                "A \\Superior\\ weapon, it cannot be modified to the degree other weapons can."
+                "[WHITE]with a larger clip and considerably better damage per bullet versus the UAC standard-issue pistol, and can be fired at greater speed to boot.\n",
+                "[WHITE]Horizontal accuracy is a bit tighter as well, but the sheer power this sidearm packs results in greater vertical bullet deviation.\n",
+                "[WHITE]Models of the PP7 are hard to come by, but prized by collectors, particularly those fond of late-20th/early-21st century cinema, strangely enough.\n",
+                "[WHITE]A [SUPERIOR]Superior[END][WHITE] weapon, it cannot be modified to the degree other weapons can."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -707,9 +707,9 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]With their foray into teleportation technology, the UAC have come across an alternate dimension with unique tech of their own.\n",
-                "Many weapons there are similar to the weapons of old before the UAC, but have remarkable improvements. Signing a deal with the EDF, the UAC secured a line of weapons branded 'Meltdown'.\n",
-                "These pistols have been sought after by many marksmen thanks to their incredible accuracy, rapid firing rate, stopping power and being light weapons\n",
-                "Its fire rate, however, means that marines will be reloading often."
+                "[WHITE]Many weapons there are similar to the weapons of old before the UAC, but have remarkable improvements. Signing a deal with the EDF, the UAC secured a line of weapons branded 'Meltdown'.\n",
+                "[WHITE]These pistols have been sought after by many marksmen thanks to their incredible accuracy, rapid firing rate, stopping power and being light weapons\n",
+                "[WHITE]Its fire rate, however, means that marines will be reloading often."
             ]
         },
         {
@@ -719,7 +719,7 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]These unique, triple barreled machineguns under the 'Meltdown' brand of weapons can tear up enemies at close range, but are offset by horrible accuracy long range.\n",
-                "They utilize bullet ammunition with seemingly greater efficiency than UAC designed chainguns, dealing more damage as a result, but are harder to find."
+                "[WHITE]They utilize bullet ammunition with seemingly greater efficiency than UAC designed chainguns, dealing more damage as a result, but are harder to find."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -738,7 +738,7 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]A 12-gauge single barelled pump action 'Meltdown' brand shotgun, this beast is similar to a Winchester weapon of old, but packing a far stronger kick.\n",
-                "It deals more damage than many shotguns found in the field while also offering greater accuracy at long ranges, but are highly sought after because of their rarity."
+                "[WHITE]It deals more damage than many shotguns found in the field while also offering greater accuracy at long ranges, but are highly sought after because of their rarity."
             ]
         },
         {
@@ -748,8 +748,8 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]This heavy duty hunk of metal is in direct contrast to the lighter Meltdown weapons, but considering it has a magazine containing multiple, \n",
-                "powerful rocket rounds, people tend to not ask questions.\n",
-                "Maintaining great accuracy, the weapon seems to have a smaller splash radius than UAC rocket launchers, while still boasting greater punching power than the other launchers."
+                "[WHITE]powerful rocket rounds, people tend to not ask questions.\n",
+                "[WHITE]Maintaining great accuracy, the weapon seems to have a smaller splash radius than UAC rocket launchers, while still boasting greater punching power than the other launchers."
             ]
         },
         {
@@ -759,11 +759,11 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]In the early days of Martian colonization, those hardy souls responsible for terraforming the red planet told tales of vicious beasts \n",
-                "driven towards the equatorial regions by the melting icecaps.\n",
-                "Never substantiated, these tales caused a growing demand in sidearms such as this Hunting Revolver.\n",
-                "It may not be flashy or have a large magazine, but it is an accurate, deadly weapon in skilled hands.\n",
-                "Patience is a must when using one, as the long loading time demands the wielder make every shot count.\n",
-                "As with other \\Superior\\ weapons, Hunting Revolvers can be only minimally modified."
+                "[WHITE]driven towards the equatorial regions by the melting icecaps.\n",
+                "[WHITE]Never substantiated, these tales caused a growing demand in sidearms such as this Hunting Revolver.\n",
+                "[WHITE]It may not be flashy or have a large magazine, but it is an accurate, deadly weapon in skilled hands.\n",
+                "[WHITE]Patience is a must when using one, as the long loading time demands the wielder make every shot count.\n",
+                "[WHITE]As with other [SUPERIOR]Superior[END][WHITE] weapons, Hunting Revolvers can be only minimally modified."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -782,8 +782,8 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]Named for its early 20th-century creator, this machine gun has needed suprisingly few tweaks during its long service, and remains as deadly \n",
-                "a weapon today as it was in the days of the United States' era of Prohibition.\n",
-                "The iconic, high-capacity drum magazine is missing from this model, instead equipped with a magazine far less prone to jamming."
+                "[WHITE]a weapon today as it was in the days of the United States' era of Prohibition.\n",
+                "[WHITE]The iconic, high-capacity drum magazine is missing from this model, instead equipped with a magazine far less prone to jamming."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -802,8 +802,8 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]Featuring an even longer barrel than the Super Shotgun, this double-barreled scattergun fires as many pellets as its predecessor, but in a much tighter \n",
-                "spread, and even does slightly more damage per pellet.\n",
-                "Predictably, the extended barrel also makes this model slower to load, making it better suited for encounters where enemies aren't likely to get in your face any time soon."
+                "[WHITE]spread, and even does slightly more damage per pellet.\n",
+                "[WHITE]Predictably, the extended barrel also makes this model slower to load, making it better suited for encounters where enemies aren't likely to get in your face any time soon."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_PELLETCOUNT",
@@ -822,10 +822,10 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]Originally manufactured in Belgium centuries ago, this accurate, powerful, fully-automatic personal defense weapon saw frequent use by \n",
-                "law enforcement agencies, as well as less savory groups, around the globe.\n",
-                "UAC acquired the original manufacturer in the mid-21st century, and this weapon was one of those short-listed for reissue.\n",
-                "Due to a manufacturing glitch, the inital batch of RC-P90s were produced with the wrong size magazin. an eighty-round mag rather than the intended fifty.\n",
-                "The UAC issued a recall, but few models were ever returned, and the examples that remain are highly sought after."
+                "[WHITE]law enforcement agencies, as well as less savory groups, around the globe.\n",
+                "[WHITE]UAC acquired the original manufacturer in the mid-21st century, and this weapon was one of those short-listed for reissue.\n",
+                "[WHITE]Due to a manufacturing glitch, the inital batch of RC-P90s were produced with the wrong size magazin. an eighty-round mag rather than the intended fifty.\n",
+                "[WHITE]The UAC issued a recall, but few models were ever returned, and the examples that remain are highly sought after."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -845,8 +845,8 @@
             "description": [
                 "[DARKGRAY]The Pancor Corporation Jackhammer is a 12 gauge, gas-operated automatic weapon.[END]\n",
                 "[WHITE]This drum-loading scattergun was originally capable of full-auto firing, but after several testers ended up shooting at the \n",
-                "ceiling and fracturing their wrists, it was limited to fairly fast, but single shot attacks.\n",
-                "It remains an exceptionally dangerous example of the UAC's weapon engineering prowess, though now only to anything in front of the barrel."
+                "[WHITE]ceiling and fracturing their wrists, it was limited to fairly fast, but single shot attacks.\n",
+                "[WHITE]It remains an exceptionally dangerous example of the UAC's weapon engineering prowess, though now only to anything in front of the barrel."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_JACKHAMMER",
@@ -866,8 +866,8 @@
             "description": [
                 "[DARKGRAY]Groovy! Wait 'till they stand in a row, and watch them being impaled.[END]\n",
                 "[WHITE]While the science behind the railgun has existed for several centuries, only in the last few decades has this once-exotic weapon come into common use.\n",
-                "Railguns consist of a series of powerful supercooled electromagnets that accelerate a matter stream at a target, at a greater velocity than could be acheived \n",
-                "through more traditional propulsion methods."
+                "[WHITE]Railguns consist of a series of powerful supercooled electromagnets that accelerate a matter stream at a target, at a greater velocity than could be acheived \n",
+                "[WHITE]through more traditional propulsion methods."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_RAILGUN",
@@ -886,8 +886,8 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]An eerie pistol that always seems to fall into the hands of those in need, it is capable of dealing impressive amounts of damage \n",
-                "thanks to the strangely exaggerated muzzle velocity it generates on bullets.\n",
-                "There are tales of the revolver being sentient, and that it delights in confusing and killing all creatures around it, even the wielder..."
+                "[WHITE]thanks to the strangely exaggerated muzzle velocity it generates on bullets.\n",
+                "[WHITE]There are tales of the revolver being sentient, and that it delights in confusing and killing all creatures around it, even the wielder..."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MYSTERIOUSMAGNUM",
@@ -907,9 +907,9 @@
             "description": [
                 "[DARKGRAY]The Ultimate Big Fucking Gun. Redefines the word \\'wallpaper\\'.[END]\n",
                 "[WHITE]Unlike most models of the BFG, the BFG10K uses a newly developed system called 'quantum displacement' to fire a quartet of energy \n",
-                "blasts that instantly impact the target, rather than a slower moving projectile.\n",
-                "The blasts cannot damage enemies at a distance through the 'ray' behavior seen in other BFG model. in early tests of the prototype, \n",
-                "the team detected dangerous spatial anomalies at higher tolerances."
+                "[WHITE]blasts that instantly impact the target, rather than a slower moving projectile.\n",
+                "[WHITE]The blasts cannot damage enemies at a distance through the 'ray' behavior seen in other BFG model. in early tests of the prototype, \n",
+                "[WHITE]the team detected dangerous spatial anomalies at higher tolerances."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_BFG10K",
@@ -928,8 +928,8 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]For every rocket it uses, the Unknown Herald pistol fires a cluster of mini-missiles in a horizontal spread.\n",
-                "Closer examination of the firearm reveals no United Aerospace Corporation insignia, and the UAC has categorically denied ever creating such a weapon.\n",
-                "Perhaps the doom it brings to its enemies is a sign of things to come?"
+                "[WHITE]Closer examination of the firearm reveals no United Aerospace Corporation insignia, and the UAC has categorically denied ever creating such a weapon.\n",
+                "[WHITE]Perhaps the doom it brings to its enemies is a sign of things to come?"
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNKNOWNHERALD",
@@ -949,8 +949,8 @@
             "description": [
                 "[DARKGRAY]Advanced pulverization technology converts bullets into shrapnel.[END]\n",
                 "[WHITE]Rather than use the traditional 12-gauge shell, the Frag Shotgun breaks down bullets into pellets, firing four bullets worth with each pull of the trigger \n",
-                "in a spread tighter than the standard Shotgun.\n",
-                "In addition, it stores multiple loads before needing to be reloaded."
+                "[WHITE]in a spread tighter than the standard Shotgun.\n",
+                "[WHITE]In addition, it stores multiple loads before needing to be reloaded."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_FRAGSHOTGUN",
@@ -969,7 +969,7 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]In an inspired bout of madness, one of the now-defunct teams at the Weapons Dept. came up with this four-barreled monster of a scattergun.\n",
-                "A bit cumbersome to wield, but nobody's complained yet about the damage it puts out."
+                "[WHITE]A bit cumbersome to wield, but nobody's complained yet about the damage it puts out."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_QUADSHOTGUN",
@@ -988,11 +988,11 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]An extradimensional firearm utilizing a device UAC researchers tenatively refer to as a 'photonic condenser array',\n",
-                "the Lightweaver strips light energy from the surrounding atmosphere, channeling it into a powerful beam.\n",
+                "[WHITE]the Lightweaver strips light energy from the surrounding atmosphere, channeling it into a powerful beam.\n",
                 "\n",
-                "While the result is a energy weapon with essentially infinite ammunition, the dimmed view while the weapon recharges can prove dangerous if fired at an inopportune moment.\n",
+                "[WHITE]While the result is a energy weapon with essentially infinite ammunition, the dimmed view while the weapon recharges can prove dangerous if fired at an inopportune moment.\n",
                 "\n",
-                "The secondary fire is even more powerful, but dims the surroundings for an even longer period, and to a greater degree."
+                "[WHITE]The secondary fire is even more powerful, but dims the surroundings for an even longer period, and to a greater degree."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_LIGHTWEAVER",
@@ -1012,10 +1012,10 @@
             "description": [
                 "[DARKGRAY]One of the deadliest weapons ever made. Nyooo >O.o<[END]\n",
                 "[WHITE]A high-caliber revolver, the Trigun achieves a level of target destruction nearly unparalleled by any unmodified weapon in a similarly compact form factor.\n",
-                "You feel there might be something far greater conceal within the depths of this gun, but you can't for the life of you work out what.\n",
-                "Who knows, maybe its some sort of ultimate super weapon or something?\n",
+                "[WHITE]You feel there might be something far greater conceal within the depths of this gun, but you can't for the life of you work out what.\n",
+                "[WHITE]Who knows, maybe its some sort of ultimate super weapon or something?\n",
                 "\n",
-                "Heh, that's stupid."
+                "[WHITE]Heh, that's stupid."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_TRIGUN",
@@ -1035,8 +1035,8 @@
             "description": [
                 "[DARKGRAY]Not without incident.[END]\n",
                 "[WHITE]A mysterious weapon, clearly touched by the influence of a great and powerful demon, the Grammaton Cleric Beretta has three firing modes: \n",
-                "the standard semi-auto, full-auto, and three-shot burst.\n",
-                "The secondary fire trigger switches between them."
+                "[WHITE]the standard semi-auto, full-auto, and three-shot burst.\n",
+                "[WHITE]The secondary fire trigger switches between them."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_GRAMMATONCLERICBERETTA",
@@ -1056,8 +1056,8 @@
             "description": [
                 "[DARKGRAY]In the name of God, impure souls of the living dead shall be banished into eternal damnation. Amen.[END]\n",
                 "[WHITE]The last word in pistols, the Anti-Freak Jackal turns every bullet it fires into a devastating explosive blast.\n",
-                "The weight and recoil of this pistol is enough to shatter the arms of all but the strongest marines around.\n",
-                "The words 'Jesus Christ is in Heaven Now' are etched on the side of the gun."
+                "[WHITE]The weight and recoil of this pistol is enough to shatter the arms of all but the strongest marines around.\n",
+                "[WHITE]The words 'Jesus Christ is in Heaven Now' are etched on the side of the gun."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_ANTIFREAKJACKAL",
@@ -1072,11 +1072,11 @@
             "specialdesc": [
                 "[UNIQUE]Anti-Freak Jackal[END]\n",
                 "[WHITE]The last word in pistols, the Anti-Freak Jackal turns every bullet it fires into a devastating explosive blast.\n",
-                "The weight and recoil of this pistol is enough to shatter the arms of all but the strongest marines around.\n",
-                "The words 'Jesus Christ is in Heaven Now' are etched on the side of the gun.\n",
+                "[WHITE]The weight and recoil of this pistol is enough to shatter the arms of all but the strongest marines around.\n",
+                "[WHITE]The words 'Jesus Christ is in Heaven Now' are etched on the side of the gun.\n",
                 "[UNIQUE]Hellsing ARMS Casull[END]\n",
                 "[WHITE]A giant monster-exploding super pistol, this thing is as powerful as it is big and heavy.\n",
-                "Explosive bullets with cores made from melted down silver crosses will lay down the hurt on all manner of monster and demon, which is just what you need right now.\n",
+                "[WHITE]Explosive bullets with cores made from melted down silver crosses will lay down the hurt on all manner of monster and demon, which is just what you need right now.\n",
                 "[GOLD]It's perfect, Walter.[END]\n",
                 "[WHITE]With guns like these, no demon can ever stand in your way."
             ]
@@ -1088,7 +1088,7 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]A giant monster-exploding super pistol, this thing is as powerful as it is big and heavy.\n",
-                "Explosive bullets with cores made from melted down silver crosses will lay down the hurt on all manner of monster and demon, which is just what you need right now."
+                "[WHITE]Explosive bullets with cores made from melted down silver crosses will lay down the hurt on all manner of monster and demon, which is just what you need right now."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_HELLSINGARMSCASULL",
@@ -1107,8 +1107,8 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]Once the energy projectile fired by this weapon bounces off a surface, it will continue to travel, releasing a series of deadly explosions in its wake.\n",
-                "A valuable weapon to have when a crowd of demons is right around the corner.\n",
-                "The weapon has been finely tuned since its earliest iterations, resulting in a weapon that's far friendlier to the user."
+                "[WHITE]A valuable weapon to have when a crowd of demons is right around the corner.\n",
+                "[WHITE]The weapon has been finely tuned since its earliest iterations, resulting in a weapon that's far friendlier to the user."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_TANTRUMCANNON",
@@ -1128,8 +1128,8 @@
             "description": [
                 "[DARKGRAY]Two can play the homing missile game.[END]\n",
                 "[WHITE]These shoulder-mounted twin missile launchers appear to be of the same make as those used by the skeletal giants of Hell.\n",
-                "It appears to have suffered some damage, as only one out of every two missiles fired will home in on targets.\n",
-                "They appear to be a derivation of UAC weapons technology, and it would seem they can still be modded as a result..."
+                "[WHITE]It appears to have suffered some damage, as only one out of every two missiles fired will home in on targets.\n",
+                "[WHITE]They appear to be a derivation of UAC weapons technology, and it would seem they can still be modded as a result..."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_REVENANTSLAUNCHER",
@@ -1149,7 +1149,7 @@
             "description": [
                 "[DARKGRAY]It feels extremely unstable... what twisted mind could conceive such a weird device?[END]\n",
                 "[WHITE]The energy fields generated by the Null Pointer deal little damage, but paralyze enemies caught in them for an extended period of \n",
-                "time, leaving them vulnerable to more conventional, immediately deadly weaponry."
+                "[WHITE]time, leaving them vulnerable to more conventional, immediately deadly weaponry."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_NULLPOINTER",
@@ -1168,7 +1168,7 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]The Particle Beam Cannon first fires a minute energy stream to serve as a guidance mechanism for the deadly, high-velocity beam that immediately follows it.\n",
-                "This beam can pierce multiple targets, stopping only when it impacts a solid surface."
+                "[WHITE]This beam can pierce multiple targets, stopping only when it impacts a solid surface."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_PARTICLEBEAMCANNON",
@@ -1187,7 +1187,7 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]The projectiles fired by this newly-developed weapon feature a guidance system referred to as a 'quark mind-drive' in the weapon specs, \n",
-                "allowing them to home in on the energy signatures of hostiles after impacting solid surfaces."
+                "[WHITE]allowing them to home in on the energy signatures of hostiles after impacting solid surfaces."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_PLASMAREDIRECTIONCANNON",
@@ -1206,8 +1206,8 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]While it can only hold one shell at a time, this scattergun turns each shell into a devastating cloud of shrapnel, firing more \n",
-                "pellets at double the damage per pellet of the standard Shotgun.\n",
-                "You feel this gun has done more than its fair share of demon splattering."
+                "[WHITE]pellets at double the damage per pellet of the standard Shotgun.\n",
+                "[WHITE]You feel this gun has done more than its fair share of demon splattering."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_STEELBEAST",
@@ -1226,8 +1226,8 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]This monstrosity of a weapon looks like it should be mounted to a vehicle, but it is in fact intended for infantry use, through \n",
-                "the addition of a recoil-reduction harness that also serves to make the weapon easier to wield.\n",
-                "The gun disperses energy projectiles at random angles and at a rapid rate of fire."
+                "[WHITE]the addition of a recoil-reduction harness that also serves to make the weapon easier to wield.\n",
+                "[WHITE]The gun disperses energy projectiles at random angles and at a rapid rate of fire."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_SUSSGUN",
@@ -1246,8 +1246,8 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]From the looks of it, this weapon was ripped from some sort of mech or vehicle, and is so heavy you can barely wield it.\n",
-                "Rapidly loading great amounts of missiles, this weapon will unleash devastating explosive barrages that will flatten anything you point it at.\n",
-                "Beware the huge ammo consumption."
+                "[WHITE]Rapidly loading great amounts of missiles, this weapon will unleash devastating explosive barrages that will flatten anything you point it at.\n",
+                "[WHITE]Beware the huge ammo consumption."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MIRVLAUNCHER",
@@ -1266,8 +1266,8 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]A strange and powerful assault weapon that doesn't match any known weapon specifications.\n",
-                "Rifle is likely extradimensional in origin, and appears to be a combination of very modern weapon technology, along with strange alien reconfigurations.\n",
-                "Take care when using the grenades."
+                "[WHITE]Rifle is likely extradimensional in origin, and appears to be a combination of very modern weapon technology, along with strange alien reconfigurations.\n",
+                "[WHITE]Take care when using the grenades."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MARATHONRIFLE",
@@ -1286,7 +1286,7 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]An exceedingly powerful and amazingly compact double shotgun, this weapon is small enough to be used with one hand, and is capable of reloading \n",
-                "extraordinarily fast through some means you can't quite fathom."
+                "[WHITE]extraordinarily fast through some means you can't quite fathom."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MARATHONSHOTGUNS",
@@ -1297,14 +1297,14 @@
                 "firestorm": "PDA_MODS_FIRESTORMMOD_MARATHONSHOTGUNS",
                 "nano": "PDA_MODS_NANOMOD_MARATHONSHOTGUNS"
             },
-            "specialpretty": "Twin WSTE-M5 Shotguns",
+            "specialpretty": "Twin [UNIQUE]WSTE-M5 Shotguns[END]",
             "specialdesc": [
                 "[UNIQUE]WSTE-M5 Shotgun[END]\n",
                 "[WHITE]An exceedingly powerful and amazingly compact double shotgun, this weapon is small enough to be used with one hand, and is capable of reloading \n",
-                "extraordinarily fast through some means you can't quite fathom.\n",
+                "[WHITE]extraordinarily fast through some means you can't quite fathom.\n\n",
                 "[GOLD][INNERQUOTE]Shotgun Marathon[INNERQUOTE][END]\n",
                 "[WHITE]Dual double barrelled murderguns? \n",
-                "YES"
+                "[WHITE]YES"
             ]
         },
         {
@@ -1314,10 +1314,10 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]This submachine gun maintains a good balance of fire rate, accuracy and magazine size, but its true strength lies in its ability to fire capsules \n",
-                "that hatch into quadrepedal spiderbots.\n",
-                "Normally, these are limited to melee attacks, but it seems exotic mods can affect their A.I. subroutines.\n",
-                "The logo for a 'Mako Ballistics Corporation' can be seen on the side of the weapon, but there is no weapons manufacturer currently operating on \n",
-                "either Earth or Mars registered under that name..."
+                "[WHITE]that hatch into quadrepedal spiderbots.\n",
+                "[WHITE]Normally, these are limited to melee attacks, but it seems exotic mods can affect their A.I. subroutines.\n",
+                "[WHITE]The logo for a 'Mako Ballistics Corporation' can be seen on the side of the weapon, but there is no weapons manufacturer currently operating on \n",
+                "[WHITE]either Earth or Mars registered under that name..."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_WIDOWMAKERSMG",
@@ -1336,8 +1336,8 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]What's better than one heavily modified nuclear plasma rifle? Two, of course.\n",
-                "Going akimbo with these weapons makes for a nearly uninterrupted stream of plasmatic fury, as by the time one rifle has depleted its ammo, \n",
-                "the other has recharged its cell and is ready for another round."
+                "[WHITE]Going akimbo with these weapons makes for a nearly uninterrupted stream of plasmatic fury, as by the time one rifle has depleted its ammo, \n",
+                "[WHITE]the other has recharged its cell and is ready for another round."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_NUCLEARONSLAUGHT",
@@ -1356,9 +1356,9 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]This newly-developed assault rifle is part of a department-wide program to develop weapons that interact with modpacks in more diverse ways, \n",
-                "creating weapons with greater adaptability in battle.\n",
-                "The Chameleon Rifle takes its name from the fact that the rifle shifts color schemes depending on what exotic modpack has been applied.\n",
-                "The weapon can be toggled between its standard firing mode and the firing mode it gains from an exotic mod by pressing the secondary fire trigger."
+                "[WHITE]creating weapons with greater adaptability in battle.\n",
+                "[WHITE]The Chameleon Rifle takes its name from the fact that the rifle shifts color schemes depending on what exotic modpack has been applied.\n",
+                "[WHITE]The weapon can be toggled between its standard firing mode and the firing mode it gains from an exotic mod by pressing the secondary fire trigger."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_CHAMELEONRIFLE",
@@ -1377,8 +1377,8 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]A highly advanced nanoassembler, the Nanomachic Armament Generator uses nanite swarms to reconfigure a base weapon into a wide variety of firearms.\n",
-                "Reloading the gun when the magazine is empty will activate the nanites, which will then pick a new weapon type to assemble.\n",
-                "When unmodified, the weapon will be chosen at random, but the application of exotic mods will limit the assembler to specific types."
+                "[WHITE]Reloading the gun when the magazine is empty will activate the nanites, which will then pick a new weapon type to assemble.\n",
+                "[WHITE]When unmodified, the weapon will be chosen at random, but the application of exotic mods will limit the assembler to specific types."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_NAG",
@@ -1397,9 +1397,9 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]Another cross-dimensional weapon you have stumbled across in your battles.\n",
-                "A high powered energy gun that can feed directly off your cell charge, and can deliver devastating bolts of yellow death in quick succession.\n",
-                "Primary fire allows you to charge the weapon, unleashing stronger, slower shots for higher ammo consumption, and secondary fire allows you to \n",
-                "rapidly unleash the weaker, faster shots.The energy core is quite unstable, so don't go overcharging the gun too much, or bad things might happen."
+                "[WHITE]A high powered energy gun that can feed directly off your cell charge, and can deliver devastating bolts of yellow death in quick succession.\n",
+                "[WHITE]Primary fire allows you to charge the weapon, unleashing stronger, slower shots for higher ammo consumption, and secondary fire allows you to \n",
+                "[WHITE]rapidly unleash the weaker, faster shots.The energy core is quite unstable, so don't go overcharging the gun too much, or bad things might happen."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_LUCIFERCANNON",
@@ -1418,9 +1418,9 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]The grand-daddy of all missile launchers, the Triad Cannon is an unforgettable experience built out of three, conceptually different missile launchers.\n",
-                "Unforgettable, because it's firepower is both a grand blessing, and a deadly curse.\n",
-                "It is just as likely that you'll obliterate everything in your vicinity, as you'll obliterate yourself.\n",
-                "It is best used in the hands of experienced demomen or people who should've known better, honestly."
+                "[WHITE]Unforgettable, because it's firepower is both a grand blessing, and a deadly curse.\n",
+                "[WHITE]It is just as likely that you'll obliterate everything in your vicinity, as you'll obliterate yourself.\n",
+                "[WHITE]It is best used in the hands of experienced demomen or people who should've known better, honestly."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_TRIADCANNON",
@@ -1439,10 +1439,10 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]An old, traditional rocket launcher that issues forth strange, nebulous energy.\n",
-                "The rockets fired from this launcher are incredibly fast, and pack a massive punch, but have little splash compared to a normal rocket.\n",
-                "It also seems capable of immense damage to airborne targets, making it great for smashing cacodemons or any mooks you've blasted into the air.\n",
+                "[WHITE]The rockets fired from this launcher are incredibly fast, and pack a massive punch, but have little splash compared to a normal rocket.\n",
+                "[WHITE]It also seems capable of immense damage to airborne targets, making it great for smashing cacodemons or any mooks you've blasted into the air.\n",
                 "\n",
-                "WARNING: Constant exposure to unidentified energy may cause irrational behaviour, misplaced patriotism, and constant screaming about maggots and hippies."
+                "[WHITE]WARNING: Constant exposure to unidentified energy may cause irrational behaviour, misplaced patriotism, and constant screaming about maggots and hippies."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_DIRECTHIT",
@@ -1461,7 +1461,7 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]A small, glowing blade that appears to be capable of cutting through space-time as easily as you could cut through an imp's neck.\n",
-                "Using this a lot might have some really baaaad consequences, but right now it's really damn good at slicing up everything in sight."
+                "[WHITE]Using this a lot might have some really baaaad consequences, but right now it's really damn good at slicing up everything in sight."
             ]
         },
         {
@@ -1471,9 +1471,9 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]A high-tech revolver that appears to have been designed for stealth combat, it generates a field that bends light around the user when one of its rounds impacts a target.\n",
-                "Float like an invisible thingy, sting like a bullet.\n",
+                "[WHITE]Float like an invisible thingy, sting like a bullet.\n",
                 "\n",
-                "Or something."
+                "[WHITE]Or something."
             ]
         },
         {
@@ -1483,9 +1483,9 @@
             "capacity": "FOUR_MOD_CAPACITY",
             "description": [
                 "[WHITE]A magnum that's been corrupted to the point that its actually become a demon itself, it seeks bloodshed and suffering to sustain itself.\n",
-                "It seems perfectly happy to kill other demons, though. As long as it is killing something, it probably won't betray you.\n",
+                "[WHITE]It seems perfectly happy to kill other demons, though. As long as it is killing something, it probably won't betray you.\n",
                 "\n",
-                "Probably."
+                "[WHITE]Probably."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_DEATHSGAZE",
@@ -1509,8 +1509,8 @@
             "capacity": "FOUR_MOD_CAPACITY",
             "description": [
                 "[WHITE]This plasma weapon appears to have been partially transformed by exposure to hellish energies, causing it to fire a cluster of energy \n",
-                "projectiles that are bound by gravity, bouncing off walls and dissipating when they impact the ground.\n",
-                "In addition, the gun seems to radiate some sort of aur. if only there were a way to channel it."
+                "[WHITE]projectiles that are bound by gravity, bouncing off walls and dissipating when they impact the ground.\n",
+                "[WHITE]In addition, the gun seems to radiate some sort of aur. if only there were a way to channel it."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_HELLSREIGN",
@@ -1534,8 +1534,8 @@
             "capacity": "FOUR_MOD_CAPACITY",
             "description": [
                 "[WHITE]A heavily corrupted UAC rifle, this weapon appears to be powered by the souls of the dead.\n",
-                "While it's probably a really bad idea to use this thing, the damage it does is very impressive, and those souls would probably \n",
-                "like to blow out a demon's brain or two anyway."
+                "[WHITE]While it's probably a really bad idea to use this thing, the damage it does is very impressive, and those souls would probably \n",
+                "[WHITE]like to blow out a demon's brain or two anyway."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_SOULSTORMRIFLE",
@@ -1583,9 +1583,9 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]A super high-tech double mini-missile launcher that has terrifying potential for destruction.\n",
-                "While tiny, the missiles detonate into a line of absolute destruction, washing over nearby enemies and ripping them apart.\n",
-                "You've got no idea what the inner workings of this gun might be like, and honestly, you are a little scared to look inside.\n",
-                "Place your judgement upon those that stand before you!"
+                "[WHITE]While tiny, the missiles detonate into a line of absolute destruction, washing over nearby enemies and ripping them apart.\n",
+                "[WHITE]You've got no idea what the inner workings of this gun might be like, and honestly, you are a little scared to look inside.\n",
+                "[WHITE]Place your judgement upon those that stand before you!"
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_JUDGEOFTHEDEAD",
@@ -1604,9 +1604,9 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]At least as devastating as the 75+ mile per hour tropical cyclone the weapon is named for, the Hurricane Cannon is a rapid-fire \n",
-                "rocket launcher that increases in firerate the longer you shoot.\n",
-                "Combined with the magazine-less ammo system, this thing can unleash a wave of explosive ordinance like nothing else.\n",
-                "It excels at demolishing your ammo supply, but somehow uses less ammo the faster it shoots...\n"
+                "[WHITE]rocket launcher that increases in firerate the longer you shoot.\n",
+                "[WHITE]Combined with the magazine-less ammo system, this thing can unleash a wave of explosive ordinance like nothing else.\n",
+                "[WHITE]It excels at demolishing your ammo supply, but somehow uses less ammo the faster it shoots...\n"
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_HURRICANECANNON",
@@ -1625,7 +1625,7 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]This pistol's retro stylings belie the weapon's usefulness.\n",
-                "Just keep a keen eye on your supply of energy cells."
+                "[WHITE]Just keep a keen eye on your supply of energy cells."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_NEURALSTUNNER",
@@ -1644,9 +1644,9 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]This heavy-duty plasma pistol only holds one shot at a time, but that shot pierces multiple enemies and is extremely powerful, \n",
-                "destroying even the most powerful of Hell's minions in one shot.\n",
-                "... That's assuming, of course, that the bolt can actually hit the target. it travels at a rate that could accurately be described as 'glacial', \n",
-                "making this weapon best suited for situations where enemies have very little elbow room, or can otherwise be prevented from evading it."
+                "[WHITE]destroying even the most powerful of Hell's minions in one shot.\n",
+                "[WHITE]... That's assuming, of course, that the bolt can actually hit the target. it travels at a rate that could accurately be described as 'glacial', \n",
+                "[WHITE]making this weapon best suited for situations where enemies have very little elbow room, or can otherwise be prevented from evading it."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_BARONBLASTER",
@@ -1666,7 +1666,7 @@
             "description": [
                 "[WHITE]You don't know what the hell happened to this gun, but whatever it was, it clearly stomps on any theories that disprove perpetual motion generators.\n",
                 "\n",
-                "This gun is just amazeballs. Wow."
+                "[WHITE]This gun is just amazeballs. Wow."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_BFGINFINITY",
@@ -1685,12 +1685,12 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[DEMONIC]HELLO.\n",
-                "WOULD YOU LIKE TO PLAY A GAME?\n",
-                "PLEASE FIRE ME.\n",
-                "YOU KNOW YOU WANT TO.\n",
-                "I'M VERY POWERFUL.\n",
-                "NOBODY WILL MESS WITH YOU.\n",
-                "EVER AGAIN.\n"
+                "[WHITE]WOULD YOU LIKE TO PLAY A GAME?\n",
+                "[GOLD]PLEASE FIRE ME.\n",
+                "[GREEN]YOU KNOW YOU WANT TO.\n",
+                "[BLUE]I'M VERY POWERFUL.\n",
+                "[YELLOW]NOBODY WILL MESS WITH YOU.\n",
+                "[DEMONIC]EVER AGAIN.\n"
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_REALITYDISTORTIONARRAY",
@@ -1709,9 +1709,9 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]A strange energy weapon with possibly alien origins, this rifle appears to be from another reality, and is capable of twisting our own world slightly to resemble its own.\n",
-                "It seems like you could power some secondary fire modes on it with some of your modpacks.\n",
+                "[WHITE]It seems like you could power some secondary fire modes on it with some of your modpacks.\n",
                 "\n",
-                "Pew pew."
+                "[WHITE]Pew pew."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_DUKE2",
@@ -1730,9 +1730,9 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]A gigantic wrist-snapper of a revolver, chambered in a calibre too terrifying to even consider. It definitely wasn't designed for human use, at least.\n",
-                "If you can somehow manage to use this thing without it just snapping you in half, it doesn't seem likely you'll find a pistol with more firepower anywhere.\n",
+                "[WHITE]If you can somehow manage to use this thing without it just snapping you in half, it doesn't seem likely you'll find a pistol with more firepower anywhere.\n",
                 "\n",
-                "If a dragon man asks for it back, just give it to him without a fight, ok?"
+                "[WHITE]If a dragon man asks for it back, just give it to him without a fight, ok?"
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_LONGHORN",
@@ -1751,8 +1751,8 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]More like a gigantic slab of metal that just happens to have a handle than an actual sword.\n",
-                "If you're strong enough to actually wield this thing, there's likely no monster alive that can withstand the sheer weight of its attacks.\n",
-                "The blade appears to have a strange quality to it, you could probably cut things that normal weapons could never touch.\n"
+                "[WHITE]If you're strong enough to actually wield this thing, there's likely no monster alive that can withstand the sheer weight of its attacks.\n",
+                "[WHITE]The blade appears to have a strange quality to it, you could probably cut things that normal weapons could never touch.\n"
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_DRAGONSLAYER",
@@ -1771,7 +1771,7 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]The sound supressor atttached to this pistol was designed to last thousands of firings, possible through a series of engineering breakthroughs \n",
-                "that remain trade secrets to this day, creating a highly reliable weapon in situations where silence is the golden rule."
+                "[WHITE]that remain trade secrets to this day, creating a highly reliable weapon in situations where silence is the golden rule."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -1790,7 +1790,7 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]A silenced, rapid-fire rifle, the best thing for quickly taking down an unaware target before they can react or retaliate.\n",
-                "The rifle is slightly more likely to alert enemies than the pistol, but only barely."
+                "[WHITE]The rifle is slightly more likely to alert enemies than the pistol, but only barely."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -1827,10 +1827,10 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]One of the newest scatterguns from Ballistic Weapons Division, the Shredder Shotgun showcases a number of advancements in shell-based weaponry.\n",
-                "This double-barreled shotgun has three modes, selectable through the secondary fire trigger.\n",
-                "In Spread Mode, the gun functions similarly to other double-barreled shotguns, firing pellets in a wide spread.\n",
-                "In Slug Mode, the pellets from each shell are fused into a pair of more accurate slugs capable of devastating damage.\n",
-                "In Shredder Mode, the gun fires the pellets from each shell two at a time in a burst, leaving its victims unable to retaliate under a prolonged hail of hot lead."
+                "[WHITE]This double-barreled shotgun has three modes, selectable through the secondary fire trigger.\n",
+                "[WHITE]In Spread Mode, the gun functions similarly to other double-barreled shotguns, firing pellets in a wide spread.\n",
+                "[WHITE]In Slug Mode, the pellets from each shell are fused into a pair of more accurate slugs capable of devastating damage.\n",
+                "[WHITE]In Shredder Mode, the gun fires the pellets from each shell two at a time in a burst, leaving its victims unable to retaliate under a prolonged hail of hot lead."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_PELLETCOUNT",
@@ -1849,7 +1849,7 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]This truly ancient weapon still fares admirably against Hell's forces.\n",
-                "Just don't expect demons to agree to a duel at high noon."
+                "[WHITE]Just don't expect demons to agree to a duel at high noon."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -1868,8 +1868,8 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]Originally developed in centuries past when the hunting of lions and bears was still legal, the Elephant Gun has experienced \n",
-                "a resurgance in popularity now that humanity is the endangered species, and Earth has been invaded by that most dangerous of game: Demons.\n",
-                "It only holds one shot at a time, but that shot is a slug that deals tremendous damage."
+                "[WHITE]a resurgance in popularity now that humanity is the endangered species, and Earth has been invaded by that most dangerous of game: Demons.\n",
+                "[WHITE]It only holds one shot at a time, but that shot is a slug that deals tremendous damage."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_BASEDAMAGE",
@@ -1888,7 +1888,7 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]The gatling gun remains one of the oldest types of rapid-fire weapon, but this UAC-developed model boasts a level of portability, \n",
-                "accuracy and reliability that the original inventors could never have envisioned."
+                "[WHITE]accuracy and reliability that the original inventors could never have envisioned."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -1907,7 +1907,7 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]True to its name, the Micro Launcher is a variant of the standard Rocket Launcher designed to be more compact, decreasing the time to ready the weapon, load it, and fire it.\n",
-                "A Micro Launcher's rockets are more compact as well, flying faster than a standard rocket, but dealing two- thirds the explosive damage at a slightly smaller radius."
+                "[WHITE]A Micro Launcher's rockets are more compact as well, flying faster than a standard rocket, but dealing two- thirds the explosive damage at a slightly smaller radius."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_IMPACTDAMAGE",
@@ -1926,7 +1926,7 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]This scattergun holds as many shells as a Combat Shotgun, but in a magazine that makes for shorter reload times. With the main weakness of the Combat Shotgun removed, \n",
-                "this weapon is a fearsome and reliable weapon."
+                "[WHITE]this weapon is a fearsome and reliable weapon."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -1946,7 +1946,7 @@
             "description": [
                 "[WHITE]Converting the basic frame and the flammable gel used in the Napalm Launcher allows you to use it as a powerful flamethrower, cooking enemies with less danger to yourself than from an exploding rocket.\n",
                 "\n",
-                "Just don't set yourself on fire."
+                "[WHITE]Just don't set yourself on fire."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -1965,7 +1965,7 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]A tried and tested weapon, the Sniper Rifle is the perfect choice for taking down targets at long range.\n",
-                "Extreme power and a zooming scope will help you dominate your enemies from afar."
+                "[WHITE]Extreme power and a zooming scope will help you dominate your enemies from afar."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -1984,7 +1984,7 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]An extremely odd weapon, this gun detonates rockets within itself, and uses the explosive force to launch the rocket casing fragments out the barrel at your enemies.\n",
-                "While it seems effective, most users are wary of it suddenly exploding in their hands."
+                "[WHITE]While it seems effective, most users are wary of it suddenly exploding in their hands."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_PROJECTILECOUNT",
@@ -2003,8 +2003,8 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]While bearing the shape of an old weapon, the interior is state of the art.\n",
-                "The smallest nuclear cell generator that the UAC has ever managed to develop, alongside a super powerful plasma focusing projector makes this pistol \n",
-                "one that your enemies will never forget."
+                "[WHITE]The smallest nuclear cell generator that the UAC has ever managed to develop, alongside a super powerful plasma focusing projector makes this pistol \n",
+                "[WHITE]one that your enemies will never forget."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_BASEDAMAGE",
@@ -2024,7 +2024,7 @@
             "description": [
                 "[DARKGRAY]A 12g shotgun -- you gotta love its spread.[END]\n",
                 "[WHITE]Attempts to get the most out of every shell resulted in this improvement over the standard UAC Shotgun.\n",
-                "It fires a greater number of pellets per shot, with each doing marginally more damage, at the same spread of the standard Shotgun."
+                "[WHITE]It fires a greater number of pellets per shot, with each doing marginally more damage, at the same spread of the standard Shotgun."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_PELLETCOUNT",
@@ -2044,7 +2044,7 @@
             "description": [
                 "[DARKGRAY]Nothing beats the sound of pumping a combat shotgun.[END]\n",
                 "[WHITE]A bigger, badder version of the Combat Shotgun, this gun is the final thing most demons will ever see.\n",
-                "It fires a greater number of pellets per shot, with each doing marginally more damage, at the same spread of the standard Combat Shotgun."
+                "[WHITE]It fires a greater number of pellets per shot, with each doing marginally more damage, at the same spread of the standard Combat Shotgun."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -2064,8 +2064,8 @@
             "description": [
                 "[DARKGRAY]Double barreled shotgun -- the perfect weapon for a desperado.[END]\n",
                 "[WHITE]After the success of the Heavy Shotgun, the team forged ahead and created a double-barrelled version.\n",
-                "As with the Heavy Shotgun, the Heavy Double Shotgun fires more pellets, and does more damage per pellet, while keeping the spread of the Double Shotgun.\n",
-                "Interestingly, they also worked in a gas-ejection system for releasing shell casings, which is super cool."
+                "[WHITE]As with the Heavy Shotgun, the Heavy Double Shotgun fires more pellets, and does more damage per pellet, while keeping the spread of the Double Shotgun.\n",
+                "[WHITE]Interestingly, they also worked in a gas-ejection system for releasing shell casings, which is super cool."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_PELLETCOUNT",
@@ -2084,8 +2084,8 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[DARKGRAY]After the first hellish invasion, weapon engineers designed the super shotgun as the world's first firearm designed to kill demons. And boy does it.[END]\n",
-                "[WHITE]he big daddy of all Super Shotguns, this thing will wreck face and break bones, and it'll sound badass while it does so. It fires a greater number \n",
-                "of pellets per shot, with each doing marginally more damage, at the same spread of the standard Super Shotgun."
+                "[WHITE]The big daddy of all Super Shotguns, this thing will wreck face and break bones, and it'll sound badass while it does so. It fires a greater number \n",
+                "[WHITE]of pellets per shot, with each doing marginally more damage, at the same spread of the standard Super Shotgun."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_PELLETCOUNT",
@@ -2105,7 +2105,7 @@
             "description": [
                 "[DARKGRAY]Big, bad and ugly.[END]\n",
                 "[WHITE]A bigger, badder version of the Assault Shotgun, this gun is the final thing most chump demons will see.\n",
-                "The Heavy Assault Shotgun fires more pellets at greater damage, killing demons faster than its forbearer ever could."
+                "[WHITE]The Heavy Assault Shotgun fires more pellets at greater damage, killing demons faster than its forbearer ever could."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -2125,7 +2125,7 @@
             "description": [
                 "[DARKGRAY]Plasma Shotgun, the best of both worlds![END]\n",
                 "[WHITE]A Plasma Shotgun that's been modded to fire higher intensity blasts, this gun can melt almost anything you'd want it to.\n",
-                "It even fires more bolts than the original gun would."
+                "[WHITE]It even fires more bolts than the original gun would."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -2144,8 +2144,8 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]A bigger, badder version of the Hunting Shotgun, this gun is the final thing most chump demons will see.\n",
-                "The Heavy Hunting Shotgun fires more pellets at greater damage, whilst retaining the tight pellet spread the Hunting Shotgun is known for.\n",
-                "The scattergun of choice for when tough hellspawn just won't go down quietly."
+                "[WHITE]The Heavy Hunting Shotgun fires more pellets at greater damage, whilst retaining the tight pellet spread the Hunting Shotgun is known for.\n",
+                "[WHITE]The scattergun of choice for when tough hellspawn just won't go down quietly."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -2164,9 +2164,9 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]Even exotic alloys have their limits, as Marines using melee weapons quickly discovered.\n",
-                "To meet the needs of those desiring close- quarters combat weapons, a team at the Weapons Dept. set about developing bladed weapons that utilize nanoassemblers to keep the blade honed.\n",
-                "This Chainsaw was one of the early entries in the line.\n",
-                "An unexpected benefit of nanomachic maintanence is that the teeth are so finely formed, they pierce armor, making the Nanoedge Saw an excellent choice when facing thicker-skinned hellspawn at close range."
+                "[WHITE]To meet the needs of those desiring close- quarters combat weapons, a team at the Weapons Dept. set about developing bladed weapons that utilize nanoassemblers to keep the blade honed.\n",
+                "[WHITE]This Chainsaw was one of the early entries in the line.\n",
+                "[WHITE]An unexpected benefit of nanomachic maintanence is that the teeth are so finely formed, they pierce armor, making the Nanoedge Saw an excellent choice when facing thicker-skinned hellspawn at close range."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_BASEDAMAGE",
@@ -2185,7 +2185,7 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Pistol is tuned for greater damage per bullet, without sacrificing accuracy.\n",
-                "Unfortunately, the magazine size is dramatically decreased."
+                "[WHITE]Unfortunately, the magazine size is dramatically decreased."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -2205,7 +2205,7 @@
             "description": [
                 "[DARKGRAY]Chaingun directs heavy firepower onto your opponent making him do the chaingun cha-cha.[END]\n",
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Chaingun is tuned for greater damage per bullet, without sacrificing accuracy.\n",
-                "Unfortunately, the magazine size is dramatically decreased."
+                "[WHITE]Unfortunately, the magazine size is dramatically decreased."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -2224,7 +2224,7 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Battle Rifle is tuned for greater damage per bullet, without sacrificing accuracy.\n",
-                "Unfortunately, the magazine size is dramatically decreased."
+                "[WHITE]Unfortunately, the magazine size is dramatically decreased."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -2244,7 +2244,7 @@
             "description": [
                 "[DARKGRAY]A plasma rifle shoots multiple rounds of plasma energy -- frying some demon butt![END]\n",
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Plasma Rifle is tuned for greater damage per bolt, without sacrificing accuracy.\n",
-                "Unfortunately, the weapon draws far more power from the capacitors than before, and so can't fire as much before needing reloading."
+                "[WHITE]Unfortunately, the weapon draws far more power from the capacitors than before, and so can't fire as much before needing reloading."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -2264,7 +2264,7 @@
             "description": [
                 "[DARKGRAY]The Big Fucking Gun. Hell wouldn't be so fun without it.[END]\n",
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this BFG 9000 is tuned for greater damage per blast, without sacrificing accuracy.\n",
-                "Unfortunately, the weapon draws far more power from the capacitors than before, and so can't fire as much before needing reloading."
+                "[WHITE]Unfortunately, the weapon draws far more power from the capacitors than before, and so can't fire as much before needing reloading."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -2284,7 +2284,7 @@
             "description": [
                 "[DARKGRAY]This is the standard issue rechargeable energy side-arm. Cool![END]\n",
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Blaster is tuned for greater damage per laser, without sacrificing accuracy.\n",
-                "Unfortunately, the weapon draws far more power from the capacitors than before, and so can't fire as much before needing recharging."
+                "[WHITE]Unfortunately, the weapon draws far more power from the capacitors than before, and so can't fire as much before needing recharging."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -2304,7 +2304,7 @@
             "description": [
                 "[DARKGRAY]This is the kind of handgun given to your superiors. Doesn't look like they're using it right now...[END]\n",
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Combat Pistol is tuned for greater damage per bullet, without sacrificing accuracy.\n",
-                "Unfortunately, the magazine size is dramatically decreased."
+                "[WHITE]Unfortunately, the magazine size is dramatically decreased."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -2323,7 +2323,7 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Marksman Pistol is tuned for greater damage per bullet, without sacrificing accuracy.\n",
-                "Unfortunately, the magazine size is dramatically decreased."
+                "[WHITE]Unfortunately, the magazine size is dramatically decreased."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -2342,7 +2342,7 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Handcannon is tuned for greater damage per bullet, without sacrificing accuracy.\n",
-                "Unfortunately, the magazine size is dramatically decreased."
+                "[WHITE]Unfortunately, the magazine size is dramatically decreased."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -2362,7 +2362,7 @@
             "description": [
                 "[DARKGRAY]Now this is a weird weapon.[END]\n",
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Tristar Blaster is tuned for greater damage per bolt, without sacrificing accuracy.\n",
-                "Unfortunately, the weapon draws far more power from the capacitors than before, and so can't fire as much before needing reloading."
+                "[WHITE]Unfortunately, the weapon draws far more power from the capacitors than before, and so can't fire as much before needing reloading."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -2382,7 +2382,7 @@
             "description": [
                 "[DARKGRAY]Spits enough lead into the air to be considered an environmental hazard.[END]\n",
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Minigun is tuned for greater damage per bullet, without sacrificing accuracy.\n",
-                "Unfortunately, the magazine size is dramatically decreased."
+                "[WHITE]Unfortunately, the magazine size is dramatically decreased."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -2402,7 +2402,7 @@
             "description": [
                 "[DARKGRAY]With no recoil and pinpoint accuracy, it takes a world-class moron to miss while using a laser rifle.[END]\n",
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Laser Rifle is tuned for greater damage per laser, without sacrificing accuracy.\n",
-                "Unfortunately, the weapon draws far more power from the capacitors than before, and so can't fire as much before needing reloading."
+                "[WHITE]Unfortunately, the weapon draws far more power from the capacitors than before, and so can't fire as much before needing reloading."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -2421,7 +2421,7 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Nuclear Plasma Pistol is tuned for greater damage per bolt, without sacrificing accuracy.\n",
-                "Unfortunately, the weapon draws far more power from its capacitors than before, and thus can't fire as much before needing to recharge."
+                "[WHITE]Unfortunately, the weapon draws far more power from its capacitors than before, and thus can't fire as much before needing to recharge."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -2441,7 +2441,7 @@
             "description": [
                 "[DARKGRAY]A self-charging plasma rifle -- too bad it can't be manually reloaded.[END]\n",
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Nuclear Plasma Rifle is tuned for greater damage per bolt, without sacrificing accuracy.\n",
-                "Unfortunately, the weapon draws far more power from its capacitors than before, and thus can't fire as much before needing to recharge."
+                "[WHITE]Unfortunately, the weapon draws far more power from its capacitors than before, and thus can't fire as much before needing to recharge."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -2461,9 +2461,9 @@
             "description": [
                 "[DARKGRAY]A self-charging BFG9000! How much more lucky can you get?[END]\n",
                 "[WHITE]This Nuclear BFG 9000 was part of the 'High Power' line of UAC weapons, but is no longer produced.\n",
-                "A catastrophic fault in the nuclear reactor was discovered after release, forcing UAC to issue a recall.\n",
-                "Several BFGs detonated in small nuclear explosions, causing a great deal of damage to UAC infrastructure, and caused great public outrage as well.\n",
-                "The UAC has disavowed all legal responsibility regarding the use of this BFG model, and it commands a high price on the black market."
+                "[WHITE]A catastrophic fault in the nuclear reactor was discovered after release, forcing UAC to issue a recall.\n",
+                "[WHITE]Several BFGs detonated in small nuclear explosions, causing a great deal of damage to UAC infrastructure, and caused great public outrage as well.\n",
+                "[WHITE]The UAC has disavowed all legal responsibility regarding the use of this BFG model, and it commands a high price on the black market."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -2482,7 +2482,7 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Uzi is tuned for greater damage per bullet, without sacrificing accuracy.\n",
-                "Unfortunately, the magazine size is dramatically decreased."
+                "[WHITE]Unfortunately, the magazine size is dramatically decreased."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -2501,7 +2501,7 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Vanguard Rifle is tuned for greater damage per bullet, without sacrificing accuracy.\n",
-                "Unfortunately, the magazine size is dramatically decreased."
+                "[WHITE]Unfortunately, the magazine size is dramatically decreased."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -2520,7 +2520,7 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Marksman Rifle is tuned for greater damage per bullet, without sacrificing accuracy.\n",
-                "Unfortunately, the magazine size is dramatically decreased."
+                "[WHITE]Unfortunately, the magazine size is dramatically decreased."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -2539,7 +2539,7 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Hunting Revolver is tuned for greater damage per bullet, without sacrificing accuracy.\n",
-                "Unfortunately, the magazine size is dramatically decreased."
+                "[WHITE]Unfortunately, the magazine size is dramatically decreased."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -2558,7 +2558,7 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Tommygun is tuned for greater damage per bullet, without sacrificing accuracy.\n",
-                "Unfortunately, the magazine size is dramatically decreased."
+                "[WHITE]Unfortunately, the magazine size is dramatically decreased."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -2577,7 +2577,7 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this PP7 is tuned for greater damage per bullet, without sacrificing accuracy.\n",
-                "Unfortunately, the magazine size is dramatically reduced."
+                "[WHITE]Unfortunately, the magazine size is dramatically reduced."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -2596,10 +2596,10 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]A powerful submachinegun from advanced tech manufacturer Chesluk Industries, the RC-P120 is a monstrous bullethose that can unleash \n",
-                "an huge amount of lead downrange without even trying.\n",
-                "In addition to the massive mag, the weapon has an advanced light-refracting device built into it that uses the weapon's ammunition to power itself.\n",
-                "Pressing the secondary fire trigger activates and deactivates the cloaking device, and firing the weapon deactivates it as well.\n",
-                "While unproven, it is widely believed that Chesluk Industries is actually a front for another dark, shadowy corporation."
+                "[WHITE]an huge amount of lead downrange without even trying.\n",
+                "[WHITE]In addition to the massive mag, the weapon has an advanced light-refracting device built into it that uses the weapon's ammunition to power itself.\n",
+                "[WHITE]Pressing the secondary fire trigger activates and deactivates the cloaking device, and firing the weapon deactivates it as well.\n",
+                "[WHITE]While unproven, it is widely believed that Chesluk Industries is actually a front for another dark, shadowy corporation."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -2619,7 +2619,7 @@
             "description": [
                 "[DARKGRAY]A 12g shotgun -- you gotta love its spread.[END]\n",
                 "[WHITE]Despite its exterior, this Shotgun is part of the 'Plasmatic' line of UAC weapons, a series of scatterguns which take standard shells and convert \n",
-                "them into a spread of energy bursts."
+                "[WHITE]them into a spread of energy bursts."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_PELLETCOUNT",
@@ -2639,7 +2639,7 @@
             "description": [
                 "[DARKGRAY]Nothing beats the sound of pumping a combat shotgun.[END]\n",
                 "[WHITE]Despite its exterior, this Combat Shotgun is part of the 'Plasmatic' line of UAC weapons, a series of scatterguns which take standard shells and convert \n",
-                "them into a spread of energy bursts."
+                "[WHITE]them into a spread of energy bursts."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -2679,7 +2679,7 @@
             "description": [
                 "[DARKGRAY]After the first hellish invasion, weapon engineers designed the super shotgun as the world's first firearm designed to kill demons. And boy does it.[END]\n",
                 "[WHITE]Despite its exterior, this Super Shotgun is part of the 'Plasmatic' line of UAC weapons, a series of scatterguns which take standard shells and convert \n",
-                "them into a spread of energy bursts."
+                "[WHITE]them into a spread of energy bursts."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_PELLETCOUNT",
@@ -2699,7 +2699,7 @@
             "description": [
                 "[DARKGRAY]Big, bad and ugly.[END]\n",
                 "[WHITE]Despite its exterior, this Assault Shotgun is part of the 'Plasmatic' line of UAC weapons, a series of scatterguns which take standard shells and convert \n",
-                "them into a spread of energy bursts."
+                "[WHITE]them into a spread of energy bursts."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -2719,7 +2719,7 @@
             "description": [
                 "[DARKGRAY]Plasma Shotgun, the best of both worlds![END]\n",
                 "[WHITE]This Plasma Shotgun has been tuned to fire extremely deadly bolts that even blast nearby enemies slightly.\n",
-                "The gun seems safe, but make sure you don't burn your hands after continuous fire."
+                "[WHITE]The gun seems safe, but make sure you don't burn your hands after continuous fire."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -2738,7 +2738,7 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]Despite its exterior, this Hunting Shotgun is part of the 'Plasmatic' line of UAC weapons, a series of scatterguns which take standard shells and convert \n",
-                "them into a spread of energy bursts."
+                "[WHITE]them into a spread of energy bursts."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -2757,7 +2757,7 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]A plasma rifle designed to refract its energy blasts all over the place, resulting in a spectacular but largely inefficient display of firepower.\n",
-                "Each point of damage a normal plasma rifle would do causes this to fire that many single-damage tiny blasts, overwhelming enemies with a mass of glowing blue death.\n"
+                "[WHITE]Each point of damage a normal plasma rifle would do causes this to fire that many single-damage tiny blasts, overwhelming enemies with a mass of glowing blue death.\n"
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -2776,7 +2776,7 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]A laser rifle designed to refract its energy blasts all over the place, resulting in a spectacular but largely inefficient display of firepower.\n",
-                "Each point of damage a normal laser rifle would do causes this to fire that many single-damage tiny blasts, overwhelming enemies with a mass of glowing red death.\n"
+                "[WHITE]Each point of damage a normal laser rifle would do causes this to fire that many single-damage tiny blasts, overwhelming enemies with a mass of glowing red death.\n"
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -2795,7 +2795,7 @@
             "capacity": "TWO_MOD_CAPACITY",
             "description": [
                 "[WHITE]A nuclear plasma rifle designed to refract its energy blasts all over the place, resulting in a spectacular but largely inefficient display of firepower.\n",
-                "Each point of damage a normal plasma rifle would do causes this to fire that many single-damage tiny blasts, overwhelming enemies with a mass of glowing blue death.\n"
+                "[WHITE]Each point of damage a normal plasma rifle would do causes this to fire that many single-damage tiny blasts, overwhelming enemies with a mass of glowing blue death.\n"
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -2814,7 +2814,7 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]If one's good, two's even better.\n",
-                "This Chainsaw has been modified to support an additional blade, making it useless for the purpose of cutting trees, but much better for cutting into the demonic hordes."
+                "[WHITE]This Chainsaw has been modified to support an additional blade, making it useless for the purpose of cutting trees, but much better for cutting into the demonic hordes."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_BASEDAMAGE",
@@ -2834,10 +2834,10 @@
             "description": [
                 "[DARKGRAY]The rocket launcher is the most standard way of blowing things up.[END]\n",
                 "[WHITE]Unbeknownst to the team developing the Missile Launcher, another team within the Weapons Dept. was developing this successor to the original \n",
-                "Rocket Launcher. While its fire rate is slightly less than the Missile Launcher, the Tactical Rocket Launcher's magazine design enables rockets \n",
-                "to be reloaded at a significantly faster rate.\n",
-                "Cost-saving measures initiated during development unfortunately mean the Tactical Rocket Launcher uses an older rocket design containing an \n",
-                "explosive charge that does the same damage as its successor, but in a smaller radius."
+                "[WHITE]Rocket Launcher. While its fire rate is slightly less than the Missile Launcher, the Tactical Rocket Launcher's magazine design enables rockets \n",
+                "[WHITE]to be reloaded at a significantly faster rate.\n",
+                "[WHITE]Cost-saving measures initiated during development unfortunately mean the Tactical Rocket Launcher uses an older rocket design containing an \n",
+                "[WHITE]explosive charge that does the same damage as its successor, but in a smaller radius."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -2856,7 +2856,7 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]This Pistol is the first in the 'Storm' line of UAC weapons.\n",
-                "Like all the ballistic weapons in the line, this Pistol divides bullets into a pair of pellets before firing them, creating a shotgun-like weapon in a pistol form factor."
+                "[WHITE]Like all the ballistic weapons in the line, this Pistol divides bullets into a pair of pellets before firing them, creating a shotgun-like weapon in a pistol form factor."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -2876,7 +2876,7 @@
             "description": [
                 "[DARKGRAY]This is the kind of handgun given to your superiors. Doesn't look like they're using it right now...[END]\n",
                 "[WHITE]This Combat Pistol is part of the 'Storm' line of UAC weapons, firing a pair of pellets formed from bullets with each trigger pull.\n",
-                "Like all Combat Pistols, a larger clip is the main improvement over the Storm Pistol."
+                "[WHITE]Like all Combat Pistols, a larger clip is the main improvement over the Storm Pistol."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -2895,7 +2895,7 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]This Marksman Pistol is part of the 'Storm' line of UAC weapons, firing a pair of pellets formed from bullets with each trigger pull.\n",
-                "Like all Marksman Pistols, greater accuracy is the main improvement over the Storm Pistol."
+                "[WHITE]Like all Marksman Pistols, greater accuracy is the main improvement over the Storm Pistol."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -2914,7 +2914,7 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]This Handcannon is part of the 'Storm' line of UAC weapons, firing a pair of pellets formed from bullets with each trigger pull.\n",
-                "Like all Handcannons, the 'Storm' variant is higher caliber and higher damage."
+                "[WHITE]Like all Handcannons, the 'Storm' variant is higher caliber and higher damage."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -2933,7 +2933,7 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]Two pistols would spit more lead than one, and therefore two Uzis will unleash an almighty wall of lead at your foes.\n",
-                "Of course, firing these will drop your accuracy and your ammo stockpiles by a considerable amount."
+                "[WHITE]Of course, firing these will drop your accuracy and your ammo stockpiles by a considerable amount."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -2953,7 +2953,7 @@
             "description": [
                 "[DARKGRAY]This is the standard issue rechargeable energy side-arm. Cool![END]\n",
                 "[WHITE]The first of two energy weapons in the 'Storm' line, the Storm Blaster fires two laser blasts simultaneously at a cost of only one charge, \n",
-                "and features a higher-capacity generator than the standard Blaster."
+                "[WHITE]and features a higher-capacity generator than the standard Blaster."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -2972,7 +2972,7 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]The last in the 'Storm' line of firearms became a rare cooperative effort between two teams at the Weapons Dept, resulting in a \n",
-                "Plasma Pistol variant with the multi-shot capability of a Storm weapon and the ammo recharging of a Nuclear weapon."
+                "[WHITE]Plasma Pistol variant with the multi-shot capability of a Storm weapon and the ammo recharging of a Nuclear weapon."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -2991,7 +2991,7 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]Experiments into creating scalar plasma weapon technology resulted in the Plasma Pistol.\n",
-                "The shots are much more damaging than the Plasma Rifle's, but they are much slower to fire."
+                "[WHITE]The shots are much more damaging than the Plasma Rifle's, but they are much slower to fire."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -3010,8 +3010,8 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[DARKGRAY]This is the kind of handgun given to your superiors. Doesn't look like they're using it right now...[END]\n",
-                "Not content with the original, the team that created the Plasma Pistol turned out this Combat version in record time, \n",
-                "featuring a higher capacity cell for more shots in between reloads and better fire rate."
+                "[WHITE]Not content with the original, the team that created the Plasma Pistol turned out this Combat version in record time, \n",
+                "[WHITE]featuring a higher capacity cell for more shots in between reloads and better fire rate."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -3030,9 +3030,9 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]Not content with the original, the team that created the Plasma Pistol also released this Marksman version, \n",
-                "featuring a highly focused emitter that can unleash plasma at incredible speed.\n",
+                "[WHITE]featuring a highly focused emitter that can unleash plasma at incredible speed.\n",
                 "\n",
-                "Also looks really cool."
+                "[WHITE]Also looks really cool."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -3051,8 +3051,8 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]Never satisfied, the developers of the Plasma Pistol and Plasma Combat Pistol moved on to the Handcannon variant, \n",
-                "continuing the trend of powerful energy-based weapons with the compact size of a sidearm.\n",
-                "The stopping power of this weapon is incredible."
+                "[WHITE]continuing the trend of powerful energy-based weapons with the compact size of a sidearm.\n",
+                "[WHITE]The stopping power of this weapon is incredible."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -3071,8 +3071,8 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]While not technically a submachine gun, as there are no moving parts involved in the firing mechanism, the Plasma Uzi has \n",
-                "silenced the would-be pedants at the UAC Weapons Dept. and elsewhere through sheer firepower.\n",
-                "Accuracy continues to be an issue at this rate-of-fire, but the Plasma Uzi remains a hot item with those able to afford its high price tag."
+                "[WHITE]silenced the would-be pedants at the UAC Weapons Dept. and elsewhere through sheer firepower.\n",
+                "[WHITE]Accuracy continues to be an issue at this rate-of-fire, but the Plasma Uzi remains a hot item with those able to afford its high price tag."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -3092,8 +3092,8 @@
             "description": [
                 "[DARKGRAY]This is the standard issue rechargeable energy side-arm. Cool![END]\n",
                 "[WHITE]In their efforts to create the most powerful handgun possible, a team within the Energy Weapons Division started with the Blaster, \n",
-                "and ended up with this. The Overcharged Blaster must recharge after every shot, but those shots are devastating beams unthinkable from \n",
-                "an energy weapon of this size, stopping most low to mid-level demons dead within a few deadly shots."
+                "[WHITE]and ended up with this. The Overcharged Blaster must recharge after every shot, but those shots are devastating beams unthinkable from \n",
+                "[WHITE]an energy weapon of this size, stopping most low to mid-level demons dead within a few deadly shots."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -3112,8 +3112,8 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]Another attempt to create energy based firearms as compact and deadly as possible resulted in this Plasma Pistol as redesigned by the Nuclear team.\n",
-                "While each shot does less initial damage than those fired by an Overcharged Blaster, the bolts it fires explode on impact, dispersing energy and damaging foes close by.\n",
-                "The Supercharged Nuclear Plasma Pistol can be charged up to fire extremely powerful blasts, but you have to make sure not to charge beyond your current ammo capacity."
+                "[WHITE]While each shot does less initial damage than those fired by an Overcharged Blaster, the bolts it fires explode on impact, dispersing energy and damaging foes close by.\n",
+                "[WHITE]The Supercharged Nuclear Plasma Pistol can be charged up to fire extremely powerful blasts, but you have to make sure not to charge beyond your current ammo capacity."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_IMPACTDAMAGE",
@@ -3133,9 +3133,9 @@
             "description": [
                 "[DARKGRAY]The Big Fucking Gun. Hell wouldn't be so fun without it.[END]\n",
                 "[WHITE]A new model of the classic BFG, the VBFG 9000 features an upgrade in the damage dealt by the projectile and the number of targets it can hit.\n",
-                "The sleek, well-machined housing of the gun has won over fans of the original BFG as well.\n",
+                "[WHITE]The sleek, well-machined housing of the gun has won over fans of the original BFG as well.\n",
                 "\n",
-                "Mind the increased charge time, however."
+                "[WHITE]Mind the increased charge time, however."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -3174,7 +3174,7 @@
             "description": [
                 "[DARKGRAY]Double barreled shotgun -- the perfect weapon for a desperado.[END]\n",
                 "[WHITE]This double-barrelled shotgun has had a choke mechanism installed on it, significantly reducing pellet spread and making it a handy weapon on smaller, tougher targets.\n",
-                "All the shots hitting the same point makes it do more damage too."
+                "[WHITE]All the shots hitting the same point makes it do more damage too."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_PELLETCOUNT",
@@ -3193,8 +3193,8 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]Despite the name, this isn't a Blaster variant, but instead a fork of the Plasma Rifle program, resulting in a weapon \n",
-                "that doesn't require cooling and has improved accuracy and projectile speed.\n",
-                "An excellent precision weapon, often overlooked by marines in search of heavy firepower, but the increased agility makes it far more effective than you might think."
+                "[WHITE]that doesn't require cooling and has improved accuracy and projectile speed.\n",
+                "[WHITE]An excellent precision weapon, often overlooked by marines in search of heavy firepower, but the increased agility makes it far more effective than you might think."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -3214,9 +3214,9 @@
             "description": [
                 "[DARKGRAY]Chaingun directs heavy firepower onto your opponent making him do the chaingun cha-cha.[END]\n",
                 "[WHITE]In addition to the slight damage increase per-bullet over the standard Chaingun, the Bulletstorm Chaingun's sequential magazine design \n",
-                "means that instead of reloading it in the traditional manner, you simply add more magazines as it ejects empties.\n",
-                "It will continue to fire until you let off the trigger, or you've run out of ammo.\n",
-                "Good in dire situations where reloading equals death, bad in dire situations where you must watch every bullet."
+                "[WHITE]means that instead of reloading it in the traditional manner, you simply add more magazines as it ejects empties.\n",
+                "[WHITE]It will continue to fire until you let off the trigger, or you've run out of ammo.\n",
+                "[WHITE]Good in dire situations where reloading equals death, bad in dire situations where you must watch every bullet."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -3235,8 +3235,8 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]In addition to the slight damage increase per-bullet over the standard Battle Rifle, the Bulletstorm Rifle's twin drum magazines \n",
-                "enable the user to utilize their full supply of bullets, without ever needing to reload.\n",
-                "The weapon of choice for when only an uninterrupted hail of bullets will do."
+                "[WHITE]enable the user to utilize their full supply of bullets, without ever needing to reload.\n",
+                "[WHITE]The weapon of choice for when only an uninterrupted hail of bullets will do."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -3256,8 +3256,8 @@
             "description": [
                 "[DARKGRAY]Nothing beats the sound of pumping a combat shotgun.[END]\n",
                 "[WHITE]Not content with shotguns such as the Combat, Tactical and Assault models, a team within the Weapons Dept. strove for an automatic scattergun \n",
-                "with a fire rate as fast as the laws of physics would allow, and created the Autoshotgun.\n",
-                "Its large magazine is a blessing given its rapid fire rate, but the recoil was an issue the team could not stamp out."
+                "[WHITE]with a fire rate as fast as the laws of physics would allow, and created the Autoshotgun.\n",
+                "[WHITE]Its large magazine is a blessing given its rapid fire rate, but the recoil was an issue the team could not stamp out."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -3277,8 +3277,8 @@
             "description": [
                 "[DARKGRAY]Double barreled shotgun -- the perfect weapon for a desperado.[END]\n",
                 "[WHITE]Quite possibly the pinnacle of traditional ballistic shotgun design, this full-auto firing, double-barreled, belt-fed scattergun is a \n",
-                "devastating addition to any demon-killing Space Marine's arsenal.\n",
-                "The strong recoil during continous fire is probably a small price to pay for this kind of firepower, but make sure you don't propel yourself into a lava pit!"
+                "[WHITE]devastating addition to any demon-killing Space Marine's arsenal.\n",
+                "[WHITE]The strong recoil during continous fire is probably a small price to pay for this kind of firepower, but make sure you don't propel yourself into a lava pit!"
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -3334,7 +3334,7 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]Adapting the Nuclear Plasma Rifle to use the improvements of the normal Mk. II rifle was quite difficult, but eventually the Nuclear team succeeded. \n",
-                "A powerful weapon that, when used accordingly, can turn the tide of any battle."
+                "[WHITE]A powerful weapon that, when used accordingly, can turn the tide of any battle."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -3353,8 +3353,8 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]Attempts to upgrade the Plasma Shotgun all ended in failure, so it had to be taken apart and put back together in a similar \n",
-                "configuration before any progress could be made.\n",
-                "The discharges made from firing the shotgun are so strong they blast back any enemies that are up in your face."
+                "[WHITE]configuration before any progress could be made.\n",
+                "[WHITE]The discharges made from firing the shotgun are so strong they blast back any enemies that are up in your face."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -3373,8 +3373,8 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]During the stalled development of the Plasma Shotgun Mk.II, several engineers collaborated with the Nuclear Division to create \n",
-                "a Nuclear upgrade for the original Plasma Shotgun.\n",
-                "The resulting weapon is no more damaging, but the cell ammo regeneration has made it an easy sell to the value-minded Marine."
+                "[WHITE]a Nuclear upgrade for the original Plasma Shotgun.\n",
+                "[WHITE]The resulting weapon is no more damaging, but the cell ammo regeneration has made it an easy sell to the value-minded Marine."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -3393,11 +3393,11 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]While developing the Laser Rifle, a divide grew between the R&D team members working on it.\n",
-                "One group felt that the best way to increase damage output would be to fire faster. Ergo, the Laser Minigun.\n",
-                "But the other half felt that you could shoot even faster than that. all at once.\n",
-                "Thus the Laser Shotgun was born.\n",
+                "[WHITE]One group felt that the best way to increase damage output would be to fire faster. Ergo, the Laser Minigun.\n",
+                "[WHITE]But the other half felt that you could shoot even faster than that. all at once.\n",
+                "[WHITE]Thus the Laser Shotgun was born.\n",
                 "\n",
-                "For some reason, many people hate the concept of a laser shotgun, and it is a source of eternal arguments."
+                "[WHITE]For some reason, many people hate the concept of a laser shotgun, and it is a source of eternal arguments."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -3416,9 +3416,9 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]The rocket-propelled explosives this weapon fires can be bounced off walls, over barriers and around corners, \n",
-                "enabling skilled users to eliminate enemies before they can retaliate, and enabling unskilled users to bounce explosives \n",
-                "right back into their own faces, for a quick and ignominious death.\n",
-                "You have been warned."
+                "[WHITE]enabling skilled users to eliminate enemies before they can retaliate, and enabling unskilled users to bounce explosives \n",
+                "[WHITE]right back into their own faces, for a quick and ignominious death.\n",
+                "[WHITE]You have been warned."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_IMPACTDAMAGE",
@@ -3438,7 +3438,7 @@
             "description": [
                 "[DARKGRAY]Chaingun directs heavy firepower onto your opponent making him do the chaingun cha-cha.[END]\n",
                 "[WHITE]The UAC's 'Assault' line of weapons are fine-tuned for better damage and accuracy at the cost of rate-of-fire, and the Assault Chaingun is an excellent example.\n",
-                "A prime choice when pinpoint accuracy at greater distances is required."
+                "[WHITE]A prime choice when pinpoint accuracy at greater distances is required."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -3457,8 +3457,8 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]To develop an 'Assault' version of a weapon prized for its high rate-of-fire seems counter-productive, \n",
-                "but the Scoped Rifle remains a desirable weapon due to its accuracy and damage upgrades.\n",
-                "A scope for zooming adds to the usefulness of this weapon."
+                "[WHITE]but the Scoped Rifle remains a desirable weapon due to its accuracy and damage upgrades.\n",
+                "[WHITE]A scope for zooming adds to the usefulness of this weapon."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -3478,7 +3478,7 @@
             "description": [
                 "[DARKGRAY]A plasma rifle shoots multiple rounds of plasma energy -- frying some demon butt![END]\n",
                 "[WHITE]As with other weapons in the UAC 'Assault' line, the Assault Plasma Rifle is designed for damage output and range, at the cost of rate-of-fire.\n",
-                "The plasma bolts it fires deal more damage and travel at a much greater velocity."
+                "[WHITE]The plasma bolts it fires deal more damage and travel at a much greater velocity."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -3498,8 +3498,8 @@
             "description": [
                 "[DARKGRAY]Spits enough lead into the air to be considered an environmental hazard.[END]\n",
                 "[WHITE]To develop an 'Assault' version of a weapon prized for its high rate-of-fire seems counter-productive, but the Assault Minigun remains a \n",
-                "desirable weapon due to its accuracy and damage upgrades.\n",
-                "The incredible magazine of ammo available to the weapon allows you to keep a huge reserve of high damage accurate shots ready without impacting your ammo reserves."
+                "[WHITE]desirable weapon due to its accuracy and damage upgrades.\n",
+                "[WHITE]The incredible magazine of ammo available to the weapon allows you to keep a huge reserve of high damage accurate shots ready without impacting your ammo reserves."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -3519,7 +3519,7 @@
             "description": [
                 "[DARKGRAY]With no recoil and pinpoint accuracy, it takes a world-class moron to miss while using a laser rifle.[END]\n",
                 "[WHITE]For the Assault Laser Rifle, the Energy Weapons Division dropped the gain limiters featured on the standard model, creating a laser rifle \n",
-                "with a reduced fire rate but severely increased damage."
+                "[WHITE]with a reduced fire rate but severely increased damage."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -3539,8 +3539,8 @@
             "description": [
                 "[DARKGRAY]A self-charging plasma rifle -- too bad it can't be manually reloaded.[END]\n",
                 "[WHITE]For the Assault Nuclear Plasma Rifle, the Energy Weapons Division added a series of amplifiers that greatly enhance the power of the weapon, \n",
-                "allowing the slow trickle of power to not be completely drained by each shot. Early prototypes simply adjusted the weapon to use more energy, \n",
-                "which left the user with only a few shots before needing to recharge."
+                "[WHITE]allowing the slow trickle of power to not be completely drained by each shot. Early prototypes simply adjusted the weapon to use more energy, \n",
+                "[WHITE]which left the user with only a few shots before needing to recharge."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -3559,8 +3559,8 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]To develop an 'Assault' version of a weapon prized for its high rate-of-fire seems counter-productive, but the Assault Uzi remains a \n",
-                "desirable weapon due to its accuracy and damage upgrades.\n",
-                "Marines that enjoy the light weight and impact of pistols, but hate the smaller magazine size often convert Uzis to Assault Uzis, to take advantage of their mag size."
+                "[WHITE]desirable weapon due to its accuracy and damage upgrades.\n",
+                "[WHITE]Marines that enjoy the light weight and impact of pistols, but hate the smaller magazine size often convert Uzis to Assault Uzis, to take advantage of their mag size."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -3580,8 +3580,8 @@
             "description": [
                 "[DARKGRAY]Chaingun directs heavy firepower onto your opponent making him do the chaingun cha-cha.[END]\n",
                 "[WHITE]This Chaingun is part of the 'Burst Cannon' series of UAC weapons.\n",
-                "Tuned for greater damage per bullet and limited to three-shot bursts, it sacrifices some accuracy versus the standard model.\n",
-                "The magazine size is doubled from the original weapon, giving you even more dakka to throw around."
+                "[WHITE]Tuned for greater damage per bullet and limited to three-shot bursts, it sacrifices some accuracy versus the standard model.\n",
+                "[WHITE]The magazine size is doubled from the original weapon, giving you even more dakka to throw around."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -3600,9 +3600,9 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]This Battle Rifle is part of the 'Burst Cannon' series of UAC weapons.\n",
-                "Tuned for greater damage per bullet and limited to three-shot bursts, it sacrifices some accuracy versus the standard model.\n",
-                "Due to the considerable accuracy of the original weapon, this is not much of a drawback, and is an extremely potent weapon.\n",
-                "The magazine size is doubled from the original weapon, giving you even more dakka to throw around."
+                "[WHITE]Tuned for greater damage per bullet and limited to three-shot bursts, it sacrifices some accuracy versus the standard model.\n",
+                "[WHITE]Due to the considerable accuracy of the original weapon, this is not much of a drawback, and is an extremely potent weapon.\n",
+                "[WHITE]The magazine size is doubled from the original weapon, giving you even more dakka to throw around."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -3622,8 +3622,8 @@
             "description": [
                 "[DARKGRAY]A plasma rifle shoots multiple rounds of plasma energy -- frying some demon butt![END]\n",
                 "[WHITE]This Plasma Rifle is part of the 'Burst Cannon' series of UAC weapons.\n",
-                "Tuned for greater damage per bolt and limited to three-shot bursts, it sacrifices some accuracy versus the standard model.\n",
-                "The magazine size is doubled from the original weapon, giving you even more dakka to throw around."
+                "[WHITE]Tuned for greater damage per bolt and limited to three-shot bursts, it sacrifices some accuracy versus the standard model.\n",
+                "[WHITE]The magazine size is doubled from the original weapon, giving you even more dakka to throw around."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -3643,8 +3643,8 @@
             "description": [
                 "[DARKGRAY]Spits enough lead into the air to be considered an environmental hazard.[END]\n",
                 "[WHITE]This Minigun is part of the 'Burst Cannon' series of UAC weapons.\n",
-                "Tuned for greater damage per bullet and limited to three-shot bursts, it sacrifices some accuracy versus the standard model.\n",
-                "The magazine size is doubled from the original weapon, giving you even more dakka to throw around."
+                "[WHITE]Tuned for greater damage per bullet and limited to three-shot bursts, it sacrifices some accuracy versus the standard model.\n",
+                "[WHITE]The magazine size is doubled from the original weapon, giving you even more dakka to throw around."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -3664,9 +3664,9 @@
             "description": [
                 "[DARKGRAY]With no recoil and pinpoint accuracy, it takes a world-class moron to miss while using a laser rifle.[END]\n",
                 "[WHITE]This Laser Rifle is part of the 'Burst Cannon' series of UAC weapons.\n",
-                "Tuned for greater damage per laser and limited to three-shot bursts, it sacrifices some accuracy versus the standard model.\n",
-                "Of course, being a laser weapon, the accuracy loss is laughable.\n",
-                "The magazine size is doubled from the original weapon, giving you even more dakka to throw around."
+                "[WHITE]Tuned for greater damage per laser and limited to three-shot bursts, it sacrifices some accuracy versus the standard model.\n",
+                "[WHITE]Of course, being a laser weapon, the accuracy loss is laughable.\n",
+                "[WHITE]The magazine size is doubled from the original weapon, giving you even more dakka to throw around."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -3686,8 +3686,8 @@
             "description": [
                 "[DARKGRAY]A self-charging plasma rifle -- too bad it can't be manually reloaded.[END]\n",
                 "[WHITE]This Nuclear Plasma Rifle is part of the 'Burst Cannon' series of UAC weapons.\n",
-                "Tuned for greater damage per bolt and limited to three-shot bursts, it sacrifices some accuracy versus the standard model.\n",
-                "The magazine size is doubled from the original weapon, giving you even more dakka to throw around."
+                "[WHITE]Tuned for greater damage per bolt and limited to three-shot bursts, it sacrifices some accuracy versus the standard model.\n",
+                "[WHITE]The magazine size is doubled from the original weapon, giving you even more dakka to throw around."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -3706,8 +3706,8 @@
             "capacity": "ONE_MOD_CAPACITY",
             "description": [
                 "[WHITE]This Uzi is part of the 'Burst Cannon' series of UAC weapons.\n",
-                "Tuned for greater damage per bullet and limited to three-shot bursts, it sacrifices some accuracy versus the standard model.\n",
-                "The magazine size is doubled from the original weapon, giving you even more dakka to throw around."
+                "[WHITE]Tuned for greater damage per bullet and limited to three-shot bursts, it sacrifices some accuracy versus the standard model.\n",
+                "[WHITE]The magazine size is doubled from the original weapon, giving you even more dakka to throw around."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_MAGAZINESIZE",
@@ -3727,7 +3727,7 @@
             "description": [
                 "[DARKGRAY]A 12g shotgun -- you gotta love its spread.[END]\n",
                 "[WHITE]This Shotgun features an ammo manufacturing nanoassembler that builds shells over time from inorganic debris. The pellets \n",
-                "fired are actually so small and fine that they pierce through enemy armor."
+                "[WHITE]fired are actually so small and fine that they pierce through enemy armor."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_PELLETCOUNT",
@@ -3747,7 +3747,7 @@
             "description": [
                 "[DARKGRAY]Nothing beats the sound of pumping a combat shotgun.[END]\n",
                 "[WHITE]This Combat Shotgun features an ammo manufacturing nanoassembler that builds shells over time from inorganic debris. The pellets \n",
-                "fired are actually so small and fine that they pierce through enemy armor."
+                "[WHITE]fired are actually so small and fine that they pierce through enemy armor."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_PELLETCOUNT",
@@ -3767,7 +3767,7 @@
             "description": [
                 "[DARKGRAY]Double barreled shotgun -- the perfect weapon for a desperado.[END]\n",
                 "[WHITE]This Double Shotgun features an ammo manufacturing nanoassembler that builds shells over time from inorganic debris. The pellets \n",
-                "fired are actually so small and fine that they pierce through enemy armor."
+                "[WHITE]fired are actually so small and fine that they pierce through enemy armor."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_PELLETCOUNT",
@@ -3787,7 +3787,7 @@
             "description": [
                 "[DARKGRAY]After the first hellish invasion, weapon engineers designed the super shotgun as the world's first firearm designed to kill demons. And boy does it.[END]\n",
                 "[WHITE]This Super Shotgun features an ammo manufacturing nanoassembler that builds shells over time from inorganic debris. The pellets \n",
-                "fired are actually so small and fine that they pierce through enemy armor."
+                "[WHITE]fired are actually so small and fine that they pierce through enemy armor."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_PELLETCOUNT",
@@ -3807,7 +3807,7 @@
             "description": [
                 "[DARKGRAY]Big, bad and ugly.[END]\n",
                 "[WHITE]This Assault Shotgun features an ammo manufacturing nanoassembler that builds shells over time from inorganic debris. The pellets \n",
-                "fired are actually so small and fine that they pierce through enemy armor."
+                "[WHITE]fired are actually so small and fine that they pierce through enemy armor."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_PELLETCOUNT",
@@ -3827,7 +3827,7 @@
             "description": [
                 "[DARKGRAY]Plasma Shotgun, the best of both worlds![END]\n",
                 "[WHITE]This Plasma Shotgun features a fusion generator that replenishes cell ammo over time.\n",
-                "The plasma bolts are much weaker than normal, due to the generator occupying most of the gun, but it no longer needs to reload."
+                "[WHITE]The plasma bolts are much weaker than normal, due to the generator occupying most of the gun, but it no longer needs to reload."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_PROJECTILECOUNT",
@@ -3846,13 +3846,13 @@
             "capacity": "ZERO_MOD_CAPACITY",
             "description": [
                 "[WHITE]After seeing how useful standard commercially-available chainsaws proved against demons, the UAC set about making one specifically \n",
-                "for hacking up hordes of slavering hellbeasts.\n",
-                "The result was the Ripper.\n",
-                "Internal compressed air jets for a self-cleaning blade, space-grade carbide alloy teeth, high-torque motor, and \n",
-                "a reinforced chain guaranteed not to break even on an Arachnotron undercarriage.\n",
-                "When the chips are down and your ammo's gone, the Ripper's got your back.\n",
+                "[WHITE]for hacking up hordes of slavering hellbeasts.\n",
+                "[WHITE]The result was the Ripper.\n",
+                "[WHITE]Internal compressed air jets for a self-cleaning blade, space-grade carbide alloy teeth, high-torque motor, and \n",
+                "[WHITE]a reinforced chain guaranteed not to break even on an Arachnotron undercarriage.\n",
+                "[WHITE]When the chips are down and your ammo's gone, the Ripper's got your back.\n",
                 "\n",
-                "It's unknown if there is any truth to the rumor that the Ripper actually preserves the wielder through battle after battle."
+                "[WHITE]It's unknown if there is any truth to the rumor that the Ripper actually preserves the wielder through battle after battle."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -3872,10 +3872,10 @@
             "description": [
                 "[DARKGRAY]The Big Fucking Gun. Hell wouldn't be so fun without it.[END]\n",
                 "[WHITE]The newest in BFG technology, the Biggest Fucking Gun is the last word in single-shot energy weaponry... at least for the moment.\n",
-                "The energy cluster it fires plows right through nearly every enemy in its path, only exploding when it hits a solid surface, dealing \n",
-                "catastrophic damage in a wide radius, and dealing 'ray' damage to more enemies outside its blast radius than any other entry in the BFG line of weaponry.\n",
+                "[WHITE]The energy cluster it fires plows right through nearly every enemy in its path, only exploding when it hits a solid surface, dealing \n",
+                "[WHITE]catastrophic damage in a wide radius, and dealing 'ray' damage to more enemies outside its blast radius than any other entry in the BFG line of weaponry.\n",
                 "\n",
-                "The downside? Takes a million years to charge."
+                "[WHITE]The downside? Takes a million years to charge."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -3895,10 +3895,10 @@
             "description": [
                 "[DARKGRAY]A self-charging BFG9000! How much more lucky can you get?[END]\n",
                 "[WHITE]In the seemingly endless game of one-upmanship the Energy Weapons Division teams play, the Biggest Fucking Gun now has a Nuclear variant.\n",
-                "The BFG team argues that the Nuclear team is just standing on the shoulders of giants and that the slow recharge time does not offset the infinite \n",
-                "ammunition, while the Nuclear team argues that weapons development is all about iteration anyway, and that the last thing a Space Marine wants when \n",
-                "they find a Biggest Fucking Gun is to not have any ammo to use with it.\n",
-                "At this point, the debate typically devolves into accusations of fund misappropriation and titty-twisters."
+                "[WHITE]The BFG team argues that the Nuclear team is just standing on the shoulders of giants and that the slow recharge time does not offset the infinite \n",
+                "[WHITE]ammunition, while the Nuclear team argues that weapons development is all about iteration anyway, and that the last thing a Space Marine wants when \n",
+                "[WHITE]they find a Biggest Fucking Gun is to not have any ammo to use with it.\n",
+                "[WHITE]At this point, the debate typically devolves into accusations of fund misappropriation and titty-twisters."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -3916,13 +3916,13 @@
             "prettyname": "[MASTER]Mother-In-Law[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "description": [
-                "[GOLD]''Three feet of death to anything in its pat. that's my Mother-In-Law''[END]\n",
+                "[GOLD]''Three feet of death to anything in its path. That's my Mother-In-Law''[END]\n",
                 "[WHITE]-Found scrawled in a Weapons Dept. bathroom stall\n",
                 "\n",
-                "While the engineers originally responsible for the M.I.L. were fired after an incident involving a plasma generator being hooked up to a \n",
-                "toilet, their creation lives on as the be-all, end-all of the UAC's line of rocket launchers.\n",
-                "Through methods not understood by the team salvaging the project, the rocket's eventual damage and blast radius will increase the farther it \n",
-                "travels, and the launcher generates its own ammo."
+                "[WHITE]While the engineers originally responsible for the M.I.L. were fired after an incident involving a plasma generator being hooked up to a \n",
+                "[WHITE]toilet, their creation lives on as the be-all, end-all of the UAC's line of rocket launchers.\n",
+                "[WHITE]Through methods not understood by the team salvaging the project, the rocket's eventual damage and blast radius will increase the farther it \n",
+                "[WHITE]travels, and the launcher generates its own ammo."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -3941,8 +3941,8 @@
             "capacity": "ZERO_MOD_CAPACITY",
             "description": [
                 "[WHITE]The Autocannon's design might imply that it's a rapid-fire weapon similar to the Chaingun or Minigun, but the Autocannon is a different beast altogether.\n",
-                "A metal monster that seems like it came about from a rocket launcher having sex with a chaingun, this war crime fires a single high-velocity shot \n",
-                "with a heavily damaging area of effect."
+                "[WHITE]A metal monster that seems like it came about from a rocket launcher having sex with a chaingun, this war crime fires a single high-velocity shot \n",
+                "[WHITE]with a heavily damaging area of effect."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -3961,10 +3961,10 @@
             "capacity": "ZERO_MOD_CAPACITY",
             "description": [
                 "[WHITE]The Plasma Refractor fires a beam of incredible potency, which splits upon contact with a surface, creating smaller projectiles that arc outwards from the original shot.\n",
-                "A handy weapon in tight quarters and around corners.\n",
+                "[WHITE]A handy weapon in tight quarters and around corners.\n",
                 "\n",
-                "Recently the weapon has received harsh criticism from a few outspoken marines, claiming the device is too weak to be useful.\n",
-                "The lead scientist responsible for creating the gun has reportedly sealed himself inside his quarters several times, often for entire days, whenever he hears remarks like this."
+                "[WHITE]Recently the weapon has received harsh criticism from a few outspoken marines, claiming the device is too weak to be useful.\n",
+                "[WHITE]The lead scientist responsible for creating the gun has reportedly sealed himself inside his quarters several times, often for entire days, whenever he hears remarks like this."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -3983,8 +3983,8 @@
             "capacity": "ZERO_MOD_CAPACITY",
             "description": [
                 "[WHITE]The king of assault weapons, the Megaton is a triple-barrelled shotgun that contains 9 shots internally.\n",
-                "It can fire in single shots, thanks to the rotating barrel mechanism, and it can also fire a triple shot to completely decimate your enemies.\n",
-                "If you have a futuristic shotgun fetish, this thing is right up your alley."
+                "[WHITE]It can fire in single shots, thanks to the rotating barrel mechanism, and it can also fire a triple shot to completely decimate your enemies.\n",
+                "[WHITE]If you have a futuristic shotgun fetish, this thing is right up your alley."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4003,9 +4003,9 @@
             "capacity": "ZERO_MOD_CAPACITY",
             "description": [
                 "[WHITE]A mag-based monster of a shotgun, the Conqueror is aptly name. all fall before the one wielding this gun.\n",
-                "High damage, more pellets and big magazine size make this one of the most versatile and powerful weapons in any Marine's arsenal.\n", 
+                "[WHITE]High damage, more pellets and big magazine size make this one of the most versatile and powerful weapons in any Marine's arsenal.\n", 
                 "\n",
-                "Previous models were able to load armor-piercing pellets, but these were horrifyingly expensive to produce in large quantities, and thus were discontinued."
+                "[WHITE]Previous models were able to load armor-piercing pellets, but these were horrifyingly expensive to produce in large quantities, and thus were discontinued."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4024,7 +4024,7 @@
             "capacity": "ZERO_MOD_CAPACITY",
             "description": [
                 "[WHITE]This devastating anti-materiel weapon fires a projectile packed with multiple bomblets, which will streak outwards on impact, \n",
-                "dealing even more damage to any hostiles unfortunate enough to be in their path."
+                "[WHITE]dealing even more damage to any hostiles unfortunate enough to be in their path."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4043,10 +4043,10 @@
             "capacity": "ZERO_MOD_CAPACITY",
             "description": [
                 "[WHITE]A companion to the original Railgun, the Gauss Rifle uses magnetic rail technology to accelerate matter streams at the target.\n",
-                "Desiring to create a magrail weapon with more damaging projectiles, the design team ran into issues with magazine durability due to \n",
-                "magnetic torsion, and finally settled on a weapon that ditches the magazine entirely, and must be reloaded after every shot.\n",
+                "[WHITE]Desiring to create a magrail weapon with more damaging projectiles, the design team ran into issues with magazine durability due to \n",
+                "[WHITE]magnetic torsion, and finally settled on a weapon that ditches the magazine entirely, and must be reloaded after every shot.\n",
                 "\n",
-                "The weapon can also be slowly charged for additional damage per shot, without using more ammo."
+                "[WHITE]The weapon can also be slowly charged for additional damage per shot, without using more ammo."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4065,9 +4065,9 @@
             "capacity": "ZERO_MOD_CAPACITY",
             "description": [
                 "[WHITE]Originally designed to pierce reinforced installations and decimate stationary weaponry, the Anti-materiel Rifle has been given a new lease on life with the demonic invasion.\n",
-                "Its high-explosive frangible rounds have proven highly effective on demon types that have assimilated UAC weaponry and defense systems.\n",
-                "Those intending to use the Anti-Materiel Rifle should keep in mind that it is a bolt-action rifl. the spent casing must be manually ejected after firing, \n",
-                "making it highly inadvisable for use in crowd control and close-range firefights."
+                "[WHITE]Its high-explosive frangible rounds have proven highly effective on demon types that have assimilated UAC weaponry and defense systems.\n",
+                "[WHITE]Those intending to use the Anti-Materiel Rifle should keep in mind that it is a bolt-action rifl. the spent casing must be manually ejected after firing, \n",
+                "[WHITE]making it highly inadvisable for use in crowd control and close-range firefights."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4086,11 +4086,11 @@
             "capacity": "ZERO_MOD_CAPACITY",
             "description": [
                 "[WHITE]Originally a fork of the BFG program, the team responsible for the weapon discovered that demonic biosignatures can conduct energy on various wavelengths.\n",
-                "...In plain English, the Zeus Cannon's energy cluster seeks after enemies and reflects off solid surfaces, constantly emmitting tendrils of lethal energy \n",
-                "until it finally explodes.\n",
+                "[WHITE]...In plain English, the Zeus Cannon's energy cluster seeks after enemies and reflects off solid surfaces, constantly emmitting tendrils of lethal energy \n",
+                "[WHITE]until it finally explodes.\n",
                 "\n",
-                "Some practical jokers like to reconfigure their Zeus Cannon to home in on friendly targets on a low power setting. not causing them direct harm, \n",
-                "but certainly punting them around rooms uncontrollably."
+                "[WHITE]Some practical jokers like to reconfigure their Zeus Cannon to home in on friendly targets on a low power setting. not causing them direct harm, \n",
+                "[WHITE]but certainly punting them around rooms uncontrollably."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4109,11 +4109,11 @@
             "capacity": "ZERO_MOD_CAPACITY",
             "description": [
                 "[WHITE]In an accident while developing the Plasma Shotgun Mk.II, the weapon's plasma focusers overloaded, and it unleashed pure electrical current \n",
-                "out the muzzle, frying both it and an unfortunate nearby technician.\n",
-                "Inspired by the raw power, a team started work on weaponizing the power of lightning, and created the glory that is the Voltgun.\n",
-                "Numerous failsafes prevent the electric currents from arcing back to the user, making certain no one but the demons will get fried now.\n",
+                "[WHITE]out the muzzle, frying both it and an unfortunate nearby technician.\n",
+                "[WHITE]Inspired by the raw power, a team started work on weaponizing the power of lightning, and created the glory that is the Voltgun.\n",
+                "[WHITE]Numerous failsafes prevent the electric currents from arcing back to the user, making certain no one but the demons will get fried now.\n",
                 "\n",
-                "Previous prototypes have, however, been reported frying marines in the heat of battle. It was the one instance where the science team was baffled at marines running faster than lightning."
+                "[WHITE]Previous prototypes have, however, been reported frying marines in the heat of battle. It was the one instance where the science team was baffled at marines running faster than lightning."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4132,8 +4132,8 @@
             "capacity": "ZERO_MOD_CAPACITY",
             "description": [
                 "[WHITE]Originally designed to be mounted on tripods or vehicles, the Super Machinegun features a colossal magazine and fires \n",
-                "bullets designed to shred through just about anything.\n",
-                "Some enterprising Marines have started carrying them around, however, seeing how useful they are against the more squishy varieties of hellbeast."
+                "[WHITE]bullets designed to shred through just about anything.\n",
+                "[WHITE]Some enterprising Marines have started carrying them around, however, seeing how useful they are against the more squishy varieties of hellbeast."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4152,9 +4152,9 @@
             "capacity": "ZERO_MOD_CAPACITY",
             "description": [
                 "[WHITE]Energy-based melee weaponry was a mainstay of science fiction of the distant past, but the UAC's Energysaw makes fantasy into brutal reality.\n",
-                "Chanelling plasma energy into a finite-length 'blade' creates a melee weapon capable of cleaving hellspawn flesh, bone and metal like the proverbial hot knife through butter.\n",
+                "[WHITE]Chanelling plasma energy into a finite-length 'blade' creates a melee weapon capable of cleaving hellspawn flesh, bone and metal like the proverbial hot knife through butter.\n",
                 "\n",
-                "Of course, unlike a normal melee weapon, this one requires cells to use, which is a small tradeoff for the power it brings."
+                "[WHITE]Of course, unlike a normal melee weapon, this one requires cells to use, which is a small tradeoff for the power it brings."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4173,10 +4173,10 @@
             "capacity": "ZERO_MOD_CAPACITY",
             "description": [
                 "[WHITE]Rather than use traditional explosive charges, the Plascharge Launcher fires a modified rocket containing a multi-plasmatic warhead.\n",
-                "The resulting energy blasts make it the weapon of choice against extremely tough or clustered enemies.\n",
-                "Never underestimate the power of this weapon.\n",
+                "[WHITE]The resulting energy blasts make it the weapon of choice against extremely tough or clustered enemies.\n",
+                "[WHITE]Never underestimate the power of this weapon.\n",
                 "\n",
-                "The detonations are quite powerful, so keep your distance, yeah?"
+                "[WHITE]The detonations are quite powerful, so keep your distance, yeah?"
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4195,11 +4195,11 @@
             "capacity": "ZERO_MOD_CAPACITY",
             "description": [
                 "[WHITE]The UAC's Plasma Rifle program was a true game-changer for the company, spawning research into many types of energy-based weaponry.\n",
-                "One of the newest is the aptly named Plasma Cannon.\n",
-                "Designed to draw from the user's full supply of energy cells, the Plasma Cannon never needs to be reloaded, and slowly fires \n",
-                "immensely potent blasts of plasma energy with a wide area of effect.\n",
-                "Some have speculated that the Plasma Cannon be rolled into the BFG program, but it must be noted that the weapon is not possessed of the \n",
-                "energy field generator found in BFGs, making it best suited for long-range assaults."
+                "[WHITE]One of the newest is the aptly named Plasma Cannon.\n",
+                "[WHITE]Designed to draw from the user's full supply of energy cells, the Plasma Cannon never needs to be reloaded, and slowly fires \n",
+                "[WHITE]immensely potent blasts of plasma energy with a wide area of effect.\n",
+                "[WHITE]Some have speculated that the Plasma Cannon be rolled into the BFG program, but it must be noted that the weapon is not possessed of the \n",
+                "[WHITE]energy field generator found in BFGs, making it best suited for long-range assaults."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4219,9 +4219,9 @@
             "description": [
                 "[DARKGRAY]This is the standard issue rechargeable energy side-arm. Cool![END]\n",
                 "[WHITE]The newest entry in the Blaster line of compact and deadly energy-based sidearems, this model fires a laser designed to bore a hole through just about anything in its path.\n",
-                "The weapon is not without its downside. namely the fact that this weapon is prone to overheating, something its less potent siblings never had to worry about.\n",
-                "One use of the primary fire will completely deplete the cell, as well as increase the heat level of the gun by a large margin.\n",
-                "The team devised a secondary fire mode which draws less power from the cell and generates less heat, but repeated usage results in a less powerful primary fire until the cell can fully recharge."
+                "[WHITE]The weapon is not without its downside. namely the fact that this weapon is prone to overheating, something its less potent siblings never had to worry about.\n",
+                "[WHITE]One use of the primary fire will completely deplete the cell, as well as increase the heat level of the gun by a large margin.\n",
+                "[WHITE]The team devised a secondary fire mode which draws less power from the cell and generates less heat, but repeated usage results in a less powerful primary fire until the cell can fully recharge."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4240,11 +4240,11 @@
             "capacity": "ZERO_MOD_CAPACITY",
             "description": [
                 "[WHITE]Foreseeing a need for more high-firerate laser weaponry following the release of the Laser Rifle, the latter's development team set to work \n",
-                "adapting the laser emitters for use in a minigun.\n",
-                "The result is even better that the team expected. cycling three emitters provides a fire rate unheard of in laser weaponry prior to now, while \n",
-                "keeping the stress on each emitter at tolerable levels.\n",
-                "The excellence of laser accuracy still grips even this ludicrous weapon, allowing the wielder to unleash extremely accurate and punishing laser \n",
-                "barrages, provided they can keep the gun well-stocked with energy cells."
+                "[WHITE]adapting the laser emitters for use in a minigun.\n",
+                "[WHITE]The result is even better that the team expected. cycling three emitters provides a fire rate unheard of in laser weaponry prior to now, while \n",
+                "[WHITE]keeping the stress on each emitter at tolerable levels.\n",
+                "[WHITE]The excellence of laser accuracy still grips even this ludicrous weapon, allowing the wielder to unleash extremely accurate and punishing laser \n",
+                "[WHITE]barrages, provided they can keep the gun well-stocked with energy cells."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4263,9 +4263,9 @@
             "capacity": "ZERO_MOD_CAPACITY",
             "description": [
                 "[WHITE]Designed for solo operatives in need of additional fire support, the Defense Drone Launcher expends the propellant from a collection of standard rockets \n",
-                "to fuel a nano-assembled hover drone equipped with twin plasma guns.\n",
-                "Rather than fire autonomously at foes, the drone directs its attacks towards whatever its owner is currently shooting at, making it a potent ally for a lone space marine.\n",
-                "They can also be deployed as stationary turrets, firing at any enemies they detect independantly of the user."
+                "[WHITE]to fuel a nano-assembled hover drone equipped with twin plasma guns.\n",
+                "[WHITE]Rather than fire autonomously at foes, the drone directs its attacks towards whatever its owner is currently shooting at, making it a potent ally for a lone space marine.\n",
+                "[WHITE]They can also be deployed as stationary turrets, firing at any enemies they detect independantly of the user."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4284,8 +4284,8 @@
             "capacity": "ZERO_MOD_CAPACITY",
             "description": [
                 "[WHITE]This bulky launcher contains one of the newest, and possibly the most bizzare of the UAC Weapons Department's contributions to the war. a rocket-propelled plasma 'flamethrower'.\n",
-                "As the rocket flies, it continuously scans its immediate surroundings for demonic biosignatures, and when it finds a match, it ejects a stream of \n",
-                "plasma which will reduce even stronger demons to a charred mess."
+                "[WHITE]As the rocket flies, it continuously scans its immediate surroundings for demonic biosignatures, and when it finds a match, it ejects a stream of \n",
+                "[WHITE]plasma which will reduce even stronger demons to a charred mess."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4304,8 +4304,8 @@
             "capacity": "ZERO_MOD_CAPACITY",
             "description": [
                 "[WHITE]This Pistol's magazine is replaced with an ammo manufacturing nano-assembler that builds compatible pistol rounds over time from inorganic debris.\n",
-                "The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
-                "They do not make it any more effective, they just look cool."
+                "[WHITE]The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
+                "[WHITE]They do not make it any more effective, they just look cool."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4324,9 +4324,9 @@
             "capacity": "ZERO_MOD_CAPACITY",
             "description": [
                 "[DARKGRAY]Chaingun directs heavy firepower onto your opponent making him do the chaingun cha-cha.[END]\n",
-                "This Chaingun's belt is replaced with an ammo manufacturing nano-assembler that builds compatible rifle rounds over time from inorganic debris.\n",
-                "The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
-                "They do not make it any more effective, they just look cool."
+                "[WHITE]This Chaingun's belt is replaced with an ammo manufacturing nano-assembler that builds compatible rifle rounds over time from inorganic debris.\n",
+                "[WHITE]The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
+                "[WHITE]They do not make it any more effective, they just look cool."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4345,8 +4345,8 @@
             "capacity": "ZERO_MOD_CAPACITY",
             "description": [
                 "[WHITE]This Battle Rifle's magazine is replaced with an ammo manufacturing nano-assembler that builds compatible rifle rounds over time from inorganic debris.\n",
-                "The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
-                "They do not make it any more effective, they just look cool."
+                "[WHITE]The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
+                "[WHITE]They do not make it any more effective, they just look cool."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4366,8 +4366,8 @@
             "description": [
                 "[DARKGRAY]The rocket launcher is the most standard way of blowing things up.[END]\n",
                 "[WHITE]This Rocket Launcher has an ammo manufacturing nano-assembler that builds rockets over time from inorganic debris.\n",
-                "The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
-                "They do not make it any more effective, they just look cool."
+                "[WHITE]The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
+                "[WHITE]They do not make it any more effective, they just look cool."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4387,8 +4387,8 @@
             "description": [
                 "[DARKGRAY]A plasma rifle shoots multiple rounds of plasma energy -- frying some demon butt![END]\n",
                 "[WHITE]This Plasma Rifle's cell battery is replaced with a series of extremely compact fusion generators that replenish cell ammo over time.\n",
-                "The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
-                "They do not make it any more effective, they just look cool."
+                "[WHITE]The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
+                "[WHITE]They do not make it any more effective, they just look cool."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4408,8 +4408,8 @@
             "description": [
                 "[DARKGRAY]This is the standard issue rechargeable energy side-arm. Cool![END]\n",
                 "[WHITE]This Blaster's battery is replaced with a series of extremely compact fusion generators that keep it charged at all times.\n",
-                "The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
-                "They do not make it any more effective, they just look cool."
+                "[WHITE]The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
+                "[WHITE]They do not make it any more effective, they just look cool."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4429,8 +4429,8 @@
             "description": [
                 "[DARKGRAY]This is the kind of handgun given to your superiors. Doesn't look like they're using it right now...[END]\n",
                 "[WHITE]This Combat Pistol's magazine is replaced with an ammo manufacturing nano-assembler that builds compatible pistol rounds over time from inorganic debris.\n",
-                "The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
-                "They do not make it any more effective, they just look cool."
+                "[WHITE]The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
+                "[WHITE]They do not make it any more effective, they just look cool."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4449,8 +4449,8 @@
             "capacity": "ZERO_MOD_CAPACITY",
             "description": [
                 "[WHITE]This Marksman Pistol's magazine is replaced with an ammo manufacturing nano-assembler that builds compatible pistol rounds over time from inorganic debris.\n",
-                "The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
-                "They do not make it any more effective, they just look cool."
+                "[WHITE]The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
+                "[WHITE]They do not make it any more effective, they just look cool."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4469,8 +4469,8 @@
             "capacity": "ZERO_MOD_CAPACITY",
             "description": [
                 "[WHITE]This Handcannon's magazine is replaced with an ammo manufacturing nano-assembler that builds compatible pistol rounds over time from inorganic debris.\n",
-                "The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
-                "They do not make it any more effective, they just look cool."
+                "[WHITE]The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
+                "[WHITE]They do not make it any more effective, they just look cool."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4490,8 +4490,8 @@
             "description": [
                 "[DARKGRAY]Now this is a weird weapon.[END]\n",
                 "[WHITE]This Tristar Blaster's cell battery is replaced with a series of extremely compact fusion generators that replenish cell ammo over time.\n",
-                "The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
-                "They do not make it any more effective, they just look cool."
+                "[WHITE]The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
+                "[WHITE]They do not make it any more effective, they just look cool."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4511,8 +4511,8 @@
             "description": [
                 "[DARKGRAY]Spits enough lead into the air to be considered an environmental hazard.[END]\n",
                 "[WHITE]This Minigun's magazine is replaced with an ammo manufacturing nano-assembler that builds compatible rifle rounds over time from inorganic debris.\n",
-                "The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
-                "They do not make it any more effective, they just look cool."
+                "[WHITE]The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
+                "[WHITE]They do not make it any more effective, they just look cool."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4532,8 +4532,8 @@
             "description": [
                 "[DARKGRAY]A definitive upgrade to the rocket launcher.[END]\n",
                 "[WHITE]This Missile Launcher's loading tube is replaced with an ammo manufacturing nano-assembler that builds missiles over time from inorganic debris.\n",
-                "The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
-                "They do not make it any more effective, they just look cool."
+                "[WHITE]The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
+                "[WHITE]They do not make it any more effective, they just look cool."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4553,8 +4553,8 @@
             "description": [
                 "[DARKGRAY]This will surely make a mess![END]\n",
                 "[WHITE]This Napalm Launcher's loading tube is replaced with an ammo manufacturing nano-assembler that builds napalm rockets over time from inorganic debris.\n",
-                "The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
-                "They do not make it any more effective, they just look cool."
+                "[WHITE]The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
+                "[WHITE]They do not make it any more effective, they just look cool."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4574,8 +4574,8 @@
             "description": [
                 "[DARKGRAY]With no recoil and pinpoint accuracy, it takes a world-class moron to miss while using a laser rifle.[END]\n",
                 "[WHITE]This Laser Rifle's cell battery is replaced with a series of extremely compact fusion generators that replenish cell ammo over time.\n",
-                "The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
-                "They do not make it any more effective, they just look cool."
+                "[WHITE]The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
+                "[WHITE]They do not make it any more effective, they just look cool."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4594,8 +4594,8 @@
             "capacity": "ZERO_MOD_CAPACITY",
             "description": [
                 "[WHITE]This Uzi's magazine is replaced with an ammo manufacturing nano-assembler that builds compatible pistol rounds over time from inorganic debris.\n",
-                "The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
-                "They do not make it any more effective, they just look cool."
+                "[WHITE]The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
+                "[WHITE]They do not make it any more effective, they just look cool."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4614,9 +4614,9 @@
             "capacity": "ZERO_MOD_CAPACITY",
             "description": [
                 "[WHITE]Part of the 'Demolition Ammo' series of ballistic weapons, this Pistol fires explosive rounds that detonate on impact, heavily damaging \n",
-                "the target and dealing splash damage to any hostiles in the immediate vicinity.\n",
-                "The explosive damage scales based on the firerate of the gun, but the size of the explosion is constant between weapons.\n",
-                "The faster a weapon fires, the less damage the explosion will deal."
+                "[WHITE]the target and dealing splash damage to any hostiles in the immediate vicinity.\n",
+                "[WHITE]The explosive damage scales based on the firerate of the gun, but the size of the explosion is constant between weapons.\n",
+                "[WHITE]The faster a weapon fires, the less damage the explosion will deal."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4636,9 +4636,9 @@
             "description": [
                 "[DARKGRAY]Chaingun directs heavy firepower onto your opponent making him do the chaingun cha-cha.[END]\n",
                 "[WHITE]Part of the 'Demolition Ammo' series of ballistic weapons, this Chaingun fires explosive rounds that detonate on impact, \n",
-                "heavily damaging the target and dealing splash damage to any hostiles in the immediate vicinity.\n",
-                "The explosive damage scales based on the firerate of the gun, but the size of the explosion is constant between weapons.\n",
-                "The faster a weapon fires, the less damage the explosion will deal."
+                "[WHITE]heavily damaging the target and dealing splash damage to any hostiles in the immediate vicinity.\n",
+                "[WHITE]The explosive damage scales based on the firerate of the gun, but the size of the explosion is constant between weapons.\n",
+                "[WHITE]The faster a weapon fires, the less damage the explosion will deal."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4657,9 +4657,9 @@
             "capacity": "ZERO_MOD_CAPACITY",
             "description": [
                 "[WHITE]Part of the 'Demolition Ammo' series of ballistic weapons, this Battle Rifle fires explosive rounds that detonate on impact, \n",
-                "heavily damaging the target and dealing splash damage to any hostiles in the immediate vicinity.\n",
-                "The explosive damage scales based on the firerate of the gun, but the size of the explosion is constant between weapons.\n",
-                "The faster a weapon fires, the less damage the explosion will deal."
+                "[WHITE]heavily damaging the target and dealing splash damage to any hostiles in the immediate vicinity.\n",
+                "[WHITE]The explosive damage scales based on the firerate of the gun, but the size of the explosion is constant between weapons.\n",
+                "[WHITE]The faster a weapon fires, the less damage the explosion will deal."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4679,9 +4679,9 @@
             "description": [
                 "[DARKGRAY]This is the kind of handgun given to your superiors. Doesn't look like they're using it right now...[END]\n",
                 "[WHITE]Part of the 'Demolition Ammo' series of ballistic weapons, this Combat Pistol fires explosive rounds that detonate on impact, \n",
-                "heavily damaging the target and dealing splash damage to any hostiles in the immediate vicinity.\n",
-                "The explosive damage scales based on the firerate of the gun, but the size of the explosion is constant between weapons.\n",
-                "The faster a weapon fires, the less damage the explosion will deal."
+                "[WHITE]heavily damaging the target and dealing splash damage to any hostiles in the immediate vicinity.\n",
+                "[WHITE]The explosive damage scales based on the firerate of the gun, but the size of the explosion is constant between weapons.\n",
+                "[WHITE]The faster a weapon fires, the less damage the explosion will deal."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4700,9 +4700,9 @@
             "capacity": "ZERO_MOD_CAPACITY",
             "description": [
                 "[WHITE]Part of the 'Demolition Ammo' series of ballistic weapons, this Marksman Pistol fires explosive rounds that detonate on impact, \n",
-                "heavily damaging the target and dealing splash damage to any hostiles in the immediate vicinity.\n",
-                "The explosive damage scales based on the firerate of the gun, but the size of the explosion is constant between weapons.\n",
-                "The faster a weapon fires, the less damage the explosion will deal."
+                "[WHITE]heavily damaging the target and dealing splash damage to any hostiles in the immediate vicinity.\n",
+                "[WHITE]The explosive damage scales based on the firerate of the gun, but the size of the explosion is constant between weapons.\n",
+                "[WHITE]The faster a weapon fires, the less damage the explosion will deal."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4721,9 +4721,9 @@
             "capacity": "ZERO_MOD_CAPACITY",
             "description": [
                 "[WHITE]Part of the 'Demolition Ammo' series of ballistic weapons, this Handcannon fires explosive rounds that detonate on impact, \n",
-                "heavily damaging the target and dealing splash damage to any hostiles in the immediate vicinity.\n",
-                "The explosive damage scales based on the firerate of the gun, but the size of the explosion is constant between weapons.\n",
-                "The faster a weapon fires, the less damage the explosion will deal."
+                "[WHITE]heavily damaging the target and dealing splash damage to any hostiles in the immediate vicinity.\n",
+                "[WHITE]The explosive damage scales based on the firerate of the gun, but the size of the explosion is constant between weapons.\n",
+                "[WHITE]The faster a weapon fires, the less damage the explosion will deal."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4743,9 +4743,9 @@
             "description": [
                 "[DARKGRAY]Spits enough lead into the air to be considered an environmental hazard.[END]\n",
                 "[WHITE]Part of the 'Demolition Ammo' series of ballistic weapons, this Minigun fires explosive rounds that detonate on impact, \n",
-                "heavily damaging the target and dealing splash damage to any hostiles in the immediate vicinity.\n",
-                "The explosive damage scales based on the firerate of the gun, but the size of the explosion is constant between weapons.\n",
-                "The faster a weapon fires, the less damage the explosion will deal."
+                "[WHITE]heavily damaging the target and dealing splash damage to any hostiles in the immediate vicinity.\n",
+                "[WHITE]The explosive damage scales based on the firerate of the gun, but the size of the explosion is constant between weapons.\n",
+                "[WHITE]The faster a weapon fires, the less damage the explosion will deal."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4764,9 +4764,9 @@
             "capacity": "ZERO_MOD_CAPACITY",
             "description": [
                 "[WHITE]Part of the 'Demolition Ammo' series of ballistic weapons, this Uzi fires explosive rounds that detonate on impact, \n",
-                "heavily damaging the target and dealing splash damage to any hostiles in the immediate vicinity.\n",
-                "The explosive damage scales based on the firerate of the gun, but the size of the explosion is constant between weapons.\n",
-                "The faster a weapon fires, the less damage the explosion will deal."
+                "[WHITE]heavily damaging the target and dealing splash damage to any hostiles in the immediate vicinity.\n",
+                "[WHITE]The explosive damage scales based on the firerate of the gun, but the size of the explosion is constant between weapons.\n",
+                "[WHITE]The faster a weapon fires, the less damage the explosion will deal."
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",

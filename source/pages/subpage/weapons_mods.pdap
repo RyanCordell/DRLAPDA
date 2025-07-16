@@ -1,17 +1,18 @@
 
 // DisplayIcon(player_weapon[player_weapon_current], PDA_ID, 0.5, 0.5, 0, 1);
+#define canBeEvil weapon_checks[weapon_checks_isdemonic]
 
 HudMessageParallax(
     StrParam("%l:\n"
     "[\c[LightBlue]%i:B \c[Red]%i:P \c[Green]%i:A \c[Yellow]%i:T \c[Purple]%i:S \c[Orange]%i:F \c[White]%i:N \cr%i:D\c-]"
     "\n\n"
     "%l:\c[Cyan]%i:",
-    (weapon_checks[weapon_checks_isdemonic]) 
+    (canBeEvil) 
         ? (CheckInventory(StrParam("%s:DemonArtifacts", player_weapon[player_weapon_current])) ? weapon_info[weapon_info_dualname] : weapon_info[weapon_info_name]) 
         : weapon_info[weapon_info_name],
     Weapon_Mod_Quantity[mod_bulk], Weapon_Mod_Quantity[mod_power], Weapon_Mod_Quantity[mod_agility], Weapon_Mod_Quantity[mod_technical],
     Weapon_Mod_Quantity[mod_sniper], Weapon_Mod_Quantity[mod_firestorm], Weapon_Mod_Quantity[mod_nano],
-    (weapon_checks[weapon_checks_isdemonic]) ? 0 : Weapon_Mod_Quantity[mod_artifact],
+    (canBeEvil) ? 0 : Weapon_Mod_Quantity[mod_artifact],
     "PDA_MODPACK_MAXSUPPORTED",
     PDA_Local.maxmodlimit),
 
