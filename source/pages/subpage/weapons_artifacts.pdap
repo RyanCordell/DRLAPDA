@@ -1,26 +1,25 @@
 
-
 HudMessageParallax(
     StrParam("\cf%l:\c-\n", 
     "PDA_DEMONARTIFACTS_NOTSUPPORTED"),
-    HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), 0.0, 1.0);
+    HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE);
 
-if (!weapon_checks[weapon_checks_isdemonic]) {
+if (!canBeEvil) {
     HudMessageParallax(
         StrParam(
             "%l:\n[\c[LightBlue]%i:B \c[Red]%i:P \c[Green]%i:A \c[Yellow]%i:T \c[Purple]%i:S \c[Orange]%i:F \c[White]%i:N \cr%i:D\c-]"
             "\n\n",
-            (weapon_checks[weapon_checks_isdemonic]) ? 
+            (canBeEvil) ? 
             (CheckInventory(StrParam("%s:DemonArtifacts", player_weapon[player_weapon_current])) ? 
                 weapon_info[weapon_info_dualname] 
                 : weapon_info[weapon_info_name]) 
             : weapon_info[weapon_info_name],
             Weapon_Mod_Quantity[mod_bulk], Weapon_Mod_Quantity[mod_power], Weapon_Mod_Quantity[mod_agility], Weapon_Mod_Quantity[mod_technical],
             Weapon_Mod_Quantity[mod_sniper], Weapon_Mod_Quantity[mod_firestorm], Weapon_Mod_Quantity[mod_nano],
-            (weapon_checks[weapon_checks_isdemonic]) ? 0 : Weapon_Mod_Quantity[mod_artifact]
+            (canBeEvil) ? 0 : Weapon_Mod_Quantity[mod_artifact]
         ),
             HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 
-            10.0, 20.0 + (20.0 * 1), 0.0, 1.0);
+            10.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE);
         
     float artifactsY = 60.0;
 
@@ -34,7 +33,7 @@ if (!weapon_checks[weapon_checks_isdemonic]) {
                         "PDA_DEMONARTIFACTS_ONE",
                         StrParam("PDA_ARTIFACT_%s:_ONE", player_weapon[player_weapon_trimmed])
                     ),
-                    HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 10.0 + (artifactsY * 1), 0.0, 1.0);
+                    HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 10.0 + (artifactsY * 1), INF_HOLDTIME, OPAQUE);
                 break;
             case 2:
                 HudMessageParallax(
@@ -48,7 +47,7 @@ if (!weapon_checks[weapon_checks_isdemonic]) {
                         "PDA_DEMONARTIFACTS_ONE",
                         StrParam("PDA_ARTIFACT_%s:_ONE", player_weapon[player_weapon_trimmed])
                     ),
-                    HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 10.0 + (artifactsY * 1), 0.0, 1.0);
+                    HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 10.0 + (artifactsY * 1), INF_HOLDTIME, OPAQUE);
                 break;
             case 3:
                 HudMessageParallax(
@@ -66,7 +65,7 @@ if (!weapon_checks[weapon_checks_isdemonic]) {
                         "PDA_DEMONARTIFACTS_ONE",
                         StrParam("PDA_ARTIFACT_%s:_ONE", player_weapon[player_weapon_trimmed])
                     ),
-                    HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 10.0 + (artifactsY * 1), 0.0, 1.0);
+                    HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 10.0 + (artifactsY * 1), INF_HOLDTIME, OPAQUE);
                 break;
         }
     }
@@ -76,7 +75,7 @@ if (!weapon_checks[weapon_checks_isdemonic]) {
                 "\c[Red]%l:\c-\n",
                 "PDA_DEMONARTIFACTS_ZERO"
             ),
-            HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 10.0 + (artifactsY * 1), 0.0, 1.0);
+            HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 10.0 + (artifactsY * 1), INF_HOLDTIME, OPAQUE);
     }
 }
 // for (int weaponIndex = 0; weaponIndex < DRLA_DEMONWEAPONMAX; weaponIndex++) {

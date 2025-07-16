@@ -201,6 +201,7 @@ enum weapon_info_index {
     weapon_info_perk,
     weapon_info_desc,
     weapon_info_dualdesc,
+    weapon_info_icon,
 }
 
 enum weapon_mod_index {

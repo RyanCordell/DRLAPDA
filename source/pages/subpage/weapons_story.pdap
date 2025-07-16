@@ -1,6 +1,9 @@
 #define canDisassemble weapon_checks[weapon_checks_disassemblable]
 #define isEvil weapon_checks[weapon_checks_supports_artifacts]
 
+// TODO: unmagic ID, X, Y
+DisplayIconParallax(weapon_info[weapon_info_icon], 60, 40.0, 40.0, INF_HOLDTIME, OPAQUE);
+
 HudMessageParallax(
     StrParam(
         "%s:" // Tech perk

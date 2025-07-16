@@ -26,7 +26,7 @@ if (StrCmp(PDA_Local.detailFetch[0], "null") != 0) {
             PDA_Enemy[PlayerNumber()][enemy_resistance],
             PDA_Enemy[PlayerNumber()][enemy_misc]
         ),
-        HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 5.0, 20.0 + (20.0 * 1), 0.0, 1.0);
+        HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 5.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE);
 } else {
     SetFont(PDA_FONT[0]);
     HudMessageParallax(
@@ -42,7 +42,7 @@ if (StrCmp(PDA_Local.detailFetch[0], "null") != 0) {
             "PDA_BESTIARY_DEFAULT_RESISTANCES",
             "PDA_BESTIARY_DEFAULT_DESC"
         ),
-        HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 5.0, 20.0 + (20.0 * 1), 0.0, 1.0);
+        HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 5.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE);
 }
 
 // PDA_UnsetScrollWindow();

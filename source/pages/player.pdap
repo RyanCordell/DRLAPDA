@@ -18,7 +18,7 @@ if (GetActorclass(0) != "None")
                 PDA_Class[PlayerNumber()][pda_class_name],
                 PDA_Class[PlayerNumber()][pda_class_abilities]
             ),
-            HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), 0.0, 1.0);
+            HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE);
     }
     // Class backstory
     if (PDA_Local.page == CLASSES_PAGE_STORY)
@@ -30,7 +30,7 @@ if (GetActorclass(0) != "None")
                 PDA_Class[PlayerNumber()][pda_class_name],
                 PDA_Class[PlayerNumber()][pda_class_story]
             ),
-            HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), 0.0, 1.0);
+            HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE);
     }
 }
 // Get rid of it once we're done.

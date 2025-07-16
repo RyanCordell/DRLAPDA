@@ -2,6 +2,7 @@
     "weapons": [
         {
             "name": "FIST",
+            "icon": "TNT1A0",
             "tier": "Normal",
             "prettyname": "[NORMAL]Fists[END]",
             "capacity": "FOUR_MOD_CAPACITY",
@@ -23,6 +24,7 @@
         },
         {
             "name": "CHAINSAW",
+            "icon": "CSAWICON",
             "tier": "Normal",
             "prettyname": "[NORMAL]Chainsaw[END]",
             "capacity": "FOUR_MOD_CAPACITY",
@@ -49,6 +51,7 @@
         },
         {
             "name": "PISTOL",
+            "icon": "PISTICON",
             "tier": "Normal",
             "prettyname": "[NORMAL]Pistol[END]",
             "capacity": "FOUR_MOD_CAPACITY",
@@ -75,6 +78,7 @@
         },
         {
             "name": "SHOTGUN",
+            "icon": "SHOTICON",
             "tier": "Normal",
             "prettyname": "[NORMAL]Shotgun[END]",
             "capacity": "FOUR_MOD_CAPACITY",
@@ -101,6 +105,7 @@
         },
         {
             "name": "COMBATSHOTGUN",
+            "icon": "COMSICON",
             "tier": "Normal",
             "prettyname": "[NORMAL]Combat Shotgun[END]",
             "capacity": "FOUR_MOD_CAPACITY",
@@ -127,6 +132,7 @@
         },
         {
             "name": "DOUBLESHOTGUN",
+            "icon": "DBLSICON",
             "tier": "Normal",
             "prettyname": "[NORMAL]Double Shotgun[END]",
             "capacity": "FOUR_MOD_CAPACITY",
@@ -153,6 +159,7 @@
         },
         {
             "name": "CHAINGUN",
+            "icon": "MGUNICON",
             "tier": "Normal",
             "prettyname": "[NORMAL]Chaingun[END]",
             "capacity": "FOUR_MOD_CAPACITY",
@@ -179,6 +186,7 @@
         },
         {
             "name": "BATTLERIFLE",
+            "icon": "UACRICON",
             "tier": "Normal",
             "prettyname": "[NORMAL]Battle Rifle[END]",
             "capacity": "FOUR_MOD_CAPACITY",
@@ -203,6 +211,7 @@
         },
         {
             "name": "ROCKETLAUNCHER",
+            "icon": "LAUNICON",
             "tier": "Normal",
             "prettyname": "[NORMAL]Rocket Launcher[END]",
             "capacity": "FOUR_MOD_CAPACITY",
@@ -230,6 +239,7 @@
         },
         {
             "name": "PLASMARIFLE",
+            "icon": "PLASICON",
             "tier": "Normal",
             "prettyname": "[NORMAL]Plasma Rifle[END]",
             "capacity": "FOUR_MOD_CAPACITY",
@@ -256,6 +266,7 @@
         },
         {
             "name": "BFG9000",
+            "icon": "BFUGICON",
             "tier": "Normal",
             "prettyname": "[NORMAL]BFG 9000[END]",
             "capacity": "FOUR_MOD_CAPACITY",
@@ -283,6 +294,7 @@
         },
         {
             "name": "BLASTER",
+            "icon": "BLASICON",
             "tier": "Normal",
             "prettyname": "[EXOTIC]Blaster[END]",
             "capacity": "FOUR_MOD_CAPACITY",
@@ -305,6 +317,7 @@
         },
         {
             "name": "COMBATPISTOL",
+            "icon": "COMPICON",
             "tier": "Normal",
             "prettyname": "[EXOTIC]Combat Pistol[END]",
             "capacity": "FOUR_MOD_CAPACITY",
@@ -325,6 +338,7 @@
         },
         {
             "name": "MARKSMANPISTOL",
+            "icon": "MRKPICON",
             "tier": "Normal",
             "prettyname": "[EXOTIC]Marksman Pistol[END]",
             "capacity": "FOUR_MOD_CAPACITY",
@@ -345,6 +359,7 @@
         },
         {
             "name": "HANDCANNON",
+            "icon": "DEAGICON",
             "tier": "Normal",
             "prettyname": "[EXOTIC]Handcannon[END]",
             "capacity": "FOUR_MOD_CAPACITY",
@@ -364,6 +379,7 @@
         },
         {
             "name": "SUPERSHOTGUN",
+            "icon": "KSSGICON",
             "tier": "Normal",
             "prettyname": "[EXOTIC]Super Shotgun[END]",
             "capacity": "FOUR_MOD_CAPACITY",
@@ -384,6 +400,7 @@
         },
         {
             "name": "ASSAULTSHOTGUN",
+            "icon": "AA12ICON",
             "tier": "Normal",
             "prettyname": "[EXOTIC]Assault Shotgun[END]",
             "capacity": "FOUR_MOD_CAPACITY",
@@ -404,6 +421,7 @@
         },
         {
             "name": "PLASMASHOTGUN",
+            "icon": "PLSHICON",
             "tier": "Normal",
             "prettyname": "[EXOTIC]Plasma Shotgun[END]",
             "capacity": "FOUR_MOD_CAPACITY",
@@ -425,6 +443,7 @@
         },
         {
             "name": "TRISTARBLASTER",
+            "icon": "TRISICON",
             "tier": "Normal",
             "prettyname": "[EXOTIC]Tristar Blaster[END]",
             "capacity": "FOUR_MOD_CAPACITY",
@@ -447,6 +466,7 @@
         },
         {
             "name": "MINIGUN",
+            "icon": "MINIICON",
             "tier": "Normal",
             "prettyname": "[EXOTIC]Minigun[END]",
             "capacity": "FOUR_MOD_CAPACITY",
@@ -469,6 +489,7 @@
         },
         {
             "name": "MISSILELAUNCHER",
+            "icon": "MISSICON",
             "tier": "Normal",
             "prettyname": "[EXOTIC]Missile Launcher[END]",
             "capacity": "FOUR_MOD_CAPACITY",
@@ -491,6 +512,7 @@
         },
         {
             "name": "NAPALMLAUNCHER",
+            "icon": "NAPAICON",
             "tier": "Normal",
             "prettyname": "[EXOTIC]Napalm Launcher[END]",
             "capacity": "FOUR_MOD_CAPACITY",
@@ -512,6 +534,7 @@
         },
         {
             "name": "LASERRIFLE",
+            "icon": "LASRICON",
             "tier": "Normal",
             "prettyname": "[EXOTIC]Laser Rifle[END]",
             "capacity": "FOUR_MOD_CAPACITY",
@@ -534,6 +557,7 @@
         },
         {
             "name": "NUCLEARPLASMAPISTOL",
+            "icon": "NUK3ICON",
             "tier": "Normal",
             "prettyname": "[EXOTIC]Nuclear Plasma Pistol[END]",
             "capacity": "FOUR_MOD_CAPACITY",
@@ -554,6 +578,7 @@
         },
         {
             "name": "NUCLEARPLASMARIFLE",
+            "icon": "NUK1ICON",
             "tier": "Normal",
             "prettyname": "[EXOTIC]Nuclear Plasma Rifle[END]",
             "capacity": "FOUR_MOD_CAPACITY",
@@ -577,6 +602,7 @@
         },
         {
             "name": "NUCLEARBFG9000",
+            "icon": "NUK2ICON",
             "tier": "Normal",
             "prettyname": "[EXOTIC]Nuclear BFG 9000[END]",
             "capacity": "FOUR_MOD_CAPACITY",
@@ -599,6 +625,7 @@
         },
         {
             "name": "COMBATTRANSLOCATOR",
+            "icon": "TRANICON",
             "tier": "Normal",
             "prettyname": "[EXOTIC]Combat Translocator[END]",
             "capacity": "FOUR_MOD_CAPACITY",
@@ -620,6 +647,7 @@
         },
         {
             "name": "UZI",
+            "icon": "RUZIICON",
             "tier": "Normal",
             "prettyname": "[EXOTIC]Uzi[END]",
             "capacity": "FOUR_MOD_CAPACITY",
@@ -639,6 +667,7 @@
         },
         {
             "name": "VANGUARDRIFLE",
+            "icon": "VANRICON",
             "tier": "Superior",
             "prettyname": "[SUPERIOR]Vanguard Rifle[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -659,6 +688,7 @@
         },
         {
             "name": "MARKSMANRIFLE",
+            "icon": "MRKRICON",
             "tier": "Superior",
             "prettyname": "[SUPERIOR]Marksman Rifle[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -680,6 +710,7 @@
         },
         {
             "name": "PP7",
+            "icon": "BPP7ICON",
             "tier": "Superior",
             "prettyname": "[SUPERIOR]PP7[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -702,6 +733,7 @@
         },
         {
             "name": "AUTOPISTOL",
+            "icon": "",
             "tier": "Superior",
             "prettyname": "[SUPERIOR]Meltdown ''Autopistol''[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -714,6 +746,7 @@
         },
         {
             "name": "RIPPER",
+            "icon": "",
             "tier": "Superior",
             "prettyname": "[SUPERIOR]Meltdown ''Ripper''[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -733,6 +766,7 @@
         },
         {
             "name": "ENFORCER",
+            "icon": "",
             "tier": "Superior",
             "prettyname": "[SUPERIOR]Meltdown ''Enforcer Shotgun''[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -743,6 +777,7 @@
         },
         {
             "name": "RPG",
+            "icon": "",
             "tier": "Superior",
             "prettyname": "[SUPERIOR]Meltdown ''RPG''[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -754,6 +789,7 @@
         },
         {
             "name": "HUNTINGREVOLVER",
+            "icon": "HUNTICON",
             "tier": "Superior",
             "prettyname": "[SUPERIOR]Hunting Revolver[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -777,6 +813,7 @@
         },
         {
             "name": "THOMPSON",
+            "icon": "TGUNICON",
             "tier": "Superior",
             "prettyname": "[SUPERIOR]Thompson[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -797,6 +834,7 @@
         },
         {
             "name": "HUNTINGSHOTGUN",
+            "icon": "HUNTICON",
             "tier": "Superior",
             "prettyname": "[SUPERIOR]Hunting Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -817,6 +855,7 @@
         },
         {
             "name": "RCP90",
+            "icon": "RCP9ICON",
             "tier": "Superior",
             "prettyname": "[SUPERIOR]RC-P90[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -839,6 +878,7 @@
         },
         {
             "name": "JACKHAMMER",
+            "icon": "JHAMICON",
             "tier": "Unique",
             "prettyname": "[UNIQUE]Jackhammer[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -860,6 +900,7 @@
         },
         {
             "name": "RAILGUN",
+            "icon": "RAILICON",
             "tier": "Unique",
             "prettyname": "[UNIQUE]Railgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -881,6 +922,7 @@
         },
         {
             "name": "MYSTERIOUSMAGNUM",
+            "icon": "MYSTICON",
             "tier": "Unique",
             "prettyname": "[UNIQUE]Mysterious Magnum[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -901,6 +943,7 @@
         },
         {
             "name": "BFG10K",
+            "icon": "B10KICON",
             "tier": "Unique",
             "prettyname": "[UNIQUE]BFG 10K[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -923,6 +966,7 @@
         },
         {
             "name": "UNKNOWNHERALD",
+            "icon": "UNKHICON",
             "tier": "Unique",
             "prettyname": "[UNIQUE]Unknown Herald[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -943,6 +987,7 @@
         },
         {
             "name": "FRAGSHOTGUN",
+            "icon": "FRSHICON",
             "tier": "Unique",
             "prettyname": "[UNIQUE]Frag Shotgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -964,6 +1009,7 @@
         },
         {
             "name": "QUADSHOTGUN",
+            "icon": "QUADICON",
             "tier": "Unique",
             "prettyname": "[UNIQUE]Quad Shotgun[END] ",
             "capacity": "ONE_MOD_CAPACITY",
@@ -983,6 +1029,7 @@
         },
         {
             "name": "LIGHTWEAVER",
+            "icon": "LITWICON",
             "tier": "Unique",
             "prettyname": "[UNIQUE]Lightweaver[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -1006,6 +1053,7 @@
         },
         {
             "name": "TRIGUN",
+            "icon": "TRIGICON",
             "tier": "Unique",
             "prettyname": "[UNIQUE]Angel arms .45 long colt[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -1029,6 +1077,7 @@
         },
         {
             "name": "GRAMMATONCLERICBERETTA",
+            "icon": "GCBPICON",
             "tier": "Unique",
             "prettyname": "[UNIQUE]Grammaton Cleric Beretta[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -1050,6 +1099,7 @@
         },
         {
             "name": "ANTIFREAKJACKAL",
+            "icon": "AFJPICON",
             "tier": "Unique",
             "prettyname": "[UNIQUE]Anti-Freak Jackal[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -1083,6 +1133,7 @@
         },
         {
             "name": "HELLSINGARMSCASULL",
+            "icon": "HSACICON",
             "tier": "Unique",
             "prettyname": "[UNIQUE]Hellsing ARMS Casull[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -1102,6 +1153,7 @@
         },
         {
             "name": "TANTRUMCANNON",
+            "icon": "QTCWICON",
             "tier": "Unique",
             "prettyname": "[UNIQUE]Quantum Tantrum Cannon[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -1122,6 +1174,7 @@
         },
         {
             "name": "REVENANTSLAUNCHER",
+            "icon": "REVLICON",
             "tier": "Unique",
             "prettyname": "[UNIQUE]Revenant's Launcher[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -1143,6 +1196,7 @@
         },
         {
             "name": "NULLPOINTER",
+            "icon": "NULLICON",
             "tier": "Unique",
             "prettyname": "[UNIQUE]Charch's Null Pointer[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -1163,6 +1217,7 @@
         },
         {
             "name": "PARTICLEBEAMCANNON",
+            "icon": "PBCNICON",
             "tier": "Unique",
             "prettyname": "[UNIQUE]Particle Beam Cannon[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -1182,6 +1237,7 @@
         },
         {
             "name": "PLASMAREDIRECTIONCANNON",
+            "icon": "PRDCICON",
             "tier": "Unique",
             "prettyname": "[UNIQUE]Plasma Redirection Cannon[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -1201,6 +1257,7 @@
         },
         {
             "name": "STEELBEAST",
+            "icon": "STBEICON",
             "tier": "Unique",
             "prettyname": "[UNIQUE]Steel Beast[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -1221,6 +1278,7 @@
         },
         {
             "name": "SUSSGUN",
+            "icon": "SUSSICON",
             "tier": "Unique",
             "prettyname": "[UNIQUE]Suss Gun[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -1241,6 +1299,7 @@
         },
         {
             "name": "MIRVLAUNCHER",
+            "icon": "MIRVICON",
             "tier": "Unique",
             "prettyname": "[UNIQUE]MIRV Launcher[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -1261,6 +1320,7 @@
         },
         {
             "name": "MARATHONASSAULTRIFLE",
+            "icon": "MA75ICO2",
             "tier": "Unique",
             "prettyname": "[UNIQUE]MA-75B Assault Rifle[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -1281,6 +1341,7 @@
         },
         {
             "name": "MARATHONSHOTGUNS",
+            "icon": "WSTEICO2",
             "tier": "Unique",
             "prettyname": "[UNIQUE]WSTE-M5 Shotgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -1309,6 +1370,7 @@
         },
         {
             "name": "WIDOWMAKERSMG",
+            "icon": "WSMGICON",
             "tier": "Unique",
             "prettyname": "[UNIQUE]Widowmaker SMG[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -1331,6 +1393,7 @@
         },
         {
             "name": "NUCLEARONSLAUGHT",
+            "icon": "NKO0ICON",
             "tier": "Unique",
             "prettyname": "[UNIQUE]Nuclear Onslaught[GRAY]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -1351,6 +1414,7 @@
         },
         {
             "name": "CHAMELEONRIFLE",
+            "icon": "CRM1ICON",
             "tier": "Unique",
             "prettyname": "[UNIQUE]Chameleon Rifle[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -1372,6 +1436,7 @@
         },
         {
             "name": "NANOMACHICARMAMENTGENERATOR",
+            "icon": "NAG0ICON",
             "tier": "Unique",
             "prettyname": "[UNIQUE]Nanomachic Armament Generator[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -1392,6 +1457,7 @@
         },
         {
             "name": "LUCIFERCANNON",
+            "icon": "LCFGICON",
             "tier": "Unique",
             "prettyname": "[UNIQUE]Lucifer Cannon[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -1413,6 +1479,7 @@
         },
         {
             "name": "TRIADCANNON",
+            "icon": "TRIDICON",
             "tier": "Unique",
             "prettyname": "[UNIQUE]Triad Cannon[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -1434,6 +1501,7 @@
         },
         {
             "name": "DIRECTHIT",
+            "icon": "DHTGICON",
             "tier": "Unique",
             "prettyname": "[UNIQUE]Direct Hit[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -1456,6 +1524,7 @@
         },
         {
             "name": "SUBTLEKNIFE",
+            "icon": "",
             "tier": "Unique",
             "prettyname": "[UNIQUE]Subtle Knife[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -1466,6 +1535,7 @@
         },
         {
             "name": "SPECTREREVOLVER",
+            "icon": "",
             "tier": "Unique",
             "prettyname": "[UNIQUE]Spectre Revolver[GRAY]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -1478,6 +1548,7 @@
         },
         {
             "name": "DeathsGaze",
+            "icon": "DGAZICON",
             "tier": "Demonic",
             "prettyname": "[DEMONIC]Deaths Gaze[END]",
             "capacity": "FOUR_MOD_CAPACITY",
@@ -1504,6 +1575,7 @@
         },
         {
             "name": "HellsReign",
+            "icon": "HE2RICON",
             "tier": "Demonic",
             "prettyname": "[DEMONIC]Hells Reign[END]",
             "capacity": "FOUR_MOD_CAPACITY",
@@ -1529,6 +1601,7 @@
         },
         {
             "name": "SoulstormRifle",
+            "icon": "SOLRICON",
             "tier": "Demonic",
             "prettyname": "[DEMONIC]Soulstorm Rifle[END]",
             "capacity": "FOUR_MOD_CAPACITY",
@@ -1555,6 +1628,7 @@
         {
             "unmoddable": true,
             "name": "Unmaker",
+            "icon": "UNMAICON",
             "tier": "Demonic",
             "prettyname": "[DEMONIC]Unmaker[END]",
             "capacity": "FOUR_MOD_CAPACITY",
@@ -1578,6 +1652,7 @@
         },
         {
             "name": "JudgeOfTheDead",
+            "icon": "JOTDICON",
             "tier": "Legendary",
             "prettyname": "[LEGENDARY]Judge of the Dead[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -1599,6 +1674,7 @@
         },
         {
             "name": "HURRICANECANNON",
+            "icon": "HURRICON",
             "tier": "Legendary",
             "prettyname": "[LEGENDARY]Hurricane Cannon[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -1620,6 +1696,7 @@
         },
         {
             "name": "NEURALSTUNNER",
+            "icon": "NEURICON",
             "tier": "Legendary",
             "prettyname": "[LEGENDARY]Neural Stunner[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -1639,6 +1716,7 @@
         },
         {
             "name": "BARONBLASTER",
+            "icon": "BABLICON",
             "tier": "Legendary",
             "prettyname": "[LEGENDARY]Baron Blaster[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -1660,6 +1738,7 @@
         },
         {
             "name": "BFGINFINITY",
+            "icon": "BFGIICON",
             "tier": "Legendary",
             "prettyname": "[LEGENDARY]BFG Infinity[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -1680,6 +1759,7 @@
         },
         {
             "name": "REALITYDISTORTIONARRAY",
+            "icon": "RDANICON",
             "tier": "Legendary",
             "prettyname": "[LEGENDARY]Reality Distortion Array[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -1704,6 +1784,7 @@
         },
         {
             "name": "DUKE2RIFLE",
+            "icon": "DN2RICON",
             "tier": "Legendary",
             "prettyname": "[LEGENDARY]Rigelatin Assault Weapon[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -1725,6 +1806,7 @@
         },
         {
             "name": "LONGHORN",
+            "icon": "LONGICON",
             "tier": "Legendary",
             "prettyname": "[LEGENDARY]Longhorn Revolver[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -1746,6 +1828,7 @@
         },
         {
             "name": "DRAGONSLAYER",
+            "icon": "",
             "tier": "Legendary",
             "prettyname": "[LEGENDARY]Dragonslayer[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -1766,6 +1849,7 @@
         },
         {
             "name": "SILENCEDPISTOL",
+            "icon": "SILPICON",
             "tier": "Basic",
             "prettyname": "[BASIC]Silenced Pistol[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -1785,6 +1869,7 @@
         },
         {
             "name": "STEALTHRIFLE",
+            "icon": "STELICON",
             "tier": "Basic",
             "prettyname": "[BASIC]Stealth Rifle[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -1804,6 +1889,7 @@
         },
         {
             "name": "SHREDDERPISTOL",
+            "icon": "SRPSICON",
             "tier": "Basic",
             "prettyname": "[BASIC]Shredder Pistol[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -1822,6 +1908,7 @@
         },
         {
             "name": "SHREDDERSHOTGUN",
+            "icon": "SHRSICON",
             "tier": "Basic",
             "prettyname": "[BASIC]Shredder Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -1844,6 +1931,7 @@
         },
         {
             "name": "SPEEDLOADERPISTOL",
+            "icon": "REVPICON",
             "tier": "Basic",
             "prettyname": "[BASIC]Revolver[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -1863,6 +1951,7 @@
         },
         {
             "name": "ELEPHANTGUN",
+            "icon": "ELEGICON",
             "tier": "Basic",
             "prettyname": "[BASIC]Elephant Gun[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -1883,6 +1972,7 @@
         },
         {
             "name": "GATLINGGUN",
+            "icon": "GATLICON",
             "tier": "Basic",
             "prettyname": "[BASIC]Gatling Gun[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -1902,6 +1992,7 @@
         },
         {
             "name": "MICROLAUNCHER",
+            "icon": "MICLICON",
             "tier": "Basic",
             "prettyname": "[BASIC]Micro Launcher[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -1921,6 +2012,7 @@
         },
         {
             "name": "TACTICALSHOTGUN",
+            "icon": "AA12ICON",
             "tier": "Basic",
             "prettyname": "[BASIC]Tactical Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -1940,6 +2032,7 @@
         },
         {
             "name": "FLAMETHROWER",
+            "icon": "FLAMICON",
             "tier": "Basic",
             "prettyname": "[BASIC]Flamethrower[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -1960,6 +2053,7 @@
         },
         {
             "name": "SNIPERRIFLE",
+            "icon": "SNPRICON",
             "tier": "Basic",
             "prettyname": "[BASIC]Sniper Rifle[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -1979,6 +2073,7 @@
         },
         {
             "name": "SHRAPNELCANNON",
+            "icon": "SHRCICON",
             "tier": "Basic",
             "prettyname": "[BASIC]Shrapnel Cannon[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -1998,6 +2093,7 @@
         },
         {
             "name": "NUCLEARPLASMAREVOLVER",
+            "icon": "NPRVICON",
             "tier": "Basic",
             "prettyname": "[BASIC]Nuclear Plasma Revolver[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2018,6 +2114,7 @@
         },
         {
             "name": "HEAVYSHOTGUN",
+            "icon": "HSHOICON",
             "tier": "Basic",
             "prettyname": "[BASIC]Heavy Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2038,6 +2135,7 @@
         },
         {
             "name": "HEAVYCOMBATSHOTGUN",
+            "icon": "HCSHICON",
             "tier": "Basic",
             "prettyname": "[BASIC]Heavy Combat Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2058,6 +2156,7 @@
         },
         {
             "name": "HEAVYDOUBLESHOTGUN",
+            "icon": "HDSHICON",
             "tier": "Basic",
             "prettyname": "[BASIC]Heavy Double Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2079,6 +2178,7 @@
         },
         {
             "name": "HEAVYSUPERSHOTGUN",
+            "icon": "HSSGICON",
             "tier": "Basic",
             "prettyname": "[BASIC]Heavy Super Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2099,6 +2199,7 @@
         },
         {
             "name": "HEAVYASSAULTSHOTGUN",
+            "icon": "AA12ICON",
             "tier": "Basic",
             "prettyname": "[BASIC]Heavy Assault Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2119,6 +2220,7 @@
         },
         {
             "name": "HEAVYPLASMASHOTGUN",
+            "icon": "PLSHICON",
             "tier": "Basic",
             "prettyname": "[BASIC]Heavy Plasma Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2139,6 +2241,7 @@
         },
         {
             "name": "HEAVYHUNTINGSHOTGUN",
+            "icon": "HUNTICON",
             "tier": "Basic",
             "prettyname": "[BASIC]Heavy Hunting Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2159,6 +2262,7 @@
         },
         {
             "name": "PIERCINGCHAINSAW",
+            "icon": "PSAWICON",
             "tier": "Basic",
             "prettyname": "[BASIC]Nanoedge Chainsaw[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2180,6 +2284,7 @@
         },
         {
             "name": "HIGHPOWERPISTOL",
+            "icon": "QPISICON",
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Pistol[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2199,6 +2304,7 @@
         },
         {
             "name": "HIGHPOWERCHAINGUN",
+            "icon": "QCHGICON",
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Chaingun[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2219,6 +2325,7 @@
         },
         {
             "name": "HIGHPOWERBATTLERIFLE",
+            "icon": "QRIFICON",
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Battle Rifle[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2238,6 +2345,7 @@
         },
         {
             "name": "HIGHPOWERPLASMARIFLE",
+            "icon": "QPLSICON",
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Plasma Rifle[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2258,6 +2366,7 @@
         },
         {
             "name": "HIGHPOWERBFG9000",
+            "icon": "BFUGICON",
             "tier": "Basic",
             "prettyname": "[BASIC]High Power BFG 9000[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2278,6 +2387,7 @@
         },
         {
             "name": "HIGHPOWERBLASTER",
+            "icon": "QBLAICON",
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Blaster[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2298,6 +2408,7 @@
         },
         {
             "name": "HIGHPOWERCOMBATPISTOL",
+            "icon": "QCPSICON",
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Combat Pistol[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2318,6 +2429,7 @@
         },
         {
             "name": "HIGHPOWERMARKSMANPISTOL",
+            "icon": "QMRKICON",
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Marksman Pistol[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2337,6 +2449,7 @@
         },
         {
             "name": "HIGHPOWERHANDCANNON",
+            "icon": "QDEAICON",
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Handcannon[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2356,6 +2469,7 @@
         },
         {
             "name": "HIGHPOWERTRISTARBLASTER",
+            "icon": "QTRIICON",
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Tristar Blaster[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2376,6 +2490,7 @@
         },
         {
             "name": "HIGHPOWERMINIGUN",
+            "icon": "QMINICON",
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Minigun[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2396,6 +2511,7 @@
         },
         {
             "name": "HIGHPOWERLASERRIFLE",
+            "icon": "QLASICON",
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Laser Rifle[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2416,6 +2532,7 @@
         },
         {
             "name": "HIGHPOWERNUCLEARPLASMAPISTOL",
+            "icon": "NUK3ICON",
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Nuclear Plasma Pistol[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2435,6 +2552,7 @@
         },
         {
             "name": "HIGHPOWERNUCLEARPLASMARIFLE",
+            "icon": "QNPLICON",
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Nuclear Plasma Rifle[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2455,6 +2573,7 @@
         },
         {
             "name": "HIGHPOWERNUCLEARBFG9000",
+            "icon": "NUK2ICON",
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Nuclear BFG 9000[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2477,6 +2596,7 @@
         },
         {
             "name": "HIGHPOWERUZI",
+            "icon": "QUZIICON",
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Uzi[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2496,6 +2616,7 @@
         },
         {
             "name": "HIGHPOWERVANGUARDRIFLE",
+            "icon": "QVANICON",
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Vanguard Rifle[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2515,6 +2636,7 @@
         },
         {
             "name": "HIGHPOWERMARKSMANRIFLE",
+            "icon": "QMRRICON",
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Marksman Rifle[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2534,6 +2656,7 @@
         },
         {
             "name": "HIGHPOWERHUNTINGREVOLVER",
+            "icon": "QREVICON",
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Hunting Revolver[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2553,6 +2676,7 @@
         },
         {
             "name": "HIGHPOWERTHOMPSON",
+            "icon": "TGUNICON",
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Thompson[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2572,6 +2696,7 @@
         },
         {
             "name": "HIGHPOWERPP7",
+            "icon": "BPP7ICON",
             "tier": "Basic",
             "prettyname": "[BASIC]High Power PP7[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2591,6 +2716,7 @@
         },
         {
             "name": "HIGHPOWERRCP90",
+            "icon": "RCP1ICON",
             "tier": "Basic",
             "prettyname": "[BASIC]RC-P120[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2613,6 +2739,7 @@
         },
         {
             "name": "PLASMATICSHRAPNELSHOTGUN",
+            "icon": "SHOTICON",
             "tier": "Basic",
             "prettyname": "[BASIC]Plasmatic Shrapnel Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2633,6 +2760,7 @@
         },
         {
             "name": "PLASMATICSHRAPNELCOMBATSHOTGUN",
+            "icon": "COMSICON",
             "tier": "Basic",
             "prettyname": "[BASIC]Plasmatic Shrapnel Combat Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2653,6 +2781,7 @@
         },
         {
             "name": "PLASMATICSHRAPNELDOUBLESHOTGUN",
+            "icon": "DBLSICON",
             "tier": "Basic",
             "prettyname": "[BASIC]Plasmatic Shrapnel Double Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2673,6 +2802,7 @@
         },
         {
             "name": "PLASMATICSHRAPNELSUPERSHOTGUN",
+            "icon": "KSSGICON",
             "tier": "Basic",
             "prettyname": "[BASIC]Plasmatic Shrapnel Super Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2693,6 +2823,7 @@
         },
         {
             "name": "PLASMATICSHRAPNELASSAULTSHOTGUN",
+            "icon": "AA12ICON",
             "tier": "Basic",
             "prettyname": "[BASIC]Plasmatic Shrapnel Assault Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2713,6 +2844,7 @@
         },
         {
             "name": "PLASMATICSHRAPNELPLASMASHOTGUN",
+            "icon": "PLSHICON",
             "tier": "Basic",
             "prettyname": "[BASIC]Plasmatic Shrapnel Plasma Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2733,6 +2865,7 @@
         },
         {
             "name": "PLASMATICSHRAPNELHUNTINGSHOTGUN",
+            "icon": "HUNTICON",
             "tier": "Basic",
             "prettyname": "[BASIC]Plasmatic Shrapnel Hunting Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2752,6 +2885,7 @@
         },
         {
             "name": "PLASMASPLITTER",
+            "icon": "",
             "tier": "Basic",
             "prettyname": "[BASIC]Plasma Splitter[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2771,6 +2905,7 @@
         },
         {
             "name": "LASERSPLITTER",
+            "icon": "",
             "tier": "Basic",
             "prettyname": "[BASIC]Laser Splitter[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2790,6 +2925,7 @@
         },
         {
             "name": "NUCLEARPLASMASPLITTER",
+            "icon": "",
             "tier": "Basic",
             "prettyname": "[BASIC]Nuclear Plasma Splitter[END]",
             "capacity": "TWO_MOD_CAPACITY",
@@ -2809,6 +2945,7 @@
         },
         {
             "name": "DOUBLECHAINSAW",
+            "icon": "2SAWICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Double Chainsaw[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -2828,6 +2965,7 @@
         },
         {
             "name": "TACTICALROCKETLAUNCHER",
+            "icon": "TROKICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Tactical Rocket Launcher[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -2851,6 +2989,7 @@
         },
         {
             "name": "STORMPISTOL",
+            "icon": "STRMICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Storm Pistol[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -2870,6 +3009,7 @@
         },
         {
             "name": "STORMCOMBATPISTOL",
+            "icon": "STRMICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Storm Combat Pistol[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -2890,6 +3030,7 @@
         },
         {
             "name": "STORMMARKSMANPISTOL",
+            "icon": "MRKPICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Storm Marksman Pistol[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -2909,6 +3050,7 @@
         },
         {
             "name": "STORMHANDCANNON",
+            "icon": "SDEAICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Storm Handcannon[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -2928,6 +3070,7 @@
         },
         {
             "name": "STORMUZI",
+            "icon": "SUZIICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Dual Uzis[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -2947,6 +3090,7 @@
         },
         {
             "name": "STORMBLASTER",
+            "icon": "BLASICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Storm Blaster[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -2967,6 +3111,7 @@
         },
         {
             "name": "STORMNUCLEARPLASMAPISTOL",
+            "icon": "NUK4ICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Storm Nuclear Plasma Pistol[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -2986,6 +3131,7 @@
         },
         {
             "name": "PLASMAPISTOL",
+            "icon": "PPISICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Plasma Pistol[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3005,6 +3151,7 @@
         },
         {
             "name": "PLASMACOMBATPISTOL",
+            "icon": "CPP1ICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Plasma Combat Pistol[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3025,6 +3172,7 @@
         },
         {
             "name": "PLASMAMARKSMANPISTOL",
+            "icon": "PMRPICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Plasma Marksman Pistol[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3046,6 +3194,7 @@
         },
         {
             "name": "PLASMAHANDCANNON",
+            "icon": "PDEAICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Plasma Handcannon[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3066,6 +3215,7 @@
         },
         {
             "name": "PLASMAUZI",
+            "icon": "PUZIICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Plasma Uzi[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3086,6 +3236,7 @@
         },
         {
             "name": "OVERCHARGEDBLASTER",
+            "icon": "OBLAICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Overcharged Blaster[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3107,6 +3258,7 @@
         },
         {
             "name": "SUPERCHARGEDNUCLEARPLASMAPISTOL",
+            "icon": "NUK3ICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Supercharged Nuclear Plasma Pistol[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3127,6 +3279,7 @@
         },
         {
             "name": "VBFG9000",
+            "icon": "VBFGICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]VBFG 9000[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3149,6 +3302,7 @@
         },
         {
             "name": "NUCLEARVBFG9000",
+            "icon": "VBFGICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Nuclear VBFG 9000[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3168,6 +3322,7 @@
         },
         {
             "name": "FOCUSEDDOUBLESHOTGUN",
+            "icon": "FOCDICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Focused Double Shotgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3188,6 +3343,7 @@
         },
         {
             "name": "HYPERBLASTER",
+            "icon": "HYPBICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Hyperblaster[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3208,6 +3364,7 @@
         },
         {
             "name": "BULLETSTORMCHAINGUN",
+            "icon": "BULSICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Bulletstorm Chaingun[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3230,6 +3387,7 @@
         },
         {
             "name": "BULLETSTORMRIFLE",
+            "icon": "BULRICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Bulletstorm Rifle[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3250,6 +3408,7 @@
         },
         {
             "name": "AUTOSHOTGUN",
+            "icon": "AUTSICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Autoshotgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3271,6 +3430,7 @@
         },
         {
             "name": "AUTODOUBLESHOTGUN",
+            "icon": "AUTDICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Auto Double Shotgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3292,6 +3452,7 @@
         },
         {
             "name": "MINIMISSILEPISTOL",
+            "icon": "MMPIICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Mini-missile Pistol[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3310,6 +3471,7 @@
         },
         {
             "name": "PLASMARIFLEMKII",
+            "icon": "2PLAICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Plasma Rifle Mk. II[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3329,6 +3491,7 @@
         },
         {
             "name": "NUCLEARPLASMARIFLEMKII",
+            "icon": "NPIIICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Nuclear Plasma Rifle Mk. II[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3348,6 +3511,7 @@
         },
         {
             "name": "PLASMASHOTGUNMKII",
+            "icon": "P2SHICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Plasma Shotgun Mk. II[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3368,6 +3532,7 @@
         },
         {
             "name": "NUCLEARPLASMASHOTGUN",
+            "icon": "NPSHICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Nuclear Plasma Shotgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3388,6 +3553,7 @@
         },
         {
             "name": "LASERSHOTGUN",
+            "icon": "LSHTICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Laser Shotgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3411,6 +3577,7 @@
         },
         {
             "name": "GRENADELAUNCHER",
+            "icon": "GRENICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Grenade Launcher[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3432,6 +3599,7 @@
         },
         {
             "name": "ASSAULTRIFLECHAINGUN",
+            "icon": "ACHGICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Assault Chaingun[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3452,6 +3620,7 @@
         },
         {
             "name": "ASSAULTRIFLEBATTLERIFLE",
+            "icon": "SCOPICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Scoped Rifle[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3472,6 +3641,7 @@
         },
         {
             "name": "ASSAULTRIFLEPLASMARIFLE",
+            "icon": "APLSICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Assault Plasma Rifle[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3492,6 +3662,7 @@
         },
         {
             "name": "ASSAULTRIFLEMINIGUN",
+            "icon": "MINIICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Assault Minigun[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3513,6 +3684,7 @@
         },
         {
             "name": "ASSAULTRIFLELASERRIFLE",
+            "icon": "LASRICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Assault Laser Rifle[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3533,6 +3705,7 @@
         },
         {
             "name": "ASSAULTRIFLENUCLEARPLASMARIFLE",
+            "icon": "NUK1ICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Assault Nuclear Plasma Rifle[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3554,6 +3727,7 @@
         },
         {
             "name": "ASSAULTRIFLEUZI",
+            "icon": "RUZIICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Assault Uzi[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3574,6 +3748,7 @@
         },
         {
             "name": "BURSTCANNONCHAINGUN",
+            "icon": "MGUNICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Burst Chaingun[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3595,6 +3770,7 @@
         },
         {
             "name": "BURSTCANNONBATTLERIFLE",
+            "icon": "BRIFICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Burst Battle Rifle[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3616,6 +3792,7 @@
         },
         {
             "name": "BURSTCANNONPLASMARIFLE",
+            "icon": "BPLSICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Burst Plasma Rifle[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3637,6 +3814,7 @@
         },
         {
             "name": "BURSTCANNONMINIGUN",
+            "icon": "MINIICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Burst Minigun[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3658,6 +3836,7 @@
         },
         {
             "name": "BURSTCANNONLASERRIFLE",
+            "icon": "LASRICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Burst Laser Rifle[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3680,6 +3859,7 @@
         },
         {
             "name": "BURSTCANNONNUCLEARPLASMARIFLE",
+            "icon": "NUK1ICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Burst Nuclear Plasma Rifle[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3701,6 +3881,7 @@
         },
         {
             "name": "BURSTCANNONUZI",
+            "icon": "BUZIICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Burst Uzi[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3721,6 +3902,7 @@
         },
         {
             "name": "NANOSHRAPNELSHOTGUN",
+            "icon": "MSHOICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Nano Shotgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3741,6 +3923,7 @@
         },
         {
             "name": "NANOSHRAPNELCOMBATSHOTGUN",
+            "icon": "COMSICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Nano Combat Shotgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3761,6 +3944,7 @@
         },
         {
             "name": "NANOSHRAPNELDOUBLESHOTGUN",
+            "icon": "DBLSICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Nano Double Shotgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3781,6 +3965,7 @@
         },
         {
             "name": "NANOSHRAPNELSUPERSHOTGUN",
+            "icon": "MSSGICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Nano Super Shotgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3801,6 +3986,7 @@
         },
         {
             "name": "NANOSHRAPNELASSAULTSHOTGUN",
+            "icon": "AA12ICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Nano Assault Shotgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3821,6 +4007,7 @@
         },
         {
             "name": "NANOSHRAPNELPLASMASHOTGUN",
+            "icon": "PLSHICON",
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Nano Plasma Shotgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
@@ -3841,6 +4028,7 @@
         },
         {
             "name": "RIPPER",
+            "icon": "RIPPICON",
             "tier": "Master",
             "prettyname": "[MASTER]Ripper[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -3866,6 +4054,7 @@
         },
         {
             "name": "BIGGESTFUCKINGGUN",
+            "icon": "BFGXICON",
             "tier": "Master",
             "prettyname": "[MASTER]Biggest Fucking Gun[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -3889,6 +4078,7 @@
         },
         {
             "name": "NUCLEARBIGGESTFUCKINGGUN",
+            "icon": "BFGXICON",
             "tier": "Master",
             "prettyname": "[MASTER]Biggest Fucking Nuclear Gun[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -3912,6 +4102,7 @@
         },
         {
             "name": "MOTHERINLAW",
+            "icon": "MOTHICON",
             "tier": "Master",
             "prettyname": "[MASTER]Mother-In-Law[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -3936,6 +4127,7 @@
         },
         {
             "name": "AUTOCANNON",
+            "icon": "AUTOICON",
             "tier": "Master",
             "prettyname": "[MASTER]Autocannon[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -3956,6 +4148,7 @@
         },
         {
             "name": "PLASMAREFRACTOR",
+            "icon": "PLRFICON",
             "tier": "Master",
             "prettyname": "[MASTER]Plasma Refractor[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -3978,6 +4171,7 @@
         },
         {
             "name": "MEGATONSHOTGUN",
+            "icon": "MEGSICON",
             "tier": "Master",
             "prettyname": "[MASTER]Megaton Shotgun[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -3998,6 +4192,7 @@
         },
         {
             "name": "CONQUERORSHOTGUN",
+            "icon": "CONQICON",
             "tier": "Master",
             "prettyname": "[MASTER]Conqueror Shotgun[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -4019,6 +4214,7 @@
         },
         {
             "name": "CLUSTERBOMBLAUNCHER",
+            "icon": "CLUBICON",
             "tier": "Master",
             "prettyname": "[MASTER]Cluster Bomb Launcher[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -4038,6 +4234,7 @@
         },
         {
             "name": "GAUSSRIFLE",
+            "icon": "GAUSICON",
             "tier": "Master",
             "prettyname": "[MASTER]Gauss Rifle[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -4060,6 +4257,7 @@
         },
         {
             "name": "ANTIMATERIELRIFLE",
+            "icon": "AMRFICON",
             "tier": "Master",
             "prettyname": "[MASTER]Anti-materiel Rifle[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -4081,6 +4279,7 @@
         },
         {
             "name": "ZEUSCANNON",
+            "icon": "ZEUSICON",
             "tier": "Master",
             "prettyname": "[MASTER]Zeus Cannon[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -4104,6 +4303,7 @@
         },
         {
             "name": "VOLTGUN",
+            "icon": "VOLTICON",
             "tier": "Master",
             "prettyname": "[MASTER]Voltgun[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -4127,6 +4327,7 @@
         },
         {
             "name": "SUPERMACHINEGUN",
+            "icon": "SMACICON",
             "tier": "Master",
             "prettyname": "[MASTER]Super Machinegun[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -4147,6 +4348,7 @@
         },
         {
             "name": "ENERGYSAW",
+            "icon": "ESAWICON",
             "tier": "Master",
             "prettyname": "[MASTER]Energysaw[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -4168,6 +4370,7 @@
         },
         {
             "name": "INFUSIONLAUNCHER",
+            "icon": "PCHLICON",
             "tier": "Master",
             "prettyname": "[MASTER]Plascharge Launcher[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -4190,6 +4393,7 @@
         },
         {
             "name": "PLASMACANNON",
+            "icon": "PLSCICON",
             "tier": "Master",
             "prettyname": "[MASTER]Plasma Cannon[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -4213,6 +4417,7 @@
         },
         {
             "name": "HEAVYPULSEBLASTER",
+            "icon": "HBLAICON",
             "tier": "Master",
             "prettyname": "[MASTER]Heavy Pulse Blaster[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -4235,6 +4440,7 @@
         },
         {
             "name": "LASERMINIGUN",
+            "icon": "LMINICON",
             "tier": "Master",
             "prettyname": "[MASTER]Laser Minigun[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -4258,6 +4464,7 @@
         },
         {
             "name": "LASERPULSELAUNCHER",
+            "icon": "DDRLICON",
             "tier": "Master",
             "prettyname": "[MASTER]Defence Drone Launcher[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -4279,6 +4486,7 @@
         },
         {
             "name": "INCINERATIONDEVICELAUNCHER",
+            "icon": "IDLAICON",
             "tier": "Master",
             "prettyname": "[MASTER]Incineration Device Launcher[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -4299,6 +4507,7 @@
         },
         {
             "name": "NANOMANUFACTUREAMMOPISTOL",
+            "icon": "MPISICON",
             "tier": "Master",
             "prettyname": "[MASTER]Nanomachic Pistol[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -4319,6 +4528,7 @@
         },
         {
             "name": "NANOMANUFACTUREAMMOCHAINGUN",
+            "icon": "MGUNICON",
             "tier": "Master",
             "prettyname": "[MASTER]Nanomachic Chaingun[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -4340,6 +4550,7 @@
         },
         {
             "name": "NANOMANUFACTUREAMMOBATTLERIFLE",
+            "icon": "MBTRICON",
             "tier": "Master",
             "prettyname": "[MASTER]Nanomachic Battle Rifle[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -4360,6 +4571,7 @@
         },
         {
             "name": "NANOMANUFACTUREAMMOROCKETLAUNCHER",
+            "icon": "MROKICON",
             "tier": "Master",
             "prettyname": "[MASTER]Nanomachic Rocket Launcher[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -4381,6 +4593,7 @@
         },
         {
             "name": "NANOMANUFACTUREAMMOPLASMARIFLE",
+            "icon": "PLASICON",
             "tier": "Master",
             "prettyname": "[MASTER]Nanomachic Plasma Rifle[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -4402,6 +4615,7 @@
         },
         {
             "name": "NANOMANUFACTUREAMMOBLASTER",
+            "icon": "BLASICON",
             "tier": "Master",
             "prettyname": "[MASTER]Nanomachic Blaster[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -4423,6 +4637,7 @@
         },
         {
             "name": "NANOMANUFACTUREAMMOCOMBATPISTOL",
+            "icon": "COMPICON",
             "tier": "Master",
             "prettyname": "[MASTER]Nanomachic Combat Pistol[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -4444,6 +4659,7 @@
         },
         {
             "name": "NANOMANUFACTUREAMMOMARKSMANPISTOL",
+            "icon": "MRKPICON",
             "tier": "Master",
             "prettyname": "[MASTER]Nanomachic Marksman Pistol[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -4464,6 +4680,7 @@
         },
         {
             "name": "NANOMANUFACTUREAMMOHANDCANNON",
+            "icon": "DEAGICON",
             "tier": "Master",
             "prettyname": "[MASTER]Nanomachic Handcannon[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -4484,6 +4701,7 @@
         },
         {
             "name": "NANOMANUFACTUREAMMOTRISTARBLASTER",
+            "icon": "MTRIICON",
             "tier": "Master",
             "prettyname": "[MASTER]Nanomachic Tristar Blaster[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -4505,6 +4723,7 @@
         },
         {
             "name": "NANOMANUFACTUREAMMOMINIGUN",
+            "icon": "MINIICON",
             "tier": "Master",
             "prettyname": "[MASTER]Nanomachic Minigun[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -4526,6 +4745,7 @@
         },
         {
             "name": "NANOMANUFACTUREAMMOMISSILELAUNCHER",
+            "icon": "MISSICON",
             "tier": "Master",
             "prettyname": "[MASTER]Nanomachic Missile Launcher[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -4547,6 +4767,7 @@
         },
         {
             "name": "NANOMANUFACTUREAMMONAPALMLAUNCHER",
+            "icon": "NAPAICON",
             "tier": "Master",
             "prettyname": "[MASTER]Nanomachic Napalm Launcher[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -4568,6 +4789,7 @@
         },
         {
             "name": "NANOMANUFACTUREAMMOLASERRIFLE",
+            "icon": "LASRICON",
             "tier": "Master",
             "prettyname": "[MASTER]Nanomachic Laser Rifle[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -4589,6 +4811,7 @@
         },
         {
             "name": "NANOMANUFACTUREAMMOUZI",
+            "icon": "RUZIICON",
             "tier": "Master",
             "prettyname": "[MASTER]Nanomachic Uzi[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -4609,6 +4832,7 @@
         },
         {
             "name": "DEMOLITIONAMMOPISTOL",
+            "icon": "DPISICON",
             "tier": "Master",
             "prettyname": "[MASTER]Demolition Ammo Pistol[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -4630,6 +4854,7 @@
         },
         {
             "name": "DEMOLITIONAMMOCHAINGUN",
+            "icon": "DCHGICON",
             "tier": "Master",
             "prettyname": "[MASTER]Demolition Ammo Chaingun[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -4652,6 +4877,7 @@
         },
         {
             "name": "DEMOLITIONAMMOBATTLERIFLE",
+            "icon": "DEMRICON",
             "tier": "Master",
             "prettyname": "[MASTER]Demolition Ammo Battle Rifle[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -4673,6 +4899,7 @@
         },
         {
             "name": "DEMOLITIONAMMOCOMBATPISTOL",
+            "icon": "DGLKICON",
             "tier": "Master",
             "prettyname": "[MASTER]Demolition Ammo Combat Pistol[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -4695,6 +4922,7 @@
         },
         {
             "name": "DEMOLITIONAMMOMARKSMANPISTOL",
+            "icon": "MRKPICON",
             "tier": "Master",
             "prettyname": "[MASTER]Demolition Ammo Marksman Pistol[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -4716,6 +4944,7 @@
         },
         {
             "name": "DEMOLITIONAMMOHANDCANNON",
+            "icon": "DDEAICON",
             "tier": "Master",
             "prettyname": "[MASTER]Demolition Ammo Handcannon[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -4737,6 +4966,7 @@
         },
         {
             "name": "DEMOLITIONAMMOMINIGUN",
+            "icon": "DMINICON",
             "tier": "Master",
             "prettyname": "[MASTER]Demolition Ammo Minigun[END]",
             "capacity": "ZERO_MOD_CAPACITY",
@@ -4759,6 +4989,7 @@
         },
         {
             "name": "DEMOLITIONAMMOUZI",
+            "icon": "DUZIICON",
             "tier": "Master",
             "prettyname": "[MASTER]Demolition Ammo Uzi[END]",
             "capacity": "ZERO_MOD_CAPACITY",

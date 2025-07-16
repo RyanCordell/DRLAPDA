@@ -31,7 +31,7 @@ if (GetCvar("DRLA_specialstarts") != 2)
             DisplayIconParallax(
                 StrParam("%l:", DRLA_ItemInfo[itemIndex + DRLA_PageOffset][0]), 
                 PDA_ITEMS_END - (ItemLimit+1), 
-                PDA_SCREEN_X + 30.0 + X_LEFT_EDGE, 50.0 + (50.0 * ItemLimit), 0.0, 1.0);
+                PDA_SCREEN_X + 30.0 + X_LEFT_EDGE, 50.0 + (50.0 * ItemLimit), INF_HOLDTIME, OPAQUE);
 
             // Item name + desc
             HudMessageParallax(
@@ -40,7 +40,7 @@ if (GetCvar("DRLA_specialstarts") != 2)
                     "%l:\n", 
                 DRLA_ItemInfo[itemIndex + DRLA_PageOffset][1], DRLA_ItemInfo[itemIndex + DRLA_PageOffset][2]), 
                 HUDMSG_PLAIN, PDA_ITEMS_END - (ItemLimit+9), CR_UNTRANSLATED, 
-                40.0, 40.0 + (50.0 * ItemLimit), 0.0, 1.0);
+                40.0, 40.0 + (50.0 * ItemLimit), INF_HOLDTIME, OPAQUE);
 
             ItemLimit++;
         }

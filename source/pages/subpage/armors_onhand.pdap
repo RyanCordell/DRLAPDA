@@ -9,7 +9,7 @@ fixed initialY   = 30.0;
 int _yTemp       = 0;
 
 // Funny that I opted to do this instead of just declaring the message outright..
-HudMessageParallax("No equipment detected", HUDMSG_PLAIN, PDA_NOEQID, CR_UNTRANSLATED, x, 50.0, 0.0, 1.0);
+HudMessageParallax("No equipment detected", HUDMSG_PLAIN, PDA_NOEQID, CR_UNTRANSLATED, x, 50.0, INF_HOLDTIME, OPAQUE);
 
 int armorLimit      = 0;
 bool areTheseBoots  = false; // Does Bruno Mars is gay???

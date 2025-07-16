@@ -10,7 +10,7 @@ bool PDA_ManyHax    = false;
 const float inAlpha = 0.7;
 const fixed playerIconX = PDA_SCREEN_X + 20.0 + X_LEFT_EDGE;
 
-DisplayIconParallax("PDAPLYR", PDA_PLYR_ICON, playerIconX, 40.0, 0.0, 1.0);
+DisplayIconParallax("PDAPLYR", PDA_PLYR_ICON, playerIconX, 40.0, INF_HOLDTIME, OPAQUE);
 
 localShowArmor    = (localEqBoolField & 1);
 localShowBoots    = (localEqBoolField & 1<<1);
@@ -126,7 +126,7 @@ if (localShowArmor && localHasArmor) {
             equipment_set_name,
             equipment_set_description
         ),
-        HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 10.0, 140.0, 0.0, 1.0);
+        HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 10.0, 140.0, INF_HOLDTIME, OPAQUE);
 } else if (localShowBoots && localHasBoots) {
     HudMessageParallax(
         StrParam(
@@ -146,7 +146,7 @@ if (localShowArmor && localHasArmor) {
             "\crDescription:\c-\n",
             StrParam("%l:\n", localBootsData.bootsDesc)
         ),
-        HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 10.0, 140.0, 0.0, 1.0);
+        HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 10.0, 140.0, INF_HOLDTIME, OPAQUE);
 } else if (localShowBackpack && localHasBackpack) {
     HudMessageParallax(
         StrParam(
@@ -159,5 +159,5 @@ if (localShowArmor && localHasArmor) {
             "\crDescription:\c-\n",
             localBackpackData.backpackVal
         ),
-        HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 10.0, 140.0, 0.0, 1.0);
+        HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 10.0, 140.0, INF_HOLDTIME, OPAQUE);
 }
