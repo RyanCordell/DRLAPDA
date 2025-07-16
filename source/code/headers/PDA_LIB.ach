@@ -27,8 +27,8 @@ bool weapon_checks[3] = {false, false, false};
 // full name, trimmed
 str player_weapon[2] = {"", ""};
 
-// flatname, demon flatname, ???, desc, demon desc
-str weapon_info[5]   = {"", "", "", "", ""};
+// flatname, demon flatname, ???, desc, demon desc, icon
+str weapon_info[6]   = {"", "", "", "", "", ""};
 
 // name, abilities, story, height, icon, weapon perk
 str PDA_Class[MAX_PLAYERS][6] = {" ", " ", " ", " ", " ", " "};

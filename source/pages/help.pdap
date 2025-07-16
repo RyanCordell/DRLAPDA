@@ -19,7 +19,7 @@ if (PDA_Local.page == 1)
         HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 
         10.0, 
         20.0 + (20.0 * 1),
-        0, 1.0);
+        INF_HOLDTIME, OPAQUE);
 }
 if (PDA_Local.page == 2)
 {
@@ -31,7 +31,7 @@ if (PDA_Local.page == 2)
         HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 
         10.0, 
         20.0 + (20.0 * 1),
-        0, 1.0);
+        INF_HOLDTIME, OPAQUE);
 }
 
 // Get rid of it once we're done.

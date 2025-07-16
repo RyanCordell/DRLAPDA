@@ -39,6 +39,7 @@ script "DRLA_HUD_InfoHandler" ENTER {
         player_weapon[player_weapon_current] = GetWeapon();
         player_weapon[player_weapon_trimmed] = StrTrim(player_weapon[player_weapon_current], 2, 0);
 
+        weapon_info[weapon_info_icon]     = StrParam("PDA_WEAPON_%s:_ICON", player_weapon[player_weapon_trimmed]);
         weapon_info[weapon_info_name]     = StrParam("PDA_WEAPON_%s:_NAME", player_weapon[player_weapon_trimmed]);
         weapon_info[weapon_info_dualname] = StrParam("PDA_WEAPON_%s:DEMONARTIFACTS_NAME", player_weapon[player_weapon_trimmed]);
 
@@ -76,6 +77,14 @@ script "DRLA_HUD_InfoHandler" ENTER {
             modsOn = StrParam("%l:", weaponName);
         }
         weaponval = modsOn;
+
+        weapon_checks[weapon_checks_disassemblable] = (GetActorClass(0) == "DoomRLTechnician" && !CheckInventory("RLStandardWeaponToken"));
+        weapon_checks[weapon_checks_supports_artifacts] = CheckInventory(StrParam("%s:DemonArtifacts", player_weapon[player_weapon_current]));
+
+        setMaxModLimit();
+
+        checkPlayerWeaponPerk();
+        checkWeaponArmorSetPerk();
 
         // Armor
         str armorType = GetArmorInfo(ARMORINFO_CLASSNAME);

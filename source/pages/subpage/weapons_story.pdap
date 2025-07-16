@@ -1,39 +1,55 @@
 #define canDisassemble weapon_checks[weapon_checks_disassemblable]
 #define isEvil weapon_checks[weapon_checks_supports_artifacts]
+#define playerWeaponPerk PDA_Class[PlayerNumber()][pda_class_weapon_perk]
+// These offsets should only be used if using the inventory.icon graphic of the weapon, otherwise, replace or null.
+#define gfxOffsetX 120.0
+#define gfyOffsetY 0.0
 
-// TODO: unmagic ID, X, Y
-DisplayIconParallax(weapon_info[weapon_info_icon], 60, 40.0, 40.0, INF_HOLDTIME, OPAQUE);
+#define weaponName(a) (a) ? weapon_info[weapon_info_dualname] : weapon_info[weapon_info_name]
+#define weaponDesc(a) (a) ? weapon_info[weapon_info_dualdesc] : weapon_info[weapon_info_desc]
+
+DisplayIconParallax(StrParam("%l:", weapon_info[weapon_info_icon]), PDA_WEAPON_ICON, 10.0 + gfxOffsetX, 20.0 + (20.0 * 1) - gfyOffsetY, INF_HOLDTIME, 0.6);
 
 HudMessageParallax(
+    // StrParam(
+    //     "%s:" // Tech perk
+    //     "%s:" // Non-Tech Class perk
+    //     "\n"
+    //     "%s:" // Weapon perk
+    //     "%l:\n" // Name
+    //     "\cj%l:\c-\n" // Description
+    //     ,
+    //     (canDisassemble) ? StrParam("> \c[Yellow]%s:", DRLA_WeaponPerkList[PDA_TECHNICIAN_PERK][PDA_PERK_NICE_NAME]) : "",
+    //     (!canDisassemble) ? playerWeaponPerk : "",
+    //     weapon_info[weapon_info_armor_set_perk],
+    //     (isEvil) ? weapon_info[weapon_info_dualname] : weapon_info[weapon_info_name],
+    //     (isEvil) ? weapon_info[weapon_info_dualdesc] : weapon_info[weapon_info_desc]
+    // ),
     StrParam(
-        "%s:" // Tech perk
-        "%s:" // Non-Tech Class perk
-        "\n"
-        "%s:" // Weapon perk
-        "%l:\n" // Name
-        "\cj%l:\c-\n" // Description
-        ,
-        (canDisassemble) ? StrParam("> \c[Yellow]%s:", DRLA_WeaponPerkList[PDA_TECHNICIAN_PERK][PDA_PERK_NICE_NAME]) : "",
-        (!canDisassemble) ? PDA_Class[PlayerNumber()][pda_class_weapon_perk] : "",
-        weapon_info[weapon_info_perk],
-        (isEvil) ? weapon_info[weapon_info_dualname] : weapon_info[weapon_info_name],
-        (isEvil) ? weapon_info[weapon_info_dualdesc] : weapon_info[weapon_info_desc]
+        "%l: %s:\n" // Name + perk
+        "%s:" // Diassembleble?
+        "%s:\n\n" // Weapon + Armor set perk
+        "\cj%l:\c-\n", // Description
+        weaponName(isEvil), stricmp(playerWeaponPerk, "") != 0 ? StrParam("+ %s:\c-", playerWeaponPerk) : "",
+        (canDisassemble) ? StrParam("\c[Yellow]%s:\c-\n\n", DRLA_WeaponPerkList[PDA_TECHNICIAN_PERK][PDA_PERK_NICE_NAME]) : "",
+        weapon_info[weapon_info_armor_set_perk],
+        weaponDesc(isEvil)
     ),
 
     HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 
-    10.0, 20.0 + (20.0 * 1), 
-    0, 1.0);
+    10.0, 20.0 + (20.0 * 3), 
+    INF_HOLDTIME, OPAQUE);
 
 if (PDA_Local.scrollYDelta == -1) {
     PDA_LocalButton[PDA_MODS_PAGE] = PDA_CreateFixedButton(PDA_MODS_PAGE, "Modpack Effects" , "MODICON", 
         10.0, PDA_SCREEN_HEIGHT, 
         82, 16, 
         16, 19);
-                    PDA_ButtonHandler(PDA_MODS_PAGE, true, 2, "", false, false);
+    PDA_ButtonHandler(PDA_MODS_PAGE, true, 2, "", false, false);
 
     PDA_LocalButton[PDA_ARTIFACTS_PAGE] = PDA_CreateFixedButton(PDA_ARTIFACTS_PAGE, "Artifact Effects", "DMNAICON", 
         PDA_SCREEN_WIDTH - 82 - 20, PDA_SCREEN_HEIGHT,
         82, 16, 
         38, 40);
-                    PDA_ButtonHandler(PDA_ARTIFACTS_PAGE, true, 3, "", false, false);
+    PDA_ButtonHandler(PDA_ARTIFACTS_PAGE, true, 3, "", false, false);
 }

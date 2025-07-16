@@ -142,23 +142,38 @@ function void PDA_ClearHeader (void) {
 
 // Useful for scroll arrows
 function void DisplayIcon (str Sprite, int ID, fixed X, fixed Y, fixed DelayTime, fixed Alpha) {
-    SetFont(Sprite);
-    HudMessage(s:"A\n"; HUDMSG_ALPHA, ID, CR_UNTRANSLATED, X, Y, DelayTime, Alpha);
-	PDA_DefaultFont();
+    if (CheckFont(Sprite)) {
+        SetFont(Sprite);
+        HudMessage(s:"A\n"; HUDMSG_ALPHA, ID, CR_UNTRANSLATED, X, Y, DelayTime, Alpha);
+        PDA_DefaultFont();
+    }
 }
 
 function void DisplayIconParallax (str Sprite, int ID, fixed X, fixed Y, fixed DelayTime, fixed Alpha) {
-    SetFont(Sprite);
-    int _yTemp = PDA_Local.scrollingY + Y;
-        _yTemp *= NEW_RESOLUTION_Y;
-    HudMessage(s:"A\n"; HUDMSG_ALPHA, ID, CR_UNTRANSLATED, X, _yTemp + Y_TOP_EDGE, DelayTime, Alpha);
-	PDA_DefaultFont();
+    if (CheckFont(Sprite)) {
+        SetFont(Sprite);
+        int _yTemp = PDA_Local.scrollingY + Y;
+            _yTemp *= NEW_RESOLUTION_Y;
+        HudMessage(s:"A\n"; HUDMSG_ALPHA, ID, CR_UNTRANSLATED, X, _yTemp + Y_TOP_EDGE, DelayTime, Alpha);
+        PDA_DefaultFont();
+    }
+}
+function void DisplayIconParallax2 (str Sprite, int ID, fixed X, fixed Y, fixed DelayTime, fixed Alpha) {
+    if (CheckFont(Sprite)) {
+        SetFont(Sprite);
+        int _yTemp = PDA_Local.scrollingY + Y;
+            _yTemp *= NEW_RESOLUTION_Y;
+        HudMessage(s:"A\n"; HUDMSG_ALPHA, ID, CR_UNTRANSLATED, X, _yTemp, DelayTime, Alpha);
+        PDA_DefaultFont();
+    }
 }
 
 function void DisplayArmorIcon (str Sprite, int ID, fixed X, fixed Y, fixed Alpha) {
-    SetFont(StrParam("%l:", Sprite));
-    HudMessage(s:"A\n"; HUDMSG_ALPHA, ID, CR_UNTRANSLATED, X, Y, 0, Alpha);
-	SetFont(PDA_FONT[0]);
+    if (CheckFont(StrParam("%l:", Sprite))) {
+        SetFont(StrParam("%l:", Sprite));
+        HudMessage(s:"A\n"; HUDMSG_ALPHA, ID, CR_UNTRANSLATED, X, Y, 0, Alpha);
+        SetFont(PDA_FONT[0]);
+    }
 }
 
 function int batoi (str stri)  {
@@ -512,49 +527,17 @@ function void PDA_SetDataPerPage (void) {
         case PDA_WEAPONS:
             player_weapon[player_weapon_current] = GetWeapon();
             player_weapon[player_weapon_trimmed] = StrTrim(player_weapon[player_weapon_current], 2, 0);
-            PDA_Class[PlayerNumber()][pda_class_weapon_perk]   = StrParam("> \c[Yellow]%l:", "PDA_WEAPON_PERKUNAVAILABLE");
 
             weapon_checks[weapon_checks_disassemblable] = (GetActorClass(0) == "DoomRLTechnician" && !CheckInventory("RLStandardWeaponToken"));
             weapon_checks[weapon_checks_supports_artifacts] = CheckInventory(StrParam("%s:DemonArtifacts", player_weapon[player_weapon_current]));
 
-            if (CheckInventory("RLStandardWeaponToken") || CheckInventory("RLExoticWeaponToken")) {
-                PDA_Local.maxmodlimit = 4;
-            }
+            setMaxModLimit();
 
-            if (CheckInventory("RLSuperiorWeaponToken") || CheckInventory("RLBasicAssemblyTypeWeapon")) {
-                PDA_Local.maxmodlimit = 2;
-            }
-
-            if (CheckInventory("RLUniqueWeaponToken") || CheckInventory("RLDemonicWeaponToken") || CheckInventory("RLLegendaryWeaponToken") || CheckInventory("RLAdvancedAssemblyTypeWeapon")) {
-                if (StrCmp(GetWeapon(),"RLDuke2Rifle") == 0 || StrCmp(GetWeapon(),"RLChameleonRifle") == 0 || StrCmp(GetWeapon(),"RLWidowmakerSMG") == 0)
-                    PDA_Local.maxmodlimit = 3;
-                else
-                    PDA_Local.maxmodlimit = 1;
-            }
-
-            if (CheckInventory("RLMasterAssemblyTypeWeapon") || CheckInventory("RLSuperiorAssembledWeaponToken")) {
-                PDA_Local.maxmodlimit = 0;
-            }
-
-            // Checks for player perks that influence weapons
-            for (int perkIndex = 0; perkIndex < DRLA_WEAPONPERKMAX; perkIndex++) {
-                if (CheckInventory(DRLA_WeaponPerkList[perkIndex][0]) && CheckInventory(DRLA_WeaponPerkList[perkIndex][2])) {
-                    PDA_Class[PlayerNumber()][pda_class_weapon_perk] = StrParam("> \c[Yellow]%s:", DRLA_WeaponPerkList[perkIndex][1]);
-                }
-            }
-            // Checks for unique weapon + armor set perks
-            // I should get a better name for this loop's max at some point..
-            for (int setPerkIndex = 0; setPerkIndex < DRLA_NUCLEARMAX; setPerkIndex++) {
-                if (CheckInventory(DRLA_WeaponSetList[setPerkIndex][0]) && (player_weapon[player_weapon_current] == DRLA_NuclearCheckList[setPerkIndex])) {
-                    weapon_info[weapon_info_perk] = StrParam("> \c[Yellow]%s:", DRLA_WeaponSetList[0][1]);
-                }
-                if (CheckInventory("RLCerberusSetBonusActive") && (player_weapon[player_weapon_current] == DRLA_TristarCheckList[setPerkIndex])) {
-                    weapon_info[weapon_info_perk] = StrParam("> \c[Yellow]%s:", DRLA_WeaponSetList[1][1]);
-                }
-            }
+            checkPlayerWeaponPerk();
+            checkWeaponArmorSetPerk();
 
             if (stricmp(player_weapon[player_weapon_current], "None") != 0) {
-                weapon_info[weapon_info_icon]     = StrParam("PDA_WEAPON_%s:_ICON", DRLA_WeaponSetList[0][1]);
+                weapon_info[weapon_info_icon]     = StrParam("PDA_WEAPON_%s:_ICON", player_weapon[player_weapon_trimmed]);
                 weapon_info[weapon_info_desc]     = StrParam("PDA_WEAPON_%s:_DESC", player_weapon[player_weapon_trimmed]);
                 weapon_info[weapon_info_dualdesc] = StrParam("PDA_WEAPON_%s:DEMONARTIFACTS_DESC", player_weapon[player_weapon_trimmed]);
 
@@ -622,21 +605,21 @@ function void PDA_SetDataPerPage (void) {
             break;
         case PDA_ASSEMBLY_DETAIL:
             if (stricmp(PDA_Local.detailFetch[0], "null") != 0) {
-                PDA_AssemblyInfo[PlayerNumber()][0]  = StrParam("%s:_ICON",   PDA_Local.detailFetch[0]);
-                PDA_AssemblyInfo[PlayerNumber()][1]  = StrParam("%s:_NAME",   PDA_Local.detailFetch[0]);
-                PDA_AssemblyInfo[PlayerNumber()][2]  = StrParam("%s:_MODS",   PDA_Local.detailFetch[0]);
-                PDA_AssemblyInfo[PlayerNumber()][3]  = StrParam("%s:_DESC",   PDA_Local.detailFetch[0]);
+                PDA_AssemblyInfo[PlayerNumber()][0] = StrParam("%s:_ICON",   PDA_Local.detailFetch[0]);
+                PDA_AssemblyInfo[PlayerNumber()][1] = StrParam("%s:_NAME",   PDA_Local.detailFetch[0]);
+                PDA_AssemblyInfo[PlayerNumber()][2] = StrParam("%s:_MODS",   PDA_Local.detailFetch[0]);
+                PDA_AssemblyInfo[PlayerNumber()][3] = StrParam("%s:_DESC",   PDA_Local.detailFetch[0]);
                 PDA_AssemblyInfo[PlayerNumber()][4] = StrParam("%s:_HEIGHT", PDA_Local.detailFetch[0]);
             }
             break;
         case PDA_BESTIARY_DETAIL:
             if (stricmp(PDA_Local.detailFetch[0], "null") != 0) {
-                enemy_count       = PDA_Local.detailFetch[1];
-                PDA_Enemy[PlayerNumber()][enemy_name]   = StrParam("%s:_NAME",       PDA_Local.detailFetch[0]);
-                PDA_Enemy[PlayerNumber()][enemy_icon]   = StrParam("%s:_ICON",       PDA_Local.detailFetch[0]);
-                PDA_Enemy[PlayerNumber()][enemy_health] = StrParam("%s:_HEALTH",     PDA_Local.detailFetch[0]);
-                PDA_Enemy[PlayerNumber()][enemy_resistance]    = StrParam("%s:_RESISTANCE", PDA_Local.detailFetch[0]);
-                PDA_Enemy[PlayerNumber()][enemy_misc]   = StrParam("%s:_MISC",       PDA_Local.detailFetch[0]);
+                enemy_count                                 = PDA_Local.detailFetch[1];
+                PDA_Enemy[PlayerNumber()][enemy_name]       = StrParam("%s:_NAME",       PDA_Local.detailFetch[0]);
+                PDA_Enemy[PlayerNumber()][enemy_icon]       = StrParam("%s:_ICON",       PDA_Local.detailFetch[0]);
+                PDA_Enemy[PlayerNumber()][enemy_health]     = StrParam("%s:_HEALTH",     PDA_Local.detailFetch[0]);
+                PDA_Enemy[PlayerNumber()][enemy_resistance] = StrParam("%s:_RESISTANCE", PDA_Local.detailFetch[0]);
+                PDA_Enemy[PlayerNumber()][enemy_misc]       = StrParam("%s:_MISC",       PDA_Local.detailFetch[0]);
             }
             break;
         case PDA_CREDITS:
@@ -1248,7 +1231,7 @@ function PDAButton PDA_CreateModPackDisplay (int id, str graphic, float x, float
     // SetFont(thisButton.textFont);
     // HudMessage("%l:", stringArray[id]; thisButton.textFlags, PDA_ASSEMBLY_ID_END + id, CR_UNTRANSLATED, 
     //     thisButton.textX, thisButton.textY,
-    //     0.0, 1.0);
+    //     0.INF_HOLDTIME, OPAQUE);
     return thisButton;
 }
 

@@ -32,6 +32,52 @@
 
 #define deleteNoEquipmentMessage() HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_NOEQID, CR_UNTRANSLATED, 0, 0, 0);
 
+#define setMaxModLimit() \
+    if (CheckInventory("RLStandardWeaponToken") || CheckInventory("RLExoticWeaponToken")) { \
+        PDA_Local.maxmodlimit = 4; \
+    } \
+    if (CheckInventory("RLSuperiorWeaponToken") || CheckInventory("RLBasicAssemblyTypeWeapon")) { \
+        PDA_Local.maxmodlimit = 2; \
+    } \
+    if (CheckInventory("RLUniqueWeaponToken") || CheckInventory("RLDemonicWeaponToken") || CheckInventory("RLLegendaryWeaponToken") || CheckInventory("RLAdvancedAssemblyTypeWeapon")) { \
+        if (StrCmp(GetWeapon(),"RLDuke2Rifle") == 0 || StrCmp(GetWeapon(),"RLChameleonRifle") == 0 || StrCmp(GetWeapon(),"RLWidowmakerSMG") == 0) \
+            PDA_Local.maxmodlimit = 3; \
+        else \
+            PDA_Local.maxmodlimit = 1; \
+    } \
+    if (CheckInventory("RLMasterAssemblyTypeWeapon") || CheckInventory("RLSuperiorAssembledWeaponToken")) { \
+        PDA_Local.maxmodlimit = 0; \
+    } \
+
+// Checks for player perks that influence weapons
+#define checkPlayerWeaponPerk() \
+    for (int perkIndex = 0; perkIndex < DRLA_WEAPONPERKMAX; perkIndex++) { \
+        if (CheckInventory(DRLA_WeaponPerkList[perkIndex][0]) && CheckInventory(DRLA_WeaponPerkList[perkIndex][2])) { \
+            PDA_Class[PlayerNumber()][pda_class_weapon_perk] = StrParam("\c[Yellow]%s:", DRLA_WeaponPerkList[perkIndex][1]); \
+        } else { \
+            PDA_Class[PlayerNumber()][pda_class_weapon_perk]   = ""; \
+        } \
+    } \
+    // PDA_Class[PlayerNumber()][pda_class_weapon_perk]   = StrParam("\c[Yellow]%l:", "PDA_WEAPON_PERKUNAVAILABLE"); \
+
+// Checks for unique weapon + armor set perks
+// I should get a better name for this loop's max at some point..
+#define nuclearWeaponPerk 0
+#define tristarWeaponPerk 1
+#define perkToken   0
+#define perkMessage 1
+
+#define checkWeaponArmorSetPerk() \
+    weapon_info[weapon_info_armor_set_perk] = ""; \
+    for (int setPerkIndex = 0; setPerkIndex < DRLA_NUCLEARMAX; setPerkIndex++) { \
+        if (CheckInventory("RLNuclearWeaponSetBonusActive") && (player_weapon[player_weapon_current] == DRLA_NuclearCheckList[setPerkIndex])) { \
+            weapon_info[weapon_info_armor_set_perk] = StrParam("\czSet Bonus!\c- \c[Yellow]%s:", DRLA_WeaponSetList[nuclearWeaponPerk][perkMessage]); \
+        } \
+        if (CheckInventory("RLCerberusSetBonusActive")      && (player_weapon[player_weapon_current] == DRLA_TristarCheckList[setPerkIndex])) { \
+            weapon_info[weapon_info_armor_set_perk] = StrParam("\czSet Bonus!\c- \c[Yellow]%s:", DRLA_WeaponSetList[tristarWeaponPerk][perkMessage]); \
+        } \
+    } \
+
 // shortening array calls
 #define localArmorIndex    global_equipment_index[equipment_armor][PlayerNumber()]
 #define localBootsIndex    global_equipment_index[equipment_boots][PlayerNumber()]

@@ -101,6 +101,7 @@ enum PDA_IDs {
     PDA_ARMORWORNIDRANGE = PDA_ASSEMBLY_ID_END,
     PDA_TOOLTIPGFX = PDA_CAT_DESCRIPTION,
     PDA_TOOLTIPID = PDA_TOOLTIPGFX - 5,
+    PDA_WEAPON_ICON = PDA_CAT_DESCRIPTION,
     PDA_PLYR_ICON = PDA_ASSEMBLY_ID_END,
 }
 
@@ -198,7 +199,7 @@ enum weapon_checks_index {
 enum weapon_info_index {
     weapon_info_name = 0,
     weapon_info_dualname,
-    weapon_info_perk,
+    weapon_info_armor_set_perk,
     weapon_info_desc,
     weapon_info_dualdesc,
     weapon_info_icon,
