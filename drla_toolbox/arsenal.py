@@ -747,6 +747,8 @@ str DRLA_ArmorSetList[DRLA_ARMORSETMAX] = {{
 
         fragment: list[str] = list(f'''PDA_WEAPON_{bigname}_ACTOR = "RL{bigname}";\n''')
 
+        if "icon" in weapon:
+            fragment.append(f'''PDA_WEAPON_{bigname}_ICON = "{weapon['icon']}";\n''')
         if "prettyname" in weapon:
             fragment.append(f'''PDA_WEAPON_{bigname}_NAME = "{weapon['prettyname']}";\n''')
             fragment.append(f'''PDA_WEAPON_{bigname}_FLATNAME = "{weapon['flatname']}";\n''')
