@@ -5,8 +5,8 @@ const int width = 180,
 
 for (int ti = 0, li = 1; ti <= PDA_Local.maxassembliesper; ti+=2, li+=2) {
     int aoff               = (PDA_Local.assemblyOffset - 1 < 0) ? 0 : (PDA_Local.assemblyOffset - 1);
-    str actorToken         = stringArray[ti + aoff];
-    str languagePointer    = stringArray[li + aoff];
+    str actorToken         = stringArray[ASSEMBLY_DIM][ti + aoff];
+    str languagePointer    = stringArray[ASSEMBLY_DIM][li + aoff];
         // index - 1 to account for message id
     int id                 = PDA_ASSEMBLY_ID_END - (ti - 1);
         assemblyY          = 30.0 + (6.0 * (ti - 1)); 

@@ -1,14 +1,4 @@
-
-int perkoffset = 1;
-
-
 PDA_DefaultFont();
-
-bool canAnim = true;
-
-// current_weapon_mods = StrParam("%l:", StrParam("PDA_WEAPON_%s:_MODS", player_weapon[player_weapon_trimmed]));
-// str_split(separator_character, current_weapon_mods);
-
 
 if (stricmp(player_weapon[player_weapon_current], "None") != 0) {
     if (PDA_Local.page == WEAPON_PAGE_STORY) {
@@ -23,5 +13,3 @@ if (stricmp(player_weapon[player_weapon_current], "None") != 0) {
         #include "../../pages/subpage/weapons_artifacts.pdap"
     }
 }
-
-// PDA_UnsetScrollWindow();

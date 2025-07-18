@@ -25,25 +25,25 @@ function int str_find(str haystack, str needle, int index) {
     return -1;
 }
 
-#define clearStringArray() \
-    for (int i = 0; i < STRING_ARRAY_MAX; i++) stringArray[i] = ""; \
+#define clearStringArray(dim) \
+    for (int i = 0; i < STRING_ARRAY_MAX; i++) stringArray[dim][i] = ""; \
 
 // Thanks to DavidPH!
-function int str_split (str separator, str input) {
+function int str_split (str separator, str input, int dim) {
     int inputLen     = StrLen(input);
     int separatorLen = StrLen(separator);
     int n      = 0;
     int pos    = 0,
         oldPos = 0;
 
-    clearStringArray();
+    clearStringArray(dim);
 
     while ((pos = str_find(input, separator, oldPos)) != -1) {
-        stringArray[n++] = StrMid(input, oldPos, pos - oldPos);
+        stringArray[dim][n++] = StrMid(input, oldPos, pos - oldPos);
         oldPos = pos + separatorLen;
     }
 
-    stringArray[n++] = StrRight(input, inputLen - oldPos);
+    stringArray[dim][n++] = StrRight(input, inputLen - oldPos);
 
     return n+1;
 }
@@ -282,7 +282,7 @@ function int checkSpecialArmorTokens(void) {
             PDA_PlaySound("UI/PDA/Select", "pda/soldier", 80); \
             (a).oldstate = (a).state; \
         } \
-        if (PDA_LocalMouse.m1 && !(PDA_LocalMouse.oldState & BT_ATTACK)) { \
+        if (PDA_LocalMouse.m1 && !(PDA_LocalMouse.oldState & _ACTION)) { \
             PDA_PlaySound("UI/PDA/ChangePage", "pda/soldier", 80); \
             (a).state = button_clicked; \
         } \
@@ -303,7 +303,7 @@ function int checkSpecialArmorTokens(void) {
             PDA_PlaySound("UI/PDA/Select", "pda/soldier", 80); \
             (a).oldstate = (a).state; \
         } \
-        if (PDA_LocalMouse.m1 && !(PDA_LocalMouse.oldState & BT_ATTACK)) { \
+        if (PDA_LocalMouse.m1 && !(PDA_LocalMouse.oldState & _ACTION)) { \
             PDA_PlaySound("UI/PDA/ChangePage", "pda/soldier", 80); \
             (a).state = button_clicked; \
         } \
@@ -541,7 +541,7 @@ function void PDA_SetDataPerPage (void) {
                 weapon_info[weapon_info_desc]     = StrParam("PDA_WEAPON_%s:_DESC", player_weapon[player_weapon_trimmed]);
                 weapon_info[weapon_info_dualdesc] = StrParam("PDA_WEAPON_%s:DEMONARTIFACTS_DESC", player_weapon[player_weapon_trimmed]);
 
-                str_split(separator_character, StrParam("%l:", StrParam("PDA_WEAPON_%s:_MODS", player_weapon[player_weapon_trimmed])));
+                str_split(separator_character, StrParam("%l:", StrParam("PDA_WEAPON_%s:_MODS", player_weapon[player_weapon_trimmed])), MODS_DIM);
             }
             break;
             
@@ -826,7 +826,7 @@ function PDAButton PDA_CreateMenuButton (int id, str label, str graphic, float x
 
     // Expand upon default bounds check with additional functionality
     // if (CheckBounds(thisButton)) {
-    //     if (PDA_LocalMouse.m1 && !(PDA_LocalMouse.oldState & BT_ATTACK)) {
+    //     if (PDA_LocalMouse.m1 && !(PDA_LocalMouse.oldState & _ACTION)) {
     //         PDA_ResetScroll();
     //     }
     // }
@@ -986,7 +986,7 @@ function PDAButton PDA_CreateAssemblyButton (int id, str graphic, str label, flo
 
     thisButton.tooltip = tooltip;
     if (CheckBounds(thisButton)) {
-        if (PDA_LocalMouse.m1 && !(PDA_LocalMouse.oldState & BT_ATTACK)) {
+        if (PDA_LocalMouse.m1 && !(PDA_LocalMouse.oldState & _ACTION)) {
             if (assembly) PDA_Local.detailFetch[0] = assembly;
 
             if (strCmp(PDA_Local.detailFetch[0], "") != 0 ) {
@@ -1014,7 +1014,7 @@ function PDAButton PDA_CreateBeastButton (int id, str label, int color, float x,
     // buttonBoundsDefault(thisButton)
 
     if (CheckBounds(thisButton)) {
-        if (PDA_LocalMouse.m1 && !(PDA_LocalMouse.oldState & BT_ATTACK)) {
+        if (PDA_LocalMouse.m1 && !(PDA_LocalMouse.oldState & _ACTION)) {
             if (strcmp(beast, "") != 0 && PDA_Local.page < 6) {
                 PDA_Local.detailFetch[0] = beast;
                 PDA_Local.detailFetch[1] = unatcokillphrase;
@@ -1057,7 +1057,7 @@ function PDAButton PDA_CreateHUDButton (int id, str label, str color, float x, f
     // buttonBoundsDefault(thisButton)
 
     // if (CheckBounds(thisButton)) {
-    //     if (PDA_LocalMouse.m1 && !(PDA_LocalMouse.oldState & BT_ATTACK)) {
+    //     if (PDA_LocalMouse.m1 && !(PDA_LocalMouse.oldState & _ACTION)) {
     //         if (strcmp(chosenhud, "") != 0 ) {
     //             TODO: Don't set category, but instead take and give the necessary tokens
     //             for (int h = 0; h < PDA_LocalHUD, h++) {
@@ -1203,7 +1203,7 @@ function PDAButton PDA_DisplayArmorOverride (int id, PDA_ArmorData override, flo
 
 function PDAButton PDA_CreateModPackDisplay (int id, str graphic, float x, float y, int width, int height, fixed alpha) {
     #define thisButton PDA_LocalButton[id]
-    assignButtonParams(thisButton, StrParam("%l:", stringArray[id]))
+    assignButtonParams(thisButton, StrParam("%l:", stringArray[MODS_DIM][id]))
 
     thisButton.graphic      = graphic;
     thisButton.graphicFlags = HUDMSG_ALPHA;

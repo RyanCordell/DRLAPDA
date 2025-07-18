@@ -19,6 +19,9 @@ str PDA_FONT[3] = {"STAT_MNO", "STAT_LWR", "PDAFONT"};
 
 str PDA_HEADER_STR = "PDA_MENU_HEADER";
 int PDA_HEADER_X   = 0;
+    
+#define _ACTION BT_ATTACK|BT_USE
+#define _BACK   BT_ALTATTACK|BT_JUMP
 
 // is demonic, disassemble-able, supports artifacts
 // 1 and 3 are kinda redundant..
@@ -39,9 +42,13 @@ str PDA_Enemy[MAX_PLAYERS][5] = {"N/A\n", "N/A\n", "N/A\n", "N/A\n", "N/A\n"};
 // bulk, power, agility, technical, sniper, firestorm, nano, artifact
 int Weapon_Mod_Quantity[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 
+#define STRING_ARRAY_DIMS 2
 #define STRING_ARRAY_MAX 1024
-str stringArray[STRING_ARRAY_MAX];
+str stringArray[STRING_ARRAY_DIMS][STRING_ARRAY_MAX];
 int stringArrayIndex = 0;
+
+#define ASSEMBLY_DIM 0
+#define MODS_DIM 1
 
 #include "PDA_STCT.ach"
 

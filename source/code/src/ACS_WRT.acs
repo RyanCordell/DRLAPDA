@@ -23,7 +23,7 @@ SCRIPT "DRLA_AssemblyGlobalizer" ENTER {
             token_index < master_max, assembly_token < master_max * 2; 
             token_index++,           assembly_token += 2
     ) {
-        actorToken = stringArray[assembly_token];
+        actorToken = stringArray[ASSEMBLY_DIM][assembly_token];
 
         int stateAt = strToNumber(DRLA_FetchStoredInfo[PlayerNumber()], token_index);
 
@@ -69,7 +69,7 @@ SCRIPT "DRLA_UpdateINI" (void) {
             token_index < master_max, assembly_token < master_max * 2; 
             token_index++,           assembly_token += 2
     ) {
-        actorToken = stringArray[assembly_token];
+        actorToken = stringArray[ASSEMBLY_DIM][assembly_token];
 
         currentState[token_index] = CheckInventory(actorToken);
 

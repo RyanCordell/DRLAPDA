@@ -19,11 +19,11 @@
 #define setAssemblyData() \
     master_max = 0; \
     all_assemblies = StrParam(l:"PDA_ASSEMBLIES"); \
-    str_split(separator_character, all_assemblies); \
-    if (stringArray[0] != "") { \
-        while ((stringArray[stringArrayIndex++]) != "") { \
-            if (str_find(stringArray[stringArrayIndex], "ADVANCED", TEXT_OFFSET) != -1 && advanced_offset == 0) advanced_offset = stringArrayIndex; \
-            if (str_find(stringArray[stringArrayIndex],   "MASTER", TEXT_OFFSET) != -1 && master_offset == 0)   master_offset   = stringArrayIndex; \
+    str_split(separator_character, all_assemblies, ASSEMBLY_DIM); \
+    if (stringArray[ASSEMBLY_DIM][0] != "") { \
+        while ((stringArray[ASSEMBLY_DIM][stringArrayIndex++]) != "") { \
+            if (str_find(stringArray[ASSEMBLY_DIM][stringArrayIndex], "ADVANCED", TEXT_OFFSET) != -1 && advanced_offset == 0) advanced_offset = stringArrayIndex; \
+            if (str_find(stringArray[ASSEMBLY_DIM][stringArrayIndex],   "MASTER", TEXT_OFFSET) != -1 && master_offset == 0)   master_offset   = stringArrayIndex; \
             master_max += 1; \
         } \
     } \
@@ -55,10 +55,22 @@
         if (CheckInventory(DRLA_WeaponPerkList[perkIndex][0]) && CheckInventory(DRLA_WeaponPerkList[perkIndex][2])) { \
             PDA_Class[PlayerNumber()][pda_class_weapon_perk] = StrParam("\c[Yellow]%s:", DRLA_WeaponPerkList[perkIndex][1]); \
         } else { \
-            PDA_Class[PlayerNumber()][pda_class_weapon_perk]   = ""; \
+            PDA_Class[PlayerNumber()][pda_class_weapon_perk] = ""; \
         } \
     } \
     // PDA_Class[PlayerNumber()][pda_class_weapon_perk]   = StrParam("\c[Yellow]%l:", "PDA_WEAPON_PERKUNAVAILABLE"); \
+
+#define pressedAction \
+    PDA_LocalMouse.m1 && !(PDA_LocalMouse.oldState & _ACTION) \
+
+#define pressedBack \
+    PDA_LocalMouse.m2 && !(PDA_LocalMouse.oldState & _BACK) \
+
+#define holdingAction \
+    PDA_LocalMouse.m1 && (PDA_LocalMouse.oldState & _ACTION) \
+
+#define notHoldingAction \
+    !PDA_LocalMouse.m1 && (PDA_LocalMouse.oldState & _ACTION) \
 
 // Checks for unique weapon + armor set perks
 // I should get a better name for this loop's max at some point..

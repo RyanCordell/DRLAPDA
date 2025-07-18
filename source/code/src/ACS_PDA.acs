@@ -148,7 +148,7 @@ function void doPDASync (void) {
     str actorToken = "";
     for (int ti = 0; ti <= master_max; ti++) {
         if (ti % 2 == 0) 
-            actorToken = stringArray[ti];
+            actorToken = stringArray[ASSEMBLY_DIM][ti];
 
         if (CheckInventory(actorToken)) 
             PDA_SetEveryoneInventory(actorToken);

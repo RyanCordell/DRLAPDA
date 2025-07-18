@@ -45,9 +45,6 @@ SCRIPT "PDA_MouseController" (void)
     //     PDA_SCREEN_WIDTH, PDA_SCREEN_HEIGHT, 
     //     PDA_SCREEN_WIDTH
     // );
-    
-    const int _ACTION = BT_ATTACK|BT_USE;
-    const int _BACK   = BT_ALTATTACK|BT_JUMP;
 
     #define setScrollDelta() (PDA_Local.scrollingY > PDA_Local.oldScrollingY) ? 1 : (PDA_Local.scrollingY == PDA_Local.oldScrollingY) ? 0 : -1;
 
@@ -60,6 +57,8 @@ SCRIPT "PDA_MouseController" (void)
         
         PDA_LocalMouse.m1 = (buttons[PlayerNumber()] & (_ACTION)) ? true : false;
         PDA_LocalMouse.m2 = (buttons[PlayerNumber()] & (_BACK))   ? true : false;
+
+        log("buttons (m1) %d: | bt_a %d: | bt_u %d: | _act %d:", buttons[PlayerNumber()], buttons[PlayerNumber()] & BT_ATTACK, buttons[PlayerNumber()] & BT_USE, buttons[PlayerNumber()] & (_ACTION));
 
         // kd: I AM REINFORCEMENTS FROM A DIFFERENT DIMENSION
         fixed mouse_sensitivity    = GetOddSensitivityCVarFixed("mouse_sensitivity", 1.0);
@@ -130,7 +129,7 @@ SCRIPT "PDA_MouseController" (void)
             DisplayIcon(localCursor, PDA_CURSORID, PDA_LocalMouse.x + 0.1, PDA_LocalMouse.y + 0.1, 0, (buttons[PlayerNumber()] & _ACTION) ? 0.8 : 1);
         }
         
-        if (PDA_LocalMouse.m1)
+        if (holdingAction)
         {
             vBuffer                  = PDA_LocalMouse.y - oldMouseY;
             myoff                    = vBuffer;
@@ -142,7 +141,7 @@ SCRIPT "PDA_MouseController" (void)
             if (PDA_Local.scrollingY > VMIN)                 PDA_Local.scrollingY = VMIN; 
         }
 
-        if (!PDA_LocalMouse.m1 && oldButtons[PlayerNumber()] & (_ACTION)) {
+        if (notHoldingAction) {
             PDA_LocalMouse.scrolling = false;
         }
 
@@ -153,43 +152,37 @@ SCRIPT "PDA_MouseController" (void)
         }
         
         // Right mouse click
-        if (PDA_LocalMouse.m2 && !(oldButtons[PlayerNumber()] & _BACK))
+        if (pressedBack)
         {
             PDA_LocalMouse.state = mouse_default;
             PDA_PlaySound("UI/PDA/Cancel", "pda/soldier", 80);
             
             // Step back into previous page
             if (PDA_Local.category == PDA_ASSEMBLY_DETAIL) {
-                // PDA_Local.category = PDA_ASSEMBLIES;
                 PDA_SetCategory(PDA_ASSEMBLIES);
             }
             else if (PDA_Local.category == PDA_BESTIARY && PDA_Local.page > 1) {
                 PDA_SetPage(1);
             }
             else if (PDA_Local.category == PDA_BESTIARY_DETAIL) {
-                // PDA_Local.category = PDA_BESTIARY;
                 PDA_SetCategory(PDA_BESTIARY);
                 PDA_SetPage(PDA_Local.previous_page);
             }
             else if (PDA_Local.category == PDA_PONG) {
                 // ACS_NamedExecute("QuitPong",0);
                 PDA_SetCategory(PDA_MISC);
-                // PDA_Local.category = PDA_MISC;
             }
             else if (PDA_Local.category == PDA_HELP) {
                 SetUserCVar(PlayerNumber(), "DRLA_PDA_firsttime", false);
                 PDA_SetCategory(PDA_MENU);
-                // PDA_Local.category = PDA_MENU;
                 PDA_SetPage(1);
             }
             else if (PDA_Local.category == PDA_CREDITS) {
                 PDA_SetCategory(PDA_MENU);
-                // PDA_Local.category = PDA_MENU;
                 PDA_SetPage(1);
             }
             else {
                 PDA_SetCategory(PDA_MENU);
-                // PDA_Local.category = PDA_MENU;
                 PDA_SetPage(1);
             }
             PDA_ResetScroll();
