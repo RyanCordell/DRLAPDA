@@ -6,6 +6,8 @@
             "tier": "Normal",
             "prettyname": "[NORMAL]Fists[END]",
             "capacity": "FOUR_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]Hopefully, you were born with them.[INNERQUOTE][END]\n\n",
                 "[WHITE]Brass knuckles and 100% Grade A Space Marine muscle. They won't do much damage, but at least you won't wake up every beastie in the place while you break jaws.\n",
@@ -28,14 +30,14 @@
             "tier": "Normal",
             "prettyname": "[NORMAL]Chainsaw[END]",
             "capacity": "FOUR_MOD_CAPACITY",
-            "description": [
+            "stats": [
                 "[ORANGE]Use rate[END]: 4 tics (0.11s)\n",
                 "[RED]Damage[END]: (2d3)\n",
                 "[YELLOW]Reload[END]: N/A\n",
-                "[DARKGREEN]Spread[END]: 2.8 x 0\n",
-                "\n",
-                "\n",
-                "[DARKGRAY]Chainsaw -- cuts through flesh like a hot knife through butter.[END]\n",
+                "[DARKGREEN]Spread[END]: 2.8 x 0\n"
+            ],
+            "description": [
+                "[DARKGRAY][INNERQUOTE]Chainsaw -- cuts through flesh like a hot knife through butter.[INNERQUOTE][END]\n",
                 "[WHITE]Mars may not need lumberjacks, but this chainsaw is as effective on demon flesh and bone as it is on pinewood back home.\n",
                 "[WHITE]Keep in mind, though, that some enemies can shrug off the damage and continue attacking, leaving you vulnerable."
             ],
@@ -55,14 +57,14 @@
             "tier": "Normal",
             "prettyname": "[NORMAL]Pistol[END]",
             "capacity": "FOUR_MOD_CAPACITY",
-            "description": [
+            "stats": [
                 "[ORANGE]Fire rate[END]: 19 tics (0.5s)\n",
                 "[RED]Damage[END]: (6d3)\n",
                 "[YELLOW]Reload[END]: 37 tics (1.0s)\n",
-                "[DARKGREEN]Spread[END]: 4 x 0\n",
-                "\n",
-                "\n",
-                "[DARKGRAY]Your trusty 10mm pistol. It may be nice, but better find something stronger.[END]\n",
+                "[DARKGREEN]Spread[END]: 4 x 0\n"
+            ],
+            "description": [
+                "[DARKGRAY][INNERQUOTE]Your trusty 10mm pistol. It may be nice, but better find something stronger.[INNERQUOTE][END]\n",
                 "[WHITE]Standard UAC pistol, chambered for the 10mm round.\n",
                 "[WHITE]Good for potshots at the odd zombie or three, but when you start seeing stronger foes, it's time to find something better."
             ],
@@ -82,14 +84,14 @@
             "tier": "Normal",
             "prettyname": "[NORMAL]Shotgun[END]",
             "capacity": "FOUR_MOD_CAPACITY",
-            "description": [
+            "stats": [
                 "[ORANGE]Fire rate[END]: 10 tics (0.2s)\n",
                 "[RED]Damage[END]: (5d3 x 7)\n",
                 "[YELLOW]Reload[END]: 36 tics (1.0s)\n",
-                "[DARKGREEN]Spread[END]: 6.5 x 3\n",
-                "\n",
-                "\n",
-                "[DARKGRAY]A 12g shotgun -- you gotta love its spread.[END]\n",
+                "[DARKGREEN]Spread[END]: 6.5 x 3\n"
+            ],
+            "description": [
+                "[DARKGRAY][INNERQUOTE]A 12g shotgun -- you gotta love its spread.[INNERQUOTE][END]\n",
                 "[WHITE]This basic long-barreled scattergun takes standard 12-gauge shells, and has proven itself the best friend of many a space marine.\n",
                 "[WHITE]Relatively tight pellet spread makes it usable even at longer ranges, but it only holds one shell at a time, making it a poor choice when coming under sustained fire."
             ],
@@ -109,14 +111,14 @@
             "tier": "Normal",
             "prettyname": "[NORMAL]Combat Shotgun[END]",
             "capacity": "FOUR_MOD_CAPACITY",
-            "description": [
+            "stats": [
                 "[ORANGE]Fire rate[END]: 14 tics +/- 9 tics (0.4s +/- 0.2s)\n",
                 "[RED]Damage[END]: ((5d3 x 7)-1)\n",
                 "[YELLOW]Reload[END]: 51 tics (1.4s)\n",
-                "[DARKGREEN]Spread[END]: 4.5 x 1\n",
-                "\n",
-                "\n",
-                "[DARKGRAY]Nothing beats the sound of pumping a combat shotgun.[END]\n",
+                "[DARKGREEN]Spread[END]: 4.5 x 1\n"
+            ],
+            "description": [
+                "[DARKGRAY][INNERQUOTE]Nothing beats the sound of pumping a combat shotgun.[INNERQUOTE][END]\n",
                 "[WHITE]This pump-action shotgun holds multiple shells, but they need to be loaded individually.\n",
                 "[WHITE]Damage randomization per pellet is slightly reduced compared to the standard Shotgun, and the pellet spread is much tighter, making it ideal for quickly dispatching weaker foes."
             ],
@@ -136,14 +138,14 @@
             "tier": "Normal",
             "prettyname": "[NORMAL]Double Shotgun[END]",
             "capacity": "FOUR_MOD_CAPACITY",
-            "description": [
+            "stats": [
                 "[ORANGE]Fire rate[END]: 10 tics (0.28s)\n",
                 "[RED]Damage[END]: (5d3 x 14)\n",
                 "[YELLOW]Reload[END]: 53 tics (1.5s)\n",
-                "[DARKGREEN]Spread[END]: 12 x 7.5\n",
-                "\n",
-                "\n",
-                "[DARKGRAY]Double barreled shotgun -- the perfect weapon for a desperado.[END]\n",
+                "[DARKGREEN]Spread[END]: 12 x 7.5\n"
+            ],
+            "description": [
+                "[DARKGRAY][INNERQUOTE]Double barreled shotgun -- the perfect weapon for a desperado.[INNERQUOTE][END]\n",
                 "[WHITE]This double-barreled scattergun has had its barrels sawn down, increasing the spread of the pellets it fires.\n",
                 "[WHITE]Best at short range against densely packed groups of enemies, or just one big bastard. The barrels can also be fired independently through the alternate fire mode.[END]"
             ],
@@ -163,14 +165,14 @@
             "tier": "Normal",
             "prettyname": "[NORMAL]Chaingun[END]",
             "capacity": "FOUR_MOD_CAPACITY",
-            "description": [
+            "stats": [
                 "[ORANGE]Fire rate[END]: 4 tics (0.11s)\n",
                 "[RED]Damage[END]: 6d3\n",
                 "[YELLOW]Reload[END]: 39 tics (1.1s)\n",
-                "[DARKGREEN]Spread[END]: 6 x 2\n",
-                "\n",
-                "\n",
-                "[DARKGRAY]Chaingun directs heavy firepower onto your opponent making him do the chaingun cha-cha.[END]\n",
+                "[DARKGREEN]Spread[END]: 6 x 2\n"
+            ],
+            "description": [
+                "[DARKGRAY][INNERQUOTE]Chaingun directs heavy firepower onto your opponent making him do the chaingun cha-cha.[INNERQUOTE][END]\n",
                 "[WHITE]An experiment into developing a portable, infantry-level equivalent of a gatling gun resulted in the Chaingun.\n",
                 "[WHITE]Utilizing standard rifle rounds, it fires at an impressive rate without sacrificing accuracy, thanks to the multiple barrel design which prevents heat warping."
             ],
@@ -190,12 +192,13 @@
             "tier": "Normal",
             "prettyname": "[NORMAL]Battle Rifle[END]",
             "capacity": "FOUR_MOD_CAPACITY",
-            "description": [
+            "stats": [
                 "[ORANGE]Fire rate[END]: 4 tics (0.11s)\n",
                 "[RED]Damage[END]: (6d3)\n",
                 "[YELLOW]Reload[END]: 39 tics (1.1s)\n",
-                "[DARKGREEN]Spread[END]: 2 x 0.5\n",
-                "\n",
+                "[DARKGREEN]Spread[END]: 2 x 0.5\n"
+            ],
+            "description": [
                 "[WHITE]The mainstay of ranked officers, the Battle Rifle is a fully-automatic rifle combining superb stopping power, portability and accuracy into an eight-pound package.\n",
                 "[WHITE]Unfortunately, the magazine capacity is half that of the Chaingun, so its a matter of personal preference as to which is superior to the other."
             ],
@@ -215,14 +218,14 @@
             "tier": "Normal",
             "prettyname": "[NORMAL]Rocket Launcher[END]",
             "capacity": "FOUR_MOD_CAPACITY",
-            "description": [
+            "stats": [
                 "[ORANGE]Fire rate[END]: 23 tics (0.92s)\n",
                 "[RED]Damage[END]: (20d8)\n",
                 "[YELLOW]Reload[END]: 55 tics (1.5s)\n",
-                "[DARKGREEN]Spread[END]: 1 x 0\n",
-                "\n",
-                "\n",
-                "[DARKGRAY]The rocket launcher is the most standard way of blowing things up.[END]\n",
+                "[DARKGREEN]Spread[END]: 1 x 0\n"
+            ],
+            "description": [
+                "[DARKGRAY][INNERQUOTE]The rocket launcher is the most standard way of blowing things up.[INNERQUOTE][END]\n",
                 "[WHITE]Previously an anti-materiel weapon, this launcher has seen renewed use against some of Hell's tougher monstrosities.\n",
                 "[WHITE]While it can only hold one rocket at a time, a few are generally enough to take down very strong foes, and are excellent at disposing of large clusters of weaker enemies quickly.\n",
                 "[WHITE]Just keep yourself out of the blast radius."
@@ -243,14 +246,14 @@
             "tier": "Normal",
             "prettyname": "[NORMAL]Plasma Rifle[END]",
             "capacity": "FOUR_MOD_CAPACITY",
-            "description": [
+            "stats": [
                 "[ORANGE]Fire rate[END]: 3 tics +/- 18 tics (0.08s +/- 0.5)\n",
                 "[RED]Damage[END]: (5d8)\n",
                 "[YELLOW]Reload[END]: 57 tics (1.6s)\n",
-                "[DARKGREEN]Spread[END]: 1 x 0\n",
-                "\n",
-                "\n",
-                "[DARKGRAY]A plasma rifle shoots multiple rounds of plasma energy -- frying some demon butt![END]\n",
+                "[DARKGREEN]Spread[END]: 1 x 0\n"
+            ],
+            "description": [
+                "[DARKGRAY][INNERQUOTE]A plasma rifle shoots multiple rounds of plasma energy -- frying some demon butt![INNERQUOTE][END]\n",
                 "[WHITE]The UAC's foray into limitless, clean energy production did have at least one benefit to humanity.\n",
                 "[WHITE]The Plasma Rifle fires bolts of pure plasma energy at an impressive rate, making it a weapon of choice against Hell's stronger forces.\n"
             ],
@@ -270,14 +273,14 @@
             "tier": "Normal",
             "prettyname": "[NORMAL]BFG 9000[END]",
             "capacity": "FOUR_MOD_CAPACITY",
-            "description": [
+            "stats": [
                 "[ORANGE]Fire rate[END]: 60 tics (1.7s)\n",
                 "[RED]Damage[END]: (100d8) + (40d8 x 15)\n",
                 "[YELLOW]Reload[END]: 103 tics (2.9s)\n",
-                "[DARKGREEN]Spread[END]: 1 x 0\n",
-                "\n",
-                "\n",
-                "[DARKGRAY]The Big Fucking Gun. Hell wouldn't be so fun without it.[END]\n",
+                "[DARKGREEN]Spread[END]: 1 x 0\n"
+            ],
+            "description": [
+                "[DARKGRAY][INNERQUOTE]The Big Fucking Gun. Hell wouldn't be so fun without it.[INNERQUOTE][END]\n",
                 "[WHITE]'Prototype 9703' was the experiment that created the UAC's ultimate weapon against the legions of hel. the BFG 9000.\n",
                 "[WHITE]This weapon launches an extremely powerful plasma blast that disrupts the matter of nearby enemies on impact, thanks to a special field generator in the gun itself.\n",
                 "[WHITE]The field also prevents the gun from disrupting the use. when used at point blank range, it generates a devastating degree of damage."
@@ -298,9 +301,10 @@
             "tier": "Normal",
             "prettyname": "[EXOTIC]Blaster[END]",
             "capacity": "FOUR_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "    \n",
-                "[DARKGRAY]This is the standard issue rechargeable energy side-arm. Cool![END]\n",
+                "[DARKGRAY][INNERQUOTE]This is the standard issue rechargeable energy side-arm. Cool![INNERQUOTE][END]\n",
                 "[WHITE]This sidearm houses a microscale energy generator, giving it ten shots before it has to recharge.\n",
                 "[WHITE]While the individual shots are weak, the essentially infinite ammo supply may outweigh that shortcoming.\n",
                 "[WHITE]Firing the gun until no shots remain will result in the generator needing to 'boot up' before it can begin recharging, however."
@@ -321,8 +325,10 @@
             "tier": "Normal",
             "prettyname": "[EXOTIC]Combat Pistol[END]",
             "capacity": "FOUR_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]This is the kind of handgun given to your superiors. Doesn't look like they're using it right now...[END]\n",
+                "[DARKGRAY][INNERQUOTE]This is the kind of handgun given to your superiors. Doesn't look like they're using it right now...[INNERQUOTE][END]\n",
                 "[WHITE]A larger clip and better accuracy are the chief improvements of this sidearm versus the standard Pistol.\n",
                 "[WHITE]The firing mechanism has also been finely tuned, resulting in higher damage and a marginally faster rate of fire."
             ], 
@@ -342,6 +348,8 @@
             "tier": "Normal",
             "prettyname": "[EXOTIC]Marksman Pistol[END]",
             "capacity": "FOUR_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Purported to have been based on a black-market weapon designed for assassination purposes, this pistol is no more\n",
                 "[WHITE]damaging than the standard UAC Pistol, but it is highly accurate, making it an ideal weapon at longer ranges\n",
@@ -363,6 +371,8 @@
             "tier": "Normal",
             "prettyname": "[EXOTIC]Handcannon[END]",
             "capacity": "FOUR_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]One look at this sidearm might have you thinking 'Too fancy for me', but the Handcannon proves style need not come at the cost of substance.\n",
                 "[WHITE]The Handcannon's high-caliber rounds will wipe the stupid look off any zombie's face, along with the face."
@@ -383,8 +393,10 @@
             "tier": "Normal",
             "prettyname": "[EXOTIC]Super Shotgun[END]",
             "capacity": "FOUR_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]After the first hellish invasion, weapon engineers designed the super shotgun as the world's first firearm designed to kill demons. And boy does it.[END]\n",
+                "[DARKGRAY][INNERQUOTE]After the first hellish invasion, weapon engineers designed the super shotgun as the world's first firearm designed to kill demons. And boy does it.[INNERQUOTE][END]\n",
                 "[WHITE]This double-barreled scattergun fires more pellets per shell at the same spread of the Double Shotgun.\n",
                 "[WHITE]The lighter alloy used in the barrels means that despite their length, this shotgun can be loaded as quickly as the Double Shotgun."
             ],
@@ -404,8 +416,10 @@
             "tier": "Normal",
             "prettyname": "[EXOTIC]Assault Shotgun[END]",
             "capacity": "FOUR_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]Big, bad and ugly.[END]\n",
+                "[DARKGRAY][INNERQUOTE]Big, bad and ugly.[INNERQUOTE][END]\n",
                 "[WHITE]A drum-loading scattergun, the Assault Shotgun boasts a fire rate superior to the basic shotgun models and hassle-free reloading.\n",
                 "[WHITE]In addition, the assault shotgun boasts a tighter pellet spread, although it has slightly lower damage randomization than other shotguns."
             ],
@@ -425,8 +439,10 @@
             "tier": "Normal",
             "prettyname": "[EXOTIC]Plasma Shotgun[END]",
             "capacity": "FOUR_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]Plasma Shotgun, the best of both worlds![END]\n",
+                "[DARKGRAY][INNERQUOTE]Plasma Shotgun, the best of both worlds![INNERQUOTE][END]\n",
                 "[WHITE]One of the UAC's early mistakes in developing plasma-based weaponry resulted in this weapon.\n",
                 "[WHITE]The first prototypes of the Plasma Rifle had faulty chanellers, resulting in the plasma bolts going anywhere but straight ahead.\n",
                 "[WHITE]Realizing their jobs were at stake, the team reworked the weapon to fire a spread of shots and branded it the Plasma Shotgun."
@@ -447,8 +463,10 @@
             "tier": "Normal",
             "prettyname": "[EXOTIC]Tristar Blaster[END]",
             "capacity": "FOUR_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]Now this is a weird weapon.[END]\n",
+                "[DARKGRAY][INNERQUOTE]Now this is a weird weapon.[INNERQUOTE][END]\n",
                 "[WHITE]Intended to be a successor to the BFG, the Tristar Blaster fires three projectiles in a spread, which will explode on impact.\n",
                 "[WHITE]Despite the UAC's efforts, it has not eclipsed its forebearer, due in part to the fact that unlike the BFG, the Tristar's projectiles are \n",
                 "[WHITE]as damaging to the user as they are to anything else.\n",
@@ -470,8 +488,10 @@
             "tier": "Normal",
             "prettyname": "[EXOTIC]Minigun[END]",
             "capacity": "FOUR_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]Spits enough lead into the air to be considered an environmental hazard.[END]\n",
+                "[DARKGRAY][INNERQUOTE]Spits enough lead into the air to be considered an environmental hazard.[INNERQUOTE][END]\n",
                 "[WHITE]In a much-lauded cost-saving measure, the design team for the UAC Minigun took the Chaingun spec and reworked the cyclical barrel design \n",
                 "[WHITE]to accomodate a much faster rate of fire, as well as improvements to the ammo feeding mechanisms to prevent jamming even during sustained usage.\n",
                 "[WHITE]Suprisingly, the Minigun has similar accuracy stats to the Chaingun on which it is based, despite the increase in rate-of-fire.\n",
@@ -493,8 +513,10 @@
             "tier": "Normal",
             "prettyname": "[EXOTIC]Missile Launcher[END]",
             "capacity": "FOUR_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]A definitive upgrade to the rocket launcher.[END]\n",
+                "[DARKGRAY][INNERQUOTE]A definitive upgrade to the rocket launcher.[INNERQUOTE][END]\n",
                 "[WHITE]After criticisms regarding the standard Rocket Launcher's single-rocket capacity, the UAC Weapons Department developed this model, which holds \n",
                 "[WHITE]multiple missiles, each needing to be loaded individually due to the design.\n",
                 "[WHITE]The missiles themselves deal explosive damage in a greater radius, thanks to advancements in the charges used, but they fly slower as a result of \n",
@@ -516,8 +538,10 @@
             "tier": "Normal",
             "prettyname": "[EXOTIC]Napalm Launcher[END]",
             "capacity": "FOUR_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]This will surely make a mess![END]\n",
+                "[DARKGRAY][INNERQUOTE]This will surely make a mess![INNERQUOTE][END]\n",
                 "[WHITE]The Napalm Launcher fires a rocket containing flammable gel which bursts on impact, leaving behind long-lasting fires which will \n",
                 "[WHITE]continue to damage targets in the vicinity.\n",
                 "[WHITE]This is one of the newer, more advanced weapons that were developed to counter the next demon invasion."
@@ -538,8 +562,10 @@
             "tier": "Normal",
             "prettyname": "[EXOTIC]Laser Rifle[END]",
             "capacity": "FOUR_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]With no recoil and pinpoint accuracy, it takes a world-class moron to miss while using a laser rifle.[END]\n",
+                "[DARKGRAY][INNERQUOTE]With no recoil and pinpoint accuracy, it takes a world-class moron to miss while using a laser rifle.[INNERQUOTE][END]\n",
                 "[WHITE]Laser-based weapons made their first appearance in the latter half of the 21st century, but only mounted to vehicles \n",
                 "[WHITE]that could carry the massive and inefficient batteries needed to power them.\n",
                 "[WHITE]This UAC-developed rifle represents the massive improvements made to the design in terms of rate-of-fire, energy efficiency, portability and combat readiness.\n",
@@ -561,6 +587,8 @@
             "tier": "Normal",
             "prettyname": "[EXOTIC]Nuclear Plasma Pistol[END]",
             "capacity": "FOUR_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Nuclear variants of energy-based firearms feature an onboard cell energy generator that replenishes ammo over time, \n",
                 "[WHITE]and this Plasma Pistol represents the degree to which the Nuclear team at the Energy Weapons Division have been able to \n",
@@ -582,8 +610,10 @@
             "tier": "Normal",
             "prettyname": "[EXOTIC]Nuclear Plasma Rifle[END]",
             "capacity": "FOUR_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]A self-charging plasma rifle -- too bad it can't be manually reloaded.[END]\n",
+                "[DARKGRAY][INNERQUOTE]A self-charging plasma rifle -- too bad it can't be manually reloaded.[INNERQUOTE][END]\n",
                 "[WHITE]Concerns about the availability of cell ammo in extended combat drove the Energy Weapons Division to research the \n",
                 "[WHITE]scalability of a cell ammo generator for installation in a weapon, and the first to be prototyped was the rapid-fire, \n",
                 "[WHITE]and thus very ammo-thirsty, Plasma Rifle.\n",
@@ -606,8 +636,10 @@
             "tier": "Normal",
             "prettyname": "[EXOTIC]Nuclear BFG 9000[END]",
             "capacity": "FOUR_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]A self-charging BFG9000! How much more lucky can you get?[END]\n",
+                "[DARKGRAY][INNERQUOTE]A self-charging BFG9000! How much more lucky can you get?[INNERQUOTE][END]\n",
                 "[WHITE]After the success of the Nuclear Plasma Rifle, development quickly began on creating an equivalent for the BFG 9000.\n",
                 "[WHITE]While the weapon is equipped, it slowly replenishes cell ammo. Its damage capability remains unaffected.\n",
                 "\n",
@@ -629,8 +661,10 @@
             "tier": "Normal",
             "prettyname": "[EXOTIC]Combat Translocator[END]",
             "capacity": "FOUR_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]Now this is a weird piece of technology, wonder how it works?[END]\n",
+                "[DARKGRAY][INNERQUOTE]Now this is a weird piece of technology, wonder how it works?[INNERQUOTE][END]\n",
                 "[WHITE]While the Combat Translocator doesn't actually damage its victims, it does remove them as a threat, at least temporarily, \n",
                 "[WHITE]by utilizing UAC teleportation technology to warp the targeted enemy away from the user.\n",
                 "[WHITE]The Mark II comes with various extra modes, allowing the user to teleport themselves around, as well as mark points for later recall."
@@ -651,6 +685,8 @@
             "tier": "Normal",
             "prettyname": "[EXOTIC]Uzi[END]",
             "capacity": "FOUR_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]This centuries-old submachine gun is still in production, a testament to the stopping power it provides in its compact form factor.\n",
                 "[WHITE]Inaccurate at longer ranges, the Uzi is best used up close, hosing opponents with a torrent of lead."
@@ -671,6 +707,8 @@
             "tier": "Superior",
             "prettyname": "[SUPERIOR]Vanguard Rifle[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]This newly-developed, fully-automatic rifle is intended to replace the aging Battle Rifle design and features significant improvements \n",
                 "[WHITE]in damage capability owing to higher bullet velocity, but it should be noted that bullet deviation due to high recoil has also increased.\n",
@@ -692,6 +730,8 @@
             "tier": "Superior",
             "prettyname": "[SUPERIOR]Marksman Rifle[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]During the development of the Vanguard Rifle, Ballistics Division saw the need to create an automatic rifle for marines who needed a greater degree of accuracy at range.\n",
                 "[WHITE]Fine-tuning the weapon's weight and balance, as well as the development of an extended memory-gel stock that molds to the user's shoulder, created an assault weapon with excellent accuracy.\n",
@@ -714,6 +754,8 @@
             "tier": "Superior",
             "prettyname": "[SUPERIOR]PP7[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]One of many weapons the United Aerospace Corporation has acquired the rights to manufacture over its long history, the PP7 is a pistol \n",
                 "[WHITE]with a larger clip and considerably better damage per bullet versus the UAC standard-issue pistol, and can be fired at greater speed to boot.\n",
@@ -737,6 +779,8 @@
             "tier": "Superior",
             "prettyname": "[SUPERIOR]Meltdown ''Autopistol''[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]With their foray into teleportation technology, the UAC have come across an alternate dimension with unique tech of their own.\n",
                 "[WHITE]Many weapons there are similar to the weapons of old before the UAC, but have remarkable improvements. Signing a deal with the EDF, the UAC secured a line of weapons branded 'Meltdown'.\n",
@@ -750,6 +794,8 @@
             "tier": "Superior",
             "prettyname": "[SUPERIOR]Meltdown ''Ripper''[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]These unique, triple barreled machineguns under the 'Meltdown' brand of weapons can tear up enemies at close range, but are offset by horrible accuracy long range.\n",
                 "[WHITE]They utilize bullet ammunition with seemingly greater efficiency than UAC designed chainguns, dealing more damage as a result, but are harder to find."
@@ -770,6 +816,8 @@
             "tier": "Superior",
             "prettyname": "[SUPERIOR]Meltdown ''Enforcer Shotgun''[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]A 12-gauge single barelled pump action 'Meltdown' brand shotgun, this beast is similar to a Winchester weapon of old, but packing a far stronger kick.\n",
                 "[WHITE]It deals more damage than many shotguns found in the field while also offering greater accuracy at long ranges, but are highly sought after because of their rarity."
@@ -781,6 +829,8 @@
             "tier": "Superior",
             "prettyname": "[SUPERIOR]Meltdown ''RPG''[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]This heavy duty hunk of metal is in direct contrast to the lighter Meltdown weapons, but considering it has a magazine containing multiple, \n",
                 "[WHITE]powerful rocket rounds, people tend to not ask questions.\n",
@@ -793,6 +843,8 @@
             "tier": "Superior",
             "prettyname": "[SUPERIOR]Hunting Revolver[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]In the early days of Martian colonization, those hardy souls responsible for terraforming the red planet told tales of vicious beasts \n",
                 "[WHITE]driven towards the equatorial regions by the melting icecaps.\n",
@@ -817,6 +869,8 @@
             "tier": "Superior",
             "prettyname": "[SUPERIOR]Thompson[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Named for its early 20th-century creator, this machine gun has needed suprisingly few tweaks during its long service, and remains as deadly \n",
                 "[WHITE]a weapon today as it was in the days of the United States' era of Prohibition.\n",
@@ -838,6 +892,8 @@
             "tier": "Superior",
             "prettyname": "[SUPERIOR]Hunting Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Featuring an even longer barrel than the Super Shotgun, this double-barreled scattergun fires as many pellets as its predecessor, but in a much tighter \n",
                 "[WHITE]spread, and even does slightly more damage per pellet.\n",
@@ -859,6 +915,8 @@
             "tier": "Superior",
             "prettyname": "[SUPERIOR]RC-P90[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Originally manufactured in Belgium centuries ago, this accurate, powerful, fully-automatic personal defense weapon saw frequent use by \n",
                 "[WHITE]law enforcement agencies, as well as less savory groups, around the globe.\n",
@@ -882,8 +940,10 @@
             "tier": "Unique",
             "prettyname": "[UNIQUE]Jackhammer[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]The Pancor Corporation Jackhammer is a 12 gauge, gas-operated automatic weapon.[END]\n",
+                "[DARKGRAY][INNERQUOTE]The Pancor Corporation Jackhammer is a 12 gauge, gas-operated automatic weapon.[INNERQUOTE][END]\n",
                 "[WHITE]This drum-loading scattergun was originally capable of full-auto firing, but after several testers ended up shooting at the \n",
                 "[WHITE]ceiling and fracturing their wrists, it was limited to fairly fast, but single shot attacks.\n",
                 "[WHITE]It remains an exceptionally dangerous example of the UAC's weapon engineering prowess, though now only to anything in front of the barrel."
@@ -904,8 +964,10 @@
             "tier": "Unique",
             "prettyname": "[UNIQUE]Railgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]Groovy! Wait 'till they stand in a row, and watch them being impaled.[END]\n",
+                "[DARKGRAY][INNERQUOTE]Groovy! Wait 'till they stand in a row, and watch them being impaled.[INNERQUOTE][END]\n",
                 "[WHITE]While the science behind the railgun has existed for several centuries, only in the last few decades has this once-exotic weapon come into common use.\n",
                 "[WHITE]Railguns consist of a series of powerful supercooled electromagnets that accelerate a matter stream at a target, at a greater velocity than could be acheived \n",
                 "[WHITE]through more traditional propulsion methods."
@@ -926,6 +988,8 @@
             "tier": "Unique",
             "prettyname": "[UNIQUE]Mysterious Magnum[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]An eerie pistol that always seems to fall into the hands of those in need, it is capable of dealing impressive amounts of damage \n",
                 "[WHITE]thanks to the strangely exaggerated muzzle velocity it generates on bullets.\n",
@@ -947,8 +1011,10 @@
             "tier": "Unique",
             "prettyname": "[UNIQUE]BFG 10K[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]The Ultimate Big Fucking Gun. Redefines the word \\'wallpaper\\'.[END]\n",
+                "[DARKGRAY][INNERQUOTE]The Ultimate Big Fucking Gun. Redefines the word \\'wallpaper\\'.[INNERQUOTE][END]\n",
                 "[WHITE]Unlike most models of the BFG, the BFG10K uses a newly developed system called 'quantum displacement' to fire a quartet of energy \n",
                 "[WHITE]blasts that instantly impact the target, rather than a slower moving projectile.\n",
                 "[WHITE]The blasts cannot damage enemies at a distance through the 'ray' behavior seen in other BFG model. in early tests of the prototype, \n",
@@ -970,6 +1036,8 @@
             "tier": "Unique",
             "prettyname": "[UNIQUE]Unknown Herald[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]For every rocket it uses, the Unknown Herald pistol fires a cluster of mini-missiles in a horizontal spread.\n",
                 "[WHITE]Closer examination of the firearm reveals no United Aerospace Corporation insignia, and the UAC has categorically denied ever creating such a weapon.\n",
@@ -991,8 +1059,10 @@
             "tier": "Unique",
             "prettyname": "[UNIQUE]Frag Shotgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]Advanced pulverization technology converts bullets into shrapnel.[END]\n",
+                "[DARKGRAY][INNERQUOTE]Advanced pulverization technology converts bullets into shrapnel.[INNERQUOTE][END]\n",
                 "[WHITE]Rather than use the traditional 12-gauge shell, the Frag Shotgun breaks down bullets into pellets, firing four bullets worth with each pull of the trigger \n",
                 "[WHITE]in a spread tighter than the standard Shotgun.\n",
                 "[WHITE]In addition, it stores multiple loads before needing to be reloaded."
@@ -1013,6 +1083,8 @@
             "tier": "Unique",
             "prettyname": "[UNIQUE]Quad Shotgun[END] ",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]In an inspired bout of madness, one of the now-defunct teams at the Weapons Dept. came up with this four-barreled monster of a scattergun.\n",
                 "[WHITE]A bit cumbersome to wield, but nobody's complained yet about the damage it puts out."
@@ -1033,6 +1105,8 @@
             "tier": "Unique",
             "prettyname": "[UNIQUE]Lightweaver[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]An extradimensional firearm utilizing a device UAC researchers tenatively refer to as a 'photonic condenser array',\n",
                 "[WHITE]the Lightweaver strips light energy from the surrounding atmosphere, channeling it into a powerful beam.\n",
@@ -1057,8 +1131,10 @@
             "tier": "Unique",
             "prettyname": "[UNIQUE]Angel arms .45 long colt[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]One of the deadliest weapons ever made. Nyooo >O.o<[END]\n",
+                "[DARKGRAY][INNERQUOTE]One of the deadliest weapons ever made. Nyooo >O.o<[INNERQUOTE][END]\n",
                 "[WHITE]A high-caliber revolver, the Trigun achieves a level of target destruction nearly unparalleled by any unmodified weapon in a similarly compact form factor.\n",
                 "[WHITE]You feel there might be something far greater conceal within the depths of this gun, but you can't for the life of you work out what.\n",
                 "[WHITE]Who knows, maybe its some sort of ultimate super weapon or something?\n",
@@ -1081,8 +1157,10 @@
             "tier": "Unique",
             "prettyname": "[UNIQUE]Grammaton Cleric Beretta[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]Not without incident.[END]\n",
+                "[DARKGRAY][INNERQUOTE]Not without incident.[INNERQUOTE][END]\n",
                 "[WHITE]A mysterious weapon, clearly touched by the influence of a great and powerful demon, the Grammaton Cleric Beretta has three firing modes: \n",
                 "[WHITE]the standard semi-auto, full-auto, and three-shot burst.\n",
                 "[WHITE]The secondary fire trigger switches between them."
@@ -1103,8 +1181,10 @@
             "tier": "Unique",
             "prettyname": "[UNIQUE]Anti-Freak Jackal[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]In the name of God, impure souls of the living dead shall be banished into eternal damnation. Amen.[END]\n",
+                "[DARKGRAY][INNERQUOTE]In the name of God, impure souls of the living dead shall be banished into eternal damnation. Amen.[INNERQUOTE][END]\n",
                 "[WHITE]The last word in pistols, the Anti-Freak Jackal turns every bullet it fires into a devastating explosive blast.\n",
                 "[WHITE]The weight and recoil of this pistol is enough to shatter the arms of all but the strongest marines around.\n",
                 "[WHITE]The words 'Jesus Christ is in Heaven Now' are etched on the side of the gun."
@@ -1120,14 +1200,14 @@
             },
             "specialpretty": "Jackal & Casull",
             "specialdesc": [
-                "[UNIQUE]Anti-Freak Jackal[END]\n",
+                "[UNIQUE]Anti-Freak Jackal[INNERQUOTE][END]\n",
                 "[WHITE]The last word in pistols, the Anti-Freak Jackal turns every bullet it fires into a devastating explosive blast.\n",
                 "[WHITE]The weight and recoil of this pistol is enough to shatter the arms of all but the strongest marines around.\n",
                 "[WHITE]The words 'Jesus Christ is in Heaven Now' are etched on the side of the gun.\n",
-                "[UNIQUE]Hellsing ARMS Casull[END]\n",
+                "[UNIQUE]Hellsing ARMS Casull[INNERQUOTE][END]\n",
                 "[WHITE]A giant monster-exploding super pistol, this thing is as powerful as it is big and heavy.\n",
                 "[WHITE]Explosive bullets with cores made from melted down silver crosses will lay down the hurt on all manner of monster and demon, which is just what you need right now.\n",
-                "[GOLD]It's perfect, Walter.[END]\n",
+                "[GOLD]It's perfect, Walter.[INNERQUOTE][END]\n",
                 "[WHITE]With guns like these, no demon can ever stand in your way."
             ]
         },
@@ -1137,6 +1217,8 @@
             "tier": "Unique",
             "prettyname": "[UNIQUE]Hellsing ARMS Casull[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]A giant monster-exploding super pistol, this thing is as powerful as it is big and heavy.\n",
                 "[WHITE]Explosive bullets with cores made from melted down silver crosses will lay down the hurt on all manner of monster and demon, which is just what you need right now."
@@ -1157,6 +1239,8 @@
             "tier": "Unique",
             "prettyname": "[UNIQUE]Quantum Tantrum Cannon[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Once the energy projectile fired by this weapon bounces off a surface, it will continue to travel, releasing a series of deadly explosions in its wake.\n",
                 "[WHITE]A valuable weapon to have when a crowd of demons is right around the corner.\n",
@@ -1178,8 +1262,10 @@
             "tier": "Unique",
             "prettyname": "[UNIQUE]Revenant's Launcher[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]Two can play the homing missile game.[END]\n",
+                "[DARKGRAY][INNERQUOTE]Two can play the homing missile game.[INNERQUOTE][END]\n",
                 "[WHITE]These shoulder-mounted twin missile launchers appear to be of the same make as those used by the skeletal giants of Hell.\n",
                 "[WHITE]It appears to have suffered some damage, as only one out of every two missiles fired will home in on targets.\n",
                 "[WHITE]They appear to be a derivation of UAC weapons technology, and it would seem they can still be modded as a result..."
@@ -1200,8 +1286,10 @@
             "tier": "Unique",
             "prettyname": "[UNIQUE]Charch's Null Pointer[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]It feels extremely unstable... what twisted mind could conceive such a weird device?[END]\n",
+                "[DARKGRAY][INNERQUOTE]It feels extremely unstable... what twisted mind could conceive such a weird device?[INNERQUOTE][END]\n",
                 "[WHITE]The energy fields generated by the Null Pointer deal little damage, but paralyze enemies caught in them for an extended period of \n",
                 "[WHITE]time, leaving them vulnerable to more conventional, immediately deadly weaponry."
             ],
@@ -1221,6 +1309,8 @@
             "tier": "Unique",
             "prettyname": "[UNIQUE]Particle Beam Cannon[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]The Particle Beam Cannon first fires a minute energy stream to serve as a guidance mechanism for the deadly, high-velocity beam that immediately follows it.\n",
                 "[WHITE]This beam can pierce multiple targets, stopping only when it impacts a solid surface."
@@ -1241,6 +1331,8 @@
             "tier": "Unique",
             "prettyname": "[UNIQUE]Plasma Redirection Cannon[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]The projectiles fired by this newly-developed weapon feature a guidance system referred to as a 'quark mind-drive' in the weapon specs, \n",
                 "[WHITE]allowing them to home in on the energy signatures of hostiles after impacting solid surfaces."
@@ -1261,6 +1353,8 @@
             "tier": "Unique",
             "prettyname": "[UNIQUE]Steel Beast[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]While it can only hold one shell at a time, this scattergun turns each shell into a devastating cloud of shrapnel, firing more \n",
                 "[WHITE]pellets at double the damage per pellet of the standard Shotgun.\n",
@@ -1282,6 +1376,8 @@
             "tier": "Unique",
             "prettyname": "[UNIQUE]Suss Gun[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]This monstrosity of a weapon looks like it should be mounted to a vehicle, but it is in fact intended for infantry use, through \n",
                 "[WHITE]the addition of a recoil-reduction harness that also serves to make the weapon easier to wield.\n",
@@ -1303,6 +1399,8 @@
             "tier": "Unique",
             "prettyname": "[UNIQUE]MIRV Launcher[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]From the looks of it, this weapon was ripped from some sort of mech or vehicle, and is so heavy you can barely wield it.\n",
                 "[WHITE]Rapidly loading great amounts of missiles, this weapon will unleash devastating explosive barrages that will flatten anything you point it at.\n",
@@ -1324,6 +1422,8 @@
             "tier": "Unique",
             "prettyname": "[UNIQUE]MA-75B Assault Rifle[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]A strange and powerful assault weapon that doesn't match any known weapon specifications.\n",
                 "[WHITE]Rifle is likely extradimensional in origin, and appears to be a combination of very modern weapon technology, along with strange alien reconfigurations.\n",
@@ -1345,6 +1445,8 @@
             "tier": "Unique",
             "prettyname": "[UNIQUE]WSTE-M5 Shotgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]An exceedingly powerful and amazingly compact double shotgun, this weapon is small enough to be used with one hand, and is capable of reloading \n",
                 "[WHITE]extraordinarily fast through some means you can't quite fathom."
@@ -1360,7 +1462,7 @@
             },
             "specialpretty": "Twin [UNIQUE]WSTE-M5 Shotguns[END]",
             "specialdesc": [
-                "[UNIQUE]WSTE-M5 Shotgun[END]\n",
+                "[UNIQUE]WSTE-M5 Shotgun[INNERQUOTE][END]\n",
                 "[WHITE]An exceedingly powerful and amazingly compact double shotgun, this weapon is small enough to be used with one hand, and is capable of reloading \n",
                 "[WHITE]extraordinarily fast through some means you can't quite fathom.\n\n",
                 "[GOLD][INNERQUOTE]Shotgun Marathon[INNERQUOTE][END]\n",
@@ -1374,6 +1476,8 @@
             "tier": "Unique",
             "prettyname": "[UNIQUE]Widowmaker SMG[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]This submachine gun maintains a good balance of fire rate, accuracy and magazine size, but its true strength lies in its ability to fire capsules \n",
                 "[WHITE]that hatch into quadrepedal spiderbots.\n",
@@ -1397,6 +1501,8 @@
             "tier": "Unique",
             "prettyname": "[UNIQUE]Nuclear Onslaught[GRAY]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]What's better than one heavily modified nuclear plasma rifle? Two, of course.\n",
                 "[WHITE]Going akimbo with these weapons makes for a nearly uninterrupted stream of plasmatic fury, as by the time one rifle has depleted its ammo, \n",
@@ -1418,6 +1524,8 @@
             "tier": "Unique",
             "prettyname": "[UNIQUE]Chameleon Rifle[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]This newly-developed assault rifle is part of a department-wide program to develop weapons that interact with modpacks in more diverse ways, \n",
                 "[WHITE]creating weapons with greater adaptability in battle.\n",
@@ -1440,6 +1548,8 @@
             "tier": "Unique",
             "prettyname": "[UNIQUE]Nanomachic Armament Generator[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]A highly advanced nanoassembler, the Nanomachic Armament Generator uses nanite swarms to reconfigure a base weapon into a wide variety of firearms.\n",
                 "[WHITE]Reloading the gun when the magazine is empty will activate the nanites, which will then pick a new weapon type to assemble.\n",
@@ -1461,6 +1571,8 @@
             "tier": "Unique",
             "prettyname": "[UNIQUE]Lucifer Cannon[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Another cross-dimensional weapon you have stumbled across in your battles.\n",
                 "[WHITE]A high powered energy gun that can feed directly off your cell charge, and can deliver devastating bolts of yellow death in quick succession.\n",
@@ -1483,6 +1595,8 @@
             "tier": "Unique",
             "prettyname": "[UNIQUE]Triad Cannon[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]The grand-daddy of all missile launchers, the Triad Cannon is an unforgettable experience built out of three, conceptually different missile launchers.\n",
                 "[WHITE]Unforgettable, because it's firepower is both a grand blessing, and a deadly curse.\n",
@@ -1505,6 +1619,8 @@
             "tier": "Unique",
             "prettyname": "[UNIQUE]Direct Hit[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]An old, traditional rocket launcher that issues forth strange, nebulous energy.\n",
                 "[WHITE]The rockets fired from this launcher are incredibly fast, and pack a massive punch, but have little splash compared to a normal rocket.\n",
@@ -1528,6 +1644,8 @@
             "tier": "Unique",
             "prettyname": "[UNIQUE]Subtle Knife[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]A small, glowing blade that appears to be capable of cutting through space-time as easily as you could cut through an imp's neck.\n",
                 "[WHITE]Using this a lot might have some really baaaad consequences, but right now it's really damn good at slicing up everything in sight."
@@ -1539,6 +1657,8 @@
             "tier": "Unique",
             "prettyname": "[UNIQUE]Spectre Revolver[GRAY]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]A high-tech revolver that appears to have been designed for stealth combat, it generates a field that bends light around the user when one of its rounds impacts a target.\n",
                 "[WHITE]Float like an invisible thingy, sting like a bullet.\n",
@@ -1552,6 +1672,8 @@
             "tier": "Demonic",
             "prettyname": "[DEMONIC]Deaths Gaze[END]",
             "capacity": "FOUR_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]A magnum that's been corrupted to the point that its actually become a demon itself, it seeks bloodshed and suffering to sustain itself.\n",
                 "[WHITE]It seems perfectly happy to kill other demons, though. As long as it is killing something, it probably won't betray you.\n",
@@ -1579,6 +1701,8 @@
             "tier": "Demonic",
             "prettyname": "[DEMONIC]Hells Reign[END]",
             "capacity": "FOUR_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]This plasma weapon appears to have been partially transformed by exposure to hellish energies, causing it to fire a cluster of energy \n",
                 "[WHITE]projectiles that are bound by gravity, bouncing off walls and dissipating when they impact the ground.\n",
@@ -1605,6 +1729,8 @@
             "tier": "Demonic",
             "prettyname": "[DEMONIC]Soulstorm Rifle[END]",
             "capacity": "FOUR_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]A heavily corrupted UAC rifle, this weapon appears to be powered by the souls of the dead.\n",
                 "[WHITE]While it's probably a really bad idea to use this thing, the damage it does is very impressive, and those souls would probably \n",
@@ -1632,6 +1758,8 @@
             "tier": "Demonic",
             "prettyname": "[DEMONIC]Unmaker[END]",
             "capacity": "FOUR_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
               "[WHITE]What the [DEMONIC]!@#%*[END][WHITE] is this!?[END]"
             ],
@@ -1656,6 +1784,8 @@
             "tier": "Legendary",
             "prettyname": "[LEGENDARY]Judge of the Dead[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]A super high-tech double mini-missile launcher that has terrifying potential for destruction.\n",
                 "[WHITE]While tiny, the missiles detonate into a line of absolute destruction, washing over nearby enemies and ripping them apart.\n",
@@ -1678,6 +1808,8 @@
             "tier": "Legendary",
             "prettyname": "[LEGENDARY]Hurricane Cannon[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]At least as devastating as the 75+ mile per hour tropical cyclone the weapon is named for, the Hurricane Cannon is a rapid-fire \n",
                 "[WHITE]rocket launcher that increases in firerate the longer you shoot.\n",
@@ -1700,6 +1832,8 @@
             "tier": "Legendary",
             "prettyname": "[LEGENDARY]Neural Stunner[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]This pistol's retro stylings belie the weapon's usefulness.\n",
                 "[WHITE]Just keep a keen eye on your supply of energy cells."
@@ -1720,6 +1854,8 @@
             "tier": "Legendary",
             "prettyname": "[LEGENDARY]Baron Blaster[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]This heavy-duty plasma pistol only holds one shot at a time, but that shot pierces multiple enemies and is extremely powerful, \n",
                 "[WHITE]destroying even the most powerful of Hell's minions in one shot.\n",
@@ -1742,7 +1878,10 @@
             "tier": "Legendary",
             "prettyname": "[LEGENDARY]BFG Infinity[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
+                "[DARKGRAY][INNERQUOTE]Oh me.. Oh my.[INNERQUOTE][END]\n",
                 "[WHITE]You don't know what the hell happened to this gun, but whatever it was, it clearly stomps on any theories that disprove perpetual motion generators.\n",
                 "\n",
                 "[WHITE]This gun is just amazeballs. Wow."
@@ -1763,6 +1902,8 @@
             "tier": "Legendary",
             "prettyname": "[LEGENDARY]Reality Distortion Array[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[DEMONIC]HELLO.\n",
                 "[WHITE]WOULD YOU LIKE TO PLAY A GAME?\n",
@@ -1788,6 +1929,8 @@
             "tier": "Legendary",
             "prettyname": "[LEGENDARY]Rigelatin Assault Weapon[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]A strange energy weapon with possibly alien origins, this rifle appears to be from another reality, and is capable of twisting our own world slightly to resemble its own.\n",
                 "[WHITE]It seems like you could power some secondary fire modes on it with some of your modpacks.\n",
@@ -1810,6 +1953,8 @@
             "tier": "Legendary",
             "prettyname": "[LEGENDARY]Longhorn Revolver[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]A gigantic wrist-snapper of a revolver, chambered in a calibre too terrifying to even consider. It definitely wasn't designed for human use, at least.\n",
                 "[WHITE]If you can somehow manage to use this thing without it just snapping you in half, it doesn't seem likely you'll find a pistol with more firepower anywhere.\n",
@@ -1832,6 +1977,8 @@
             "tier": "Legendary",
             "prettyname": "[LEGENDARY]Dragonslayer[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]More like a gigantic slab of metal that just happens to have a handle than an actual sword.\n",
                 "[WHITE]If you're strong enough to actually wield this thing, there's likely no monster alive that can withstand the sheer weight of its attacks.\n",
@@ -1853,6 +2000,8 @@
             "tier": "Basic",
             "prettyname": "[BASIC]Silenced Pistol[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]The sound supressor atttached to this pistol was designed to last thousands of firings, possible through a series of engineering breakthroughs \n",
                 "[WHITE]that remain trade secrets to this day, creating a highly reliable weapon in situations where silence is the golden rule."
@@ -1873,6 +2022,8 @@
             "tier": "Basic",
             "prettyname": "[BASIC]Stealth Rifle[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]A silenced, rapid-fire rifle, the best thing for quickly taking down an unaware target before they can react or retaliate.\n",
                 "[WHITE]The rifle is slightly more likely to alert enemies than the pistol, but only barely."
@@ -1893,6 +2044,8 @@
             "tier": "Basic",
             "prettyname": "[BASIC]Shredder Pistol[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]This handgun takes standard 12- gauge shells and fires each of the pellets contained within in a single consecutive burst, but must be reloaded after each firing."
             ],
@@ -1912,6 +2065,8 @@
             "tier": "Basic",
             "prettyname": "[BASIC]Shredder Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]One of the newest scatterguns from Ballistic Weapons Division, the Shredder Shotgun showcases a number of advancements in shell-based weaponry.\n",
                 "[WHITE]This double-barreled shotgun has three modes, selectable through the secondary fire trigger.\n",
@@ -1935,6 +2090,8 @@
             "tier": "Basic",
             "prettyname": "[BASIC]Revolver[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]This truly ancient weapon still fares admirably against Hell's forces.\n",
                 "[WHITE]Just don't expect demons to agree to a duel at high noon."
@@ -1955,6 +2112,8 @@
             "tier": "Basic",
             "prettyname": "[BASIC]Elephant Gun[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Originally developed in centuries past when the hunting of lions and bears was still legal, the Elephant Gun has experienced \n",
                 "[WHITE]a resurgance in popularity now that humanity is the endangered species, and Earth has been invaded by that most dangerous of game: Demons.\n",
@@ -1976,6 +2135,8 @@
             "tier": "Basic",
             "prettyname": "[BASIC]Gatling Gun[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]The gatling gun remains one of the oldest types of rapid-fire weapon, but this UAC-developed model boasts a level of portability, \n",
                 "[WHITE]accuracy and reliability that the original inventors could never have envisioned."
@@ -1996,6 +2157,8 @@
             "tier": "Basic",
             "prettyname": "[BASIC]Micro Launcher[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]True to its name, the Micro Launcher is a variant of the standard Rocket Launcher designed to be more compact, decreasing the time to ready the weapon, load it, and fire it.\n",
                 "[WHITE]A Micro Launcher's rockets are more compact as well, flying faster than a standard rocket, but dealing two- thirds the explosive damage at a slightly smaller radius."
@@ -2016,6 +2179,8 @@
             "tier": "Basic",
             "prettyname": "[BASIC]Tactical Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]This scattergun holds as many shells as a Combat Shotgun, but in a magazine that makes for shorter reload times. With the main weakness of the Combat Shotgun removed, \n",
                 "[WHITE]this weapon is a fearsome and reliable weapon."
@@ -2036,6 +2201,8 @@
             "tier": "Basic",
             "prettyname": "[BASIC]Flamethrower[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Converting the basic frame and the flammable gel used in the Napalm Launcher allows you to use it as a powerful flamethrower, cooking enemies with less danger to yourself than from an exploding rocket.\n",
                 "\n",
@@ -2057,6 +2224,8 @@
             "tier": "Basic",
             "prettyname": "[BASIC]Sniper Rifle[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]A tried and tested weapon, the Sniper Rifle is the perfect choice for taking down targets at long range.\n",
                 "[WHITE]Extreme power and a zooming scope will help you dominate your enemies from afar."
@@ -2077,6 +2246,8 @@
             "tier": "Basic",
             "prettyname": "[BASIC]Shrapnel Cannon[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]An extremely odd weapon, this gun detonates rockets within itself, and uses the explosive force to launch the rocket casing fragments out the barrel at your enemies.\n",
                 "[WHITE]While it seems effective, most users are wary of it suddenly exploding in their hands."
@@ -2097,6 +2268,8 @@
             "tier": "Basic",
             "prettyname": "[BASIC]Nuclear Plasma Revolver[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]While bearing the shape of an old weapon, the interior is state of the art.\n",
                 "[WHITE]The smallest nuclear cell generator that the UAC has ever managed to develop, alongside a super powerful plasma focusing projector makes this pistol \n",
@@ -2118,8 +2291,10 @@
             "tier": "Basic",
             "prettyname": "[BASIC]Heavy Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]A 12g shotgun -- you gotta love its spread.[END]\n",
+                "[DARKGRAY][INNERQUOTE]A 12g shotgun -- you gotta love its spread.[INNERQUOTE][END]\n",
                 "[WHITE]Attempts to get the most out of every shell resulted in this improvement over the standard UAC Shotgun.\n",
                 "[WHITE]It fires a greater number of pellets per shot, with each doing marginally more damage, at the same spread of the standard Shotgun."
             ],
@@ -2139,8 +2314,10 @@
             "tier": "Basic",
             "prettyname": "[BASIC]Heavy Combat Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]Nothing beats the sound of pumping a combat shotgun.[END]\n",
+                "[DARKGRAY][INNERQUOTE]Nothing beats the sound of pumping a combat shotgun.[INNERQUOTE][END]\n",
                 "[WHITE]A bigger, badder version of the Combat Shotgun, this gun is the final thing most demons will ever see.\n",
                 "[WHITE]It fires a greater number of pellets per shot, with each doing marginally more damage, at the same spread of the standard Combat Shotgun."
             ],
@@ -2160,8 +2337,10 @@
             "tier": "Basic",
             "prettyname": "[BASIC]Heavy Double Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]Double barreled shotgun -- the perfect weapon for a desperado.[END]\n",
+                "[DARKGRAY][INNERQUOTE]Double barreled shotgun -- the perfect weapon for a desperado.[INNERQUOTE][END]\n",
                 "[WHITE]After the success of the Heavy Shotgun, the team forged ahead and created a double-barrelled version.\n",
                 "[WHITE]As with the Heavy Shotgun, the Heavy Double Shotgun fires more pellets, and does more damage per pellet, while keeping the spread of the Double Shotgun.\n",
                 "[WHITE]Interestingly, they also worked in a gas-ejection system for releasing shell casings, which is super cool."
@@ -2182,8 +2361,10 @@
             "tier": "Basic",
             "prettyname": "[BASIC]Heavy Super Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]After the first hellish invasion, weapon engineers designed the super shotgun as the world's first firearm designed to kill demons. And boy does it.[END]\n",
+                "[DARKGRAY][INNERQUOTE]After the first hellish invasion, weapon engineers designed the super shotgun as the world's first firearm designed to kill demons. And boy does it.[INNERQUOTE][END]\n",
                 "[WHITE]The big daddy of all Super Shotguns, this thing will wreck face and break bones, and it'll sound badass while it does so. It fires a greater number \n",
                 "[WHITE]of pellets per shot, with each doing marginally more damage, at the same spread of the standard Super Shotgun."
             ],
@@ -2203,8 +2384,10 @@
             "tier": "Basic",
             "prettyname": "[BASIC]Heavy Assault Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]Big, bad and ugly.[END]\n",
+                "[DARKGRAY][INNERQUOTE]Big, bad and ugly.[INNERQUOTE][END]\n",
                 "[WHITE]A bigger, badder version of the Assault Shotgun, this gun is the final thing most chump demons will see.\n",
                 "[WHITE]The Heavy Assault Shotgun fires more pellets at greater damage, killing demons faster than its forbearer ever could."
             ],
@@ -2224,8 +2407,10 @@
             "tier": "Basic",
             "prettyname": "[BASIC]Heavy Plasma Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]Plasma Shotgun, the best of both worlds![END]\n",
+                "[DARKGRAY][INNERQUOTE]Plasma Shotgun, the best of both worlds![INNERQUOTE][END]\n",
                 "[WHITE]A Plasma Shotgun that's been modded to fire higher intensity blasts, this gun can melt almost anything you'd want it to.\n",
                 "[WHITE]It even fires more bolts than the original gun would."
             ],
@@ -2245,6 +2430,8 @@
             "tier": "Basic",
             "prettyname": "[BASIC]Heavy Hunting Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]A bigger, badder version of the Hunting Shotgun, this gun is the final thing most chump demons will see.\n",
                 "[WHITE]The Heavy Hunting Shotgun fires more pellets at greater damage, whilst retaining the tight pellet spread the Hunting Shotgun is known for.\n",
@@ -2266,6 +2453,8 @@
             "tier": "Basic",
             "prettyname": "[BASIC]Nanoedge Chainsaw[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Even exotic alloys have their limits, as Marines using melee weapons quickly discovered.\n",
                 "[WHITE]To meet the needs of those desiring close- quarters combat weapons, a team at the Weapons Dept. set about developing bladed weapons that utilize nanoassemblers to keep the blade honed.\n",
@@ -2288,6 +2477,8 @@
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Pistol[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Pistol is tuned for greater damage per bullet, without sacrificing accuracy.\n",
                 "[WHITE]Unfortunately, the magazine size is dramatically decreased."
@@ -2308,8 +2499,10 @@
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Chaingun[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]Chaingun directs heavy firepower onto your opponent making him do the chaingun cha-cha.[END]\n",
+                "[DARKGRAY][INNERQUOTE]Chaingun directs heavy firepower onto your opponent making him do the chaingun cha-cha.[INNERQUOTE][END]\n",
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Chaingun is tuned for greater damage per bullet, without sacrificing accuracy.\n",
                 "[WHITE]Unfortunately, the magazine size is dramatically decreased."
             ],
@@ -2329,6 +2522,8 @@
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Battle Rifle[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Battle Rifle is tuned for greater damage per bullet, without sacrificing accuracy.\n",
                 "[WHITE]Unfortunately, the magazine size is dramatically decreased."
@@ -2349,8 +2544,10 @@
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Plasma Rifle[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]A plasma rifle shoots multiple rounds of plasma energy -- frying some demon butt![END]\n",
+                "[DARKGRAY][INNERQUOTE]A plasma rifle shoots multiple rounds of plasma energy -- frying some demon butt![INNERQUOTE][END]\n",
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Plasma Rifle is tuned for greater damage per bolt, without sacrificing accuracy.\n",
                 "[WHITE]Unfortunately, the weapon draws far more power from the capacitors than before, and so can't fire as much before needing reloading."
             ],
@@ -2370,8 +2567,10 @@
             "tier": "Basic",
             "prettyname": "[BASIC]High Power BFG 9000[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]The Big Fucking Gun. Hell wouldn't be so fun without it.[END]\n",
+                "[DARKGRAY][INNERQUOTE]The Big Fucking Gun. Hell wouldn't be so fun without it.[INNERQUOTE][END]\n",
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this BFG 9000 is tuned for greater damage per blast, without sacrificing accuracy.\n",
                 "[WHITE]Unfortunately, the weapon draws far more power from the capacitors than before, and so can't fire as much before needing reloading."
             ],
@@ -2391,8 +2590,10 @@
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Blaster[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]This is the standard issue rechargeable energy side-arm. Cool![END]\n",
+                "[DARKGRAY][INNERQUOTE]This is the standard issue rechargeable energy side-arm. Cool![INNERQUOTE][END]\n",
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Blaster is tuned for greater damage per laser, without sacrificing accuracy.\n",
                 "[WHITE]Unfortunately, the weapon draws far more power from the capacitors than before, and so can't fire as much before needing recharging."
             ],
@@ -2412,8 +2613,10 @@
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Combat Pistol[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]This is the kind of handgun given to your superiors. Doesn't look like they're using it right now...[END]\n",
+                "[DARKGRAY][INNERQUOTE]This is the kind of handgun given to your superiors. Doesn't look like they're using it right now...[INNERQUOTE][END]\n",
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Combat Pistol is tuned for greater damage per bullet, without sacrificing accuracy.\n",
                 "[WHITE]Unfortunately, the magazine size is dramatically decreased."
             ],
@@ -2433,6 +2636,8 @@
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Marksman Pistol[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Marksman Pistol is tuned for greater damage per bullet, without sacrificing accuracy.\n",
                 "[WHITE]Unfortunately, the magazine size is dramatically decreased."
@@ -2453,6 +2658,8 @@
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Handcannon[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Handcannon is tuned for greater damage per bullet, without sacrificing accuracy.\n",
                 "[WHITE]Unfortunately, the magazine size is dramatically decreased."
@@ -2473,8 +2680,10 @@
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Tristar Blaster[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]Now this is a weird weapon.[END]\n",
+                "[DARKGRAY][INNERQUOTE]Now this is a weird weapon.[INNERQUOTE][END]\n",
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Tristar Blaster is tuned for greater damage per bolt, without sacrificing accuracy.\n",
                 "[WHITE]Unfortunately, the weapon draws far more power from the capacitors than before, and so can't fire as much before needing reloading."
             ],
@@ -2494,8 +2703,10 @@
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Minigun[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]Spits enough lead into the air to be considered an environmental hazard.[END]\n",
+                "[DARKGRAY][INNERQUOTE]Spits enough lead into the air to be considered an environmental hazard.[INNERQUOTE][END]\n",
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Minigun is tuned for greater damage per bullet, without sacrificing accuracy.\n",
                 "[WHITE]Unfortunately, the magazine size is dramatically decreased."
             ],
@@ -2515,8 +2726,10 @@
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Laser Rifle[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]With no recoil and pinpoint accuracy, it takes a world-class moron to miss while using a laser rifle.[END]\n",
+                "[DARKGRAY][INNERQUOTE]With no recoil and pinpoint accuracy, it takes a world-class moron to miss while using a laser rifle.[INNERQUOTE][END]\n",
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Laser Rifle is tuned for greater damage per laser, without sacrificing accuracy.\n",
                 "[WHITE]Unfortunately, the weapon draws far more power from the capacitors than before, and so can't fire as much before needing reloading."
             ],
@@ -2536,6 +2749,8 @@
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Nuclear Plasma Pistol[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Nuclear Plasma Pistol is tuned for greater damage per bolt, without sacrificing accuracy.\n",
                 "[WHITE]Unfortunately, the weapon draws far more power from its capacitors than before, and thus can't fire as much before needing to recharge."
@@ -2556,8 +2771,10 @@
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Nuclear Plasma Rifle[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]A self-charging plasma rifle -- too bad it can't be manually reloaded.[END]\n",
+                "[DARKGRAY][INNERQUOTE]A self-charging plasma rifle -- too bad it can't be manually reloaded.[INNERQUOTE][END]\n",
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Nuclear Plasma Rifle is tuned for greater damage per bolt, without sacrificing accuracy.\n",
                 "[WHITE]Unfortunately, the weapon draws far more power from its capacitors than before, and thus can't fire as much before needing to recharge."
             ],
@@ -2577,8 +2794,10 @@
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Nuclear BFG 9000[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]A self-charging BFG9000! How much more lucky can you get?[END]\n",
+                "[DARKGRAY][INNERQUOTE]A self-charging BFG9000! How much more lucky can you get?[INNERQUOTE][END]\n",
                 "[WHITE]This Nuclear BFG 9000 was part of the 'High Power' line of UAC weapons, but is no longer produced.\n",
                 "[WHITE]A catastrophic fault in the nuclear reactor was discovered after release, forcing UAC to issue a recall.\n",
                 "[WHITE]Several BFGs detonated in small nuclear explosions, causing a great deal of damage to UAC infrastructure, and caused great public outrage as well.\n",
@@ -2600,6 +2819,8 @@
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Uzi[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Uzi is tuned for greater damage per bullet, without sacrificing accuracy.\n",
                 "[WHITE]Unfortunately, the magazine size is dramatically decreased."
@@ -2620,6 +2841,8 @@
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Vanguard Rifle[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Vanguard Rifle is tuned for greater damage per bullet, without sacrificing accuracy.\n",
                 "[WHITE]Unfortunately, the magazine size is dramatically decreased."
@@ -2640,6 +2863,8 @@
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Marksman Rifle[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Marksman Rifle is tuned for greater damage per bullet, without sacrificing accuracy.\n",
                 "[WHITE]Unfortunately, the magazine size is dramatically decreased."
@@ -2660,6 +2885,8 @@
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Hunting Revolver[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Hunting Revolver is tuned for greater damage per bullet, without sacrificing accuracy.\n",
                 "[WHITE]Unfortunately, the magazine size is dramatically decreased."
@@ -2680,6 +2907,8 @@
             "tier": "Basic",
             "prettyname": "[BASIC]High Power Thompson[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Tommygun is tuned for greater damage per bullet, without sacrificing accuracy.\n",
                 "[WHITE]Unfortunately, the magazine size is dramatically decreased."
@@ -2700,6 +2929,8 @@
             "tier": "Basic",
             "prettyname": "[BASIC]High Power PP7[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this PP7 is tuned for greater damage per bullet, without sacrificing accuracy.\n",
                 "[WHITE]Unfortunately, the magazine size is dramatically reduced."
@@ -2720,6 +2951,8 @@
             "tier": "Basic",
             "prettyname": "[BASIC]RC-P120[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]A powerful submachinegun from advanced tech manufacturer Chesluk Industries, the RC-P120 is a monstrous bullethose that can unleash \n",
                 "[WHITE]an huge amount of lead downrange without even trying.\n",
@@ -2743,8 +2976,10 @@
             "tier": "Basic",
             "prettyname": "[BASIC]Plasmatic Shrapnel Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]A 12g shotgun -- you gotta love its spread.[END]\n",
+                "[DARKGRAY][INNERQUOTE]A 12g shotgun -- you gotta love its spread.[INNERQUOTE][END]\n",
                 "[WHITE]Despite its exterior, this Shotgun is part of the 'Plasmatic' line of UAC weapons, a series of scatterguns which take standard shells and convert \n",
                 "[WHITE]them into a spread of energy bursts."
             ],
@@ -2764,8 +2999,10 @@
             "tier": "Basic",
             "prettyname": "[BASIC]Plasmatic Shrapnel Combat Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]Nothing beats the sound of pumping a combat shotgun.[END]\n",
+                "[DARKGRAY][INNERQUOTE]Nothing beats the sound of pumping a combat shotgun.[INNERQUOTE][END]\n",
                 "[WHITE]Despite its exterior, this Combat Shotgun is part of the 'Plasmatic' line of UAC weapons, a series of scatterguns which take standard shells and convert \n",
                 "[WHITE]them into a spread of energy bursts."
             ],
@@ -2785,8 +3022,10 @@
             "tier": "Basic",
             "prettyname": "[BASIC]Plasmatic Shrapnel Double Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]Double barreled shotgun -- the perfect weapon for a desperado.[END]\n",
+                "[DARKGRAY][INNERQUOTE]Double barreled shotgun -- the perfect weapon for a desperado.[INNERQUOTE][END]\n",
                 "[WHITE]Despite its exterior, this Double Shotgun is part of the 'Plasmatic' line of UAC weapons, a series of scatterguns which take standard shells and convert \n",
                 "them into a spread of energy bursts."
             ],
@@ -2806,8 +3045,10 @@
             "tier": "Basic",
             "prettyname": "[BASIC]Plasmatic Shrapnel Super Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]After the first hellish invasion, weapon engineers designed the super shotgun as the world's first firearm designed to kill demons. And boy does it.[END]\n",
+                "[DARKGRAY][INNERQUOTE]After the first hellish invasion, weapon engineers designed the super shotgun as the world's first firearm designed to kill demons. And boy does it.[INNERQUOTE][END]\n",
                 "[WHITE]Despite its exterior, this Super Shotgun is part of the 'Plasmatic' line of UAC weapons, a series of scatterguns which take standard shells and convert \n",
                 "[WHITE]them into a spread of energy bursts."
             ],
@@ -2827,8 +3068,10 @@
             "tier": "Basic",
             "prettyname": "[BASIC]Plasmatic Shrapnel Assault Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]Big, bad and ugly.[END]\n",
+                "[DARKGRAY][INNERQUOTE]Big, bad and ugly.[INNERQUOTE][END]\n",
                 "[WHITE]Despite its exterior, this Assault Shotgun is part of the 'Plasmatic' line of UAC weapons, a series of scatterguns which take standard shells and convert \n",
                 "[WHITE]them into a spread of energy bursts."
             ],
@@ -2848,8 +3091,10 @@
             "tier": "Basic",
             "prettyname": "[BASIC]Plasmatic Shrapnel Plasma Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]Plasma Shotgun, the best of both worlds![END]\n",
+                "[DARKGRAY][INNERQUOTE]Plasma Shotgun, the best of both worlds![INNERQUOTE][END]\n",
                 "[WHITE]This Plasma Shotgun has been tuned to fire extremely deadly bolts that even blast nearby enemies slightly.\n",
                 "[WHITE]The gun seems safe, but make sure you don't burn your hands after continuous fire."
             ],
@@ -2869,6 +3114,8 @@
             "tier": "Basic",
             "prettyname": "[BASIC]Plasmatic Shrapnel Hunting Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Despite its exterior, this Hunting Shotgun is part of the 'Plasmatic' line of UAC weapons, a series of scatterguns which take standard shells and convert \n",
                 "[WHITE]them into a spread of energy bursts."
@@ -2889,6 +3136,8 @@
             "tier": "Basic",
             "prettyname": "[BASIC]Plasma Splitter[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]A plasma rifle designed to refract its energy blasts all over the place, resulting in a spectacular but largely inefficient display of firepower.\n",
                 "[WHITE]Each point of damage a normal plasma rifle would do causes this to fire that many single-damage tiny blasts, overwhelming enemies with a mass of glowing blue death.\n"
@@ -2909,6 +3158,8 @@
             "tier": "Basic",
             "prettyname": "[BASIC]Laser Splitter[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]A laser rifle designed to refract its energy blasts all over the place, resulting in a spectacular but largely inefficient display of firepower.\n",
                 "[WHITE]Each point of damage a normal laser rifle would do causes this to fire that many single-damage tiny blasts, overwhelming enemies with a mass of glowing red death.\n"
@@ -2929,6 +3180,8 @@
             "tier": "Basic",
             "prettyname": "[BASIC]Nuclear Plasma Splitter[END]",
             "capacity": "TWO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]A nuclear plasma rifle designed to refract its energy blasts all over the place, resulting in a spectacular but largely inefficient display of firepower.\n",
                 "[WHITE]Each point of damage a normal plasma rifle would do causes this to fire that many single-damage tiny blasts, overwhelming enemies with a mass of glowing blue death.\n"
@@ -2949,6 +3202,8 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Double Chainsaw[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]If one's good, two's even better.\n",
                 "[WHITE]This Chainsaw has been modified to support an additional blade, making it useless for the purpose of cutting trees, but much better for cutting into the demonic hordes."
@@ -2969,8 +3224,10 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Tactical Rocket Launcher[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]The rocket launcher is the most standard way of blowing things up.[END]\n",
+                "[DARKGRAY][INNERQUOTE]The rocket launcher is the most standard way of blowing things up.[INNERQUOTE][END]\n",
                 "[WHITE]Unbeknownst to the team developing the Missile Launcher, another team within the Weapons Dept. was developing this successor to the original \n",
                 "[WHITE]Rocket Launcher. While its fire rate is slightly less than the Missile Launcher, the Tactical Rocket Launcher's magazine design enables rockets \n",
                 "[WHITE]to be reloaded at a significantly faster rate.\n",
@@ -2993,6 +3250,8 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Storm Pistol[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]This Pistol is the first in the 'Storm' line of UAC weapons.\n",
                 "[WHITE]Like all the ballistic weapons in the line, this Pistol divides bullets into a pair of pellets before firing them, creating a shotgun-like weapon in a pistol form factor."
@@ -3013,8 +3272,10 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Storm Combat Pistol[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]This is the kind of handgun given to your superiors. Doesn't look like they're using it right now...[END]\n",
+                "[DARKGRAY][INNERQUOTE]This is the kind of handgun given to your superiors. Doesn't look like they're using it right now...[INNERQUOTE][END]\n",
                 "[WHITE]This Combat Pistol is part of the 'Storm' line of UAC weapons, firing a pair of pellets formed from bullets with each trigger pull.\n",
                 "[WHITE]Like all Combat Pistols, a larger clip is the main improvement over the Storm Pistol."
             ],
@@ -3034,6 +3295,8 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Storm Marksman Pistol[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]This Marksman Pistol is part of the 'Storm' line of UAC weapons, firing a pair of pellets formed from bullets with each trigger pull.\n",
                 "[WHITE]Like all Marksman Pistols, greater accuracy is the main improvement over the Storm Pistol."
@@ -3054,6 +3317,8 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Storm Handcannon[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]This Handcannon is part of the 'Storm' line of UAC weapons, firing a pair of pellets formed from bullets with each trigger pull.\n",
                 "[WHITE]Like all Handcannons, the 'Storm' variant is higher caliber and higher damage."
@@ -3074,6 +3339,8 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Dual Uzis[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Two pistols would spit more lead than one, and therefore two Uzis will unleash an almighty wall of lead at your foes.\n",
                 "[WHITE]Of course, firing these will drop your accuracy and your ammo stockpiles by a considerable amount."
@@ -3094,8 +3361,10 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Storm Blaster[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]This is the standard issue rechargeable energy side-arm. Cool![END]\n",
+                "[DARKGRAY][INNERQUOTE]This is the standard issue rechargeable energy side-arm. Cool![INNERQUOTE][END]\n",
                 "[WHITE]The first of two energy weapons in the 'Storm' line, the Storm Blaster fires two laser blasts simultaneously at a cost of only one charge, \n",
                 "[WHITE]and features a higher-capacity generator than the standard Blaster."
             ],
@@ -3115,6 +3384,8 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Storm Nuclear Plasma Pistol[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]The last in the 'Storm' line of firearms became a rare cooperative effort between two teams at the Weapons Dept, resulting in a \n",
                 "[WHITE]Plasma Pistol variant with the multi-shot capability of a Storm weapon and the ammo recharging of a Nuclear weapon."
@@ -3135,6 +3406,8 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Plasma Pistol[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Experiments into creating scalar plasma weapon technology resulted in the Plasma Pistol.\n",
                 "[WHITE]The shots are much more damaging than the Plasma Rifle's, but they are much slower to fire."
@@ -3155,8 +3428,10 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Plasma Combat Pistol[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]This is the kind of handgun given to your superiors. Doesn't look like they're using it right now...[END]\n",
+                "[DARKGRAY][INNERQUOTE]This is the kind of handgun given to your superiors. Doesn't look like they're using it right now...[INNERQUOTE][END]\n",
                 "[WHITE]Not content with the original, the team that created the Plasma Pistol turned out this Combat version in record time, \n",
                 "[WHITE]featuring a higher capacity cell for more shots in between reloads and better fire rate."
             ],
@@ -3176,6 +3451,8 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Plasma Marksman Pistol[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Not content with the original, the team that created the Plasma Pistol also released this Marksman version, \n",
                 "[WHITE]featuring a highly focused emitter that can unleash plasma at incredible speed.\n",
@@ -3198,6 +3475,8 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Plasma Handcannon[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Never satisfied, the developers of the Plasma Pistol and Plasma Combat Pistol moved on to the Handcannon variant, \n",
                 "[WHITE]continuing the trend of powerful energy-based weapons with the compact size of a sidearm.\n",
@@ -3219,6 +3498,8 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Plasma Uzi[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]While not technically a submachine gun, as there are no moving parts involved in the firing mechanism, the Plasma Uzi has \n",
                 "[WHITE]silenced the would-be pedants at the UAC Weapons Dept. and elsewhere through sheer firepower.\n",
@@ -3240,8 +3521,10 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Overcharged Blaster[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]This is the standard issue rechargeable energy side-arm. Cool![END]\n",
+                "[DARKGRAY][INNERQUOTE]This is the standard issue rechargeable energy side-arm. Cool![INNERQUOTE][END]\n",
                 "[WHITE]In their efforts to create the most powerful handgun possible, a team within the Energy Weapons Division started with the Blaster, \n",
                 "[WHITE]and ended up with this. The Overcharged Blaster must recharge after every shot, but those shots are devastating beams unthinkable from \n",
                 "[WHITE]an energy weapon of this size, stopping most low to mid-level demons dead within a few deadly shots."
@@ -3262,6 +3545,8 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Supercharged Nuclear Plasma Pistol[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Another attempt to create energy based firearms as compact and deadly as possible resulted in this Plasma Pistol as redesigned by the Nuclear team.\n",
                 "[WHITE]While each shot does less initial damage than those fired by an Overcharged Blaster, the bolts it fires explode on impact, dispersing energy and damaging foes close by.\n",
@@ -3283,8 +3568,10 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]VBFG 9000[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]The Big Fucking Gun. Hell wouldn't be so fun without it.[END]\n",
+                "[DARKGRAY][INNERQUOTE]The Big Fucking Gun. Hell wouldn't be so fun without it.[INNERQUOTE][END]\n",
                 "[WHITE]A new model of the classic BFG, the VBFG 9000 features an upgrade in the damage dealt by the projectile and the number of targets it can hit.\n",
                 "[WHITE]The sleek, well-machined housing of the gun has won over fans of the original BFG as well.\n",
                 "\n",
@@ -3306,8 +3593,10 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Nuclear VBFG 9000[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]A self-charging BFG9000! How much more lucky can you get?[END]\n",
+                "[DARKGRAY][INNERQUOTE]A self-charging BFG9000! How much more lucky can you get?[INNERQUOTE][END]\n",
                 "[WHITE]The Nuclear variant of the VBFG 9000 retains the capabilities of the standard VBFG, adding a nuclear reactor that slowly replenishes the gun's ammo when it's equipped and idling."
             ],
             "mods": {
@@ -3326,8 +3615,10 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Focused Double Shotgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]Double barreled shotgun -- the perfect weapon for a desperado.[END]\n",
+                "[DARKGRAY][INNERQUOTE]Double barreled shotgun -- the perfect weapon for a desperado.[INNERQUOTE][END]\n",
                 "[WHITE]This double-barrelled shotgun has had a choke mechanism installed on it, significantly reducing pellet spread and making it a handy weapon on smaller, tougher targets.\n",
                 "[WHITE]All the shots hitting the same point makes it do more damage too."
             ],
@@ -3347,6 +3638,8 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Hyperblaster[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Despite the name, this isn't a Blaster variant, but instead a fork of the Plasma Rifle program, resulting in a weapon \n",
                 "[WHITE]that doesn't require cooling and has improved accuracy and projectile speed.\n",
@@ -3368,8 +3661,10 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Bulletstorm Chaingun[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]Chaingun directs heavy firepower onto your opponent making him do the chaingun cha-cha.[END]\n",
+                "[DARKGRAY][INNERQUOTE]Chaingun directs heavy firepower onto your opponent making him do the chaingun cha-cha.[INNERQUOTE][END]\n",
                 "[WHITE]In addition to the slight damage increase per-bullet over the standard Chaingun, the Bulletstorm Chaingun's sequential magazine design \n",
                 "[WHITE]means that instead of reloading it in the traditional manner, you simply add more magazines as it ejects empties.\n",
                 "[WHITE]It will continue to fire until you let off the trigger, or you've run out of ammo.\n",
@@ -3391,6 +3686,8 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Bulletstorm Rifle[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]In addition to the slight damage increase per-bullet over the standard Battle Rifle, the Bulletstorm Rifle's twin drum magazines \n",
                 "[WHITE]enable the user to utilize their full supply of bullets, without ever needing to reload.\n",
@@ -3412,8 +3709,10 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Autoshotgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]Nothing beats the sound of pumping a combat shotgun.[END]\n",
+                "[DARKGRAY][INNERQUOTE]Nothing beats the sound of pumping a combat shotgun.[INNERQUOTE][END]\n",
                 "[WHITE]Not content with shotguns such as the Combat, Tactical and Assault models, a team within the Weapons Dept. strove for an automatic scattergun \n",
                 "[WHITE]with a fire rate as fast as the laws of physics would allow, and created the Autoshotgun.\n",
                 "[WHITE]Its large magazine is a blessing given its rapid fire rate, but the recoil was an issue the team could not stamp out."
@@ -3434,8 +3733,10 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Auto Double Shotgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]Double barreled shotgun -- the perfect weapon for a desperado.[END]\n",
+                "[DARKGRAY][INNERQUOTE]Double barreled shotgun -- the perfect weapon for a desperado.[INNERQUOTE][END]\n",
                 "[WHITE]Quite possibly the pinnacle of traditional ballistic shotgun design, this full-auto firing, double-barreled, belt-fed scattergun is a \n",
                 "[WHITE]devastating addition to any demon-killing Space Marine's arsenal.\n",
                 "[WHITE]The strong recoil during continous fire is probably a small price to pay for this kind of firepower, but make sure you don't propel yourself into a lava pit!"
@@ -3456,6 +3757,8 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Mini-missile Pistol[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]An advancement of 20th-century 'Gyrojet' technology, this sidearm fires self-propelled explosives that retain a stable trajectory even at longer ranges."
             ],
@@ -3475,8 +3778,10 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Plasma Rifle Mk. II[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]A plasma rifle shoots multiple rounds of plasma energy -- frying some demon butt![END]\n",
+                "[DARKGRAY][INNERQUOTE]A plasma rifle shoots multiple rounds of plasma energy -- frying some demon butt![INNERQUOTE][END]\n",
                 "[WHITE]This redesign of the classic Plasma Rifle resulted in a weapon with a slightly decreased fire rate, but more damaging plasma bolts, and a far greater capacity."
             ],
             "mods": {
@@ -3495,6 +3800,8 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Nuclear Plasma Rifle Mk. II[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Adapting the Nuclear Plasma Rifle to use the improvements of the normal Mk. II rifle was quite difficult, but eventually the Nuclear team succeeded. \n",
                 "[WHITE]A powerful weapon that, when used accordingly, can turn the tide of any battle."
@@ -3515,6 +3822,8 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Plasma Shotgun Mk. II[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Attempts to upgrade the Plasma Shotgun all ended in failure, so it had to be taken apart and put back together in a similar \n",
                 "[WHITE]configuration before any progress could be made.\n",
@@ -3536,6 +3845,8 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Nuclear Plasma Shotgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]During the stalled development of the Plasma Shotgun Mk.II, several engineers collaborated with the Nuclear Division to create \n",
                 "[WHITE]a Nuclear upgrade for the original Plasma Shotgun.\n",
@@ -3557,6 +3868,8 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Laser Shotgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]While developing the Laser Rifle, a divide grew between the R&D team members working on it.\n",
                 "[WHITE]One group felt that the best way to increase damage output would be to fire faster. Ergo, the Laser Minigun.\n",
@@ -3581,6 +3894,8 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Grenade Launcher[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]The rocket-propelled explosives this weapon fires can be bounced off walls, over barriers and around corners, \n",
                 "[WHITE]enabling skilled users to eliminate enemies before they can retaliate, and enabling unskilled users to bounce explosives \n",
@@ -3603,8 +3918,10 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Assault Chaingun[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]Chaingun directs heavy firepower onto your opponent making him do the chaingun cha-cha.[END]\n",
+                "[DARKGRAY][INNERQUOTE]Chaingun directs heavy firepower onto your opponent making him do the chaingun cha-cha.[INNERQUOTE][END]\n",
                 "[WHITE]The UAC's 'Assault' line of weapons are fine-tuned for better damage and accuracy at the cost of rate-of-fire, and the Assault Chaingun is an excellent example.\n",
                 "[WHITE]A prime choice when pinpoint accuracy at greater distances is required."
             ],
@@ -3624,6 +3941,8 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Scoped Rifle[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]To develop an 'Assault' version of a weapon prized for its high rate-of-fire seems counter-productive, \n",
                 "[WHITE]but the Scoped Rifle remains a desirable weapon due to its accuracy and damage upgrades.\n",
@@ -3645,8 +3964,10 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Assault Plasma Rifle[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]A plasma rifle shoots multiple rounds of plasma energy -- frying some demon butt![END]\n",
+                "[DARKGRAY][INNERQUOTE]A plasma rifle shoots multiple rounds of plasma energy -- frying some demon butt![INNERQUOTE][END]\n",
                 "[WHITE]As with other weapons in the UAC 'Assault' line, the Assault Plasma Rifle is designed for damage output and range, at the cost of rate-of-fire.\n",
                 "[WHITE]The plasma bolts it fires deal more damage and travel at a much greater velocity."
             ],
@@ -3666,8 +3987,10 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Assault Minigun[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]Spits enough lead into the air to be considered an environmental hazard.[END]\n",
+                "[DARKGRAY][INNERQUOTE]Spits enough lead into the air to be considered an environmental hazard.[INNERQUOTE][END]\n",
                 "[WHITE]To develop an 'Assault' version of a weapon prized for its high rate-of-fire seems counter-productive, but the Assault Minigun remains a \n",
                 "[WHITE]desirable weapon due to its accuracy and damage upgrades.\n",
                 "[WHITE]The incredible magazine of ammo available to the weapon allows you to keep a huge reserve of high damage accurate shots ready without impacting your ammo reserves."
@@ -3688,8 +4011,10 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Assault Laser Rifle[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]With no recoil and pinpoint accuracy, it takes a world-class moron to miss while using a laser rifle.[END]\n",
+                "[DARKGRAY][INNERQUOTE]With no recoil and pinpoint accuracy, it takes a world-class moron to miss while using a laser rifle.[INNERQUOTE][END]\n",
                 "[WHITE]For the Assault Laser Rifle, the Energy Weapons Division dropped the gain limiters featured on the standard model, creating a laser rifle \n",
                 "[WHITE]with a reduced fire rate but severely increased damage."
             ],
@@ -3709,8 +4034,10 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Assault Nuclear Plasma Rifle[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]A self-charging plasma rifle -- too bad it can't be manually reloaded.[END]\n",
+                "[DARKGRAY][INNERQUOTE]A self-charging plasma rifle -- too bad it can't be manually reloaded.[INNERQUOTE][END]\n",
                 "[WHITE]For the Assault Nuclear Plasma Rifle, the Energy Weapons Division added a series of amplifiers that greatly enhance the power of the weapon, \n",
                 "[WHITE]allowing the slow trickle of power to not be completely drained by each shot. Early prototypes simply adjusted the weapon to use more energy, \n",
                 "[WHITE]which left the user with only a few shots before needing to recharge."
@@ -3731,6 +4058,8 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Assault Uzi[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]To develop an 'Assault' version of a weapon prized for its high rate-of-fire seems counter-productive, but the Assault Uzi remains a \n",
                 "[WHITE]desirable weapon due to its accuracy and damage upgrades.\n",
@@ -3752,8 +4081,10 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Burst Chaingun[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]Chaingun directs heavy firepower onto your opponent making him do the chaingun cha-cha.[END]\n",
+                "[DARKGRAY][INNERQUOTE]Chaingun directs heavy firepower onto your opponent making him do the chaingun cha-cha.[INNERQUOTE][END]\n",
                 "[WHITE]This Chaingun is part of the 'Burst Cannon' series of UAC weapons.\n",
                 "[WHITE]Tuned for greater damage per bullet and limited to three-shot bursts, it sacrifices some accuracy versus the standard model.\n",
                 "[WHITE]The magazine size is doubled from the original weapon, giving you even more dakka to throw around."
@@ -3774,6 +4105,8 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Burst Battle Rifle[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]This Battle Rifle is part of the 'Burst Cannon' series of UAC weapons.\n",
                 "[WHITE]Tuned for greater damage per bullet and limited to three-shot bursts, it sacrifices some accuracy versus the standard model.\n",
@@ -3796,8 +4129,10 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Burst Plasma Rifle[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]A plasma rifle shoots multiple rounds of plasma energy -- frying some demon butt![END]\n",
+                "[DARKGRAY][INNERQUOTE]A plasma rifle shoots multiple rounds of plasma energy -- frying some demon butt![INNERQUOTE][END]\n",
                 "[WHITE]This Plasma Rifle is part of the 'Burst Cannon' series of UAC weapons.\n",
                 "[WHITE]Tuned for greater damage per bolt and limited to three-shot bursts, it sacrifices some accuracy versus the standard model.\n",
                 "[WHITE]The magazine size is doubled from the original weapon, giving you even more dakka to throw around."
@@ -3818,8 +4153,10 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Burst Minigun[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]Spits enough lead into the air to be considered an environmental hazard.[END]\n",
+                "[DARKGRAY][INNERQUOTE]Spits enough lead into the air to be considered an environmental hazard.[INNERQUOTE][END]\n",
                 "[WHITE]This Minigun is part of the 'Burst Cannon' series of UAC weapons.\n",
                 "[WHITE]Tuned for greater damage per bullet and limited to three-shot bursts, it sacrifices some accuracy versus the standard model.\n",
                 "[WHITE]The magazine size is doubled from the original weapon, giving you even more dakka to throw around."
@@ -3840,8 +4177,10 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Burst Laser Rifle[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]With no recoil and pinpoint accuracy, it takes a world-class moron to miss while using a laser rifle.[END]\n",
+                "[DARKGRAY][INNERQUOTE]With no recoil and pinpoint accuracy, it takes a world-class moron to miss while using a laser rifle.[INNERQUOTE][END]\n",
                 "[WHITE]This Laser Rifle is part of the 'Burst Cannon' series of UAC weapons.\n",
                 "[WHITE]Tuned for greater damage per laser and limited to three-shot bursts, it sacrifices some accuracy versus the standard model.\n",
                 "[WHITE]Of course, being a laser weapon, the accuracy loss is laughable.\n",
@@ -3863,8 +4202,10 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Burst Nuclear Plasma Rifle[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]A self-charging plasma rifle -- too bad it can't be manually reloaded.[END]\n",
+                "[DARKGRAY][INNERQUOTE]A self-charging plasma rifle -- too bad it can't be manually reloaded.[INNERQUOTE][END]\n",
                 "[WHITE]This Nuclear Plasma Rifle is part of the 'Burst Cannon' series of UAC weapons.\n",
                 "[WHITE]Tuned for greater damage per bolt and limited to three-shot bursts, it sacrifices some accuracy versus the standard model.\n",
                 "[WHITE]The magazine size is doubled from the original weapon, giving you even more dakka to throw around."
@@ -3885,6 +4226,8 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Burst Uzi[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]This Uzi is part of the 'Burst Cannon' series of UAC weapons.\n",
                 "[WHITE]Tuned for greater damage per bullet and limited to three-shot bursts, it sacrifices some accuracy versus the standard model.\n",
@@ -3906,8 +4249,10 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Nano Shotgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]A 12g shotgun -- you gotta love its spread.[END]\n",
+                "[DARKGRAY][INNERQUOTE]A 12g shotgun -- you gotta love its spread.[INNERQUOTE][END]\n",
                 "[WHITE]This Shotgun features an ammo manufacturing nanoassembler that builds shells over time from inorganic debris. The pellets \n",
                 "[WHITE]fired are actually so small and fine that they pierce through enemy armor."
             ],
@@ -3927,8 +4272,10 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Nano Combat Shotgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]Nothing beats the sound of pumping a combat shotgun.[END]\n",
+                "[DARKGRAY][INNERQUOTE]Nothing beats the sound of pumping a combat shotgun.[INNERQUOTE][END]\n",
                 "[WHITE]This Combat Shotgun features an ammo manufacturing nanoassembler that builds shells over time from inorganic debris. The pellets \n",
                 "[WHITE]fired are actually so small and fine that they pierce through enemy armor."
             ],
@@ -3948,8 +4295,10 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Nano Double Shotgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]Double barreled shotgun -- the perfect weapon for a desperado.[END]\n",
+                "[DARKGRAY][INNERQUOTE]Double barreled shotgun -- the perfect weapon for a desperado.[INNERQUOTE][END]\n",
                 "[WHITE]This Double Shotgun features an ammo manufacturing nanoassembler that builds shells over time from inorganic debris. The pellets \n",
                 "[WHITE]fired are actually so small and fine that they pierce through enemy armor."
             ],
@@ -3969,8 +4318,10 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Nano Super Shotgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]After the first hellish invasion, weapon engineers designed the super shotgun as the world's first firearm designed to kill demons. And boy does it.[END]\n",
+                "[DARKGRAY][INNERQUOTE]After the first hellish invasion, weapon engineers designed the super shotgun as the world's first firearm designed to kill demons. And boy does it.[INNERQUOTE][END]\n",
                 "[WHITE]This Super Shotgun features an ammo manufacturing nanoassembler that builds shells over time from inorganic debris. The pellets \n",
                 "[WHITE]fired are actually so small and fine that they pierce through enemy armor."
             ],
@@ -3990,8 +4341,10 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Nano Assault Shotgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]Big, bad and ugly.[END]\n",
+                "[DARKGRAY][INNERQUOTE]Big, bad and ugly.[INNERQUOTE][END]\n",
                 "[WHITE]This Assault Shotgun features an ammo manufacturing nanoassembler that builds shells over time from inorganic debris. The pellets \n",
                 "[WHITE]fired are actually so small and fine that they pierce through enemy armor."
             ],
@@ -4011,8 +4364,10 @@
             "tier": "Advanced",
             "prettyname": "[ADVANCED]Nano Plasma Shotgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]Plasma Shotgun, the best of both worlds![END]\n",
+                "[DARKGRAY][INNERQUOTE]Plasma Shotgun, the best of both worlds![INNERQUOTE][END]\n",
                 "[WHITE]This Plasma Shotgun features a fusion generator that replenishes cell ammo over time.\n",
                 "[WHITE]The plasma bolts are much weaker than normal, due to the generator occupying most of the gun, but it no longer needs to reload."
             ],
@@ -4032,6 +4387,8 @@
             "tier": "Master",
             "prettyname": "[MASTER]Ripper[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]After seeing how useful standard commercially-available chainsaws proved against demons, the UAC set about making one specifically \n",
                 "[WHITE]for hacking up hordes of slavering hellbeasts.\n",
@@ -4058,8 +4415,10 @@
             "tier": "Master",
             "prettyname": "[MASTER]Biggest Fucking Gun[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]The Big Fucking Gun. Hell wouldn't be so fun without it.[END]\n",
+                "[DARKGRAY][INNERQUOTE]The Big Fucking Gun. Hell wouldn't be so fun without it.[INNERQUOTE][END]\n",
                 "[WHITE]The newest in BFG technology, the Biggest Fucking Gun is the last word in single-shot energy weaponry... at least for the moment.\n",
                 "[WHITE]The energy cluster it fires plows right through nearly every enemy in its path, only exploding when it hits a solid surface, dealing \n",
                 "[WHITE]catastrophic damage in a wide radius, and dealing 'ray' damage to more enemies outside its blast radius than any other entry in the BFG line of weaponry.\n",
@@ -4082,8 +4441,10 @@
             "tier": "Master",
             "prettyname": "[MASTER]Biggest Fucking Nuclear Gun[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]A self-charging BFG9000! How much more lucky can you get?[END]\n",
+                "[DARKGRAY][INNERQUOTE]A self-charging BFG9000! How much more lucky can you get?[INNERQUOTE][END]\n",
                 "[WHITE]In the seemingly endless game of one-upmanship the Energy Weapons Division teams play, the Biggest Fucking Gun now has a Nuclear variant.\n",
                 "[WHITE]The BFG team argues that the Nuclear team is just standing on the shoulders of giants and that the slow recharge time does not offset the infinite \n",
                 "[WHITE]ammunition, while the Nuclear team argues that weapons development is all about iteration anyway, and that the last thing a Space Marine wants when \n",
@@ -4106,8 +4467,10 @@
             "tier": "Master",
             "prettyname": "[MASTER]Mother-In-Law[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[GOLD]''Three feet of death to anything in its path. That's my Mother-In-Law''[END]\n",
+                "[GOLD]''Three feet of death to anything in its path. That's my Mother-In-Law''[INNERQUOTE][END]\n",
                 "[WHITE]-Found scrawled in a Weapons Dept. bathroom stall\n",
                 "\n",
                 "[WHITE]While the engineers originally responsible for the M.I.L. were fired after an incident involving a plasma generator being hooked up to a \n",
@@ -4131,6 +4494,8 @@
             "tier": "Master",
             "prettyname": "[MASTER]Autocannon[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]The Autocannon's design might imply that it's a rapid-fire weapon similar to the Chaingun or Minigun, but the Autocannon is a different beast altogether.\n",
                 "[WHITE]A metal monster that seems like it came about from a rocket launcher having sex with a chaingun, this war crime fires a single high-velocity shot \n",
@@ -4152,6 +4517,8 @@
             "tier": "Master",
             "prettyname": "[MASTER]Plasma Refractor[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]The Plasma Refractor fires a beam of incredible potency, which splits upon contact with a surface, creating smaller projectiles that arc outwards from the original shot.\n",
                 "[WHITE]A handy weapon in tight quarters and around corners.\n",
@@ -4175,6 +4542,8 @@
             "tier": "Master",
             "prettyname": "[MASTER]Megaton Shotgun[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]The king of assault weapons, the Megaton is a triple-barrelled shotgun that contains 9 shots internally.\n",
                 "[WHITE]It can fire in single shots, thanks to the rotating barrel mechanism, and it can also fire a triple shot to completely decimate your enemies.\n",
@@ -4196,6 +4565,8 @@
             "tier": "Master",
             "prettyname": "[MASTER]Conqueror Shotgun[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]A mag-based monster of a shotgun, the Conqueror is aptly name. all fall before the one wielding this gun.\n",
                 "[WHITE]High damage, more pellets and big magazine size make this one of the most versatile and powerful weapons in any Marine's arsenal.\n", 
@@ -4218,6 +4589,8 @@
             "tier": "Master",
             "prettyname": "[MASTER]Cluster Bomb Launcher[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]This devastating anti-materiel weapon fires a projectile packed with multiple bomblets, which will streak outwards on impact, \n",
                 "[WHITE]dealing even more damage to any hostiles unfortunate enough to be in their path."
@@ -4238,6 +4611,8 @@
             "tier": "Master",
             "prettyname": "[MASTER]Gauss Rifle[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]A companion to the original Railgun, the Gauss Rifle uses magnetic rail technology to accelerate matter streams at the target.\n",
                 "[WHITE]Desiring to create a magrail weapon with more damaging projectiles, the design team ran into issues with magazine durability due to \n",
@@ -4261,6 +4636,8 @@
             "tier": "Master",
             "prettyname": "[MASTER]Anti-materiel Rifle[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Originally designed to pierce reinforced installations and decimate stationary weaponry, the Anti-materiel Rifle has been given a new lease on life with the demonic invasion.\n",
                 "[WHITE]Its high-explosive frangible rounds have proven highly effective on demon types that have assimilated UAC weaponry and defense systems.\n",
@@ -4283,6 +4660,8 @@
             "tier": "Master",
             "prettyname": "[MASTER]Zeus Cannon[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Originally a fork of the BFG program, the team responsible for the weapon discovered that demonic biosignatures can conduct energy on various wavelengths.\n",
                 "[WHITE]...In plain English, the Zeus Cannon's energy cluster seeks after enemies and reflects off solid surfaces, constantly emmitting tendrils of lethal energy \n",
@@ -4307,6 +4686,8 @@
             "tier": "Master",
             "prettyname": "[MASTER]Voltgun[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]In an accident while developing the Plasma Shotgun Mk.II, the weapon's plasma focusers overloaded, and it unleashed pure electrical current \n",
                 "[WHITE]out the muzzle, frying both it and an unfortunate nearby technician.\n",
@@ -4331,6 +4712,8 @@
             "tier": "Master",
             "prettyname": "[MASTER]Super Machinegun[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Originally designed to be mounted on tripods or vehicles, the Super Machinegun features a colossal magazine and fires \n",
                 "[WHITE]bullets designed to shred through just about anything.\n",
@@ -4352,6 +4735,8 @@
             "tier": "Master",
             "prettyname": "[MASTER]Energysaw[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Energy-based melee weaponry was a mainstay of science fiction of the distant past, but the UAC's Energysaw makes fantasy into brutal reality.\n",
                 "[WHITE]Chanelling plasma energy into a finite-length 'blade' creates a melee weapon capable of cleaving hellspawn flesh, bone and metal like the proverbial hot knife through butter.\n",
@@ -4374,6 +4759,8 @@
             "tier": "Master",
             "prettyname": "[MASTER]Plascharge Launcher[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Rather than use traditional explosive charges, the Plascharge Launcher fires a modified rocket containing a multi-plasmatic warhead.\n",
                 "[WHITE]The resulting energy blasts make it the weapon of choice against extremely tough or clustered enemies.\n",
@@ -4397,6 +4784,8 @@
             "tier": "Master",
             "prettyname": "[MASTER]Plasma Cannon[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]The UAC's Plasma Rifle program was a true game-changer for the company, spawning research into many types of energy-based weaponry.\n",
                 "[WHITE]One of the newest is the aptly named Plasma Cannon.\n",
@@ -4421,8 +4810,10 @@
             "tier": "Master",
             "prettyname": "[MASTER]Heavy Pulse Blaster[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]This is the standard issue rechargeable energy side-arm. Cool![END]\n",
+                "[DARKGRAY][INNERQUOTE]This is the standard issue rechargeable energy side-arm. Cool![INNERQUOTE][END]\n",
                 "[WHITE]The newest entry in the Blaster line of compact and deadly energy-based sidearems, this model fires a laser designed to bore a hole through just about anything in its path.\n",
                 "[WHITE]The weapon is not without its downside. namely the fact that this weapon is prone to overheating, something its less potent siblings never had to worry about.\n",
                 "[WHITE]One use of the primary fire will completely deplete the cell, as well as increase the heat level of the gun by a large margin.\n",
@@ -4444,6 +4835,8 @@
             "tier": "Master",
             "prettyname": "[MASTER]Laser Minigun[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Foreseeing a need for more high-firerate laser weaponry following the release of the Laser Rifle, the latter's development team set to work \n",
                 "[WHITE]adapting the laser emitters for use in a minigun.\n",
@@ -4468,6 +4861,8 @@
             "tier": "Master",
             "prettyname": "[MASTER]Defence Drone Launcher[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Designed for solo operatives in need of additional fire support, the Defense Drone Launcher expends the propellant from a collection of standard rockets \n",
                 "[WHITE]to fuel a nano-assembled hover drone equipped with twin plasma guns.\n",
@@ -4490,6 +4885,8 @@
             "tier": "Master",
             "prettyname": "[MASTER]Incineration Device Launcher[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]This bulky launcher contains one of the newest, and possibly the most bizzare of the UAC Weapons Department's contributions to the war. a rocket-propelled plasma 'flamethrower'.\n",
                 "[WHITE]As the rocket flies, it continuously scans its immediate surroundings for demonic biosignatures, and when it finds a match, it ejects a stream of \n",
@@ -4511,6 +4908,8 @@
             "tier": "Master",
             "prettyname": "[MASTER]Nanomachic Pistol[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]This Pistol's magazine is replaced with an ammo manufacturing nano-assembler that builds compatible pistol rounds over time from inorganic debris.\n",
                 "[WHITE]The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
@@ -4532,8 +4931,10 @@
             "tier": "Master",
             "prettyname": "[MASTER]Nanomachic Chaingun[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]Chaingun directs heavy firepower onto your opponent making him do the chaingun cha-cha.[END]\n",
+                "[DARKGRAY][INNERQUOTE]Chaingun directs heavy firepower onto your opponent making him do the chaingun cha-cha.[INNERQUOTE][END]\n",
                 "[WHITE]This Chaingun's belt is replaced with an ammo manufacturing nano-assembler that builds compatible rifle rounds over time from inorganic debris.\n",
                 "[WHITE]The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
                 "[WHITE]They do not make it any more effective, they just look cool."
@@ -4554,6 +4955,8 @@
             "tier": "Master",
             "prettyname": "[MASTER]Nanomachic Battle Rifle[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]This Battle Rifle's magazine is replaced with an ammo manufacturing nano-assembler that builds compatible rifle rounds over time from inorganic debris.\n",
                 "[WHITE]The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
@@ -4575,8 +4978,10 @@
             "tier": "Master",
             "prettyname": "[MASTER]Nanomachic Rocket Launcher[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]The rocket launcher is the most standard way of blowing things up.[END]\n",
+                "[DARKGRAY][INNERQUOTE]The rocket launcher is the most standard way of blowing things up.[INNERQUOTE][END]\n",
                 "[WHITE]This Rocket Launcher has an ammo manufacturing nano-assembler that builds rockets over time from inorganic debris.\n",
                 "[WHITE]The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
                 "[WHITE]They do not make it any more effective, they just look cool."
@@ -4597,8 +5002,10 @@
             "tier": "Master",
             "prettyname": "[MASTER]Nanomachic Plasma Rifle[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]A plasma rifle shoots multiple rounds of plasma energy -- frying some demon butt![END]\n",
+                "[DARKGRAY][INNERQUOTE]A plasma rifle shoots multiple rounds of plasma energy -- frying some demon butt![INNERQUOTE][END]\n",
                 "[WHITE]This Plasma Rifle's cell battery is replaced with a series of extremely compact fusion generators that replenish cell ammo over time.\n",
                 "[WHITE]The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
                 "[WHITE]They do not make it any more effective, they just look cool."
@@ -4619,8 +5026,10 @@
             "tier": "Master",
             "prettyname": "[MASTER]Nanomachic Blaster[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]This is the standard issue rechargeable energy side-arm. Cool![END]\n",
+                "[DARKGRAY][INNERQUOTE]This is the standard issue rechargeable energy side-arm. Cool![INNERQUOTE][END]\n",
                 "[WHITE]This Blaster's battery is replaced with a series of extremely compact fusion generators that keep it charged at all times.\n",
                 "[WHITE]The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
                 "[WHITE]They do not make it any more effective, they just look cool."
@@ -4641,8 +5050,10 @@
             "tier": "Master",
             "prettyname": "[MASTER]Nanomachic Combat Pistol[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]This is the kind of handgun given to your superiors. Doesn't look like they're using it right now...[END]\n",
+                "[DARKGRAY][INNERQUOTE]This is the kind of handgun given to your superiors. Doesn't look like they're using it right now...[INNERQUOTE][END]\n",
                 "[WHITE]This Combat Pistol's magazine is replaced with an ammo manufacturing nano-assembler that builds compatible pistol rounds over time from inorganic debris.\n",
                 "[WHITE]The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
                 "[WHITE]They do not make it any more effective, they just look cool."
@@ -4663,6 +5074,8 @@
             "tier": "Master",
             "prettyname": "[MASTER]Nanomachic Marksman Pistol[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]This Marksman Pistol's magazine is replaced with an ammo manufacturing nano-assembler that builds compatible pistol rounds over time from inorganic debris.\n",
                 "[WHITE]The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
@@ -4684,6 +5097,8 @@
             "tier": "Master",
             "prettyname": "[MASTER]Nanomachic Handcannon[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]This Handcannon's magazine is replaced with an ammo manufacturing nano-assembler that builds compatible pistol rounds over time from inorganic debris.\n",
                 "[WHITE]The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
@@ -4705,8 +5120,10 @@
             "tier": "Master",
             "prettyname": "[MASTER]Nanomachic Tristar Blaster[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]Now this is a weird weapon.[END]\n",
+                "[DARKGRAY][INNERQUOTE]Now this is a weird weapon.[INNERQUOTE][END]\n",
                 "[WHITE]This Tristar Blaster's cell battery is replaced with a series of extremely compact fusion generators that replenish cell ammo over time.\n",
                 "[WHITE]The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
                 "[WHITE]They do not make it any more effective, they just look cool."
@@ -4727,8 +5144,10 @@
             "tier": "Master",
             "prettyname": "[MASTER]Nanomachic Minigun[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]Spits enough lead into the air to be considered an environmental hazard.[END]\n",
+                "[DARKGRAY][INNERQUOTE]Spits enough lead into the air to be considered an environmental hazard.[INNERQUOTE][END]\n",
                 "[WHITE]This Minigun's magazine is replaced with an ammo manufacturing nano-assembler that builds compatible rifle rounds over time from inorganic debris.\n",
                 "[WHITE]The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
                 "[WHITE]They do not make it any more effective, they just look cool."
@@ -4749,8 +5168,10 @@
             "tier": "Master",
             "prettyname": "[MASTER]Nanomachic Missile Launcher[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]A definitive upgrade to the rocket launcher.[END]\n",
+                "[DARKGRAY][INNERQUOTE]A definitive upgrade to the rocket launcher.[INNERQUOTE][END]\n",
                 "[WHITE]This Missile Launcher's loading tube is replaced with an ammo manufacturing nano-assembler that builds missiles over time from inorganic debris.\n",
                 "[WHITE]The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
                 "[WHITE]They do not make it any more effective, they just look cool."
@@ -4771,8 +5192,10 @@
             "tier": "Master",
             "prettyname": "[MASTER]Nanomachic Napalm Launcher[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]This will surely make a mess![END]\n",
+                "[DARKGRAY][INNERQUOTE]This will surely make a mess![INNERQUOTE][END]\n",
                 "[WHITE]This Napalm Launcher's loading tube is replaced with an ammo manufacturing nano-assembler that builds napalm rockets over time from inorganic debris.\n",
                 "[WHITE]The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
                 "[WHITE]They do not make it any more effective, they just look cool."
@@ -4793,8 +5216,10 @@
             "tier": "Master",
             "prettyname": "[MASTER]Nanomachic Laser Rifle[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]With no recoil and pinpoint accuracy, it takes a world-class moron to miss while using a laser rifle.[END]\n",
+                "[DARKGRAY][INNERQUOTE]With no recoil and pinpoint accuracy, it takes a world-class moron to miss while using a laser rifle.[INNERQUOTE][END]\n",
                 "[WHITE]This Laser Rifle's cell battery is replaced with a series of extremely compact fusion generators that replenish cell ammo over time.\n",
                 "[WHITE]The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
                 "[WHITE]They do not make it any more effective, they just look cool."
@@ -4815,6 +5240,8 @@
             "tier": "Master",
             "prettyname": "[MASTER]Nanomachic Uzi[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]This Uzi's magazine is replaced with an ammo manufacturing nano-assembler that builds compatible pistol rounds over time from inorganic debris.\n",
                 "[WHITE]The designers of this weapon felt that such a futuristic concept needed to look futuristic too, so they built flashy pulsing lights into it.\n",
@@ -4836,6 +5263,8 @@
             "tier": "Master",
             "prettyname": "[MASTER]Demolition Ammo Pistol[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Part of the 'Demolition Ammo' series of ballistic weapons, this Pistol fires explosive rounds that detonate on impact, heavily damaging \n",
                 "[WHITE]the target and dealing splash damage to any hostiles in the immediate vicinity.\n",
@@ -4858,8 +5287,10 @@
             "tier": "Master",
             "prettyname": "[MASTER]Demolition Ammo Chaingun[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]Chaingun directs heavy firepower onto your opponent making him do the chaingun cha-cha.[END]\n",
+                "[DARKGRAY][INNERQUOTE]Chaingun directs heavy firepower onto your opponent making him do the chaingun cha-cha.[INNERQUOTE][END]\n",
                 "[WHITE]Part of the 'Demolition Ammo' series of ballistic weapons, this Chaingun fires explosive rounds that detonate on impact, \n",
                 "[WHITE]heavily damaging the target and dealing splash damage to any hostiles in the immediate vicinity.\n",
                 "[WHITE]The explosive damage scales based on the firerate of the gun, but the size of the explosion is constant between weapons.\n",
@@ -4881,6 +5312,8 @@
             "tier": "Master",
             "prettyname": "[MASTER]Demolition Ammo Battle Rifle[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Part of the 'Demolition Ammo' series of ballistic weapons, this Battle Rifle fires explosive rounds that detonate on impact, \n",
                 "[WHITE]heavily damaging the target and dealing splash damage to any hostiles in the immediate vicinity.\n",
@@ -4903,8 +5336,10 @@
             "tier": "Master",
             "prettyname": "[MASTER]Demolition Ammo Combat Pistol[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]This is the kind of handgun given to your superiors. Doesn't look like they're using it right now...[END]\n",
+                "[DARKGRAY][INNERQUOTE]This is the kind of handgun given to your superiors. Doesn't look like they're using it right now...[INNERQUOTE][END]\n",
                 "[WHITE]Part of the 'Demolition Ammo' series of ballistic weapons, this Combat Pistol fires explosive rounds that detonate on impact, \n",
                 "[WHITE]heavily damaging the target and dealing splash damage to any hostiles in the immediate vicinity.\n",
                 "[WHITE]The explosive damage scales based on the firerate of the gun, but the size of the explosion is constant between weapons.\n",
@@ -4926,6 +5361,8 @@
             "tier": "Master",
             "prettyname": "[MASTER]Demolition Ammo Marksman Pistol[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Part of the 'Demolition Ammo' series of ballistic weapons, this Marksman Pistol fires explosive rounds that detonate on impact, \n",
                 "[WHITE]heavily damaging the target and dealing splash damage to any hostiles in the immediate vicinity.\n",
@@ -4948,6 +5385,8 @@
             "tier": "Master",
             "prettyname": "[MASTER]Demolition Ammo Handcannon[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Part of the 'Demolition Ammo' series of ballistic weapons, this Handcannon fires explosive rounds that detonate on impact, \n",
                 "[WHITE]heavily damaging the target and dealing splash damage to any hostiles in the immediate vicinity.\n",
@@ -4970,8 +5409,10 @@
             "tier": "Master",
             "prettyname": "[MASTER]Demolition Ammo Minigun[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
-                "[DARKGRAY]Spits enough lead into the air to be considered an environmental hazard.[END]\n",
+                "[DARKGRAY][INNERQUOTE]Spits enough lead into the air to be considered an environmental hazard.[INNERQUOTE][END]\n",
                 "[WHITE]Part of the 'Demolition Ammo' series of ballistic weapons, this Minigun fires explosive rounds that detonate on impact, \n",
                 "[WHITE]heavily damaging the target and dealing splash damage to any hostiles in the immediate vicinity.\n",
                 "[WHITE]The explosive damage scales based on the firerate of the gun, but the size of the explosion is constant between weapons.\n",
@@ -4993,6 +5434,8 @@
             "tier": "Master",
             "prettyname": "[MASTER]Demolition Ammo Uzi[END]",
             "capacity": "ZERO_MOD_CAPACITY",
+            "stats": [
+            ],
             "description": [
                 "[WHITE]Part of the 'Demolition Ammo' series of ballistic weapons, this Uzi fires explosive rounds that detonate on impact, \n",
                 "[WHITE]heavily damaging the target and dealing splash damage to any hostiles in the immediate vicinity.\n",

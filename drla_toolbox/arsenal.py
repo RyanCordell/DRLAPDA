@@ -224,7 +224,8 @@ it\'s specifically compiled and any changes may be lost.
 
         for weapon in weapons:
             weapon: dict[str, Any]
-            weapon_description = []
+            weapon_description: list[str] = []
+            weapon_stats: list[str] = []
             weapon_s_description = []
             weapon_mods = []
             # weaponArtifacts = ''
@@ -277,6 +278,18 @@ f'''"RL{weapon["name"]}",
                         master_mod_max += 1
                     case _:
                         pass
+
+            if "stats" in weapon:
+                stats_len = len(weapon["stats"])
+                if stats_len > 1:
+                    for i, stats_fragment in enumerate(weapon["stats"]):
+                        stats_fragment: str = stats_fragment.replace("\n", "/n")
+                        weapon_stats.append(f'"{stats_fragment}"')
+
+                        if i < stats_len - 1:
+                            weapon_stats.append("\n")
+
+                    weapon["actualStats"] = "".join(weapon_stats)
 
             if "description" in weapon:
                 desc_len = len(weapon["description"])
@@ -754,7 +767,12 @@ str DRLA_ArmorSetList[DRLA_ARMORSETMAX] = {{
             fragment.append(f'''PDA_WEAPON_{bigname}_FLATNAME = "{weapon['flatname']}";\n''')
         if "actualDescription" in weapon:
             # Note to future self: Don't try to add quote marks here, they're already handled elsewhere.
-            fragment.append(f'''PDA_WEAPON_{bigname}_DESC = {weapon['actualDescription']};\n''')
+            if "actualStats" in weapon:
+                fragment.append(f'''PDA_WEAPON_{bigname}_DESC = {weapon['actualStats']}\n''')
+                fragment.append(f'''"/n/n"\n''')
+                fragment.append(f'''{weapon['actualDescription']};\n''')
+            else:
+                fragment.append(f'''PDA_WEAPON_{bigname}_DESC = {weapon['actualDescription']};\n''')
         if "specialpretty" in weapon:
             fragment.append(f'''PDA_WEAPON_{bigname}DEMONARTIFACTS_NAME = "{weapon['specialpretty']}";\n''')
         if "specialdesc" in weapon:
