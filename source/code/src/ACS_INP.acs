@@ -50,6 +50,8 @@ SCRIPT "PDA_MouseController" (void)
 
     while (PDA_Local.active)
     {
+        // bool noPrescale = GetCVar("m_noprescale");
+
                                      buttons[PlayerNumber()] = GetPlayerInput(ACTIVATOR, INPUT_BUTTONS);
         PDA_LocalMouse.oldState = oldbuttons[PlayerNumber()] = GetPlayerInput(ACTIVATOR, INPUT_OLDBUTTONS);
           
@@ -57,8 +59,6 @@ SCRIPT "PDA_MouseController" (void)
         
         PDA_LocalMouse.m1 = (buttons[PlayerNumber()] & (_ACTION)) ? true : false;
         PDA_LocalMouse.m2 = (buttons[PlayerNumber()] & (_BACK))   ? true : false;
-
-        log("buttons (m1) %d: | bt_a %d: | bt_u %d: | _act %d:", buttons[PlayerNumber()], buttons[PlayerNumber()] & BT_ATTACK, buttons[PlayerNumber()] & BT_USE, buttons[PlayerNumber()] & (_ACTION));
 
         // kd: I AM REINFORCEMENTS FROM A DIFFERENT DIMENSION
         fixed mouse_sensitivity    = GetOddSensitivityCVarFixed("mouse_sensitivity", 1.0);
@@ -79,6 +79,7 @@ SCRIPT "PDA_MouseController" (void)
         */
         fixed playerX = GetPlayerInputFixed(ACTIVATOR, INPUT_YAW)   - (GetPlayerInputFixed(ACTIVATOR, INPUT_SIDEMOVE)    / PDA_X_sensitivity);
         fixed playerY = GetPlayerInputFixed(ACTIVATOR, INPUT_PITCH) + (GetPlayerInputFixed(ACTIVATOR, INPUT_FORWARDMOVE) / PDA_Y_sensitivity);
+
 
         PDA_LocalMouse.x -= (playerX << PDA_X_sensitivity) * xScale;
 
