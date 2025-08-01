@@ -2110,6 +2110,7 @@
             "prettyname": "[BASIC]Silenced Pistol[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: ((1~5)d6)\n"
             ],
             "description": [
                 "[WHITE]The sound supressor atttached to this pistol was designed to last thousands of firings, possible through a series of engineering breakthroughs \n",
@@ -2132,6 +2133,7 @@
             "prettyname": "[BASIC]Stealth Rifle[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: ((1~5)d5)\n"
             ],
             "description": [
                 "[WHITE]A silenced, rapid-fire rifle, the best thing for quickly taking down an unaware target before they can react or retaliate.\n",
@@ -2154,6 +2156,7 @@
             "prettyname": "[BASIC]Shredder Pistol[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 4 x (6d3)\n"
             ],
             "description": [
                 "[WHITE]This handgun takes standard 12- gauge shells and fires each of the pellets contained within in a single consecutive burst, but must be reloaded after each firing."
@@ -2175,6 +2178,7 @@
             "prettyname": "[BASIC]Shredder Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 20 x (5d3) || 2 x (50~150) || 2 x (5d3)\n"
             ],
             "description": [
                 "[WHITE]One of the newest scatterguns from Ballistic Weapons Division, the Shredder Shotgun showcases a number of advancements in shell-based weaponry.\n",
@@ -2200,6 +2204,7 @@
             "prettyname": "[BASIC]Revolver[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (20d3)\n"
             ],
             "description": [
                 "[WHITE]This truly ancient weapon still fares admirably against Hell's forces.\n",
@@ -2222,6 +2227,7 @@
             "prettyname": "[BASIC]Elephant Gun[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: ((18~22)d5)\n"
             ],
             "description": [
                 "[WHITE]Originally developed in centuries past when the hunting of lions and bears was still legal, the Elephant Gun has experienced \n",
@@ -2245,6 +2251,7 @@
             "prettyname": "[BASIC]Gatling Gun[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (8d3)\n"
             ],
             "description": [
                 "[WHITE]The gatling gun remains one of the oldest types of rapid-fire weapon, but this UAC-developed model boasts a level of portability, \n",
@@ -2267,6 +2274,7 @@
             "prettyname": "[BASIC]Micro Launcher[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (20d8) + <160>\n"
             ],
             "description": [
                 "[WHITE]True to its name, the Micro Launcher is a variant of the standard Rocket Launcher designed to be more compact, decreasing the time to ready the weapon, load it, and fire it.\n",
@@ -2289,6 +2297,7 @@
             "prettyname": "[BASIC]Tactical Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 7 x (5d3)\n"
             ],
             "description": [
                 "[WHITE]This scattergun holds as many shells as a Combat Shotgun, but in a magazine that makes for shorter reload times. With the main weakness of the Combat Shotgun removed, \n",
@@ -2311,6 +2320,7 @@
             "prettyname": "[BASIC]Flamethrower[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (1) + (19 x <5>)\n"
             ],
             "description": [
                 "[WHITE]Converting the basic frame and the flammable gel used in the Napalm Launcher allows you to use it as a powerful flamethrower, cooking enemies with less danger to yourself than from an exploding rocket.\n",
@@ -2334,6 +2344,7 @@
             "prettyname": "[BASIC]Sniper Rifle[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: ((4~6)d32)\n"
             ],
             "description": [
                 "[WHITE]A tried and tested weapon, the Sniper Rifle is the perfect choice for taking down targets at long range.\n",
@@ -2356,6 +2367,7 @@
             "prettyname": "[BASIC]Shrapnel Cannon[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 9 x (8)!\n"
             ],
             "description": [
                 "[WHITE]An extremely odd weapon, this gun detonates rockets within itself, and uses the explosive force to launch the rocket casing fragments out the barrel at your enemies.\n",
@@ -2378,6 +2390,7 @@
             "prettyname": "[BASIC]Nuclear Plasma Revolver[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (20d8)\n"
             ],
             "description": [
                 "[WHITE]While bearing the shape of an old weapon, the interior is state of the art.\n",
@@ -2401,6 +2414,7 @@
             "prettyname": "[BASIC]Heavy Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 10 x ((2~3)d5)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]A 12g shotgun -- you gotta love its spread.[INNERQUOTE][END]\n",
@@ -2424,6 +2438,7 @@
             "prettyname": "[BASIC]Heavy Combat Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 10 x ((2~3)*5) - 1\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]Nothing beats the sound of pumping a combat shotgun.[INNERQUOTE][END]\n",
@@ -2447,6 +2462,7 @@
             "prettyname": "[BASIC]Heavy Double Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 29 x ((2~3)d5)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]Double barreled shotgun -- the perfect weapon for a desperado.[INNERQUOTE][END]\n",
@@ -2471,6 +2487,7 @@
             "prettyname": "[BASIC]Heavy Super Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 26 x ((2~3)d5)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]After the first hellish invasion, weapon engineers designed the super shotgun as the world's first firearm designed to kill demons. And boy does it.[INNERQUOTE][END]\n",
@@ -2494,6 +2511,7 @@
             "prettyname": "[BASIC]Heavy Assault Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 10 x ((2~3)d5) - 1\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]Big, bad and ugly.[INNERQUOTE][END]\n",
@@ -2517,6 +2535,7 @@
             "prettyname": "[BASIC]Heavy Plasma Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 7 x ((2~7)d5)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]Plasma Shotgun, the best of both worlds![INNERQUOTE][END]\n",
@@ -2540,6 +2559,7 @@
             "prettyname": "[BASIC]Heavy Hunting Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 26 x ((2~3)d6)\n"
             ],
             "description": [
                 "[WHITE]A bigger, badder version of the Hunting Shotgun, this gun is the final thing most chump demons will see.\n",
@@ -2563,6 +2583,7 @@
             "prettyname": "[BASIC]Nanoedge Chainsaw[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (3d8)\n"
             ],
             "description": [
                 "[WHITE]Even exotic alloys have their limits, as Marines using melee weapons quickly discovered.\n",
@@ -2587,6 +2608,7 @@
             "prettyname": "[BASIC]High Power Pistol[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (6d6)\n"
             ],
             "description": [
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Pistol is tuned for greater damage per bullet, without sacrificing accuracy.\n",
@@ -2609,6 +2631,7 @@
             "prettyname": "[BASIC]High Power Chaingun[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (6d6)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]Chaingun directs heavy firepower onto your opponent making him do the chaingun cha-cha.[INNERQUOTE][END]\n",
@@ -2632,6 +2655,7 @@
             "prettyname": "[BASIC]High Power Battle Rifle[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (6d5)\n"
             ],
             "description": [
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Battle Rifle is tuned for greater damage per bullet, without sacrificing accuracy.\n",
@@ -2654,6 +2678,7 @@
             "prettyname": "[BASIC]High Power Plasma Rifle[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (12d5)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]A plasma rifle shoots multiple rounds of plasma energy -- frying some demon butt![INNERQUOTE][END]\n",
@@ -2677,6 +2702,7 @@
             "prettyname": "[BASIC]High Power BFG 9000[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (200d8) + (40d8 x 15)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]The Big Fucking Gun. Hell wouldn't be so fun without it.[INNERQUOTE][END]\n",
@@ -2700,6 +2726,7 @@
             "prettyname": "[BASIC]High Power Blaster[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (10d6)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]This is the standard issue rechargeable energy side-arm. Cool![INNERQUOTE][END]\n",
@@ -2723,6 +2750,7 @@
             "prettyname": "[BASIC]High Power Combat Pistol[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (6d7)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]This is the kind of handgun given to your superiors. Doesn't look like they're using it right now...[INNERQUOTE][END]\n",
@@ -2746,6 +2774,7 @@
             "prettyname": "[BASIC]High Power Marksman Pistol[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 24 + (1d6)\n"
             ],
             "description": [
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Marksman Pistol is tuned for greater damage per bullet, without sacrificing accuracy.\n",
@@ -2768,6 +2797,7 @@
             "prettyname": "[BASIC]High Power Handcannon[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (6d11)\n"
             ],
             "description": [
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Handcannon is tuned for greater damage per bullet, without sacrificing accuracy.\n",
@@ -2790,6 +2820,7 @@
             "prettyname": "[BASIC]High Power Tristar Blaster[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 3 x (12d12) + <160>\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]Now this is a weird weapon.[INNERQUOTE][END]\n",
@@ -2813,6 +2844,7 @@
             "prettyname": "[BASIC]High Power Minigun[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (6d4)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]Spits enough lead into the air to be considered an environmental hazard.[INNERQUOTE][END]\n",
@@ -2836,6 +2868,7 @@
             "prettyname": "[BASIC]High Power Laser Rifle[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (10d5)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]With no recoil and pinpoint accuracy, it takes a world-class moron to miss while using a laser rifle.[INNERQUOTE][END]\n",
@@ -2859,6 +2892,7 @@
             "prettyname": "[BASIC]High Power Nuclear Plasma Pistol[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (12d5)\n"
             ],
             "description": [
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Nuclear Plasma Pistol is tuned for greater damage per bolt, without sacrificing accuracy.\n",
@@ -2881,6 +2915,7 @@
             "prettyname": "[BASIC]High Power Nuclear Plasma Rifle[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (12d5)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]A self-charging plasma rifle -- too bad it can't be manually reloaded.[INNERQUOTE][END]\n",
@@ -2904,6 +2939,7 @@
             "prettyname": "[BASIC]High Power Nuclear BFG 9000[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (200d8) + (40d8 x 15)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]A self-charging BFG9000! How much more lucky can you get?[INNERQUOTE][END]\n",
@@ -2929,6 +2965,7 @@
             "prettyname": "[BASIC]High Power Uzi[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (6d5)\n"
             ],
             "description": [
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Uzi is tuned for greater damage per bullet, without sacrificing accuracy.\n",
@@ -2951,6 +2988,7 @@
             "prettyname": "[BASIC]High Power Vanguard Rifle[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (6d7)\n"
             ],
             "description": [
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Vanguard Rifle is tuned for greater damage per bullet, without sacrificing accuracy.\n",
@@ -2973,6 +3011,7 @@
             "prettyname": "[BASIC]High Power Marksman Rifle[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 21 + (1d6)\n"
             ],
             "description": [
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Marksman Rifle is tuned for greater damage per bullet, without sacrificing accuracy.\n",
@@ -2995,6 +3034,7 @@
             "prettyname": "[BASIC]High Power Hunting Revolver[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (6d30)\n"
             ],
             "description": [
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Hunting Revolver is tuned for greater damage per bullet, without sacrificing accuracy.\n",
@@ -3017,6 +3057,7 @@
             "prettyname": "[BASIC]High Power Thompson[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (6d6)\n"
             ],
             "description": [
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this Tommygun is tuned for greater damage per bullet, without sacrificing accuracy.\n",
@@ -3039,6 +3080,7 @@
             "prettyname": "[BASIC]High Power PP7[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (6d10)\n"
             ],
             "description": [
                 "[WHITE]Part of the 'High-Power' line of UAC weapons, this PP7 is tuned for greater damage per bullet, without sacrificing accuracy.\n",
@@ -3061,6 +3103,7 @@
             "prettyname": "[BASIC]RC-P120[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (6d6)\n"
             ],
             "description": [
                 "[WHITE]A powerful submachinegun from advanced tech manufacturer Chesluk Industries, the RC-P120 is a monstrous bullethose that can unleash \n",
@@ -3086,6 +3129,7 @@
             "prettyname": "[BASIC]Plasmatic Shrapnel Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 7 x (5d3) + <8>\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]A 12g shotgun -- you gotta love its spread.[INNERQUOTE][END]\n",
@@ -3109,6 +3153,7 @@
             "prettyname": "[BASIC]Plasmatic Shrapnel Combat Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 7 x ((5d3) - 1) + <8>\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]Nothing beats the sound of pumping a combat shotgun.[INNERQUOTE][END]\n",
@@ -3132,6 +3177,7 @@
             "prettyname": "[BASIC]Plasmatic Shrapnel Double Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 14 x (5d3) + <8>\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]Double barreled shotgun -- the perfect weapon for a desperado.[INNERQUOTE][END]\n",
@@ -3155,6 +3201,7 @@
             "prettyname": "[BASIC]Plasmatic Shrapnel Super Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 20 x (5d3) + <8>\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]After the first hellish invasion, weapon engineers designed the super shotgun as the world's first firearm designed to kill demons. And boy does it.[INNERQUOTE][END]\n",
@@ -3178,6 +3225,7 @@
             "prettyname": "[BASIC]Plasmatic Shrapnel Assault Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 7 x ((5d3) - 1) + <8>\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]Big, bad and ugly.[INNERQUOTE][END]\n",
@@ -3201,6 +3249,7 @@
             "prettyname": "[BASIC]Plasmatic Shrapnel Plasma Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 7 x (5d5) + <1>\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]Plasma Shotgun, the best of both worlds![INNERQUOTE][END]\n",
@@ -3224,6 +3273,7 @@
             "prettyname": "[BASIC]Plasmatic Shrapnel Hunting Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 20 x (6d3) + <8>\n"
             ],
             "description": [
                 "[WHITE]Despite its exterior, this Hunting Shotgun is part of the 'Plasmatic' line of UAC weapons, a series of scatterguns which take standard shells and convert \n",
@@ -3246,6 +3296,7 @@
             "prettyname": "[BASIC]Plasma Splitter[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: ???\n"
             ],
             "description": [
                 "[WHITE]A plasma rifle designed to refract its energy blasts all over the place, resulting in a spectacular but largely inefficient display of firepower.\n",
@@ -3268,6 +3319,7 @@
             "prettyname": "[BASIC]Laser Splitter[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: ???\n"
             ],
             "description": [
                 "[WHITE]A laser rifle designed to refract its energy blasts all over the place, resulting in a spectacular but largely inefficient display of firepower.\n",
@@ -3290,6 +3342,7 @@
             "prettyname": "[BASIC]Nuclear Plasma Splitter[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: ???\n"
             ],
             "description": [
                 "[WHITE]A nuclear plasma rifle designed to refract its energy blasts all over the place, resulting in a spectacular but largely inefficient display of firepower.\n",
@@ -3312,6 +3365,7 @@
             "prettyname": "[ADVANCED]Double Chainsaw[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 2 x (6d8)\n"
             ],
             "description": [
                 "[WHITE]If one's good, two's even better.\n",
