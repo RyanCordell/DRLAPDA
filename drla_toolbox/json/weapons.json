@@ -1766,7 +1766,7 @@
             "prettyname": "[DEMONIC]Deaths Gaze[END]",
             "capacity": "FOUR_MOD_CAPACITY",
             "stats": [
-                "[RED]Base Damage[END]: (10 * 5~6)\n"
+                "[RED]Base Damage[END]: (10 * (5 ~ 6))\n"
             ],
             "description": [
                 "[WHITE]A magnum that's been corrupted to the point that its actually become a demon itself, it seeks bloodshed and suffering to sustain itself.\n",
@@ -1796,7 +1796,7 @@
             "prettyname": "[DEMONIC]Hells Reign[END]",
             "capacity": "FOUR_MOD_CAPACITY",
             "stats": [
-                "[RED]Base Damage[END]: 6 x (20 * 3~5)\n"
+                "[RED]Base Damage[END]: 6 x (20 * (3 ~ 5))\n"
             ],
             "description": [
                 "[WHITE]This plasma weapon appears to have been partially transformed by exposure to hellish energies, causing it to fire a cluster of energy \n",
@@ -1825,7 +1825,7 @@
             "prettyname": "[DEMONIC]Soulstorm Rifle[END]",
             "capacity": "FOUR_MOD_CAPACITY",
             "stats": [
-                "[RED]Base Damage[END]: (20~24)\n"
+                "[RED]Base Damage[END]: (20 ~ 24)\n"
             ],
             "description": [
                 "[WHITE]A heavily corrupted UAC rifle, this weapon appears to be powered by the souls of the dead.\n",
@@ -1855,7 +1855,7 @@
             "prettyname": "[DEMONIC]Unmaker[END]",
             "capacity": "FOUR_MOD_CAPACITY",
             "stats": [
-                "[RED]Base Damage[END]: (111 * 1~6)\n"
+                "[RED]Base Damage[END]: (111 * 1d6)\n"
             ],
             "description": [
               "[WHITE]What the [DEMONIC]!@#%*[END][WHITE] is this!?[END]"
@@ -2110,7 +2110,7 @@
             "prettyname": "[BASIC]Silenced Pistol[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
-                "[RED]Base Damage[END]: ((1~5)d6)\n"
+                "[RED]Base Damage[END]: (6d5)\n"
             ],
             "description": [
                 "[WHITE]The sound supressor atttached to this pistol was designed to last thousands of firings, possible through a series of engineering breakthroughs \n",
@@ -2133,7 +2133,7 @@
             "prettyname": "[BASIC]Stealth Rifle[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
-                "[RED]Base Damage[END]: ((1~5)d5)\n"
+                "[RED]Base Damage[END]: (5d5)\n"
             ],
             "description": [
                 "[WHITE]A silenced, rapid-fire rifle, the best thing for quickly taking down an unaware target before they can react or retaliate.\n",
@@ -2178,7 +2178,7 @@
             "prettyname": "[BASIC]Shredder Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
-                "[RED]Base Damage[END]: 20 x (5d3) || 2 x (50~150) || 2 x (5d3)\n"
+                "[RED]Base Damage[END]: 20 x (5d3) || 2 x (50 ~ 150) || 2 x (5d3)\n"
             ],
             "description": [
                 "[WHITE]One of the newest scatterguns from Ballistic Weapons Division, the Shredder Shotgun showcases a number of advancements in shell-based weaponry.\n",
@@ -2227,7 +2227,7 @@
             "prettyname": "[BASIC]Elephant Gun[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
-                "[RED]Base Damage[END]: ((18~22)d5)\n"
+                "[RED]Base Damage[END]: ((18 ~ 22)d5)\n"
             ],
             "description": [
                 "[WHITE]Originally developed in centuries past when the hunting of lions and bears was still legal, the Elephant Gun has experienced \n",
@@ -2344,7 +2344,7 @@
             "prettyname": "[BASIC]Sniper Rifle[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
-                "[RED]Base Damage[END]: ((4~6)d32)\n"
+                "[RED]Base Damage[END]: ((4 ~ 6)d32)\n"
             ],
             "description": [
                 "[WHITE]A tried and tested weapon, the Sniper Rifle is the perfect choice for taking down targets at long range.\n",
@@ -2414,7 +2414,7 @@
             "prettyname": "[BASIC]Heavy Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
-                "[RED]Base Damage[END]: 10 x ((2~3)d5)\n"
+                "[RED]Base Damage[END]: 10 x ((2 ~ 3)d5)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]A 12g shotgun -- you gotta love its spread.[INNERQUOTE][END]\n",
@@ -2438,7 +2438,7 @@
             "prettyname": "[BASIC]Heavy Combat Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
-                "[RED]Base Damage[END]: 10 x ((2~3)*5) - 1\n"
+                "[RED]Base Damage[END]: 10 x ((2 ~ 3)d5) - 1\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]Nothing beats the sound of pumping a combat shotgun.[INNERQUOTE][END]\n",
@@ -2462,7 +2462,7 @@
             "prettyname": "[BASIC]Heavy Double Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
-                "[RED]Base Damage[END]: 29 x ((2~3)d5)\n"
+                "[RED]Base Damage[END]: 29 x ((2 ~ 3)d5)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]Double barreled shotgun -- the perfect weapon for a desperado.[INNERQUOTE][END]\n",
@@ -2487,7 +2487,7 @@
             "prettyname": "[BASIC]Heavy Super Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
-                "[RED]Base Damage[END]: 26 x ((2~3)d5)\n"
+                "[RED]Base Damage[END]: 26 x ((2 ~ 3)d5)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]After the first hellish invasion, weapon engineers designed the super shotgun as the world's first firearm designed to kill demons. And boy does it.[INNERQUOTE][END]\n",
@@ -2511,7 +2511,7 @@
             "prettyname": "[BASIC]Heavy Assault Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
-                "[RED]Base Damage[END]: 10 x ((2~3)d5) - 1\n"
+                "[RED]Base Damage[END]: 10 x ((2 ~ 3)d5) - 1\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]Big, bad and ugly.[INNERQUOTE][END]\n",
@@ -2535,7 +2535,7 @@
             "prettyname": "[BASIC]Heavy Plasma Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
-                "[RED]Base Damage[END]: 7 x ((2~7)d5)\n"
+                "[RED]Base Damage[END]: 7 x ((2 ~ 7)d5)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]Plasma Shotgun, the best of both worlds![INNERQUOTE][END]\n",
@@ -2559,7 +2559,7 @@
             "prettyname": "[BASIC]Heavy Hunting Shotgun[END]",
             "capacity": "TWO_MOD_CAPACITY",
             "stats": [
-                "[RED]Base Damage[END]: 26 x ((2~3)d6)\n"
+                "[RED]Base Damage[END]: 26 x ((2 ~ 3)d6)\n"
             ],
             "description": [
                 "[WHITE]A bigger, badder version of the Hunting Shotgun, this gun is the final thing most chump demons will see.\n",
@@ -4601,6 +4601,7 @@
             "prettyname": "[MASTER]Ripper[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (2d8)\n"
             ],
             "description": [
                 "[WHITE]After seeing how useful standard commercially-available chainsaws proved against demons, the UAC set about making one specifically \n",
@@ -4629,6 +4630,7 @@
             "prettyname": "[MASTER]Biggest Fucking Gun[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (250d8) + (100d8 x 20) + <1152>\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]The Big Fucking Gun. Hell wouldn't be so fun without it.[INNERQUOTE][END]\n",
@@ -4655,6 +4657,7 @@
             "prettyname": "[MASTER]Biggest Fucking Nuclear Gun[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (250d8) + (100d8 x 20) + <1152>\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]A self-charging BFG9000! How much more lucky can you get?[INNERQUOTE][END]\n",
@@ -4681,6 +4684,7 @@
             "prettyname": "[MASTER]Mother-In-Law[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (300) + <0...64000>\n"
             ],
             "description": [
                 "[GOLD]''Three feet of death to anything in its path. That's my Mother-In-Law''[INNERQUOTE][END]\n",
@@ -4708,6 +4712,7 @@
             "prettyname": "[MASTER]Autocannon[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (150) + <128>\n"
             ],
             "description": [
                 "[WHITE]The Autocannon's design might imply that it's a rapid-fire weapon similar to the Chaingun or Minigun, but the Autocannon is a different beast altogether.\n",
@@ -4731,6 +4736,7 @@
             "prettyname": "[MASTER]Plasma Refractor[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 36 x (50)\n"
             ],
             "description": [
                 "[WHITE]The Plasma Refractor fires a beam of incredible potency, which splits upon contact with a surface, creating smaller projectiles that arc outwards from the original shot.\n",
@@ -4756,6 +4762,7 @@
             "prettyname": "[MASTER]Megaton Shotgun[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (20d3) + 13 x (6d3)\n"
             ],
             "description": [
                 "[WHITE]The king of assault weapons, the Megaton is a triple-barrelled shotgun that contains 9 shots internally.\n",
@@ -4779,6 +4786,7 @@
             "prettyname": "[MASTER]Conqueror Shotgun[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 10 x ((2 ~ 5)d3)\n"
             ],
             "description": [
                 "[WHITE]A mag-based monster of a shotgun, the Conqueror is aptly name. all fall before the one wielding this gun.\n",
@@ -4803,10 +4811,13 @@
             "prettyname": "[MASTER]Cluster Bomb Launcher[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (25d8) + <256> + <33 x <<6 x 96> + <4 x 94> + <2 x 94>> + <4 x 94> + <7 x 94> + <7 x 94>\n"
             ],
             "description": [
                 "[WHITE]This devastating anti-materiel weapon fires a projectile packed with multiple bomblets, which will streak outwards on impact, \n",
-                "[WHITE]dealing even more damage to any hostiles unfortunate enough to be in their path."
+                "[WHITE]dealing even more damage to any hostiles unfortunate enough to be in their path.\n",
+                "\n",
+                "[WHITE]Even the UAC's benchmarking team have a hard time detailing the monster frisbee damage potential of this weapon.\n"
             ],
             "mods": {
                 "bulk": "PDA_MODS_BULKMOD_UNMODDABLE",
@@ -4825,6 +4836,7 @@
             "prettyname": "[MASTER]Gauss Rifle[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: ((300 ~ 400)...(1300 ~ 1400))\n"
             ],
             "description": [
                 "[WHITE]A companion to the original Railgun, the Gauss Rifle uses magnetic rail technology to accelerate matter streams at the target.\n",
@@ -4850,11 +4862,12 @@
             "prettyname": "[MASTER]Anti-materiel Rifle[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 6 x (100)\n"
             ],
             "description": [
                 "[WHITE]Originally designed to pierce reinforced installations and decimate stationary weaponry, the Anti-materiel Rifle has been given a new lease on life with the demonic invasion.\n",
                 "[WHITE]Its high-explosive frangible rounds have proven highly effective on demon types that have assimilated UAC weaponry and defense systems.\n",
-                "[WHITE]Those intending to use the Anti-Materiel Rifle should keep in mind that it is a bolt-action rifl. the spent casing must be manually ejected after firing, \n",
+                "[WHITE]Those intending to use the Anti-Materiel Rifle should keep in mind that it is a bolt-action rifle. the spent casing must be manually ejected after firing, \n",
                 "[WHITE]making it highly inadvisable for use in crowd control and close-range firefights."
             ],
             "mods": {
@@ -4874,6 +4887,7 @@
             "prettyname": "[MASTER]Zeus Cannon[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (10d8) + <60> + <256>\n"
             ],
             "description": [
                 "[WHITE]Originally a fork of the BFG program, the team responsible for the weapon discovered that demonic biosignatures can conduct energy on various wavelengths.\n",
@@ -4900,6 +4914,7 @@
             "prettyname": "[MASTER]Voltgun[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 37 x (3d5) + 7 x (3d5)\n"
             ],
             "description": [
                 "[WHITE]In an accident while developing the Plasma Shotgun Mk.II, the weapon's plasma focusers overloaded, and it unleashed pure electrical current \n",
@@ -4926,6 +4941,7 @@
             "prettyname": "[MASTER]Super Machinegun[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (25d3)\n"
             ],
             "description": [
                 "[WHITE]Originally designed to be mounted on tripods or vehicles, the Super Machinegun features a colossal magazine and fires \n",
@@ -4949,6 +4965,7 @@
             "prettyname": "[MASTER]Energysaw[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (5d6...5d10)\n"
             ],
             "description": [
                 "[WHITE]Energy-based melee weaponry was a mainstay of science fiction of the distant past, but the UAC's Energysaw makes fantasy into brutal reality.\n",
@@ -4973,6 +4990,7 @@
             "prettyname": "[MASTER]Plascharge Launcher[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (20d8) + <384> + 25 x <30...>\n"
             ],
             "description": [
                 "[WHITE]Rather than use traditional explosive charges, the Plascharge Launcher fires a modified rocket containing a multi-plasmatic warhead.\n",
@@ -4998,6 +5016,7 @@
             "prettyname": "[MASTER]Plasma Cannon[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (20d8) + <256> + 40 x <3d3>\n"
             ],
             "description": [
                 "[WHITE]The UAC's Plasma Rifle program was a true game-changer for the company, spawning research into many types of energy-based weaponry.\n",
@@ -5024,6 +5043,7 @@
             "prettyname": "[MASTER]Heavy Pulse Blaster[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (7d4...7d42)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]This is the standard issue rechargeable energy side-arm. Cool![INNERQUOTE][END]\n",
@@ -5049,6 +5069,7 @@
             "prettyname": "[MASTER]Laser Minigun[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (7d5)\n"
             ],
             "description": [
                 "[WHITE]Foreseeing a need for more high-firerate laser weaponry following the release of the Laser Rifle, the latter's development team set to work \n",
@@ -5075,6 +5096,7 @@
             "prettyname": "[MASTER]Defence Drone Launcher[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 1...3 x (6)\n"
             ],
             "description": [
                 "[WHITE]Designed for solo operatives in need of additional fire support, the Defense Drone Launcher expends the propellant from a collection of standard rockets \n",
@@ -5099,6 +5121,7 @@
             "prettyname": "[MASTER]Incineration Device Launcher[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (3) + <95> + <128>\n"
             ],
             "description": [
                 "[WHITE]This bulky launcher contains one of the newest, and possibly the most bizzare of the UAC Weapons Department's contributions to the war. a rocket-propelled plasma 'flamethrower'.\n",
@@ -5122,6 +5145,7 @@
             "prettyname": "[MASTER]Nanomachic Pistol[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (6d3)\n"
             ],
             "description": [
                 "[WHITE]This Pistol's magazine is replaced with an ammo manufacturing nano-assembler that builds compatible pistol rounds over time from inorganic debris.\n",
@@ -5145,6 +5169,7 @@
             "prettyname": "[MASTER]Nanomachic Chaingun[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (6d3)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]Chaingun directs heavy firepower onto your opponent making him do the chaingun cha-cha.[INNERQUOTE][END]\n",
@@ -5169,6 +5194,7 @@
             "prettyname": "[MASTER]Nanomachic Battle Rifle[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (5d3)\n"
             ],
             "description": [
                 "[WHITE]This Battle Rifle's magazine is replaced with an ammo manufacturing nano-assembler that builds compatible rifle rounds over time from inorganic debris.\n",
@@ -5192,6 +5218,7 @@
             "prettyname": "[MASTER]Nanomachic Rocket Launcher[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (20d8) + <256>\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]The rocket launcher is the most standard way of blowing things up.[INNERQUOTE][END]\n",
@@ -5216,6 +5243,10 @@
             "prettyname": "[MASTER]Nanomachic Plasma Rifle[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[ORANGE]Fire rate[END]: 3 tics +/- 18 tics (0.08s +/- 0.5)\n",
+                "[RED]Base Damage[END]: (5d8)\n",
+                "[YELLOW]Reload[END]: N/A\n",
+                "[DARKGREEN]Spread[END]: 1 x 0\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]A plasma rifle shoots multiple rounds of plasma energy -- frying some demon butt![INNERQUOTE][END]\n",
@@ -5240,6 +5271,7 @@
             "prettyname": "[MASTER]Nanomachic Blaster[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (7d6)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]This is the standard issue rechargeable energy side-arm. Cool![INNERQUOTE][END]\n",
@@ -5264,6 +5296,7 @@
             "prettyname": "[MASTER]Nanomachic Combat Pistol[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (7d3)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]This is the kind of handgun given to your superiors. Doesn't look like they're using it right now...[INNERQUOTE][END]\n",
@@ -5288,6 +5321,7 @@
             "prettyname": "[MASTER]Nanomachic Marksman Pistol[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (21 + 1d3)\n"
             ],
             "description": [
                 "[WHITE]This Marksman Pistol's magazine is replaced with an ammo manufacturing nano-assembler that builds compatible pistol rounds over time from inorganic debris.\n",
@@ -5311,6 +5345,7 @@
             "prettyname": "[MASTER]Nanomachic Handcannon[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (11d3)\n"
             ],
             "description": [
                 "[WHITE]This Handcannon's magazine is replaced with an ammo manufacturing nano-assembler that builds compatible pistol rounds over time from inorganic debris.\n",
@@ -5334,6 +5369,7 @@
             "prettyname": "[MASTER]Nanomachic Tristar Blaster[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 3 x (12d8) + <128>\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]Now this is a weird weapon.[INNERQUOTE][END]\n",
@@ -5358,6 +5394,7 @@
             "prettyname": "[MASTER]Nanomachic Minigun[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (4d3)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]Spits enough lead into the air to be considered an environmental hazard.[INNERQUOTE][END]\n",
@@ -5382,6 +5419,7 @@
             "prettyname": "[MASTER]Nanomachic Missile Launcher[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (20d8) + <256>\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]A definitive upgrade to the rocket launcher.[INNERQUOTE][END]\n",
@@ -5406,6 +5444,7 @@
             "prettyname": "[MASTER]Nanomachic Napalm Launcher[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (20d8) + <128>\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]This will surely make a mess![INNERQUOTE][END]\n",
@@ -5430,6 +5469,7 @@
             "prettyname": "[MASTER]Nanomachic Laser Rifle[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (5d7)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]With no recoil and pinpoint accuracy, it takes a world-class moron to miss while using a laser rifle.[INNERQUOTE][END]\n",
@@ -5454,6 +5494,7 @@
             "prettyname": "[MASTER]Nanomachic Uzi[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (5d3)\n"
             ],
             "description": [
                 "[WHITE]This Uzi's magazine is replaced with an ammo manufacturing nano-assembler that builds compatible pistol rounds over time from inorganic debris.\n",
@@ -5477,6 +5518,7 @@
             "prettyname": "[MASTER]Demolition Ammo Pistol[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (6d3) + <140>\n"
             ],
             "description": [
                 "[WHITE]Part of the 'Demolition Ammo' series of ballistic weapons, this Pistol fires explosive rounds that detonate on impact, heavily damaging \n",
@@ -5501,6 +5543,7 @@
             "prettyname": "[MASTER]Demolition Ammo Chaingun[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (6d3) + <40>\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]Chaingun directs heavy firepower onto your opponent making him do the chaingun cha-cha.[INNERQUOTE][END]\n",
@@ -5526,6 +5569,7 @@
             "prettyname": "[MASTER]Demolition Ammo Battle Rifle[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (5d3) + <40>\n"
             ],
             "description": [
                 "[WHITE]Part of the 'Demolition Ammo' series of ballistic weapons, this Battle Rifle fires explosive rounds that detonate on impact, \n",
@@ -5550,6 +5594,7 @@
             "prettyname": "[MASTER]Demolition Ammo Combat Pistol[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (7d3) + <100>\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]This is the kind of handgun given to your superiors. Doesn't look like they're using it right now...[INNERQUOTE][END]\n",
@@ -5575,6 +5620,7 @@
             "prettyname": "[MASTER]Demolition Ammo Marksman Pistol[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (21 + 1d3) + <130>\n"
             ],
             "description": [
                 "[WHITE]Part of the 'Demolition Ammo' series of ballistic weapons, this Marksman Pistol fires explosive rounds that detonate on impact, \n",
@@ -5599,6 +5645,7 @@
             "prettyname": "[MASTER]Demolition Ammo Handcannon[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (11d3) + <190>\n"
             ],
             "description": [
                 "[WHITE]Part of the 'Demolition Ammo' series of ballistic weapons, this Handcannon fires explosive rounds that detonate on impact, \n",
@@ -5623,6 +5670,7 @@
             "prettyname": "[MASTER]Demolition Ammo Minigun[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (4d3) + <10>\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]Spits enough lead into the air to be considered an environmental hazard.[INNERQUOTE][END]\n",
@@ -5648,6 +5696,7 @@
             "prettyname": "[MASTER]Demolition Ammo Uzi[END]",
             "capacity": "ZERO_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (5d3) + <30>\n"
             ],
             "description": [
                 "[WHITE]Part of the 'Demolition Ammo' series of ballistic weapons, this Uzi fires explosive rounds that detonate on impact, \n",
