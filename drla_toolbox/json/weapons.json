@@ -3388,6 +3388,7 @@
             "prettyname": "[ADVANCED]Tactical Rocket Launcher[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (20d8) + <256>\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]The rocket launcher is the most standard way of blowing things up.[INNERQUOTE][END]\n",
@@ -3414,6 +3415,7 @@
             "prettyname": "[ADVANCED]Storm Pistol[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 2 x (6d3)\n"
             ],
             "description": [
                 "[WHITE]This Pistol is the first in the 'Storm' line of UAC weapons.\n",
@@ -3436,6 +3438,7 @@
             "prettyname": "[ADVANCED]Storm Combat Pistol[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 2 x (7d3)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]This is the kind of handgun given to your superiors. Doesn't look like they're using it right now...[INNERQUOTE][END]\n",
@@ -3459,6 +3462,7 @@
             "prettyname": "[ADVANCED]Storm Marksman Pistol[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 2 x (21 + 1d3)\n"
             ],
             "description": [
                 "[WHITE]This Marksman Pistol is part of the 'Storm' line of UAC weapons, firing a pair of pellets formed from bullets with each trigger pull.\n",
@@ -3481,6 +3485,7 @@
             "prettyname": "[ADVANCED]Storm Handcannon[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 2 x (11d3)\n"
             ],
             "description": [
                 "[WHITE]This Handcannon is part of the 'Storm' line of UAC weapons, firing a pair of pellets formed from bullets with each trigger pull.\n",
@@ -3503,6 +3508,7 @@
             "prettyname": "[ADVANCED]Dual Uzis[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 2? x (5d3)\n"
             ],
             "description": [
                 "[WHITE]Two pistols would spit more lead than one, and therefore two Uzis will unleash an almighty wall of lead at your foes.\n",
@@ -3525,6 +3531,7 @@
             "prettyname": "[ADVANCED]Storm Blaster[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 2 x (7d6)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]This is the standard issue rechargeable energy side-arm. Cool![INNERQUOTE][END]\n",
@@ -3548,6 +3555,7 @@
             "prettyname": "[ADVANCED]Storm Nuclear Plasma Pistol[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 2 x (6d8)\n"
             ],
             "description": [
                 "[WHITE]The last in the 'Storm' line of firearms became a rare cooperative effort between two teams at the Weapons Dept, resulting in a \n",
@@ -3570,6 +3578,7 @@
             "prettyname": "[ADVANCED]Plasma Pistol[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (14d8)\n"
             ],
             "description": [
                 "[WHITE]Experiments into creating scalar plasma weapon technology resulted in the Plasma Pistol.\n",
@@ -3592,6 +3601,7 @@
             "prettyname": "[ADVANCED]Plasma Combat Pistol[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (16d8)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]This is the kind of handgun given to your superiors. Doesn't look like they're using it right now...[INNERQUOTE][END]\n",
@@ -3615,6 +3625,7 @@
             "prettyname": "[ADVANCED]Plasma Marksman Pistol[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (70 + 1d3)\n"
             ],
             "description": [
                 "[WHITE]Not content with the original, the team that created the Plasma Pistol also released this Marksman version, \n",
@@ -3639,6 +3650,7 @@
             "prettyname": "[ADVANCED]Plasma Handcannon[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (26d8) \n"
             ],
             "description": [
                 "[WHITE]Never satisfied, the developers of the Plasma Pistol and Plasma Combat Pistol moved on to the Handcannon variant, \n",
@@ -3662,6 +3674,7 @@
             "prettyname": "[ADVANCED]Plasma Uzi[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (10d8)\n"
             ],
             "description": [
                 "[WHITE]While not technically a submachine gun, as there are no moving parts involved in the firing mechanism, the Plasma Uzi has \n",
@@ -3685,6 +3698,7 @@
             "prettyname": "[ADVANCED]Overcharged Blaster[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (7d24)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]This is the standard issue rechargeable energy side-arm. Cool![INNERQUOTE][END]\n",
@@ -3709,6 +3723,7 @@
             "prettyname": "[ADVANCED]Supercharged Nuclear Plasma Pistol[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (15d8) + <10>\n"
             ],
             "description": [
                 "[WHITE]Another attempt to create energy based firearms as compact and deadly as possible resulted in this Plasma Pistol as redesigned by the Nuclear team.\n",
@@ -3732,6 +3747,7 @@
             "prettyname": "[ADVANCED]VBFG 9000[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (150d8) + (60d8 x 23)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]The Big Fucking Gun. Hell wouldn't be so fun without it.[INNERQUOTE][END]\n",
@@ -3757,6 +3773,7 @@
             "prettyname": "[ADVANCED]Nuclear VBFG 9000[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (150d8) + (60d8 x 23)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]A self-charging BFG9000! How much more lucky can you get?[INNERQUOTE][END]\n",
@@ -3779,6 +3796,7 @@
             "prettyname": "[ADVANCED]Focused Double Shotgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 14 x (7d3)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]Double barreled shotgun -- the perfect weapon for a desperado.[INNERQUOTE][END]\n",
@@ -3802,6 +3820,7 @@
             "prettyname": "[ADVANCED]Hyperblaster[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (5d8)\n"
             ],
             "description": [
                 "[WHITE]Despite the name, this isn't a Blaster variant, but instead a fork of the Plasma Rifle program, resulting in a weapon \n",
@@ -3825,6 +3844,7 @@
             "prettyname": "[ADVANCED]Bulletstorm Chaingun[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (8d3)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]Chaingun directs heavy firepower onto your opponent making him do the chaingun cha-cha.[INNERQUOTE][END]\n",
@@ -3850,6 +3870,7 @@
             "prettyname": "[ADVANCED]Bulletstorm Rifle[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (6d3)\n"
             ],
             "description": [
                 "[WHITE]In addition to the slight damage increase per-bullet over the standard Battle Rifle, the Bulletstorm Rifle's twin drum magazines \n",
@@ -3873,6 +3894,7 @@
             "prettyname": "[ADVANCED]Autoshotgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 7 x (5d3)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]Nothing beats the sound of pumping a combat shotgun.[INNERQUOTE][END]\n",
@@ -3897,6 +3919,7 @@
             "prettyname": "[ADVANCED]Auto Double Shotgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 14 x (5d3)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]Double barreled shotgun -- the perfect weapon for a desperado.[INNERQUOTE][END]\n",
@@ -3921,6 +3944,7 @@
             "prettyname": "[ADVANCED]Mini-missile Pistol[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (20d8) + <32>\n"
             ],
             "description": [
                 "[WHITE]An advancement of 20th-century 'Gyrojet' technology, this sidearm fires self-propelled explosives that retain a stable trajectory even at longer ranges."
@@ -3942,6 +3966,7 @@
             "prettyname": "[ADVANCED]Plasma Rifle Mk. II[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (15d8) + <6>\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]A plasma rifle shoots multiple rounds of plasma energy -- frying some demon butt![INNERQUOTE][END]\n",
@@ -3964,6 +3989,7 @@
             "prettyname": "[ADVANCED]Nuclear Plasma Rifle Mk. II[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (15d8) + <6>\n"
             ],
             "description": [
                 "[WHITE]Adapting the Nuclear Plasma Rifle to use the improvements of the normal Mk. II rifle was quite difficult, but eventually the Nuclear team succeeded. \n",
@@ -3986,6 +4012,7 @@
             "prettyname": "[ADVANCED]Plasma Shotgun Mk. II[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 14 x (5d6)\n"
             ],
             "description": [
                 "[WHITE]Attempts to upgrade the Plasma Shotgun all ended in failure, so it had to be taken apart and put back together in a similar \n",
@@ -4009,6 +4036,7 @@
             "prettyname": "[ADVANCED]Nuclear Plasma Shotgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 7 x (5d5)\n"
             ],
             "description": [
                 "[WHITE]During the stalled development of the Plasma Shotgun Mk.II, several engineers collaborated with the Nuclear Division to create \n",
@@ -4032,6 +4060,7 @@
             "prettyname": "[ADVANCED]Laser Shotgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 7 x (7d5)\n"
             ],
             "description": [
                 "[WHITE]While developing the Laser Rifle, a divide grew between the R&D team members working on it.\n",
@@ -4058,6 +4087,7 @@
             "prettyname": "[ADVANCED]Grenade Launcher[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (20d8) + <256>\n"
             ],
             "description": [
                 "[WHITE]The rocket-propelled explosives this weapon fires can be bounced off walls, over barriers and around corners, \n",
@@ -4082,6 +4112,7 @@
             "prettyname": "[ADVANCED]Assault Chaingun[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (18d3)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]Chaingun directs heavy firepower onto your opponent making him do the chaingun cha-cha.[INNERQUOTE][END]\n",
@@ -4105,6 +4136,7 @@
             "prettyname": "[ADVANCED]Scoped Rifle[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (15d3)\n"
             ],
             "description": [
                 "[WHITE]To develop an 'Assault' version of a weapon prized for its high rate-of-fire seems counter-productive, \n",
@@ -4128,6 +4160,7 @@
             "prettyname": "[ADVANCED]Assault Plasma Rifle[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (15d8)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]A plasma rifle shoots multiple rounds of plasma energy -- frying some demon butt![INNERQUOTE][END]\n",
@@ -4151,6 +4184,7 @@
             "prettyname": "[ADVANCED]Assault Minigun[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (15d3)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]Spits enough lead into the air to be considered an environmental hazard.[INNERQUOTE][END]\n",
@@ -4175,6 +4209,7 @@
             "prettyname": "[ADVANCED]Assault Laser Rifle[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (7d15)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]With no recoil and pinpoint accuracy, it takes a world-class moron to miss while using a laser rifle.[INNERQUOTE][END]\n",
@@ -4198,6 +4233,7 @@
             "prettyname": "[ADVANCED]Assault Nuclear Plasma Rifle[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (15d8)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]A self-charging plasma rifle -- too bad it can't be manually reloaded.[INNERQUOTE][END]\n",
@@ -4222,6 +4258,7 @@
             "prettyname": "[ADVANCED]Assault Uzi[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (15d3)\n"
             ],
             "description": [
                 "[WHITE]To develop an 'Assault' version of a weapon prized for its high rate-of-fire seems counter-productive, but the Assault Uzi remains a \n",
@@ -4245,6 +4282,7 @@
             "prettyname": "[ADVANCED]Burst Chaingun[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (12d3)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]Chaingun directs heavy firepower onto your opponent making him do the chaingun cha-cha.[INNERQUOTE][END]\n",
@@ -4269,6 +4307,7 @@
             "prettyname": "[ADVANCED]Burst Battle Rifle[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (10d3)\n"
             ],
             "description": [
                 "[WHITE]This Battle Rifle is part of the 'Burst Cannon' series of UAC weapons.\n",
@@ -4293,6 +4332,7 @@
             "prettyname": "[ADVANCED]Burst Plasma Rifle[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (10d8)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]A plasma rifle shoots multiple rounds of plasma energy -- frying some demon butt![INNERQUOTE][END]\n",
@@ -4317,6 +4357,7 @@
             "prettyname": "[ADVANCED]Burst Minigun[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (12d3)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]Spits enough lead into the air to be considered an environmental hazard.[INNERQUOTE][END]\n",
@@ -4341,6 +4382,7 @@
             "prettyname": "[ADVANCED]Burst Laser Rifle[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (7d10)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]With no recoil and pinpoint accuracy, it takes a world-class moron to miss while using a laser rifle.[INNERQUOTE][END]\n",
@@ -4366,6 +4408,7 @@
             "prettyname": "[ADVANCED]Burst Nuclear Plasma Rifle[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (10d8)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]A self-charging plasma rifle -- too bad it can't be manually reloaded.[INNERQUOTE][END]\n",
@@ -4390,6 +4433,7 @@
             "prettyname": "[ADVANCED]Burst Uzi[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: (10d3)\n"
             ],
             "description": [
                 "[WHITE]This Uzi is part of the 'Burst Cannon' series of UAC weapons.\n",
@@ -4413,6 +4457,7 @@
             "prettyname": "[ADVANCED]Nano Shotgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 7 x (3d3)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]A 12g shotgun -- you gotta love its spread.[INNERQUOTE][END]\n",
@@ -4436,6 +4481,7 @@
             "prettyname": "[ADVANCED]Nano Combat Shotgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 7 x (3d3) - 1\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]Nothing beats the sound of pumping a combat shotgun.[INNERQUOTE][END]\n",
@@ -4459,6 +4505,7 @@
             "prettyname": "[ADVANCED]Nano Double Shotgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 14 x (3d3)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]Double barreled shotgun -- the perfect weapon for a desperado.[INNERQUOTE][END]\n",
@@ -4482,6 +4529,7 @@
             "prettyname": "[ADVANCED]Nano Super Shotgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 20 x (3d3)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]After the first hellish invasion, weapon engineers designed the super shotgun as the world's first firearm designed to kill demons. And boy does it.[INNERQUOTE][END]\n",
@@ -4505,6 +4553,7 @@
             "prettyname": "[ADVANCED]Nano Assault Shotgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 7 x (3d3) - 1\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]Big, bad and ugly.[INNERQUOTE][END]\n",
@@ -4528,6 +4577,7 @@
             "prettyname": "[ADVANCED]Nano Plasma Shotgun[END]",
             "capacity": "ONE_MOD_CAPACITY",
             "stats": [
+                "[RED]Base Damage[END]: 7 x (5d3)\n"
             ],
             "description": [
                 "[DARKGRAY][INNERQUOTE]Plasma Shotgun, the best of both worlds![INNERQUOTE][END]\n",

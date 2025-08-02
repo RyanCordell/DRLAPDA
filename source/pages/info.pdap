@@ -1,0 +1,12 @@
+HudMessageParallax("
+Damage formulas explained:
+  (XdN) = Random value of 1 to X multiplied by N.\n
+  (X~Y) = Random value between X and Y. Used when the minimum value X is not 1, and thus cannot\nbe represented with the above formula.\n
+  <X> = Splash damage of X value.\n
+  (X) = Non-random damage value
+  (X)! = Non-random damage value on a Ripper projectile
+  (X) - N = X damage value with N subtracted from the final result
+  Y x (N) = Y amount of bullets dealing N damage
+  Y? x (N) = Y amount of bullets dealing N damage with dual wielded weapons
+
+")
