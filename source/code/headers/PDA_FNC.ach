@@ -329,6 +329,8 @@ function void PDA_SetupFloatingTooltip (str graphic, str tooltip) {
     // int _yTemp = PDA_LocalMouse.y * NEW_RESOLUTION_Y + 10;
     int _yTemp = (PDA_SCREEN_Y + 32) * NEW_RESOLUTION_Y;
 
+    _xTemp -= 60.0;
+
     HudMessage(s:"A\n"; HUDMSG_ALPHA, PDA_TOOLTIPGFX, CR_UNTRANSLATED,
         _xTemp + X_LEFT_EDGE, _yTemp + Y_TOP_EDGE,
         0, 0.9);
@@ -1195,7 +1197,7 @@ function PDAButton PDA_DisplayArmor (int id, int structType, float x, float y, i
     }
 
     thisButton.label   = label;
-    thisButton.tooltip = tooltip;
+    thisButton.tooltip = StrParam("%s:\n%s:", thisButton.label, tooltip);
     thisButton.width   = width;
     thisButton.graphic = StrParam("%l:", graphic);
 
@@ -1236,7 +1238,7 @@ function PDAButton PDA_DisplayArmorOverride (int id, PDA_ArmorData override, flo
 
     thisButton.label   = override.name;
     thisButton.width   = width;
-    thisButton.tooltip = override.tooltip;
+    thisButton.tooltip = StrParam("%s:\n%s:", thisButton.label, override.tooltip);
     thisButton.graphic = StrParam("%l:", override.graphic);
 
     // log("PDA_DisplayArmorOverride tooltip %s:", thisButton.tooltip);
@@ -1638,6 +1640,11 @@ function void PDA_HandleHeader(void) {
                 PDA_LocalButton[PDA_TAB_BUTTONS_START + 4] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 4, "5" , "PTAB", PDA_TAB_NEXT_X(4), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
                 PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 4, true, 5, "", false, false);
             }
+            break;
+        case PDA_ARMOR_DETAIL:
+            PDA_Local.pagemax = 1;
+
+            PDA_HEADER_STR = "PDA_DETAILEDARMOR_HEADER"; PDA_HEADER_X = -30;
             break;
         case PDA_ASSEMBLY_DETAIL:
             PDA_Local.pagemax = 1;
