@@ -281,7 +281,7 @@ f'''"RL{weapon["name"]}",
 
             if "stats" in weapon:
                 stats_len = len(weapon["stats"])
-                if stats_len > 1:
+                if stats_len > 0:
                     for i, stats_fragment in enumerate(weapon["stats"]):
                         stats_fragment: str = stats_fragment.replace("\n", "/n")
                         weapon_stats.append(f'"{stats_fragment}"')
