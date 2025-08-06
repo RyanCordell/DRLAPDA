@@ -10,8 +10,8 @@ OptionMenu "DRLAPDAMenu"
 	StaticText 	"PDA Options", 1
 	Option "PDA Appearance", 		 "DRLA_PDA_theme", "PDAThemes"
 	Option "PDA Font",       		 "DRLA_PDA_font",  "PDAFonts"
-	Option "PDA Monoscape Font", "DRLA_PDA_monofont",  "PDAFonts"
-	Option "PDA Slim Font", 		 "DRLA_PDA_slimfont",  "PDAFonts"
+	Option "PDA Monoscape Font", "DRLA_PDA_monofont",  "PDAMonoFonts"
+	Option "PDA Slim Font", 		 "DRLA_PDA_slimfont",  "PDASlimFonts"
 	StaticText "It's worth noting that no font outside of the default is properly supported."
 	StaticText 	""
 
@@ -39,6 +39,29 @@ OptionString "PDAFonts"
 	"STAT_MNO", "PDA Wider"
 	"SMALLFONT", "Smallfont"
 	"PDAFONT", "PDA Menu Slim"
+	"RLZFONT", "Holographic Font"
+	"RLZFONT2", "Grayscale Holographic Font"
+	"RLZFONT3", "Grayscale Holographic Font (Smaller)"
+}
+
+
+OptionString "PDAMonoFonts"
+{
+  "STAT_LWR", "PDA"
+	"STAT_MNO", "Default/PDA Wider"
+	"SMALLFONT", "Smallfont"
+	"PDAFONT", "PDA Menu Slim"
+	"RLZFONT", "Holographic Font"
+	"RLZFONT2", "Grayscale Holographic Font"
+	"RLZFONT3", "Grayscale Holographic Font (Smaller)"
+}
+
+OptionString "PDASlimFonts"
+{
+  "STAT_LWR", "PDA"
+	"STAT_MNO", "PDA Wider"
+	"SMALLFONT", "Smallfont"
+	"PDAFONT", "Default/PDA Menu Slim"
 	"RLZFONT", "Holographic Font"
 	"RLZFONT2", "Grayscale Holographic Font"
 	"RLZFONT3", "Grayscale Holographic Font (Smaller)"

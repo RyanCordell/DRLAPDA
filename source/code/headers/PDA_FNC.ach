@@ -335,7 +335,7 @@ function void PDA_SetupFloatingTooltip (str graphic, str tooltip) {
         _xTemp + X_LEFT_EDGE, _yTemp + Y_TOP_EDGE,
         0, 0.9);
 
-    SetFont(PDA_MONOFONT[mono_font]);
+    SetFont(PDA_FONT[mono_font]);
 
     SetHudClipRect(
         PDA_SCREEN_X + 4, PDA_SCROLLABLE_Y,

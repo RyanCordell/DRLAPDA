@@ -1,4 +1,4 @@
-user	string	DRLA_PDA_theme = "bulky";
-user	string	DRLA_PDA_font = "PDAFONT";
-user	string	DRLA_PDA_monofont = "PDAFONT";
+user	string	DRLA_PDA_theme    = "bulky";
+user	string	DRLA_PDA_font     = "STAT_LWR";
+user	string	DRLA_PDA_monofont = "STAT_MNO";
 user	string	DRLA_PDA_slimfont = "PDAFONT";
