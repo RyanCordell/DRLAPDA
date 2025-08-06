@@ -476,6 +476,71 @@ function PDA_ArmorData setupArmorData (int specialArmorTokens) {
 
     return localArmorData;
 }
+function PDA_ArmorData setupArmorDataOverride (int specialArmorTokens, str langEntry) {
+    #define armorActor DRLA_ArmorList[localArmorIndex][armor_ACTOR]
+
+    bool renegade_check = CheckActorClass(0, CheckInventory("DRPGDRLAActive") ? "DoomRLRenegadeRPG" : "DoomRLRenegade") == true;
+
+    if (specialArmorTokens) {
+        localArmorData.armorRes  = StrParam("%l:", StrParam("%l:_RES", langEntry));
+    } else {
+        localArmorData.armorRes  = StrParam("%l:", StrParam("%l:_RES", langEntry));
+
+        if (CheckInventory("PowerRLReactiveShieldSystemMelee"))
+            localArmorData.armorRes = "PDA_ARMOR_REACTIVESHIELDSYSTEM_MELEE";
+
+        if (CheckInventory("PowerRLReactiveShieldSystemBullet"))
+            localArmorData.armorRes = "PDA_ARMOR_REACTIVESHIELDSYSTEM_BULLET";
+
+        if (CheckInventory("PowerRLReactiveShieldSystemFire"))
+            localArmorData.armorRes = "PDA_ARMOR_REACTIVESHIELDSYSTEM_FIRE";
+
+        if (CheckInventory("PowerRLReactiveShieldSystemPlasma"))
+            localArmorData.armorRes = "PDA_ARMOR_REACTIVESHIELDSYSTEM_PLASMA";
+    }
+
+    if (specialArmorTokens && stricmp(strLeft(DRLA_ArmorList[localArmorIndex][armor_TOKEN], 17), "RLCyberneticArmor") == 0) {
+        localArmorData.name      = StrParam("%l:", "PDA_ARMOR_CYBERNETICARMOR_NAME");
+        localArmorData.graphic   = StrParam("%l:", "PDA_ARMOR_CYBERNETICARMOR_ICON");
+        localArmorData.armorAttr = StrParam("%l:", "PDA_ARMOR_CYBERNETICARMOR_ATTR");
+        localArmorData.armorDesc = StrParam("%l:", "PDA_ARMOR_CYBERNETICARMOR_DESC");
+        localArmorData.armorVal  = StrParam("%l:\n\n",
+                (!renegade_check) ? "PDA_ARMOR_CYBERNETICARMOR_PROT" : "PDA_ARMOR_CYBERNETICARMOR_RENPROT");
+
+        if (CheckInventory("RLCyberneticArmorModdedToken")) {
+            if (CheckInventory("RLCyberneticArmorBulkToken"))      localArmorData.armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORBULK_RES";
+            if (CheckInventory("RLCyberneticArmorPowerToken"))     localArmorData.armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORPOWER_RES";
+            if (CheckInventory("RLCyberneticArmorAgilityToken"))   localArmorData.armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORAGILITY_RES";
+            if (CheckInventory("RLCyberneticArmorTechnicalToken")) localArmorData.armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORTECHNICAL_RES";
+            if (CheckInventory("RLCyberneticArmorSniperToken"))    localArmorData.armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORSNIPER_RES";
+            if (CheckInventory("RLCyberneticArmorFirestormToken")) localArmorData.armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORFIRESTORM_RES";
+            if (CheckInventory("RLCyberneticArmorNanoToken"))      localArmorData.armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORNANO_RES";
+            if (CheckInventory("RLCyberneticArmorOnyxToken"))      localArmorData.armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORONYX_RES";
+        }
+
+        localArmorData.tooltip   = StrParam("%l:\n%l:\n%l:",
+                (!renegade_check) ? "PDA_ARMOR_CYBERNETICARMOR_PROT" : "PDA_ARMOR_CYBERNETICARMOR_RENPROT", localArmorData.armorRes, localArmorData.armorAttr);
+    } else {
+        localArmorData.name      = StrParam("%l:", StrParam("%l:_NAME", langEntry));
+        localArmorData.graphic   = StrParam("%l:", StrParam("%l:_ICON", langEntry));
+        localArmorData.armorAttr = StrParam("%l:", StrParam("%l:_ATTR", langEntry));
+        localArmorData.armorDesc = StrParam("%l:", StrParam("%l:_DESC", langEntry));
+        localArmorData.armorVal  = StrParam("%l:\n\n",
+                    (!renegade_check) ? StrParam("%l:_PROT", langEntry) 
+                                      : StrParam("%l:_RENPROT", langEntry));
+        localArmorData.tooltip   = StrParam(
+            "\cdStats:\c-\n"
+            "%l:\n"
+            "%l:\n"
+            "%l:",
+            (!renegade_check) ? StrParam("%l:_PROT", langEntry) 
+                              : StrParam("%l:_RENPROT", langEntry),
+            localArmorData.armorRes, localArmorData.armorAttr
+        );
+    }
+
+    return localArmorData;
+}
 
 function PDA_BootsData setupBootsData (void) {
     #define bootsActor DRLA_ArmorList[localBootsIndex][armor_ACTOR]
@@ -491,6 +556,25 @@ function PDA_BootsData setupBootsData (void) {
         "%l:\n\n"
         "%l:", 
         StrParam("%l:_PROT", localBootsData.langEntry), 
+        localBootsData.bootsAttr
+    );
+
+    return localBootsData;
+}
+
+function PDA_BootsData setupBootsDataOverride (str langEntry) {
+    #define bootsActor DRLA_ArmorList[localBootsIndex][armor_ACTOR]
+
+    localBootsData.bootsVal  = StrParam("%l:\n\n", StrParam("%l:_PROT", CheckInventory("RLEnclaveSetBonusActive") ? StrParam("PDA_ARMOR_BOOSTED_%s:", bootsActor) : langEntry));
+    localBootsData.name      = StrParam("%l:", StrParam("%l:_NAME", langEntry));
+    localBootsData.graphic   = StrParam("%l:", StrParam("%l:_ICON", langEntry));
+    localBootsData.bootsAttr = StrParam("%l:", StrParam("%l:_ATTR", langEntry));
+    localBootsData.bootsDesc = StrParam("%l:", StrParam("%l:_DESC", langEntry));
+    localBootsData.tooltip   = StrParam(
+        "\cdStats:\c-\n"
+        "%l:\n\n"
+        "%l:", 
+        StrParam("%l:_PROT", langEntry), 
         localBootsData.bootsAttr
     );
 
@@ -631,7 +715,6 @@ function void PDA_ChangeScrolling (void) {
     switch (PDA_Local.category) {
         case PDA_MENU:
             PDA_SetScrollLimit(-90);
-            PDA_SetScrollArrows2(-30, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
             break;
 
         case PDA_CLASSES:
@@ -640,10 +723,7 @@ function void PDA_ChangeScrolling (void) {
                     PDA_SetScrollLimit(20);
                     break;
                 case CLASSES_PAGE_STORY:
-                    // PDA_SetScrollLimit(-1 * batoi(StrParam("%l:", PDA_Class[PlayerNumber()][pda_class_height])));
-                    // PDA_SetScrollArrows2(-1 * batoi(StrParam("%l:", PDA_Class[PlayerNumber()][pda_class_height])), PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
                     PDA_SetScrollLimit(120);
-                    PDA_SetScrollArrows2(120, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
                     break;
             }
             break;
@@ -654,12 +734,10 @@ function void PDA_ChangeScrolling (void) {
                     PDA_SetScrollLimit(-50);
                     break;
                 case WEAPON_PAGE_MODPACK_EFFECTS:
-                    PDA_SetScrollLimit(-30);
-                    PDA_SetScrollArrows2(-30, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+                    PDA_SetScrollLimit(-60);
                     break;
                 case WEAPON_PAGE_ARTIFACT_EFFECTS:
                     PDA_SetScrollLimit(-80);
-                    PDA_SetScrollArrows2(-80, PDA_SCREEN_WIDTH + 50.0, PDA_SCROLLABLE_HEIGHT + 90.0);
                     break;
             }
             break;
@@ -671,11 +749,9 @@ function void PDA_ChangeScrolling (void) {
             switch (PDA_Local.page) {
                 case BESTIARY_PAGE_DIFFICULTIES:
                     PDA_SetScrollLimit(20);
-                    PDA_SetScrollArrows2(0, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
                     break;
                 default: 
                     PDA_SetScrollLimit(DRLA_MONSTER_PAGE_MAX * -10);
-                    PDA_SetScrollArrows2(DRLA_MONSTER_PAGE_MAX * -10, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
                     break;
             }
             break;
@@ -684,15 +760,12 @@ function void PDA_ChangeScrolling (void) {
                 case EQUIPMENT_PAGE_ONHAND:
                     if (localHasBackpack) {
                         PDA_SetScrollLimit(-140);
-                        PDA_SetScrollArrows2(-140, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
                     } else {
                         PDA_SetScrollLimit(-80);
-                        PDA_SetScrollArrows2(-80 , PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
                     }
                     break;
                 case EQUIPMENT_PAGE_INFO:
                     PDA_SetScrollLimit(-160);
-                    PDA_SetScrollArrows2(-160, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
                     break;
             }
             break;
@@ -700,7 +773,6 @@ function void PDA_ChangeScrolling (void) {
         case PDA_ASSEMBLIES:
             int scrollOffset = -8 * PDA_Local.maxassembliesper;
             PDA_SetScrollLimit  (scrollOffset);
-            PDA_SetScrollArrows2(scrollOffset, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
             break;
 
         case PDA_HELP:
@@ -708,21 +780,17 @@ function void PDA_ChangeScrolling (void) {
             break;
         case PDA_MISC:
             PDA_SetScrollLimit(0);
-            PDA_SetScrollArrows2(0, PDA_SCREEN_WIDTH + 50.0, PDA_SCROLLABLE_HEIGHT + 90.0);
             break;
 
         case PDA_ITEMS:
             PDA_SetScrollLimit(-200);
-            PDA_SetScrollArrows2(-200, PDA_SCREEN_WIDTH + 50.0, PDA_SCROLLABLE_HEIGHT + 90.0);
             break;
         case PDA_ASSEMBLY_DETAIL:
             PDA_SetScrollLimit  (-100);
-            PDA_SetScrollArrows2(-100, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
             break;
         case PDA_BESTIARY_DETAIL:
             if (stricmp(PDA_Local.detailFetch[0], "null") != 0) {
                 PDA_SetScrollLimit(-100);
-                PDA_SetScrollArrows2(-100, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
             } else {
                 PDA_SetScrollLimit(0);
             }
@@ -1515,13 +1583,13 @@ function void PDA_HandleHeader(void) {
                     break;
             }
             
-            PDA_LocalButton[PDA_TAB_BUTTONS_START    ] = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y, 8, 6);
+            PDA_LocalButton[PDA_TAB_BUTTONS_START    ] = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y, PDA_TAB_W, PDA_TAB_H);
             PDA_ButtonHandler(PDA_TAB_BUTTONS_START    , true, 1, "", false, false);
 
-            PDA_LocalButton[PDA_TAB_BUTTONS_START + 1] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y, 8, 6);
+            PDA_LocalButton[PDA_TAB_BUTTONS_START + 1] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y, PDA_TAB_W, PDA_TAB_H);
             PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 1, true, 2, "", false, false);
 
-            PDA_LocalButton[PDA_TAB_BUTTONS_START + 2] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 2, "3", "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y, 8, 6);
+            PDA_LocalButton[PDA_TAB_BUTTONS_START + 2] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 2, "3", "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y, PDA_TAB_W, PDA_TAB_H);
             PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 2, true, 3, "", false, false);
             break;
 
@@ -1532,13 +1600,17 @@ function void PDA_HandleHeader(void) {
             {
                 case 1: PDA_HEADER_STR = "PDA_PDAHELP_HEADER"; PDA_HEADER_X = -10; break;
                 case 2: PDA_HEADER_STR = "PDA_DRLAHELP_HEADER"; PDA_HEADER_X = -40; break;
+                case 3: PDA_HEADER_STR = "PDA_DMGHELP_HEADER"; PDA_HEADER_X = -40; break;
             }
 
-            PDAButton HELP_TAB_1 = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+            PDA_LocalButton[PDA_TAB_BUTTONS_START    ] = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
             PDA_ButtonHandler(PDA_TAB_BUTTONS_START    , true, 1, "", false, false);
 
-            PDAButton HELP_TAB_2 = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+            PDA_LocalButton[PDA_TAB_BUTTONS_START + 1] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
             PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 1, true, 2, "", false, false);
+            
+            PDA_LocalButton[PDA_TAB_BUTTONS_START + 2] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 2, "3", "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+            PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 2, true, 3, "", false, false);
             break;
         case PDA_MISC:
             PDA_Local.pagemax = 1;
@@ -1589,6 +1661,91 @@ function void PDA_HandleHeader(void) {
     SetHudSize(320,200,0);
     HudMessage(l:PDA_HEADER_STR; HUDMSG_PLAIN, PDA_INFOTOPID, CR_GREEN, PDA_SCREEN_X + 100.0 + PDA_HEADER_X + X_LEFT_EDGE, PDA_SCREEN_Y + 2.0 + Y_TOP_EDGE, 0.0);
     PDA_SetupScreenBounds();
+}
+
+
+function void PDA_TrackScrollArrows (void) {
+    switch (PDA_Local.category) {
+        case PDA_MENU:
+            PDA_SetScrollArrows2(-30, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+            break;
+
+        case PDA_CLASSES:
+            switch (PDA_Local.page) {
+                case CLASSES_PAGE_PERKS:
+                    break;
+                case CLASSES_PAGE_STORY:
+                    PDA_SetScrollArrows2(120, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+                    break;
+            }
+            break;
+
+        case PDA_WEAPONS:
+            switch (PDA_Local.page) {
+                case WEAPON_PAGE_STORY:
+                    break;
+                case WEAPON_PAGE_MODPACK_EFFECTS:
+                    PDA_SetScrollArrows2(-60, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+                    break;
+                case WEAPON_PAGE_ARTIFACT_EFFECTS:
+                    PDA_SetScrollArrows2(-80, PDA_SCREEN_WIDTH + 50.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+                    break;
+            }
+            break;
+            
+        case PDA_BESTIARY:
+            PDA_SetScrollWindow(-240);
+
+            switch (PDA_Local.page) {
+                case BESTIARY_PAGE_DIFFICULTIES:
+                    PDA_SetScrollArrows2(0, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+                    break;
+                default: 
+                    PDA_SetScrollArrows2(DRLA_MONSTER_PAGE_MAX * -10, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+                    break;
+            }
+            break;
+        case PDA_ARMORS:
+            switch (PDA_Local.page) {
+                case EQUIPMENT_PAGE_ONHAND:
+                    if (localHasBackpack) {
+                        PDA_SetScrollArrows2(-140, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+                    } else {
+                        PDA_SetScrollArrows2(-80 , PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+                    }
+                    break;
+                case EQUIPMENT_PAGE_INFO:
+                    PDA_SetScrollArrows2(-160, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+                    break;
+            }
+            break;
+
+        case PDA_ASSEMBLIES:
+            int scrollOffset = -8 * PDA_Local.maxassembliesper;
+            PDA_SetScrollArrows2(scrollOffset, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+            break;
+
+        case PDA_HELP:
+            break;
+        case PDA_MISC:
+            PDA_SetScrollArrows2(0, PDA_SCREEN_WIDTH + 50.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+            break;
+
+        case PDA_ITEMS:
+            PDA_SetScrollArrows2(-200, PDA_SCREEN_WIDTH + 50.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+            break;
+        case PDA_ASSEMBLY_DETAIL:
+            PDA_SetScrollArrows2(-100, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+            break;
+        case PDA_BESTIARY_DETAIL:
+            if (stricmp(PDA_Local.detailFetch[0], "null") != 0) {
+                PDA_SetScrollArrows2(-100, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+            }
+            break;
+        case PDA_CREDITS:
+            PDA_SetScrollWindow(0);
+            break;
+    }
 }
 
 // EOF

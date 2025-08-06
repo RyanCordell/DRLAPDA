@@ -1,8 +1,4 @@
-
-// PDA_DefaultFont();
-
-if (PDA_Local.page == 1)
-{
+if (PDA_Local.page == 1) {
     HudMessageParallax(
         StrParam(
         "%l:\n" // First time?
@@ -21,8 +17,7 @@ if (PDA_Local.page == 1)
         20.0 + (20.0 * 1),
         INF_HOLDTIME, OPAQUE);
 }
-if (PDA_Local.page == 2)
-{
+if (PDA_Local.page == 2) {
     HudMessageParallax(
         StrParam(
             "\cd(%k:\c-, \cd%k:)\c- %l:\cd(%k:)\c- %l:%l:",
@@ -33,6 +28,14 @@ if (PDA_Local.page == 2)
         20.0 + (20.0 * 1),
         INF_HOLDTIME, OPAQUE);
 }
-
-// Get rid of it once we're done.
-// PDA_UnsetScrollWindow();
+if (PDA_Local.page == 3) {
+    HudMessageParallax(
+        StrParam(
+            "\cc%l:\c-",
+            "PDA_DRLAHELP_DMG"
+        ),
+        HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 
+        10.0, 
+        20.0 + (20.0 * 1),
+        INF_HOLDTIME, OPAQUE);
+}

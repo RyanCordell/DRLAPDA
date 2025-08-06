@@ -32,6 +32,13 @@ if (localHasArmor) {
     }
 
     PDA_ButtonHandler(id, true, 1, "", false, false);
+    switch (PDA_LocalButton[id].state) {
+        case button_clicked:
+            PDA_Local.detailFetch[0] = "armor";
+            setupArmorDataOverride(checkSpecialArmorTokens(), localArmorData.langEntry);
+            PDA_SetCategory(PDA_ARMOR_DETAIL);
+            break;
+    }
 
     if (armorLimit > PDA_MAX_ARMOR_IN_INV + 1) armorLimit = 0;
     else armorLimit++;
@@ -52,6 +59,14 @@ if (localHasBoots) {
     }
 
     PDA_ButtonHandler(id, true, 1, "", false, false);
+    switch (PDA_LocalButton[id].state) {
+        case button_clicked:
+            PDA_Local.detailFetch[0] = "boots";
+            setupBootsDataOverride(localBootsData.langEntry);
+            PDA_SetCategory(PDA_ARMOR_DETAIL);
+            break;
+    }
+
     if (armorLimit > PDA_MAX_ARMOR_IN_INV + 1) armorLimit = 0;
     else armorLimit++;
     y     += height + gap;
@@ -101,10 +116,18 @@ for (int armorIndex = 0; armorIndex < DRLA_ARMORMAX; armorIndex++) {
         PDA_LocalButton[id] = PDA_DisplayArmorOverride(id, localArmorData, x, y, height, 0.6);
 
         PDA_ButtonHandler(id, true, 1, "", false, false);
+        switch (PDA_LocalButton[id].state) {
+            case button_clicked:
+                PDA_Local.detailFetch[0] = !areTheseBoots ? "armor" : "boots";
+                if (!areTheseBoots) setupArmorDataOverride(checkSpecialArmorTokens(), localArmorData.langEntry);
+                else                setupBootsDataOverride(localArmorData.langEntry);
+                PDA_SetCategory(PDA_ARMOR_DETAIL);
+                break;
+        }
 
         if (armorLimit > PDA_MAX_ARMOR_IN_INV + 1) armorLimit = 0;
         else armorLimit++;
-        y     += height + gap;
+        y += height + gap;
     }
 }
 PDA_DefaultFont();

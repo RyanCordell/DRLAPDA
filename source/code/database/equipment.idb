@@ -1,3 +1,4 @@
+
 #library "PDA_ARM"
 
 #define DRLA_ARMORMAX 139
@@ -27,4 +28,3 @@ str DRLA_ArmorSetList[DRLA_ARMORSETMAX] = {
   "RLRainbowSetBonusActive",
   "RLTeslaboltSetBonusActive"
 };
-    

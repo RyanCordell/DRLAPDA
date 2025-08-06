@@ -122,6 +122,7 @@ enum PDA_Categories {
 	// Normally unaccessible
 	PDA_ASSEMBLY_DETAIL,
     PDA_BESTIARY_DETAIL,
+    PDA_ARMOR_DETAIL,
 	
 	// Accessible through Misc
 	PDA_PONG,
@@ -168,6 +169,11 @@ enum PDA_Classes_Pages {
 enum PDA_Equipment_Pages {
     EQUIPMENT_PAGE_ONHAND = 1,
     EQUIPMENT_PAGE_INFO,
+}
+
+enum PDA_Equipment_Types {
+    EQUIPMENT_TYPE_ARMOR = 0,
+    EQUIPMENT_TYPE_BOOTS
 }
 
 enum armor_enum {

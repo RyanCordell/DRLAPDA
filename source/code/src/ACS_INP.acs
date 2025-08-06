@@ -162,6 +162,10 @@ SCRIPT "PDA_MouseController" (void)
             if (PDA_Local.category == PDA_ASSEMBLY_DETAIL) {
                 PDA_SetCategory(PDA_ASSEMBLIES);
             }
+            if (PDA_Local.category == PDA_ARMOR_DETAIL) {
+                PDA_SetCategory(PDA_ARMORS);
+                PDA_SetPage(1);
+            }
             else if (PDA_Local.category == PDA_BESTIARY && PDA_Local.page > 1) {
                 PDA_SetPage(1);
             }

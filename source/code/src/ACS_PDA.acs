@@ -355,6 +355,11 @@ function void page_assembly_info (void) {
     #include "../../pages/assemblyinfo.pdap"
 }
 
+function void page_armor_info (void) {
+    if (PDA_Local.category != PDA_ARMOR_DETAIL) return;
+    #include "../../pages/armorinfo.pdap"
+}
+
 function void page_monster_info (void) {
     if (PDA_Local.category != PDA_BESTIARY_DETAIL) return;
     checkMonsterKillCount();
@@ -416,6 +421,9 @@ SCRIPT "PDA_Core" (void) {
             case PDA_ASSEMBLY_DETAIL:
                 page_assembly_info();
                 break;
+            case PDA_ARMOR_DETAIL:
+                page_armor_info();
+                break;
             case PDA_BESTIARY_DETAIL:
                 page_monster_info();
                 break;
@@ -424,6 +432,10 @@ SCRIPT "PDA_Core" (void) {
                 break;
         }
         Delay(PDA_Responsiveness);
+
+        if (PDA_LocalMouse.scrolling) {
+            PDA_TrackScrollArrows();
+        }
     }
     SetHudClipRect(0,0,0,0,0);
 }

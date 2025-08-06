@@ -93,19 +93,13 @@ if (localShowArmor && localHasArmor) {
     HudMessageParallax(
         StrParam(
             "%s:" // Armor section
-            "%s:" // Protection header
-            "%l:" // Protection value
-            "%s:" // Resistances header
-            "%l:" // Resistances value
-            "%s:" // Attributes header
-            "%l:" // Attributes value
-            "%s:" // Description header
-            " %l:" // Description value
+            "%s:""%l:" // Protection header / value
+            "%s:""%l:" // Resistances header / value
+            "%s:""%l:" // Attributes header / value
+            "%s:"" %l:" // Description header / value
             "%s:" // Set bonus header
-            " %l:" // Bitch hacks for Enclave/Nuclear set
-            " %l:" // Bitch hacks for Enclave/Nuclear set
-            " %l:" // Set name
-            " %l:" // Set desc
+            " %l:"" %l:" // Bitch hacks for Enclave/Nuclear set
+            " %l:"" %l:" // Set name / desc
             ,
             "\cgARMOR\c-\n",
             "\crProtection:\c-\n",
@@ -131,12 +125,9 @@ if (localShowArmor && localHasArmor) {
     HudMessageParallax(
         StrParam(
             "%s:" // Boots section
-            "%s:" // Boots protection header
-            "%l:" // Boots protection value
-            "%s:" // Boots attributes header
-            "%l:" // Boots attributes value
-            "%s:" // Boots description header
-            "%l:" // Boots description value
+            "%s:""%l:" // Boots protection header / value
+            "%s:""%l:" // Boots attributes header / value
+            "%s:""%l:" // Boots description header / value
             ,
             "\cgBOOTS\c-\n",
             "\crProtection:\c-\n",
