@@ -12,7 +12,7 @@ if (StrCmp(PDA_Local.detailFetch[0], "null") != 0) {
     DisplayIcon(StrParam("%l:", PDA_Enemy[PlayerNumber()][enemy_icon]), PDA_INFO2ID, PDA_SCREEN_WIDTH - 50.0 + X_LEFT_EDGE, PDA_Local.scrollingY + 110.0 + Y_TOP_EDGE, 0, 0.8);
 
     // EXPERIMENTS
-    SetFont(PDA_FONT[0]);
+    SetFont(PDA_FONT[mono_font]);
     HudMessageParallax(
         StrParam(
             "\cdName:\c- %l:\n"
@@ -28,7 +28,7 @@ if (StrCmp(PDA_Local.detailFetch[0], "null") != 0) {
         ),
         HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 5.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE);
 } else {
-    SetFont(PDA_FONT[0]);
+    SetFont(PDA_FONT[mono_font]);
     HudMessageParallax(
         StrParam(
             "%l:\n"

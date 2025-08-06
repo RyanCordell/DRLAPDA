@@ -172,7 +172,7 @@ function void DisplayArmorIcon (str Sprite, int ID, fixed X, fixed Y, fixed Alph
     if (CheckFont(StrParam("%l:", Sprite))) {
         SetFont(StrParam("%l:", Sprite));
         HudMessage(s:"A\n"; HUDMSG_ALPHA, ID, CR_UNTRANSLATED, X, Y, 0, Alpha);
-        SetFont(PDA_FONT[0]);
+        SetFont(PDA_FONT[mono_font]);
     }
 }
 
@@ -335,7 +335,7 @@ function void PDA_SetupFloatingTooltip (str graphic, str tooltip) {
         _xTemp + X_LEFT_EDGE, _yTemp + Y_TOP_EDGE,
         0, 0.9);
 
-    SetFont(PDA_FONT[0]);
+    SetFont(PDA_MONOFONT[mono_font]);
 
     SetHudClipRect(
         PDA_SCREEN_X + 4, PDA_SCROLLABLE_Y,
@@ -369,7 +369,7 @@ function void PDA_SetupPageTooltip (str graphic, str tooltip, float alpha) {
         PDA_SCREEN_X + X_LEFT_EDGE, (int)(PDA_LocalMouse.y * NEW_RESOLUTION_Y) + 20.0 + Y_TOP_EDGE,
         0, 0.9);
 
-    SetFont(PDA_FONT[0]);
+    SetFont(PDA_FONT[mono_font]);
     HudMessage(s:tooltip; HUDMSG_ALPHA, PDA_TOOLTIPID - 1, CR_UNTRANSLATED,
     10.0,
     (int)(PDA_LocalMouse.y * NEW_RESOLUTION_Y) + 30.0,
@@ -914,7 +914,7 @@ function PDAButton PDA_CreateMenuButton (int id, str label, str graphic, float x
     thisButton.graphicY     = _gfyTemp + 10.0;
     thisButton.type         = "menu";
 
-    thisButton.textFont     = PDA_FONT[2];
+    thisButton.textFont     = PDA_FONT[slim_font];
     thisButton.textFlags    = HUDMSG_ALPHA;
     thisButton.textID       = thisButton.graphicID + 20;
     thisButton.textX        = thisButton.graphicX + (xlabeloff * NEW_RESOLUTION_X);
@@ -947,7 +947,7 @@ function PDAButton PDA_CreateTab (int id, str label, str graphic, float x, float
     thisButton.graphicY     = _gyTemp + Y_TOP_EDGE;
     thisButton.type         = "tab";
 
-    thisButton.textFont     = PDA_FONT[2];
+    thisButton.textFont     = PDA_FONT[slim_font];
     thisButton.textFlags    = HUDMSG_ALPHA;
     thisButton.textID       = thisButton.graphicID + 10;
     thisButton.textX       = (int)thisButton.graphicX + xlabeloff;
@@ -980,7 +980,7 @@ function PDAButton PDA_CreateButton (int id, str label, str graphic, float x, fl
     thisButton.graphicY     = PDA_SCREEN_Y + _gyTemp - (int)(gh / 2);
     thisButton.type         = "generic";
 
-    thisButton.textFont     = PDA_FONT[2];
+    thisButton.textFont     = PDA_FONT[slim_font];
     thisButton.textFlags    = HUDMSG_ALPHA;
     thisButton.textID       = thisButton.graphicID + 20;
     int _fxTemp             = (int)thisButton.graphicX + (gw + X_MARGIN) * NEW_RESOLUTION_X;
@@ -1014,7 +1014,7 @@ function PDAButton PDA_CreateFixedButton (int id, str label, str graphic, float 
     thisButton.graphicY     = PDA_SCREEN_Y + _gyTemp - (int)(gh / 2);
     thisButton.type         = "generic";
 
-    thisButton.textFont     = PDA_FONT[2];
+    thisButton.textFont     = PDA_FONT[slim_font];
     thisButton.textFlags    = HUDMSG_ALPHA;
     thisButton.textID       = thisButton.graphicID + 20;
     int _fxTemp             = (int)thisButton.graphicX + (gw + X_MARGIN) * NEW_RESOLUTION_X;
@@ -1046,7 +1046,7 @@ function PDAButton PDA_CreateAssemblyButton (int id, str graphic, str label, flo
     thisButton.graphicY     = _gyTemp + 20.0;
     thisButton.type         = "assembly";
 
-    thisButton.textFont  = PDA_FONT[0];
+    thisButton.textFont  = PDA_FONT[mono_font];
     thisButton.textFlags = HUDMSG_ALPHA;
     thisButton.textID    = thisButton.id + 1;
     int _fxTemp          = thisButton.graphicX * NEW_RESOLUTION_X;
@@ -1105,7 +1105,7 @@ function PDAButton PDA_CreateBeastButton (int id, str label, int color, float x,
     thisButton.graphicY     = _gfyTemp;
     thisButton.type         = "beast";
 
-    thisButton.textFont  = PDA_FONT[0];
+    thisButton.textFont  = PDA_FONT[mono_font];
     thisButton.textFlags = HUDMSG_ALPHA | HUDMSG_COLORSTRING;
     thisButton.textColor = color;
     thisButton.textID    = (thisButton.id) + 20;
@@ -1148,7 +1148,7 @@ function PDAButton PDA_CreateHUDButton (int id, str label, str color, float x, f
     thisButton.graphicY     = _gyTemp + X_LEFT_EDGE;
     thisButton.type         = "hud";
 
-    thisButton.textFont  = PDA_FONT[0];
+    thisButton.textFont  = PDA_FONT[mono_font];
     thisButton.textFlags = HUDMSG_ALPHA | HUDMSG_COLORSTRING;
     thisButton.textID    = (thisButton.id) + 20;
     thisButton.textX    = (thisButton.x * NEW_RESOLUTION_X) + 10.0;
@@ -1213,7 +1213,7 @@ function PDAButton PDA_DisplayArmor (int id, int structType, float x, float y, i
     thisButton.graphicY     = _gfyTemp + Y_TOP_EDGE;
     thisButton.type         = "armor";
 
-    thisButton.textFont  = PDA_FONT[1];
+    thisButton.textFont  = PDA_FONT[lower_font];
     thisButton.textFlags = HUDMSG_ALPHA;
     thisButton.textID    = (thisButton.id) + 1;
     int _fxTemp          = thisButton.x * NEW_RESOLUTION_X;
@@ -1256,7 +1256,7 @@ function PDAButton PDA_DisplayArmorOverride (int id, PDA_ArmorData override, flo
     thisButton.graphicY     = _gfyTemp + Y_TOP_EDGE;
     thisButton.type         = "armor";
 
-    thisButton.textFont  = PDA_FONT[1];
+    thisButton.textFont  = PDA_FONT[lower_font];
     thisButton.textFlags = HUDMSG_ALPHA;
     thisButton.textID    = (thisButton.id) + 1;
     int _fxTemp          = thisButton.x * NEW_RESOLUTION_X;
@@ -1285,7 +1285,7 @@ function PDAButton PDA_CreateModPackDisplay (int id, str graphic, float x, float
     thisButton.type         = "modpack";
 
     thisButton.textFlags = HUDMSG_ALPHA;
-    thisButton.textFont  = PDA_FONT[0];
+    thisButton.textFont  = PDA_FONT[mono_font];
     thisButton.textID    = PDA_ASSEMBLY_ID_END + thisButton.id;
     int _fxTemp          = thisButton.graphicX;
     thisButton.textX     = _fxTemp + 5.0 + X_LEFT_EDGE;
@@ -1349,7 +1349,7 @@ function void PDA_InitButton (PDAButton button, int incat, int catpage, str mess
                 break;
             case button_hovered:
                 if (strcmp(message, "") != 0) {
-                    // SetFont(PDA_FONT[2]);
+                    // SetFont(PDA_FONT[slim_font]);
                     // SetHudClipRect(
                     //     PDA_MENU_TOOLTIP_X,     PDA_MENU_TOOLTIP_Y,
                     //     PDA_MENU_TOOLTIP_WIDTH, PDA_MENU_TOOLTIP_HEIGHT,
@@ -1420,7 +1420,7 @@ function void PDA_ButtonHandler (int id, int incat, int catpage, str message, bo
                 break;
             case button_hovered:
                 if (strcmp(message, "") != 0) {
-                    SetFont(PDA_FONT[2]);
+                    SetFont(PDA_FONT[slim_font]);
                     SetHudClipRect(
                         PDA_MENU_TOOLTIP_X,     PDA_MENU_TOOLTIP_Y,
                         PDA_MENU_TOOLTIP_WIDTH, PDA_MENU_TOOLTIP_HEIGHT,

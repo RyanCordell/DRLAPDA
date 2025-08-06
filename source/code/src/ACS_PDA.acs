@@ -232,7 +232,9 @@ SCRIPT "PDA_Display" (void) net {
             break;
     }
 
-    PDA_FONT[0] = GetUserCVarString(PlayerNumber(), "DRLA_PDA_font");
+    PDA_FONT[lower_font] = GetUserCVarString(PlayerNumber(), "DRLA_PDA_font");
+    PDA_FONT[mono_font]  = GetUserCVarString(PlayerNumber(), "DRLA_PDA_monofont");
+    PDA_FONT[slim_font]  = GetUserCVarString(PlayerNumber(), "DRLA_PDA_slimfont");
     SetHudSize(320,200,0);
     PDA_HasEquipment();
     

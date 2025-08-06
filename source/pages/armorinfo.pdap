@@ -38,7 +38,7 @@ const float equipment_text_y = equipment_icon_y + 80.0;
 switch (equipmentType) {
     case EQUIPMENT_TYPE_ARMOR:
         DisplayIconParallax(localArmorData.graphic, PDA_PLAYER_ARMOR_ICON, equipment_icon_x, equipment_icon_y, INF_HOLDTIME, OPAQUE);
-        SetFont(PDA_FONT[used_font]);
+        SetFont(PDA_FONT[mono_font]);
         HudMessageParallax(
             StrParam(
                 "%s:" // Armor section
@@ -73,7 +73,7 @@ switch (equipmentType) {
         break;
     case EQUIPMENT_TYPE_BOOTS:
         DisplayIconParallax(localArmorData.graphic, PDA_PLAYER_BOOTS_ICON, equipment_icon_x, equipment_icon_y, INF_HOLDTIME, OPAQUE);
-        SetFont(PDA_FONT[used_font]);
+        SetFont(PDA_FONT[mono_font]);
         HudMessageParallax(
             StrParam(
                 "%s:" // Boots section
@@ -97,7 +97,7 @@ switch (equipmentType) {
 }
 
 if (localHasBackpack) {
-    SetFont(PDA_FONT[used_font]);
+    SetFont(PDA_FONT[mono_font]);
     HudMessageParallax(
         StrParam(
             "%s:" // Backpack

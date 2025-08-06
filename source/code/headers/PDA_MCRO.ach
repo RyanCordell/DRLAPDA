@@ -8,7 +8,7 @@
 #define PDA_SetScrollLimit(a)  	PDA_Local.max_text_y = (a)
 #define PDA_ResetScroll()       PDA_Local.scrollingY = PDA_SCREEN_Y;
 #define PDA_SetMonsterLimit(a)  if (PDA_Local.monsterpage > (a)) PDA_Local.monsterpage = (a)
-#define PDA_DefaultFont() 		  SetFont(PDA_FONT[0]);
+#define PDA_DefaultFont() 		  SetFont(PDA_FONT[mono_font]);
 
 #define PDA_CheckPlayer1Inventory(name) ACS_NamedExecuteWithResult("PDA_CheckPlayer1Inventory", name)
 #define PDA_SetEveryoneInventory(name)  ACS_NamedExecuteWithResult("PDA_SetEveryoneInventory",  name)

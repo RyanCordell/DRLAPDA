@@ -265,7 +265,7 @@ enum equipment_index {
 }
 
 enum pda_font_index {
-    used_font = 0, 
+    mono_font = 0, 
     lower_font,
     slim_font
 }

@@ -1,6 +1,6 @@
 
 
-SetFont(PDA_FONT[0]);
+SetFont(PDA_FONT[lower_font]);
 HudMessage("%l:", "PDA_DEV_TEAM"; HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, (PDA_SCREEN_X) + 120.0 + X_CENTER_TEXT_CENTER, (int)PDA_Local.creditsroll + PDA_NormalY + 20.0 + Y_TOP_EDGE + (10.0 * 1), 0);
 
 

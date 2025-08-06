@@ -87,7 +87,7 @@ for (int setIndex = 0; setIndex < DRLA_ARMORSETMAX; setIndex++) {
 str enclaveequipment_set_name = (PDA_ManyHax) ? StrParam("%l:\n\n", "PDA_ARMOR_EnclaveSetBonusActive_equipment_set_name") : "";
 str enclaveequipment_set_description = (PDA_ManyHax) ? StrParam("%l:\n\n", "PDA_ARMOR_EnclaveSetBonusActive_equipment_set_description") : "";
 
-SetFont(PDA_FONT[used_font]);
+SetFont(PDA_FONT[mono_font]);
 
 if (localShowArmor && localHasArmor) {
     HudMessageParallax(

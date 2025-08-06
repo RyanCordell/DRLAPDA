@@ -8,8 +8,10 @@ OptionMenu "DRLAPDAMenu"
 	StaticText 	""
 	StaticText 	""
 	StaticText 	"PDA Options", 1
-	Option "PDA Appearance", "DRLA_PDA_theme", "PDAThemes"
-	Option "PDA Font",       "DRLA_PDA_font",  "PDAFonts"
+	Option "PDA Appearance", 		 "DRLA_PDA_theme", "PDAThemes"
+	Option "PDA Font",       		 "DRLA_PDA_font",  "PDAFonts"
+	Option "PDA Monoscape Font", "DRLA_PDA_monofont",  "PDAFonts"
+	Option "PDA Slim Font", 		 "DRLA_PDA_slimfont",  "PDAFonts"
 	StaticText "It's worth noting that no font outside of the default is properly supported."
 	StaticText 	""
 
