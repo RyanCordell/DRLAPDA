@@ -1271,6 +1271,49 @@ function PDAButton PDA_DisplayArmorOverride (int id, PDA_ArmorData override, flo
     return thisButton;
 }
 
+function PDAButton PDA_DisplayBootsOverride (int id, PDA_BootsData override, float x, float y, int height, fixed opacity) {
+    #define thisButton PDA_LocalButton[id]
+
+    str label = override.name;
+    int width = strLen(label) * 5;
+
+    assignButtonParams(thisButton, thisButton.label)
+
+    thisButton.label   = override.name;
+    thisButton.width   = width;
+    thisButton.tooltip = StrParam("%s:\n%s:", thisButton.label, override.tooltip);
+    thisButton.graphic = StrParam("%l:", override.graphic);
+
+    // log("PDA_DisplayArmorOverride tooltip %s:", thisButton.tooltip);
+    if (CheckBounds(thisButton) && strCmp(thisButton.tooltip, "") != 0) {
+        PDA_SetupFloatingTooltip("PTIP", thisButton.tooltip);
+    }
+
+    thisButton.alpha = opacity;
+
+    thisButton.graphicFlags = HUDMSG_ALPHA;
+    thisButton.graphicID    = thisButton.id;
+    int _gfxTemp            = thisButton.x * NEW_RESOLUTION_X;
+    thisButton.graphicX     = _gfxTemp - 5.0 + X_LEFT_EDGE;
+    int _gfyTemp            = thisButton.y * NEW_RESOLUTION_Y;
+    thisButton.graphicY     = _gfyTemp + Y_TOP_EDGE;
+    thisButton.type         = "armor";
+
+    thisButton.textFont  = PDA_FONT[lower_font];
+    thisButton.textFlags = HUDMSG_ALPHA;
+    thisButton.textID    = (thisButton.id) + 1;
+    int _fxTemp          = thisButton.x * NEW_RESOLUTION_X;
+    thisButton.textX     = _fxTemp + 35.0 + X_LEFT_EDGE;
+    int _fyTemp          = thisButton.y * NEW_RESOLUTION_Y;
+    thisButton.textY     = _fyTemp + (height / 2);
+    thisButton.alpha = opacity;
+
+    if (debug) {
+        DrawBorder(thisButton.x * NEW_RESOLUTION_X, thisButton.y * NEW_RESOLUTION_Y, width * NEW_RESOLUTION_X, height * NEW_RESOLUTION_Y);
+    }
+    return thisButton;
+}
+
 function PDAButton PDA_CreateModPackDisplay (int id, str graphic, float x, float y, int width, int height, fixed alpha) {
     #define thisButton PDA_LocalButton[id]
     assignButtonParams(thisButton, StrParam("%l:", stringArray[MODS_DIM][id]))
@@ -1644,7 +1687,7 @@ function void PDA_HandleHeader(void) {
         case PDA_ARMOR_DETAIL:
             PDA_Local.pagemax = 1;
 
-            PDA_HEADER_STR = "PDA_DETAILEDARMOR_HEADER"; PDA_HEADER_X = -30;
+            PDA_HEADER_STR = "PDA_DETAILEDARMOR_HEADER"; PDA_HEADER_X = -60;
             break;
         case PDA_ASSEMBLY_DETAIL:
             PDA_Local.pagemax = 1;

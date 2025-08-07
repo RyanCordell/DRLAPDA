@@ -1,5 +1,4 @@
 // Clicked-on equipment info
-const int height = 34 / NEW_RESOLUTION_Y;
 
 bool PDA_ManyHax    = false;
 
@@ -31,13 +30,9 @@ str enclaveequipment_set_name = (PDA_ManyHax) ? StrParam("%l:\n\n", "PDA_ARMOR_E
 str enclaveequipment_set_description = (PDA_ManyHax) ? StrParam("%l:\n\n", "PDA_ARMOR_EnclaveSetBonusActive_equipment_set_description") : "";
 
 
-const float equipment_icon_x = PDA_SCREEN_X + 35.0;
-const float equipment_icon_y = 60.0;
-const float equipment_text_y = equipment_icon_y + 80.0;
-
 switch (equipmentType) {
     case EQUIPMENT_TYPE_ARMOR:
-        DisplayIconParallax(localArmorData.graphic, PDA_PLAYER_ARMOR_ICON, equipment_icon_x, equipment_icon_y, INF_HOLDTIME, OPAQUE);
+        DisplayIconParallax(localArmorData.graphic, PDA_PLAYER_ARMOR_ICON, EQUIPMENT_ICON_X, EQUIPMENT_ICON_Y, INF_HOLDTIME, OPAQUE);
         SetFont(PDA_FONT[mono_font]);
         HudMessageParallax(
             StrParam(
@@ -69,10 +64,10 @@ switch (equipmentType) {
                 equipment_set_name,
                 equipment_set_description
             ),
-            HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 10.0, equipment_text_y, INF_HOLDTIME, OPAQUE);
+            HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 10.0, EQUIPMENT_TEXT_Y, INF_HOLDTIME, OPAQUE);
         break;
     case EQUIPMENT_TYPE_BOOTS:
-        DisplayIconParallax(localArmorData.graphic, PDA_PLAYER_BOOTS_ICON, equipment_icon_x, equipment_icon_y, INF_HOLDTIME, OPAQUE);
+        DisplayIconParallax(localBootsData.graphic, PDA_PLAYER_BOOTS_ICON, EQUIPMENT_ICON_X, EQUIPMENT_ICON_Y, INF_HOLDTIME, OPAQUE);
         SetFont(PDA_FONT[mono_font]);
         HudMessageParallax(
             StrParam(
@@ -89,7 +84,7 @@ switch (equipmentType) {
                 "\crDescription:\c-\n",
                 StrParam("%l:\n", localBootsData.bootsDesc)
             ),
-            HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, equipment_text_y, INF_HOLDTIME, OPAQUE);
+            HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, EQUIPMENT_TEXT_Y, INF_HOLDTIME, OPAQUE);
         break;
     default:
         Log("ERR: Invalid equipment type");
