@@ -10,13 +10,13 @@
 #define Y_TOP_EDGE    0.1
 #define Y_BOTTOM_EDGE 0.2
 
-#define MAX_PLAYERS 8
+#define MAX_PLAYERS        8
 #define PDA_Responsiveness 1
-#define PDA_HistoryMax 16
-#define PDA_TAB_START_X 12.0
-#define PDA_TAB_Y 5.0
-#define PDA_TAB_W 12
-#define PDA_TAB_H 7
+#define PDA_HistoryMax     16
+#define PDA_TAB_START_X    12.0
+#define PDA_TAB_Y          5.0
+#define PDA_TAB_W          12
+#define PDA_TAB_H          7
 
 #define NUM_DIFFICULTIES 5
 
@@ -28,97 +28,97 @@
 #define PDA_MODMIN  0
 #define PDA_MODMAX  8
 
-#define ARMOR_DATA 1
+#define ARMOR_DATA    1
 #define BACKPACK_DATA 2
-#define BOOTS_DATA 3
+#define BOOTS_DATA    3
 
-#define BEAST_DIFFICULTY_WIDTH 85
+#define BEAST_DIFFICULTY_WIDTH  85
 #define BEAST_DIFFICULTY_HEIGHT 8
-#define DRLA_MONSTER_PAGE_MAX 19
+#define DRLA_MONSTER_PAGE_MAX   19
 
-#define DRLA_BACKPACKMAX 6
-#define DRLA_TRISTARMAX 3
-#define DRLA_NUCLEARMAX 16
-#define DRLA_WEAPONSETMAX 2
-#define	DRLA_MENUMAXELEMENTS 2
-#define DRLA_WEAPONPERKMAX 5
+#define DRLA_BACKPACKMAX      6
+#define DRLA_TRISTARMAX       3
+#define DRLA_NUCLEARMAX       16
+#define DRLA_WEAPONSETMAX     2
+#define	DRLA_MENUMAXELEMENTS  2
+#define DRLA_WEAPONPERKMAX    5
 
 #define DRLA_DIFFICULTYTIERS 5
 
 #define DRLA_BESTIARYELEMENTS 2
 
-#define DRLA_NORMALMONSTERMAX 19
-#define DRLA_NIGHTMAREMONSTERMAX 19
-#define DRLA_TECHNOMONSTERMAX 19
+#define DRLA_NORMALMONSTERMAX     19
+#define DRLA_NIGHTMAREMONSTERMAX  19
+#define DRLA_TECHNOMONSTERMAX     19
 #define DRLA_ARMAGEDDONMONSTERMAX 19
-#define DRLA_SPECIALMONSTERMAX 6
+#define DRLA_SPECIALMONSTERMAX    6
 
 #define DRLA_MONSTERMAX (DRLA_NORMALMONSTERMAX + DRLA_NIGHTMAREMONSTERMAX + DRLA_TECHNOMONSTERMAX + DRLA_ARMAGEDDONMONSTERMAX)
 
 #define DRLA_GROUPQUANTITY 6
-#define DRLA_ITEMSMAX 1 + (8 * DRLA_GROUPQUANTITY)
+#define DRLA_ITEMSMAX      1 + (8 * DRLA_GROUPQUANTITY)
 
 #define DRLA_ITEMELEMENTS 3
 
 #define TEXT_OFFSET 13 // "PDA_ASSEMBLY_" string length
 
 #define INF_HOLDTIME 0.0
-#define OPAQUE 1.0
+#define OPAQUE       1.0
 
-#define ARM_HEIGHT        34 / NEW_RESOLUTION_Y
+#define ARM_HEIGHT        (int)(34 / NEW_RESOLUTION_Y)
 
-#define EQUIPMENT_ICON_X  PDA_SCREEN_X + 35.0
+#define EQUIPMENT_ICON_X  (int)(PDA_SCREEN_X + 35.0)
 #define EQUIPMENT_ICON_Y  60.0
-#define EQUIPMENT_TEXT_Y  EQUIPMENT_ICON_Y + 80.0
+#define EQUIPMENT_TEXT_Y  (int)(EQUIPMENT_ICON_Y + 80.0)
 
 // PDA size
 // const float NEW_RESOLUTION_WIDTH = 384, NEW_RESOLUTION_HEIGHT = 288;  // 380 / 320 = 1.1875  |  260 / 200 = 1.3
-#define NEW_RESOLUTION_WIDTH   400
-#define NEW_RESOLUTION_HEIGHT  300
+#define NEW_RESOLUTION_WIDTH   400.0
+#define NEW_RESOLUTION_HEIGHT  300.0
 
-#define OLD_RESOLUTION_WIDTH   320
-#define OLD_RESOLUTION_HEIGHT  200
+#define OLD_RESOLUTION_WIDTH   320.0
+#define OLD_RESOLUTION_HEIGHT  200.0
             
-#define NEW_RESOLUTION_X   NEW_RESOLUTION_WIDTH / OLD_RESOLUTION_WIDTH
-#define NEW_RESOLUTION_Y   NEW_RESOLUTION_HEIGHT / OLD_RESOLUTION_HEIGHT
+#define NEW_RESOLUTION_X   (float)(NEW_RESOLUTION_WIDTH / OLD_RESOLUTION_WIDTH)
+#define NEW_RESOLUTION_Y   (float)(NEW_RESOLUTION_HEIGHT / OLD_RESOLUTION_HEIGHT)
 
 // The following four constants are all based off the RLZPDA2 graphic itself.
-#define   PDA_SCREEN_X      18 // 17 pixels from graphic left start + 1 px screen padding
-#define   PDA_SCREEN_Y      20 // 19 pixels from graphic top start + 1 px screen padding.
-#define   PDA_SCREEN_WIDTH  255 // Should be 256, taking into account 1px screen padding...
-#define   PDA_SCREEN_HEIGHT 162 // Should be 162, taking into account 1px screen padding...
-#define   PDA_SCREEN_HEADER 13
+#define PDA_SCREEN_X      18 // 17 pixels from graphic left start + 1 px screen padding
+#define PDA_SCREEN_Y      20 // 19 pixels from graphic top start + 1 px screen padding.
+#define PDA_SCREEN_WIDTH  255 // Should be 256, taking into account 1px screen padding...
+#define PDA_SCREEN_HEIGHT 162 // Should be 162, taking into account 1px screen padding...
+#define PDA_SCREEN_HEADER 13
 // -------------
-#define  PDA_SCROLLABLE_Y       (PDA_SCREEN_HEADER + PDA_SCREEN_Y) * NEW_RESOLUTION_Y  - 1
-#define  PDA_SCROLLABLE_HEIGHT  (PDA_SCREEN_HEIGHT                 * NEW_RESOLUTION_Y) - PDA_SCREEN_Y + 1
+#define PDA_SCROLLABLE_Y       (int)((PDA_SCREEN_HEADER + PDA_SCREEN_Y) * NEW_RESOLUTION_Y  - 1)
+#define PDA_SCROLLABLE_HEIGHT  (int)((PDA_SCREEN_HEIGHT                 * NEW_RESOLUTION_Y) - PDA_SCREEN_Y + 1)
 // -------------
-#define   PDA_FLOATING_TOOLTIP_GRAPHIC_X       PDA_SCREEN_X
-#define   PDA_FLOATING_TOOLTIP_GRAPHIC_Y       PDA_SCROLLABLE_Y      + 15
-#define   PDA_FLOATING_TOOLTIP_GRAPHIC_WIDTH   PDA_SCREEN_WIDTH      + 80
-#define   PDA_FLOATING_TOOLTIP_GRAPHIC_HEIGHT  PDA_SCROLLABLE_HEIGHT + 60
-#define   PDA_FLOATING_TOOLTIP_GRAPHIC_WRAP    PDA_SCREEN_WIDTH      + 10 // The graphic doesn't wrap though..
+#define PDA_FLOATING_TOOLTIP_GRAPHIC_X       PDA_SCREEN_X
+#define PDA_FLOATING_TOOLTIP_GRAPHIC_Y       PDA_SCROLLABLE_Y      + 15
+#define PDA_FLOATING_TOOLTIP_GRAPHIC_WIDTH   PDA_SCREEN_WIDTH      + 80
+#define PDA_FLOATING_TOOLTIP_GRAPHIC_HEIGHT  PDA_SCROLLABLE_HEIGHT + 60
+#define PDA_FLOATING_TOOLTIP_GRAPHIC_WRAP    PDA_SCREEN_WIDTH      + 10 // The graphic doesn't wrap though..
 
-#define   PDA_FLOATING_TOOLTIP_X       PDA_SCREEN_X
-#define   PDA_FLOATING_TOOLTIP_Y       PDA_SCROLLABLE_Y      + 15
-#define   PDA_FLOATING_TOOLTIP_WIDTH   PDA_SCREEN_WIDTH      + 80
-#define   PDA_FLOATING_TOOLTIP_HEIGHT  PDA_SCROLLABLE_HEIGHT + 165
-#define   PDA_FLOATING_TOOLTIP_WRAP    (PDA_SCREEN_WIDTH - PDA_SCREEN_X) / NEW_RESOLUTION_X + 42
+#define PDA_FLOATING_TOOLTIP_X       PDA_SCREEN_X
+#define PDA_FLOATING_TOOLTIP_Y       PDA_SCROLLABLE_Y      + 15
+#define PDA_FLOATING_TOOLTIP_WIDTH   PDA_SCREEN_WIDTH      + 80
+#define PDA_FLOATING_TOOLTIP_HEIGHT  PDA_SCROLLABLE_HEIGHT + 165
+#define PDA_FLOATING_TOOLTIP_WRAP    (int)((PDA_SCREEN_WIDTH - PDA_SCREEN_X) / NEW_RESOLUTION_X + 42)
 // -------------
-#define   PDA_MENU_TOOLTIP_X       180
-#define   PDA_MENU_TOOLTIP_Y       80
-#define   PDA_MENU_TOOLTIP_WIDTH   115
-#define   PDA_MENU_TOOLTIP_HEIGHT  158
+#define PDA_MENU_TOOLTIP_X       180
+#define PDA_MENU_TOOLTIP_Y       80
+#define PDA_MENU_TOOLTIP_WIDTH   115
+#define PDA_MENU_TOOLTIP_HEIGHT  158
 // -------------
-#define 	PDA_MAX_ARMOR_IN_INV  4
-#define   PDA_MAX_ARMOR_WORN    2
-#define   PDA_MAX_MOD_PACKS     7
+#define PDA_MAX_ARMOR_IN_INV  4
+#define PDA_MAX_ARMOR_WORN    2
+#define PDA_MAX_MOD_PACKS     7
 
-#define PDA_MENU_ICON_LEFT_X    20 + X_LEFT_EDGE
-#define PDA_MENU_ICON_RIGHT_X   140.0 + X_LEFT_EDGE
+#define PDA_MENU_ICON_LEFT_X    (float)(20 + X_LEFT_EDGE)
+#define PDA_MENU_ICON_RIGHT_X   (float)(140.0 + X_LEFT_EDGE)
 
-#define PDA_MENU_TEXT_LEFT_X   PDA_MENU_ICON_LEFT_X + 30.0
-#define PDA_MENU_TEXT_RIGHT_X  PDA_MENU_ICON_RIGHT_X + 30.0
+#define PDA_MENU_TEXT_LEFT_X   (float)(PDA_MENU_ICON_LEFT_X + 30.0)
+#define PDA_MENU_TEXT_RIGHT_X  (float)(PDA_MENU_ICON_RIGHT_X + 30.0)
 
-#define PDA_NormalY  PDA_SCREEN_Y
+#define PDA_NormalY  (float)PDA_SCREEN_Y
 
 // EOF

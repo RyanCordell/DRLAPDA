@@ -1,4 +1,4 @@
-const int MENU_OFFSET = 20.0 + Y_TOP_EDGE;
+#define MENU_OFFSET (int)(20.0 + Y_TOP_EDGE)
 
 PDA_ButtonHandler(PDA_PLAYERS_BUTTON,    false, PDA_CLASSES,    "Shows all available class information.\n", false, false);
 PDA_ButtonHandler(PDA_WEAPONS_BUTTON,    false, PDA_WEAPONS,    "Shows all available weapon information.\nWeapon name, available modpack effects and miscellaneous info.\n", false, false);
