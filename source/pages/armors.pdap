@@ -1,10 +1,7 @@
-bool specialArmorTokens = checkSpecialArmorTokens();
-
 if (PDA_Local.page == EQUIPMENT_PAGE_ONHAND) {
-    #include "../../pages/subpage/armors_onhand.pdap"
+    #include "../../pages/subpage/armors_onhand_logic.pdap"
 }
 
-// Detailed information on currently equipped gear (armor, boots, backpack)
 if (PDA_Local.page == EQUIPMENT_PAGE_INFO) {
-    #include "../../pages/subpage/armors_detail.pdap"
+    #include "../../pages/subpage/armors_detail_logic.pdap"
 }

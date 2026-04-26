@@ -36,6 +36,7 @@ enum PDA_IDs {
     PDA_BESTIARY_BUTTON,
     PDA_MISC_BUTTON,
     PDA_HELP_BUTTON,
+    PDA_WINFO_BUTTON,
 
     // Bestiary
     PDA_BEAST_UV = 50,
@@ -117,6 +118,7 @@ enum PDA_Categories {
 	PDA_HELP,
 	PDA_ITEMS,
 	PDA_MISC,
+    PDA_WINFO,
 	PDA_MENUMAX, // Always keep this as the last element in the accessible areas
 
 	// Normally unaccessible

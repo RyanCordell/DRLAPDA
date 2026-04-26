@@ -5,7 +5,7 @@
 #define StrTrim(a,b,c)		StrMid((a),(b),StrLen((a)) - (c))
 #define Array_Size(array) 	(sizeof((array))/sizeof((array[0][0])))
 
-#define PDA_SetScrollLimit(a)  	PDA_Local.max_text_y = (a)
+#define PDA_SetScrollLimit(a)  	PDA_Local.maxTextY = (a)
 #define PDA_ResetScroll()       PDA_Local.scrollingY = PDA_SCREEN_Y;
 #define PDA_SetMonsterLimit(a)  if (PDA_Local.monsterpage > (a)) PDA_Local.monsterpage = (a)
 #define PDA_DefaultFont() 		  SetFont(PDA_FONT[mono_font]);
@@ -34,19 +34,19 @@
 
 #define setMaxModLimit() \
     if (CheckInventory("RLStandardWeaponToken") || CheckInventory("RLExoticWeaponToken")) { \
-        PDA_Local.maxmodlimit = 4; \
+        PDA_Local.maxModLimit = 4; \
     } \
     if (CheckInventory("RLSuperiorWeaponToken") || CheckInventory("RLBasicAssemblyTypeWeapon")) { \
-        PDA_Local.maxmodlimit = 2; \
+        PDA_Local.maxModLimit = 2; \
     } \
     if (CheckInventory("RLUniqueWeaponToken") || CheckInventory("RLDemonicWeaponToken") || CheckInventory("RLLegendaryWeaponToken") || CheckInventory("RLAdvancedAssemblyTypeWeapon")) { \
         if (StrCmp(GetWeapon(),"RLDuke2Rifle") == 0 || StrCmp(GetWeapon(),"RLChameleonRifle") == 0 || StrCmp(GetWeapon(),"RLWidowmakerSMG") == 0) \
-            PDA_Local.maxmodlimit = 3; \
+            PDA_Local.maxModLimit = 3; \
         else \
-            PDA_Local.maxmodlimit = 1; \
+            PDA_Local.maxModLimit = 1; \
     } \
     if (CheckInventory("RLMasterAssemblyTypeWeapon") || CheckInventory("RLSuperiorAssembledWeaponToken")) { \
-        PDA_Local.maxmodlimit = 0; \
+        PDA_Local.maxModLimit = 0; \
     } \
 
 // Checks for player perks that influence weapons
@@ -71,6 +71,22 @@
 
 #define notHoldingAction \
     !PDA_LocalMouse.m1 && (PDA_LocalMouse.oldState & _ACTION) \
+
+#define PDA_CommitButtonState(id) \
+    PDA_LocalButton[id].oldState = PDA_LocalButton[id].state \
+
+#define PDA_SetDirty()          PDA_Local.dirty = true
+#define PDA_SetScrollDirty()    PDA_Local.scrollDirty = true
+#define PDA_ClearDirty()        PDA_Local.dirty = false; PDA_Local.scrollDirty = false
+
+#define PDA_CategoryChanged \
+    (PDA_Local.category != PDA_Local.prevCategory) \
+
+#define PDA_PageChanged \
+    (PDA_Local.page != PDA_Local.prevPage) \
+
+#define PDA_ScrollMoved \
+    (PDA_Local.scrollingY != PDA_Local.prevScrollingY) \
 
 // Checks for unique weapon + armor set perks
 // I should get a better name for this loop's max at some point..

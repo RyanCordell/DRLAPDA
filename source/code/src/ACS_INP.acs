@@ -93,10 +93,9 @@ SCRIPT "PDA_MouseController" (void)
             PDA_LocalMouse.moving = true;
         else {
             PDA_LocalMouse.moving = false;
-            PDA_LocalMouse.scrolling = false;
         }
 
-        // log("scrollY %f: | minY %f: | maxY %f: | s? %d: | m? %d:", PDA_Local.scrollingY, VMIN, PDA_Local.max_text_y, PDA_LocalMouse.scrolling, PDA_LocalMouse.moving);
+        // log("scrollY %f: | minY %f: | maxY %f: | s? %d: | m? %d:", PDA_Local.scrollingY, VMIN, PDA_Local.maxTextY, PDA_LocalMouse.scrolling, PDA_LocalMouse.moving);
 
         if (PDA_LocalMouse.x < HMIN) PDA_LocalMouse.x = HMIN;
         if (PDA_LocalMouse.x > HMAX) PDA_LocalMouse.x = HMAX;
@@ -105,7 +104,6 @@ SCRIPT "PDA_MouseController" (void)
             PDA_LocalMouse.y = VMIN;
 
             if (PDA_Local.scrollingY < PDA_SCREEN_Y) {
-                PDA_LocalMouse.scrolling = true;
                 PDA_Local.scrollingY += 2.0 * yScale;
                 PDA_Local.scrollYDelta = setScrollDelta();
             }
@@ -113,8 +111,7 @@ SCRIPT "PDA_MouseController" (void)
         if (PDA_LocalMouse.y > VMAX) {
             PDA_LocalMouse.y = VMAX;
 
-            if (PDA_Local.scrollingY > PDA_Local.max_text_y) {
-                PDA_LocalMouse.scrolling = true;
+            if (PDA_Local.scrollingY > PDA_Local.maxTextY) {
                 PDA_Local.scrollingY -= 2.0 * yScale;
                 PDA_Local.scrollYDelta = setScrollDelta();
             }
@@ -125,7 +122,7 @@ SCRIPT "PDA_MouseController" (void)
    else if (PDA_LocalMouse.state == mouse_grab)    localCursor = "PDAGRB";
    else if (PDA_LocalMouse.state == mouse_holding) localCursor = "PDAHLD";
         
-        if (!PDA_Local.pongrunning)
+        if (!PDA_Local.pongRunning)
         {
             DisplayIcon(localCursor, PDA_CURSORID, PDA_LocalMouse.x + 0.1, PDA_LocalMouse.y + 0.1, 0, (buttons[PlayerNumber()] & _ACTION) ? 0.8 : 1);
         }
@@ -136,20 +133,9 @@ SCRIPT "PDA_MouseController" (void)
             myoff                    = vBuffer;
             PDA_Local.scrollingY    += vBuffer;
             PDA_Local.scrollYDelta   = setScrollDelta();
-            PDA_LocalMouse.scrolling = true;
             
-            if (PDA_Local.scrollingY < PDA_Local.max_text_y) PDA_Local.scrollingY = PDA_Local.max_text_y;
+            if (PDA_Local.scrollingY < PDA_Local.maxTextY) PDA_Local.scrollingY = PDA_Local.maxTextY;
             if (PDA_Local.scrollingY > VMIN)                 PDA_Local.scrollingY = VMIN; 
-        }
-
-        if (notHoldingAction) {
-            PDA_LocalMouse.scrolling = false;
-        }
-
-        if (PDA_LocalMouse.scrolling) {
-            if (PDA_Local.scrollingY < PDA_Local.max_text_y || PDA_Local.scrollingY > VMIN) {
-                PDA_LocalMouse.scrolling = false;
-            }
         }
         
         // Right mouse click
@@ -171,7 +157,7 @@ SCRIPT "PDA_MouseController" (void)
             }
             else if (PDA_Local.category == PDA_BESTIARY_DETAIL) {
                 PDA_SetCategory(PDA_BESTIARY);
-                PDA_SetPage(PDA_Local.previous_page);
+                PDA_SetPage(PDA_Local.previousPage);
             }
             else if (PDA_Local.category == PDA_PONG) {
                 // ACS_NamedExecute("QuitPong",0);

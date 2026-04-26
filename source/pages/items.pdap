@@ -1,6 +1,6 @@
 if (GetCvar("DRLA_specialstarts") == 2)
 {
-    PDA_Local.pagemax = 3;
+    PDA_Local.pageMax = 3;
 
     #define DUKE2X 0.0 + X_LEFT_EDGE
     #define DUKE2Y 0.0 + Y_TOP_EDGE
@@ -34,13 +34,11 @@ if (GetCvar("DRLA_specialstarts") != 2)
                 PDA_SCREEN_X + 30.0 + X_LEFT_EDGE, 50.0 + (50.0 * ItemLimit), INF_HOLDTIME, OPAQUE);
 
             // Item name + desc
-            HudMessageParallax(
-                StrParam(
-                    "%l:"
-                    "%l:\n", 
-                DRLA_ItemInfo[itemIndex + DRLA_PageOffset][1], DRLA_ItemInfo[itemIndex + DRLA_PageOffset][2]), 
-                HUDMSG_PLAIN, PDA_ITEMS_END - (ItemLimit+9), CR_UNTRANSLATED, 
-                40.0, 40.0 + (50.0 * ItemLimit), INF_HOLDTIME, OPAQUE);
+            PDA_HudDirtyP(HUDMSG_PLAIN, PDA_ITEMS_END - (ItemLimit+9), CR_UNTRANSLATED, 40.0, 40.0 + (50.0 * ItemLimit), INF_HOLDTIME, OPAQUE,
+                l:DRLA_ItemInfo[itemIndex + DRLA_PageOffset][1],
+                l:DRLA_ItemInfo[itemIndex + DRLA_PageOffset][2],
+                s:"\n"
+            );
 
             ItemLimit++;
         }

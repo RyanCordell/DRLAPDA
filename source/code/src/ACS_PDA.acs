@@ -171,7 +171,7 @@ function void reset_pda_stuff (str location) {
     
     PDA_PlaySound("UI/PDA/Offline", "pda/soldierclose", 80);
     
-    PDA_Local.pongrunning = false;
+    PDA_Local.pongRunning = false;
     PDA_Local.active = false;
 }
 
@@ -186,29 +186,42 @@ SCRIPT "HeyADollar" enter {
 script "PDA_GSInit" open {
    for (int i = 0; i < MAX_PLAYERS; i++) {
       PDA_Info[i].active = false;
-      PDA_Info[i].pongrunning = false;
+      PDA_Info[i].pongRunning = false;
       
       PDA_Info[i].category = 0;
       PDA_Info[i].page = 1;
-      PDA_Info[i].previous_page = 1;
-      PDA_Info[i].pagemax = 0;
+      PDA_Info[i].previousPage = 1;
+      PDA_Info[i].pageMax = 0;
       
-      PDA_Info[i].texty = 0;
-      PDA_Info[i].max_text_y = -200;
+      PDA_Info[i].textY = 0;
+      PDA_Info[i].maxTextY = -200;
       PDA_Info[i].scrollingY = 20.0;
       PDA_Info[i].scrollYDelta = 0;
       
       PDA_Info[i].clicked = false;
       PDA_Info[i].newEntry[0] = false;
       
-      PDA_Info[i].assemblyoffset = 0;
-      PDA_Info[i].currentassembly = 0;
-      PDA_Info[i].maxassembliesper = 255;
+      PDA_Info[i].assemblyOffset = 0;
+      PDA_Info[i].currentAssembly = 0;
+      PDA_Info[i].maxAssembliesPer = 255;
       
-      PDA_Info[i].playonce = false;
+      PDA_Info[i].playSoundOnce = false;
       
-      PDA_Info[i].maxmodlimit = 0;
+      PDA_Info[i].maxModLimit = 0;
       PDA_Info[i].detailFetch[i] = "null";
+      
+      PDA_Info[i].dirty = false;
+      PDA_Info[i].scrollDirty = false;
+      PDA_Info[i].prevScrollingY = 0.0;
+      PDA_Info[i].prevCategory = 0;
+      PDA_Info[i].prevPage = 0;
+
+      PDA_Info[i].equipmentLimit = 0;
+      PDA_Info[i].equipmentBaseY = 30.0;
+      PDA_Info[i].equipmentId = 0;
+      PDA_Info[i].stopEquipmentEarly = false;
+
+
       /*PDA_Mouse[i].x = 0;
       PDA_Mouse[i].y = 0;
       PDA_Mouse[i].m1 = false;
@@ -337,6 +350,11 @@ function void page_help (void) {
     #include "../../pages/help.pdap"
 }
 
+function void page_info (void) {
+    if (PDA_Local.category != PDA_WINFO) return;
+    #include "../../pages/info.pdap"
+}
+
 function void page_misc (void) {
     if (PDA_Local.category != PDA_MISC) return;
     #include "../../pages/misc.pdap"
@@ -369,8 +387,17 @@ function void page_monster_info (void) {
     #include "../../pages/beastinfo.pdap"
 }
 
-SCRIPT "PDA_Core" (void) {
+function void PDA_OnChange (void) {
+    afterPageDefaults("PDA_OnChange");
+    PDA_ChangeScrolling();
+    PDA_SetDataPerPage();
     #include "PDA_STC.acs"
+    PDA_SetDirty();
+    PDA_Local.prevCategory = PDA_Local.category;
+    PDA_Local.prevPage = PDA_Local.page;
+}
+
+SCRIPT "PDA_Core" (void) {
     PDA_Local.scrollingY = 20.0;
 
     if (PDA_Local.active) {
@@ -378,11 +405,18 @@ SCRIPT "PDA_Core" (void) {
         PDA_DefaultFont();
 
         separator_character = StrParam("%l:", "PDA_SEPARATOR_CHARACTER");
-
-        PDA_OnChange();
     }
     
     while (PDA_Local.active) {
+        if (PDA_ScrollMoved) {
+          PDA_SetScrollDirty();
+          PDA_TrackScrollArrows();
+        }
+        PDA_Local.prevScrollingY = PDA_Local.scrollingY;
+
+        if (PDA_CategoryChanged || PDA_PageChanged) {
+          PDA_OnChange();
+        }
         PDA_HandleHeader();
         
         switch (PDA_Local.category) {
@@ -435,9 +469,7 @@ SCRIPT "PDA_Core" (void) {
         }
         Delay(PDA_Responsiveness);
 
-        if (PDA_LocalMouse.scrolling) {
-            PDA_TrackScrollArrows();
-        }
+        PDA_ClearDirty();
     }
     SetHudClipRect(0,0,0,0,0);
 }

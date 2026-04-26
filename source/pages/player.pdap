@@ -1,38 +1,37 @@
-if (GetActorclass(0) != "None")
-{
-
-    if (stricmp(PDA_Class[PlayerNumber()][pda_class_icon], "PDA_", 4) == 0) 
-      PDA_Class[PlayerNumber()][pda_class_icon] = "PPDAUNK";
+// if (GetActorClass(0) != "None")
+// {
+//     if (stricmp(PDA_Class[PlayerNumber()][pda_class_icon], "PDA_", 4) == 0) 
+//       PDA_Class[PlayerNumber()][pda_class_icon] = "PPDAUNK";
       
-    SetFont(PDA_Class[PlayerNumber()][pda_class_icon]);
-    HudMessage(s:"A\n"; HUDMSG_ALPHA, PDA_INFOID, CR_UNTRANSLATED,  PDA_SCREEN_WIDTH + 5.0 + X_RIGHT_EDGE, (PDA_SCROLLABLE_HEIGHT) + 5.0 + Y_TOP_EDGE, 0, 0.45);
+//     SetFont(PDA_Class[PlayerNumber()][pda_class_icon]);
+//     HudMessage(s:"A\n"; HUDMSG_ALPHA, PDA_INFOID, CR_UNTRANSLATED,  PDA_SCREEN_WIDTH + 5.0 + X_RIGHT_EDGE, (PDA_SCROLLABLE_HEIGHT) + 5.0 + Y_TOP_EDGE, 0, 0.45);
     
-    PDA_DefaultFont();
-    // Class perks
-    if (PDA_Local.page == CLASSES_PAGE_PERKS)
-    {
-        HudMessageParallax(
-            StrParam(
-                "\cd%l:\c-\n\n"
-                "%l:",
-                PDA_Class[PlayerNumber()][pda_class_name],
-                PDA_Class[PlayerNumber()][pda_class_abilities]
-            ),
-            HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE);
-    }
-    // Class backstory
-    if (PDA_Local.page == CLASSES_PAGE_STORY)
-    {
-        HudMessageParallax(
-            StrParam(
-                "\cd%l:\c-\n\n"
-                "%l:",
-                PDA_Class[PlayerNumber()][pda_class_name],
-                PDA_Class[PlayerNumber()][pda_class_story]
-            ),
-            HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE);
-    }
-}
-// Get rid of it once we're done.
-// PDA_UnsetScrollWindow();
+//     PDA_DefaultFont();
+//     // Class perks
+//     if (PDA_Local.page == CLASSES_PAGE_PERKS)
+//     {
+//         HudMessageParallax(
+//             StrParam(
+//                 "\cd%l:\c-\n\n"
+//                 "%l:",
+//                 PDA_Class[PlayerNumber()][pda_class_name],
+//                 PDA_Class[PlayerNumber()][pda_class_abilities]
+//             ),
+//             HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE);
+//     }
+//     // Class backstory
+//     if (PDA_Local.page == CLASSES_PAGE_STORY)
+//     {
+//         HudMessageParallax(
+//             StrParam(
+//                 "\cd%l:\c-\n\n"
+//                 "%l:",
+//                 PDA_Class[PlayerNumber()][pda_class_name],
+//                 PDA_Class[PlayerNumber()][pda_class_story]
+//             ),
+//             HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE);
+//     }
+// }
+// // Get rid of it once we're done.
+// // PDA_UnsetScrollWindow();
 

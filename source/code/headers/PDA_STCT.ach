@@ -1,33 +1,45 @@
 
 struct PDAInfo {
-   bool active;
-   bool pongrunning;
-   
-   int category;
-   int page;
-   int pagemax;
-   int previous_page;
-   
-   float texty;
-   float max_text_y;
-   float scrollingY;
-   float oldScrollingY;
-   float creditsroll;
-   
-   str tiercolor;
-   int assemblyoffset;
-   int currentassembly;
-   int maxassembliesper;
-   
-   bool newEntry[5];
-   
-   bool clicked;
-   bool playonce;
-   
-   str detailFetch[8];
-   
-   int maxmodlimit;
-   int scrollYDelta;
+    bool active;
+    bool pongRunning;
+
+    int category;
+    int page;
+    int pageMax;
+    int previousPage;
+
+    float textY;
+    float maxTextY;
+    float scrollingY;
+    float oldScrollingY;
+    float creditsroll;
+
+    str tierColor;
+    int assemblyOffset;
+    int currentAssembly;
+    int maxAssembliesPer;
+
+    bool newEntry[5];
+
+    bool clicked;
+    bool playSoundOnce;
+
+    str detailFetch[8];
+
+    int maxModLimit;
+    int scrollYDelta;
+
+    int equipmentLimit;
+    fixed equipmentBaseY;
+    int equipmentId;
+    bool stopEquipmentEarly;
+
+    // new flags necessary for retained mode UI
+    bool dirty;
+    bool scrollDirty;
+    fixed prevScrollingY;
+    int prevCategory;
+    int prevPage;
 }
 PDAInfo PDA_Info[MAX_PLAYERS];
 
@@ -41,7 +53,7 @@ struct PDAMouse {
     bool m2;
     
     int state;
-    int oldstate;
+    int oldState;
 
     bool scrolling;
     bool moving;
@@ -58,7 +70,7 @@ struct PDAButton {
     int height;
 
     int state;
-    int oldstate;
+    int oldState;
 
     str label;
     str graphic;

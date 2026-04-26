@@ -1,4 +1,2 @@
-PDA_Local.pagemax = 6;
-
 // PDA_DefaultFont();
 // PDA_UnsetScrollWindow();

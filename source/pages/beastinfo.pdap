@@ -1,48 +1,45 @@
-if (!PDA_Local.playonce) {
-    PDA_PlaySound("UI/PDA/Activate", "pda/soldier", 80);
+// if (!PDA_Local.playSoundOnce) {
+//     PDA_PlaySound("UI/PDA/Activate", "pda/soldier", 80);
 
-    PDA_Local.playonce = true;
-}
+//     PDA_Local.playSoundOnce = true;
+// }
 
+// if (StrCmp(PDA_Local.detailFetch[0], "null") != 0) {
+//     // Monster icon
+//     DisplayIcon(StrParam("%l:", PDA_Enemy[PlayerNumber()][enemy_icon]), PDA_INFO2ID, PDA_SCREEN_WIDTH - 50.0 + X_LEFT_EDGE, PDA_Local.scrollingY + 110.0 + Y_TOP_EDGE, 0, 0.8);
 
-
-if (StrCmp(PDA_Local.detailFetch[0], "null") != 0) {
-    
-    // Monster icon
-    DisplayIcon(StrParam("%l:", PDA_Enemy[PlayerNumber()][enemy_icon]), PDA_INFO2ID, PDA_SCREEN_WIDTH - 50.0 + X_LEFT_EDGE, PDA_Local.scrollingY + 110.0 + Y_TOP_EDGE, 0, 0.8);
-
-    // EXPERIMENTS
-    SetFont(PDA_FONT[mono_font]);
-    HudMessageParallax(
-        StrParam(
-            "\cdName:\c- %l:\n"
-            "\cdNo. of Kills:\c- %i:\n"
-            "\cdHealth:\c- %l:\n"
-            "\cdResistances:\c- \n%l:\n"
-            "\cdDrops and misc info:\c- \n%l:\n",
-            PDA_Enemy[PlayerNumber()][enemy_name],
-            enemy_count,
-            PDA_Enemy[PlayerNumber()][enemy_health],
-            PDA_Enemy[PlayerNumber()][enemy_resistance],
-            PDA_Enemy[PlayerNumber()][enemy_misc]
-        ),
-        HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 5.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE);
-} else {
-    SetFont(PDA_FONT[mono_font]);
-    HudMessageParallax(
-        StrParam(
-            "%l:\n"
-            "%l:\n"
-            "%l:\n"
-            "%l:\n"
-            "%l:\n",
-            "PDA_BESTIARY_DEFAULT_NAME",
-            "PDA_BESTIARY_DEFAULT_KILLS",
-            "PDA_BESTIARY_DEFAULT_HEALTH",
-            "PDA_BESTIARY_DEFAULT_RESISTANCES",
-            "PDA_BESTIARY_DEFAULT_DESC"
-        ),
-        HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 5.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE);
-}
+//     // EXPERIMENTS
+//     SetFont(PDA_FONT[mono_font]);
+//     HudMessageParallax(
+//         StrParam(
+//             "\cdName:\c- %l:\n"
+//             "\cdNo. of Kills:\c- %i:\n"
+//             "\cdHealth:\c- %l:\n"
+//             "\cdResistances:\c- \n%l:\n"
+//             "\cdDrops and misc info:\c- \n%l:\n",
+//             PDA_Enemy[PlayerNumber()][enemy_name],
+//             enemy_count,
+//             PDA_Enemy[PlayerNumber()][enemy_health],
+//             PDA_Enemy[PlayerNumber()][enemy_resistance],
+//             PDA_Enemy[PlayerNumber()][enemy_misc]
+//         ),
+//         HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 5.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE);
+// } else {
+//     SetFont(PDA_FONT[mono_font]);
+//     HudMessageParallax(
+//         StrParam(
+//             "%l:\n"
+//             "%l:\n"
+//             "%l:\n"
+//             "%l:\n"
+//             "%l:\n",
+//             "PDA_BESTIARY_DEFAULT_NAME",
+//             "PDA_BESTIARY_DEFAULT_KILLS",
+//             "PDA_BESTIARY_DEFAULT_HEALTH",
+//             "PDA_BESTIARY_DEFAULT_RESISTANCES",
+//             "PDA_BESTIARY_DEFAULT_DESC"
+//         ),
+//         HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 5.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE);
+// }
 
 // PDA_UnsetScrollWindow();

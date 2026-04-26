@@ -1,23 +1,12 @@
-float assemblyX = 20.0,
-      assemblyY;
+float assemblyX = 20.0;
 const int width = 180, 
           height = 7;
 
-for (int ti = 0, li = 1; ti <= PDA_Local.maxassembliesper; ti+=2, li+=2) {
+for (int ti = 0, li = 1; ti <= PDA_Local.maxAssembliesPer; ti+=2, li+=2) {
     int aoff               = (PDA_Local.assemblyOffset - 1 < 0) ? 0 : (PDA_Local.assemblyOffset - 1);
     str actorToken         = stringArray[ASSEMBLY_DIM][ti + aoff];
-    str languagePointer    = stringArray[ASSEMBLY_DIM][li + aoff];
-        // index - 1 to account for message id
+    // index - 1 to account for message id
     int id                 = PDA_ASSEMBLY_ID_END - (ti - 1);
-        assemblyY          = 30.0 + (6.0 * (ti - 1)); 
-    str icon               = StrParam("%l:",    StrParam("%s:_ICON", languagePointer));
-    str colored_label      = StrParam("%s:%l:\c-", PDA_Local.tiercolor, languagePointer);
-    str callback           = languagePointer;
-    str tooltip            = StrParam("%l:\n%l:\n%l:", 
-                                StrParam("%s:%l:\c-", PDA_Local.tiercolor, StrParam("%s:_NAME", languagePointer)), 
-                                "PDA_ASSEMBLY_REQUIREMENTS", 
-                                StrParam("%s:_REQ", languagePointer)
-                            );
 
     if (ti + 2 >= advanced_offset && PDA_Local.assemblyOffset < advanced_offset) continue;
     if (ti + 2 >= master_offset   && PDA_Local.assemblyOffset < master_max     ) continue;
@@ -25,31 +14,16 @@ for (int ti = 0, li = 1; ti <= PDA_Local.maxassembliesper; ti+=2, li+=2) {
     int _incat = false;
     int _catpage = PDA_ASSEMBLY_DETAIL;
     if (!PDA_CheckPlayer1Inventory(actorToken) || !CheckInventory(actorToken)) {
-        icon = "PDAUNK";
-        colored_label = StrParam(l:"PDA_ASSEMBLY_UNKNOWN");
-        callback = "";
-        tooltip = "???";
         _incat = true;
         _catpage = PDA_Local.page;
     }
     
-    PDA_LocalButton[id] = PDA_CreateAssemblyButton(id, icon, colored_label, assemblyX, assemblyY, width, height, callback, tooltip);
     PDA_ButtonHandler(id, _incat, _catpage, "", false, false);
 }
 
-float nextButtonX = 10.0;
-float paginationY = 35.0 + (6.0 * PDA_Local.maxassembliesper);
-
-if (PDA_Local.page > 1 && PDA_Local.page < 3) nextButtonX = PDA_SCREEN_WIDTH + PDA_SCREEN_X - 82;
-
-// Until something is figured out, this will have to stay without the scrolling check,
-// otherwise a weird button retention bug happens.
 if (PDA_Local.page > 1) {
-    PDA_LocalButton[PDA_PREV_PAGE] = PDA_CreateButton(PDA_PREV_PAGE, "Previous tier" , "A_PREV", 10.0, paginationY, 82, 16, 20, 15);
     PDA_ButtonHandler(PDA_PREV_PAGE, true, PDA_Local.page - 1, "", false, false);
 }
-
 if (PDA_Local.page < 3) {
-    PDA_LocalButton[PDA_NEXT_PAGE] = PDA_CreateButton(PDA_NEXT_PAGE, "Next tier" , "A_NEXT", nextButtonX, paginationY, 82, 16, 20, 15);
     PDA_ButtonHandler(PDA_NEXT_PAGE, true, PDA_Local.page + 1, "", false, false);
 }

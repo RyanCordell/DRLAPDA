@@ -51,6 +51,7 @@ int stringArrayIndex = 0;
 #define MODS_DIM 1
 
 #include "PDA_STCT.ach"
+#include "PDA_MCRO.ach"
 
 str PDA_PrintWhichUnique[MAX_PLAYERS][PDA_MODMAX];
 str PDA_PrintWhichBasic[MAX_PLAYERS][PDA_MODMAX];
@@ -319,7 +320,5 @@ str DRLA_ItemInfo[DRLA_ITEMSMAX][DRLA_ITEMELEMENTS] =
     {"PDA_ITEMS_SKULLS_ICON",           "PDA_ITEMS_SKULLS_NAME",           "PDA_ITEMS_SKULLS_DESC"           },
     {"PDA_ITEMS_PHASEDEVICES_ICON",     "PDA_ITEMS_PHASEDEVICES_NAME",     "PDA_ITEMS_PHASEDEVICES_DESC"     },
 };
-
-#include "PDA_MCRO.ach"
 
 // EOF

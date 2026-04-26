@@ -1,0 +1,71 @@
+
+PDA_HudDirtyP(HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE,
+    s:"\cf",l:"PDA_DEMONARTIFACTS_NOTSUPPORTED",s:"\c-\n"
+);
+
+if (!canBeEvil) {
+    PDA_HudDirtyP(HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE,
+        l:(canBeEvil) ? 
+            (CheckInventory(StrParam("%s:DemonArtifacts", player_weapon[player_weapon_current])) ? 
+                weapon_info[weapon_info_dualname] 
+                : weapon_info[weapon_info_name]) 
+            : weapon_info[weapon_info_name],s:"\n",
+        s:"[\c[LightBlue]",i:Weapon_Mod_Quantity[mod_bulk],
+        s:"B \c[Red]",i:Weapon_Mod_Quantity[mod_power],
+        s:"P \c[Green]",i:Weapon_Mod_Quantity[mod_agility],
+        s:"A \c[Yellow]",i:Weapon_Mod_Quantity[mod_technical],
+        s:"T \c[Purple]",i:Weapon_Mod_Quantity[mod_sniper],
+        s:"S \c[Orange]",i:Weapon_Mod_Quantity[mod_firestorm],
+        s:"F \c[White]",i:Weapon_Mod_Quantity[mod_nano],
+        s:"N \cr",i:(canBeEvil) ? 0 : Weapon_Mod_Quantity[mod_artifact],
+        s:"D\c-]\n\n"
+    );
+        
+    float artifactsY = 60.0;
+
+    if (Weapon_Mod_Quantity[mod_artifact] > 0) {
+        switch (Weapon_Mod_Quantity[mod_artifact]) {
+            case 1:
+                PDA_HudDirtyP(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 10.0 + (artifactsY * 1), INF_HOLDTIME, OPAQUE,
+                    s:"\cf",l:"PDA_DEMONARTIFACTS_ONE",s:"\c-\n",
+                    l:StrParam("PDA_ARTIFACT_%s:_ONE", player_weapon[player_weapon_trimmed]),
+                    s:"\n\n"
+                );
+                break;
+            case 2:
+                PDA_HudDirtyP(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 10.0 + (artifactsY * 1), INF_HOLDTIME, OPAQUE,
+                    s:"\cf",l:"PDA_DEMONARTIFACTS_TWO",s:"\c-\n",
+                    l:StrParam("PDA_ARTIFACT_%s:_TWO", player_weapon[player_weapon_trimmed]),
+                    s:"\n\n\c[Red]",
+                    l:"PDA_DEMONARTIFACTS_ONE",
+                    s:"\c-\n",
+                    l:StrParam("PDA_ARTIFACT_%s:_ONE", player_weapon[player_weapon_trimmed]),
+                    s:"\n\n"
+                );
+                break;
+            case 3:
+                PDA_HudDirtyP(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 10.0 + (artifactsY * 1), INF_HOLDTIME, OPAQUE,
+                    s:"\cf",
+                    l:"PDA_DEMONARTIFACTS_THREE",
+                    s:"\c-\n",
+                    l:StrParam("PDA_ARTIFACT_%s:_THREE", player_weapon[player_weapon_trimmed]),
+                    s:"\n\n\c[Red]",
+                    l:"PDA_DEMONARTIFACTS_TWO",
+                    s:"\c-\n",
+                    l:StrParam("PDA_ARTIFACT_%s:_TWO", player_weapon[player_weapon_trimmed]),
+                    s:"\n\n\c[Red]",
+                    l:"PDA_DEMONARTIFACTS_ONE",
+                    s:"\c-\n",
+                    l:StrParam("PDA_ARTIFACT_%s:_ONE", player_weapon[player_weapon_trimmed]),
+                    s:"\n\n"
+                );
+                break;
+        }
+    } else {
+        PDA_HudDirtyP(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 10.0 + (artifactsY * 1), INF_HOLDTIME, OPAQUE,
+            s:"\c[Red]",
+            l:"PDA_DEMONARTIFACTS_ZERO",
+            s:"\c-\n"
+        );
+    }
+}

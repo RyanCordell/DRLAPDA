@@ -1,13 +1,5 @@
 switch (PDA_Local.page) {
     case BESTIARY_PAGE_DIFFICULTIES: 
-        if (PDA_LocalMouse.scrolling) {
-            PDA_LocalButton[PDA_BEAST_UV] = PDA_CreateBeastButton(PDA_BEAST_UV, "Normal",       CR_WHITE,     10.0, 30.0 + (15.0 * 0), BEAST_DIFFICULTY_WIDTH, BEAST_DIFFICULTY_HEIGHT, -4.0, -3.0, "", "");
-            PDA_LocalButton[PDA_BEAST_NM] = PDA_CreateBeastButton(PDA_BEAST_NM, "Nightmare",    CR_BRICK,     10.0, 30.0 + (15.0 * 1), BEAST_DIFFICULTY_WIDTH, BEAST_DIFFICULTY_HEIGHT, -4.0, -3.0, "", "");
-            PDA_LocalButton[PDA_BEAST_TP] = PDA_CreateBeastButton(PDA_BEAST_TP, "Technophobia", CR_LIGHTBLUE, 10.0, 30.0 + (15.0 * 2), BEAST_DIFFICULTY_WIDTH, BEAST_DIFFICULTY_HEIGHT, -4.0, -3.0, "", "");
-            PDA_LocalButton[PDA_BEAST_AG] = PDA_CreateBeastButton(PDA_BEAST_AG, "Armageddon",   CR_GOLD,      10.0, 30.0 + (15.0 * 3), BEAST_DIFFICULTY_WIDTH, BEAST_DIFFICULTY_HEIGHT, -4.0, -3.0, "", "");
-            PDA_LocalButton[PDA_BEAST_EX] = PDA_CreateBeastButton(PDA_BEAST_EX, "Extra",        CR_PURPLE,    10.0, 30.0 + (15.0 * 4), BEAST_DIFFICULTY_WIDTH, BEAST_DIFFICULTY_HEIGHT, -4.0, -3.0, "", "");
-        }
-        
         PDA_ButtonHandler(PDA_BEAST_UV, true, 2, strparam("%l:\n", "PDA_DIFFICULTY_UV_OR_LOWER") , false, false);
         PDA_ButtonHandler(PDA_BEAST_NM, true, 3, strparam("%l:\n", "PDA_DIFFICULTY_NIGHTMARE")   , false, false);
         PDA_ButtonHandler(PDA_BEAST_TP, true, 4, strparam("%l:\n", "PDA_DIFFICULTY_TECHNOPHOBIA"), false, false);
@@ -17,42 +9,19 @@ switch (PDA_Local.page) {
         break;
     default:
         beast_info[0] = PDA_Local.page - 2;
+
         for (int i = 0; i < DRLA_MONSTER_PAGE_MAX; i++) {
-            localListEnemy[list_kill_count] = StrParam("%s:KillCounter", DRLA_Bestiary[beast_info[0]][i][beast_TOKEN]);
-            monsterCheck[beast_info[0]][i]  = CheckInventory(localListEnemy[list_kill_count]);
-
-            fixed beast_y = 30.0 + (16.0 * i);
-            
-            if (CheckInventory(localListEnemy[list_kill_count]) > 0)
-            {
-                localListEnemy[list_actor] = DRLA_Bestiary[beast_info[0]][i][beast_ACTOR];
-                localListEnemy[list_name]  = StrParam("%l:", StrParam("%l:_name", localListEnemy[list_actor]));
-                localListEnemy[list_icon]  = StrParam("%l:", StrParam("%l:_icon", localListEnemy[list_actor]));
-                player_kill_count          = CheckPointerInventory(localListEnemy[list_kill_count], PlayerNumber());
-                beast_info[1]              = (strlen(localListEnemy[list_name]) * 10) / 2;
-            } else {
-                localListEnemy[list_actor] = "null";
-                player_kill_count          = 0;
-                localListEnemy[list_name]  = " ????";
-            }
-
             const int buttonID = PDA_BEASTS_ID_END - i;
-
-            PDA_LocalButton[buttonID] = PDA_CreateBeastButton(buttonID, localListEnemy[list_name], beast_info[2], 
-                beast_x, beast_y, 
-                beast_info[1], 10, 
-                3.0, -3.0, 
-                localListEnemy[list_actor], player_kill_count);
 
             if (localListEnemy[list_name] != " ????") {
                 PDA_ButtonHandler(buttonID, true, 1, "", false, false);
 
                 if (PDA_LocalButton[buttonID].state == button_hovered) {
-                    if (CheckFont(localListEnemy[list_icon])) {
-                        DisplayIcon(localListEnemy[list_icon], PDA_INFO2ID, PDA_SCREEN_WIDTH - 30.0 + X_LEFT_EDGE, PDA_SCREEN_Y + 100.0 + Y_TOP_EDGE, 0, 0.2 + pulser(2.0, 0.59));
-                    } else {
-                        DisplayIcon("EPDAUNK", PDA_INFO2ID, PDA_SCREEN_WIDTH - 30.0 + X_LEFT_EDGE, PDA_SCREEN_Y + 100.0 + Y_TOP_EDGE, 0, 0.2 + pulser(2.0, 0.59));
-                    }
+                    DisplayIcon(
+                        CheckFont(localListEnemy[list_icon]) ? localListEnemy[list_icon] : "EPDAUNK", 
+                        PDA_INFO2ID, PDA_SCREEN_WIDTH - 30.0 + X_LEFT_EDGE, PDA_SCREEN_Y + 100.0 + Y_TOP_EDGE, 0, 
+                        0.2 + pulser(2.0, 0.59)
+                    );
                 }
             }
         }

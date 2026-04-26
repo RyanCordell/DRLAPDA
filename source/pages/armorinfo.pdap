@@ -1,108 +1,106 @@
-// Clicked-on equipment info
+// // Clicked-on equipment info
+// bool PDA_ManyHax    = false;
 
-bool PDA_ManyHax    = false;
+// int equipmentType = 0;
+// if (PDA_Local.detailFetch[0] == "armor") equipmentType = EQUIPMENT_TYPE_ARMOR;
+// if (PDA_Local.detailFetch[0] == "boots") equipmentType = EQUIPMENT_TYPE_BOOTS;
 
-int equipmentType = 0;
-if (PDA_Local.detailFetch[0] == "armor") equipmentType = EQUIPMENT_TYPE_ARMOR;
-if (PDA_Local.detailFetch[0] == "boots") equipmentType = EQUIPMENT_TYPE_BOOTS;
+// str equipment_set_name        = "N/A\n",
+//     equipment_set_description = "\n\n";
 
-str equipment_set_name        = "N/A\n",
-    equipment_set_description = "\n\n";
+// // Armor
+// for (int setIndex = 0; setIndex < DRLA_ARMORSETMAX; setIndex++) {
+//     if (CheckInventory(DRLA_ArmorSetList[setIndex])) {
+//         if (CheckInventory("RLEnclaveSetBonusActive") && CheckInventory("RLNuclearWeaponSetBonusActive"))
+//             PDA_ManyHax = true;
 
-// Armor
-for (int setIndex = 0; setIndex < DRLA_ARMORSETMAX; setIndex++) {
-    if (CheckInventory(DRLA_ArmorSetList[setIndex])) {
-        if (CheckInventory("RLEnclaveSetBonusActive") && CheckInventory("RLNuclearWeaponSetBonusActive"))
-            PDA_ManyHax = true;
+//         str trimmedList = strTrim(DRLA_ArmorSetList[setIndex],2,0);
 
-        str trimmedList = strTrim(DRLA_ArmorSetList[setIndex],2,0);
+//         equipment_set_name = StrParam("%l:\n\n", (PDA_ManyHax)
+//             ? "PDA_ARMOR_NuclearWeaponSetBonusActive_equipment_set_name"
+//             : StrParam("PDA_ARMOR_%s:_equipment_set_name", trimmedList));
+//         equipment_set_description = StrParam("%l:\n\n", (PDA_ManyHax)
+//             ? "PDA_ARMOR_NuclearWeaponSetBonusActive_equipment_set_description"
+//             : StrParam("PDA_ARMOR_%s:_equipment_set_description", trimmedList));
+//     }
+// }
 
-        equipment_set_name = StrParam("%l:\n\n", (PDA_ManyHax)
-            ? "PDA_ARMOR_NuclearWeaponSetBonusActive_equipment_set_name"
-            : StrParam("PDA_ARMOR_%s:_equipment_set_name", trimmedList));
-        equipment_set_description = StrParam("%l:\n\n", (PDA_ManyHax)
-            ? "PDA_ARMOR_NuclearWeaponSetBonusActive_equipment_set_description"
-            : StrParam("PDA_ARMOR_%s:_equipment_set_description", trimmedList));
-    }
-}
+// str enclaveequipment_set_name = (PDA_ManyHax) ? StrParam("%l:\n\n", "PDA_ARMOR_EnclaveSetBonusActive_equipment_set_name") : "";
+// str enclaveequipment_set_description = (PDA_ManyHax) ? StrParam("%l:\n\n", "PDA_ARMOR_EnclaveSetBonusActive_equipment_set_description") : "";
 
-str enclaveequipment_set_name = (PDA_ManyHax) ? StrParam("%l:\n\n", "PDA_ARMOR_EnclaveSetBonusActive_equipment_set_name") : "";
-str enclaveequipment_set_description = (PDA_ManyHax) ? StrParam("%l:\n\n", "PDA_ARMOR_EnclaveSetBonusActive_equipment_set_description") : "";
+// switch (equipmentType) {
+//     case EQUIPMENT_TYPE_ARMOR:
+//         DisplayIconParallax(localArmorData.graphic, PDA_PLAYER_ARMOR_ICON, EQUIPMENT_ICON_X, EQUIPMENT_ICON_Y, INF_HOLDTIME, OPAQUE);
+//         SetFont(PDA_FONT[mono_font]);
+//         HudMessageParallax(
+//             StrParam(
+//                 "%s:" // Armor section
+//                 "%s:""%l:" // Protection header / value
+//                 "%s:""%l:" // Resistances header / value
+//                 "%s:""%l:" // Attributes header / value
+//                 "%s:"" %l:" // Description header / value
+//                 "%s:" // Set bonus header
+//                 " %l:"" %l:" // Bitch hacks for Enclave/Nuclear set
+//                 " %l:"" %l:" // Set name / desc
+//                 ,
+//                 "\cgARMOR\c-\n",
+//                 "\crProtection:\c-\n",
+//                 localArmorData.armorVal,
 
+//                 "\crResistances:\c-\n",
+//                 StrParam("%l:\n", localArmorData.armorRes),
 
-switch (equipmentType) {
-    case EQUIPMENT_TYPE_ARMOR:
-        DisplayIconParallax(localArmorData.graphic, PDA_PLAYER_ARMOR_ICON, EQUIPMENT_ICON_X, EQUIPMENT_ICON_Y, INF_HOLDTIME, OPAQUE);
-        SetFont(PDA_FONT[mono_font]);
-        HudMessageParallax(
-            StrParam(
-                "%s:" // Armor section
-                "%s:""%l:" // Protection header / value
-                "%s:""%l:" // Resistances header / value
-                "%s:""%l:" // Attributes header / value
-                "%s:"" %l:" // Description header / value
-                "%s:" // Set bonus header
-                " %l:"" %l:" // Bitch hacks for Enclave/Nuclear set
-                " %l:"" %l:" // Set name / desc
-                ,
-                "\cgARMOR\c-\n",
-                "\crProtection:\c-\n",
-                localArmorData.armorVal,
+//                 "\crAttributes:\c-\n",
+//                 StrParam("%l:\n\n", localArmorData.armorAttr),
 
-                "\crResistances:\c-\n",
-                StrParam("%l:\n", localArmorData.armorRes),
+//                 "\crDescription:\c-\n",
+//                 StrParam(" %l:\n\n", localArmorData.armorDesc),
 
-                "\crAttributes:\c-\n",
-                StrParam("%l:\n\n", localArmorData.armorAttr),
+//                 "\crSet bonus:\c-\n",
+//                 enclaveequipment_set_name,
+//                 enclaveequipment_set_description,
+//                 equipment_set_name,
+//                 equipment_set_description
+//             ),
+//             HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 10.0, EQUIPMENT_TEXT_Y, INF_HOLDTIME, OPAQUE);
+//         break;
+//     case EQUIPMENT_TYPE_BOOTS:
+//         DisplayIconParallax(localBootsData.graphic, PDA_PLAYER_BOOTS_ICON, EQUIPMENT_ICON_X, EQUIPMENT_ICON_Y, INF_HOLDTIME, OPAQUE);
+//         SetFont(PDA_FONT[mono_font]);
+//         HudMessageParallax(
+//             StrParam(
+//                 "%s:" // Boots section
+//                 "%s:""%l:" // Boots protection header / value
+//                 "%s:""%l:" // Boots attributes header / value
+//                 "%s:""%l:" // Boots description header / value
+//                 ,
+//                 "\cgBOOTS\c-\n",
+//                 "\crProtection:\c-\n",
+//                 localBootsData.bootsVal,
+//                 "\crAttributes:\c-\n",
+//                 StrParam("%l:\n", localBootsData.bootsAttr),
+//                 "\crDescription:\c-\n",
+//                 StrParam("%l:\n", localBootsData.bootsDesc)
+//             ),
+//             HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, EQUIPMENT_TEXT_Y, INF_HOLDTIME, OPAQUE);
+//         break;
+//     default:
+//         Log("ERR: Invalid equipment type");
+//         break;
+// }
 
-                "\crDescription:\c-\n",
-                StrParam(" %l:\n\n", localArmorData.armorDesc),
+// if (localHasBackpack) {
+//     SetFont(PDA_FONT[mono_font]);
+//     HudMessageParallax(
+//         StrParam(
+//             "%s:" // Backpack
+//             "%s:" // Backpack description header
+//             "%l:" // Backpack value
+//             ,
 
-                "\crSet bonus:\c-\n",
-                enclaveequipment_set_name,
-                enclaveequipment_set_description,
-                equipment_set_name,
-                equipment_set_description
-            ),
-            HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 10.0, EQUIPMENT_TEXT_Y, INF_HOLDTIME, OPAQUE);
-        break;
-    case EQUIPMENT_TYPE_BOOTS:
-        DisplayIconParallax(localBootsData.graphic, PDA_PLAYER_BOOTS_ICON, EQUIPMENT_ICON_X, EQUIPMENT_ICON_Y, INF_HOLDTIME, OPAQUE);
-        SetFont(PDA_FONT[mono_font]);
-        HudMessageParallax(
-            StrParam(
-                "%s:" // Boots section
-                "%s:""%l:" // Boots protection header / value
-                "%s:""%l:" // Boots attributes header / value
-                "%s:""%l:" // Boots description header / value
-                ,
-                "\cgBOOTS\c-\n",
-                "\crProtection:\c-\n",
-                localBootsData.bootsVal,
-                "\crAttributes:\c-\n",
-                StrParam("%l:\n", localBootsData.bootsAttr),
-                "\crDescription:\c-\n",
-                StrParam("%l:\n", localBootsData.bootsDesc)
-            ),
-            HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, EQUIPMENT_TEXT_Y, INF_HOLDTIME, OPAQUE);
-        break;
-    default:
-        Log("ERR: Invalid equipment type");
-        break;
-}
-
-if (localHasBackpack) {
-    SetFont(PDA_FONT[mono_font]);
-    HudMessageParallax(
-        StrParam(
-            "%s:" // Backpack
-            "%s:" // Backpack description header
-            "%l:" // Backpack value
-            ,
-
-            "\cgBACKPACK\c-\n",
-            "\crDescription:\c-\n",
-            localBackpackData.backpackVal
-        ),
-        HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 10.0, 40.0, INF_HOLDTIME, OPAQUE);
-}
+//             "\cgBACKPACK\c-\n",
+//             "\crDescription:\c-\n",
+//             localBackpackData.backpackVal
+//         ),
+//         HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 10.0, 40.0, INF_HOLDTIME, OPAQUE);
+// }

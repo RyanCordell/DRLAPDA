@@ -1,4 +1,4 @@
-PDA_Local.pagemax = 6;
+PDA_Local.pageMax = 6;
 
 switch(PDA_Local.page)
 {
