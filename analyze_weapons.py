@@ -27,6 +27,7 @@ from __future__ import annotations
 import re
 import sys
 import argparse
+import time
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
@@ -78,15 +79,21 @@ _ZDOOM_BUILTIN_PROJ_DAMAGE: dict[str, str] = {
     "headfx1":      "(8d6)",    # Heretic goldwand, Damage 6
 }
 
-# Weapons that fire via an intermediate drone/helper actor (cross-file projectile chain).
-# Keyed by lowercased actor name; applied as fallback when normal extraction returns "?".
-_WEAPON_DAMAGE_OVERRIDES: dict[str, str] = {
-    "rllaserpulselauncher": "(6)",    # RLDefenceDrone → RLDefenceDroneLaser, Damage (6)
+# Weapons whose damage can't be statically resolved (cross-file chains, latch-explode, etc.)
+# Keyed by lowercased actor name. Value: (damage_expr, reason).
+# Applied as fallback when normal extraction returns "?", "", or "[proj:...]".
+_WEAPON_DAMAGE_OVERRIDES: dict[str, tuple[str, str]] = {
+    "rllaserpulselauncher": ("(6)",       "RLDefenceDrone -> RLDefenceDroneLaser, Damage (6)"),
+    "rlplasmarefractor":    ("36 x (50)", "RLPlasmaRefractorImpact latches -> explodes into 36 x RLPlasmaRefractionBall @ fixed (50)"),
 }
-_WEAPON_SPREAD_OVERRIDES: dict[str, str] = {
-    "rlzeuscannon": "N/A",    # Zeus Cannon doesn't really have spread per-se
+_WEAPON_SPREAD_OVERRIDES: dict[str, tuple[str, str]] = {
+    "rlzeuscannon": ("N/A", "Zeus Cannon doesn't really have spread per-se")
 }
 
+# Set to True by --debug flag in main(); read by parse_file and helpers.
+_DEBUG: bool = False
+
+global_proj_lookup: dict[str, str] = dict(_ZDOOM_BUILTIN_PROJ_DAMAGE)
 
 # ---------------------------------------------------------------------------
 # Data model
@@ -166,6 +173,11 @@ _FRAME_STD_RE = re.compile(
 # Quoted sprite frame:  "####" "ABCDE" N [actions...]
 _FRAME_QUOTED_RE = re.compile(
     r'^\s*"[^"]+"\s+"([^"]+)"\s+(-?\d+)',
+)
+
+_WEAPON_SPAWN_EXCLUSION_RE = re.compile(
+    r"(Recoil|Pickup|Modded|Clip|Assembled|DRPG|Shells|Trail|Smoke|Shrapnel|HaximusMaximus)\"", 
+    re.IGNORECASE
 )
 
 # Projectile Damage property in actor body (before States block)
@@ -583,11 +595,14 @@ def extract_attack_call(
         for line in states.get(label, []):
             bare = _bare(line)
             
+            if _DEBUG: out_console.print(f"bare line:[yellow]{bare}[/yellow]")
+            
             # Ignore ANY effect spawns, as they've been skewing reporting!
-            if re.search(r"(Recoil|Pickup|Modded|Clip|Assembled|DRPG|Shells|Trail|Smoke|Shrapnel)\"", bare, re.IGNORECASE):
+            if _WEAPON_SPAWN_EXCLUSION_RE.search(bare):
                 continue
 
             # --- A_Explode: always collect radius; note damage as fallback ---
+            if _DEBUG: out_console.print(f"A_Explode? [bold]{re.search(r"\bA_Explode\b", bare, re.IGNORECASE)}[/bold]")
             if re.search(r"\bA_Explode\b", bare, re.IGNORECASE):
                 args = parse_func_args(bare, "A_Explode")
                 if args:
@@ -612,6 +627,7 @@ def extract_attack_call(
 
             # --- A_CustomPunch / A_Saw — melee ---
             for melee_fn, dmg_arg in (("A_CustomPunch", 0), ("A_Saw", 2)):
+                if _DEBUG: out_console.print(f"A_CustomPunch | A_Saw? [bold]{re.search(rf"\b{melee_fn}\b", bare, re.IGNORECASE)}[/bold]")
                 if re.search(rf"\b{melee_fn}\b", bare, re.IGNORECASE):
                     args = parse_func_args(bare, melee_fn)
                     if len(args) > dmg_arg:
@@ -629,6 +645,7 @@ def extract_attack_call(
                 continue
 
             # --- A_FireBullets ---
+            if _DEBUG: out_console.print(f"bA_FireBullets? [bold]{re.search(r"\bA_FireBullets\b", bare, re.IGNORECASE)}[/bold]")
             if re.search(r"\bA_FireBullets\b", bare, re.IGNORECASE):
                 args = parse_func_args(bare, "A_FireBullets")
                 if len(args) >= 4:
@@ -653,6 +670,7 @@ def extract_attack_call(
                     continue
 
             # --- A_CustomBulletAttack ---
+            if _DEBUG: out_console.print(f"bA_CustomBulletAttack? [bold]{re.search(r"\bA_CustomBulletAttack\b", bare, re.IGNORECASE)}[/bold]")
             if re.search(r"\bA_CustomBulletAttack\b", bare, re.IGNORECASE):
                 args = parse_func_args(bare, "A_CustomBulletAttack")
                 if len(args) >= 4:
@@ -677,6 +695,7 @@ def extract_attack_call(
                     continue
 
             # --- A_RailAttack — always fixed damage (no random(1,3) multiplier) ---
+            if _DEBUG: out_console.print(f"bA_RailAttack? [bold]{re.search(r"\bA_RailAttack\b", bare, re.IGNORECASE)}[/bold]")
             if re.search(r"\bA_RailAttack\b", bare, re.IGNORECASE):
                 args = parse_func_args(bare, "A_RailAttack")
                 # Skip decorative 0-damage ring/visual calls (e.g. HPB ring effect).
@@ -705,6 +724,7 @@ def extract_attack_call(
 
             # --- A_FireCustomMissile / A_SpawnItemEx — projectile launch ---
             for proj_fn in ("A_FireCustomMissile", "A_SpawnItemEx", "A_CustomMissile"):
+                if _DEBUG: out_console.print(f"A_FireCustomMissile | A_SpawnItemEx | A_CustomMissile? [bold]{re.search(rf"\b{proj_fn}\b", bare, re.IGNORECASE)}[/bold]")
                 if re.search(rf"\b{proj_fn}\b", bare, re.IGNORECASE):
                     args = parse_func_args(bare, proj_fn)
                     if args:
@@ -713,6 +733,7 @@ def extract_attack_call(
                         damage_expr = dmg or f"[proj:{proj_name}]"
                         primary_found = True
                     break
+            if _DEBUG: out_console.print(f"_________________");
 
     # If only A_Explode was found, use its damage as the primary
     if not primary_found and explode_damage is not None:
@@ -1042,31 +1063,33 @@ def _pretty_name(actor_name: str) -> str:
 # File parser
 # ---------------------------------------------------------------------------
 
-def _build_proj_lookup(actor_blocks):
+def _build_proj_lookup(actor_blocks) -> dict[str, str]:
     # Seed with known ZDoom builtin projectile damages
-    lookup: dict[str, str] = dict(_ZDOOM_BUILTIN_PROJ_DAMAGE)
+    # lookup: dict[str, str] = dict(_ZDOOM_BUILTIN_PROJ_DAMAGE)
+    lookup: dict[str, str] = {**global_proj_lookup}
     parents: dict[str, str] = {}  # name.lower() -> parent.lower()
 
     # Pass 1: explicit Damage properties from file (override builtins if redefined)
     for name, parent, block in actor_blocks:
+        name_lower: str = name.lower()
         if parent.lower() in _WEAPON_BASES:
             continue
-        parents[name.lower()] = parent.lower()
-        sm = re.search(r'\bStates\s*\{', block, re.IGNORECASE)
+        parents[name_lower] = parent.lower()
+        sm: re.Match[str] | None = re.search(r'\bStates\s*\{', block, re.IGNORECASE)
         props = block[:sm.start()] if sm else block
 
-        m = _DAMAGE_FIXED_RE.search(props)
+        m: re.Match[str] | None = _DAMAGE_FIXED_RE.search(props)
         if m:
-            lookup[name.lower()] = _normalize_damage_expr(raw=m.group(1).strip(), norandom=True)
+            lookup[name_lower] = _normalize_damage_expr(raw=m.group(1).strip(), norandom=True)
             continue
 
         m = _DAMAGE_PLAIN_RE.search(props)
         if m:
-            lookup[name.lower()] = _normalize_damage_expr(raw=m.group(1), norandom=False, dice=8)
+            lookup[name_lower] = _normalize_damage_expr(raw=m.group(1), norandom=False, dice=8)
 
         if _RIPPER_FLAG_RE.search(props):
-            existing = lookup.get(name.lower(), "?")
-            lookup[name.lower()] = existing + "!"
+            existing = lookup.get(name_lower, "?")
+            lookup[name_lower] = existing + "!"
 
     # Pass 2: walk parent chain until no new entries can be resolved
     changed = True
@@ -1079,7 +1102,7 @@ def _build_proj_lookup(actor_blocks):
 
     return lookup
 
-def parse_file(path: Path, debug: bool) -> list[WeaponStats]:
+def parse_file(path: Path, filter: str = "") -> list[WeaponStats]:
     """Parse one .txt file; return WeaponStats for each valid weapon actor."""
     try:
         text: str = path.read_text(encoding="utf-8", errors="replace")
@@ -1092,11 +1115,16 @@ def parse_file(path: Path, debug: bool) -> list[WeaponStats]:
     out_console = Console(highlight=False)
 
     actor_blocks: list[tuple[str, str, str]] = _split_actor_blocks(text)
-    lookup_table = _build_proj_lookup(actor_blocks)
+    # lookup_table = _build_proj_lookup(actor_blocks)
+    lookup_table = {**(global_proj_lookup or {}), **_build_proj_lookup(actor_blocks)}
     
     for name, parent, block in actor_blocks:
+        if filter and name.lower() != filter.lower():
+            continue
+        
         if parent.lower() not in _WEAPON_BASES:
             continue
+        
         notes: list[str] = []
         states: dict[str, list[str]] = tokenize_states(block)
 
@@ -1108,7 +1136,7 @@ def parse_file(path: Path, debug: bool) -> list[WeaponStats]:
             )
             continue
         
-        if debug:
+        if _DEBUG:
             attack_func, attack_args = extract_attack_function(states)
             if attack_func and attack_args:
                 out_console.print(f"\n")
@@ -1140,7 +1168,7 @@ def parse_file(path: Path, debug: bool) -> list[WeaponStats]:
 
         reload_tics, per_shell = extract_reload(states)
 
-        if debug:
+        if _DEBUG:
             out_console.print(
                 f"[bold]{name}[/bold]: {markup_escape(damage_expr)}"
             )
@@ -1152,15 +1180,16 @@ def parse_file(path: Path, debug: bool) -> list[WeaponStats]:
         # Triggers on "?", "", or unresolved [proj:...] references.
         if damage_expr in ("?", "") or damage_expr.startswith("[proj:"):
             override = _WEAPON_DAMAGE_OVERRIDES.get(name.lower())
-            if override and override != "?":
-                damage_expr = override
-                notes.append("damage from manual override (drone-launched projectile)")
+            if override:
+                damage_expr, override_reason = override
+                notes.append(f"manual override: ({override_reason})")
         
         # Allow spread overrides on applicable weapons
         if spread_h is None or spread_v is None:
             override = _WEAPON_SPREAD_OVERRIDES.get(name.lower())
-            if override and override != "?":
-                spread_override = override
+            if override:
+                spread_override, override_reason = override
+                notes.append(f"manual override: ({override_reason})")
 
         if fire_min == 0 and fire_max == 0:
             notes.append("could not determine fire rate")
@@ -1255,8 +1284,17 @@ def main() -> None:
         "--debug", action="store_true",
         help="Show raw weapon, tier, matching action call, and resulting damage",
     )
+    ap.add_argument(
+        "--filter", type=str,
+        default="",
+        metavar="RLBFG9000",
+        help="Search only for a specific weapon",
+    )
     args = ap.parse_args()
 
+    global _DEBUG
+    _DEBUG = args.debug
+    
     if not args.weapons_dir.is_dir():
         print(
             f"Error: weapons directory not found: {args.weapons_dir}",
@@ -1269,10 +1307,21 @@ def main() -> None:
     # stderr console for progress bar — always visible even when stdout is piped
     err_console = Console(stderr=True, highlight=False)
     
+    start_time = time.time()
+    
     files = sorted(args.weapons_dir.rglob("*.txt"))
     if not files:
         err_console.print("[yellow]No .txt files found in weapons directory.[/yellow]")
         sys.exit(0)
+
+    # We need to build the projectile lookup table first, otherwise we lose some valuable info
+    for f in files:
+        try:
+            text = f.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        blocks = _split_actor_blocks(text)
+        global_proj_lookup.update(_build_proj_lookup(blocks));
 
     if args.no_progress:
         iterator = iter(files)
@@ -1286,16 +1335,19 @@ def main() -> None:
 
     all_weapons: list[WeaponStats] = []
     for f in iterator:
-        all_weapons.extend(parse_file(f, args.debug))
+        if (args.filter):
+            all_weapons.extend(parse_file(f, args.filter))
+        else:
+            all_weapons.extend(parse_file(f))
 
-    if args.debug:
+    if _DEBUG:
         out_console.print(all_weapons)
-
-    if not args.debug:
+    else:
         render_all(all_weapons, out_console)
 
+    end_time = time.time()
     err_console.print(
-        f"[dim]Parsed[/dim] [bold]{len(all_weapons)} weapons[/bold] [dim]from[/dim] [bold]{len(files)}[/bold] [dim]files.[/dim]"
+        f"[dim]Parsed[/dim] [bold]{len(all_weapons)} weapons[/bold] [dim]from[/dim] [bold]{len(files)}[/bold] [dim]files in[/dim] [bold]{end_time - start_time}s[/bold][dim].[/dim]"
     )
 
     unresolved = [
