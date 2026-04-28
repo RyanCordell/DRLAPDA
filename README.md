@@ -54,3 +54,7 @@ Used to work on the new database interpreter for the PDA
 ### Python
 To create the toolbox that helps process .JSON and text information into a format 
 that ZDoom can understand
+
+### Claude Code
+To help clean up the toolbox, and create the weapon analysis script that reads DRLA's 
+weapons to determine their base stats
