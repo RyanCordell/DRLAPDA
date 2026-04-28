@@ -10,6 +10,8 @@ Usage:
     python analyze_weapons.py --no-progress        # suppress progress bar
     python analyze_weapons.py --weapons-dir PATH   # custom weapons folder
     python analyze_weapons.py --no-color           # force plain text in terminal too
+    python analyze_weapons.py --debug              # show dev specified debugging output
+    python analyze_weapons.py --help               # show usage
 
 Tic counting rules (ZDoom 2.8.1 DECORATE):
   - Each tic ≈ 1/35 second
@@ -74,6 +76,15 @@ _ZDOOM_BUILTIN_PROJ_DAMAGE: dict[str, str] = {
     "cacodemonball":"(8d3)",    # Damage 3
     "bruisershot":  "(8d8)",    # Baron fireball, Damage 8
     "headfx1":      "(8d6)",    # Heretic goldwand, Damage 6
+}
+
+# Weapons that fire via an intermediate drone/helper actor (cross-file projectile chain).
+# Keyed by lowercased actor name; applied as fallback when normal extraction returns "?".
+_WEAPON_DAMAGE_OVERRIDES: dict[str, str] = {
+    "rllaserpulselauncher": "(6)",    # RLDefenceDrone → RLDefenceDroneLaser, Damage (6)
+}
+_WEAPON_SPREAD_OVERRIDES: dict[str, str] = {
+    "rlzeuscannon": "N/A",    # Zeus Cannon doesn't really have spread per-se
 }
 
 
@@ -476,7 +487,7 @@ def _parse_damage_expr(pellets_raw: str, damage_raw: str, flags: str = "", frame
 # At this point it would be easier to bake a blacklist for the modded states
 base_fire_states = [
     "fire", "firestart", "firerepeat", "firebegin", "firespin", "firecontinue", "firedualleftcontinue", "firedualrightcontinue", "firenormal", "hold", "firestartbuildup", 
-    "firedisrupted", "firestable", "overload", "leftpunch", "firefinishpowerupcheckdone",
+    "firedisrupted", "firestable", "overload", "normalleft", "firefinishpowerupcheckdone",
     
     "firemainmissileleft", "firemainmissileright", "fireammocheckdone","fireammocheck", "firemain", "firemainbasic", 
     
@@ -531,6 +542,10 @@ def extract_attack_function(
             if re.search(r"\bA_FireCustomMissile\b", bare, re.IGNORECASE):
                 args = parse_func_args(bare, "A_FireCustomMissile")
                 return "A_FireCustomMissile", args
+            # A_CustomMissile
+            if re.search(r"\bA_CustomMissile\b", bare, re.IGNORECASE):
+                args = parse_func_args(bare, "A_CustomMissile")
+                return "A_CustomMissile", args
             # A_RailAttack
             if re.search(r"\bA_RailAttack\b", bare, re.IGNORECASE):
                 args = parse_func_args(bare, "A_RailAttack")
@@ -689,7 +704,7 @@ def extract_attack_call(
                     continue
 
             # --- A_FireCustomMissile / A_SpawnItemEx — projectile launch ---
-            for proj_fn in ("A_FireCustomMissile", "A_SpawnItemEx"):
+            for proj_fn in ("A_FireCustomMissile", "A_SpawnItemEx", "A_CustomMissile"):
                 if re.search(rf"\b{proj_fn}\b", bare, re.IGNORECASE):
                     args = parse_func_args(bare, proj_fn)
                     if args:
@@ -1064,7 +1079,7 @@ def _build_proj_lookup(actor_blocks):
 
     return lookup
 
-def parse_file(path: Path) -> list[WeaponStats]:
+def parse_file(path: Path, debug: bool) -> list[WeaponStats]:
     """Parse one .txt file; return WeaponStats for each valid weapon actor."""
     try:
         text: str = path.read_text(encoding="utf-8", errors="replace")
@@ -1093,19 +1108,18 @@ def parse_file(path: Path) -> list[WeaponStats]:
             )
             continue
         
-        attack_func, attack_args = extract_attack_function(states)
-        if attack_func and attack_args:
-            out_console.print(f"\n")
-            out_console.print(
-                f"[bold]{name}[/bold] [{tier}]: [dim]{parent}[/dim] -> [bold]{attack_func}[/bold]({attack_args})"
-            )
-            pass
-        else:
-            out_console.print(f"\n")
-            out_console.print(
-                f"[bold]{name}[/bold] [{tier}]: {parent} -> [red]{attack_func}({attack_args})[/red]"
-            )
-            pass
+        if debug:
+            attack_func, attack_args = extract_attack_function(states)
+            if attack_func and attack_args:
+                out_console.print(f"\n")
+                out_console.print(
+                    f"[bold]{name}[/bold] [{tier}]: [dim]{parent}[/dim] -> [bold]{attack_func}[/bold]({attack_args})"
+                )
+            else:
+                out_console.print(f"\n")
+                out_console.print(
+                    f"[bold]{name}[/bold] [{tier}]: {parent} -> [red]{attack_func}({attack_args})[/red]"
+                )
 
         charge_type = _detect_charge_type(states)
         charge_stages = _count_charge_stages(states)
@@ -1126,12 +1140,27 @@ def parse_file(path: Path) -> list[WeaponStats]:
 
         reload_tics, per_shell = extract_reload(states)
 
-        out_console.print(
-            f"[bold]{name}[/bold]: {damage_expr}"
-        )
+        if debug:
+            out_console.print(
+                f"[bold]{name}[/bold]: {markup_escape(damage_expr)}"
+            )
 
         if name == "RLCombatTranslocator":
             damage_expr = "TELEFRAG"
+
+        # Drone/helper-launched weapons: cross-file chain can't be resolved statically.
+        # Triggers on "?", "", or unresolved [proj:...] references.
+        if damage_expr in ("?", "") or damage_expr.startswith("[proj:"):
+            override = _WEAPON_DAMAGE_OVERRIDES.get(name.lower())
+            if override and override != "?":
+                damage_expr = override
+                notes.append("damage from manual override (drone-launched projectile)")
+        
+        # Allow spread overrides on applicable weapons
+        if spread_h is None or spread_v is None:
+            override = _WEAPON_SPREAD_OVERRIDES.get(name.lower())
+            if override and override != "?":
+                spread_override = override
 
         if fire_min == 0 and fire_max == 0:
             notes.append("could not determine fire rate")
@@ -1180,7 +1209,7 @@ def render_weapon(w: WeaponStats, console: Console) -> None:
     _field("Reload",      w.reload_str,    "yellow",  console)
     _field("Spread",      w.spread_str,    "magenta", console)
     for note in w.parse_notes:
-        console.print(f"    [dim]⚠  {note}[/dim]")
+        console.print(f"    [dim][!] {note}[/dim]")
     console.print()
 
 
@@ -1222,6 +1251,10 @@ def main() -> None:
         "--no-color", action="store_true",
         help="Force plain-text output even in a terminal",
     )
+    ap.add_argument(
+        "--debug", action="store_true",
+        help="Show raw weapon, tier, matching action call, and resulting damage",
+    )
     args = ap.parse_args()
 
     if not args.weapons_dir.is_dir():
@@ -1235,7 +1268,7 @@ def main() -> None:
     out_console = Console(highlight=False, no_color=args.no_color)
     # stderr console for progress bar — always visible even when stdout is piped
     err_console = Console(stderr=True, highlight=False)
-
+    
     files = sorted(args.weapons_dir.rglob("*.txt"))
     if not files:
         err_console.print("[yellow]No .txt files found in weapons directory.[/yellow]")
@@ -1253,13 +1286,33 @@ def main() -> None:
 
     all_weapons: list[WeaponStats] = []
     for f in iterator:
-        all_weapons.extend(parse_file(f))
+        all_weapons.extend(parse_file(f, args.debug))
 
-    # render_all(all_weapons, out_console)
+    if args.debug:
+        out_console.print(all_weapons)
+
+    if not args.debug:
+        render_all(all_weapons, out_console)
 
     err_console.print(
-        f"[dim]Parsed {len(all_weapons)} weapons from {len(files)} files.[/dim]"
+        f"[dim]Parsed[/dim] [bold]{len(all_weapons)} weapons[/bold] [dim]from[/dim] [bold]{len(files)}[/bold] [dim]files.[/dim]"
     )
+
+    unresolved = [
+        w for w in all_weapons
+        if w.damage_expr.startswith("[proj:")
+    ]
+    if unresolved:
+        err_console.print()
+        err_console.print(
+            "[yellow]Unresolved projectile damage - add entries to "
+            "_WEAPON_DAMAGE_OVERRIDES (or _ZDOOM_BUILTIN_PROJ_DAMAGE if a ZDoom "
+            "builtin):[/yellow]"
+        )
+        for w in unresolved:
+            err_console.print(
+                f"  [dim]{w.name}[/dim]  ->  {markup_escape(w.damage_expr)}"
+            )
 
 
 if __name__ == "__main__":
