@@ -1,7 +1,7 @@
 /** 
  * PDA IDs
  * 
- * Ideally, this would be automatically generated to avoid compat issues, not unlike DoomRPG.
+ * Ideally, all of these would be automatically generated to avoid compat issues, not unlike DoomRPG.
  */
 
 /** Sort by ascending order. */
@@ -17,36 +17,43 @@ enum PDA_ButtonState {
     button_clicked,
 }
 
-enum PDA_MouseState {
-    mouse_default = 0,
-    mouse_pointer,
-    mouse_grab,
-    mouse_holding,
+enum PDA_CursorState {
+    cursor_default = 0,
+    cursor_pointer,
+    cursor_grab,
+    cursor_holding
+}
+
+enum PDA_MouseAction {
+    mouse_none = 0,
+    mouse_click,
+    mouse_hold,
+    mouse_back,
 }
 
 enum PDA_IDs {
     PDA_CURSORID = 2,
     
     // Menu
-    PDA_PLAYERS_BUTTON = 40,
-    PDA_WEAPONS_BUTTON,
-    PDA_ARMORS_BUTTON,
-    PDA_ASSEMBLIES_BUTTON,
-    PDA_ITEMS_BUTTON,
-    PDA_BESTIARY_BUTTON,
-    PDA_MISC_BUTTON,
-    PDA_HELP_BUTTON,
-    PDA_WINFO_BUTTON,
+    PDA_PLAYERS_BUTTON = 30,
+    PDA_WEAPONS_BUTTON = PDA_PLAYERS_BUTTON + 3, // +3 to reserve for text IDs
+    PDA_ARMORS_BUTTON = PDA_WEAPONS_BUTTON + 3,
+    PDA_ASSEMBLIES_BUTTON = PDA_ARMORS_BUTTON + 3,
+    PDA_ITEMS_BUTTON = PDA_ASSEMBLIES_BUTTON + 3,
+    PDA_BESTIARY_BUTTON = PDA_ITEMS_BUTTON + 3,
+    PDA_MISC_BUTTON = PDA_BESTIARY_BUTTON + 3,
+    PDA_HELP_BUTTON = PDA_MISC_BUTTON + 3,
+    PDA_WINFO_BUTTON = PDA_HELP_BUTTON + 3,
 
     // Bestiary
-    PDA_BEAST_UV = 50,
+    PDA_BEAST_UV = PDA_WINFO_BUTTON + 40,
     PDA_BEAST_NM,
     PDA_BEAST_TP,
     PDA_BEAST_AG,
     PDA_BEAST_EX,
 
     // Navigation for any page
-    PDA_PREV_PAGE = PDA_BEAST_EX + 10,
+    PDA_PREV_PAGE = PDA_BEAST_EX + 50,
     PDA_NEXT_PAGE = PDA_PREV_PAGE + 2,
 
     // Same-same but different for weapons page
@@ -54,13 +61,13 @@ enum PDA_IDs {
     PDA_ARTIFACTS_PAGE = PDA_NEXT_PAGE,
 
     // Category description tooltip
-    PDA_CAT_DESCRIPTION = 65,
+    PDA_CAT_DESCRIPTION = PDA_NEXT_PAGE + 10,
     
     // Classes/Player IDs
-    PDA_PLAYER_BODY_ICON = 70,
-    PDA_PLAYER_ARMOR_ICON = 71,
-    PDA_PLAYER_BACKPACK_ICON = 74,
-    PDA_PLAYER_BOOTS_ICON = 76,
+    PDA_PLAYER_BODY_ICON = PDA_CAT_DESCRIPTION + 10,
+    PDA_PLAYER_ARMOR_ICON = PDA_PLAYER_BODY_ICON + 1,
+    PDA_PLAYER_BACKPACK_ICON = PDA_PLAYER_ARMOR_ICON + 3,
+    PDA_PLAYER_BOOTS_ICON = PDA_PLAYER_BACKPACK_ICON + 3,
 
     // Various ID ranges
     PDA_ASSEMBLY_ID_END = PDA_PLAYER_BOOTS_ICON + 64,
@@ -68,14 +75,14 @@ enum PDA_IDs {
     PDA_WORNARMORS = PDA_ASSEMBLY_ID_END + 16,
 
     PDA_STASHEDARMORS = PDA_WORNARMORS + 8,
-    PDA_NOEQID = PDA_STASHEDARMORS + 3,
+    PDA_NOEQID = PDA_STASHEDARMORS + 4,
     // Modpack ID range
-    PDA_MODIDRANGE = PDA_NOEQID + 7,
+    PDA_MODIDRANGE = PDA_NOEQID + 7, // For the 7 chaos- er, modpacks.
     // Message IDs
     PDA_INFO4ID,
-    PDA_INFO3ID,
-    PDA_INFO2ID,
-    PDA_INFOID,
+    PDA_INFO3ID = PDA_INFO4ID + 2,
+    PDA_INFO2ID = PDA_INFO3ID + 2,
+    PDA_INFOID = PDA_INFO2ID + 2,
     // Scrolling arrows
     PDA_SCROLLDNID,
     PDA_SCROLLUPID,
@@ -108,7 +115,7 @@ enum PDA_IDs {
 
 // PDA categories - these are all the unique sections you can wind up at
 enum PDA_Categories {
-	// Accessibles
+    // Accessibles
 	PDA_MENU = 0,
 	PDA_CLASSES,
 	PDA_WEAPONS,

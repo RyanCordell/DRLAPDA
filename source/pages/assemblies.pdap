@@ -1,3 +1,8 @@
+if (PDA_LocalMouse.action == mouse_back) {
+    PDA_SetCategory(PDA_MENU);
+    PDA_SetPage(1);
+}
+
 float assemblyX = 20.0;
 const int width = 180, 
           height = 7;

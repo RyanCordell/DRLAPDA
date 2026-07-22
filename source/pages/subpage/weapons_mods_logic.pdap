@@ -1,1 +1,5 @@
 // Nothing here, sorry.
+if (PDA_LocalMouse.action == mouse_back) {
+    PDA_SetCategory(PDA_MENU);
+    PDA_SetPage(1);
+}

@@ -110,13 +110,13 @@ switch (PDA_Local.category) {
             localListEnemy[list_actor], player_kill_count);
 
         if (localListEnemy[list_name] != " ????") {
-            if (PDA_LocalButton[buttonID].state == button_hovered) {
-                if (CheckFont(localListEnemy[list_icon])) {
-                    DisplayIcon(localListEnemy[list_icon], PDA_INFO2ID, PDA_SCREEN_WIDTH - 30.0 + X_LEFT_EDGE, PDA_SCREEN_Y + 100.0 + Y_TOP_EDGE, 0, 0.2 + pulser(2.0, 0.59));
-                } else {
-                    DisplayIcon("EPDAUNK", PDA_INFO2ID, PDA_SCREEN_WIDTH - 30.0 + X_LEFT_EDGE, PDA_SCREEN_Y + 100.0 + Y_TOP_EDGE, 0, 0.2 + pulser(2.0, 0.59));
-                }
+          if (PDA_LocalButton[buttonID].state == button_hovered) {
+            if (CheckFont(localListEnemy[list_icon])) {
+              DisplayIcon(localListEnemy[list_icon], PDA_INFO2ID, PDA_SCREEN_WIDTH - 30.0 + X_LEFT_EDGE, PDA_SCREEN_Y + 100.0 + Y_TOP_EDGE, 0, 0.2 + pulser(2.0, 0.59));
+            } else {
+              DisplayIcon("EPDAUNK", PDA_INFO2ID, PDA_SCREEN_WIDTH - 30.0 + X_LEFT_EDGE, PDA_SCREEN_Y + 100.0 + Y_TOP_EDGE, 0, 0.2 + pulser(2.0, 0.59));
             }
+          }
         }
       }
     }
@@ -265,7 +265,7 @@ switch (PDA_Local.category) {
     // Armor
     for (int setIndex = 0; setIndex < DRLA_ARMORSETMAX; setIndex++) {
         if (CheckInventory(DRLA_ArmorSetList[setIndex])) {
-            if (CheckInventory("RLEnclaveSetBonusActive") && CheckInventory("RLNuclearWeaponSetBonusActive")) {}
+            if (CheckInventory("RLEnclaveSetBonusActive") && CheckInventory("RLNuclearWeaponSetBonusActive")) {
                 PDA_ManyHax = true;
             }
 

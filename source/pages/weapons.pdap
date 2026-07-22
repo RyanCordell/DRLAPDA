@@ -1,3 +1,8 @@
+if (PDA_LocalMouse.action == mouse_back) {
+    PDA_SetCategory(PDA_MENU);
+    PDA_SetPage(1);
+}
+
 if (stricmp(player_weapon[player_weapon_current], "None") != 0) {
     if (PDA_Local.page == WEAPON_PAGE_STORY) {
         #include "../../pages/subpage/weapons_story_logic.pdap"

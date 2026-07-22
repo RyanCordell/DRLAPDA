@@ -1,3 +1,8 @@
+if (PDA_LocalMouse.action == mouse_back) {
+    PDA_SetCategory(PDA_ARMORS);
+    PDA_SetPage(1);
+}
+
 // Armor / Boots / Suit display
 bool PDA_ManyHax    = false;
 

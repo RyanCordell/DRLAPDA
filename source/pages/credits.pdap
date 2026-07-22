@@ -1,3 +1,8 @@
+if (PDA_LocalMouse.action == mouse_back) {
+    PDA_SetCategory(PDA_MENU);
+    PDA_SetPage(1);
+}
+
 if (PDA_LocalMouse.m1) PDA_Local.creditsroll -= 2.35;
 else PDA_Local.creditsroll -= 0.35;
 

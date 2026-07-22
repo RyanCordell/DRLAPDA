@@ -1,3 +1,8 @@
+if (PDA_LocalMouse.action == mouse_back) {
+    PDA_SetCategory(PDA_BESTIARY);
+    PDA_SetPage(PDA_Local.prevPage);
+}
+
 // if (!PDA_Local.playSoundOnce) {
 //     PDA_PlaySound("UI/PDA/Activate", "pda/soldier", 80);
 

@@ -1,1 +1,5 @@
-
+if (PDA_LocalMouse.action == mouse_back) {
+    SetUserCVar(PlayerNumber(), "DRLA_PDA_firsttime", false);
+    PDA_SetCategory(PDA_MENU);
+    PDA_SetPage(1);
+}

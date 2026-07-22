@@ -4,9 +4,11 @@ struct PDAInfo {
     bool pongRunning;
 
     int category;
+    int prevCategory;
     int page;
+    int prevPage;
+
     int pageMax;
-    int previousPage;
 
     float textY;
     float maxTextY;
@@ -38,8 +40,8 @@ struct PDAInfo {
     bool dirty;
     bool scrollDirty;
     fixed prevScrollingY;
-    int prevCategory;
-    int prevPage;
+
+    int ptic;
 }
 PDAInfo PDA_Info[MAX_PLAYERS];
 
@@ -55,8 +57,12 @@ struct PDAMouse {
     int state;
     int oldState;
 
+    int action;
+
     bool scrolling;
     bool moving;
+
+    int mtic;
 }
 PDAMouse PDA_Mouse[MAX_PLAYERS];
 

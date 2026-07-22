@@ -54,6 +54,19 @@ PDA_DRLAHELP_BACKPACK =
 PDA_DRLAHELP_CRATE =
 	"If you see a \cudark gray crate\c-, shoot it. Odds are, you'll get weapons, ammo, or even rare and exotic equipment!" "\n\n";
 
+PDA_DRLAHELP_DMG =
+	"Damage formulas explained:\n"
+  "\cd(XdN)\c- = Random value of \cg1\c- to \cgX\c- multiplied by \cgN\c-.\n"
+  "\cd(X~Y)\c- = Random value between \cgX\c- and \cgY\c-. Used when the minimum value \cgX\c- is not \cg1\c-, and thus cannot\nbe represented with the above formula.\n"
+  "\cd((X~Y)*N)\c- = Effectively a combination of the two formulas above.\n"
+  "\cd<X>\c- = Splash damage of \cgX\c- value.\n"
+  "\cd<X...Y>\c- = Splash damage of minimum \cgX\c- value, all the way up to \cgY\c-.\n"
+  "\cd(X)\c- = Non-random damage value.\n"
+  "\cd(X)!\c- = Non-random damage value on a \cgripper projectile\c-.\n"
+  "\cd(X) - N\c- = \cgX\c- damage value with \cgN\c- subtracted from the final result.\n"
+  "\cdY x (N)\c- = \cgY\c- amount of bullets dealing \cgN\c- damage.\n"
+  "\cdY? x (N)\c- = \cgY\c- amount of bullets dealing \cgN\c- damage with \cgdual wielded weapons\c-.\n";
+
 PDA_CLASS_HEADER1 =
 	"Perks";
 PDA_CLASS_HEADER2 =
@@ -82,6 +95,8 @@ PDA_DEMONARTIFACTS_THREE =
 PDA_DEMONARTIFACTS_NOTSUPPORTED =
 	"This weapon does not support demonic artifacts";
 
+PDA_DETAILEDARMOR_HEADER =
+	"Equipment information";
 PDA_DETAILEDASSEMBLY_HEADER =
 	"Assembly description";
 PDA_DETAILEDBEAST_HEADER =

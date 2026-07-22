@@ -1,3 +1,8 @@
+if (PDA_LocalMouse.action == mouse_back) {
+    PDA_SetCategory(PDA_MENU);
+    PDA_SetPage(1);
+}
+
 // Note to future self: don't try to merge these first 5 lines for cleanliness sake. Won't work the way you wish it would.
 if (localHasArmor) {
     PDA_ButtonHandler(PDA_Local.equipmentId, true, 1, "", false, false);

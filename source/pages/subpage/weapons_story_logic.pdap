@@ -1,3 +1,8 @@
+if (PDA_LocalMouse.action == mouse_back) {
+    PDA_SetCategory(PDA_MENU);
+    PDA_SetPage(1);
+}
+
 if (PDA_Local.scrollYDelta == -1) {
     PDA_ButtonHandler(PDA_MODS_PAGE, true, 2, "", false, false);
     PDA_ButtonHandler(PDA_ARTIFACTS_PAGE, true, 3, "", false, false);

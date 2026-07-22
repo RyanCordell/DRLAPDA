@@ -1,3 +1,12 @@
+if (PDA_LocalMouse.action == mouse_back) {
+    if (PDA_Local.page > 1) {
+        PDA_SetPage(1);
+    } else {
+        PDA_SetCategory(PDA_MENU);
+        PDA_SetPage(1);
+    }
+}
+
 switch (PDA_Local.page) {
     case BESTIARY_PAGE_DIFFICULTIES: 
         PDA_ButtonHandler(PDA_BEAST_UV, true, 2, strparam("%l:\n", "PDA_DIFFICULTY_UV_OR_LOWER") , false, false);

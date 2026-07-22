@@ -1,4 +1,6 @@
-
+if (PDA_LocalMouse.action == mouse_back) {
+    PDA_SetCategory(PDA_ASSEMBLIES);
+}
 // str detailedAssemblyStringer;
 
 // if (!PDA_Local.playSoundOnce) {

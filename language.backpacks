@@ -26,7 +26,7 @@ PDA_BACKPACK_SCROUNGER_ICON = "BPK332X";
 PDA_BACKPACK_SCROUNGER_NAME = "\ccScrounger Backpack\c-";
 PDA_BACKPACK_SCROUNGER_INFO = "";
 PDA_BACKPACK_SCROUNGER_DESC =
-"\ccLets the player receive extra chosen ammo\}"
+"\ccLets the player receive extra chosen ammo\c-\n"
 "from other ammo sources.\c-\n"
 "\c[Orange]All Special Backpacks add their effects over the basic Backpack's ammo increase.\c-";
 

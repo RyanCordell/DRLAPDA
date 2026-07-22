@@ -1,4 +1,4 @@
-#pragma define_raw  on
+#pragma define raw  on
 #pragma fixed       on
 #pragma block_scope on
 
@@ -9,7 +9,7 @@
 #include "../database/equipment.idb" // Armors, boots, and etc.
 #include "../headers/PDA_FNC.ach"
 
-#include "ACS_INP.acs" // PDA input tracker, made separate for better responsiveness
+#include "ACS_INP.acs"
 
 global str 43:weaponval;
 global str 44:armorval;
@@ -155,86 +155,77 @@ function void doPDASync (void) {
     }
 }
 
-function void reset_pda_stuff (str location) {
-    PDA_NOPONG();
-    PDA_ClearHeader();
-    PDA_UnsetScrollArrows();
-    PDA_SuperWipe(location);
-    // ACS_NamedExecuteAlways("QuitPong",0);
-    DisplayIcon("RLZPDA", PDA_ID, 0.5, 0.5, 0, 0);
-    
-    SetPlayerProperty(0,0,PROP_TOTALLYFROZEN);
-    TakeInventory("RLSynthFireDisabled",1);
-    FadeTo(0, 0, 0, 0.0, 0.0);
-    
-    if (PDA_Local.category == PDA_CREDITS) SetMusic("*");
-    
-    PDA_PlaySound("UI/PDA/Offline", "pda/soldierclose", 80);
-    
-    PDA_Local.pongRunning = false;
-    PDA_Local.active = false;
-}
-
-
 SCRIPT "HeyADollar" enter {
     doPDASync();
     GiveInventory("RLHUDStyleChanger", 1);
     ACS_NamedExecuteAlways("DRLA_HUDStyleChanger", 0);
 }
 
-// [marrub] Static init stuff
-script "PDA_GSInit" open {
-   for (int i = 0; i < MAX_PLAYERS; i++) {
-      PDA_Info[i].active = false;
-      PDA_Info[i].pongRunning = false;
-      
-      PDA_Info[i].category = 0;
-      PDA_Info[i].page = 1;
-      PDA_Info[i].previousPage = 1;
-      PDA_Info[i].pageMax = 0;
-      
-      PDA_Info[i].textY = 0;
-      PDA_Info[i].maxTextY = -200;
-      PDA_Info[i].scrollingY = 20.0;
-      PDA_Info[i].scrollYDelta = 0;
-      
-      PDA_Info[i].clicked = false;
-      PDA_Info[i].newEntry[0] = false;
-      
-      PDA_Info[i].assemblyOffset = 0;
-      PDA_Info[i].currentAssembly = 0;
-      PDA_Info[i].maxAssembliesPer = 255;
-      
-      PDA_Info[i].playSoundOnce = false;
-      
-      PDA_Info[i].maxModLimit = 0;
-      PDA_Info[i].detailFetch[i] = "null";
-      
-      PDA_Info[i].dirty = false;
-      PDA_Info[i].scrollDirty = false;
-      PDA_Info[i].prevScrollingY = 0.0;
-      PDA_Info[i].prevCategory = 0;
-      PDA_Info[i].prevPage = 0;
+function void setPDADefaults (int playerNum) {
+    PDA_Info[playerNum].active = false;
+    PDA_Info[playerNum].pongRunning = false;
 
-      PDA_Info[i].equipmentLimit = 0;
-      PDA_Info[i].equipmentBaseY = 30.0;
-      PDA_Info[i].equipmentId = 0;
-      PDA_Info[i].stopEquipmentEarly = false;
+    PDA_Info[playerNum].category = 0;
+    PDA_Info[playerNum].prevCategory = -1;
+    PDA_Info[playerNum].page = 1;
+    PDA_Info[playerNum].prevPage = -1;
+    PDA_Info[playerNum].pageMax = 0;
 
+    PDA_Info[playerNum].textY = 0;
+    PDA_Info[playerNum].maxTextY = -200;
+    PDA_Info[playerNum].scrollingY = 20.0;
+    PDA_Info[playerNum].scrollYDelta = 0;
 
-      /*PDA_Mouse[i].x = 0;
-      PDA_Mouse[i].y = 0;
-      PDA_Mouse[i].m1 = false;
-      PDA_Mouse[i].m2 = false;
-      PDA_Mouse[i].pollRate = 1;*/
-   }
+    PDA_Info[playerNum].clicked = false;
+    PDA_Info[playerNum].newEntry[0] = false;
+
+    PDA_Info[playerNum].assemblyOffset = 0;
+    PDA_Info[playerNum].currentAssembly = 0;
+    PDA_Info[playerNum].maxAssembliesPer = 255;
+
+    PDA_Info[playerNum].playSoundOnce = false;
+
+    PDA_Info[playerNum].maxModLimit = 0;
+    PDA_Info[playerNum].detailFetch[playerNum] = "null";
+
+    PDA_Info[playerNum].dirty = true;
+    PDA_Info[playerNum].scrollDirty = true;
+    PDA_Info[playerNum].prevScrollingY = 0.0;
+
+    PDA_Info[playerNum].equipmentLimit = 0;
+    PDA_Info[playerNum].equipmentBaseY = 30.0;
+    PDA_Info[playerNum].equipmentId = 0;
+    PDA_Info[playerNum].stopEquipmentEarly = false;
+
+    for (int b = 0; b < 256; b++) {
+        PDA_Button[playerNum][b].alpha = DEFAULT_BUTTON_ALPHA;
+    }
+
+    /*
+     PDA_Mouse[playerNum].x = 0;
+     PDA_Mouse[playerNum].y = 0;
+     PDA_Mouse[playerNum].m1 = false;
+     PDA_Mouse[playerNum].m2 = false;
+     PDA_Mouse[playerNum].pollRate = 1;
+     */
 }
 
-// Display terminal
-SCRIPT "PDA_Display" (void) net {
-    int PDA_THEME = GetUserCVar(PlayerNumber(), "DRLA_PDA_theme");
+// [marrub] Static init stuff
+script "PDA_GSInit" open {
+    for (int i = 0; i < MAX_PLAYERS; i++) {
+        if (!PlayerInGame(i)) continue;
+        setPDADefaults(i);
+    }
+}
+
+#define PDA_ACTIVATE 1
+#define PDA_DEACTIVATE 0
+
+function void PDA_SetDisplay(int state) {
+    int PDA_THEME = GetUserCVar(PlayerNumber (), "DRLA_PDA_theme");
     str pdaGraphic = "RLZPDA2";
-    
+
+    // This could potentially be wired differently to be more dynamic. Maybe StrParam use here as well, dunno.
     switch (PDA_THEME) {
         case THEME_SLIM:
             pdaGraphic = "RLZPDA3";
@@ -245,65 +236,98 @@ SCRIPT "PDA_Display" (void) net {
             break;
     }
 
-    PDA_FONT[lower_font] = GetUserCVarString(PlayerNumber(), "DRLA_PDA_font");
-    PDA_FONT[mono_font]  = GetUserCVarString(PlayerNumber(), "DRLA_PDA_monofont");
-    PDA_FONT[slim_font]  = GetUserCVarString(PlayerNumber(), "DRLA_PDA_slimfont");
-    SetHudSize(320,200,0);
-    PDA_HasEquipment();
-    
-    if (!localOneEquipFirst) {
-        if (localHasArmor) {
-            localEqBoolField = localHasArmor << 0;
-            localOneEquipFirst = true;
-        }
-        if (localHasBoots) {
-            localEqBoolField = localHasBoots << 1;
-            localOneEquipFirst = true;
-        }
-        if (localHasBackpack) {
-            localEqBoolField = localHasBackpack << 2;
-            localOneEquipFirst = true;
-        }
-    }
-    else {
-        if (!localHasArmor && !localHasBoots && !localHasBackpack) localOneEquipFirst = false;
-    }
+    switch (state) {
+        case PDA_ACTIVATE:
+            PDA_FONT[lower_font] = GetUserCVarString(PlayerNumber(), "DRLA_PDA_font");
+            PDA_FONT[mono_font]  = GetUserCVarString(PlayerNumber(), "DRLA_PDA_monofont");
+            PDA_FONT[slim_font]  = GetUserCVarString(PlayerNumber(), "DRLA_PDA_slimfont");
+            SetHudSize(320,200,0);
+            PDA_HasEquipment();
 
+            if (!localOneEquipFirst) {
+                if (localHasArmor) {
+                    localEqBoolField = localHasArmor << 0;
+                    localOneEquipFirst = true;
+                }
+                if (localHasBoots) {
+                    localEqBoolField = localHasBoots << 1;
+                    localOneEquipFirst = true;
+                }
+                if (localHasBackpack) {
+                    localEqBoolField = localHasBackpack << 2;
+                    localOneEquipFirst = true;
+                }
+            }
+            else {
+                if (!localHasArmor && !localHasBoots && !localHasBackpack) localOneEquipFirst = false;
+            }
+
+
+            PDA_UnsetScrollArrows();
+
+            SetPlayerProperty(0,1,PROP_TOTALLYFROZEN);
+
+            // No more murdering people while browsing your iP- er, PDA!
+            GiveInventory("RLSynthFireDisabled",1);
+
+            FadeTo(0, 0, 0, 0.5, 0.0);
+            PDA_SetFullDirty();
+
+            DisplayIconAlways(pdaGraphic, PDA_ID, 0.5, 0.5, 0, 1);
+
+            PDA_PlaySound("UI/PDA/Online", "pda/soldieropen", 80);
+
+            ACS_NamedExecuteAlways("PDA_MouseController",0);
+            ACS_NamedExecuteAlways("PDA_Core",0);
+
+            PDA_Local.active = true;
+            break;
+        case PDA_DEACTIVATE:
+            PDA_Local.active = false;
+            PDA_Local.pongRunning = false;
+
+            PDA_PlaySound("UI/PDA/Offline", "pda/soldierclose", 80);
+
+            PDA_ClearDirty();
+
+            PDA_NOPONG();
+            PDA_ClearHeader();
+            PDA_UnsetScrollArrows();
+            PDA_SuperWipe("PDA_SetDisplay");
+            setPDADefaults(PlayerNumber());
+
+            DisplayIconAlways(pdaGraphic, PDA_ID, 0.5, 0.5, 0, 0);
+
+            SetPlayerProperty(0,0,PROP_TOTALLYFROZEN);
+            TakeInventory("RLSynthFireDisabled",1);
+            FadeTo(0, 0, 0, 0.0, 0.0);
+
+            if (PDA_Local.category == PDA_CREDITS) SetMusic("*");
+
+            break;
+    }
+    PDA_SetFullDirty();
+}
+
+// Display terminal
+SCRIPT "PDA_Display" (void) net {
     if (!PDA_Local.active) {
-        PDA_UnsetScrollArrows();
-
-        SetPlayerProperty(0,1,PROP_TOTALLYFROZEN);
-
-        // No more murdering people while browsing your iP- er, PDA!
-        GiveInventory("RLSynthFireDisabled",1);
-
-        FadeTo(0, 0, 0, 0.5, 0.0);
-
-        DisplayIcon(pdaGraphic, PDA_ID, 0.5, 0.5, 0, 1);
-        
-        PDA_PlaySound("UI/PDA/Online", "pda/soldieropen", 80);
-
-        
-        ACS_NamedExecuteAlways("PDA_MouseController",0);
-        //ACS_NamedExecuteAlways("PDA_TrackKeys",0);
-        ACS_NamedExecuteAlways("PDA_Core",0);
-
-        PDA_Local.active = true;
+        PDA_SetDisplay(PDA_ACTIVATE);
     } else {
-        reset_pda_stuff("PDA_Display Terminate");
+        PDA_SetDisplay(PDA_DEACTIVATE);
     }
 }
 
 SCRIPT "PDA_YOUAREDEADnotbigsurprise" DEATH {
     if (PDA_Local.active) {
-        reset_pda_stuff("Player Death");
+        PDA_SetDisplay(PDA_DEACTIVATE);
     }
 }
 
 /** Attempt to eliminate problems that result from dying w/ PDA*/
 SCRIPT "PDA_Respawn" RESPAWN {
     if (PDA_Local.active) {
-        reset_pda_stuff("Respawn");
+        PDA_SetDisplay(PDA_DEACTIVATE);
     }
 }
 
@@ -391,11 +415,73 @@ function void PDA_OnChange (void) {
     afterPageDefaults("PDA_OnChange");
     PDA_ChangeScrolling();
     PDA_SetDataPerPage();
+
     #include "PDA_STC.acs"
-    PDA_SetDirty();
+
+    PDA_SetFullDirty();
     PDA_Local.prevCategory = PDA_Local.category;
     PDA_Local.prevPage = PDA_Local.page;
 }
+
+function void DebugIDs (void) {
+    log("PDA_CURSORID=%d:",PDA_CURSORID);
+    log("PDA_PLAYERS_BUTTON=%d:",PDA_PLAYERS_BUTTON);
+    log("PDA_WEAPONS_BUTTON=%d:",PDA_WEAPONS_BUTTON);
+    log("PDA_ARMORS_BUTTON=%d:",PDA_ARMORS_BUTTON);
+    log("PDA_ASSEMBLIES_BUTTON=%d:",PDA_ASSEMBLIES_BUTTON);
+    log("PDA_ITEMS_BUTTON=%d:",PDA_ITEMS_BUTTON);
+    log("PDA_BESTIARY_BUTTON=%d:",PDA_BESTIARY_BUTTON);
+    log("PDA_MISC_BUTTON=%d:",PDA_MISC_BUTTON);
+    log("PDA_HELP_BUTTON=%d:",PDA_HELP_BUTTON);
+    log("PDA_WINFO_BUTTON=%d:",PDA_WINFO_BUTTON);
+    log("PDA_BEAST_UV=%d:",PDA_BEAST_UV);
+    log("PDA_BEAST_NM=%d:",PDA_BEAST_NM);
+    log("PDA_BEAST_TP=%d:",PDA_BEAST_TP);
+    log("PDA_BEAST_AG=%d:",PDA_BEAST_AG);
+    log("PDA_BEAST_EX=%d:",PDA_BEAST_EX);
+    log("PDA_PREV_PAGE=%d:",PDA_PREV_PAGE);
+    log("PDA_NEXT_PAGE=%d:",PDA_NEXT_PAGE);
+    log("PDA_MODS_PAGE=%d:",PDA_MODS_PAGE);
+    log("PDA_ARTIFACTS_PAGE=%d:",PDA_ARTIFACTS_PAGE);
+    log("PDA_CAT_DESCRIPTION=%d:",PDA_CAT_DESCRIPTION);
+    log("PDA_PLAYER_BODY_ICON=%d:",PDA_PLAYER_BODY_ICON);
+    log("PDA_PLAYER_ARMOR_ICON=%d:",PDA_PLAYER_ARMOR_ICON);
+    log("PDA_PLAYER_BACKPACK_ICON=%d:",PDA_PLAYER_BACKPACK_ICON);
+    log("PDA_PLAYER_BOOTS_ICON=%d:",PDA_PLAYER_BOOTS_ICON);
+    log("PDA_ASSEMBLY_ID_END=%d:",PDA_ASSEMBLY_ID_END);
+    log("PDA_BEASTS_ID_END=%d:",PDA_BEASTS_ID_END);
+    log("PDA_WORNARMORS=%d:",PDA_WORNARMORS);
+    log("PDA_STASHEDARMORS=%d:",PDA_STASHEDARMORS);
+    log("PDA_NOEQID=%d:",PDA_NOEQID);
+    log("PDA_MODIDRANGE=%d:",PDA_MODIDRANGE);
+    log("PDA_INFO4ID=%d:",PDA_INFO4ID);
+    log("PDA_INFO3ID=%d:",PDA_INFO3ID);
+    log("PDA_INFO2ID=%d:",PDA_INFO2ID);
+    log("PDA_INFOID=%d:",PDA_INFOID);
+    log("PDA_SCROLLDNID=%d:",PDA_SCROLLDNID);
+    log("PDA_SCROLLUPID=%d:",PDA_SCROLLUPID);
+    log("PDA_ITEMS_END=%d:",PDA_ITEMS_END);
+    log("PDA_LASTID=%d:",PDA_LASTID);
+    log("PDA_PONG_LEFTPADDLE=%d:",PDA_PONG_LEFTPADDLE);
+    log("PDA_PONG_RIGHTPADDLE=%d:",PDA_PONG_RIGHTPADDLE);
+    log("PDA_PONG_BALL=%d:",PDA_PONG_BALL);
+    log("PDA_PONG_TOPBORD=%d:",PDA_PONG_TOPBORD);
+    log("PDA_PONG_BOTBORD=%d:",PDA_PONG_BOTBORD);
+    log("PDA_PONG_PLAYERSCORE=%d:",PDA_PONG_PLAYERSCORE);
+    log("PDA_PONG_AISCORE=%d:",PDA_PONG_AISCORE);
+    log("PDA_INFOTOPID=%d:",PDA_INFOTOPID);
+    log("PDA_TAB_BUTTONS_START=%d:",PDA_TAB_BUTTONS_START);
+    log("PDA_TAB_BUTTONS_END=%d:",PDA_TAB_BUTTONS_END);
+    log("PDA_ID=%d:",PDA_ID);
+    log("PDA_REALLYLASTID=%d:",PDA_REALLYLASTID);
+    log("PDA_ARMORINVIDRANGE=%d:",PDA_ARMORINVIDRANGE);
+    log("PDA_ARMORWORNIDRANGE=%d:",PDA_ARMORWORNIDRANGE);
+    log("PDA_TOOLTIPGFX=%d:",PDA_TOOLTIPGFX);
+    log("PDA_TOOLTIPID=%d:",PDA_TOOLTIPID);
+    log("PDA_WEAPON_ICON=%d:",PDA_WEAPON_ICON);
+    log("PDA_PLYR_ICON=%d:",PDA_PLYR_ICON);
+}
+
 
 SCRIPT "PDA_Core" (void) {
     PDA_Local.scrollingY = 20.0;
@@ -408,6 +494,7 @@ SCRIPT "PDA_Core" (void) {
     }
     
     while (PDA_Local.active) {
+        ++PDA_Local.ptic;
         if (PDA_ScrollMoved) {
           PDA_SetScrollDirty();
           PDA_TrackScrollArrows();
@@ -415,10 +502,13 @@ SCRIPT "PDA_Core" (void) {
         PDA_Local.prevScrollingY = PDA_Local.scrollingY;
 
         if (PDA_CategoryChanged || PDA_PageChanged) {
-          PDA_OnChange();
+            log("category or page changed");
+            PDA_OnChange();
         }
         PDA_HandleHeader();
+        // DebugIDs();
         
+        // isDirtyBoy("PDA_Core Loop");
         switch (PDA_Local.category) {
             case PDA_MENU:
                 page_menu();
@@ -448,9 +538,9 @@ SCRIPT "PDA_Core" (void) {
                 page_misc();
                 break;
             
-            case PDA_PONG:
-                page_menu();
-                break;
+            // case PDA_PONG:
+            //     page_menu();
+            //     break;
             case PDA_CREDITS:
                 page_credits();
                 break;
@@ -469,7 +559,8 @@ SCRIPT "PDA_Core" (void) {
         }
         Delay(PDA_Responsiveness);
 
-        PDA_ClearDirty();
+        if (PDA_ParallaxNeedsDraw) PDA_ClearDirty();
+        if (PDA_Local.ptic > 255) PDA_Local.ptic = 0;
     }
     SetHudClipRect(0,0,0,0,0);
 }

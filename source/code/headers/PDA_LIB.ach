@@ -19,9 +19,6 @@ str PDA_FONT[3] = {"STAT_MNO", "STAT_LWR", "PDAFONT"};
 
 str PDA_HEADER_STR = "PDA_MENU_HEADER";
 int PDA_HEADER_X   = 0;
-    
-#define _ACTION BT_ATTACK|BT_USE
-#define _BACK   BT_ALTATTACK|BT_JUMP
 
 // is demonic, disassemble-able, supports artifacts
 // 1 and 3 are kinda redundant..

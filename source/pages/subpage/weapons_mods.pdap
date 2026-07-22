@@ -2,33 +2,29 @@
 // DisplayIcon(player_weapon[player_weapon_current], PDA_ID, 0.5, 0.5, 0, 1);
 #define canBeEvil weapon_checks[weapon_checks_isdemonic]
 
-PDA_HudDirtyP(HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, /*x*/ 10.0, /*y*/ 20.0 + (20.0 * 1), 0.0, 1.0,
-    l:(canBeEvil) 
+HudMessageParallax(
+    StrParam("%l:\n"
+    "[\c[LightBlue]%i:B \c[Red]%i:P \c[Green]%i:A \c[Yellow]%i:T \c[Purple]%i:S \c[Orange]%i:F \c[White]%i:N \cr%i:D\c-]"
+    "\n\n"
+    "%l:\c[Cyan]%i:",
+    (canBeEvil) 
         ? (CheckInventory(StrParam("%s:DemonArtifacts", player_weapon[player_weapon_current])) ? weapon_info[weapon_info_dualname] : weapon_info[weapon_info_name]) 
         : weapon_info[weapon_info_name],
-    s:"\n[\c[LightBlue]",
-    i:Weapon_Mod_Quantity[mod_bulk],
-    s:"B \c[Red]",
-    i:Weapon_Mod_Quantity[mod_power],
-    s:"P \c[Green]",
-    i:Weapon_Mod_Quantity[mod_agility],
-    s:"A \c[Yellow]",
-    i:Weapon_Mod_Quantity[mod_technical],
-    s:"T \c[Purple]",
-    i:Weapon_Mod_Quantity[mod_sniper],
-    s:"S \c[Orange]",
-    i:Weapon_Mod_Quantity[mod_firestorm],
-    s:"F \c[White]",
-    i:Weapon_Mod_Quantity[mod_nano],
-    s:"N \cr",
-    i:(canBeEvil) ? 0 : Weapon_Mod_Quantity[mod_artifact],
-    s:"D\c-]\n\n",
-    l:"PDA_MODPACK_MAXSUPPORTED",
-    s:"\c[Cyan]",
-    i:PDA_Local.maxModLimit
+    Weapon_Mod_Quantity[mod_bulk], Weapon_Mod_Quantity[mod_power], Weapon_Mod_Quantity[mod_agility], Weapon_Mod_Quantity[mod_technical],
+    Weapon_Mod_Quantity[mod_sniper], Weapon_Mod_Quantity[mod_firestorm], Weapon_Mod_Quantity[mod_nano],
+    (canBeEvil) ? 0 : Weapon_Mod_Quantity[mod_artifact],
+    "PDA_MODPACK_MAXSUPPORTED",
+    PDA_Local.maxmodlimit),
+
+    HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 
+    /*x*/ 10.0, 
+    /*y*/ 20.0 + (20.0 * 1), 
+    0.0, 1.0
 );
 
 for (int modPack = PDA_MODMIN; modPack < PDA_MODMAX - 1; modPack++) {
+
+    // str selectedMod = StrParam("%s:MODICON", strMid(stringArray[modPack], 9, 1));
     str selectedMod = StrParam("%s:MODICON", weapon_mods[modPack]);
 
     float modY = 55.0 + (24.0 * modPack);
