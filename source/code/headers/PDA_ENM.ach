@@ -35,6 +35,7 @@ enum PDA_IDs {
     PDA_CURSORID = 2,
     PDA_DEBUG_HEADER,
     PDA_DEBUG_BODY,
+    PDA_DEBUG_TOOLTIP,
     
     // Menu
     PDA_PLAYERS_BUTTON = PDA_CURSORID + 30,
@@ -63,7 +64,7 @@ enum PDA_IDs {
     PDA_ARTIFACTS_PAGE = PDA_NEXT_PAGE,
 
     // Category description tooltip
-    PDA_CAT_DESCRIPTION = PDA_NEXT_PAGE + 10,
+    PDA_CAT_DESCRIPTION = PDA_NEXT_PAGE + 1,
     
     // Classes/Player IDs
     PDA_PLAYER_BODY_ICON = PDA_CAT_DESCRIPTION + 10,

@@ -212,19 +212,26 @@ function void PDA_UnsetScrollWindow (void) {
 
 
 #define HEADER_BOUNDS() \
-    int headX  = PDA_SCREEN_X + 4; \
-    int headY  = PDA_SCREEN_Y + 8; \
-    int headW  = PDA_SCREEN_WIDTH * NEW_RESOLUTION_X; \
-    int headH  = headY - 8; \
-    int headWW = (PDA_SCREEN_WIDTH * NEW_RESOLUTION_X) - PDA_SCREEN_X; \
-
+    int headX  = PDA_HEADER_X; \
+    int headY  = PDA_HEADER_Y; \
+    int headW  = PDA_SCREEN_WIDTH_SCALED; \
+    int headH  = PDA_HEADER_HEIGHT; \
+    int headWW = PDA_SCREEN_WIDTH_SCALED - PDA_SCREEN_X; \
 
 #define BODY_BOUNDS() \
     int bodyX  = PDA_SCREEN_X + 4; \
-    int bodyY  = PDA_SCROLLABLE_Y; \
-    int bodyW  = PDA_SCREEN_WIDTH * NEW_RESOLUTION_X; \
-    int bodyH  = PDA_SCROLLABLE_HEIGHT; \
-    int bodyWW = (PDA_SCREEN_WIDTH * NEW_RESOLUTION_X) - (PDA_SCREEN_X * 3); \
+    int bodyY  = PDA_SCROLLABLE_BODY_Y; \
+    int bodyW  = PDA_SCREEN_WIDTH_SCALED; \
+    int bodyH  = PDA_SCROLLABLE_BODY_HEIGHT; \
+    int bodyWW = PDA_SCREEN_WIDTH_SCALED - (PDA_SCREEN_X * 3); \
+
+#define TOOLTIP_BOUNDS() \
+    int tipX  = PDA_MENU_TOOLTIP_X + 5.0; \
+    int tipY  = PDA_MENU_TOOLTIP_Y; \
+    int tipW  = (PDA_MENU_TOOLTIP_WIDTH * NEW_RESOLUTION_X); \
+    int tipH  = PDA_MENU_TOOLTIP_HEIGHT; \
+    int tipWW = tipW - 10; \
+    // int tipWW = PDA_SCREEN_WIDTH_SCALED - (PDA_SCREEN_X * 3); \
 
 
 function void PDA_SetupHeaderBounds (void) {
@@ -242,9 +249,23 @@ function void PDA_SetupHeaderBounds (void) {
     TraceLog("PDA_SetupHeaderBounds");
 }
 
+function void PDA_SetupTooltipBounds (void) {
+    SetHudSize(NEW_RESOLUTION_WIDTH, NEW_RESOLUTION_HEIGHT);
+
+    TOOLTIP_BOUNDS()
+
+    SetHudClipRect(tipX, tipY, tipW, tipH, tipWW);
+
+    if (debug) {
+        SetFont("TOL_BG");
+        HudMessage(s:"A\n"; HUDMSG_ALPHA, PDA_DEBUG_TOOLTIP, CR_UNTRANSLATED, 0.1, 0.1, INF_HOLDTIME, 0.24);
+        PDA_DefaultFont();
+    }
+
+    TraceLog("PDA_SetupTooltipBounds");
+}
+
 function void PDA_SetupScreenBounds (void) {
-    // SetHudClipRect(0,0,0,0,0);
-    // PDA_Wipe("PDA_SetupScreenBounds"); // at least this finally seemed to help out w/ retention bugs
     SetHudSize(NEW_RESOLUTION_WIDTH, NEW_RESOLUTION_HEIGHT);
 
     BODY_BOUNDS()
@@ -262,9 +283,9 @@ function void PDA_SetupScreenBounds_Wipeless (void) {
     SetHudSize(NEW_RESOLUTION_WIDTH, NEW_RESOLUTION_HEIGHT);
 
     int x = PDA_SCREEN_X + 4;
-    int y = PDA_SCROLLABLE_Y;
+    int y = PDA_SCROLLABLE_BODY_Y;
     int w = PDA_SCREEN_WIDTH * NEW_RESOLUTION_X;
-    int h = PDA_SCROLLABLE_HEIGHT;
+    int h = PDA_SCROLLABLE_BODY_HEIGHT;
     int ww = (PDA_SCREEN_WIDTH * NEW_RESOLUTION_X) - (PDA_SCREEN_X * 3);
 
     SetHudClipRect(x, y, w, h, ww);
@@ -282,6 +303,83 @@ function void PDA_ClearHeader (void) {
     HudMessage(s:""; HUDMSG_PLAIN, PDA_INFOTOPID, CR_GREEN, PDA_SCREEN_X + 100.0 + PDA_HEADER_X_OFFSET + X_LEFT_EDGE, PDA_SCREEN_Y + 2.0 + Y_TOP_EDGE, 0.0);
     TraceLog("PDA_ClearHeader");
 }
+
+// Text drawing functions w/ built in bounds checking
+// I should have done this many years ago..
+function void PDA_DrawHeaderText(str text, fixed x, fixed y) {
+    PDA_SetupHeaderBounds();
+    HEADER_BOUNDS()
+
+    fixed finalX = (int)(x * NEW_RESOLUTION_X) + X_LEFT_EDGE;
+    fixed finalY = (int)(y * NEW_RESOLUTION_Y) + Y_TOP_EDGE;
+
+    log("headH[%d: > (%f:) < %d:] || headY[%d: > (%f:) < %d:]", headX, finalX, headX + headW, headY, finalY, headY + headH);
+    if (finalX < headX || finalX > headX + headW) {
+        log("Header text outside horizontal clipping bounds");
+    }
+    if (finalY < headY || finalY > headY + headH) {
+        log("Header text outside vertical clipping bounds");
+    }
+
+    // TODO: Should we use our specialized hud printer here?
+    if (PDA_NeedsDraw) {
+        HudMessage(l:text; HUDMSG_ALPHA, PDA_INFOTOPID, CR_GREEN, finalX, finalY, INF_HOLDTIME, OPAQUE);
+    }
+}
+
+function void PDA_DrawBodyText_Set(int type, int id, int color, fixed x, fixed y, fixed hold, fixed alpha) {
+    PDA_SetupScreenBounds();
+    BODY_BOUNDS()
+
+    fixed finalX = (int)(((PDA_BODY_X                       ) + x) * NEW_RESOLUTION_X) + X_LEFT_EDGE;
+    fixed finalY = (int)(((PDA_BODY_Y + PDA_Local.scrollingY) + y) * NEW_RESOLUTION_Y) + Y_TOP_EDGE;
+
+    log("bodyH[%d: > (%f:) < %d:] || bodyY[%d: > (%f:) < %d:]", bodyX, finalX, bodyX + bodyW, bodyY, finalY, bodyY + bodyH);
+    if (finalX < bodyX || finalX > bodyX + bodyW) {
+        log("Body text outside horizontal clipping bounds");
+    }
+    if (finalY < bodyY || finalY > bodyY + bodyH) {
+        log("Body text outside vertical clipping bounds");
+    }
+
+    if (PDA_ParallaxNeedsDraw) {
+        PDA_HudSet(type, id, color, finalX, finalY, hold, alpha);
+    }
+}
+
+#define PDA_DrawBodyText(type, id, color, x, y, hold, alpha, ...) do { \
+PDA_DrawBodyText_Set(type, id, color, x, y, hold, alpha); \
+PDA_Hud(__VA_ARGS__); \
+} while(0) \
+
+
+function void PDA_DrawTooltipText_Set(int type, int id, int color, fixed x, fixed y, fixed hold, fixed alpha) {
+    PDA_SetupTooltipBounds();
+    TOOLTIP_BOUNDS()
+
+    fixed finalX = (int)(PDA_MENU_TOOLTIP_X                        + x) + X_LEFT_EDGE;
+    fixed finalY = (int)(PDA_MENU_TOOLTIP_Y + PDA_Local.scrollingY + y) + Y_TOP_EDGE;
+
+    log("tipH[%d: > (%f:) < %d:] || tipY[%d: > (%f:) < %d:]", tipX, finalX, tipX + tipW, tipY, finalY, tipY + tipH);
+    if (finalX < tipX || finalX > tipX + tipW) {
+        log("Tooltip text outside horizontal clipping bounds");
+    }
+    if (finalY < tipY || finalY > tipY + tipH) {
+        log("Tooltip text outside vertical clipping bounds");
+    }
+
+    if (PDA_NeedsDraw) {
+        SetFont(PDA_FONT[slim_font]);
+        PDA_HudSet(type, id, color, finalX, finalY, hold, alpha);
+    }
+}
+
+#define PDA_DrawTooltipText(type, id, color, x, y, hold, alpha, ...) do { \
+PDA_DrawTooltipText_Set(type, id, color, x, y, hold, alpha); \
+PDA_Hud(__VA_ARGS__); \
+PDA_SetupScreenBounds_Wipeless(); \
+} while(0) \
+
 
 // Rare use: Mouse cursor, etc.
 function void DisplayIconAlways (str Sprite, int ID, fixed X, fixed Y, fixed DelayTime, fixed Alpha) {
@@ -470,8 +568,8 @@ function void PDA_SetupFloatingTooltip (str graphic, str tooltip) {
     SetFont(PDA_FONT[mono_font]);
 
     SetHudClipRect(
-        PDA_SCREEN_X + 4, PDA_SCROLLABLE_Y,
-        PDA_SCREEN_WIDTH * NEW_RESOLUTION_X, PDA_SCROLLABLE_HEIGHT,
+        PDA_SCREEN_X + 4, PDA_SCROLLABLE_BODY_Y,
+        PDA_SCREEN_WIDTH * NEW_RESOLUTION_X, PDA_SCROLLABLE_BODY_HEIGHT,
         PDA_FLOATING_TOOLTIP_WRAP
     );
 
@@ -1035,32 +1133,29 @@ function void PDA_HasEquipment (void) {
 
 // !! When debugging button hitboxes via DrawBorder, remember to multiply X, Y, W, H with matching NEW_RESOLUTION_ variables !!
 
-function PDAButton PDA_CreateMenuButton (int id, str label, str graphic, float x, float y, int width, int height) {
+function PDAButton PDA_CreateMenuButton (int id, str label, str graphic, fixed x, fixed y) {
     #define thisButton PDA_LocalButton[id]
+    int width        = PDA_MENU_BTN_W;
+    int height       = PDA_MENU_BTN_H;
+
     assignButtonParams(thisButton, label)
 
-    fixed xlabeloff = (StrCmp(thisButton.graphic, "PTAB") == 0) ? 4.0 : 0.0;
-    fixed ylabeloff = (StrCmp(thisButton.graphic, "PTAB") == 0) ? 3.0 : 0.0;
+    fixed xlabeloff = 0.0;
+    fixed ylabeloff = 0.0;
 
     thisButton.graphic      = graphic;
     thisButton.graphicFlags = HUDMSG_ALPHA;
     thisButton.graphicID    = thisButton.id;
-    int _gfxTemp            = thisButton.x * NEW_RESOLUTION_X;
-    thisButton.graphicX     = _gfxTemp + X_LEFT_EDGE;
-    int _gfyTemp            = thisButton.y * NEW_RESOLUTION_Y;
-    thisButton.graphicY     = _gfyTemp + 10.0;
+    thisButton.graphicX     = (int)(thisButton.x * NEW_RESOLUTION_X) + X_LEFT_EDGE;
+    thisButton.graphicY     = (int)(thisButton.y * NEW_RESOLUTION_Y) + 10.0;
     thisButton.type         = "menu";
 
     thisButton.textFont     = PDA_FONT[slim_font];
     thisButton.textFlags    = HUDMSG_ALPHA;
     thisButton.textID       = thisButton.graphicID + 1;
     thisButton.textX        = thisButton.graphicX + (xlabeloff * NEW_RESOLUTION_X);
-    int _tyTemp             = thisButton.y * NEW_RESOLUTION_Y;
-    thisButton.textY        = _tyTemp + (ylabeloff * NEW_RESOLUTION_Y);
+    thisButton.textY        = (int)(thisButton.y * NEW_RESOLUTION_Y) + (int)(ylabeloff * NEW_RESOLUTION_Y);
 
-    if (debug) {
-        // DrawBorder(thisButton.x * NEW_RESOLUTION_X, thisButton.y * NEW_RESOLUTION_Y, width * NEW_RESOLUTION_X, height * NEW_RESOLUTION_Y);
-    }
     TraceLog("PDA_CreateMenuButton");
     return thisButton;
 }
@@ -1556,15 +1651,9 @@ function void PDA_DrawButton (int id, str message, bool onlyVisual, bool clear) 
             PDA_SetFullDirty();
 
             if (StrCmp(message, "") != 0) {
-                SetFont(PDA_FONT[slim_font]);
-                SetHudClipRect(
-                    PDA_MENU_TOOLTIP_X,     PDA_MENU_TOOLTIP_Y,
-                    PDA_MENU_TOOLTIP_WIDTH, PDA_MENU_TOOLTIP_HEIGHT,
-                    PDA_MENU_TOOLTIP_WIDTH
-                );
-                PDA_TooltipDirty(HUDMSG_PLAIN, PDA_CAT_DESCRIPTION + id, CR_UNTRANSLATED, PDA_MENU_TOOLTIP_X + X_LEFT_EDGE, PDA_MENU_TOOLTIP_Y + Y_TOP_EDGE, INF_HOLDTIME, OPAQUE, s:message);
-
-                PDA_SetupScreenBounds_Wipeless();
+                PDA_DrawTooltipText(HUDMSG_PLAIN, PDA_CAT_DESCRIPTION, CR_UNTRANSLATED,
+                                    0.0, 0.0,
+                                    INF_HOLDTIME, OPAQUE, s:message);
             }
             break;
     }
@@ -1572,7 +1661,9 @@ function void PDA_DrawButton (int id, str message, bool onlyVisual, bool clear) 
     if (PDA_LocalButton[id].oldState == button_hovered && PDA_LocalButton[id].state != button_hovered) {
         PDA_SetFullDirty();
 
-        PDA_TooltipDirty(HUDMSG_PLAIN, PDA_CAT_DESCRIPTION + id, CR_UNTRANSLATED, PDA_MENU_TOOLTIP_X + X_LEFT_EDGE, PDA_MENU_TOOLTIP_Y + Y_TOP_EDGE, INF_HOLDTIME, OPAQUE, s:"");
+        PDA_DrawTooltipText(HUDMSG_PLAIN, PDA_CAT_DESCRIPTION, CR_UNTRANSLATED,
+                            0.0, 0.0,
+                            INF_HOLDTIME, 0.0, s:"");
     }
 
     // I hate this condition setup. Dargh.
@@ -1617,9 +1708,17 @@ function void PDA_DrawButton (int id, str message, bool onlyVisual, bool clear) 
     PDA_HudDirty(PDA_LocalButton[id].textFlags, PDA_LocalButton[id].textID, newColor, PDA_LocalButton[id].textX, PDA_LocalButton[id].textY, INF_HOLDTIME, PDA_LocalButton[id].alpha, s:PDA_LocalButton[id].label);
 
     if (clear) {
-        PrintSpriteAlpha(PDA_LocalButton[id].graphic, PDA_LocalButton[id].graphicID, PDA_LocalButton[id].graphicX, PDA_LocalButton[id].graphicY, 0.0, 0.0, true);
-        HudMessage(s:" "; PDA_LocalButton[id].textFlags, PDA_LocalButton[id].textID, newColor, PDA_LocalButton[id].textX, PDA_LocalButton[id].textY, 1.0, 0.0);
-        HudMessage(s:" "; HUDMSG_ALPHA, id + 5, CR_GREEN, thisButton.textX + thisButton.width - 10.0, thisButton.textY - 6.0, 0.0, 0.0);
+        // Button graphic
+        PrintSpriteAlpha(PDA_LocalButton[id].graphic, PDA_LocalButton[id].graphicID, PDA_LocalButton[id].graphicX, PDA_LocalButton[id].graphicY, INF_HOLDTIME, 0.0, B_CLEAR);
+
+        // Button text
+        PDA_HudDirty(PDA_LocalButton[id].textFlags, PDA_LocalButton[id].textID, newColor, PDA_LocalButton[id].textX, PDA_LocalButton[id].textY, INF_HOLDTIME, 0.0, s:"");
+
+        PDA_TooltipDirty(HUDMSG_PLAIN, PDA_CAT_DESCRIPTION, CR_UNTRANSLATED, PDA_MENU_TOOLTIP_X + X_LEFT_EDGE, PDA_MENU_TOOLTIP_Y + Y_TOP_EDGE, INF_HOLDTIME, 0.0, s:"");
+
+        // HudMessage(s:" "; PDA_LocalButton[id].textFlags, PDA_LocalButton[id].textID, newColor, PDA_LocalButton[id].textX, PDA_LocalButton[id].textY, 1.0, 0.0);
+        //
+        // HudMessage(s:" "; HUDMSG_ALPHA, id + 5, CR_GREEN, thisButton.textX + thisButton.width - 10.0, thisButton.textY - 6.0, 0.0, 0.0);
     }
     TraceLog("PDA_DrawButton");
 }
@@ -1631,54 +1730,9 @@ function void PDA_ButtonHandler (int id, int inCategory, int categoryPage, str m
     TraceLog("PDA_ButtonHandler");
 }
 
-function void PDA_DrawHeaderText(str text, fixed x, fixed y) {
-    PDA_SetupHeaderBounds();
-    HEADER_BOUNDS()
-
-    int _xTemp = (int)(x * NEW_RESOLUTION_X);
-    int _yTemp = (int)(y * NEW_RESOLUTION_Y);
-    fixed finalX = _xTemp + X_LEFT_EDGE;
-    fixed finalY = _yTemp + Y_TOP_EDGE;
-    log("headH[%d: > (%f:) < %d:] || headY[%d: > (%f:) < %d:]", headX, finalX, headX + headW, headY, finalY, headY + headH);
-    if (finalX < headX || finalX > headX + headW) {
-        log("Header text outside horizontal clipping bounds");
-    }
-    if (finalY < headY || finalY > headY + headH) {
-        log("Header text outside vertical clipping bounds");
-    }
-
-    HudMessage(l:text; HUDMSG_ALPHA, PDA_INFOTOPID, CR_GREEN,
-               finalX, finalY,
-               INF_HOLDTIME, OPAQUE);
-}
 
 
-function void PDA_DrawBodyText_Set(int type, int id, int color, fixed x, fixed y, fixed hold, fixed alpha) {
-    PDA_SetupScreenBounds();
-    BODY_BOUNDS()
 
-    fixed finalX = (int)(((PDA_BODY_X                       ) + x) * NEW_RESOLUTION_X) + X_LEFT_EDGE;
-    fixed finalY = (int)(((PDA_BODY_Y + PDA_Local.scrollingY) + y) * NEW_RESOLUTION_Y) + Y_TOP_EDGE;
-
-    log("body_y %d: scrolly %f: y %f: new_res_y %f:", PDA_BODY_X, PDA_Local.scrollingY, y, NEW_RESOLUTION_Y);
-
-    log("bodyH[%d: > (%f:) < %d:] || bodyY[%d: > (%f:) < %d:]", bodyX, finalX, bodyX + bodyW, bodyY, finalY, bodyY + bodyH);
-    if (finalX < bodyX || finalX > bodyX + bodyW) {
-        log("Body text outside horizontal clipping bounds");
-    }
-    if (finalY < bodyY || finalY > bodyY + bodyH) {
-        log("Body text outside vertical clipping bounds");
-    }
-
-    if (PDA_ParallaxNeedsDraw) {
-        PDA_HudSet(type, id, color, finalX, finalY, hold, alpha);
-    }
-}
-
-#define PDA_DrawBodyText(type, id, color, x, y, hold, alpha, ...) do { \
-    PDA_DrawBodyText_Set(type, id, color, x, y, hold, alpha); \
-    PDA_Hud(__VA_ARGS__); \
-} while(0) \
 
 function void PDA_HandleHeader(void) {
     if (PDA_CategoryChanged || PDA_PageChanged) {
@@ -1809,7 +1863,7 @@ function void PDA_HandleHeader(void) {
 function void PDA_TrackScrollArrows (void) {
     switch (PDA_Local.category) {
         case PDA_MENU:
-            PDA_SetScrollArrows2(-30, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+            PDA_SetScrollArrows2(-30, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_BODY_HEIGHT + 90.0);
             break;
 
         case PDA_CLASSES:
@@ -1817,7 +1871,7 @@ function void PDA_TrackScrollArrows (void) {
                 case CLASSES_PAGE_PERKS:
                     break;
                 case CLASSES_PAGE_STORY:
-                    PDA_SetScrollArrows2(120, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+                    PDA_SetScrollArrows2(120, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_BODY_HEIGHT + 90.0);
                     break;
             }
             break;
@@ -1827,10 +1881,10 @@ function void PDA_TrackScrollArrows (void) {
                 case WEAPON_PAGE_STORY:
                     break;
                 case WEAPON_PAGE_MODPACK_EFFECTS:
-                    PDA_SetScrollArrows2(-60, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+                    PDA_SetScrollArrows2(-60, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_BODY_HEIGHT + 90.0);
                     break;
                 case WEAPON_PAGE_ARTIFACT_EFFECTS:
-                    PDA_SetScrollArrows2(-80, PDA_SCREEN_WIDTH + 50.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+                    PDA_SetScrollArrows2(-80, PDA_SCREEN_WIDTH + 50.0, PDA_SCROLLABLE_BODY_HEIGHT + 90.0);
                     break;
             }
             break;
@@ -1840,10 +1894,10 @@ function void PDA_TrackScrollArrows (void) {
 
             switch (PDA_Local.page) {
                 case BESTIARY_PAGE_DIFFICULTIES:
-                    PDA_SetScrollArrows2(0, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+                    PDA_SetScrollArrows2(0, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_BODY_HEIGHT + 90.0);
                     break;
                 default:
-                    PDA_SetScrollArrows2(DRLA_MONSTER_PAGE_MAX * -10, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+                    PDA_SetScrollArrows2(DRLA_MONSTER_PAGE_MAX * -10, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_BODY_HEIGHT + 90.0);
                     break;
             }
             break;
@@ -1851,37 +1905,37 @@ function void PDA_TrackScrollArrows (void) {
             switch (PDA_Local.page) {
                 case EQUIPMENT_PAGE_ONHAND:
                     if (localHasBackpack) {
-                        PDA_SetScrollArrows2(-140, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+                        PDA_SetScrollArrows2(-140, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_BODY_HEIGHT + 90.0);
                     } else {
-                        PDA_SetScrollArrows2(-80 , PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+                        PDA_SetScrollArrows2(-80 , PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_BODY_HEIGHT + 90.0);
                     }
                     break;
                 case EQUIPMENT_PAGE_INFO:
-                    PDA_SetScrollArrows2(-160, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+                    PDA_SetScrollArrows2(-160, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_BODY_HEIGHT + 90.0);
                     break;
             }
             break;
 
         case PDA_ASSEMBLIES:
             int scrollOffset = -8 * PDA_Local.maxAssembliesPer;
-            PDA_SetScrollArrows2(scrollOffset, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+            PDA_SetScrollArrows2(scrollOffset, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_BODY_HEIGHT + 90.0);
             break;
 
         case PDA_HELP:
             break;
         case PDA_MISC:
-            PDA_SetScrollArrows2(0, PDA_SCREEN_WIDTH + 50.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+            PDA_SetScrollArrows2(0, PDA_SCREEN_WIDTH + 50.0, PDA_SCROLLABLE_BODY_HEIGHT + 90.0);
             break;
 
         case PDA_ITEMS:
-            PDA_SetScrollArrows2(-200, PDA_SCREEN_WIDTH + 50.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+            PDA_SetScrollArrows2(-200, PDA_SCREEN_WIDTH + 50.0, PDA_SCROLLABLE_BODY_HEIGHT + 90.0);
             break;
         case PDA_ASSEMBLY_DETAIL:
-            PDA_SetScrollArrows2(-100, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+            PDA_SetScrollArrows2(-100, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_BODY_HEIGHT + 90.0);
             break;
         case PDA_BESTIARY_DETAIL:
             if (stricmp(PDA_Local.detailFetch[0], "null") != 0) {
-                PDA_SetScrollArrows2(-100, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+                PDA_SetScrollArrows2(-100, PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_BODY_HEIGHT + 90.0);
             }
             break;
         case PDA_CREDITS:

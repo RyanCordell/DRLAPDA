@@ -9,7 +9,7 @@ if (PDA_Local.page == 1)
 {
   
   PDA_SetScrollLimit(0);
-  PDA_SetScrollArrows2(0, PDA_SCREEN_WIDTH + 50.0, PDA_SCROLLABLE_HEIGHT + 90.0);
+  PDA_SetScrollArrows2(0, PDA_SCREEN_WIDTH + 50.0, PDA_SCROLLABLE_BODY_HEIGHT + 90.0);
 
   // yes i'm lazy
   #define makeHuddy(id, name, y, token) /

@@ -1,6 +1,6 @@
 // functions
 #define PDA_TAB_NEXT_X(a) \
-    (PDA_TAB_START_X * (a + 1)) + (2.0 * a)
+    (PDA_TAB_START_X + (PDA_TAB_W * (a)) + PDA_TAB_MARGIN)
 
 #define StrTrim(a,b,c)		StrMid((a),(b),StrLen((a)) - (c))
 #define Array_Size(array) 	(sizeof((array))/sizeof((array[0][0])))
