@@ -36,7 +36,7 @@ for (int modPack = PDA_MODMIN; modPack < PDA_MODMAX - 1; modPack++) {
     PDA_LocalButton[modPack] = PDA_CreateModPackDisplay(modPack, selectedMod, 
                 10.0, modY,
                 16, 24, (Weapon_Mod_Quantity[modPack] > 0) ? pulser(4.0, 0.9) : 0.5);
-                PDA_ButtonHandler(modPack, true, WEAPON_PAGE_MODPACK_EFFECTS, '', true, false);
+                PDA_ButtonHandler(modPack, true, WEAPON_PAGE_MODPACK_EFFECTS, NO_TOOLTIP, B_ONLY_VISUAL, B_NO_CLEAR);
 }
 
 PDA_DefaultFont();

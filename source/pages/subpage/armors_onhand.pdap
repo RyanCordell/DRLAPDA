@@ -31,7 +31,7 @@ if (localHasArmor) {
         PDA_LocalButton[id].alpha = 1.0;
     }
 
-    PDA_ButtonHandler(id, true, 1, "", false, false);
+    PDA_ButtonHandler(id, true, 1, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
     switch (PDA_LocalButton[id].state) {
         case button_clicked:
             PDA_Local.detailFetch[0] = "armor";
@@ -58,7 +58,7 @@ if (localHasBoots) {
         PDA_LocalButton[id].alpha = 1.0;
     }
 
-    PDA_ButtonHandler(id, true, 1, "", false, false);
+    PDA_ButtonHandler(id, true, 1, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
     switch (PDA_LocalButton[id].state) {
         case button_clicked:
             PDA_Local.detailFetch[0] = "boots";
@@ -136,7 +136,7 @@ for (int armorIndex = 0; armorIndex < DRLA_ARMORMAX; armorIndex++) {
                 stopEarly = true;
                 break;
         }
-        PDA_ButtonHandler(id, true, 1, "", false, false);
+        PDA_ButtonHandler(id, true, 1, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
 
         if (armorLimit > PDA_MAX_ARMOR_IN_INV + 1) armorLimit = 0;
         else armorLimit++;

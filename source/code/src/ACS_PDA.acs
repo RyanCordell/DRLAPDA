@@ -14,6 +14,67 @@
 global str 43:weaponval;
 global str 44:armorval;
 
+
+
+function void DebugIDs (void) {
+    log("PDA_CURSORID=%d:",PDA_CURSORID);
+    log("PDA_PLAYERS_BUTTON=%d:",PDA_PLAYERS_BUTTON);
+    log("PDA_WEAPONS_BUTTON=%d:",PDA_WEAPONS_BUTTON);
+    log("PDA_ARMORS_BUTTON=%d:",PDA_ARMORS_BUTTON);
+    log("PDA_ASSEMBLIES_BUTTON=%d:",PDA_ASSEMBLIES_BUTTON);
+    log("PDA_ITEMS_BUTTON=%d:",PDA_ITEMS_BUTTON);
+    log("PDA_BESTIARY_BUTTON=%d:",PDA_BESTIARY_BUTTON);
+    log("PDA_MISC_BUTTON=%d:",PDA_MISC_BUTTON);
+    log("PDA_HELP_BUTTON=%d:",PDA_HELP_BUTTON);
+    log("PDA_WINFO_BUTTON=%d:",PDA_WINFO_BUTTON);
+    log("PDA_BEAST_UV=%d:",PDA_BEAST_UV);
+    log("PDA_BEAST_NM=%d:",PDA_BEAST_NM);
+    log("PDA_BEAST_TP=%d:",PDA_BEAST_TP);
+    log("PDA_BEAST_AG=%d:",PDA_BEAST_AG);
+    log("PDA_BEAST_EX=%d:",PDA_BEAST_EX);
+    log("PDA_PREV_PAGE=%d:",PDA_PREV_PAGE);
+    log("PDA_NEXT_PAGE=%d:",PDA_NEXT_PAGE);
+    log("PDA_MODS_PAGE=%d:",PDA_MODS_PAGE);
+    log("PDA_ARTIFACTS_PAGE=%d:",PDA_ARTIFACTS_PAGE);
+    log("PDA_CAT_DESCRIPTION=%d:",PDA_CAT_DESCRIPTION);
+    log("PDA_PLAYER_BODY_ICON=%d:",PDA_PLAYER_BODY_ICON);
+    log("PDA_PLAYER_ARMOR_ICON=%d:",PDA_PLAYER_ARMOR_ICON);
+    log("PDA_PLAYER_BACKPACK_ICON=%d:",PDA_PLAYER_BACKPACK_ICON);
+    log("PDA_PLAYER_BOOTS_ICON=%d:",PDA_PLAYER_BOOTS_ICON);
+    log("PDA_ASSEMBLY_ID_END=%d:",PDA_ASSEMBLY_ID_END);
+    log("PDA_BEASTS_ID_END=%d:",PDA_BEASTS_ID_END);
+    log("PDA_WORNARMORS=%d:",PDA_WORNARMORS);
+    log("PDA_STASHEDARMORS=%d:",PDA_STASHEDARMORS);
+    log("PDA_NOEQID=%d:",PDA_NOEQID);
+    log("PDA_MODIDRANGE=%d:",PDA_MODIDRANGE);
+    log("PDA_INFO4ID=%d:",PDA_INFO4ID);
+    log("PDA_INFO3ID=%d:",PDA_INFO3ID);
+    log("PDA_INFO2ID=%d:",PDA_INFO2ID);
+    log("PDA_INFOID=%d:",PDA_INFOID);
+    log("PDA_SCROLLDNID=%d:",PDA_SCROLLDNID);
+    log("PDA_SCROLLUPID=%d:",PDA_SCROLLUPID);
+    log("PDA_ITEMS_END=%d:",PDA_ITEMS_END);
+    log("PDA_LASTID=%d:",PDA_LASTID);
+    log("PDA_PONG_LEFTPADDLE=%d:",PDA_PONG_LEFTPADDLE);
+    log("PDA_PONG_RIGHTPADDLE=%d:",PDA_PONG_RIGHTPADDLE);
+    log("PDA_PONG_BALL=%d:",PDA_PONG_BALL);
+    log("PDA_PONG_TOPBORD=%d:",PDA_PONG_TOPBORD);
+    log("PDA_PONG_BOTBORD=%d:",PDA_PONG_BOTBORD);
+    log("PDA_PONG_PLAYERSCORE=%d:",PDA_PONG_PLAYERSCORE);
+    log("PDA_PONG_AISCORE=%d:",PDA_PONG_AISCORE);
+    log("PDA_INFOTOPID=%d:",PDA_INFOTOPID);
+    log("PDA_TAB_BUTTONS_START=%d:",PDA_TAB_BUTTONS_START);
+    log("PDA_TAB_BUTTONS_END=%d:",PDA_TAB_BUTTONS_END);
+    log("PDA_ID=%d:",PDA_ID);
+    log("PDA_REALLYLASTID=%d:",PDA_REALLYLASTID);
+    log("PDA_ARMORINVIDRANGE=%d:",PDA_ARMORINVIDRANGE);
+    log("PDA_ARMORWORNIDRANGE=%d:",PDA_ARMORWORNIDRANGE);
+    log("PDA_TOOLTIPGFX=%d:",PDA_TOOLTIPGFX);
+    log("PDA_TOOLTIPID=%d:",PDA_TOOLTIPID);
+    log("PDA_WEAPON_ICON=%d:",PDA_WEAPON_ICON);
+    log("PDA_PLYR_ICON=%d:",PDA_PLYR_ICON);
+}
+
 // [marrub] This is a pretty cool hack
 script "PDA_CheckPlayer1Inventory" (str name) {
    SetActivator(0, AAPTR_PLAYER1);
@@ -423,65 +484,6 @@ function void PDA_OnChange (void) {
     PDA_Local.prevPage = PDA_Local.page;
 }
 
-function void DebugIDs (void) {
-    log("PDA_CURSORID=%d:",PDA_CURSORID);
-    log("PDA_PLAYERS_BUTTON=%d:",PDA_PLAYERS_BUTTON);
-    log("PDA_WEAPONS_BUTTON=%d:",PDA_WEAPONS_BUTTON);
-    log("PDA_ARMORS_BUTTON=%d:",PDA_ARMORS_BUTTON);
-    log("PDA_ASSEMBLIES_BUTTON=%d:",PDA_ASSEMBLIES_BUTTON);
-    log("PDA_ITEMS_BUTTON=%d:",PDA_ITEMS_BUTTON);
-    log("PDA_BESTIARY_BUTTON=%d:",PDA_BESTIARY_BUTTON);
-    log("PDA_MISC_BUTTON=%d:",PDA_MISC_BUTTON);
-    log("PDA_HELP_BUTTON=%d:",PDA_HELP_BUTTON);
-    log("PDA_WINFO_BUTTON=%d:",PDA_WINFO_BUTTON);
-    log("PDA_BEAST_UV=%d:",PDA_BEAST_UV);
-    log("PDA_BEAST_NM=%d:",PDA_BEAST_NM);
-    log("PDA_BEAST_TP=%d:",PDA_BEAST_TP);
-    log("PDA_BEAST_AG=%d:",PDA_BEAST_AG);
-    log("PDA_BEAST_EX=%d:",PDA_BEAST_EX);
-    log("PDA_PREV_PAGE=%d:",PDA_PREV_PAGE);
-    log("PDA_NEXT_PAGE=%d:",PDA_NEXT_PAGE);
-    log("PDA_MODS_PAGE=%d:",PDA_MODS_PAGE);
-    log("PDA_ARTIFACTS_PAGE=%d:",PDA_ARTIFACTS_PAGE);
-    log("PDA_CAT_DESCRIPTION=%d:",PDA_CAT_DESCRIPTION);
-    log("PDA_PLAYER_BODY_ICON=%d:",PDA_PLAYER_BODY_ICON);
-    log("PDA_PLAYER_ARMOR_ICON=%d:",PDA_PLAYER_ARMOR_ICON);
-    log("PDA_PLAYER_BACKPACK_ICON=%d:",PDA_PLAYER_BACKPACK_ICON);
-    log("PDA_PLAYER_BOOTS_ICON=%d:",PDA_PLAYER_BOOTS_ICON);
-    log("PDA_ASSEMBLY_ID_END=%d:",PDA_ASSEMBLY_ID_END);
-    log("PDA_BEASTS_ID_END=%d:",PDA_BEASTS_ID_END);
-    log("PDA_WORNARMORS=%d:",PDA_WORNARMORS);
-    log("PDA_STASHEDARMORS=%d:",PDA_STASHEDARMORS);
-    log("PDA_NOEQID=%d:",PDA_NOEQID);
-    log("PDA_MODIDRANGE=%d:",PDA_MODIDRANGE);
-    log("PDA_INFO4ID=%d:",PDA_INFO4ID);
-    log("PDA_INFO3ID=%d:",PDA_INFO3ID);
-    log("PDA_INFO2ID=%d:",PDA_INFO2ID);
-    log("PDA_INFOID=%d:",PDA_INFOID);
-    log("PDA_SCROLLDNID=%d:",PDA_SCROLLDNID);
-    log("PDA_SCROLLUPID=%d:",PDA_SCROLLUPID);
-    log("PDA_ITEMS_END=%d:",PDA_ITEMS_END);
-    log("PDA_LASTID=%d:",PDA_LASTID);
-    log("PDA_PONG_LEFTPADDLE=%d:",PDA_PONG_LEFTPADDLE);
-    log("PDA_PONG_RIGHTPADDLE=%d:",PDA_PONG_RIGHTPADDLE);
-    log("PDA_PONG_BALL=%d:",PDA_PONG_BALL);
-    log("PDA_PONG_TOPBORD=%d:",PDA_PONG_TOPBORD);
-    log("PDA_PONG_BOTBORD=%d:",PDA_PONG_BOTBORD);
-    log("PDA_PONG_PLAYERSCORE=%d:",PDA_PONG_PLAYERSCORE);
-    log("PDA_PONG_AISCORE=%d:",PDA_PONG_AISCORE);
-    log("PDA_INFOTOPID=%d:",PDA_INFOTOPID);
-    log("PDA_TAB_BUTTONS_START=%d:",PDA_TAB_BUTTONS_START);
-    log("PDA_TAB_BUTTONS_END=%d:",PDA_TAB_BUTTONS_END);
-    log("PDA_ID=%d:",PDA_ID);
-    log("PDA_REALLYLASTID=%d:",PDA_REALLYLASTID);
-    log("PDA_ARMORINVIDRANGE=%d:",PDA_ARMORINVIDRANGE);
-    log("PDA_ARMORWORNIDRANGE=%d:",PDA_ARMORWORNIDRANGE);
-    log("PDA_TOOLTIPGFX=%d:",PDA_TOOLTIPGFX);
-    log("PDA_TOOLTIPID=%d:",PDA_TOOLTIPID);
-    log("PDA_WEAPON_ICON=%d:",PDA_WEAPON_ICON);
-    log("PDA_PLYR_ICON=%d:",PDA_PLYR_ICON);
-}
-
 
 SCRIPT "PDA_Core" (void) {
     PDA_Local.scrollingY = 20.0;
@@ -501,11 +503,11 @@ SCRIPT "PDA_Core" (void) {
         }
         PDA_Local.prevScrollingY = PDA_Local.scrollingY;
 
+        PDA_HandleHeader();
+
         if (PDA_CategoryChanged || PDA_PageChanged) {
-            log("category or page changed");
             PDA_OnChange();
         }
-        PDA_HandleHeader();
         // DebugIDs();
         
         // isDirtyBoy("PDA_Core Loop");

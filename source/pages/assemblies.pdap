@@ -1,3 +1,14 @@
+// PDA_LocalButton[PDA_TAB_BUTTONS_START    ] = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y, PDA_TAB_W, PDA_TAB_H);
+PDA_ButtonHandler(TAB1, true, 1, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
+
+// PDA_LocalButton[PDA_TAB_BUTTONS_START + 1] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y, PDA_TAB_W, PDA_TAB_H);
+PDA_ButtonHandler(TAB2, true, 2, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
+
+// PDA_LocalButton[PDA_TAB_BUTTONS_START + 2] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 2, "3", "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y, PDA_TAB_W, PDA_TAB_H);
+PDA_ButtonHandler(TAB3, true, 3, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
+
+
+
 if (PDA_LocalMouse.action == mouse_back) {
     PDA_SetCategory(PDA_MENU);
     PDA_SetPage(1);
@@ -27,8 +38,8 @@ for (int ti = 0, li = 1; ti <= PDA_Local.maxAssembliesPer; ti+=2, li+=2) {
 }
 
 if (PDA_Local.page > 1) {
-    PDA_ButtonHandler(PDA_PREV_PAGE, true, PDA_Local.page - 1, "", false, false);
+    PDA_ButtonHandler(PDA_PREV_PAGE, true, PDA_Local.page - 1, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
 }
 if (PDA_Local.page < 3) {
-    PDA_ButtonHandler(PDA_NEXT_PAGE, true, PDA_Local.page + 1, "", false, false);
+    PDA_ButtonHandler(PDA_NEXT_PAGE, true, PDA_Local.page + 1, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
 }

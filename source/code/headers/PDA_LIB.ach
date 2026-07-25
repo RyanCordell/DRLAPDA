@@ -1,7 +1,6 @@
 /** VARIABLES */
-bool debug = false;
+bool debug = true;
 
-bool buttonInteracted = false;
 bool inverted = false;
 
 /*
@@ -12,13 +11,13 @@ bool inverted = false;
     %x: hex
 */
 
-#include "PDA_CST.ach"
 #include "PDA_ENM.ach"
+#include "PDA_CST.ach"
 
 str PDA_FONT[3] = {"STAT_MNO", "STAT_LWR", "PDAFONT"};
 
 str PDA_HEADER_STR = "PDA_MENU_HEADER";
-int PDA_HEADER_X   = 0;
+int PDA_HEADER_X_OFFSET   = 0;
 
 // is demonic, disassemble-able, supports artifacts
 // 1 and 3 are kinda redundant..

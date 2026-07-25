@@ -9,11 +9,11 @@ if (PDA_LocalMouse.action == mouse_back) {
 
 switch (PDA_Local.page) {
     case BESTIARY_PAGE_DIFFICULTIES: 
-        PDA_ButtonHandler(PDA_BEAST_UV, true, 2, strparam("%l:\n", "PDA_DIFFICULTY_UV_OR_LOWER") , false, false);
-        PDA_ButtonHandler(PDA_BEAST_NM, true, 3, strparam("%l:\n", "PDA_DIFFICULTY_NIGHTMARE")   , false, false);
-        PDA_ButtonHandler(PDA_BEAST_TP, true, 4, strparam("%l:\n", "PDA_DIFFICULTY_TECHNOPHOBIA"), false, false);
-        PDA_ButtonHandler(PDA_BEAST_AG, true, 5, strparam("%l:\n", "PDA_DIFFICULTY_ARMAGEDDON")  , false, false);
-        PDA_ButtonHandler(PDA_BEAST_EX, true, 6, strparam("%l:\n", "PDA_DIFFICULTY_EXTRA")       , false, false);
+        PDA_ButtonHandler(PDA_BEAST_UV, true, 2, strparam("%l:\n", "PDA_DIFFICULTY_UV_OR_LOWER") , B_FUNCTIONAL, B_NO_CLEAR);
+        PDA_ButtonHandler(PDA_BEAST_NM, true, 3, strparam("%l:\n", "PDA_DIFFICULTY_NIGHTMARE")   , B_FUNCTIONAL, B_NO_CLEAR);
+        PDA_ButtonHandler(PDA_BEAST_TP, true, 4, strparam("%l:\n", "PDA_DIFFICULTY_TECHNOPHOBIA"), B_FUNCTIONAL, B_NO_CLEAR);
+        PDA_ButtonHandler(PDA_BEAST_AG, true, 5, strparam("%l:\n", "PDA_DIFFICULTY_ARMAGEDDON")  , B_FUNCTIONAL, B_NO_CLEAR);
+        PDA_ButtonHandler(PDA_BEAST_EX, true, 6, strparam("%l:\n", "PDA_DIFFICULTY_EXTRA")       , B_FUNCTIONAL, B_NO_CLEAR);
         
         break;
     default:
@@ -23,7 +23,7 @@ switch (PDA_Local.page) {
             const int buttonID = PDA_BEASTS_ID_END - i;
 
             if (localListEnemy[list_name] != " ????") {
-                PDA_ButtonHandler(buttonID, true, 1, "", false, false);
+                PDA_ButtonHandler(buttonID, true, 1, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
 
                 if (PDA_LocalButton[buttonID].state == button_hovered) {
                     DisplayIcon(

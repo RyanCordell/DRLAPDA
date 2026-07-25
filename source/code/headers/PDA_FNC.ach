@@ -15,11 +15,6 @@ fixed _pda_hm_f[4];  // [0]=x     [1]=y      [2]=hold   [3]=alpha
 #define TraceLog(message) do { \
     if (TraceDebug) log(s:(message)); \
 } while(0) \
-// function void TraceLog (str message) {
-//     if (TraceDebug)
-//         log(s:message);
-// }
-
 
 #define PDA_HudSet(type, id, color, x, y, hold, alpha) \
     _pda_hm_i[0] = (type);  \
@@ -57,7 +52,7 @@ print PDA_Hud(
 
 #define PDA_HudDirty(type, id, color, x, y, hold, alpha, ...) do { \
     if (PDA_NeedsDraw) { \
-        PDA_HudSetP(type, id, color, x, y, hold, alpha); \
+        PDA_HudSetP(type, id, color, x, y - PDA_Local.scrollingY, hold, alpha); \
         PDA_Hud(__VA_ARGS__); \
     } \
 } while(0) \
@@ -65,6 +60,17 @@ print PDA_Hud(
 #define PDA_HudDirtyP(type, id, color, x, y, hold, alpha, ...) do { \
     if (PDA_ParallaxNeedsDraw) { \
         PDA_HudSetP(type, id, color, x, y, hold, alpha); \
+        PDA_Hud(__VA_ARGS__); \
+    } \
+} while(0) \
+
+#define PDA_HudDirtyV(type, id, color, x, y, hold, alpha, ...) do { \
+    int _xTemp = (PDA_SCREEN_X + x) * NEW_RESOLUTION_X; \
+    int _yTemp = (PDA_Local.scrollingY * NEW_RESOLUTION_Y) + y; \
+    fixed _x = _xTemp + X_LEFT_EDGE; \
+    fixed _y = _yTemp + Y_TOP_EDGE; \
+    if (PDA_ParallaxNeedsDraw) { \
+        PDA_HudSetP(type, id, color, _x, _y, hold, alpha); \
         PDA_Hud(__VA_ARGS__); \
     } \
 } while(0) \
@@ -205,16 +211,34 @@ function void PDA_UnsetScrollWindow (void) {
     TraceLog("afterPageDefaults"); \
 
 
+#define HEADER_BOUNDS() \
+    int headX  = PDA_SCREEN_X + 4; \
+    int headY  = PDA_SCREEN_Y + 8; \
+    int headW  = PDA_SCREEN_WIDTH * NEW_RESOLUTION_X; \
+    int headH  = headY - 8; \
+    int headWW = (PDA_SCREEN_WIDTH * NEW_RESOLUTION_X) - PDA_SCREEN_X; \
+
+
+#define BODY_BOUNDS() \
+    int bodyX  = PDA_SCREEN_X + 4; \
+    int bodyY  = PDA_SCROLLABLE_Y; \
+    int bodyW  = PDA_SCREEN_WIDTH * NEW_RESOLUTION_X; \
+    int bodyH  = PDA_SCROLLABLE_HEIGHT; \
+    int bodyWW = (PDA_SCREEN_WIDTH * NEW_RESOLUTION_X) - (PDA_SCREEN_X * 3); \
+
+
 function void PDA_SetupHeaderBounds (void) {
     SetHudSize(NEW_RESOLUTION_WIDTH, NEW_RESOLUTION_HEIGHT);
 
-    int x = PDA_SCREEN_X + 4;
-    int y = PDA_SCREEN_Y;
-    int w = PDA_SCREEN_WIDTH * NEW_RESOLUTION_X;
-    int h = PDA_SCREEN_Y + 38;
-    int ww = (PDA_SCREEN_WIDTH * NEW_RESOLUTION_X) - PDA_SCREEN_X;
+    HEADER_BOUNDS()
 
-    SetHudClipRect(x, y, w, h, ww);
+    SetHudClipRect(headX, headY, headW, headH, headWW);
+
+    if (debug) {
+        SetFont("HDR_BG");
+        HudMessage(s:"A\n"; HUDMSG_ALPHA, PDA_DEBUG_HEADER, CR_UNTRANSLATED, 0.1, 0.1, INF_HOLDTIME, 0.24);
+        PDA_DefaultFont();
+    }
     TraceLog("PDA_SetupHeaderBounds");
 }
 
@@ -223,18 +247,14 @@ function void PDA_SetupScreenBounds (void) {
     // PDA_Wipe("PDA_SetupScreenBounds"); // at least this finally seemed to help out w/ retention bugs
     SetHudSize(NEW_RESOLUTION_WIDTH, NEW_RESOLUTION_HEIGHT);
 
-    int x = PDA_SCREEN_X + 4;
-    int y = PDA_SCROLLABLE_Y;
-    int w = PDA_SCREEN_WIDTH * NEW_RESOLUTION_X;
-    int h = PDA_SCROLLABLE_HEIGHT;
-    int ww = (PDA_SCREEN_WIDTH * NEW_RESOLUTION_X) - (PDA_SCREEN_X * 3);
+    BODY_BOUNDS()
 
-    SetHudClipRect(x, y, w, h, ww);
+    SetHudClipRect(bodyX, bodyY, bodyW, bodyH, bodyWW);
 
     if (debug) {
-        DrawBorder(PDA_SCREEN_X * NEW_RESOLUTION_X, PDA_SCROLLABLE_Y,
-                PDA_SCREEN_WIDTH * NEW_RESOLUTION_X, PDA_SCROLLABLE_HEIGHT);
-        SetHudClipRect(x, y, w, h, ww);
+        SetFont("DBG_BG");
+        HudMessage(s:"A\n"; HUDMSG_ALPHA, PDA_DEBUG_BODY, CR_UNTRANSLATED, 0.1, 0.1, INF_HOLDTIME, 0.24);
+        PDA_DefaultFont();
     }
     TraceLog("PDA_SetupScreenBounds");
 }
@@ -248,11 +268,18 @@ function void PDA_SetupScreenBounds_Wipeless (void) {
     int ww = (PDA_SCREEN_WIDTH * NEW_RESOLUTION_X) - (PDA_SCREEN_X * 3);
 
     SetHudClipRect(x, y, w, h, ww);
+
+    if (debug) {
+        SetFont("DBG_BG");
+        HudMessage(s:"A\n"; HUDMSG_ALPHA, PDA_DEBUG_BODY, CR_UNTRANSLATED, 0.1, 0.1, INF_HOLDTIME, 0.24);
+        PDA_DefaultFont();
+        // SetHudClipRect(x, y, w, h, ww);
+    }
     TraceLog("PDA_SetupScreenBounds_Wipeless");
 }
 
 function void PDA_ClearHeader (void) {
-    HudMessage(s:""; HUDMSG_PLAIN, PDA_INFOTOPID, CR_GREEN, PDA_SCREEN_X + 100.0 + PDA_HEADER_X + X_LEFT_EDGE, PDA_SCREEN_Y + 2.0 + Y_TOP_EDGE, 0.0);
+    HudMessage(s:""; HUDMSG_PLAIN, PDA_INFOTOPID, CR_GREEN, PDA_SCREEN_X + 100.0 + PDA_HEADER_X_OFFSET + X_LEFT_EDGE, PDA_SCREEN_Y + 2.0 + Y_TOP_EDGE, 0.0);
     TraceLog("PDA_ClearHeader");
 }
 
@@ -274,7 +301,6 @@ function void DisplayIcon (str Sprite, int ID, fixed X, fixed Y, fixed DelayTime
     TraceLog("DisplayIcon");
 }
 
-// I'm not sure why these two are practically identical..'
 function void DisplayIconParallax (str Sprite, int ID, fixed X, fixed Y, fixed DelayTime, fixed Alpha) {
     if (CheckFont(Sprite)) {
         SetFont(Sprite);
@@ -285,18 +311,6 @@ function void DisplayIconParallax (str Sprite, int ID, fixed X, fixed Y, fixed D
     }
     TraceLog("DisplayIconParallax");
 }
-
-function void DisplayIconParallax2 (str Sprite, int ID, fixed X, fixed Y, fixed DelayTime, fixed Alpha) {
-    if (CheckFont(Sprite)) {
-        SetFont(Sprite);
-        int _yTemp = PDA_Local.scrollingY + Y;
-            _yTemp *= NEW_RESOLUTION_Y;
-        HudMessage(s:"A\n"; HUDMSG_ALPHA, ID, CR_UNTRANSLATED, X, _yTemp, DelayTime, Alpha);
-        PDA_DefaultFont();
-    }
-    TraceLog("DisplayIconParallax2");
-}
-// ---
 
 function void DisplayArmorIcon (str Sprite, int ID, fixed X, fixed Y, fixed Alpha) {
     if (CheckFont(StrParam("%l:", Sprite))) {
@@ -1045,7 +1059,7 @@ function PDAButton PDA_CreateMenuButton (int id, str label, str graphic, float x
     thisButton.textY        = _tyTemp + (ylabeloff * NEW_RESOLUTION_Y);
 
     if (debug) {
-        DrawBorder(thisButton.x * NEW_RESOLUTION_X, thisButton.y * NEW_RESOLUTION_Y, width * NEW_RESOLUTION_X, height * NEW_RESOLUTION_Y);
+        // DrawBorder(thisButton.x * NEW_RESOLUTION_X, thisButton.y * NEW_RESOLUTION_Y, width * NEW_RESOLUTION_X, height * NEW_RESOLUTION_Y);
     }
     TraceLog("PDA_CreateMenuButton");
     return thisButton;
@@ -1058,8 +1072,11 @@ function PDAButton PDA_CreateTab (int id, str label, str graphic, float x, float
     thisButton.y       = PDA_SCREEN_Y + y + Y_TOP_EDGE; // Override as this isn't meant to scroll
     thisButton.alpha   = 0.6;
 
-    fixed xlabeloff = (StrCmp(graphic, "PTAB") == 0) ? 6.0 : 0.0;
-    fixed ylabeloff = (StrCmp(graphic, "PTAB") == 0) ? 7.0 : 0.0;
+    // why am I comparing if it's a PTAB _here_'
+    // fixed xlabeloff = (StrCmp(graphic, "PTAB") == 0) ? 6.0 : 0.0;
+    // fixed ylabeloff = (StrCmp(graphic, "PTAB") == 0) ? 7.0 : 0.0;
+    fixed xlabeloff = 4.0;
+    fixed ylabeloff = 4.0;
 
     thisButton.graphic      = graphic;
     thisButton.graphicFlags = HUDMSG_ALPHA;
@@ -1072,16 +1089,16 @@ function PDAButton PDA_CreateTab (int id, str label, str graphic, float x, float
 
     thisButton.textFont     = PDA_FONT[slim_font];
     thisButton.textFlags    = HUDMSG_ALPHA;
-    thisButton.textID       = thisButton.graphicID + 10;
-    thisButton.textX       = (int)thisButton.graphicX + xlabeloff;
-    thisButton.textY       = (int)thisButton.graphicY + ylabeloff;
+    thisButton.textID       = thisButton.graphicID + 1;
+    thisButton.textX        = (int)thisButton.graphicX + xlabeloff;
+    thisButton.textY        = (int)thisButton.graphicY + ylabeloff;
 
     if (debug) {
-        int x = thisButton.x * NEW_RESOLUTION_X,
-            y = thisButton.y * NEW_RESOLUTION_Y,
-            w = width        * NEW_RESOLUTION_X,
-            h = height       * NEW_RESOLUTION_Y;
-        DrawBorder(x, y, w, h);
+        // int x = thisButton.x * NEW_RESOLUTION_X,
+        //     y = thisButton.y * NEW_RESOLUTION_Y,
+        //     w = width        * NEW_RESOLUTION_X,
+        //     h = height       * NEW_RESOLUTION_Y;
+        // DrawBorder(x, y, w, h);
     }
 
     TraceLog("PDA_CreateTab");
@@ -1111,11 +1128,11 @@ function PDAButton PDA_CreateButton (int id, str label, str graphic, float x, fl
     thisButton.textY       = thisButton.graphicY;
 
     if (debug) {
-        int x = thisButton.x * NEW_RESOLUTION_X,
-            y = thisButton.y * NEW_RESOLUTION_Y,
-            w = width        * NEW_RESOLUTION_X,
-            h = height       * NEW_RESOLUTION_Y;
-        DrawBorder(x, y, w, h);
+        // int x = thisButton.x * NEW_RESOLUTION_X,
+        //     y = thisButton.y * NEW_RESOLUTION_Y,
+        //     w = width        * NEW_RESOLUTION_X,
+        //     h = height       * NEW_RESOLUTION_Y;
+        // DrawBorder(x, y, w, h);
     }
     TraceLog("PDA_CreateButton");
     return thisButton;
@@ -1145,11 +1162,11 @@ function PDAButton PDA_CreateFixedButton (int id, str label, str graphic, float 
     thisButton.textY       = thisButton.graphicY;
 
     if (debug) {
-        int x = thisButton.x * NEW_RESOLUTION_X,
-            y = thisButton.y * NEW_RESOLUTION_Y,
-            w = width        * NEW_RESOLUTION_X,
-            h = height       * NEW_RESOLUTION_Y;
-        DrawBorder(x, y, w, h);
+        // int x = thisButton.x * NEW_RESOLUTION_X,
+        //     y = thisButton.y * NEW_RESOLUTION_Y,
+        //     w = width        * NEW_RESOLUTION_X,
+        //     h = height       * NEW_RESOLUTION_Y;
+        // DrawBorder(x, y, w, h);
     }
     TraceLog("PDA_CreateFixedButton");
     return thisButton;
@@ -1195,7 +1212,7 @@ function PDAButton PDA_CreateAssemblyButton (int id, str graphic, str label, flo
     }
 
     if (debug) {
-        DrawBorder(thisButton.x * NEW_RESOLUTION_X, thisButton.y * NEW_RESOLUTION_Y, width * NEW_RESOLUTION_X, height * NEW_RESOLUTION_Y);
+        // DrawBorder(thisButton.x * NEW_RESOLUTION_X, thisButton.y * NEW_RESOLUTION_Y, width * NEW_RESOLUTION_X, height * NEW_RESOLUTION_Y);
     }
     TraceLog("PDA_CreateAssemblyButton");
     return thisButton;
@@ -1238,7 +1255,7 @@ function PDAButton PDA_CreateBeastButton (int id, str label, int color, float x,
     thisButton.textY     = _tyTemp + 2.0;
 
     if (debug) {
-        DrawBorder(thisButton.x * NEW_RESOLUTION_X, thisButton.y * NEW_RESOLUTION_Y, width * NEW_RESOLUTION_X, height * NEW_RESOLUTION_Y);
+        // DrawBorder(thisButton.x * NEW_RESOLUTION_X, thisButton.y * NEW_RESOLUTION_Y, width * NEW_RESOLUTION_X, height * NEW_RESOLUTION_Y);
     }
 
     TraceLog("PDA_CreateBeastButton");
@@ -1267,7 +1284,7 @@ function PDAButton PDA_CreateHUDButton (int id, str label, str color, float x, f
     thisButton.textY    = _tyTemp + 4.0 + X_LEFT_EDGE;
 
     if (debug) {
-        DrawBorder(thisButton.x * NEW_RESOLUTION_X, thisButton.y * NEW_RESOLUTION_Y, width * NEW_RESOLUTION_X, height * NEW_RESOLUTION_Y);
+        // DrawBorder(thisButton.x * NEW_RESOLUTION_X, thisButton.y * NEW_RESOLUTION_Y, width * NEW_RESOLUTION_X, height * NEW_RESOLUTION_Y);
     }
 
     TraceLog("PDA_CreateHUDButton");
@@ -1336,7 +1353,7 @@ function PDAButton PDA_DisplayArmor (int id, int structType, float x, float y, i
     thisButton.alpha     = opacity;
 
     if (debug) {
-        DrawBorder(thisButton.x * NEW_RESOLUTION_X, thisButton.y * NEW_RESOLUTION_Y, width * NEW_RESOLUTION_X, height * NEW_RESOLUTION_Y);
+        // DrawBorder(thisButton.x * NEW_RESOLUTION_X, thisButton.y * NEW_RESOLUTION_Y, width * NEW_RESOLUTION_X, height * NEW_RESOLUTION_Y);
     }
 
     TraceLog("PDA_DisplayArmor");
@@ -1381,7 +1398,7 @@ function PDAButton PDA_DisplayArmorOverride (int id, PDA_ArmorData override, flo
     thisButton.alpha = opacity;
 
     if (debug) {
-        DrawBorder(thisButton.x * NEW_RESOLUTION_X, thisButton.y * NEW_RESOLUTION_Y, width * NEW_RESOLUTION_X, height * NEW_RESOLUTION_Y);
+        // DrawBorder(thisButton.x * NEW_RESOLUTION_X, thisButton.y * NEW_RESOLUTION_Y, width * NEW_RESOLUTION_X, height * NEW_RESOLUTION_Y);
     }
 
     TraceLog("PDA_DisplayArmorOverride");
@@ -1426,7 +1443,7 @@ function PDAButton PDA_DisplayBootsOverride (int id, PDA_BootsData override, flo
     thisButton.alpha = opacity;
 
     if (debug) {
-        DrawBorder(thisButton.x * NEW_RESOLUTION_X, thisButton.y * NEW_RESOLUTION_Y, width * NEW_RESOLUTION_X, height * NEW_RESOLUTION_Y);
+        // DrawBorder(thisButton.x * NEW_RESOLUTION_X, thisButton.y * NEW_RESOLUTION_Y, width * NEW_RESOLUTION_X, height * NEW_RESOLUTION_Y);
     }
 
     TraceLog("PDA_DisplayBootsOverride");
@@ -1457,7 +1474,7 @@ function PDAButton PDA_CreateModPackDisplay (int id, str graphic, float x, float
     thisButton.alpha = alpha;
 
     if (debug) {
-        DrawBorder(thisButton.x * NEW_RESOLUTION_X, thisButton.y * NEW_RESOLUTION_Y, width * NEW_RESOLUTION_X, height * NEW_RESOLUTION_Y);
+        // DrawBorder(thisButton.x * NEW_RESOLUTION_X, thisButton.y * NEW_RESOLUTION_Y, width * NEW_RESOLUTION_X, height * NEW_RESOLUTION_Y);
     }
 
     // SetFont(thisButton.textFont);
@@ -1489,7 +1506,6 @@ function void PDA_ButtonLogic (int id, int inCategory, int categoryPage, bool on
             PDA_SetFullDirty();
         }
 
-        log("button[%d:]: %s:", id, stringifyButtonState(PDA_LocalButton[id].state));
         switch (PDA_LocalButton[id].state) {
             case button_clicked:
                 log("in cat? %b:", inCategory);
@@ -1598,7 +1614,7 @@ function void PDA_DrawButton (int id, str message, bool onlyVisual, bool clear) 
 
     // Button text
     SetFont(PDA_LocalButton[id].textFont);
-    PDA_HudDirty(PDA_LocalButton[id].textFlags, PDA_LocalButton[id].textID, newColor, PDA_LocalButton[id].textX, PDA_LocalButton[id].textY, 1.0, PDA_LocalButton[id].alpha, s:PDA_LocalButton[id].label);
+    PDA_HudDirty(PDA_LocalButton[id].textFlags, PDA_LocalButton[id].textID, newColor, PDA_LocalButton[id].textX, PDA_LocalButton[id].textY, INF_HOLDTIME, PDA_LocalButton[id].alpha, s:PDA_LocalButton[id].label);
 
     if (clear) {
         PrintSpriteAlpha(PDA_LocalButton[id].graphic, PDA_LocalButton[id].graphicID, PDA_LocalButton[id].graphicX, PDA_LocalButton[id].graphicY, 0.0, 0.0, true);
@@ -1615,61 +1631,87 @@ function void PDA_ButtonHandler (int id, int inCategory, int categoryPage, str m
     TraceLog("PDA_ButtonHandler");
 }
 
+function void PDA_DrawHeaderText(str text, fixed x, fixed y) {
+    PDA_SetupHeaderBounds();
+    HEADER_BOUNDS()
+
+    int _xTemp = (int)(x * NEW_RESOLUTION_X);
+    int _yTemp = (int)(y * NEW_RESOLUTION_Y);
+    fixed finalX = _xTemp + X_LEFT_EDGE;
+    fixed finalY = _yTemp + Y_TOP_EDGE;
+    log("headH[%d: > (%f:) < %d:] || headY[%d: > (%f:) < %d:]", headX, finalX, headX + headW, headY, finalY, headY + headH);
+    if (finalX < headX || finalX > headX + headW) {
+        log("Header text outside horizontal clipping bounds");
+    }
+    if (finalY < headY || finalY > headY + headH) {
+        log("Header text outside vertical clipping bounds");
+    }
+
+    HudMessage(l:text; HUDMSG_ALPHA, PDA_INFOTOPID, CR_GREEN,
+               finalX, finalY,
+               INF_HOLDTIME, OPAQUE);
+}
+
+
+function void PDA_DrawBodyText_Set(int type, int id, int color, fixed x, fixed y, fixed hold, fixed alpha) {
+    PDA_SetupScreenBounds();
+    BODY_BOUNDS()
+
+    fixed finalX = (int)(((PDA_BODY_X                       ) + x) * NEW_RESOLUTION_X) + X_LEFT_EDGE;
+    fixed finalY = (int)(((PDA_BODY_Y + PDA_Local.scrollingY) + y) * NEW_RESOLUTION_Y) + Y_TOP_EDGE;
+
+    log("body_y %d: scrolly %f: y %f: new_res_y %f:", PDA_BODY_X, PDA_Local.scrollingY, y, NEW_RESOLUTION_Y);
+
+    log("bodyH[%d: > (%f:) < %d:] || bodyY[%d: > (%f:) < %d:]", bodyX, finalX, bodyX + bodyW, bodyY, finalY, bodyY + bodyH);
+    if (finalX < bodyX || finalX > bodyX + bodyW) {
+        log("Body text outside horizontal clipping bounds");
+    }
+    if (finalY < bodyY || finalY > bodyY + bodyH) {
+        log("Body text outside vertical clipping bounds");
+    }
+
+    if (PDA_ParallaxNeedsDraw) {
+        PDA_HudSet(type, id, color, finalX, finalY, hold, alpha);
+    }
+}
+
+#define PDA_DrawBodyText(type, id, color, x, y, hold, alpha, ...) do { \
+    PDA_DrawBodyText_Set(type, id, color, x, y, hold, alpha); \
+    PDA_Hud(__VA_ARGS__); \
+} while(0) \
+
 function void PDA_HandleHeader(void) {
     if (PDA_CategoryChanged || PDA_PageChanged) {
-        PDA_SetupHeaderBounds();
-
-        // Handle the per-screen tabs + any header data
-        PDA_ButtonHandler(PDA_TAB_BUTTONS_START    , 0, 0, "", true, true);
-        PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 1, 0, 0, "", true, true);
-        PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 2, 0, 0, "", true, true);
-        PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 3, 0, 0, "", true, true);
-        PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 4, 0, 0, "", true, true);
+        PDA_SetFullDirty();
 
         switch (PDA_Local.category) {
             case PDA_MENU:
                 PDA_Local.pageMax = 1;
 
-                PDA_HEADER_STR = "PDA_MENU_HEADER"; PDA_HEADER_X = 0;
+                PDA_HEADER_STR = "PDA_MENU_HEADER"; PDA_HEADER_X_OFFSET = 0;
                 break;
 
             case PDA_CLASSES:
                 PDA_Local.pageMax = 2;
 
-                PDA_LocalButton[PDA_TAB_BUTTONS_START    ] = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-                PDA_ButtonHandler(PDA_TAB_BUTTONS_START    , true, 1, "", false, false);
-
-                PDA_LocalButton[PDA_TAB_BUTTONS_START + 1] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-                PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 1, true, 2, "", false, false);
-
-                switch(PDA_Local.page)
-                {
-                    case CLASSES_PAGE_PERKS: PDA_HEADER_STR = "PDA_CLASS_HEADER1"; PDA_HEADER_X = 5; break;
-                    case CLASSES_PAGE_STORY: PDA_HEADER_STR = "PDA_CLASS_HEADER2"; PDA_HEADER_X = 0; break;
+                switch(PDA_Local.page) {
+                    case CLASSES_PAGE_PERKS: PDA_HEADER_STR = "PDA_CLASS_HEADER1"; PDA_HEADER_X_OFFSET = 5; break;
+                    case CLASSES_PAGE_STORY: PDA_HEADER_STR = "PDA_CLASS_HEADER2"; PDA_HEADER_X_OFFSET = 0; break;
                 }
                 break;
 
             case PDA_WEAPONS:
                 PDA_Local.pageMax = 3;
 
-                PDA_LocalButton[PDA_TAB_BUTTONS_START    ] = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-                PDA_ButtonHandler(PDA_TAB_BUTTONS_START    , true, 1, "", false, false);
-
-                PDA_LocalButton[PDA_TAB_BUTTONS_START + 1] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-                PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 1, true, 2, "", false, false);
-
-                PDA_LocalButton[PDA_TAB_BUTTONS_START + 2] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 2, "3", "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-                PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 2, true, 3, "", false, false);
-
                 switch (PDA_Local.page) {
                     case WEAPON_PAGE_STORY:
-                        PDA_HEADER_STR = "PDA_WEAPON_HEADER"; PDA_HEADER_X = 0;
+                        PDA_HEADER_STR = "PDA_WEAPON_HEADER"; PDA_HEADER_X_OFFSET = 0;
                         break;
                     case WEAPON_PAGE_MODPACK_EFFECTS:
-                        PDA_HEADER_STR = "PDA_MODPACK_HEADER"; PDA_HEADER_X = -10;
+                        PDA_HEADER_STR = "PDA_MODPACK_HEADER"; PDA_HEADER_X_OFFSET = -10;
                         break;
                     case WEAPON_PAGE_ARTIFACT_EFFECTS:
-                        PDA_HEADER_STR = "PDA_DEMONARTIFACT_HEADER"; PDA_HEADER_X = -20;
+                        PDA_HEADER_STR = "PDA_DEMONARTIFACT_HEADER"; PDA_HEADER_X_OFFSET = -20;
                         break;
                 }
                 break;
@@ -1678,29 +1720,23 @@ function void PDA_HandleHeader(void) {
                 PDA_Local.pageMax = 6;
 
                 switch (PDA_Local.page) {
-                    case 1: PDA_HEADER_STR = "PDA_BESTIARY_HEADER";    PDA_HEADER_X =   0;                               break;
-                    case 2: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_UV"; PDA_HEADER_X = -40; beast_info[2] = CR_WHITE;     break;
-                    case 3: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_NM"; PDA_HEADER_X = -30; beast_info[2] = CR_BRICK;     break;
-                    case 4: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_TP"; PDA_HEADER_X = -50; beast_info[2] = CR_LIGHTBLUE; break;
-                    case 5: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_AR"; PDA_HEADER_X = -40; beast_info[2] = CR_GOLD;      break;
-                    case 6: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_SP"; PDA_HEADER_X = -20; beast_info[2] = CR_PURPLE;    break;
+                    case 1: PDA_HEADER_STR = "PDA_BESTIARY_HEADER";    PDA_HEADER_X_OFFSET =   0;                               break;
+                    case 2: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_UV"; PDA_HEADER_X_OFFSET = -40; beast_info[2] = CR_WHITE;     break;
+                    case 3: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_NM"; PDA_HEADER_X_OFFSET = -30; beast_info[2] = CR_BRICK;     break;
+                    case 4: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_TP"; PDA_HEADER_X_OFFSET = -50; beast_info[2] = CR_LIGHTBLUE; break;
+                    case 5: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_AR"; PDA_HEADER_X_OFFSET = -40; beast_info[2] = CR_GOLD;      break;
+                    case 6: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_SP"; PDA_HEADER_X_OFFSET = -20; beast_info[2] = CR_PURPLE;    break;
                 }
                 break;
             case PDA_ARMORS:
                 PDA_Local.pageMax = 2;
 
-                PDA_LocalButton[PDA_TAB_BUTTONS_START    ] = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-                PDA_ButtonHandler(PDA_TAB_BUTTONS_START    , true, 1, "", false, false);
-
-                PDA_LocalButton[PDA_TAB_BUTTONS_START + 1] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-                PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 1, true, 2, "", false, false);
-
                 switch (PDA_Local.page) {
                     case EQUIPMENT_PAGE_ONHAND:
-                        PDA_HEADER_STR = "PDA_ARMOR_HEADER1"; PDA_HEADER_X = -20;
+                        PDA_HEADER_STR = "PDA_ARMOR_HEADER1"; PDA_HEADER_X_OFFSET = -20;
                         break;
                     case EQUIPMENT_PAGE_INFO:
-                        PDA_HEADER_STR = "PDA_ARMOR_HEADER2"; PDA_HEADER_X = -15;
+                        PDA_HEADER_STR = "PDA_ARMOR_HEADER2"; PDA_HEADER_X_OFFSET = -15;
                         break;
                 }
                 break;
@@ -1709,104 +1745,64 @@ function void PDA_HandleHeader(void) {
                 PDA_Local.pageMax = 3;
                 switch (PDA_Local.page) {
                     case ASSEMBLY_PAGE_BASIC:
-                        PDA_HEADER_STR = "PDA_ASSEMBLY_BASIC_NAME"; PDA_HEADER_X = -30;
+                        PDA_HEADER_STR = "PDA_ASSEMBLY_BASIC_NAME"; PDA_HEADER_X_OFFSET = -30;
                         break;
                     case ASSEMBLY_PAGE_ADVANCED:
-                        PDA_HEADER_STR = "PDA_ASSEMBLY_ADVANCED_NAME"; PDA_HEADER_X = -30;
+                        PDA_HEADER_STR = "PDA_ASSEMBLY_ADVANCED_NAME"; PDA_HEADER_X_OFFSET = -30;
                         break;
                     case ASSEMBLY_PAGE_MASTER:
-                        PDA_HEADER_STR = "PDA_ASSEMBLY_MASTER_NAME"; PDA_HEADER_X = -30;
+                        PDA_HEADER_STR = "PDA_ASSEMBLY_MASTER_NAME"; PDA_HEADER_X_OFFSET = -30;
                         break;
                 }
-
-                PDA_LocalButton[PDA_TAB_BUTTONS_START    ] = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y, PDA_TAB_W, PDA_TAB_H);
-                PDA_ButtonHandler(PDA_TAB_BUTTONS_START    , true, 1, "", false, false);
-
-                PDA_LocalButton[PDA_TAB_BUTTONS_START + 1] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y, PDA_TAB_W, PDA_TAB_H);
-                PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 1, true, 2, "", false, false);
-
-                PDA_LocalButton[PDA_TAB_BUTTONS_START + 2] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 2, "3", "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y, PDA_TAB_W, PDA_TAB_H);
-                PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 2, true, 3, "", false, false);
                 break;
 
             case PDA_HELP:
                 PDA_Local.pageMax = 2;
 
-                switch(PDA_Local.page)
-                {
-                    case 1: PDA_HEADER_STR = "PDA_PDAHELP_HEADER"; PDA_HEADER_X = -10; break;
-                    case 2: PDA_HEADER_STR = "PDA_DRLAHELP_HEADER"; PDA_HEADER_X = -40; break;
-                    case 3: PDA_HEADER_STR = "PDA_DMGHELP_HEADER"; PDA_HEADER_X = -40; break;
+                switch(PDA_Local.page) {
+                    case 1: PDA_HEADER_STR = "PDA_PDAHELP_HEADER"; PDA_HEADER_X_OFFSET = -10; break;
+                    case 2: PDA_HEADER_STR = "PDA_DRLAHELP_HEADER"; PDA_HEADER_X_OFFSET = -40; break;
+                    case 3: PDA_HEADER_STR = "PDA_DMGHELP_HEADER"; PDA_HEADER_X_OFFSET = -40; break;
                 }
-
-                PDA_LocalButton[PDA_TAB_BUTTONS_START    ] = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-                PDA_ButtonHandler(PDA_TAB_BUTTONS_START    , true, 1, "", false, false);
-
-                PDA_LocalButton[PDA_TAB_BUTTONS_START + 1] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-                PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 1, true, 2, "", false, false);
-
-                PDA_LocalButton[PDA_TAB_BUTTONS_START + 2] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 2, "3", "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-                PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 2, true, 3, "", false, false);
                 break;
             case PDA_MISC:
                 PDA_Local.pageMax = 1;
 
-                PDA_HEADER_STR = "PDA_MISC_HEADER"; PDA_HEADER_X = 10;
+                PDA_HEADER_STR = "PDA_MISC_HEADER"; PDA_HEADER_X_OFFSET = 10;
                 break;
 
             case PDA_ITEMS:
-                if (GetCvar("DRLA_specialstarts") != 2)
-                {
-                    PDA_Local.pageMax = DRLA_GROUPQUANTITY;
-
-                    PDA_LocalButton[PDA_TAB_BUTTONS_START    ] = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1" , "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-                    PDA_ButtonHandler(PDA_TAB_BUTTONS_START    , true, 1, "", false, false);
-
-                    PDA_LocalButton[PDA_TAB_BUTTONS_START + 1] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2" , "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-                    PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 1, true, 2, "", false, false);
-
-                    PDA_LocalButton[PDA_TAB_BUTTONS_START + 2] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 2, "3" , "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-                    PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 2, true, 3, "", false, false);
-
-                    PDA_LocalButton[PDA_TAB_BUTTONS_START + 3] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 3, "4" , "PTAB", PDA_TAB_NEXT_X(3), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-                    PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 3, true, 4, "", false, false);
-
-                    PDA_LocalButton[PDA_TAB_BUTTONS_START + 4] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 4, "5" , "PTAB", PDA_TAB_NEXT_X(4), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-                    PDA_ButtonHandler(PDA_TAB_BUTTONS_START + 4, true, 5, "", false, false);
-                }
                 break;
             case PDA_ARMOR_DETAIL:
                 PDA_Local.pageMax = 1;
 
-                PDA_HEADER_STR = "PDA_DETAILEDARMOR_HEADER"; PDA_HEADER_X = -60;
+                PDA_HEADER_STR = "PDA_DETAILEDARMOR_HEADER"; PDA_HEADER_X_OFFSET = -60;
                 break;
             case PDA_ASSEMBLY_DETAIL:
                 PDA_Local.pageMax = 1;
 
-                PDA_HEADER_STR = "PDA_DETAILEDASSEMBLY_HEADER"; PDA_HEADER_X = -30;
+                PDA_HEADER_STR = "PDA_DETAILEDASSEMBLY_HEADER"; PDA_HEADER_X_OFFSET = -30;
                 break;
             case PDA_BESTIARY_DETAIL:
                 PDA_Local.pageMax = 1;
 
-                PDA_HEADER_STR = "PDA_DETAILEDBEAST_HEADER"; PDA_HEADER_X = -30;
+                PDA_HEADER_STR = "PDA_DETAILEDBEAST_HEADER"; PDA_HEADER_X_OFFSET = -30;
                 break;
             case PDA_CREDITS:
                 PDA_Local.pageMax = 1;
 
-                PDA_HEADER_STR = "PDA_CREDITS_HEADER"; PDA_HEADER_X = 0;
+                PDA_HEADER_STR = "PDA_CREDITS_HEADER"; PDA_HEADER_X_OFFSET = 0;
                 break;
         }
-
-        // Then print the header
-
-        if (PDA_ParallaxNeedsDraw) {
-            PDA_DefaultFont();
-            SetHudSize(320,200,0);
-            HudMessage(l:PDA_HEADER_STR; HUDMSG_PLAIN, PDA_INFOTOPID, CR_GREEN, PDA_SCREEN_X + 100.0 + PDA_HEADER_X + X_LEFT_EDGE, PDA_SCREEN_Y + 2.0 + Y_TOP_EDGE, 0.0);
-        }
     }
-    TraceLog("PDA_HandleHeader");
+
+    // Then print the header
+    if (PDA_ParallaxNeedsDraw) {
+        PDA_DefaultFont();
+        PDA_DrawHeaderText(PDA_HEADER_STR, PDA_HEADER_X + PDA_HEADER_X_OFFSET, PDA_SCREEN_Y + 6.0);
+    }
     PDA_SetupScreenBounds();
+    TraceLog("PDA_HandleHeader");
 }
 
 

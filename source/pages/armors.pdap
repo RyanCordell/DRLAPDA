@@ -1,3 +1,9 @@
+// PDA_LocalButton[PDA_TAB_BUTTONS_START    ] = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+PDA_ButtonHandler(TAB1, true, 1, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
+
+// PDA_LocalButton[PDA_TAB_BUTTONS_START + 1] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+PDA_ButtonHandler(TAB2, true, 2, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
+
 if (PDA_LocalMouse.action == mouse_back) {
     PDA_SetCategory(PDA_MENU);
     PDA_SetPage(1);

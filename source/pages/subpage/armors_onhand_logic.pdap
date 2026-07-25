@@ -5,7 +5,7 @@ if (PDA_LocalMouse.action == mouse_back) {
 
 // Note to future self: don't try to merge these first 5 lines for cleanliness sake. Won't work the way you wish it would.
 if (localHasArmor) {
-    PDA_ButtonHandler(PDA_Local.equipmentId, true, 1, "", false, false);
+    PDA_ButtonHandler(PDA_Local.equipmentId, true, 1, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
 
     PDA_LocalButton[PDA_Local.equipmentId].alpha = pulser(2.0, 0.8);
     
@@ -24,7 +24,7 @@ if (localHasArmor) {
 }
 
 if (localHasBoots) {
-    PDA_ButtonHandler(PDA_Local.equipmentId, true, 1, "", false, false);
+    PDA_ButtonHandler(PDA_Local.equipmentId, true, 1, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
 
     PDA_LocalButton[PDA_Local.equipmentId].alpha = pulser(2.0, 0.8);
 
@@ -62,6 +62,6 @@ for (int armorIndex = 0; armorIndex < DRLA_ARMORMAX; armorIndex++) {
                 PDA_Local.stopEquipmentEarly = true;
                 break;
         }
-        PDA_ButtonHandler(PDA_Local.equipmentId, true, 1, "", false, false);
+        PDA_ButtonHandler(PDA_Local.equipmentId, true, 1, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
     }
 }

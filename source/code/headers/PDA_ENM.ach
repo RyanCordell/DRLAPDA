@@ -33,9 +33,11 @@ enum PDA_MouseAction {
 
 enum PDA_IDs {
     PDA_CURSORID = 2,
+    PDA_DEBUG_HEADER,
+    PDA_DEBUG_BODY,
     
     // Menu
-    PDA_PLAYERS_BUTTON = 30,
+    PDA_PLAYERS_BUTTON = PDA_CURSORID + 30,
     PDA_WEAPONS_BUTTON = PDA_PLAYERS_BUTTON + 3, // +3 to reserve for text IDs
     PDA_ARMORS_BUTTON = PDA_WEAPONS_BUTTON + 3,
     PDA_ASSEMBLIES_BUTTON = PDA_ARMORS_BUTTON + 3,
@@ -80,8 +82,8 @@ enum PDA_IDs {
     PDA_MODIDRANGE = PDA_NOEQID + 7, // For the 7 chaos- er, modpacks.
     // Message IDs
     PDA_INFO4ID,
-    PDA_INFO3ID = PDA_INFO4ID + 2,
-    PDA_INFO2ID = PDA_INFO3ID + 2,
+    PDA_INFO3ID = PDA_INFO4ID + 4,
+    PDA_INFO2ID = PDA_INFO3ID + 3,
     PDA_INFOID = PDA_INFO2ID + 2,
     // Scrolling arrows
     PDA_SCROLLDNID,
@@ -99,7 +101,7 @@ enum PDA_IDs {
     // Anything that *must* stay in the PDA header range
     PDA_INFOTOPID,
     PDA_TAB_BUTTONS_START = PDA_INFOTOPID + 5,
-    PDA_TAB_BUTTONS_END = PDA_TAB_BUTTONS_START + 20,
+    PDA_TAB_BUTTONS_END = PDA_TAB_BUTTONS_START + 25,
     // PDA display
     PDA_ID,
     PDA_REALLYLASTID,

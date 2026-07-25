@@ -1,3 +1,24 @@
+if (GetCvar("DRLA_specialstarts") != 2)
+{
+    PDA_Local.pageMax = DRLA_GROUPQUANTITY;
+
+    // PDA_LocalButton[PDA_TAB_BUTTONS_START    ] = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1" , "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDA_ButtonHandler(TAB1, true, 1, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
+
+    // PDA_LocalButton[PDA_TAB_BUTTONS_START + 1] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2" , "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDA_ButtonHandler(TAB2, true, 2, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
+
+    // PDA_LocalButton[PDA_TAB_BUTTONS_START + 2] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 2, "3" , "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDA_ButtonHandler(TAB3, true, 3, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
+
+    // PDA_LocalButton[PDA_TAB_BUTTONS_START + 3] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 3, "4" , "PTAB", PDA_TAB_NEXT_X(3), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDA_ButtonHandler(TAB4, true, 4, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
+
+    // PDA_LocalButton[PDA_TAB_BUTTONS_START + 4] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 4, "5" , "PTAB", PDA_TAB_NEXT_X(4), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDA_ButtonHandler(TAB5, true, 5, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
+}
+
+
 if (PDA_LocalMouse.action == mouse_back) {
     PDA_SetCategory(PDA_MENU);
     PDA_SetPage(1);

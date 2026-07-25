@@ -24,7 +24,7 @@ if (localHasArmor) {
                         playerIconX + 35.0, 20.0, height, localShowArmor ? pulser(2.0, 0.8) : inAlpha);
     }
 
-    PDA_ButtonHandler(PDA_PLAYER_ARMOR_ICON, true, 2, "", false, false);
+    PDA_ButtonHandler(PDA_PLAYER_ARMOR_ICON, true, 2, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
     PDA_LocalButton[PDA_PLAYER_ARMOR_ICON].alpha = localShowArmor ? pulser(2.0, 0.8) : inAlpha;
     if (PDA_LocalButton[PDA_PLAYER_ARMOR_ICON].state == button_clicked) {
         if (localEqBoolField != 1) localEqBoolField = 1;
@@ -39,7 +39,7 @@ if (localHasBackpack) {
                         playerIconX + 33.0, 45.0, height, localShowBackpack ? pulser(2.0, 0.8) : inAlpha);
     }
 
-    PDA_ButtonHandler(PDA_PLAYER_BACKPACK_ICON, true, 2, "", false, false);
+    PDA_ButtonHandler(PDA_PLAYER_BACKPACK_ICON, true, 2, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
     PDA_LocalButton[PDA_PLAYER_BACKPACK_ICON].alpha = localShowBackpack ? pulser(2.0, 0.8) : inAlpha;
     if (PDA_LocalButton[PDA_PLAYER_BACKPACK_ICON].state == button_clicked) {
         if (localEqBoolField != 4) localEqBoolField = 4;
@@ -55,7 +55,7 @@ if (localHasBoots) {
                         playerIconX + 30.0, 70.0, height, localShowBoots ? pulser(2.0, 0.8) : inAlpha);
     }
 
-    PDA_ButtonHandler(PDA_PLAYER_BOOTS_ICON, true, 2, "", false, false);
+    PDA_ButtonHandler(PDA_PLAYER_BOOTS_ICON, true, 2, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
     PDA_LocalButton[PDA_PLAYER_BOOTS_ICON].alpha = localShowBoots ? pulser(2.0, 0.8) : inAlpha;
     if (PDA_LocalButton[PDA_PLAYER_BOOTS_ICON].state == button_clicked) {
         if (localEqBoolField != 2) localEqBoolField = 2;

@@ -187,10 +187,6 @@ SCRIPT "PDA_MouseController" (void)
             DisplayIconAlways(localCursor, PDA_CURSORID, PDA_LocalMouse.x + 0.1, PDA_LocalMouse.y + 0.1, 0, (PDA_LocalMouse.m1) ? 0.8 : 1);
         }
 
-        log("mouse action: %s:", stringifyMouseState(PDA_LocalMouse.action));
-        log("mtic %d:", PDA_LocalMouse.mtic);
-        log("m2 %b: | was _BACK? %d: | is _BACK? %d:", PDA_LocalMouse.m2, PDA_LocalMouse.oldState & _BACK, PDA_LocalMouse.state & _BACK);
-        // log("old[%d:] buttons[%d:] | m1 %b: | m2 %b:", oldButton, currButton, PDA_LocalMouse.m1, PDA_LocalMouse.m2, !currButton & (BT_ATTACK|BT_ALTATTACK));
         if (!PDA_LocalMouse.m1 && !PDA_LocalMouse.m2) {
             PDA_LocalMouse.action = mouse_none;
             if (PDA_LocalMouse.mtic > 0) PDA_LocalMouse.mtic = 0;

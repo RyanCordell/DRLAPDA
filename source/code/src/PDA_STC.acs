@@ -1,5 +1,6 @@
 // All on-creation/switch calls should be handled here to avoid constant data thrashing
 
+
 switch (PDA_Local.category) {
   case PDA_MENU:
     PDA_LocalButton[PDA_PLAYERS_BUTTON]    = PDA_CreateMenuButton(PDA_PLAYERS_BUTTON,    "", "MPLYICO", 10.0, 20.0 + (20.0 * 0), PDA_MENU_BTN_W, PDA_MENU_BTN_H);
@@ -14,46 +15,51 @@ switch (PDA_Local.category) {
     break;
 
   case PDA_CLASSES:
-    PDA_LocalButton[PDA_TAB_BUTTONS_START    ] = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-    PDA_LocalButton[PDA_TAB_BUTTONS_START + 1] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDA_LocalButton[TAB1] =
+      PDA_CreateTab(TAB1, "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDA_LocalButton[TAB2] =
+      PDA_CreateTab(TAB2, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
 
-    if (GetActorClass(0) != "None")
-    {
-        if (stricmp(PDA_Class[PlayerNumber()][pda_class_icon], "PDA_", 4) == 0) {
-          PDA_Class[PlayerNumber()][pda_class_icon] = "PPDAUNK";
-        }
-          
-        SetFont(PDA_Class[PlayerNumber()][pda_class_icon]);
-        HudMessage(s:"A\n"; HUDMSG_ALPHA, PDA_INFOID, CR_UNTRANSLATED,  PDA_SCREEN_WIDTH + 5.0 + X_RIGHT_EDGE, (PDA_SCROLLABLE_HEIGHT) + 5.0 + Y_TOP_EDGE, 0, 0.45);
-        
-        PDA_DefaultFont();
-        // Class perks
-        if (PDA_Local.page == CLASSES_PAGE_PERKS)
-        {
-            PDA_HudDirtyP(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE,
-              s:"\cd",
-              l:PDA_Class[PlayerNumber()][pda_class_name],
-              s:"\c-\n\n",
-              l:PDA_Class[PlayerNumber()][pda_class_abilities]
-            );
-        }
-        // Class backstory
-        if (PDA_Local.page == CLASSES_PAGE_STORY)
-        {
-            PDA_HudDirtyP(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE,
-              s:"\cd",
-              l:PDA_Class[PlayerNumber()][pda_class_name],
-              s:"\c-\n\n",
-              l:PDA_Class[PlayerNumber()][pda_class_story]
-            );
-        }
-    }
+    // PDA_ButtonHandler(TAB1, true, 1, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
+    // PDA_ButtonHandler(TAB2, true, 2, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
+
+//     if (GetActorClass(0) != "None")
+//     {
+//         if (stricmp(PDA_Class[PlayerNumber()][pda_class_icon], "PDA_", 4) == 0) {
+//           PDA_Class[PlayerNumber()][pda_class_icon] = "PPDAUNK";
+//         }
+//
+//         SetFont(PDA_Class[PlayerNumber()][pda_class_icon]);
+//         HudMessage(s:"A\n"; HUDMSG_ALPHA, PDA_INFOID, CR_UNTRANSLATED,  PDA_SCREEN_WIDTH + 5.0 + X_RIGHT_EDGE, (PDA_SCROLLABLE_HEIGHT) + 5.0 + Y_TOP_EDGE, 0, 0.45);
+//
+//         PDA_DefaultFont();
+//         // Class perks
+//         if (PDA_Local.page == CLASSES_PAGE_PERKS)
+//         {
+//             PDA_HudDirtyP(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE,
+//               s:"\cd",
+//               l:PDA_Class[PlayerNumber()][pda_class_name],
+//               s:"\c-\n\n",
+//               l:PDA_Class[PlayerNumber()][pda_class_abilities]
+//             );
+//         }
+//         // Class backstory
+//         if (PDA_Local.page == CLASSES_PAGE_STORY)
+//         {
+//             PDA_HudDirtyP(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE,
+//               s:"\cd",
+//               l:PDA_Class[PlayerNumber()][pda_class_name],
+//               s:"\c-\n\n",
+//               l:PDA_Class[PlayerNumber()][pda_class_story]
+//             );
+//         }
+//     }
     break;
 
   case PDA_WEAPONS:
-    PDA_LocalButton[PDA_TAB_BUTTONS_START    ] = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-    PDA_LocalButton[PDA_TAB_BUTTONS_START + 1] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-    PDA_LocalButton[PDA_TAB_BUTTONS_START + 2] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 2, "3", "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDA_LocalButton[TAB1] = PDA_CreateTab(TAB1    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDA_LocalButton[TAB2] = PDA_CreateTab(TAB2, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDA_LocalButton[TAB3] = PDA_CreateTab(TAB3, "3", "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
 
     PDA_DefaultFont();
 
@@ -161,8 +167,8 @@ switch (PDA_Local.category) {
     localBootsData          = setupBootsData();
     localBackpackData       = setupBackpackData();
 
-    PDA_LocalButton[PDA_TAB_BUTTONS_START    ] = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-    PDA_LocalButton[PDA_TAB_BUTTONS_START + 1] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDA_LocalButton[TAB1] = PDA_CreateTab(TAB1    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDA_LocalButton[TAB2] = PDA_CreateTab(TAB2, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
 
     PDA_LocalButton[PDA_PLAYER_ARMOR_ICON]    = PDA_DisplayArmor(PDA_PLAYER_ARMOR_ICON   , ARMOR_DATA   , playerIconX + 35.0, 20.0, 16, localShowArmor    ? pulser(2.0, 0.8) : 0.7),
     PDA_LocalButton[PDA_PLAYER_BACKPACK_ICON] = PDA_DisplayArmor(PDA_PLAYER_BACKPACK_ICON, BACKPACK_DATA, playerIconX + 33.0, 45.0, 16, localShowBackpack ? pulser(2.0, 0.8) : 0.7),
@@ -333,9 +339,9 @@ switch (PDA_Local.category) {
       nextButtonX = PDA_SCREEN_WIDTH + PDA_SCREEN_X - 82;
     }
 
-    PDA_LocalButton[PDA_TAB_BUTTONS_START    ] = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y, PDA_TAB_W, PDA_TAB_H);
-    PDA_LocalButton[PDA_TAB_BUTTONS_START + 1] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y, PDA_TAB_W, PDA_TAB_H);
-    PDA_LocalButton[PDA_TAB_BUTTONS_START + 2] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 2, "3", "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y, PDA_TAB_W, PDA_TAB_H);
+    PDA_LocalButton[TAB1] = PDA_CreateTab(TAB1    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y, PDA_TAB_W, PDA_TAB_H);
+    PDA_LocalButton[TAB2] = PDA_CreateTab(TAB2, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y, PDA_TAB_W, PDA_TAB_H);
+    PDA_LocalButton[TAB3] = PDA_CreateTab(TAB3, "3", "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y, PDA_TAB_W, PDA_TAB_H);
     
     PDA_LocalButton[PDA_PREV_PAGE] = PDA_CreateButton(PDA_PREV_PAGE, "Previous tier", "A_PREV",        10.0, paginationY, 82, 16, 20, 15);
     PDA_LocalButton[PDA_NEXT_PAGE] = PDA_CreateButton(PDA_NEXT_PAGE, "Next tier"    , "A_NEXT", nextButtonX, paginationY, 82, 16, 20, 15);
@@ -426,8 +432,8 @@ switch (PDA_Local.category) {
     break;
 
   case PDA_HELP:
-    PDA_LocalButton[PDA_TAB_BUTTONS_START    ] = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-    PDA_LocalButton[PDA_TAB_BUTTONS_START + 1] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDA_LocalButton[TAB1] = PDA_CreateTab(TAB1    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDA_LocalButton[TAB2] = PDA_CreateTab(TAB2, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
 
     if (PDA_Local.page == 1) {
       PDA_HudDirtyP(HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE,
@@ -497,11 +503,11 @@ switch (PDA_Local.category) {
 
 
   case PDA_ITEMS:
-    PDA_LocalButton[PDA_TAB_BUTTONS_START    ] = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1" , "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-    PDA_LocalButton[PDA_TAB_BUTTONS_START + 1] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2" , "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-    PDA_LocalButton[PDA_TAB_BUTTONS_START + 2] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 2, "3" , "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-    PDA_LocalButton[PDA_TAB_BUTTONS_START + 3] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 3, "4" , "PTAB", PDA_TAB_NEXT_X(3), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-    PDA_LocalButton[PDA_TAB_BUTTONS_START + 4] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 4, "5" , "PTAB", PDA_TAB_NEXT_X(4), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDA_LocalButton[TAB1] = PDA_CreateTab(TAB1    , "1" , "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDA_LocalButton[TAB2] = PDA_CreateTab(TAB2, "2" , "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDA_LocalButton[TAB3] = PDA_CreateTab(TAB3, "3" , "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDA_LocalButton[TAB4] = PDA_CreateTab(TAB4, "4" , "PTAB", PDA_TAB_NEXT_X(3), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    PDA_LocalButton[TAB5] = PDA_CreateTab(TAB5, "5" , "PTAB", PDA_TAB_NEXT_X(4), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
     break;
 }
 
