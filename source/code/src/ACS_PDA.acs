@@ -498,11 +498,13 @@ SCRIPT "PDA_Core" (void) {
     
     while (PDA_Local.active) {
         ++PDA_Local.ptic;
+
         if (PDA_ScrollMoved) {
-          PDA_SetScrollDirty();
-          PDA_TrackScrollArrows();
+            log("it do move owo");
+            PDA_SetFullDirty();
+            // PDA_SetScrollDirty();
+            PDA_TrackScrollArrows();
         }
-        PDA_Local.prevScrollingY = PDA_Local.scrollingY;
 
         PDA_HandleHeader();
 
@@ -560,9 +562,10 @@ SCRIPT "PDA_Core" (void) {
                 log("how'd you get here?");
                 break;
         }
+        PDA_Local.prevScrollingY = PDA_Local.scrollingY;
         Delay(PDA_Responsiveness);
 
-        if (PDA_ParallaxNeedsDraw) PDA_ClearDirty();
+        // if (PDA_ParallaxNeedsDraw) PDA_ClearDirty();
         if (PDA_Local.ptic > 255) PDA_Local.ptic = 0;
     }
     SetHudClipRect(0,0,0,0,0);

@@ -212,34 +212,33 @@ function void PDA_UnsetScrollWindow (void) {
 
 
 #define HEADER_BOUNDS() \
-    int headX  = PDA_HEADER_X; \
-    int headY  = PDA_HEADER_Y; \
-    int headW  = PDA_SCREEN_WIDTH_SCALED; \
-    int headH  = PDA_HEADER_HEIGHT; \
-    int headWW = PDA_SCREEN_WIDTH_SCALED - PDA_SCREEN_X; \
+    int head[5] = { \
+        PDA_HEADER_X, PDA_HEADER_Y, \
+        PDA_SCREEN_WIDTH_SCALED, PDA_HEADER_HEIGHT, \
+        PDA_SCREEN_WIDTH_SCALED - PDA_SCREEN_X \
+    }; \
 
 #define BODY_BOUNDS() \
-    int bodyX  = PDA_SCREEN_X + 4; \
-    int bodyY  = PDA_SCROLLABLE_BODY_Y; \
-    int bodyW  = PDA_SCREEN_WIDTH_SCALED; \
-    int bodyH  = PDA_SCROLLABLE_BODY_HEIGHT; \
-    int bodyWW = PDA_SCREEN_WIDTH_SCALED - (PDA_SCREEN_X * 3); \
+    int body[5] = { \
+        PDA_SCREEN_X + 4, PDA_SCROLLABLE_BODY_Y, \
+        PDA_SCREEN_WIDTH_SCALED, PDA_SCROLLABLE_BODY_HEIGHT, \
+        PDA_SCREEN_WIDTH_SCALED - (PDA_SCREEN_X * 3) \
+    }; \
 
 #define TOOLTIP_BOUNDS() \
-    int tipX  = PDA_MENU_TOOLTIP_X + 5.0; \
-    int tipY  = PDA_MENU_TOOLTIP_Y; \
-    int tipW  = (PDA_MENU_TOOLTIP_WIDTH * NEW_RESOLUTION_X); \
-    int tipH  = PDA_MENU_TOOLTIP_HEIGHT; \
-    int tipWW = tipW - 10; \
-    // int tipWW = PDA_SCREEN_WIDTH_SCALED - (PDA_SCREEN_X * 3); \
-
+    int tip[5] = { \
+        PDA_MENU_TOOLTIP_X, PDA_MENU_TOOLTIP_Y, \
+        (PDA_MENU_TOOLTIP_WIDTH * NEW_RESOLUTION_X), PDA_MENU_TOOLTIP_HEIGHT, \
+        (PDA_MENU_TOOLTIP_WIDTH * NEW_RESOLUTION_X) - 10 \
+    }; \
 
 function void PDA_SetupHeaderBounds (void) {
     SetHudSize(NEW_RESOLUTION_WIDTH, NEW_RESOLUTION_HEIGHT);
 
     HEADER_BOUNDS()
 
-    SetHudClipRect(headX, headY, headW, headH, headWW);
+    // SetHudClipRect(headX, headY, headW, headH, headWW);
+    SetHudClipRect(head[0], head[1], head[2], head[3], head[4]);
 
     if (debug) {
         SetFont("HDR_BG");
@@ -254,7 +253,7 @@ function void PDA_SetupTooltipBounds (void) {
 
     TOOLTIP_BOUNDS()
 
-    SetHudClipRect(tipX, tipY, tipW, tipH, tipWW);
+    SetHudClipRect(tip[0], tip[1], tip[2], tip[3], tip[4]);
 
     if (debug) {
         SetFont("TOL_BG");
@@ -270,7 +269,7 @@ function void PDA_SetupScreenBounds (void) {
 
     BODY_BOUNDS()
 
-    SetHudClipRect(bodyX, bodyY, bodyW, bodyH, bodyWW);
+    SetHudClipRect(body[0], body[1], body[2], body[3], body[4]);
 
     if (debug) {
         SetFont("DBG_BG");
@@ -282,13 +281,9 @@ function void PDA_SetupScreenBounds (void) {
 function void PDA_SetupScreenBounds_Wipeless (void) {
     SetHudSize(NEW_RESOLUTION_WIDTH, NEW_RESOLUTION_HEIGHT);
 
-    int x = PDA_SCREEN_X + 4;
-    int y = PDA_SCROLLABLE_BODY_Y;
-    int w = PDA_SCREEN_WIDTH * NEW_RESOLUTION_X;
-    int h = PDA_SCROLLABLE_BODY_HEIGHT;
-    int ww = (PDA_SCREEN_WIDTH * NEW_RESOLUTION_X) - (PDA_SCREEN_X * 3);
+    BODY_BOUNDS()
 
-    SetHudClipRect(x, y, w, h, ww);
+    SetHudClipRect(body[0], body[1], body[2], body[3], body[4]);
 
     if (debug) {
         SetFont("DBG_BG");
@@ -313,11 +308,11 @@ function void PDA_DrawHeaderText(str text, fixed x, fixed y) {
     fixed finalX = (int)(x * NEW_RESOLUTION_X) + X_LEFT_EDGE;
     fixed finalY = (int)(y * NEW_RESOLUTION_Y) + Y_TOP_EDGE;
 
-    log("headH[%d: > (%f:) < %d:] || headY[%d: > (%f:) < %d:]", headX, finalX, headX + headW, headY, finalY, headY + headH);
-    if (finalX < headX || finalX > headX + headW) {
+    log("headH[%d: > (%f:) < %d:] || headY[%d: > (%f:) < %d:]", head[0], finalX, head[0] + head[2], head[1], finalY, head[1] + head[3]);
+    if (finalX < head[0] || finalX > head[0] + head[2]) {
         log("Header text outside horizontal clipping bounds");
     }
-    if (finalY < headY || finalY > headY + headH) {
+    if (finalY < head[1] || finalY > head[1] + head[3]) {
         log("Header text outside vertical clipping bounds");
     }
 
@@ -334,11 +329,12 @@ function void PDA_DrawBodyText_Set(int type, int id, int color, fixed x, fixed y
     fixed finalX = (int)(((PDA_BODY_X                       ) + x) * NEW_RESOLUTION_X) + X_LEFT_EDGE;
     fixed finalY = (int)(((PDA_BODY_Y + PDA_Local.scrollingY) + y) * NEW_RESOLUTION_Y) + Y_TOP_EDGE;
 
-    log("bodyH[%d: > (%f:) < %d:] || bodyY[%d: > (%f:) < %d:]", bodyX, finalX, bodyX + bodyW, bodyY, finalY, bodyY + bodyH);
-    if (finalX < bodyX || finalX > bodyX + bodyW) {
+    log("bodyW[%d: > (%f:) < %d:] || bodyH[%d: > (%f:) < %d:]", body[0], finalX, body[0] + body[2], body[1], finalY, body[1] + body[3]);
+
+    if (finalX < body[0] || finalX > body[0] + body[2]) {
         log("Body text outside horizontal clipping bounds");
     }
-    if (finalY < bodyY || finalY > bodyY + bodyH) {
+    if (finalY < body[1] || finalY > body[1] + body[3]) {
         log("Body text outside vertical clipping bounds");
     }
 
@@ -357,14 +353,15 @@ function void PDA_DrawTooltipText_Set(int type, int id, int color, fixed x, fixe
     PDA_SetupTooltipBounds();
     TOOLTIP_BOUNDS()
 
-    fixed finalX = (int)(PDA_MENU_TOOLTIP_X                        + x) + X_LEFT_EDGE;
+    fixed finalX = (int)(PDA_MENU_TOOLTIP_X + 5.0                  + x) + X_LEFT_EDGE;
     fixed finalY = (int)(PDA_MENU_TOOLTIP_Y + PDA_Local.scrollingY + y) + Y_TOP_EDGE;
 
-    log("tipH[%d: > (%f:) < %d:] || tipY[%d: > (%f:) < %d:]", tipX, finalX, tipX + tipW, tipY, finalY, tipY + tipH);
-    if (finalX < tipX || finalX > tipX + tipW) {
+    log("tipW[%d: > (%f:) < %d:] || tipH[%d: > (%f:) < %d:]", tip[0], finalX, tip[0] + tip[2], tip[1], finalY, tip[1] + tip[3]);
+
+    if (finalX < tip[0] || finalX > tip[0] + tip[2]) {
         log("Tooltip text outside horizontal clipping bounds");
     }
-    if (finalY < tipY || finalY > tipY + tipH) {
+    if (finalY < tip[1] || finalY > tip[1] + tip[3]) {
         log("Tooltip text outside vertical clipping bounds");
     }
 
@@ -473,11 +470,10 @@ function int checkSpecialArmorTokens(void) {
 
 // int _xTemp = (PDA_SCREEN_X * NEW_RESOLUTION_X) + (x * NEW_RESOLUTION_X);
 #define assignButtonParams(a, b) \
-    int _xTemp = PDA_SCREEN_X + x; \
-    int _yTemp = PDA_Local.scrollingY + y; \
     (a).id = id; \
-    (a).x = _xTemp; \
-    (a).y = _yTemp; \
+    (a).x = (int)(PDA_BODY_X + x); \
+    (a).y = (int)(PDA_Local.scrollingY + y); \
+    (a).rawY = (int)(y); \
     (a).width = width; \
     (a).height = height; \
     (a).label = (b); \
@@ -1633,6 +1629,7 @@ function void PDA_ButtonLogic (int id, int inCategory, int categoryPage, bool on
 }
 
 function void PDA_DrawButton (int id, str message, bool onlyVisual, bool clear) {
+    #define thisButton PDA_LocalButton[id]
     #define buttonType PDA_LocalButton[id].type
     #define buttonOnHover PDA_LocalButton[id].state == button_hovered
     #define ifGraphicPTAB StrCmp(PDA_LocalButton[id].graphic, "PTAB") == 0
@@ -1646,7 +1643,7 @@ function void PDA_DrawButton (int id, str message, bool onlyVisual, bool clear) 
     if (warningID < 0) warningID = 0;
     if (warningID > 4) warningID = 4;
 
-    switch (PDA_LocalButton[id].state) {
+    switch (thisButton.state) {
         case button_hovered:
             PDA_SetFullDirty();
 
@@ -1658,7 +1655,7 @@ function void PDA_DrawButton (int id, str message, bool onlyVisual, bool clear) 
             break;
     }
 
-    if (PDA_LocalButton[id].oldState == button_hovered && PDA_LocalButton[id].state != button_hovered) {
+    if (thisButton.oldState == button_hovered && thisButton.state != button_hovered) {
         PDA_SetFullDirty();
 
         PDA_DrawTooltipText(HUDMSG_PLAIN, PDA_CAT_DESCRIPTION, CR_UNTRANSLATED,
@@ -1668,29 +1665,35 @@ function void PDA_DrawButton (int id, str message, bool onlyVisual, bool clear) 
 
     // I hate this condition setup. Dargh.
     if (buttonType == "assembly") {
-        if (PDA_LocalButton[id].tooltip != "???") {
-            PDA_LocalButton[id].alpha = (buttonOnHover) ? pulser(2.0, DEFAULT_BUTTON_ALPHA + 0.2) : DEFAULT_BUTTON_ALPHA;
+        if (thisButton.tooltip != "???") {
+            thisButton.alpha = (buttonOnHover) ? pulser(2.0, DEFAULT_BUTTON_ALPHA + 0.2) : DEFAULT_BUTTON_ALPHA;
         } else {
-            PDA_LocalButton[id].alpha = (buttonOnHover) ? 1.0 : DEFAULT_BUTTON_ALPHA;
+            thisButton.alpha = (buttonOnHover) ? 1.0 : DEFAULT_BUTTON_ALPHA;
         }
     } else {
         if (buttonType != "modpack" && buttonType != "tab" && buttonType != "armor") {
-            PDA_LocalButton[id].alpha = (buttonOnHover) ? pulser(2.0, DEFAULT_BUTTON_ALPHA + 0.2) : DEFAULT_BUTTON_ALPHA;
+            thisButton.alpha = (buttonOnHover) ? pulser(2.0, DEFAULT_BUTTON_ALPHA + 0.2) : DEFAULT_BUTTON_ALPHA;
         }
         if (buttonType == "armor") {
-            PDA_LocalButton[id].alpha = buttonOnHover ? 1.0 : DEFAULT_BUTTON_ALPHA;
+            thisButton.alpha = buttonOnHover ? 1.0 : DEFAULT_BUTTON_ALPHA;
         }
+    }
+
+    if (PDA_ScrollMoved) {
+        thisButton.y        = (int)(PDA_Local.scrollingY + thisButton.rawY);
+        thisButton.graphicY = (int)(thisButton.y * NEW_RESOLUTION_Y) + 10.0;
+        thisButton.textY    = (int)(thisButton.y * NEW_RESOLUTION_Y) + (int)(ylabeloff * NEW_RESOLUTION_Y);
+        PDA_SetFullDirty();
     }
 
     if (!PDA_ParallaxNeedsDraw) {
         return;
     }
-
     // Button graphic
-    PrintSpriteAlpha(PDA_LocalButton[id].graphic, PDA_LocalButton[id].graphicID, PDA_LocalButton[id].graphicX, PDA_LocalButton[id].graphicY, INF_HOLDTIME, PDA_LocalButton[id].alpha, false);
+    PrintSpriteAlpha(thisButton.graphic, thisButton.graphicID, thisButton.graphicX, thisButton.graphicY, INF_HOLDTIME, thisButton.alpha, false);
 
     if (buttonType == "beast") {
-        newColor = PDA_LocalButton[id].textColor;
+        newColor = thisButton.textColor;
 
         if (PDA_Local.newEntry[warningID]) {
             newColor = CR_GOLD;
@@ -1704,19 +1707,19 @@ function void PDA_DrawButton (int id, str message, bool onlyVisual, bool clear) 
     }
 
     // Button text
-    SetFont(PDA_LocalButton[id].textFont);
-    PDA_HudDirty(PDA_LocalButton[id].textFlags, PDA_LocalButton[id].textID, newColor, PDA_LocalButton[id].textX, PDA_LocalButton[id].textY, INF_HOLDTIME, PDA_LocalButton[id].alpha, s:PDA_LocalButton[id].label);
+    SetFont(thisButton.textFont);
+    PDA_HudDirty(thisButton.textFlags, thisButton.textID, newColor, thisButton.textX, thisButton.textY, INF_HOLDTIME, thisButton.alpha, s:thisButton.label);
 
     if (clear) {
         // Button graphic
-        PrintSpriteAlpha(PDA_LocalButton[id].graphic, PDA_LocalButton[id].graphicID, PDA_LocalButton[id].graphicX, PDA_LocalButton[id].graphicY, INF_HOLDTIME, 0.0, B_CLEAR);
+        PrintSpriteAlpha(thisButton.graphic, thisButton.graphicID, thisButton.graphicX, thisButton.graphicY, INF_HOLDTIME, 0.0, B_CLEAR);
 
         // Button text
-        PDA_HudDirty(PDA_LocalButton[id].textFlags, PDA_LocalButton[id].textID, newColor, PDA_LocalButton[id].textX, PDA_LocalButton[id].textY, INF_HOLDTIME, 0.0, s:"");
+        PDA_HudDirty(thisButton.textFlags, thisButton.textID, newColor, thisButton.textX, thisButton.textY, INF_HOLDTIME, 0.0, s:"");
 
         PDA_TooltipDirty(HUDMSG_PLAIN, PDA_CAT_DESCRIPTION, CR_UNTRANSLATED, PDA_MENU_TOOLTIP_X + X_LEFT_EDGE, PDA_MENU_TOOLTIP_Y + Y_TOP_EDGE, INF_HOLDTIME, 0.0, s:"");
 
-        // HudMessage(s:" "; PDA_LocalButton[id].textFlags, PDA_LocalButton[id].textID, newColor, PDA_LocalButton[id].textX, PDA_LocalButton[id].textY, 1.0, 0.0);
+        // HudMessage(s:" "; thisButton.textFlags, thisButton.textID, newColor, thisButton.textX, thisButton.textY, 1.0, 0.0);
         //
         // HudMessage(s:" "; HUDMSG_ALPHA, id + 5, CR_GREEN, thisButton.textX + thisButton.width - 10.0, thisButton.textY - 6.0, 0.0, 0.0);
     }

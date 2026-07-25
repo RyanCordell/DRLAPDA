@@ -71,6 +71,7 @@ struct PDAButton {
     int id;
     float x;
     float y;
+    float rawY;
 
     int width;
     int height;

@@ -1,7 +1,5 @@
 /** VARIABLES */
-bool debug = true;
-
-bool inverted = false;
+bool debug = false;
 
 /*
     %s: string
