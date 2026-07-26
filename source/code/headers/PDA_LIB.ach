@@ -1,5 +1,5 @@
 /** VARIABLES */
-bool debug = false;
+bool debug = true;
 
 /*
     %s: string
@@ -15,7 +15,7 @@ bool debug = false;
 str PDA_FONT[3] = {"STAT_MNO", "STAT_LWR", "PDAFONT"};
 
 str PDA_HEADER_STR = "PDA_MENU_HEADER";
-int PDA_HEADER_X_OFFSET   = 0;
+int PDA_HEADING_X_OFFSET   = 0;
 
 // is demonic, disassemble-able, supports artifacts
 // 1 and 3 are kinda redundant..

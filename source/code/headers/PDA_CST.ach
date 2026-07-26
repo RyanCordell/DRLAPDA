@@ -110,6 +110,7 @@
 // -------------
 #define PDA_HEADER_X       (PDA_SCREEN_X_SCALED + 0.0              )
 #define PDA_HEADER_Y       (PDA_SCREEN_Y_SCALED - 1.0              )
+#define PDA_HEADING_X      (PDA_SCREEN_WIDTH    / 2 + 15.0         ) // Scaled by PDA_DrawHeaderText
 #define PDA_HEADER_HEIGHT  (PDA_SCREEN_Y_SCALED - 12.0             )
 #define PDA_BODY_X         (PDA_SCREEN_X_SCALED + 0.0              )
 #define PDA_BODY_Y         (PDA_HEADER_Y        + PDA_HEADER_HEIGHT)
@@ -118,6 +119,8 @@
 #define PDA_SCROLLABLE_BODY_HEIGHT  (int)(PDA_SCREEN_HEIGHT_SCALED - PDA_HEADER_HEIGHT)
 // #define PDA_SCROLLABLE_BODY_Y       (int)(((PDA_BODY_Y       ) * NEW_RESOLUTION_Y) -              1)
 // #define PDA_SCROLLABLE_BODY_HEIGHT  (int)(((PDA_SCREEN_HEIGHT) * NEW_RESOLUTION_Y) - PDA_BODY_Y + 1)
+#define PDA_SCROLL_TOP      20.0
+#define PDA_SCROLL_BOTTOM  -60.0
 // -------------
 #define PDA_MENU_TOOLTIP_X       (PDA_SCREEN_WIDTH_SCALED / 2 + 6)
 #define PDA_MENU_TOOLTIP_Y       (PDA_BODY_Y)

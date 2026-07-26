@@ -1,5 +1,5 @@
-// All on-creation/switch calls should be handled here to avoid constant data thrashing
-
+// All on-creation/switch calls should be handled here to avoid being created every tic
+// Ideally, this is only called once-per-page-change.
 
 switch (PDA_Local.category) {
   case PDA_MENU:
@@ -11,7 +11,7 @@ switch (PDA_Local.category) {
     PDA_LocalButton[PDA_BESTIARY_BUTTON]   = PDA_CreateMenuButton(PDA_BESTIARY_BUTTON,   "", "MBESICO", 10.0, 20.0 + (20.0 * 5));
     PDA_LocalButton[PDA_MISC_BUTTON]       = PDA_CreateMenuButton(PDA_MISC_BUTTON,       "", "MMSCICO", 10.0, 20.0 + (20.0 * 6));
     PDA_LocalButton[PDA_HELP_BUTTON]       = PDA_CreateMenuButton(PDA_HELP_BUTTON,       "", "MHLPICO", 10.0, 20.0 + (20.0 * 7));
-    PDA_LocalButton[PDA_WINFO_BUTTON]      = PDA_CreateMenuButton(PDA_WINFO_BUTTON,      "", "MHLPICO", 10.0, 20.0 + (20.0 * 7));
+    // PDA_LocalButton[PDA_WINFO_BUTTON]      = PDA_CreateMenuButton(PDA_WINFO_BUTTON,      "", "MHLPICO", 10.0, 20.0 + (20.0 * 7));
     break;
 
   case PDA_CLASSES:
@@ -60,12 +60,28 @@ switch (PDA_Local.category) {
 
     PDA_DefaultFont();
 
+    if (PDA_Local.scrollYDelta == -1) {
+      PDA_LocalButton[PDA_MODS_PAGE] = PDA_CreateFixedButton(PDA_MODS_PAGE, "Modpack Effects" , "MODICON", 10.0, PDA_SCREEN_HEIGHT, 82, 16, 16, 19);
+
+      PDA_LocalButton[PDA_ARTIFACTS_PAGE] = PDA_CreateFixedButton(PDA_ARTIFACTS_PAGE, "Artifact Effects", "DMNAICON",  PDA_SCREEN_WIDTH - 82 - 20, PDA_SCREEN_HEIGHT, 82, 16, 38, 40);
+    }
+
     if (stricmp(player_weapon[player_weapon_current], "None") != 0) {
         if (PDA_Local.page == WEAPON_PAGE_STORY) {
             #include "../../pages/subpage/weapons_story_draw.pdap"
         }
 
         if (PDA_Local.page == WEAPON_PAGE_MODPACK_EFFECTS) {
+            for (int modPack = PDA_MODMIN; modPack < PDA_MODMAX - 1; modPack++) {
+              str selectedMod = StrParam("%s:MODICON", weapon_mods[modPack]);
+
+              float modY = 55.0 + (24.0 * modPack);
+
+              PDA_LocalButton[modPack] = PDA_CreateModPackDisplay(modPack, selectedMod,
+                                              10.0, modY,
+                                              16, 24, (Weapon_Mod_Quantity[modPack] > 0) ? pulser(4.0, 0.9) : 0.5);
+            }
+
             #include "../../pages/subpage/weapons_mods_draw.pdap"
             
         }
@@ -407,7 +423,7 @@ switch (PDA_Local.category) {
             
         if (StrCmp(StrParam("%l:", PDA_AssemblyInfo[PlayerNumber()][4]), PDA_AssemblyInfo[PlayerNumber()][4]) != 0) {
             PDA_SetScrollLimit(-1 * batoi(StrParam("%l:", PDA_AssemblyInfo[PlayerNumber()][4])));
-            PDA_SetScrollArrows2(-1 * batoi(StrParam("%l:", PDA_AssemblyInfo[PlayerNumber()][4])), PDA_SCREEN_WIDTH + 60.0, PDA_SCROLLABLE_BODY_HEIGHT + 90.0);
+            PDA_SetScrollArrows2(-1 * batoi(StrParam("%l:", PDA_AssemblyInfo[PlayerNumber()][4])), PDA_SCROLL_TOP, 60.0, 90.0);
         }
     } else {
         PDA_HudDirtyP(HUDMSG_PLAIN, PDA_INFO2ID, CR_WHITE, 10.0, 50.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE,

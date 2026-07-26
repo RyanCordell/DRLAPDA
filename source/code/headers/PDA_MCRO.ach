@@ -1,14 +1,16 @@
 // functions
 #define PDA_TAB_NEXT_X(a) \
-    (PDA_TAB_START_X + (PDA_TAB_W * (a)) + PDA_TAB_MARGIN)
+    (PDA_TAB_START_X + (PDA_TAB_W * (a)) + (PDA_TAB_MARGIN * (a)))
 
-#define StrTrim(a,b,c)		StrMid((a),(b),StrLen((a)) - (c))
-#define Array_Size(array) 	(sizeof((array))/sizeof((array[0][0])))
+#define StrTrim(a,b,c)      StrMid((a),(b),StrLen((a)) - (c))
+#define Array_Size(array)   (sizeof((array))/sizeof((array[0][0])))
 
-#define PDA_SetScrollLimit(a)  	PDA_Local.maxTextY = (a)
+#define PDA_SetScrollLimit(a)   PDA_Local.maxTextY = (a)
 #define PDA_ResetScroll()       PDA_Local.scrollingY = PDA_SCREEN_Y;
-#define PDA_SetMonsterLimit(a)  if (PDA_Local.monsterpage > (a)) PDA_Local.monsterpage = (a)
-#define PDA_DefaultFont() 		  SetFont(PDA_FONT[mono_font]);
+#define PDA_SetMonsterLimit(a) \
+    if (PDA_Local.monsterpage > (a)) PDA_Local.monsterpage = (a) \
+
+#define PDA_DefaultFont()        SetFont(PDA_FONT[mono_font]);
 
 #define PDA_CheckPlayer1Inventory(name) ACS_NamedExecuteWithResult("PDA_CheckPlayer1Inventory", name)
 #define PDA_SetEveryoneInventory(name)  ACS_NamedExecuteWithResult("PDA_SetEveryoneInventory",  name)
@@ -30,7 +32,8 @@
     stringArrayIndex = 0; \
     master_max -= 1; \
 
-#define deleteNoEquipmentMessage() HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_NOEQID, CR_UNTRANSLATED, 0, 0, 0);
+#define deleteNoEquipmentMessage() \
+    HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_NOEQID, CR_UNTRANSLATED, 0, 0, 0); \
 
 #define setMaxModLimit() \
     if (CheckInventory("RLStandardWeaponToken") || CheckInventory("RLExoticWeaponToken")) { \
@@ -88,6 +91,170 @@
 
 #define PDA_ScrollMoved \
     (PDA_Local.scrollingY != PDA_Local.prevScrollingY) \
+
+//
+#define PDA_NeedsDraw (PDA_Local.dirty)
+#define PDA_ParallaxNeedsDraw (PDA_Local.dirty || PDA_Local.scrollDirty)
+
+#define TraceLog(message) do { \
+if (TraceDebug) log(s:(message)); \
+} while(0) \
+
+
+#define PDA_HudDirty(type, id, color, x, y, hold, alpha, ...) do { \
+if (PDA_NeedsDraw) { \
+    PDA_HudSetP(type, id, color, x, y - PDA_Local.scrollingY, hold, alpha); \
+    PDA_Hud(__VA_ARGS__); \
+} \
+} while(0) \
+
+#define PDA_HudDirtyP(type, id, color, x, y, hold, alpha, ...) do { \
+if (PDA_ParallaxNeedsDraw) { \
+    PDA_HudSetP(type, id, color, x, y, hold, alpha); \
+    PDA_Hud(__VA_ARGS__); \
+} \
+} while(0) \
+
+#define PDA_HudDirtyV(type, id, color, x, y, hold, alpha, ...) do { \
+int _xTemp = (PDA_SCREEN_X + x) * NEW_RESOLUTION_X; \
+int _yTemp = (PDA_Local.scrollingY * NEW_RESOLUTION_Y) + y; \
+fixed _x = _xTemp + X_LEFT_EDGE; \
+fixed _y = _yTemp + Y_TOP_EDGE; \
+if (PDA_ParallaxNeedsDraw) { \
+    PDA_HudSetP(type, id, color, _x, _y, hold, alpha); \
+    PDA_Hud(__VA_ARGS__); \
+} \
+} while(0) \
+
+#define clearStringArray(dim) \
+for (int i = 0; i < STRING_ARRAY_MAX; i++) stringArray[dim][i] = ""; \
+
+#define afterPageDefaults(a) \
+PDA_Wipe((a)); \
+PDA_DefaultFont(); \
+PDA_UnsetScrollWindow(); \
+TraceLog("afterPageDefaults"); \
+
+
+#define HEADER_BOUNDS() \
+int head[5] = { \
+    PDA_HEADER_X, PDA_HEADER_Y, \
+    PDA_SCREEN_WIDTH_SCALED, PDA_HEADER_HEIGHT, \
+    PDA_SCREEN_WIDTH_SCALED - PDA_SCREEN_X \
+}; \
+
+#define BODY_BOUNDS() \
+int body[5] = { \
+    PDA_SCREEN_X + 4, PDA_SCROLLABLE_BODY_Y, \
+    PDA_SCREEN_WIDTH_SCALED, PDA_SCROLLABLE_BODY_HEIGHT, \
+    PDA_SCREEN_WIDTH_SCALED - (PDA_SCREEN_X * 3) \
+}; \
+
+#define TOOLTIP_BOUNDS() \
+int tip[5] = { \
+    PDA_MENU_TOOLTIP_X, PDA_MENU_TOOLTIP_Y, \
+    (PDA_MENU_TOOLTIP_WIDTH * NEW_RESOLUTION_X), PDA_MENU_TOOLTIP_HEIGHT, \
+    (PDA_MENU_TOOLTIP_WIDTH * NEW_RESOLUTION_X) - 10 \
+}; \
+
+#define PDA_DrawBodyText(type, id, color, x, y, hold, alpha, ...) do { \
+PDA_DrawBodyText_Set(type, id, color, x, y, hold, alpha); \
+PDA_Hud(__VA_ARGS__); \
+} while(0) \
+
+#define PDA_DrawTooltipText(type, id, color, x, y, hold, alpha, ...) do { \
+PDA_DrawTooltipText_Set(type, id, color, x, y, hold, alpha); \
+PDA_Hud(__VA_ARGS__); \
+PDA_SetupScreenBounds_Wipeless(); \
+} while(0) \
+
+#define checkMonsterKillCount() \
+for (int t = 0; t < DRLA_DIFFICULTYTIERS; t++) { \
+    for (int m = 0; m < DRLA_MONSTER_PAGE_MAX; m++) { \
+        monsterCheck[t][m] = CheckInventory(StrParam(s:DRLA_Bestiary[t][m][beast_TOKEN],s:"KillCounter")); \
+        if (oldCheck[t][m] != monsterCheck[t][m] && oldCheck[t][m] < 2 && monsterCheck[t][m] < 2) { \
+            PDA_Local.newEntry[t] = true; \
+        } \
+    } \
+} \
+
+#define updateOldMonsterKillCount() \
+for (int t = 0; t < DRLA_DIFFICULTYTIERS; t++) { \
+    for (int m = 0; m < DRLA_MONSTER_PAGE_MAX; m++) { \
+        oldCheck[t][m] = monsterCheck[t][m]; \
+    } \
+} \
+
+#define assignButtonParams(a, b) \
+(a).id = id; \
+(a).x = (int)(PDA_BODY_X + x); \
+(a).y = (int)(PDA_Local.scrollingY + y); \
+(a).rawY = (int)(y); \
+(a).width = width; \
+(a).height = height; \
+(a).label = (b); \
+
+#define CheckBounds(a) \
+PDA_LocalMouse.x >= (a).x - 1 && PDA_LocalMouse.x <= (a).x + (a).width \
+&& \
+PDA_LocalMouse.y >= (a).y - 2 && PDA_LocalMouse.y <= (a).y + (a).height \
+
+#define PDA_PlaySound(PDA_Sound, soldier, volume) \
+LocalAmbientSound(!GetCVar("DRLA_PDA_soldier") ? PDA_Sound : soldier, volume); \
+
+#define buttonBoundsDefault(button) \
+if (CheckBounds(button)) { \
+    (button).state = button_hovered; \
+    PDA_LocalMouse.state = cursor_pointer; \
+    if ((button).state != (button).oldState) { \
+        PDA_PlaySound("UI/PDA/Select", "pda/soldier", 80); \
+    } \
+    if (PDA_LocalMouse.action == mouse_click) { \
+        PDA_PlaySound("UI/PDA/ChangePage", "pda/soldier", 80); \
+        (button).state = button_clicked; \
+        PDA_LocalMouse.state = mouse_click; \
+    } \
+} else { \
+    (button).state = button_none; \
+    PDA_Local.playSoundOnce = false; \
+    if ((button).state != (button).oldState) { \
+        PDA_LocalMouse.state = cursor_default; \
+    } \
+} \
+
+#define PDA_NOPONG() \
+for (int wipeIndex = PDA_PONG_LEFTPADDLE; wipeIndex <= PDA_PONG_AISCORE; wipeIndex++) { \
+    HudMessage(s:"\n"; HUDMSG_PLAIN, wipeIndex, CR_UNTRANSLATED, 0, 0, 0, 0); \
+} \
+TraceLog("PDA_NOPONG"); \
+
+
+#define PDA_SetScrollWindow(scrollDownMax, scrollUpMax) \
+PDA_SetScrollArrows2((scrollDownMax), (scrollUpMax), PDA_SCREEN_WIDTH + X_LEFT_EDGE, PDA_SCREEN_HEIGHT + Y_TOP_EDGE); \
+TraceLog("PDA_SetScrollWindow"); \
+
+#define PDA_UnsetScrollArrows() \
+DisplayIcon("RLZARU", PDA_SCROLLUPID, PDA_SCREEN_WIDTH + X_LEFT_EDGE, PDA_SCREEN_Y + 10.0 + Y_TOP_EDGE, INF_HOLDTIME, 0); \
+DisplayIcon("RLZARD", PDA_SCROLLDNID, PDA_SCREEN_WIDTH + X_LEFT_EDGE, PDA_SCREEN_HEIGHT + 0.0 + Y_TOP_EDGE, INF_HOLDTIME, 0); \
+TraceLog("PDA_UnsetScrollArrows"); \
+
+
+#define PDA_HudSet(type, id, color, x, y, hold, alpha) \
+_pda_hm_i[0] = (type);  \
+_pda_hm_i[1] = (id);    \
+_pda_hm_i[2] = (color); \
+_pda_hm_f[0] = (x);     \
+_pda_hm_f[1] = (y);     \
+_pda_hm_f[2] = (hold);  \
+_pda_hm_f[3] = (alpha); \
+
+#define PDA_HudSetP(type, id, color, x, y, hold, alpha) \
+PDA_HudSet(type, id, color, \
+(x) + X_LEFT_EDGE, \
+(y) + Y_TOP_EDGE + PDA_Local.scrollingY, \
+hold, alpha) \
+
+#define PDA_TooltipDirty(...) PDA_HudDirty(__VA_ARGS__)
 
 // Checks for unique weapon + armor set perks
 // I should get a better name for this loop's max at some point..

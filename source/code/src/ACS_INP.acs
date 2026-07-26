@@ -51,12 +51,11 @@ function str handleCursorChange (void) {
 
 function void handleScroll (fixed yScale) {
     if (holdingAction) {
-        // if (PDA_LocalMouse.mtic > HOLD_THRESHOLD) {
+        if (PDA_LocalMouse.mtic > HOLD_THRESHOLD) {
             PDA_SetFullDirty();
             PDA_Local.scrollingY   += PDA_LocalMouse.y - PDA_LocalMouse.oldY;
             PDA_Local.scrollYDelta  = setScrollDelta();
-        // }
-        log("can scroll now! pSY %f: sY %f: sYD %d:", PDA_Local.prevScrollingY, PDA_Local.scrollingY, PDA_Local.scrollYDelta);
+        }
     }
     if (PDA_LocalMouse.y < VMIN) {
         if (PDA_Local.scrollingY < PDA_SCREEN_Y) {

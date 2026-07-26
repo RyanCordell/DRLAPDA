@@ -9,12 +9,10 @@ if (PDA_LocalMouse.action == mouse_back) {
     PDA_SetPage(1);
 }
 
-if (GetActorClass(0) != "None")
-{
+if (GetActorClass(0) != "None") {
     if (stricmp(PDA_LocalPlayer[pda_class_icon], "PDA_", 4) == 0) {
         PDA_LocalPlayer[pda_class_icon] = "PPDAUNK";
     }
-      
 
     if (PDA_ParallaxNeedsDraw) {
         DisplayIconParallax(PDA_LocalPlayer[pda_class_icon], PDA_INFOID, PDA_SCREEN_WIDTH + 5.0 + X_RIGHT_EDGE, (PDA_SCROLLABLE_BODY_HEIGHT) + 5.0 + Y_TOP_EDGE, INF_HOLDTIME, 0.45);
@@ -29,14 +27,19 @@ if (GetActorClass(0) != "None")
                 );
                 break;
             case CLASSES_PAGE_STORY:
-                HudMessageParallax(
-                    StrParam(
-                        "\cd%l:\c-\n\n"
-                        "%l:",
-                        PDA_LocalPlayer[pda_class_name],
-                        PDA_LocalPlayer[pda_class_story]
-                    ),
-                    HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE);
+                PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED,
+                    0.0, 0.0, INF_HOLDTIME, OPAQUE,
+                    s:"\cd",l:PDA_LocalPlayer[pda_class_name], s:"\c-\n\n",
+                    l:PDA_LocalPlayer[pda_class_story]
+                );
+                // HudMessageParallax(
+                //     StrParam(
+                //         "\cd%l:\c-\n\n"
+                //         "%l:",
+                //         PDA_LocalPlayer[pda_class_name],
+                //         PDA_LocalPlayer[pda_class_story]
+                //     ),
+                //     HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE);
                 break;
         }
     }

@@ -1,12 +1,7 @@
-// PDA_LocalButton[PDA_TAB_BUTTONS_START    ] = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+
 PDA_ButtonHandler(TAB1, true, 1, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
-
-// PDA_LocalButton[PDA_TAB_BUTTONS_START + 1] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
 PDA_ButtonHandler(TAB2, true, 2, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
-
-// PDA_LocalButton[PDA_TAB_BUTTONS_START + 2] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 2, "3", "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
 PDA_ButtonHandler(TAB3, true, 3, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
-
 
 if (PDA_LocalMouse.action == mouse_back) {
     PDA_SetCategory(PDA_MENU);
@@ -14,15 +9,15 @@ if (PDA_LocalMouse.action == mouse_back) {
 }
 
 if (stricmp(player_weapon[player_weapon_current], "None") != 0) {
-    if (PDA_Local.page == WEAPON_PAGE_STORY) {
-        #include "../../pages/subpage/weapons_story_logic.pdap"
-    }
-
-    if (PDA_Local.page == WEAPON_PAGE_MODPACK_EFFECTS) {
-        #include "../../pages/subpage/weapons_mods_logic.pdap"
-        
-    }
-    if (PDA_Local.page == WEAPON_PAGE_ARTIFACT_EFFECTS) {
-        #include "../../pages/subpage/weapons_artifacts_logic.pdap"
+    switch (PDA_Local.page) {
+        case WEAPON_PAGE_STORY:
+            #include "../../pages/subpage/weapons_story_logic.pdap"
+            break;
+        case WEAPON_PAGE_MODPACK_EFFECTS:
+            #include "../../pages/subpage/weapons_mods_logic.pdap"
+            break;
+        case WEAPON_PAGE_ARTIFACT_EFFECTS:
+            #include "../../pages/subpage/weapons_artifacts_logic.pdap"
+            break;
     }
 }

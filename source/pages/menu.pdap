@@ -6,3 +6,4 @@ PDA_ButtonHandler(PDA_ITEMS_BUTTON,      false, PDA_ITEMS,      "Shows all in-ga
 PDA_ButtonHandler(PDA_BESTIARY_BUTTON,   false, PDA_BESTIARY,   "Shows all in-game enemies.\n", B_FUNCTIONAL, B_NO_CLEAR);
 PDA_ButtonHandler(PDA_MISC_BUTTON,       false, PDA_MISC,       "Miscellaneous options\n", B_FUNCTIONAL, B_NO_CLEAR);
 PDA_ButtonHandler(PDA_HELP_BUTTON,       false, PDA_HELP,       "Help with PDA or this mod\n", B_FUNCTIONAL, B_NO_CLEAR);
+

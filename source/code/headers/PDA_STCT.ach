@@ -36,6 +36,8 @@ struct PDAInfo {
     int equipmentId;
     bool stopEquipmentEarly;
 
+    str clipRegion;
+
     // new flags necessary for retained mode UI
     bool dirty;
     bool scrollDirty;
