@@ -23,7 +23,7 @@ if (PDA_LocalMouse.action == mouse_back) {
 //             "\cdResistances:\c- \n%l:\n"
 //             "\cdDrops and misc info:\c- \n%l:\n",
 //             PDA_Enemy[PlayerNumber()][enemy_name],
-//             enemy_count,
+//             beast_info[BEAST__E_COUNT],
 //             PDA_Enemy[PlayerNumber()][enemy_health],
 //             PDA_Enemy[PlayerNumber()][enemy_resistance],
 //             PDA_Enemy[PlayerNumber()][enemy_misc]

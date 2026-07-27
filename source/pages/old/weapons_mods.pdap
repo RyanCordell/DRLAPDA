@@ -27,7 +27,7 @@ for (int modPack = PDA_MODMIN; modPack < PDA_MODMAX - 1; modPack++) {
     // str selectedMod = StrParam("%s:MODICON", strMid(stringArray[modPack], 9, 1));
     str selectedMod = StrParam("%s:MODICON", weapon_mods[modPack]);
 
-    float modY = 55.0 + (24.0 * modPack);
+    fixed modY = 55.0 + (24.0 * modPack);
 
     PDA_LocalButton[modPack] = PDA_CreateModPackDisplay(modPack, selectedMod, 
                 10.0, modY,

@@ -21,7 +21,7 @@ if (!canBeEvil) {
         s:"D\c-]\n\n"
     );
         
-    float artifactsY = 60.0;
+    fixed artifactsY = 60.0;
 
     if (Weapon_Mod_Quantity[mod_artifact] > 0) {
         switch (Weapon_Mod_Quantity[mod_artifact]) {

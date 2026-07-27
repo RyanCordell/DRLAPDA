@@ -503,24 +503,15 @@ SCRIPT "PDA_Core" (void) {
 
         if (PDA_ScrollMoved) {
             PDA_SetFullDirty();
-            // PDA_SetScrollDirty();
-            PDA_TrackScrollArrows();
-
-            for (int i = PDA_PLAYERS_BUTTON; i <= PDA_HELP_BUTTON; ++i) {
-                if (PDA_LocalButton[i].id == 0) continue;
-                log("id %d:, y: %f:, gfxY %f:", PDA_LocalButton[i].id, PDA_LocalButton[i].y, PDA_LocalButton[i].graphicY);
-            }
+            PDA_ChangeScrolling(); // TODO: Find alternative? Either way, the inner SetScrollArrows function has to be called once more just to fetch data..
         }
+        // DisplayIconAlways("RLZARU", PDA_SCROLLUPID, PDA_SCREEN_WIDTH_SCALED + X_LEFT_EDGE, (int)(PDA_BODY_Y + 12.0) + Y_TOP_EDGE, INF_HOLDTIME, 0.5);
+        // DisplayIconAlways("RLZARD", PDA_SCROLLDNID, PDA_SCREEN_WIDTH_SCALED + X_LEFT_EDGE, (int)(PDA_SCREEN_HEIGHT_SCALED + PDA_HEADER_HEIGHT) + Y_BOTTOM_EDGE, INF_HOLDTIME, 0.5);
 
         PDA_HandleHeader();
 
         if (PDA_CategoryChanged || PDA_PageChanged) {
             PDA_OnChange();
-
-            for (int i = PDA_PLAYERS_BUTTON; i <= PDA_HELP_BUTTON; ++i) {
-                if (PDA_LocalButton[i].id == 0) continue;
-                log("id %d:, y: %f:, gfxY %f:", PDA_LocalButton[i].id, PDA_LocalButton[i].y, PDA_LocalButton[i].graphicY);
-            }
         }
         // DebugIDs();
         
@@ -573,12 +564,12 @@ SCRIPT "PDA_Core" (void) {
                 break;
         }
         PDA_Local.prevScrollingY = PDA_Local.scrollingY;
-        Delay(PDA_Responsiveness);
+        Delay(PDA_RESPONSIVENESS);
 
         if (PDA_ParallaxNeedsDraw) {
-            isDirtyBoy("PDA_Core Loop");
             PDA_ClearDirty();
         }
+        // isDirtyBoy("PDA_Core Loop");
         if (PDA_Local.ptic > 255) PDA_Local.ptic = 0;
     }
     SetHudClipRect(0,0,0,0,0);

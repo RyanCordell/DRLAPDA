@@ -3,66 +3,64 @@ struct PDAInfo {
     bool active;
     bool pongRunning;
 
+    bool clicked;
+    bool playSoundOnce;
+
+    bool stopEquipmentEarly;
+    bool dirty;
+    bool scrollDirty;
+
+    bool newEntry[5];
+
     int category;
     int prevCategory;
     int page;
     int prevPage;
 
     int pageMax;
+    int ptic; // PDA tics
 
-    float textY;
-    float maxTextY;
-    float scrollingY;
-    float oldScrollingY;
-    float creditsroll;
-
-    str tierColor;
     int assemblyOffset;
     int currentAssembly;
     int maxAssembliesPer;
-
-    bool newEntry[5];
-
-    bool clicked;
-    bool playSoundOnce;
-
-    str detailFetch[8];
 
     int maxModLimit;
     int scrollYDelta;
 
     int equipmentLimit;
-    fixed equipmentBaseY;
     int equipmentId;
-    bool stopEquipmentEarly;
 
-    str clipRegion;
-
-    // new flags necessary for retained mode UI
-    bool dirty;
-    bool scrollDirty;
+    fixed textY;
+    fixed maxTextY;
+    fixed scrollingY;
+    fixed oldScrollingY; // Deprecated
+    fixed creditsroll;
+    fixed equipmentBaseY;
     fixed prevScrollingY;
 
-    int ptic;
+    str clipRegion;
+    str tierColor;
+    str detailFetch[8];
+
 }
 PDAInfo PDA_Info[MAX_PLAYERS];
 
 struct PDAMouse {
+    bool m1;
+    bool m2;
+
+    bool scrolling;
+    bool moving;
+
     int x;
     int y;
     int oldX;
     int oldY;
     
-    bool m1;
-    bool m2;
-    
     int state;
     int oldState;
 
     int action;
-
-    bool scrolling;
-    bool moving;
 
     int mtic;
 }
@@ -71,40 +69,42 @@ PDAMouse PDA_Mouse[MAX_PLAYERS];
 
 struct PDAButton {
     int id;
-    float x;
-    float y;
-    float rawY;
 
     int width;
     int height;
 
     int state;
     int oldState;
+    int graphicID;
+    int graphicFlags;
+
+    int textColor;
+    int textID;
+    int textFlags;
+
+    fixed x;
+    fixed y;
+    fixed rawY;
+
+    fixed alpha;
+
+    fixed graphicX;
+    fixed graphicY;
+
+    fixed textX;
+    fixed textY;
+
+    fixed finalX;
+    fixed finalY;
+    fixed scrollY;
+
+    str type;
+    str textFont;
 
     str label;
     str graphic;
 
     str tooltip;
-
-    fixed alpha;
-
-    int graphicID;
-    int graphicFlags;
-    float graphicX;
-    float graphicY;
-
-    str textFont;
-    int textColor;
-    int textID;
-    int textFlags;
-    float textX;
-    float textY;
-
-    float finalX;
-    float finalY;
-    float scrollY;
-
-    str type;
 }
 PDAButton PDA_Button[MAX_PLAYERS][256];
 

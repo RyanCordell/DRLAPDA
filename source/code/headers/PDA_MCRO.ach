@@ -5,8 +5,6 @@
 #define StrTrim(a,b,c)      StrMid((a),(b),StrLen((a)) - (c))
 #define Array_Size(array)   (sizeof((array))/sizeof((array[0][0])))
 
-#define PDA_SetScrollLimit(a)   PDA_Local.maxTextY = (a)
-#define PDA_ResetScroll()       PDA_Local.scrollingY = PDA_SCREEN_Y;
 #define PDA_SetMonsterLimit(a) \
     if (PDA_Local.monsterpage > (a)) PDA_Local.monsterpage = (a) \
 
@@ -157,8 +155,8 @@ int tip[5] = { \
     (PDA_MENU_TOOLTIP_WIDTH * NEW_RESOLUTION_X) - 10 \
 }; \
 
-#define PDA_DrawBodyText(type, id, color, x, y, hold, alpha, ...) do { \
-PDA_DrawBodyText_Set(type, id, color, x, y, hold, alpha); \
+#define PDA_DrawBodyText(type, id, color, x, y, hold, alpha, parallax, ...) do { \
+PDA_DrawBodyText_Set(type, id, color, x, y, hold, alpha, parallax); \
 PDA_Hud(__VA_ARGS__); \
 } while(0) \
 
@@ -228,10 +226,16 @@ for (int wipeIndex = PDA_PONG_LEFTPADDLE; wipeIndex <= PDA_PONG_AISCORE; wipeInd
 } \
 TraceLog("PDA_NOPONG"); \
 
+#define PDA_SetScrollWindow(a,b)   \
+    PDA_Local.maxTextY = (a); \
+    PDA_SetScrollArrows2((a), (b)); \
+    TraceLog("PDA_SetScrollWindow"); \
 
-#define PDA_SetScrollWindow(scrollDownMax, scrollUpMax) \
-PDA_SetScrollArrows2((scrollDownMax), (scrollUpMax), PDA_SCREEN_WIDTH + X_LEFT_EDGE, PDA_SCREEN_HEIGHT + Y_TOP_EDGE); \
-TraceLog("PDA_SetScrollWindow"); \
+#define PDA_ResetScroll()       PDA_Local.scrollingY = PDA_SCREEN_Y;
+
+// #define PDA_SetScrollWindow(scrollDownMax, scrollUpMax) \
+// PDA_SetScrollArrows2((scrollDownMax), (scrollUpMax), PDA_SCREEN_WIDTH + X_LEFT_EDGE, PDA_SCREEN_HEIGHT + Y_TOP_EDGE); \
+// TraceLog("PDA_SetScrollWindow"); \
 
 #define PDA_UnsetScrollArrows() \
 DisplayIcon("RLZARU", PDA_SCROLLUPID, PDA_SCREEN_WIDTH + X_LEFT_EDGE, PDA_SCREEN_Y + 10.0 + Y_TOP_EDGE, INF_HOLDTIME, 0); \
@@ -243,16 +247,18 @@ TraceLog("PDA_UnsetScrollArrows"); \
 _pda_hm_i[0] = (type);  \
 _pda_hm_i[1] = (id);    \
 _pda_hm_i[2] = (color); \
-_pda_hm_f[0] = (x);     \
-_pda_hm_f[1] = (y);     \
+_pda_hm_f[0] = (int)((x)) + X_LEFT_EDGE;     \
+_pda_hm_f[1] = (int)((y)) + Y_TOP_EDGE;     \
 _pda_hm_f[2] = (hold);  \
 _pda_hm_f[3] = (alpha); \
+// log("PDA_HudSet[%f:, %f:]", _pda_hm_f[0], _pda_hm_f[1]); \
 
 #define PDA_HudSetP(type, id, color, x, y, hold, alpha) \
-PDA_HudSet(type, id, color, \
-(x) + X_LEFT_EDGE, \
-(y) + Y_TOP_EDGE + PDA_Local.scrollingY, \
-hold, alpha) \
+    PDA_HudSet(type, id, color, \
+        (x), \
+        ((y) + PDA_Local.scrollingY), \
+        hold, alpha); \
+    // log("PDA_HudSetP[%f:, %f:]", (x), ((y) + PDA_Local.scrollingY)); \
 
 #define PDA_TooltipDirty(...) PDA_HudDirty(__VA_ARGS__)
 

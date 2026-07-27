@@ -15,33 +15,31 @@ if (GetActorClass(0) != "None") {
     }
 
     if (PDA_ParallaxNeedsDraw) {
-        DisplayIconParallax(PDA_LocalPlayer[pda_class_icon], PDA_INFOID, PDA_SCREEN_WIDTH + 5.0 + X_RIGHT_EDGE, (PDA_SCROLLABLE_BODY_HEIGHT) + 5.0 + Y_TOP_EDGE, INF_HOLDTIME, 0.45);
+        // DisplayIconParallax(PDA_LocalPlayer[pda_class_icon], PDA_INFOID,
+        //     PDA_SCREEN_WIDTH + 5.0 + X_RIGHT_EDGE, (PDA_SCROLLABLE_BODY_HEIGHT) + 5.0 + Y_TOP_EDGE,
+        //     INF_HOLDTIME, 0.45);
+        DisplayIconParallax(PDA_LocalPlayer[pda_class_icon], PDA_INFOID,
+            (int)(PDA_SCREEN_WIDTH - 24.0) + X_RIGHT_EDGE,
+            (int)(PDA_SCROLLABLE_BODY_HEIGHT - 24.0),
+            INF_HOLDTIME, 1.0);
+
+        int array_access_index = pda_class_abilities;
 
         PDA_DefaultFont();
         switch(PDA_Local.page) {
             case CLASSES_PAGE_PERKS:
-                PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED,
-                    0.0, 0.0, INF_HOLDTIME, OPAQUE,
-                    s:"\cd",l:PDA_LocalPlayer[pda_class_name],s:"\c-\n\n",
-                    l:PDA_LocalPlayer[pda_class_abilities]
-                );
+                array_access_index = pda_class_abilities;
                 break;
             case CLASSES_PAGE_STORY:
-                PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED,
-                    0.0, 0.0, INF_HOLDTIME, OPAQUE,
-                    s:"\cd",l:PDA_LocalPlayer[pda_class_name], s:"\c-\n\n",
-                    l:PDA_LocalPlayer[pda_class_story]
-                );
-                // HudMessageParallax(
-                //     StrParam(
-                //         "\cd%l:\c-\n\n"
-                //         "%l:",
-                //         PDA_LocalPlayer[pda_class_name],
-                //         PDA_LocalPlayer[pda_class_story]
-                //     ),
-                //     HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE);
+                array_access_index = pda_class_story;
                 break;
         }
+
+        PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED,
+            0.0, 0.0, INF_HOLDTIME, OPAQUE, B_DO_PARALLAX,
+            s:"\cd",l:PDA_LocalPlayer[pda_class_name], s:"\c-\n\n",
+            l:PDA_LocalPlayer[array_access_index]
+        );
     }
 }
 // // Get rid of it once we're done.

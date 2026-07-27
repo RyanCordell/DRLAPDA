@@ -1,11 +1,9 @@
 /** VARIABLES */
-bool debug = true;
-
 /*
     %s: string
     %b: bool
     %d: decimal
-    %f: float/fixed?
+    %f: fixed/fixed?
     %x: hex
 */
 
@@ -14,11 +12,10 @@ bool debug = true;
 
 str PDA_FONT[3] = {"STAT_MNO", "STAT_LWR", "PDAFONT"};
 
-str PDA_HEADER_STR = "PDA_MENU_HEADER";
 int PDA_HEADING_X_OFFSET   = 0;
 
 // is demonic, disassemble-able, supports artifacts
-// 1 and 3 are kinda redundant..
+// 1 and 3 are kinda redundant.. outside of the Unmaker
 bool weapon_checks[3] = {false, false, false};
 
 // full name, trimmed
@@ -36,19 +33,22 @@ str PDA_Enemy[MAX_PLAYERS][5] = {"N/A\n", "N/A\n", "N/A\n", "N/A\n", "N/A\n"};
 // bulk, power, agility, technical, sniper, firestorm, nano, artifact
 int Weapon_Mod_Quantity[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 
-#define STRING_ARRAY_DIMS 2
-#define STRING_ARRAY_MAX 1024
 str stringArray[STRING_ARRAY_DIMS][STRING_ARRAY_MAX];
 int stringArrayIndex = 0;
 
-#define ASSEMBLY_DIM 0
-#define MODS_DIM 1
 
 #include "PDA_STCT.ach"
 #include "PDA_MCRO.ach"
 
 str PDA_PrintWhichUnique[MAX_PLAYERS][PDA_MODMAX];
 str PDA_PrintWhichBasic[MAX_PLAYERS][PDA_MODMAX];
+str all_assemblies = "x";
+str separator_character = ":"; // by default.
+
+// page, width, difficulty color, enemy count, player kill count
+int beast_info[BEAST_INFO_MAX] = {0, 80, CR_UNTRANSLATED, 0, 0};
+// Not the renegade of funk, unfortunately..
+bool isRenegade = false;
      
 bool gotOneEquipFirst[MAX_PLAYERS] = {false, false, false, false, false, false, false, false};
 #define localOneEquipFirst gotOneEquipFirst[PlayerNumber()]
@@ -64,30 +64,15 @@ str DRLA_FetchStoredInfo[MAX_PLAYERS] = {"","","","","","","",""};
 int monsterCheck[NUM_DIFFICULTIES][DRLA_MONSTER_PAGE_MAX],
         oldCheck[NUM_DIFFICULTIES][DRLA_MONSTER_PAGE_MAX];
 
-str all_assemblies = "x";
 
-int PDA_ModData[MAX_PLAYERS][4] = { 0, 0, 0, 0 }; // should be 0, 33, 65, and 95 respectively
-
-int enemy_count = 0;
+int PDA_ModData[MAX_PLAYERS][4] = { 0, 0, 0, 0 }; // By default: 0, 33, 65, and 95 respectively
 
 // similar to above, but for monster list page
 str PDA_ListEnemy[MAX_PLAYERS][4] = {" ", " ", " ", ""};
-int player_kill_count = 0;
-
-fixed beast_x   = 4.0;
-// page, width, difficulty color
-int beast_info[3] = {0, 80, CR_UNTRANSLATED};
 
 str PDA_AssemblyInfo[MAX_PLAYERS][5] = {" ", " ", " ", " ", "1"};
 
-// str current_weapon_mods    = " ";
-
-str separator_character = ":"; // by default.
 str weapon_mods[7] = { "b", "p", "a", "t", "s", "f", "n" };
-
-// Not the renegade of funk, unfortunately..
-bool isRenegade = false;
-
 
 #define PDA_LocalUniqueModEffect PDA_PrintWhichUnique[PlayerNumber()]
 #define PDA_LocalWeaponModEffect PDA_PrintWhichBasic[PlayerNumber()]

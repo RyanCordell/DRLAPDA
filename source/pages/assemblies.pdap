@@ -14,7 +14,7 @@ if (PDA_LocalMouse.action == mouse_back) {
     PDA_SetPage(1);
 }
 
-float assemblyX = 20.0;
+fixed assemblyX = 20.0;
 const int width = 180, 
           height = 7;
 

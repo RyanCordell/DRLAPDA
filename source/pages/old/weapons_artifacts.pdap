@@ -21,7 +21,7 @@ if (!canBeEvil) {
             HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 
             10.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE);
         
-    float artifactsY = 60.0;
+    fixed artifactsY = 60.0;
 
     if (Weapon_Mod_Quantity[mod_artifact] > 0) {
         switch (Weapon_Mod_Quantity[mod_artifact]) {

@@ -7,7 +7,7 @@ int width        = 60;
 bool PDA_ManyHax    = false;
 // int pdaStrTrimValue = 0;
 
-const float inAlpha = 0.7;
+const fixed inAlpha = 0.7;
 const fixed playerIconX = PDA_SCREEN_X + 20.0 + X_LEFT_EDGE;
 
 DisplayIconParallax("PDAPLYR", PDA_PLYR_ICON, playerIconX, 40.0, INF_HOLDTIME, OPAQUE);

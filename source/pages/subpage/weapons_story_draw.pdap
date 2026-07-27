@@ -21,8 +21,10 @@ DisplayIconParallax(StrParam("%l:", weapon_info[weapon_info_icon]), PDA_WEAPON_I
 //     l:weaponDesc(isEvil),
 //     s:"\c-\n"
 // );
+
+if (PDA_ParallaxNeedsDraw) {
 PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED,
-    0.0, 0.0, INF_HOLDTIME, OPAQUE,
+    0.0, 0.0, INF_HOLDTIME, OPAQUE, B_DO_PARALLAX,
     l:weaponName(isEvil),
     s:" ",
     s:stricmp(playerWeaponPerk, "") != 0 ? StrParam("+ %s:\c-", playerWeaponPerk) : "",
@@ -33,6 +35,7 @@ PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED,
     l:weaponDesc(isEvil),
     s:"\c-\n"
 );
+}
 
 // if (PDA_Local.scrollYDelta == -1) {
 //     PDA_LocalButton[PDA_MODS_PAGE] = PDA_CreateFixedButton(PDA_MODS_PAGE, "Modpack Effects" , "MODICON",

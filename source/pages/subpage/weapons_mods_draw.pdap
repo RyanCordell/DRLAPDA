@@ -3,8 +3,9 @@
 
 #define canBeEvil weapon_checks[weapon_checks_isdemonic]
 
+if (PDA_ParallaxNeedsDraw) {
 PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED,
-    0.0, 0.0, INF_HOLDTIME, OPAQUE,
+    0.0, 0.0, INF_HOLDTIME, OPAQUE, B_DO_PARALLAX,
     l:(canBeEvil)
     ? (CheckInventory(StrParam("%s:DemonArtifacts", player_weapon[player_weapon_current])) ? weapon_info[weapon_info_dualname] : weapon_info[weapon_info_name])
     : weapon_info[weapon_info_name],
@@ -29,5 +30,6 @@ PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED,
     s:"\c[Cyan]",
     i:PDA_Local.maxModLimit
 );
+}
 
 PDA_DefaultFont();

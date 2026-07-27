@@ -2,14 +2,12 @@ PDA_Local.pageMax = 6;
 
 switch(PDA_Local.page)
 {
-    case 1: PDA_HEADER_STR = "PDA_HUDSWITCH_HEADER1", -70); break;
+    // case 1: PDA_HEADER_STR = "PDA_HUDSWITCH_HEADER1", -70); break;
 }
 
-if (PDA_Local.page == 1)
-{
-  
-  PDA_SetScrollLimit(0);
-  PDA_SetScrollArrows2(0, PDA_SCROLL_TOP, 50.0, 90.0);
+if (PDA_Local.page == 1) {
+  PDA_SetScrollWindow(0, PDA_SCROLL_TOP);
+  // PDA_SetScrollArrows2(0, PDA_SCROLL_TOP, 50.0, 90.0);
 
   // yes i'm lazy
   #define makeHuddy(id, name, y, token) /

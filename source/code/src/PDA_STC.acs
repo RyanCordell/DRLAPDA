@@ -11,7 +11,6 @@ switch (PDA_Local.category) {
     PDA_LocalButton[PDA_BESTIARY_BUTTON]   = PDA_CreateMenuButton(PDA_BESTIARY_BUTTON,   "", "MBESICO", 10.0, 20.0 + (20.0 * 5));
     PDA_LocalButton[PDA_MISC_BUTTON]       = PDA_CreateMenuButton(PDA_MISC_BUTTON,       "", "MMSCICO", 10.0, 20.0 + (20.0 * 6));
     PDA_LocalButton[PDA_HELP_BUTTON]       = PDA_CreateMenuButton(PDA_HELP_BUTTON,       "", "MHLPICO", 10.0, 20.0 + (20.0 * 7));
-    // PDA_LocalButton[PDA_WINFO_BUTTON]      = PDA_CreateMenuButton(PDA_WINFO_BUTTON,      "", "MHLPICO", 10.0, 20.0 + (20.0 * 7));
     break;
 
   case PDA_CLASSES:
@@ -75,7 +74,7 @@ switch (PDA_Local.category) {
             for (int modPack = PDA_MODMIN; modPack < PDA_MODMAX - 1; modPack++) {
               str selectedMod = StrParam("%s:MODICON", weapon_mods[modPack]);
 
-              float modY = 55.0 + (24.0 * modPack);
+              fixed modY = 55.0 + (24.0 * modPack);
 
               PDA_LocalButton[modPack] = PDA_CreateModPackDisplay(modPack, selectedMod,
                                               10.0, modY,
@@ -98,35 +97,36 @@ switch (PDA_Local.category) {
     PDA_LocalButton[PDA_BEAST_AG] = PDA_CreateBeastButton(PDA_BEAST_AG, "Armageddon",   CR_GOLD,      10.0, 30.0 + (15.0 * 3), BEAST_DIFFICULTY_WIDTH, BEAST_DIFFICULTY_HEIGHT, -4.0, -3.0, "", "");
     PDA_LocalButton[PDA_BEAST_EX] = PDA_CreateBeastButton(PDA_BEAST_EX, "Extra",        CR_PURPLE,    10.0, 30.0 + (15.0 * 4), BEAST_DIFFICULTY_WIDTH, BEAST_DIFFICULTY_HEIGHT, -4.0, -3.0, "", "");
 
-    beast_info[0] = PDA_Local.page - 2;
+    beast_info[BEAST__PAGE] = PDA_Local.page - 2;
 
     if (PDA_Local.page != BESTIARY_PAGE_DIFFICULTIES) {
       for (int i = 0; i < DRLA_MONSTER_PAGE_MAX; i++) {
-        localListEnemy[list_kill_count] = StrParam("%s:KillCounter", DRLA_Bestiary[beast_info[0]][i][beast_TOKEN]);
-        monsterCheck[beast_info[0]][i]  = CheckInventory(localListEnemy[list_kill_count]);
+        localListEnemy[list_kill_count] = StrParam("%s:KillCounter", DRLA_Bestiary[beast_info[BEAST__PAGE]][i][beast_TOKEN]);
+        monsterCheck[beast_info[BEAST__PAGE]][i]  = CheckInventory(localListEnemy[list_kill_count]);
 
+        #define beast_x (4.0)
         fixed beast_y = 30.0 + (16.0 * i);
         
         if (CheckInventory(localListEnemy[list_kill_count]) > 0)
         {
-            localListEnemy[list_actor] = DRLA_Bestiary[beast_info[0]][i][beast_ACTOR];
+            localListEnemy[list_actor] = DRLA_Bestiary[beast_info[BEAST__PAGE]][i][beast_ACTOR];
             localListEnemy[list_name]  = StrParam("%l:", StrParam("%l:_name", localListEnemy[list_actor]));
             localListEnemy[list_icon]  = StrParam("%l:", StrParam("%l:_icon", localListEnemy[list_actor]));
-            player_kill_count          = CheckPointerInventory(localListEnemy[list_kill_count], PlayerNumber());
-            beast_info[1]              = (StrLen(localListEnemy[list_name]) * 10) / 2;
+            beast_info[BEAST__P_K_COUNT]          = CheckPointerInventory(localListEnemy[list_kill_count], PlayerNumber());
+            beast_info[BEAST__WIDTH]              = (StrLen(localListEnemy[list_name]) * 10) / 2;
         } else {
             localListEnemy[list_actor] = "null";
-            player_kill_count          = 0;
+            beast_info[BEAST__P_K_COUNT]          = 0;
             localListEnemy[list_name]  = " ????";
         }
 
         const int buttonID = PDA_BEASTS_ID_END - i;
 
-        PDA_LocalButton[buttonID] = PDA_CreateBeastButton(buttonID, localListEnemy[list_name], beast_info[2], 
+        PDA_LocalButton[buttonID] = PDA_CreateBeastButton(buttonID, localListEnemy[list_name], beast_info[BEAST__LV_COLOR],
             beast_x, beast_y, 
-            beast_info[1], 10, 
+            beast_info[BEAST__WIDTH], 10,
             3.0, -3.0, 
-            localListEnemy[list_actor], player_kill_count);
+            localListEnemy[list_actor], beast_info[BEAST__P_K_COUNT]);
 
         if (localListEnemy[list_name] != " ????") {
           if (PDA_LocalButton[buttonID].state == button_hovered) {
@@ -157,7 +157,7 @@ switch (PDA_Local.category) {
 
         PDA_HudDirtyP(HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 5.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE,
           s:"\cdName:\c- ",l:LocalEnemy[enemy_name],s:"\n",
-          s:"\cdNo. of Kills:\c- ",i:enemy_count,s:"\n",
+          s:"\cdNo. of Kills:\c- ",i:beast_info[BEAST__E_COUNT],s:"\n",
           s:"\cdHealth:\c- ",l:LocalEnemy[enemy_health],s:"\n",
           s:"\cdResistances:\c- \n",l:LocalEnemy[enemy_resistance],s:"\n",
           s:"\cdDrops and misc info:\c- \n",l:LocalEnemy[enemy_misc],s:"\n"
@@ -345,9 +345,9 @@ switch (PDA_Local.category) {
     break;
 
   case PDA_ASSEMBLIES:
-    float paginationY = 35.0 + (6.0 * PDA_Local.maxAssembliesPer);
+    fixed paginationY = 35.0 + (6.0 * PDA_Local.maxAssembliesPer);
 
-    float nextButtonX = 10.0;
+    fixed nextButtonX = 10.0;
     if (PDA_Local.page > 1 && PDA_Local.page < 3) {
       nextButtonX = PDA_SCREEN_WIDTH + PDA_SCREEN_X - 82;
     }
@@ -359,7 +359,7 @@ switch (PDA_Local.category) {
     PDA_LocalButton[PDA_PREV_PAGE] = PDA_CreateButton(PDA_PREV_PAGE, "Previous tier", "A_PREV",        10.0, paginationY, 82, 16, 20, 15);
     PDA_LocalButton[PDA_NEXT_PAGE] = PDA_CreateButton(PDA_NEXT_PAGE, "Next tier"    , "A_NEXT", nextButtonX, paginationY, 82, 16, 20, 15);
 
-    float assemblyX = 20.0,
+    fixed assemblyX = 20.0,
           assemblyY;
     const int width = 180, 
               height = 7;
@@ -422,8 +422,9 @@ switch (PDA_Local.category) {
         );
             
         if (StrCmp(StrParam("%l:", PDA_AssemblyInfo[PlayerNumber()][4]), PDA_AssemblyInfo[PlayerNumber()][4]) != 0) {
-            PDA_SetScrollLimit(-1 * batoi(StrParam("%l:", PDA_AssemblyInfo[PlayerNumber()][4])));
-            PDA_SetScrollArrows2(-1 * batoi(StrParam("%l:", PDA_AssemblyInfo[PlayerNumber()][4])), PDA_SCROLL_TOP, 60.0, 90.0);
+          #define minY  (-1 * batoi(StrParam("%l:", PDA_AssemblyInfo[PlayerNumber()][4])))
+            PDA_SetScrollWindow(minY, PDA_SCROLL_TOP);
+            // PDA_SetScrollArrows2(minY, PDA_SCROLL_TOP, 60.0, 90.0);
         }
     } else {
         PDA_HudDirtyP(HUDMSG_PLAIN, PDA_INFO2ID, CR_WHITE, 10.0, 50.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE,

@@ -251,12 +251,16 @@ function void PDA_DrawHeaderText (str text, fixed x, fixed y) {
     }
 }
 
-function void PDA_DrawBodyText_Set (int type, int id, int color, fixed x, fixed y, fixed hold, fixed alpha) {
+function void PDA_DrawBodyText_Set (int type, int id, int color, fixed x, fixed y, fixed hold, fixed alpha, bool parallax) {
     PDA_SetupScreenBounds();
     BODY_BOUNDS()
 
-    fixed finalX = (int)(((PDA_BODY_X                       ) + x) * NEW_RESOLUTION_X) + X_LEFT_EDGE;
-    fixed finalY = (int)(((PDA_BODY_Y + PDA_Local.scrollingY) + y) * NEW_RESOLUTION_Y) + Y_TOP_EDGE;
+    // x_left_edge and y_top_edge are already handled by pda_hudset
+    // along with scrollingY
+    fixed finalX = (int)((PDA_BODY_X + x) * NEW_RESOLUTION_X);
+    fixed finalY = (int)((PDA_BODY_Y + y) * NEW_RESOLUTION_Y);
+
+    log("final[%f:, %f:]", finalX, finalY);
 
     if (debug) {
         log("bodyW[%d: > (%f:) < %d:] || bodyH[%d: > (%f:) < %d:]", body[0], finalX, body[0] + body[2], body[1], finalY, body[1] + body[3]);
@@ -269,7 +273,9 @@ function void PDA_DrawBodyText_Set (int type, int id, int color, fixed x, fixed 
         log("Body text outside vertical clipping bounds");
     }
 
-    if (PDA_ParallaxNeedsDraw) {
+    if (parallax) {
+        PDA_HudSetP(type, id, color, finalX, finalY, hold, alpha);
+    } else {
         PDA_HudSet(type, id, color, finalX, finalY, hold, alpha);
     }
 }
@@ -337,10 +343,8 @@ function void DisplayArmorIcon (str Sprite, int ID, fixed X, fixed Y, fixed Alph
 }
 
 function void HudMessageParallax(str text, int type, int id, int color, fixed x, fixed y, fixed holdTime, fixed alpha) {
-    int _xTemp = (PDA_SCREEN_X + x) * NEW_RESOLUTION_X;
-    int _yTemp = (PDA_Local.scrollingY * NEW_RESOLUTION_Y) + y;
-    fixed _x = _xTemp + X_LEFT_EDGE;
-    fixed _y = _yTemp + Y_TOP_EDGE;
+    fixed _x = (int)((PDA_SCREEN_X + x) * NEW_RESOLUTION_X) + X_LEFT_EDGE;
+    fixed _y = (int)((PDA_Local.scrollingY * NEW_RESOLUTION_Y) + y) + Y_TOP_EDGE;
     HudMessage(s:text; type, id, color, _x, _y, holdTime, alpha);
     TraceLog("HudMessageParallax");
 }
@@ -448,7 +452,7 @@ function void PDA_SetupFloatingTooltip (str graphic, str tooltip) {
     // PDA_SetupScreenBounds();
 }
 
-function void PDA_SetupPageTooltip (str graphic, str tooltip, float alpha) {
+function void PDA_SetupPageTooltip (str graphic, str tooltip, fixed alpha) {
     // if (!PDA_ParallaxNeedsDraw) return;
 
     SetHudClipRect(
@@ -472,12 +476,13 @@ function void PDA_SetupPageTooltip (str graphic, str tooltip, float alpha) {
 }
 
 // Setup scrolling arrows for pages with lots of text
-function void PDA_SetScrollArrows2 (int scrollDownMax, int scrollUpMax, fixed x, fixed y) {
+function void PDA_SetScrollArrows2 (int scrollDownMax, int scrollUpMax) {
     bool notbot = PDA_Local.scrollingY > scrollDownMax;
     bool nottop = PDA_Local.scrollingY < scrollUpMax;
 
-    DisplayIcon("RLZARU", PDA_SCROLLUPID, PDA_SCREEN_WIDTH + x, PDA_SCREEN_Y + 40.0 + Y_TOP_EDGE, INF_HOLDTIME, (nottop) ? 0.5 : 0.0);
-    DisplayIcon("RLZARD", PDA_SCROLLDNID,                    x, PDA_SCROLLABLE_BODY_HEIGHT + y,   INF_HOLDTIME, (notbot) ? 0.5 : 0.0);
+    DisplayIcon("RLZARU", PDA_SCROLLUPID, PDA_SCREEN_WIDTH_SCALED + X_LEFT_EDGE, (int)(PDA_BODY_Y + 12.0) + Y_TOP_EDGE, INF_HOLDTIME, (nottop) ? 0.5 : 0.0);
+
+    DisplayIcon("RLZARD", PDA_SCROLLDNID,                    PDA_SCREEN_WIDTH_SCALED + X_LEFT_EDGE, (int)(PDA_SCREEN_HEIGHT_SCALED + PDA_HEADER_HEIGHT) + Y_BOTTOM_EDGE, INF_HOLDTIME, (notbot) ? 0.5 : 0.0);
 
     TraceLog("PDA_SetScrollArrows2");
 }
@@ -782,7 +787,7 @@ function void PDA_SetDataPerPage (void) {
             break;
         case PDA_BESTIARY_DETAIL:
             if (stricmp(PDA_Local.detailFetch[0], "null") != 0) {
-                enemy_count                                 = PDA_Local.detailFetch[1];
+                beast_info[BEAST__E_COUNT]                                 = PDA_Local.detailFetch[1];
                 PDA_Enemy[PlayerNumber()][enemy_name]       = StrParam("%s:_NAME",       PDA_Local.detailFetch[0]);
                 PDA_Enemy[PlayerNumber()][enemy_icon]       = StrParam("%s:_ICON",       PDA_Local.detailFetch[0]);
                 PDA_Enemy[PlayerNumber()][enemy_health]     = StrParam("%s:_HEALTH",     PDA_Local.detailFetch[0]);
@@ -799,16 +804,16 @@ function void PDA_SetDataPerPage (void) {
 function void PDA_ChangeScrolling (void) {
     switch (PDA_Local.category) {
         case PDA_MENU:
-            PDA_SetScrollLimit(-5);
+            PDA_SetScrollWindow(-5, PDA_SCROLL_TOP);
             break;
 
         case PDA_CLASSES:
             switch (PDA_Local.page) {
                 case CLASSES_PAGE_PERKS:
-                    PDA_SetScrollLimit(20);
+                    PDA_SetScrollWindow(PDA_SCROLL_TOP, PDA_SCROLL_TOP);
                     break;
                 case CLASSES_PAGE_STORY:
-                    PDA_SetScrollLimit(120);
+                    PDA_SetScrollWindow(120, PDA_SCROLL_TOP);
                     break;
             }
             break;
@@ -816,72 +821,64 @@ function void PDA_ChangeScrolling (void) {
         case PDA_WEAPONS:
             switch (PDA_Local.page) {
                 case WEAPON_PAGE_STORY:
-                    PDA_SetScrollLimit(-50);
+                    PDA_SetScrollWindow(-50, PDA_SCROLL_TOP);
                     break;
                 case WEAPON_PAGE_MODPACK_EFFECTS:
-                    PDA_SetScrollLimit(-60);
+                    PDA_SetScrollWindow(-60, PDA_SCROLL_TOP);
                     break;
                 case WEAPON_PAGE_ARTIFACT_EFFECTS:
-                    PDA_SetScrollLimit(-80);
+                    PDA_SetScrollWindow(-80, PDA_SCROLL_TOP);
                     break;
             }
             break;
 
         case PDA_BESTIARY:
-            PDA_SetScrollLimit(-240);
             PDA_SetScrollWindow(-240, PDA_SCROLL_TOP);
+            // PDA_SetScrollWindow(-240, PDA_SCROLL_TOP);
 
             switch (PDA_Local.page) {
                 case BESTIARY_PAGE_DIFFICULTIES:
-                    PDA_SetScrollLimit(20);
+                    PDA_SetScrollWindow(20, PDA_SCROLL_TOP);
                     break;
                 default:
-                    PDA_SetScrollLimit(DRLA_MONSTER_PAGE_MAX * -10);
+                    PDA_SetScrollWindow(DRLA_MONSTER_PAGE_MAX * -10, PDA_SCROLL_TOP);
                     break;
             }
             break;
         case PDA_ARMORS:
             switch (PDA_Local.page) {
                 case EQUIPMENT_PAGE_ONHAND:
-                    if (localHasBackpack) {
-                        PDA_SetScrollLimit(-140);
-                    } else {
-                        PDA_SetScrollLimit(-80);
-                    }
+                    PDA_SetScrollWindow((localHasBackpack ? -140 : -80), PDA_SCROLL_TOP);
                     break;
                 case EQUIPMENT_PAGE_INFO:
-                    PDA_SetScrollLimit(-160);
+                    PDA_SetScrollWindow(-160, PDA_SCROLL_TOP);
                     break;
             }
             break;
 
         case PDA_ASSEMBLIES:
-            int scrollOffset = -8 * PDA_Local.maxAssembliesPer;
-            PDA_SetScrollLimit  (scrollOffset);
+            PDA_SetScrollWindow((int)(-8 * PDA_Local.maxAssembliesPer), PDA_SCROLL_TOP);
             break;
 
         case PDA_HELP:
-            PDA_SetScrollLimit(-100);
+            PDA_SetScrollWindow(-100, PDA_SCROLL_TOP);
             break;
         case PDA_MISC:
-            PDA_SetScrollLimit(0);
+            PDA_SetScrollWindow(0, PDA_SCROLL_TOP);
             break;
 
         case PDA_ITEMS:
-            PDA_SetScrollLimit(-200);
+            PDA_SetScrollWindow(-200, PDA_SCROLL_TOP);
             break;
         case PDA_ASSEMBLY_DETAIL:
-            PDA_SetScrollLimit  (-100);
+            PDA_SetScrollWindow(-100, PDA_SCROLL_TOP);
             break;
         case PDA_BESTIARY_DETAIL:
-            if (stricmp(PDA_Local.detailFetch[0], "null") != 0) {
-                PDA_SetScrollLimit(-100);
-            } else {
-                PDA_SetScrollLimit(0);
-            }
+            PDA_SetScrollWindow((stricmp(PDA_Local.detailFetch[0], "null") != 0 ? -100 : 0), PDA_SCROLL_TOP)
             break;
         case PDA_CREDITS:
             PDA_SetScrollWindow(0, PDA_SCROLL_TOP);
+            // PDA_SetScrollWindow(0, PDA_SCROLL_TOP);
             break;
     }
     PDA_SetFullDirty();
@@ -962,8 +959,8 @@ function void PDA_HasEquipment (void) {
 * @param: int id  The ID of the button
 * @param: str label  The button's label that's displayed
 * @param: str graphic  The graphic used
-* @param: float x  Button X co-ordinate
-* @param: float y  Button Y co-ordinate
+* @param: fixed x  Button X co-ordinate
+* @param: fixed y  Button Y co-ordinate
 * @param: int width  Button width
 * @param: int height  Button height
 */
@@ -997,7 +994,7 @@ function PDAButton PDA_CreateMenuButton (int id, str label, str graphic, fixed x
     return thisButton;
 }
 
-function PDAButton PDA_CreateTab (int id, str label, str graphic, float x, float y, int width, int height) {
+function PDAButton PDA_CreateTab (int id, str label, str graphic, fixed x, fixed y, int width, int height) {
     #define thisButton PDA_LocalButton[id]
     assignButtonParams(thisButton, label)
 
@@ -1027,11 +1024,11 @@ function PDAButton PDA_CreateTab (int id, str label, str graphic, float x, float
     return thisButton;
 }
 
-function PDAButton PDA_CreateButton (int id, str label, str graphic, float x, float y, int width, int height, float gw, float gh) {
+function PDAButton PDA_CreateButton (int id, str label, str graphic, fixed x, fixed y, int width, int height, fixed gw, fixed gh) {
     #define thisButton PDA_LocalButton[id]
     assignButtonParams(thisButton, label)
 
-    const float X_MARGIN = 1.0;
+    const fixed X_MARGIN = 1.0;
 
     thisButton.graphic      = graphic;
     thisButton.graphicFlags = HUDMSG_ALPHA;
@@ -1050,12 +1047,12 @@ function PDAButton PDA_CreateButton (int id, str label, str graphic, float x, fl
     return thisButton;
 }
 
-function PDAButton PDA_CreateFixedButton (int id, str label, str graphic, float x, float y, int width, int height, float gw, float gh) {
+function PDAButton PDA_CreateFixedButton (int id, str label, str graphic, fixed x, fixed y, int width, int height, fixed gw, fixed gh) {
     #define thisButton PDA_LocalButton[id]
     assignButtonParams(thisButton, label)
     thisButton.y = y;
 
-    const float X_MARGIN = 1.0;
+    const fixed X_MARGIN = 1.0;
 
     thisButton.graphic      = graphic;
     thisButton.graphicFlags = HUDMSG_ALPHA;
@@ -1075,7 +1072,7 @@ function PDAButton PDA_CreateFixedButton (int id, str label, str graphic, float 
     return thisButton;
 }
 
-function PDAButton PDA_CreateAssemblyButton (int id, str graphic, str label, float x, float y, int width, int height, str assembly, str tooltip) {
+function PDAButton PDA_CreateAssemblyButton (int id, str graphic, str label, fixed x, fixed y, int width, int height, str assembly, str tooltip) {
     #define thisButton PDA_LocalButton[id]
     assignButtonParams(thisButton, label)
 
@@ -1117,7 +1114,7 @@ function PDAButton PDA_CreateAssemblyButton (int id, str graphic, str label, flo
     return thisButton;
 }
 
-function PDAButton PDA_CreateBeastButton (int id, str label, int color, float x, float y, int width, int height, float xoff, float yoff, str beast, str unatcokillphrase) {
+function PDAButton PDA_CreateBeastButton (int id, str label, int color, fixed x, fixed y, int width, int height, fixed xoff, fixed yoff, str beast, str unatcokillphrase) {
     #define thisButton PDA_LocalButton[id]
     assignButtonParams(thisButton, label)
     thisButton.graphic = "";
@@ -1153,7 +1150,7 @@ function PDAButton PDA_CreateBeastButton (int id, str label, int color, float x,
     return thisButton;
 }
 
-function PDAButton PDA_CreateHUDButton (int id, str label, str color, float x, float y, int width, int height, float xoff, float yoff, str chosenhud) {
+function PDAButton PDA_CreateHUDButton (int id, str label, str color, fixed x, fixed y, int width, int height, fixed xoff, fixed yoff, str chosenhud) {
     #define thisButton PDA_LocalButton[id]
     assignButtonParams(thisButton, label)
 
@@ -1176,8 +1173,8 @@ function PDAButton PDA_CreateHUDButton (int id, str label, str color, float x, f
     return thisButton;
 }
 
-// function PDAButton PDA_DisplayArmor (int id, str label, str graphic, float x, float y, int width, int height, str tooltip, fixed opacity) {
-function PDAButton PDA_DisplayArmor (int id, int structType, float x, float y, int height, fixed opacity) {
+// function PDAButton PDA_DisplayArmor (int id, str label, str graphic, fixed x, fixed y, int width, int height, str tooltip, fixed opacity) {
+function PDAButton PDA_DisplayArmor (int id, int structType, fixed x, fixed y, int height, fixed opacity) {
     #define thisButton PDA_LocalButton[id]
 
     str label   = "";
@@ -1237,7 +1234,7 @@ function PDAButton PDA_DisplayArmor (int id, int structType, float x, float y, i
     return thisButton;
 }
 
-function PDAButton PDA_DisplayArmorOverride (int id, PDA_ArmorData override, float x, float y, int height, fixed opacity) {
+function PDAButton PDA_DisplayArmorOverride (int id, PDA_ArmorData override, fixed x, fixed y, int height, fixed opacity) {
     #define thisButton PDA_LocalButton[id]
 
     str label = override.name;
@@ -1274,7 +1271,7 @@ function PDAButton PDA_DisplayArmorOverride (int id, PDA_ArmorData override, flo
     return thisButton;
 }
 
-function PDAButton PDA_DisplayBootsOverride (int id, PDA_BootsData override, float x, float y, int height, fixed opacity) {
+function PDAButton PDA_DisplayBootsOverride (int id, PDA_BootsData override, fixed x, fixed y, int height, fixed opacity) {
     #define thisButton PDA_LocalButton[id]
 
     str label = override.name;
@@ -1311,7 +1308,7 @@ function PDAButton PDA_DisplayBootsOverride (int id, PDA_BootsData override, flo
     return thisButton;
 }
 
-function PDAButton PDA_CreateModPackDisplay (int id, str graphic, float x, float y, int width, int height, fixed alpha) {
+function PDAButton PDA_CreateModPackDisplay (int id, str graphic, fixed x, fixed y, int width, int height, fixed alpha) {
     #define thisButton PDA_LocalButton[id]
     assignButtonParams(thisButton, StrParam("%l:", stringArray[MODS_DIM][id]))
 
@@ -1495,6 +1492,7 @@ function void PDA_ButtonHandler (int id, int inCategory, int categoryPage, str m
 }
 
 function void PDA_HandleHeader(void) {
+    str PDA_HEADER_STR = "PDA_MENU_HEADER";
     if (PDA_CategoryChanged || PDA_PageChanged) {
         PDA_SetFullDirty();
 
@@ -1535,11 +1533,11 @@ function void PDA_HandleHeader(void) {
 
                 switch (PDA_Local.page) {
                     case 1: PDA_HEADER_STR = "PDA_BESTIARY_HEADER";    PDA_HEADING_X_OFFSET =   0;                               break;
-                    case 2: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_UV"; PDA_HEADING_X_OFFSET = -40; beast_info[2] = CR_WHITE;     break;
-                    case 3: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_NM"; PDA_HEADING_X_OFFSET = -30; beast_info[2] = CR_BRICK;     break;
-                    case 4: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_TP"; PDA_HEADING_X_OFFSET = -50; beast_info[2] = CR_LIGHTBLUE; break;
-                    case 5: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_AR"; PDA_HEADING_X_OFFSET = -40; beast_info[2] = CR_GOLD;      break;
-                    case 6: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_SP"; PDA_HEADING_X_OFFSET = -20; beast_info[2] = CR_PURPLE;    break;
+                    case 2: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_UV"; PDA_HEADING_X_OFFSET = -40; beast_info[BEAST__LV_COLOR] = CR_WHITE;     break;
+                    case 3: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_NM"; PDA_HEADING_X_OFFSET = -30; beast_info[BEAST__LV_COLOR] = CR_BRICK;     break;
+                    case 4: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_TP"; PDA_HEADING_X_OFFSET = -50; beast_info[BEAST__LV_COLOR] = CR_LIGHTBLUE; break;
+                    case 5: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_AR"; PDA_HEADING_X_OFFSET = -40; beast_info[BEAST__LV_COLOR] = CR_GOLD;      break;
+                    case 6: PDA_HEADER_STR = "PDA_BESTIARY_HEADER_SP"; PDA_HEADING_X_OFFSET = -20; beast_info[BEAST__LV_COLOR] = CR_PURPLE;    break;
                 }
                 break;
             case PDA_ARMORS:
@@ -1619,89 +1617,5 @@ function void PDA_HandleHeader(void) {
     TraceLog("PDA_HandleHeader");
 }
 
-
-function void PDA_TrackScrollArrows (void) {
-    switch (PDA_Local.category) {
-        case PDA_MENU:
-            PDA_SetScrollArrows2(-30, PDA_SCROLL_TOP, 60.0, 90.0);
-            break;
-
-        case PDA_CLASSES:
-            switch (PDA_Local.page) {
-                case CLASSES_PAGE_PERKS:
-                    break;
-                case CLASSES_PAGE_STORY:
-                    PDA_SetScrollArrows2(120, PDA_SCROLL_TOP, 60.0, 90.0);
-                    break;
-            }
-            break;
-
-        case PDA_WEAPONS:
-            switch (PDA_Local.page) {
-                case WEAPON_PAGE_STORY:
-                    break;
-                case WEAPON_PAGE_MODPACK_EFFECTS:
-                    PDA_SetScrollArrows2(-60, PDA_SCROLL_TOP, 60.0, 90.0);
-                    break;
-                case WEAPON_PAGE_ARTIFACT_EFFECTS:
-                    PDA_SetScrollArrows2(-80, PDA_SCROLL_TOP, 50.0, 90.0);
-                    break;
-            }
-            break;
-
-        case PDA_BESTIARY:
-            PDA_SetScrollWindow(-240, PDA_SCROLL_TOP);
-
-            switch (PDA_Local.page) {
-                case BESTIARY_PAGE_DIFFICULTIES:
-                    PDA_SetScrollArrows2(0, PDA_SCROLL_TOP, 60.0, 90.0);
-                    break;
-                default:
-                    PDA_SetScrollArrows2(DRLA_MONSTER_PAGE_MAX * -10, PDA_SCROLL_TOP, 60.0, 90.0);
-                    break;
-            }
-            break;
-        case PDA_ARMORS:
-            switch (PDA_Local.page) {
-                case EQUIPMENT_PAGE_ONHAND:
-                    if (localHasBackpack) {
-                        PDA_SetScrollArrows2(-140, PDA_SCROLL_TOP, 60.0, 90.0);
-                    } else {
-                        PDA_SetScrollArrows2(-80 , PDA_SCROLL_TOP, 60.0, 90.0);
-                    }
-                    break;
-                case EQUIPMENT_PAGE_INFO:
-                    PDA_SetScrollArrows2(-160, PDA_SCROLL_TOP, 60.0, 90.0);
-                    break;
-            }
-            break;
-
-        case PDA_ASSEMBLIES:
-            PDA_SetScrollArrows2((int)(-8 * PDA_Local.maxAssembliesPer), PDA_SCROLL_TOP, 60.0, 90.0);
-            break;
-
-        case PDA_HELP:
-            break;
-        case PDA_MISC:
-            PDA_SetScrollArrows2(0, PDA_SCROLL_TOP, 50.0, 90.0);
-            break;
-
-        case PDA_ITEMS:
-            PDA_SetScrollArrows2(-200, PDA_SCROLL_TOP, 50.0, 90.0);
-            break;
-        case PDA_ASSEMBLY_DETAIL:
-            PDA_SetScrollArrows2(-100, PDA_SCROLL_TOP, 60.0, 90.0);
-            break;
-        case PDA_BESTIARY_DETAIL:
-            if (stricmp(PDA_Local.detailFetch[0], "null") != 0) {
-                PDA_SetScrollArrows2(-100, PDA_SCROLL_TOP, 60.0, 90.0);
-            }
-            break;
-        case PDA_CREDITS:
-            PDA_SetScrollWindow(0, PDA_SCROLL_TOP);
-            break;
-    }
-    TraceLog("PDA_TrackScrollArrows");
-}
 
 // EOF

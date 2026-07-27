@@ -24,7 +24,7 @@ if (PDA_LocalMouse.action == mouse_back) {
 //         HUDMSG_PLAIN, PDA_INFO2ID, CR_WHITE, 10.0, 50.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE);
         
 //     if (StrCmp(StrParam("%l:", PDA_AssemblyInfo[PlayerNumber()][4]), PDA_AssemblyInfo[PlayerNumber()][4]) != 0) {
-//         PDA_SetScrollLimit(-1 * batoi(StrParam("%l:", PDA_AssemblyInfo[PlayerNumber()][4])));
+//         PDA_SetScrollWindow(-1 * batoi(StrParam("%l:", PDA_AssemblyInfo[PlayerNumber()][4])));
 //         PDA_SetScrollArrows2(-1 * batoi(StrParam("%l:", PDA_AssemblyInfo[PlayerNumber()][4])), PDA_SCROLL_TOP, 60.0, 90.0);
 //     }
 // } else {
