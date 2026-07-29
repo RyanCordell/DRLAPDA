@@ -1,11 +1,11 @@
 
-HudMessageParallax(
+HudMessageScrollable(
     StrParam("\cf%l:\c-\n", 
     "PDA_DEMONARTIFACTS_NOTSUPPORTED"),
     HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE);
 
 if (!canBeEvil) {
-    HudMessageParallax(
+    HudMessageScrollable(
         StrParam(
             "%l:\n[\c[LightBlue]%i:B \c[Red]%i:P \c[Green]%i:A \c[Yellow]%i:T \c[Purple]%i:S \c[Orange]%i:F \c[White]%i:N \cr%i:D\c-]"
             "\n\n",
@@ -26,7 +26,7 @@ if (!canBeEvil) {
     if (Weapon_Mod_Quantity[mod_artifact] > 0) {
         switch (Weapon_Mod_Quantity[mod_artifact]) {
             case 1:
-                HudMessageParallax(
+                HudMessageScrollable(
                     StrParam(
                         "\cf%l:\c-\n"
                         "%l:\n\n",
@@ -36,7 +36,7 @@ if (!canBeEvil) {
                     HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 10.0 + (artifactsY * 1), INF_HOLDTIME, OPAQUE);
                 break;
             case 2:
-                HudMessageParallax(
+                HudMessageScrollable(
                     StrParam(
                         "\cf%l:\c-\n"
                         "%l:\n\n"
@@ -50,7 +50,7 @@ if (!canBeEvil) {
                     HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 10.0 + (artifactsY * 1), INF_HOLDTIME, OPAQUE);
                 break;
             case 3:
-                HudMessageParallax(
+                HudMessageScrollable(
                     StrParam(
                         "\cf%l:\c-\n"
                         "%l:\n\n"
@@ -70,7 +70,7 @@ if (!canBeEvil) {
         }
     }
     else {
-        HudMessageParallax(
+        HudMessageScrollable(
             StrParam(
                 "\c[Red]%l:\c-\n",
                 "PDA_DEMONARTIFACTS_ZERO"

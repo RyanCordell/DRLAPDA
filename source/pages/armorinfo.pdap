@@ -30,9 +30,9 @@
 
 // switch (equipmentType) {
 //     case EQUIPMENT_TYPE_ARMOR:
-//         DisplayIconParallax(localArmorData.graphic, PDA_PLAYER_ARMOR_ICON, EQUIPMENT_ICON_X, EQUIPMENT_ICON_Y, INF_HOLDTIME, OPAQUE);
+//         DisplayIconScrollable(localArmorData.graphic, PDA_PLAYER_ARMOR_ICON, EQUIPMENT_ICON_X, EQUIPMENT_ICON_Y, INF_HOLDTIME, OPAQUE);
 //         SetFont(PDA_FONT[mono_font]);
-//         HudMessageParallax(
+//         HudMessageScrollable(
 //             StrParam(
 //                 "%s:" // Armor section
 //                 "%s:""%l:" // Protection header / value
@@ -65,9 +65,9 @@
 //             HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 10.0, EQUIPMENT_TEXT_Y, INF_HOLDTIME, OPAQUE);
 //         break;
 //     case EQUIPMENT_TYPE_BOOTS:
-//         DisplayIconParallax(localBootsData.graphic, PDA_PLAYER_BOOTS_ICON, EQUIPMENT_ICON_X, EQUIPMENT_ICON_Y, INF_HOLDTIME, OPAQUE);
+//         DisplayIconScrollable(localBootsData.graphic, PDA_PLAYER_BOOTS_ICON, EQUIPMENT_ICON_X, EQUIPMENT_ICON_Y, INF_HOLDTIME, OPAQUE);
 //         SetFont(PDA_FONT[mono_font]);
-//         HudMessageParallax(
+//         HudMessageScrollable(
 //             StrParam(
 //                 "%s:" // Boots section
 //                 "%s:""%l:" // Boots protection header / value
@@ -91,7 +91,7 @@
 
 // if (localHasBackpack) {
 //     SetFont(PDA_FONT[mono_font]);
-//     HudMessageParallax(
+//     HudMessageScrollable(
 //         StrParam(
 //             "%s:" // Backpack
 //             "%s:" // Backpack description header

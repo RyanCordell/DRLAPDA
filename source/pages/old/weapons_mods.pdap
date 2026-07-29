@@ -2,7 +2,7 @@
 // DisplayIcon(player_weapon[player_weapon_current], PDA_ID, 0.5, 0.5, 0, 1);
 #define canBeEvil weapon_checks[weapon_checks_isdemonic]
 
-HudMessageParallax(
+HudMessageScrollable(
     StrParam("%l:\n"
     "[\c[LightBlue]%i:B \c[Red]%i:P \c[Green]%i:A \c[Yellow]%i:T \c[Purple]%i:S \c[Orange]%i:F \c[White]%i:N \cr%i:D\c-]"
     "\n\n"

@@ -8,9 +8,9 @@
 #define weaponName(a) (a) ? weapon_info[weapon_info_dualname] : weapon_info[weapon_info_name]
 #define weaponDesc(a) (a) ? weapon_info[weapon_info_dualdesc] : weapon_info[weapon_info_desc]
 
-DisplayIconParallax(StrParam("%l:", weapon_info[weapon_info_icon]), PDA_WEAPON_ICON, 10.0 + gfxOffsetX, 20.0 + (20.0 * 1) - gfyOffsetY, INF_HOLDTIME, 0.6);
+DisplayIconScrollable(StrParam("%l:", weapon_info[weapon_info_icon]), PDA_WEAPON_ICON, 10.0 + gfxOffsetX, 20.0 + (20.0 * 1) - gfyOffsetY, INF_HOLDTIME, 0.6);
 
-HudMessageParallax(
+HudMessageScrollable(
     // StrParam(
     //     "%s:" // Tech perk
     //     "%s:" // Non-Tech Class perk

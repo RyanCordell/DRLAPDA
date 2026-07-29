@@ -10,9 +10,9 @@ if (PDA_LocalMouse.action == mouse_back) {
 // }
 
 // if (StrCmp(PDA_Local.detailFetch[0], "null") != 0) {
-//     DisplayArmorIcon(PDA_AssemblyInfo[PlayerNumber()][0], PDA_INFOID, PDA_SCREEN_X + 150.0 + X_LEFT_EDGE, PDA_Local.scrollingY + 40.0 + Y_TOP_EDGE + (20.0 * 1), 1);
+//     DisplayArmorIcon(PDA_AssemblyInfo[PlayerNumber()][0], PDA_INFOID, PDA_SCREEN_X + 150.0 + X_LEFT_EDGE, 40.0 + PDA_Local.scrollingY + Y_TOP_EDGE + (20.0 * 1), 1);
 
-//     HudMessageParallax(
+//     HudMessageScrollable(
 //         StrParam(
 //             "%l:\n"
 //             "%l:\n\n\n"
@@ -25,10 +25,10 @@ if (PDA_LocalMouse.action == mouse_back) {
         
 //     if (StrCmp(StrParam("%l:", PDA_AssemblyInfo[PlayerNumber()][4]), PDA_AssemblyInfo[PlayerNumber()][4]) != 0) {
 //         PDA_SetScrollWindow(-1 * batoi(StrParam("%l:", PDA_AssemblyInfo[PlayerNumber()][4])));
-//         PDA_SetScrollArrows2(-1 * batoi(StrParam("%l:", PDA_AssemblyInfo[PlayerNumber()][4])), PDA_SCROLL_TOP, 60.0, 90.0);
+//         PDA_SetScrollArrows(-1 * batoi(StrParam("%l:", PDA_AssemblyInfo[PlayerNumber()][4])), PDA_SCROLL_TOP, 60.0, 90.0);
 //     }
 // } else {
-//     HudMessageParallax(
+//     HudMessageScrollable(
 //         StrParam(
 //             "%l:\n"
 //             "%l:\n\n\n"

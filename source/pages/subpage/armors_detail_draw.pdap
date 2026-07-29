@@ -10,28 +10,31 @@ bool PDA_ManyHax    = false;
 const fixed inAlpha = 0.7;
 const fixed playerIconX = PDA_SCREEN_X + 20.0 + X_LEFT_EDGE;
 
-DisplayIconParallax("PDAPLYR", PDA_PLYR_ICON, playerIconX, 40.0, INF_HOLDTIME, OPAQUE);
+DisplayIconScrollable("PDAPLYR", PDA_PLYR_ICON, playerIconX, 40.0, INF_HOLDTIME, OPAQUE);
 
 localShowArmor    = (localEqBoolField & 1);
 localShowBoots    = (localEqBoolField & 1<<1);
 localShowBackpack = (localEqBoolField & 1<<2);
 
 if (localHasArmor) {
-    DisplayIconParallax("PDAPARM", PDA_PLAYER_BODY_ICON, playerIconX, 40.0, 0.0, show_equipment[equipment_armor][PlayerNumber()] ? 1.0 : 0.5);
+    DisplayIconScrollable("PDAPARM", PDA_PLAYER_BODY_ICON, playerIconX, 40.0, 0.0, show_equipment[equipment_armor][PlayerNumber()] ? 1.0 : 0.5);
 
+    // TODO: move to _logic
     PDA_LocalButton[PDA_PLAYER_ARMOR_ICON] = PDA_DisplayArmor(PDA_PLAYER_ARMOR_ICON, ARMOR_DATA, playerIconX + 35.0, 20.0, height, localShowArmor ? pulser(2.0, 0.8) : inAlpha);
 }
 
 if (localHasBackpack) {
-    DisplayIconParallax("PDAPBCK", PDA_PLYR_ICON - 2, playerIconX, 40.0, 0.0, show_equipment[equipment_backpack][PlayerNumber()] ? 1.0 : 0.5);
+    DisplayIconScrollable("PDAPBCK", PDA_PLYR_ICON - 2, playerIconX, 40.0, 0.0, show_equipment[equipment_backpack][PlayerNumber()] ? 1.0 : 0.5);
 
+    // TODO: move to _logic
     PDA_LocalButton[PDA_PLAYER_BACKPACK_ICON] = PDA_DisplayArmor(PDA_PLAYER_BACKPACK_ICON, BACKPACK_DATA, playerIconX + 33.0, 45.0, height, localShowBackpack ? pulser(2.0, 0.8) : inAlpha);
 
 }
 
 if (localHasBoots) {
-    DisplayIconParallax("PDAPBTS", PDA_PLYR_ICON - 3, playerIconX, 40.0, 0.0, show_equipment[equipment_boots][PlayerNumber()] ? 1.0 : 0.5);
+    DisplayIconScrollable("PDAPBTS", PDA_PLYR_ICON - 3, playerIconX, 40.0, 0.0, show_equipment[equipment_boots][PlayerNumber()] ? 1.0 : 0.5);
 
+    // TODO: move to _logic
     PDA_LocalButton[PDA_PLAYER_BOOTS_ICON] = PDA_DisplayArmor(PDA_PLAYER_BOOTS_ICON, BOOTS_DATA, playerIconX + 30.0, 70.0, height, localShowBoots ? pulser(2.0, 0.8) : inAlpha);
 }
 
@@ -63,7 +66,7 @@ str enclaveequipment_set_description = (PDA_ManyHax) ? StrParam("%l:\n\n", "PDA_
 SetFont(PDA_FONT[mono_font]);
 
 if (localShowArmor && localHasArmor) {
-    PDA_HudDirtyP(HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 10.0, 140.0, INF_HOLDTIME, OPAQUE,
+    PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 10.0, 140.0, INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
         s:"\cgARMOR\c-\n",
         s:"\crProtection:\c-\n",
         l:localArmorData.armorVal,
@@ -85,7 +88,7 @@ if (localShowArmor && localHasArmor) {
         l:equipment_set_description
     );
 } else if (localShowBoots && localHasBoots) {
-    PDA_HudDirtyP(HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 10.0, 140.0, INF_HOLDTIME, OPAQUE,
+    PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 10.0, 140.0, INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
         s:"\cgBOOTS\c-\n",
         s:"\crProtection:\c-\n",
         l:localBootsData.bootsVal,
@@ -95,7 +98,7 @@ if (localShowArmor && localHasArmor) {
         l:StrParam("%l:\n", localBootsData.bootsDesc)
     );
 } else if (localShowBackpack && localHasBackpack) {
-    PDA_HudDirtyP(HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 10.0, 140.0, INF_HOLDTIME, OPAQUE,
+    PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 10.0, 140.0, INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
         s:"\cgBACKPACK\c-\n",
         s:"\crDescription:\c-\n",
         l:localBackpackData.backpackVal

@@ -10,14 +10,14 @@ bool PDA_ManyHax    = false;
 const fixed inAlpha = 0.7;
 const fixed playerIconX = PDA_SCREEN_X + 20.0 + X_LEFT_EDGE;
 
-DisplayIconParallax("PDAPLYR", PDA_PLYR_ICON, playerIconX, 40.0, INF_HOLDTIME, OPAQUE);
+DisplayIconScrollable("PDAPLYR", PDA_PLYR_ICON, playerIconX, 40.0, INF_HOLDTIME, OPAQUE);
 
 localShowArmor    = (localEqBoolField & 1);
 localShowBoots    = (localEqBoolField & 1<<1);
 localShowBackpack = (localEqBoolField & 1<<2);
 
 if (localHasArmor) {
-    DisplayIconParallax("PDAPARM", PDA_PLAYER_BODY_ICON, playerIconX, 40.0, 0.0, show_equipment[equipment_armor][PlayerNumber()] ? 1.0 : 0.5);
+    DisplayIconScrollable("PDAPARM", PDA_PLAYER_BODY_ICON, playerIconX, 40.0, 0.0, show_equipment[equipment_armor][PlayerNumber()] ? 1.0 : 0.5);
 
     if (PDA_LocalMouse.scrolling) {
         PDA_LocalButton[PDA_PLAYER_ARMOR_ICON] = PDA_DisplayArmor(PDA_PLAYER_ARMOR_ICON, ARMOR_DATA,
@@ -32,7 +32,7 @@ if (localHasArmor) {
 }
 
 if (localHasBackpack) {
-    DisplayIconParallax("PDAPBCK", PDA_PLYR_ICON - 2, playerIconX, 40.0, 0.0, show_equipment[equipment_backpack][PlayerNumber()] ? 1.0 : 0.5);
+    DisplayIconScrollable("PDAPBCK", PDA_PLYR_ICON - 2, playerIconX, 40.0, 0.0, show_equipment[equipment_backpack][PlayerNumber()] ? 1.0 : 0.5);
 
     if (PDA_LocalMouse.scrolling) {
         PDA_LocalButton[PDA_PLAYER_BACKPACK_ICON] = PDA_DisplayArmor(PDA_PLAYER_BACKPACK_ICON, BACKPACK_DATA, 
@@ -48,7 +48,7 @@ if (localHasBackpack) {
 }
 
 if (localHasBoots) {
-    DisplayIconParallax("PDAPBTS", PDA_PLYR_ICON - 3, playerIconX, 40.0, 0.0, show_equipment[equipment_boots][PlayerNumber()] ? 1.0 : 0.5);
+    DisplayIconScrollable("PDAPBTS", PDA_PLYR_ICON - 3, playerIconX, 40.0, 0.0, show_equipment[equipment_boots][PlayerNumber()] ? 1.0 : 0.5);
 
     if (PDA_LocalMouse.scrolling) {
         PDA_LocalButton[PDA_PLAYER_BOOTS_ICON] = PDA_DisplayArmor(PDA_PLAYER_BOOTS_ICON, BOOTS_DATA, 
@@ -90,7 +90,7 @@ str enclaveequipment_set_description = (PDA_ManyHax) ? StrParam("%l:\n\n", "PDA_
 SetFont(PDA_FONT[mono_font]);
 
 if (localShowArmor && localHasArmor) {
-    HudMessageParallax(
+    HudMessageScrollable(
         StrParam(
             "%s:" // Armor section
             "%s:""%l:" // Protection header / value
@@ -122,7 +122,7 @@ if (localShowArmor && localHasArmor) {
         ),
         HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 10.0, 140.0, INF_HOLDTIME, OPAQUE);
 } else if (localShowBoots && localHasBoots) {
-    HudMessageParallax(
+    HudMessageScrollable(
         StrParam(
             "%s:" // Boots section
             "%s:""%l:" // Boots protection header / value
@@ -139,7 +139,7 @@ if (localShowArmor && localHasArmor) {
         ),
         HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 10.0, 140.0, INF_HOLDTIME, OPAQUE);
 } else if (localShowBackpack && localHasBackpack) {
-    HudMessageParallax(
+    HudMessageScrollable(
         StrParam(
             "%s:" // Backpack
             "%s:" // Backpack description header

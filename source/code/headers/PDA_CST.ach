@@ -12,8 +12,8 @@
 #define B_ONLY_VISUAL true
 #define B_FUNCTIONAL false
 
-#define B_DO_PARALLAX true
-#define B_NO_PARALLAX false
+#define B_IS_SCROLLABLE true
+#define B_NOT_SCROLLABLE false
 
 #define NO_TOOLTIP ""
 
@@ -22,6 +22,8 @@
 
 #define ASSEMBLY_DIM 0
 #define MODS_DIM 1
+
+#define PDA_BUTTON_MAX 256
 
 #define BEAST__PAGE 0
 #define BEAST__WIDTH 1
@@ -37,6 +39,7 @@
 #define TAB4  PDA_TAB_BUTTONS_START + 6
 #define TAB5  PDA_TAB_BUTTONS_START + 8
 
+#define DEFAULT_ALIGN            -9999.0
 #define X_CENTER                 0.0
 #define X_LEFT_EDGE              0.1
 #define X_RIGHT_EDGE             0.2
@@ -53,6 +56,11 @@
 #define PDA_HISTORYMAX     16
 
 #define NUM_DIFFICULTIES 5
+
+#define TB_X     0
+#define TB_Y     1
+#define TB_X_OFF 2
+#define TB_Y_OFF 3
 
 #define PDA_MENU_BTN_W 88
 #define PDA_MENU_BTN_H 16
@@ -135,12 +143,11 @@
 #define PDA_HEADING_X      (PDA_SCREEN_WIDTH    / 2 + 15.0         ) // Scaled by PDA_DrawHeaderText
 #define PDA_HEADER_HEIGHT  (PDA_SCREEN_Y_SCALED - 12.0             )
 #define PDA_BODY_X         (PDA_SCREEN_X_SCALED + 0.0              )
-#define PDA_BODY_Y         (PDA_HEADER_Y        + PDA_HEADER_HEIGHT)
+#define PDA_BODY_Y         (PDA_HEADER_Y        + PDA_HEADER_HEIGHT + 1.0)
 // -------------
 #define PDA_SCROLLABLE_BODY_Y       (int)(PDA_BODY_Y                                  )
-#define PDA_SCROLLABLE_BODY_HEIGHT  (int)(PDA_SCREEN_HEIGHT_SCALED - PDA_HEADER_HEIGHT)
-// #define PDA_SCROLLABLE_BODY_Y       (int)(((PDA_BODY_Y       ) * NEW_RESOLUTION_Y) -              1)
-// #define PDA_SCROLLABLE_BODY_HEIGHT  (int)(((PDA_SCREEN_HEIGHT) * NEW_RESOLUTION_Y) - PDA_BODY_Y + 1)
+#define PDA_SCROLLABLE_BODY_HEIGHT  (int)(PDA_SCREEN_HEIGHT_SCALED - PDA_HEADER_HEIGHT - 1.0)
+
 #define PDA_SCROLL_TOP      20.0
 #define PDA_SCROLL_BOTTOM  -60.0
 // -------------

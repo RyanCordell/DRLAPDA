@@ -41,6 +41,7 @@ struct PDAInfo {
     str clipRegion;
     str tierColor;
     str detailFetch[8];
+    str heading;
 
 }
 PDAInfo PDA_Info[MAX_PLAYERS];
@@ -88,15 +89,15 @@ struct PDAButton {
 
     fixed alpha;
 
-    fixed graphicX;
-    fixed graphicY;
-
     fixed textX;
     fixed textY;
 
     fixed finalX;
     fixed finalY;
     fixed scrollY;
+
+    fixed gfxPos[4]; // Contains gfxX, gfxY, xOffset, yOffset
+    fixed textPos[4]; // Contains text X, Y, xOffset, yOffset
 
     str type;
     str textFont;
@@ -106,7 +107,7 @@ struct PDAButton {
 
     str tooltip;
 }
-PDAButton PDA_Button[MAX_PLAYERS][256];
+PDAButton PDA_Button[MAX_PLAYERS][PDA_BUTTON_MAX];
 
 struct PDA_ArmorData {
     str armorRes;

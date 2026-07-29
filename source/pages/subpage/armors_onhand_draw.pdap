@@ -1,6 +1,6 @@
 
 // Funny that I opted to do this instead of just declaring the message outright..
-PDA_HudDirtyP(HUDMSG_PLAIN, PDA_NOEQID, CR_UNTRANSLATED, ARM_X, 50.0, INF_HOLDTIME, OPAQUE, s:"No equipment detected");
+PDA_DrawBodyText(HUDMSG_PLAIN, PDA_NOEQID, CR_UNTRANSLATED, ARM_X, 50.0, INF_HOLDTIME, OPAQUE, B_NOT_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN, s:"No equipment detected");
 
 // Note to future self: don't try to merge these first 5 lines for cleanliness sake. Won't work the way you wish it would.
 // Note: The pulsers won't animate here, but instead, in _logic.

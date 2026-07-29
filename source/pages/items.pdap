@@ -1,20 +1,10 @@
-if (GetCvar("DRLA_specialstarts") != 2)
-{
+if (GetCvar("DRLA_specialstarts") != 2) {
     PDA_Local.pageMax = DRLA_GROUPQUANTITY;
 
-    // PDA_LocalButton[PDA_TAB_BUTTONS_START    ] = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1" , "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
     PDA_ButtonHandler(TAB1, true, 1, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
-
-    // PDA_LocalButton[PDA_TAB_BUTTONS_START + 1] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2" , "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
     PDA_ButtonHandler(TAB2, true, 2, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
-
-    // PDA_LocalButton[PDA_TAB_BUTTONS_START + 2] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 2, "3" , "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
     PDA_ButtonHandler(TAB3, true, 3, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
-
-    // PDA_LocalButton[PDA_TAB_BUTTONS_START + 3] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 3, "4" , "PTAB", PDA_TAB_NEXT_X(3), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
     PDA_ButtonHandler(TAB4, true, 4, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
-
-    // PDA_LocalButton[PDA_TAB_BUTTONS_START + 4] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 4, "5" , "PTAB", PDA_TAB_NEXT_X(4), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
     PDA_ButtonHandler(TAB5, true, 5, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
 }
 
@@ -54,13 +44,13 @@ if (GetCvar("DRLA_specialstarts") != 2)
             if (PDA_Local.page > 1)  DRLA_PageOffset = (8 * (PDA_Local.page - 1) + 1);
 
             // Item icon
-            DisplayIconParallax(
+            DisplayIconScrollable(
                 StrParam("%l:", DRLA_ItemInfo[itemIndex + DRLA_PageOffset][0]), 
                 PDA_ITEMS_END - (ItemLimit+1), 
-                PDA_SCREEN_X + 30.0 + X_LEFT_EDGE, 50.0 + (50.0 * ItemLimit), INF_HOLDTIME, OPAQUE);
+                PDA_SCREEN_X_SCALED + 30.0 + X_LEFT_EDGE, 50.0 + (50.0 * ItemLimit), INF_HOLDTIME, OPAQUE);
 
             // Item name + desc
-            PDA_HudDirtyP(HUDMSG_PLAIN, PDA_ITEMS_END - (ItemLimit+9), CR_UNTRANSLATED, 40.0, 40.0 + (50.0 * ItemLimit), INF_HOLDTIME, OPAQUE,
+            PDA_DrawBodyText(HUDMSG_PLAIN, PDA_ITEMS_END - (ItemLimit+9), CR_UNTRANSLATED, 40.0, 40.0 + (50.0 * ItemLimit), INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
                 l:DRLA_ItemInfo[itemIndex + DRLA_PageOffset][1],
                 l:DRLA_ItemInfo[itemIndex + DRLA_PageOffset][2],
                 s:"\n"

@@ -1,10 +1,10 @@
 
-PDA_HudDirtyP(HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE,
+PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
     s:"\cf",l:"PDA_DEMONARTIFACTS_NOTSUPPORTED",s:"\c-\n"
 );
 
 if (!canBeEvil) {
-    PDA_HudDirtyP(HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE,
+    PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
         l:(canBeEvil) ? 
             (CheckInventory(StrParam("%s:DemonArtifacts", player_weapon[player_weapon_current])) ? 
                 weapon_info[weapon_info_dualname] 
@@ -26,14 +26,14 @@ if (!canBeEvil) {
     if (Weapon_Mod_Quantity[mod_artifact] > 0) {
         switch (Weapon_Mod_Quantity[mod_artifact]) {
             case 1:
-                PDA_HudDirtyP(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 10.0 + (artifactsY * 1), INF_HOLDTIME, OPAQUE,
+                PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 10.0 + (artifactsY * 1), INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
                     s:"\cf",l:"PDA_DEMONARTIFACTS_ONE",s:"\c-\n",
                     l:StrParam("PDA_ARTIFACT_%s:_ONE", player_weapon[player_weapon_trimmed]),
                     s:"\n\n"
                 );
                 break;
             case 2:
-                PDA_HudDirtyP(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 10.0 + (artifactsY * 1), INF_HOLDTIME, OPAQUE,
+                PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 10.0 + (artifactsY * 1), INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
                     s:"\cf",l:"PDA_DEMONARTIFACTS_TWO",s:"\c-\n",
                     l:StrParam("PDA_ARTIFACT_%s:_TWO", player_weapon[player_weapon_trimmed]),
                     s:"\n\n\c[Red]",
@@ -44,7 +44,7 @@ if (!canBeEvil) {
                 );
                 break;
             case 3:
-                PDA_HudDirtyP(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 10.0 + (artifactsY * 1), INF_HOLDTIME, OPAQUE,
+                PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 10.0 + (artifactsY * 1), INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
                     s:"\cf",
                     l:"PDA_DEMONARTIFACTS_THREE",
                     s:"\c-\n",
@@ -62,7 +62,7 @@ if (!canBeEvil) {
                 break;
         }
     } else {
-        PDA_HudDirtyP(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 10.0 + (artifactsY * 1), INF_HOLDTIME, OPAQUE,
+        PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 10.0 + (artifactsY * 1), INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
             s:"\c[Red]",
             l:"PDA_DEMONARTIFACTS_ZERO",
             s:"\c-\n"

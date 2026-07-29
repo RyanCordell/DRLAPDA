@@ -14,14 +14,12 @@ if (GetActorClass(0) != "None") {
         PDA_LocalPlayer[pda_class_icon] = "PPDAUNK";
     }
 
-    if (PDA_ParallaxNeedsDraw) {
-        // DisplayIconParallax(PDA_LocalPlayer[pda_class_icon], PDA_INFOID,
-        //     PDA_SCREEN_WIDTH + 5.0 + X_RIGHT_EDGE, (PDA_SCROLLABLE_BODY_HEIGHT) + 5.0 + Y_TOP_EDGE,
-        //     INF_HOLDTIME, 0.45);
-        DisplayIconParallax(PDA_LocalPlayer[pda_class_icon], PDA_INFOID,
-            (int)(PDA_SCREEN_WIDTH - 24.0) + X_RIGHT_EDGE,
-            (int)(PDA_SCROLLABLE_BODY_HEIGHT - 24.0),
-            INF_HOLDTIME, 1.0);
+    if (PDA_ScrollableNeedsDraw) {
+        PDA_SetupScreenBounds();
+        DisplayIcon(PDA_LocalPlayer[pda_class_icon], PDA_INFOID,
+            (int)(PDA_SCREEN_WIDTH_SCALED + 0.0) + X_RIGHT_EDGE,
+            (int)(PDA_SCROLLABLE_BODY_HEIGHT - 6.0),
+            INF_HOLDTIME, 0.45);
 
         int array_access_index = pda_class_abilities;
 
@@ -36,7 +34,7 @@ if (GetActorClass(0) != "None") {
         }
 
         PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED,
-            0.0, 0.0, INF_HOLDTIME, OPAQUE, B_DO_PARALLAX,
+            0.0, -20.0, INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
             s:"\cd",l:PDA_LocalPlayer[pda_class_name], s:"\c-\n\n",
             l:PDA_LocalPlayer[array_access_index]
         );

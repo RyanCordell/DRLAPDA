@@ -5,6 +5,7 @@
 
 #define setScrollDelta() (PDA_Local.scrollingY > PDA_Local.prevScrollingY) ? 1 : (PDA_Local.scrollingY == PDA_Local.prevScrollingY) ? 0 : -1;
 
+// This should stay scoped to the inner graphic, not the scaled version
 #define HMIN (PDA_SCREEN_X)
 #define HMAX (PDA_SCREEN_WIDTH  + PDA_SCREEN_X - 7)
 #define VMIN (PDA_SCREEN_Y)
@@ -57,18 +58,10 @@ function void handleScroll (fixed yScale) {
             PDA_Local.scrollYDelta  = setScrollDelta();
         }
     }
-    if (PDA_LocalMouse.y < VMIN) {
-        if (PDA_Local.scrollingY < PDA_SCREEN_Y) {
-            PDA_Local.scrollingY += 2.0 * yScale;
-            PDA_Local.scrollYDelta = setScrollDelta();
-        }
-    }
-    if (PDA_LocalMouse.y > VMAX) {
-        if (PDA_Local.scrollingY > PDA_Local.maxTextY) {
-            PDA_Local.scrollingY -= 2.0 * yScale;
-            PDA_Local.scrollYDelta = setScrollDelta();
-        }
-    }
+
+    handleMouseVMIN()
+    handleMouseVMAX()
+
     if (PDA_Local.scrollingY < PDA_Local.maxTextY) PDA_Local.scrollingY = PDA_Local.maxTextY;
     if (PDA_Local.scrollingY > VMIN)               PDA_Local.scrollingY = VMIN;
 }
@@ -88,8 +81,22 @@ function void handleMouseMove (bool inverted, fixed xScale, fixed yScale, int xS
 
     PDA_LocalMouse.moving = (PDA_LocalMouse.x != PDA_LocalMouse.oldX || PDA_LocalMouse.y != PDA_LocalMouse.oldY);
 
-    if (PDA_LocalMouse.y < VMIN) PDA_LocalMouse.y = VMIN;
-    if (PDA_LocalMouse.y > VMAX) PDA_LocalMouse.y = VMAX;
+    if (PDA_LocalMouse.y < VMIN) {
+        PDA_LocalMouse.y = VMIN;
+
+        if (PDA_Local.scrollingY < PDA_SCROLL_TOP && PDA_LocalMouse.action != mouse_hold) {
+            PDA_Local.scrollingY += 2.0 * yScale;
+            PDA_Local.scrollYDelta = setScrollDelta();
+        }
+    }
+    if (PDA_LocalMouse.y > VMAX) {
+        PDA_LocalMouse.y = VMAX;
+
+        if (PDA_Local.scrollingY > PDA_Local.maxTextY  && PDA_LocalMouse.action != mouse_hold) {
+            PDA_Local.scrollingY -= 2.0 * yScale;
+            PDA_Local.scrollYDelta = setScrollDelta();
+        }
+    }
 
     if (PDA_LocalMouse.x < HMIN) PDA_LocalMouse.x = HMIN;
     if (PDA_LocalMouse.x > HMAX) PDA_LocalMouse.x = HMAX;
