@@ -94,6 +94,10 @@
 #define PDA_ScrollMoved \
     (PDA_Local.scrollingY != PDA_Local.prevScrollingY) \
 
+#define RAW_SCROLL (PDA_Local.scrollingY - PDA_SCROLL_TOP)
+#define SCALED_SCROLL (RAW_SCROLL * NEW_RESOLUTION_Y)
+
+#define canBeEvil weapon_checks[weapon_checks_isdemonic]
 //
 #define PDA_NeedsDraw (PDA_Local.dirty)
 #define PDA_ScrollableNeedsDraw (PDA_Local.dirty || PDA_Local.scrollDirty)
@@ -112,8 +116,6 @@ PDA_DefaultFont(); \
 PDA_UnsetScrollWindow(); \
 TraceLog("afterPageDefaults"); \
 
-#define RAW_SCROLL (PDA_Local.scrollingY - PDA_SCROLL_TOP)
-#define SCALED_SCROLL (RAW_SCROLL * NEW_RESOLUTION_Y)
 
 #define HEADER_BOUNDS() \
 int head[5] = { \

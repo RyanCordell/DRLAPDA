@@ -24,9 +24,9 @@ switch (PDA_Local.category) {
   case PDA_WEAPONS:
     PDA_LocalButton[TAB1] = PDA_CreateTab(TAB1, "1", "PTAB", PDA_TAB_START_X  , PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
     PDA_LocalButton[TAB2] = PDA_CreateTab(TAB2, "2", "PTAB", PDA_TAB_NEXT_X(1), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-    PDA_LocalButton[TAB3] = PDA_CreateTab(TAB3, "3", "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
-
-    PDA_DefaultFont();
+    if (canBeEvil) {
+      PDA_LocalButton[TAB3] = PDA_CreateTab(TAB3, "3", "PTAB", PDA_TAB_NEXT_X(2), PDA_TAB_Y,  PDA_TAB_W, PDA_TAB_H);
+    }
 
     if (PDA_Local.scrollYDelta == -1) {
       PDA_LocalButton[PDA_MODS_PAGE] = PDA_CreateFixedButton(PDA_MODS_PAGE, "Modpack Effects" , "MODICON", 10.0, PDA_SCREEN_HEIGHT, 82, 16, 16, 19);
@@ -40,13 +40,16 @@ switch (PDA_Local.category) {
           for (int modPack = PDA_MODMIN; modPack < PDA_MODMAX - 1; modPack++) {
             str selectedMod = StrParam("%s:MODICON", weapon_mods[modPack]);
 
+            // Ideally the first modpack would be offset based on the first drawn text
             PDA_LocalButton[modPack] = PDA_CreateModPackDisplay(modPack, selectedMod,
-              10.0, PDA_BODY_Y + 20.0 + (20.0 * modPack),
+              15.0, PDA_BODY_Y + 25.0 + (20.0 * modPack),
               16, 24, (Weapon_Mod_Quantity[modPack] > 0) ? pulser(4.0, 0.9) : 0.5);
           }
           break;
       }
     }
+
+    PDA_DefaultFont();
     break;
 
   case PDA_BESTIARY:

@@ -1495,7 +1495,9 @@ function void PDA_DrawButton (int id, str message, bool onlyVisual, bool clear) 
     }
 
     // Button graphic
-    PrintSpriteAlpha(thisButton.graphic, thisButton.graphicID, (int)(thisButton.gfxPos[TB_X]) + X_LEFT_EDGE, (int)(thisButton.gfxPos[TB_Y] + SCALED_SCROLL) + Y_TOP_EDGE, INF_HOLDTIME, thisButton.alpha, false);
+    #define SCROLL_OFFSET ((buttonType != "tab" && buttonType != "fixed") ? SCALED_SCROLL : 0.0)
+
+    PrintSpriteAlpha(thisButton.graphic, thisButton.graphicID, (int)(thisButton.gfxPos[TB_X]) + X_LEFT_EDGE, (int)(thisButton.gfxPos[TB_Y] + SCROLL_OFFSET) + Y_TOP_EDGE, INF_HOLDTIME, thisButton.alpha, false);
 
 
     if (buttonType == "beast") {
@@ -1506,7 +1508,7 @@ function void PDA_DrawButton (int id, str message, bool onlyVisual, bool clear) 
 
             if (PDA_Local.page == 1) {
                 HudMessage(s:"New entry!\n";
-                    HUDMSG_ALPHA, id + 5, CR_GREEN, thisButton.textPos[TB_X] + thisButton.width - 10.0, (int)(thisButton.textPos[TB_Y] - 6.0 + SCALED_SCROLL), 0.0, pulser(2.0, DEFAULT_BUTTON_ALPHA + 0.2)
+                    HUDMSG_ALPHA, id + 5, CR_GREEN, thisButton.textPos[TB_X] + thisButton.width - 10.0, (int)(thisButton.textPos[TB_Y] - 6.0 + SCROLL_OFFSET), 0.0, pulser(2.0, DEFAULT_BUTTON_ALPHA + 0.2)
                 );
             }
         }
@@ -1516,7 +1518,7 @@ function void PDA_DrawButton (int id, str message, bool onlyVisual, bool clear) 
     SetFont(thisButton.textFont);
     PDA_HudDirty(thisButton.textFlags, thisButton.textID, newColor,
         (int)(thisButton.textPos[TB_X]),
-        (int)(thisButton.textPos[TB_Y] + SCALED_SCROLL),
+        (int)(thisButton.textPos[TB_Y] + SCROLL_OFFSET),
         INF_HOLDTIME, thisButton.alpha, DEFAULT_ALIGN, DEFAULT_ALIGN, s:thisButton.label);
 
     if (clear) {

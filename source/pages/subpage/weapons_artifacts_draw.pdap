@@ -1,71 +1,76 @@
+if (PDA_ScrollableNeedsDraw) {
+    PDA_DefaultFont();
+    #define defaultY 0.0
+    if (canBeEvil) {
+        PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 0.0, defaultY, INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
+            l:(!canBeEvil) ?
+                (CheckInventory(StrParam("%s:DemonArtifacts", player_weapon[player_weapon_current])) ?
+                    weapon_info[weapon_info_dualname]
+                    : weapon_info[weapon_info_name])
+                : weapon_info[weapon_info_name],s:"\n",
+            s:"[\c[LightBlue]",i:Weapon_Mod_Quantity[mod_bulk],s:"B ",
+            s:"\c[Red]",i:Weapon_Mod_Quantity[mod_power],s:"P ",
+            s:"\c[Green]",i:Weapon_Mod_Quantity[mod_agility],s:"A ",
+            s:"\c[Yellow]",i:Weapon_Mod_Quantity[mod_technical],s:"T ",
+            s:"\c[Purple]",i:Weapon_Mod_Quantity[mod_sniper],s:"S ",
+            s:"\c[Orange]",i:Weapon_Mod_Quantity[mod_firestorm],s:"F ",
+            s:"\c[White]",i:Weapon_Mod_Quantity[mod_nano],s:"N ",
+            s:"\cr",i:Weapon_Mod_Quantity[mod_artifact],s:"D",
+            s:"\c-]\n\n",l:"PDA_MODPACK_MAXSUPPORTED",
+            s:"\c[Cyan]",i:PDA_Local.maxModLimit
+        );
 
-PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
-    s:"\cf",l:"PDA_DEMONARTIFACTS_NOTSUPPORTED",s:"\c-\n"
-);
+        #define artifactsY 60.0
 
-if (!canBeEvil) {
-    PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
-        l:(canBeEvil) ? 
-            (CheckInventory(StrParam("%s:DemonArtifacts", player_weapon[player_weapon_current])) ? 
-                weapon_info[weapon_info_dualname] 
-                : weapon_info[weapon_info_name]) 
-            : weapon_info[weapon_info_name],s:"\n",
-        s:"[\c[LightBlue]",i:Weapon_Mod_Quantity[mod_bulk],
-        s:"B \c[Red]",i:Weapon_Mod_Quantity[mod_power],
-        s:"P \c[Green]",i:Weapon_Mod_Quantity[mod_agility],
-        s:"A \c[Yellow]",i:Weapon_Mod_Quantity[mod_technical],
-        s:"T \c[Purple]",i:Weapon_Mod_Quantity[mod_sniper],
-        s:"S \c[Orange]",i:Weapon_Mod_Quantity[mod_firestorm],
-        s:"F \c[White]",i:Weapon_Mod_Quantity[mod_nano],
-        s:"N \cr",i:(canBeEvil) ? 0 : Weapon_Mod_Quantity[mod_artifact],
-        s:"D\c-]\n\n"
-    );
-        
-    fixed artifactsY = 60.0;
-
-    if (Weapon_Mod_Quantity[mod_artifact] > 0) {
-        switch (Weapon_Mod_Quantity[mod_artifact]) {
-            case 1:
-                PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 10.0 + (artifactsY * 1), INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
-                    s:"\cf",l:"PDA_DEMONARTIFACTS_ONE",s:"\c-\n",
-                    l:StrParam("PDA_ARTIFACT_%s:_ONE", player_weapon[player_weapon_trimmed]),
-                    s:"\n\n"
-                );
-                break;
-            case 2:
-                PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 10.0 + (artifactsY * 1), INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
-                    s:"\cf",l:"PDA_DEMONARTIFACTS_TWO",s:"\c-\n",
-                    l:StrParam("PDA_ARTIFACT_%s:_TWO", player_weapon[player_weapon_trimmed]),
-                    s:"\n\n\c[Red]",
-                    l:"PDA_DEMONARTIFACTS_ONE",
-                    s:"\c-\n",
-                    l:StrParam("PDA_ARTIFACT_%s:_ONE", player_weapon[player_weapon_trimmed]),
-                    s:"\n\n"
-                );
-                break;
-            case 3:
-                PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 10.0 + (artifactsY * 1), INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
-                    s:"\cf",
-                    l:"PDA_DEMONARTIFACTS_THREE",
-                    s:"\c-\n",
-                    l:StrParam("PDA_ARTIFACT_%s:_THREE", player_weapon[player_weapon_trimmed]),
-                    s:"\n\n\c[Red]",
-                    l:"PDA_DEMONARTIFACTS_TWO",
-                    s:"\c-\n",
-                    l:StrParam("PDA_ARTIFACT_%s:_TWO", player_weapon[player_weapon_trimmed]),
-                    s:"\n\n\c[Red]",
-                    l:"PDA_DEMONARTIFACTS_ONE",
-                    s:"\c-\n",
-                    l:StrParam("PDA_ARTIFACT_%s:_ONE", player_weapon[player_weapon_trimmed]),
-                    s:"\n\n"
-                );
-                break;
+        if (Weapon_Mod_Quantity[mod_artifact] > 0) {
+            switch (Weapon_Mod_Quantity[mod_artifact]) {
+                case 1:
+                    PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 0.0, defaultY + (artifactsY * 1), INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
+                        s:"\cf",l:"PDA_DEMONARTIFACTS_ONE",s:"\c-\n",
+                        l:StrParam("PDA_ARTIFACT_%s:_ONE", player_weapon[player_weapon_trimmed]),
+                        s:"\n\n"
+                    );
+                    break;
+                case 2:
+                    PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 0.0, defaultY + (artifactsY * 1), INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
+                        s:"\cf",l:"PDA_DEMONARTIFACTS_TWO",s:"\c-\n",
+                        l:StrParam("PDA_ARTIFACT_%s:_TWO", player_weapon[player_weapon_trimmed]),
+                        s:"\n\n\c[Red]",
+                        l:"PDA_DEMONARTIFACTS_ONE",
+                        s:"\c-\n",
+                        l:StrParam("PDA_ARTIFACT_%s:_ONE", player_weapon[player_weapon_trimmed]),
+                        s:"\n\n"
+                    );
+                    break;
+                case 3:
+                    PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 0.0, defaultY + (artifactsY * 1), INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
+                        s:"\cf",
+                        l:"PDA_DEMONARTIFACTS_THREE",
+                        s:"\c-\n",
+                        l:StrParam("PDA_ARTIFACT_%s:_THREE", player_weapon[player_weapon_trimmed]),
+                        s:"\n\n\c[Red]",
+                        l:"PDA_DEMONARTIFACTS_TWO",
+                        s:"\c-\n",
+                        l:StrParam("PDA_ARTIFACT_%s:_TWO", player_weapon[player_weapon_trimmed]),
+                        s:"\n\n\c[Red]",
+                        l:"PDA_DEMONARTIFACTS_ONE",
+                        s:"\c-\n",
+                        l:StrParam("PDA_ARTIFACT_%s:_ONE", player_weapon[player_weapon_trimmed]),
+                        s:"\n\n"
+                    );
+                    break;
+            }
+        } else {
+            PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 0.0, defaultY + (artifactsY * 1), INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
+                s:"\c[Red]",
+                l:"PDA_DEMONARTIFACTS_ZERO",
+                s:"\c-\n"
+            );
         }
     } else {
-        PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 10.0 + (artifactsY * 1), INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
-            s:"\c[Red]",
-            l:"PDA_DEMONARTIFACTS_ZERO",
-            s:"\c-\n"
+        // Technically unreachable since we hide the tab now..
+        PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, PDA_SCREEN_WIDTH / 2, PDA_BODY_Y, INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, X_CENTER_TEXT_CENTER, DEFAULT_ALIGN,
+                        s:"\cf",l:"PDA_DEMONARTIFACTS_NOTSUPPORTED",s:"\c-\n"
         );
     }
 }
