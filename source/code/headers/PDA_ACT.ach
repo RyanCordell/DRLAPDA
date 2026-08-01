@@ -1,0 +1,84 @@
+
+switch (thisButton.actionID) {
+    case action_navigate:
+        if (!inCategory) {
+            if (buttonType != "equipment") PDA_SetCategory(categoryPage);
+
+            if (PDA_Local.category != PDA_ASSEMBLY_DETAIL) {
+                if (buttonType != "equipment") PDA_SetPage(1);
+            }
+        } else {
+            if (PDA_Local.category != 0 && PDA_Local.page >= 0) {
+                if (buttonType != "equipment") {
+                    PDA_SetPage(categoryPage);
+                    PDA_ResetScroll();
+                }
+            }
+        }
+        break;
+    case action_toggle_display:
+        switch(thisButton.actionParam) {
+            case 1:
+                if (localEqBoolField != 1) localEqBoolField = 1;
+                break;
+            case 2:
+                if (localEqBoolField != 4) localEqBoolField = 4;
+                break;
+            case 3:
+                if (localEqBoolField != 2) localEqBoolField = 2;
+                break;
+        }
+        break;
+    case action_show_equipment_detail:
+        if (localHasArmor || thisButton.actionParam == 1) {
+            PDA_Local.detailFetch[0] = "armor";
+            setupArmorDataOverride(checkSpecialArmorTokens(), localArmorData.langEntry);
+            // PDA_SetCategory(PDA_EQUIPMENT_DETAIL);
+        }
+
+        // if (localHasBackpack) {
+        //     PDA_Local.detailFetch[0] = "armor";
+        //     setupBackupDataOverride(thisButton.actionParam, localArmorData.langEntry);
+        //     PDA_SetCategory(PDA_EQUIPMENT_DETAIL);
+        // }
+
+        if (localHasBoots || thisButton.actionParam == 2) {
+            PDA_Local.detailFetch[0] = "boots";
+            setupBootsDataOverride(localBootsData.langEntry);
+            // PDA_SetCategory(PDA_EQUIPMENT_DETAIL);
+        }
+
+        // if (thisButton.actionParam == 1) {
+        //     PDA_Local.detailFetch[0] = "armor";
+        //     setupArmorDataOverride(checkSpecialArmorTokens(), localArmorData.langEntry);
+        // }
+        //
+        // if (thisButton.actionParam == 2) {
+        //     PDA_Local.detailFetch[0] = "boots";
+        //     setupBootsDataOverride(localBootsData.langEntry);
+        // }
+
+        PDA_SetCategory(PDA_EQUIPMENT_DETAIL);
+        PDA_Local.stopEquipmentEarly = true;
+        break;
+
+        // for (int armorIndex = 0, eqId = stashed_id_1; armorIndex < DRLA_EQUIPMENT_MAX; armorIndex++) {
+        //     #define _armorToken DRLA_Equipment_List[armorIndex][armor_TOKEN]
+        //
+        //     if (PDA_Local.stopEquipmentEarly) break;
+        //
+        //     if (CheckInventory(StrParam("%s:Pickup", _armorToken))) {
+        //         if (StrCmp(_armorToken,StrParam("%s:Boots", StrTrim(_armorToken,0,5))) != 0) {
+        //             PDA_Local.detailFetch[0] = "armor";
+        //             setupArmorDataOverride(checkSpecialArmorTokens(), localArmorData.langEntry);
+        //         } else {
+        //             PDA_Local.detailFetch[0] = "boots";
+        //             setupBootsDataOverride(localBootsData.langEntry);
+        //         }
+        //         PDA_SetCategory(PDA_EQUIPMENT_DETAIL);
+        //         PDA_Local.stopEquipmentEarly = true;
+        //         break;
+        //     }
+        // }
+        break;
+}

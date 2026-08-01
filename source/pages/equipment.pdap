@@ -9,13 +9,11 @@ if (PDA_LocalMouse.action == mouse_back) {
 
 // Body
 // belongs to equipment_onhand_draw.pdap
-#define equipmentButton PDA_LocalButton[PDA_Local.equipmentId]
-
-#define someCheck() \
-PDA_ButtonHandler(PDA_Local.equipmentId, true, 1, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR); \
+#define someCheck(eqId) \
+PDA_ButtonHandler(eqId, true, 1, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR); \
 deleteNoEquipmentMessage(); \
-// if (StrCmp(equipmentButton.tooltip, "") != 0 && CheckBounds(equipmentButton) && PDA_Local.page != EQUIPMENT_PAGE_INFO) { \
-//     PDA_SetupFloatingTooltip("PTIP", equipmentButton.tooltip); \
+// if (StrCmp(PDA_LocalButton[eqId].tooltip, "") != 0 && CheckBounds(PDA_LocalButton[eqId]) && PDA_Local.page != EQUIPMENT_PAGE_INFO) { \
+//     PDA_SetupFloatingTooltip("PTIP", PDA_LocalButton[eqId].tooltip); \
 // } \
 
 switch(PDA_Local.page) {
@@ -23,18 +21,16 @@ switch(PDA_Local.page) {
         PDA_DrawBodyText(HUDMSG_PLAIN, PDA_NOEQID, CR_UNTRANSLATED, 10.0, 50.0, INF_HOLDTIME, OPAQUE, B_NOT_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN, s:"No equipment detected");
 
         // Note to future self: don't try to merge these two ifs for cleanliness sake. Won't work the way you wish it would.
-        // log("eq armor: %s: | eq boots: %s:", DRLA_Equipment_List[localArmorIndex][armor_ACTOR], DRLA_Equipment_List[localBootsIndex][armor_ACTOR]);
         if (localHasArmor) {
-            someCheck();
+            someCheck(PDA_Local.equipmentId[worn_armor_id]);
         }
 
         if (localHasBoots) {
-            someCheck();
+            someCheck(PDA_Local.equipmentId[worn_boots_id]);
         }
 
         // Stashed armors
-        for (int armorIndex = 0; armorIndex < DRLA_EQUIPMENT_MAX; armorIndex++) {
-            log("eqId: %d:", PDA_Local.equipmentId);
+        for (int armorIndex = 0, eqId = stashed_id_1; armorIndex < DRLA_EQUIPMENT_MAX; armorIndex++) {
             #define _armorToken DRLA_Equipment_List[armorIndex][armor_TOKEN]
             if (PDA_Local.stopEquipmentEarly) {
                 break;
@@ -45,7 +41,8 @@ switch(PDA_Local.page) {
                 deleteNoEquipmentMessage();
                 // TODO: Maybe someday I can have this lead to a separate Equipment Detail page
                 // The source seems to say it was kind of already a thing? I have no idea..
-                PDA_ButtonHandler(PDA_Local.equipmentId, true, 1, NO_TOOLTIP, B_ONLY_VISUAL, B_NO_CLEAR);
+                PDA_ButtonHandler(PDA_Local.equipmentId[eqId], true, 1, NO_TOOLTIP, B_ONLY_VISUAL, B_NO_CLEAR);
+                eqId++;
             }
         }
         PDA_DefaultFont();

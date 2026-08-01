@@ -4,8 +4,8 @@
 #define ARM_GAP 4
 #define isRenegade (CheckActorClass(0, CheckInventory("DRPGDRLAActive") ? "DoomRLRenegadeRPG" : "DoomRLRenegade") == true)
 
-#define equipmentSet() \
-PDA_Local.equipmentId = (PDA_WORN_EQUIPMENT - 4) + (PDA_Local.equipmentLimit * 4); \
+#define equipmentSet(eqId) \
+PDA_Local.equipmentId[eqId] = (PDA_WORN_EQUIPMENT - 4) + (PDA_Local.equipmentLimit * 4); \
 if (PDA_Local.equipmentLimit > PDA_MAX_EQUIPMENT_IN_INV + 1) PDA_Local.equipmentLimit = 0; \
 else PDA_Local.equipmentLimit++; \
 armorY += ARM_HEIGHT + ARM_GAP; \
@@ -27,23 +27,23 @@ PDA_LocalButton[PDA_PLAYER_BOOTS_ICON]    = PDA_DisplayArmor(PDA_PLAYER_BOOTS_IC
 
 // Body
 fixed armorY = PDA_Local.equipmentBaseY;
-PDA_Local.equipmentId = 0;
 PDA_Local.stopEquipmentEarly = false;
 
 // Note to future self: don't try to merge these first 5 lines for cleanliness sake. Won't work the way you wish it would.
 if (localHasArmor) {
-    equipmentSet();
-    PDA_LocalButton[PDA_Local.equipmentId] = PDA_DisplayArmor(PDA_Local.equipmentId, ARMOR_DATA, ARM_X, armorY, ARM_HEIGHT, 1.0);
+    equipmentSet(worn_armor_id);
+    PDA_LocalButton[PDA_Local.equipmentId[worn_armor_id]] = PDA_DisplayArmor(PDA_Local.equipmentId[worn_armor_id], ARMOR_DATA, ARM_X, armorY, ARM_HEIGHT, 1.0);
 }
 
 if (localHasBoots) {
-    equipmentSet();
-    PDA_LocalButton[PDA_Local.equipmentId] = PDA_DisplayArmor(PDA_Local.equipmentId, BOOTS_DATA, ARM_X, armorY, ARM_HEIGHT, 1.0);
+    equipmentSet(worn_boots_id);
+    PDA_LocalButton[PDA_Local.equipmentId[worn_boots_id]] = PDA_DisplayArmor(PDA_Local.equipmentId[worn_boots_id], BOOTS_DATA, ARM_X, armorY, ARM_HEIGHT, 1.0);
+    PDA_LocalButton[PDA_Local.equipmentId[worn_boots_id]].actionParam = (PDA_Local.page == EQUIPMENT_PAGE_ONHAND) ? localBootsData.langEntry : 3;
 }
 
 // str armorPickupCheck = "\n";
 
-for (int armorIndex = 0; armorIndex < DRLA_EQUIPMENT_MAX; armorIndex++) {
+for (int armorIndex = 0, eqId = stashed_id_1; armorIndex < DRLA_EQUIPMENT_MAX; armorIndex++) {
     #define _armorToken DRLA_Equipment_List[armorIndex][armor_TOKEN]
     #define _armorActor DRLA_Equipment_List[armorIndex][armor_ACTOR]
 
@@ -52,13 +52,13 @@ for (int armorIndex = 0; armorIndex < DRLA_EQUIPMENT_MAX; armorIndex++) {
     if (PDA_Local.stopEquipmentEarly) break;
 
     if (CheckInventory(StrParam("%s:Pickup", _armorToken))) {
-        PDA_Local.equipmentId = (PDA_STASHEDEQUIPMENT - 8) + (PDA_Local.equipmentLimit * 2);
+        PDA_Local.equipmentId[eqId] = (PDA_STASHEDEQUIPMENT - 8) + (PDA_Local.equipmentLimit * 2);
+
         if (PDA_Local.equipmentLimit > PDA_MAX_EQUIPMENT_IN_INV + 1) PDA_Local.equipmentLimit = 0;
         else PDA_Local.equipmentLimit++;
         armorY += ARM_HEIGHT + ARM_GAP;
 
-        #define protKey (!isRenegade ? StrParam("%l:_PROT",    localArmorData.langEntry) \
-        : StrParam("%l:_RENPROT", localArmorData.langEntry))
+        #define protKey (!isRenegade ? StrParam("%l:_PROT", localArmorData.langEntry) : StrParam("%l:_RENPROT", localArmorData.langEntry))
 
         if (StrCmp(_armorToken, StrParam("%s:Boots", StrTrim(_armorToken,0,5))) != 0) {
             localArmorData.langEntry = StrParam("PDA_ARMOR_%s:", _armorActor);
@@ -72,11 +72,12 @@ for (int armorIndex = 0; armorIndex < DRLA_EQUIPMENT_MAX; armorIndex++) {
                 "%l:", // 3*
                 protKey,
                 StrParam("%l:_RES", localArmorData.langEntry),  // 2
-                                                localArmorData.armorAttr // 3
+                localArmorData.armorAttr // 3
             );
             // This is set up extremely stupidly.
-            // I THINK my past intend was to assign EquipmentID to the one you clicked on..
-            PDA_LocalButton[PDA_Local.equipmentId] = PDA_DisplayArmorOverride(PDA_Local.equipmentId, localArmorData, ARM_X, armorY, ARM_HEIGHT, 0.6);
+            // I THINK my past intent was to assign EquipmentID to the one you clicked on..
+            PDA_LocalButton[PDA_Local.equipmentId[eqId]] = PDA_DisplayArmorOverride(PDA_Local.equipmentId[eqId], localArmorData, ARM_X, armorY, ARM_HEIGHT, 0.6);
+            PDA_LocalButton[PDA_Local.equipmentId[eqId]].actionParam = (PDA_Local.page == EQUIPMENT_PAGE_ONHAND) ? localArmorData.langEntry : 3;
         } else {
             localBootsData.langEntry = StrParam("PDA_ARMOR_%s:", _armorActor);
             localBootsData.name      = StrParam("%l:", StrParam("%l:_NAME", localBootsData.langEntry));
@@ -87,9 +88,11 @@ for (int armorIndex = 0; armorIndex < DRLA_EQUIPMENT_MAX; armorIndex++) {
                 "%l:\n\n" // 1*
                 "%l:", // 2*
                 StrParam("%l:_PROT", localBootsData.langEntry), // 1
-                                                localBootsData.bootsAttr // 2
+                localBootsData.bootsAttr // 2
             );
-            PDA_LocalButton[PDA_Local.equipmentId] = PDA_DisplayBootsOverride(PDA_Local.equipmentId, localBootsData, ARM_X, armorY, ARM_HEIGHT, 0.6);
+            PDA_LocalButton[PDA_Local.equipmentId[eqId]] = PDA_DisplayBootsOverride(PDA_Local.equipmentId[eqId], localBootsData, ARM_X, armorY, ARM_HEIGHT, 0.6);
+            PDA_LocalButton[PDA_Local.equipmentId[eqId]].actionParam = (PDA_Local.page == EQUIPMENT_PAGE_ONHAND) ? localBootsData.langEntry : 3;
         }
+        eqId++;
     }
 }

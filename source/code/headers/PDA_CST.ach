@@ -23,8 +23,6 @@
 #define ASSEMBLY_DIM 0
 #define MODS_DIM 1
 
-#define PDA_BUTTON_MAX 256
-
 #define BEAST__PAGE 0
 #define BEAST__WIDTH 1
 #define BEAST__LV_COLOR 2
@@ -54,6 +52,8 @@
 #define MAX_PLAYERS        8
 #define PDA_RESPONSIVENESS 1
 #define PDA_HISTORYMAX     16
+
+#define PDA_BUTTON_MAX 256
 
 #define NUM_DIFFICULTIES 5
 
@@ -170,6 +170,8 @@
 // -------------
 #define PDA_MAX_EQUIPMENT_IN_INV  4
 #define PDA_MAX_EQUIPMENT_WORN    2
+
+#define PDA_EQUIPMENT_TOTAL_MAX   (PDA_MAX_EQUIPMENT_WORN + PDA_MAX_EQUIPMENT_IN_INV)
 #define PDA_MAX_MOD_PACKS     7
 
 #define PDA_MENU_ICON_LEFT_X   (fixed)(20.0  + X_LEFT_EDGE)

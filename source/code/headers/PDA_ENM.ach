@@ -190,8 +190,15 @@ enum PDA_Equipment_Types {
 }
 
 enum armor_enum {
-	armor_TOKEN = 0,
-	armor_ACTOR,
+    armor_TOKEN = 0,
+    armor_ACTOR,
+}
+
+enum button_actions {
+    action_none,
+    action_navigate,
+    action_toggle_display, // Equipment page bitmask toggles
+    action_show_equipment_detail
 }
 
 enum bestiary_enum {
@@ -200,13 +207,25 @@ enum bestiary_enum {
 }
 
 enum weaponmod_enum {
-	mi_bulk = 0,
-	mi_power,
-	mi_agility,
-	mi_technical,
-	mi_sniper,
-	mi_firestorm,
-	mi_nano,
+    mi_bulk = 0,
+    mi_power,
+    mi_agility,
+    mi_technical,
+    mi_sniper,
+    mi_firestorm,
+    mi_nano,
+}
+
+enum equipment_ids {
+    // worn
+    worn_armor_id = 0,
+    worn_boots_id,
+
+    // stashed
+    stashed_id_1,
+    stashed_id_2,
+    stashed_id_3,
+    stashed_id_4,
 }
 
 enum weapon_checks_index {

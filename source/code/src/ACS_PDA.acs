@@ -254,14 +254,19 @@ function void setPDADefaults (int playerNum) {
     PDA_Info[playerNum].scrollDirty = true;
     PDA_Info[playerNum].prevScrollingY = PDA_SCROLL_TOP;
 
+    PDA_Info[playerNum].actionID = -1;
+    PDA_Info[playerNum].actionParam = -1;
+
     PDA_Info[playerNum].equipmentLimit = 0;
     PDA_Info[playerNum].equipmentBaseY = 30.0;
-    PDA_Info[playerNum].equipmentId = 0;
     PDA_Info[playerNum].stopEquipmentEarly = false;
 
     PDA_Info[playerNum].clipRegion = "HEADER"; // Always starts here by default
     PDA_Info[playerNum].heading = "PDA_MENU_HEADER";
 
+    for (int b = 0; b < PDA_EQUIPMENT_TOTAL_MAX; b++) {
+        PDA_Info[playerNum].equipmentId[b] = 0;
+    }
     for (int b = 0; b < PDA_BUTTON_MAX; b++) {
         PDA_Button[playerNum][b].alpha = DEFAULT_BUTTON_ALPHA;
     }
@@ -467,14 +472,14 @@ function void page_assembly_info (void) {
     #include "../../pages/assemblyinfo.pdap"
 }
 
+function void page_equipment_info (void) {
+    if (PDA_Local.category != PDA_EQUIPMENT_DETAIL) return;
+    #include "../../pages/equipmentdetail.pdap"
+}
+
 // function void page_pong (void) {
 //     if (PDA_Local.category != PDA_PONG) return;
 //     #include "../../pages/pong.pdap"
-// }
-
-// function void page_equipment_info (void) {
-//     if (PDA_Local.category != PDA_EQUIPMENT_DETAIL) return;
-//     #include "../../pages/equipmentinfo.pdap"
 // }
 
 function void PDA_OnChange (void) {
@@ -558,9 +563,9 @@ SCRIPT "PDA_Core" (void) {
             // case PDA_PONG:
             //     page_menu();
             //     break;
-            // case PDA_EQUIPMENT_DETAIL:
-            //     page_equipment_info();
-                //     break;
+            case PDA_EQUIPMENT_DETAIL:
+                page_equipment_info();
+                break;
             case PDA_ASSEMBLY_DETAIL:
                 page_assembly_info();
                 break;

@@ -6,7 +6,7 @@ switch (PDA_Local.category) {
     #define menuButtonY(a) (PDA_BODY_Y) + (20.0 * (a))
     PDA_LocalButton[PDA_PLAYERS_BUTTON]    = PDA_CreateMenuButton(PDA_PLAYERS_BUTTON,    "", "MPLYICO", 10.0, menuButtonY(0));
     PDA_LocalButton[PDA_WEAPONS_BUTTON]    = PDA_CreateMenuButton(PDA_WEAPONS_BUTTON,    "", "MWEPICO", 10.0, menuButtonY(1));
-    PDA_LocalButton[PDA_EQUIPMENT_BUTTON]     = PDA_CreateMenuButton(PDA_EQUIPMENT_BUTTON,     "", "MARMICO", 10.0, menuButtonY(2));
+    PDA_LocalButton[PDA_EQUIPMENT_BUTTON]  = PDA_CreateMenuButton(PDA_EQUIPMENT_BUTTON,  "", "MARMICO", 10.0, menuButtonY(2));
     PDA_LocalButton[PDA_ASSEMBLIES_BUTTON] = PDA_CreateMenuButton(PDA_ASSEMBLIES_BUTTON, "", "MASMICO", 10.0, menuButtonY(3));
     PDA_LocalButton[PDA_ITEMS_BUTTON]      = PDA_CreateMenuButton(PDA_ITEMS_BUTTON,      "", "MITMICO", 10.0, menuButtonY(4));
     PDA_LocalButton[PDA_BESTIARY_BUTTON]   = PDA_CreateMenuButton(PDA_BESTIARY_BUTTON,   "", "MBESICO", 10.0, menuButtonY(5));
@@ -15,10 +15,8 @@ switch (PDA_Local.category) {
     break;
 
   case PDA_CLASSES:
-    PDA_LocalButton[TAB1] =
-      PDA_CreateTab(TAB1, "1", "PTAB", PDA_TAB_START_X  );
-    PDA_LocalButton[TAB2] =
-      PDA_CreateTab(TAB2, "2", "PTAB", PDA_TAB_NEXT_X(1));
+    PDA_LocalButton[TAB1] = PDA_CreateTab(TAB1, "1", "PTAB", PDA_TAB_START_X  );
+    PDA_LocalButton[TAB2] = PDA_CreateTab(TAB2, "2", "PTAB", PDA_TAB_NEXT_X(1));
     break;
 
   case PDA_WEAPONS:

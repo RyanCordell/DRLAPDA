@@ -971,6 +971,9 @@ function PDAButton PDA_CreateMenuButton (int id, str label, str graphic, fixed x
         0.0
     );
 
+    thisButton.actionID = action_navigate;
+    thisButton.actionParam = 1;
+
     TraceLog("PDA_CreateMenuButton");
     return thisButton;
 }
@@ -1200,10 +1203,12 @@ function PDAButton PDA_CreateHUDButton (int id, str label, str color, fixed x, f
 function PDAButton PDA_DisplayArmor (int id, int structType, fixed x, fixed y, int height, fixed opacity) {
     #define thisButton PDA_LocalButton[id]
 
-    str label   = "";
-    str graphic = "";
-    str tooltip = "";
-    int width   = 150;
+    str label        = "";
+    str graphic      = "";
+    str tooltip      = "";
+    int actionID     = action_none;
+    int actionParam  = -1;
+    int width        = 150;
     bool specialArmorTokens = checkSpecialArmorTokens();
     assignButtonParams(thisButton, label)
 
@@ -1214,6 +1219,8 @@ function PDAButton PDA_DisplayArmor (int id, int structType, fixed x, fixed y, i
             graphic        = localArmorData.graphic;
             width          = StrLen(localArmorData.name) * 5;
             tooltip        = localArmorData.tooltip;
+            actionID       = (PDA_Local.page == EQUIPMENT_PAGE_ONHAND) ? action_show_equipment_detail : action_toggle_display;
+            actionParam    = (PDA_Local.page == EQUIPMENT_PAGE_ONHAND) ? checkSpecialArmorTokens() : 1;
             break;
         case BACKPACK_DATA:
             localBackpackData = setupBackpackData();
@@ -1221,6 +1228,8 @@ function PDAButton PDA_DisplayArmor (int id, int structType, fixed x, fixed y, i
             graphic           = localBackpackData.graphic;
             width             = StrLen(localBackpackData.name) * 5;
             tooltip           = localBackpackData.tooltip;
+            actionID          = (PDA_Local.page == EQUIPMENT_PAGE_ONHAND) ? action_show_equipment_detail : action_toggle_display;
+            actionParam       = (PDA_Local.page == EQUIPMENT_PAGE_ONHAND) ? -1 : 2;
             break;
         case BOOTS_DATA:
             localBootsData = setupBootsData();
@@ -1228,19 +1237,23 @@ function PDAButton PDA_DisplayArmor (int id, int structType, fixed x, fixed y, i
             graphic        = localBootsData.graphic;
             width          = StrLen(localBootsData.name) * 5;
             tooltip        = localBootsData.tooltip;
+            actionID       = (PDA_Local.page == EQUIPMENT_PAGE_ONHAND) ? action_show_equipment_detail : action_toggle_display;
+            actionParam    = (PDA_Local.page == EQUIPMENT_PAGE_ONHAND) ? -1 : 3;
             break;
     }
 
-    thisButton.label   = label;
-    thisButton.tooltip = StrParam("%s:\n%s:", thisButton.label, tooltip);
-    thisButton.width   = width;
-    thisButton.graphic = StrParam("%l:", graphic);
+    thisButton.label       = label;
+    thisButton.tooltip     = StrParam("%s:\n%s:", thisButton.label, tooltip);
+    thisButton.width       = width;
+    thisButton.graphic     = StrParam("%l:", graphic);
+    thisButton.actionID    = actionID;
+    thisButton.actionParam = actionParam;
 
     // if (CheckBounds(thisButton) && StrCmp(thisButton.tooltip, "") != 0 && PDA_Local.page != EQUIPMENT_PAGE_INFO) {
     //     PDA_SetupFloatingTooltip("PTIP", thisButton.tooltip);
     // }
 
-    thisButton.type         = "armor";
+    thisButton.type         = "equipment";
     thisButton.graphicFlags = HUDMSG_ALPHA;
     thisButton.graphicID    = thisButton.id;
     assignButtonPosition(thisButton.gfxPos,
@@ -1284,7 +1297,7 @@ function PDAButton PDA_DisplayArmorOverride (int id, PDA_ArmorData override, fix
 
     thisButton.alpha = opacity;
 
-    thisButton.type         = "armor";
+    thisButton.type         = "equipment";
     thisButton.graphicFlags = HUDMSG_ALPHA;
     thisButton.graphicID    = thisButton.id;
     assignButtonPosition(thisButton.gfxPos,
@@ -1329,7 +1342,7 @@ function PDAButton PDA_DisplayBootsOverride (int id, PDA_BootsData override, fix
 
     thisButton.alpha = opacity;
 
-    thisButton.type         = "armor";
+    thisButton.type         = "equipment";
     thisButton.graphicFlags = HUDMSG_ALPHA;
     thisButton.graphicID    = thisButton.id;
     assignButtonPosition(thisButton.gfxPos,
@@ -1391,6 +1404,7 @@ function PDAButton PDA_CreateModPackDisplay (int id, str graphic, fixed x, fixed
 }
 
 function void PDA_ButtonLogic (int id, int inCategory, int categoryPage, bool onlyVisual) {
+    #define thisButton PDA_LocalButton[id]
     #define buttonType PDA_LocalButton[id].type
 
     if (buttonType == "tab") {
@@ -1398,37 +1412,29 @@ function void PDA_ButtonLogic (int id, int inCategory, int categoryPage, bool on
 
         if (inCategory > 0 && PDA_Local.page == categoryPage) {
             // I wonder why I did this..
-            PDA_LocalButton[id].state = button_hovered;
-            PDA_LocalButton[id].alpha = 1;
+            thisButton.state = button_hovered;
+            thisButton.alpha = 1;
         }
     }
 
     if (!onlyVisual) {
-        buttonBoundsDefault(PDA_LocalButton[id]);
+        buttonBoundsDefault(thisButton);
 
-        if (PDA_LocalButton[id].state != PDA_LocalButton[id].oldState) {
+        if (thisButton.state != thisButton.oldState) {
             PDA_SetFullDirty();
         }
 
-        switch (PDA_LocalButton[id].state) {
-            case button_clicked:
-                // We shouldn't continue proccing after the first few tics
-                // if (PDA_LocalMouse.action == mouse_hold || PDA_LocalMouse.mtic > 4) return;
-
-                if (!inCategory) {
-                    if (buttonType != "armor") PDA_SetCategory(categoryPage);
-
-                    if (PDA_Local.category != PDA_ASSEMBLY_DETAIL) {
-                        if (buttonType != "armor") PDA_SetPage(1);
-                    }
-                } else {
-                    if (PDA_Local.category != 0 && PDA_Local.page >= 0) {
-                        if (buttonType != "armor") {
-                            PDA_SetPage(categoryPage);
-                            PDA_ResetScroll();
-                        }
+        switch (thisButton.state) {
+            case button_hovered:
+                if (buttonType == "equipment") {
+                    if (StrCmp(thisButton.tooltip, "") != 0 && PDA_Local.page != EQUIPMENT_PAGE_INFO) {
+                        PDA_SetupFloatingTooltip("PTIP", thisButton.tooltip);
+                        // thisButton.alpha = pulser(2.0, 0.8);
+                        thisButton.alpha = 1.0;
                     }
                 }
+            case button_clicked:
+                #include "./PDA_ACT.ach"
 
                 PDA_LocalMouse.state = cursor_default;
                 PDA_LocalMouse.oldState = PDA_LocalMouse.state;
@@ -1437,7 +1443,7 @@ function void PDA_ButtonLogic (int id, int inCategory, int categoryPage, bool on
     }
 
     // End
-    PDA_LocalButton[id].oldState = PDA_LocalButton[id].state;
+    thisButton.oldState = thisButton.state;
 
     TraceLog("PDA_ButtonLogic");
 }
@@ -1488,10 +1494,10 @@ function void PDA_DrawButton (int id, str message, bool onlyVisual, bool clear) 
             thisButton.alpha = buttonOnHover ? 1.0 : DEFAULT_BUTTON_ALPHA;
         }
     } else {
-        if (buttonType != "modpack" && buttonType != "tab" && buttonType != "armor") {
+        if (buttonType != "modpack" && buttonType != "tab" && buttonType != "equipment") {
             thisButton.alpha = buttonOnHover ? pulser(2.0, DEFAULT_BUTTON_ALPHA + 0.2) : DEFAULT_BUTTON_ALPHA;
         }
-        if (buttonType == "armor") {
+        if (buttonType == "equipment") {
             thisButton.alpha = buttonOnHover ? 1.0 : DEFAULT_BUTTON_ALPHA;
         }
     }
