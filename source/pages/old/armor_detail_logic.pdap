@@ -1,0 +1,28 @@
+// Clicked-on equipment info
+PDA_Local.armorHax = false;
+
+int equipmentType = 0;
+if (PDA_Local.detailFetch[0] == "armor") equipmentType = EQUIPMENT_TYPE_ARMOR;
+if (PDA_Local.detailFetch[0] == "boots") equipmentType = EQUIPMENT_TYPE_BOOTS;
+
+str equipment_set_name        = "N/A\n",
+    equipment_set_description = "\n\n";
+
+// Armor
+// This should stay in _logic, yes..
+for (int setIndex = 0; setIndex < DRLA_EQUIPMENT_SETMAX; setIndex++) {
+    if (CheckInventory(DRLA_Equipment_SetList[setIndex])) {
+        if (CheckInventory("RLEnclaveSetBonusActive") && CheckInventory("RLNuclearWeaponSetBonusActive")) {
+            PDA_Local.armorHax = true;
+        }
+
+        #define trimmedList strTrim(DRLA_Equipment_SetList[setIndex],2,0)
+
+        equipment_set_name = StrParam("%l:\n\n", (PDA_Local.armorHax)
+        ? "PDA_ARMOR_NuclearWeaponSetBonusActive_equipment_set_name"
+        : StrParam("PDA_ARMOR_%s:_equipment_set_name", trimmedList));
+        equipment_set_description = StrParam("%l:\n\n", (PDA_Local.armorHax)
+        ? "PDA_ARMOR_NuclearWeaponSetBonusActive_equipment_set_description"
+        : StrParam("PDA_ARMOR_%s:_equipment_set_description", trimmedList));
+    }
+}

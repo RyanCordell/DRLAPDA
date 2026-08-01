@@ -19,7 +19,7 @@ y = initialY;
 // Note to future self: don't try to merge these first 5 lines for cleanliness sake. Won't work the way you wish it would.
 if (localHasArmor) {
     deleteNoEquipmentMessage();
-    id    = (PDA_WORNARMORS - 4) + (armorLimit * 4);
+    id    = (PDA_WORN_EQUIPMENT - 4) + (armorLimit * 4);
     width = (strLen(localArmorData.name) * 5);
 
     // PDAButton armor = PDA_DisplayArmor(id, StrParam("\cdE:\c- %s:", localArmorData.name), localArmorData.graphic, ARM_X, y, width, ARM_HEIGHT, localArmorData.tooltip, pulser(2.0, 0.8));
@@ -36,18 +36,18 @@ if (localHasArmor) {
         case button_clicked:
             PDA_Local.detailFetch[0] = "armor";
             setupArmorDataOverride(checkSpecialArmorTokens(), localArmorData.langEntry);
-            PDA_SetCategory(PDA_ARMOR_DETAIL);
+            PDA_SetCategory(PDA_EQUIPMENT_DETAIL);
             break;
     }
 
-    if (armorLimit > PDA_MAX_ARMOR_IN_INV + 1) armorLimit = 0;
+    if (armorLimit > PDA_MAX_EQUIPMENT_IN_INV + 1) armorLimit = 0;
     else armorLimit++;
     y     += ARM_HEIGHT + ARM_GAP;
 }
 
 if (localHasBoots) {
     deleteNoEquipmentMessage();
-    id    = (PDA_WORNARMORS - 4) + (armorLimit * 4);
+    id    = (PDA_WORN_EQUIPMENT - 4) + (armorLimit * 4);
     width = (strLen(localBootsData.name) * 5);
 
     // PDAButton boots = PDA_DisplayArmor(id, StrParam("\cdE:\c- %s:", localBootsData.name), localBootsData.graphic, ARM_X, y, width, ARM_HEIGHT, localBootsData.tooltip, pulser(2.0, 0.8));
@@ -63,20 +63,20 @@ if (localHasBoots) {
         case button_clicked:
             PDA_Local.detailFetch[0] = "boots";
             setupBootsDataOverride(localBootsData.langEntry);
-            PDA_SetCategory(PDA_ARMOR_DETAIL);
+            PDA_SetCategory(PDA_EQUIPMENT_DETAIL);
             break;
     }
 
-    if (armorLimit > PDA_MAX_ARMOR_IN_INV + 1) armorLimit = 0;
+    if (armorLimit > PDA_MAX_EQUIPMENT_IN_INV + 1) armorLimit = 0;
     else armorLimit++;
     y     += ARM_HEIGHT + ARM_GAP;
 }
 
 str armorPickupCheck = "\n";
 // Stashed armors
-for (int armorIndex = 0; armorIndex < DRLA_ARMORMAX; armorIndex++) {
-    #define _armorToken DRLA_ArmorList[armorIndex][armor_TOKEN]
-    #define _armorActor DRLA_ArmorList[armorIndex][armor_ACTOR]
+for (int armorIndex = 0; armorIndex < DRLA_EQUIPMENT_MAX; armorIndex++) {
+    #define _armorToken DRLA_Equipment_List[armorIndex][armor_TOKEN]
+    #define _armorActor DRLA_Equipment_List[armorIndex][armor_ACTOR]
 
     if (stopEarly) break;
 
@@ -87,7 +87,7 @@ for (int armorIndex = 0; armorIndex < DRLA_ARMORMAX; armorIndex++) {
         #define isRenegade (CheckActorClass(0, CheckInventory("DRPGDRLAActive") ? "DoomRLRenegadeRPG" : "DoomRLRenegade") == true)
 
         deleteNoEquipmentMessage();
-        id    = (PDA_STASHEDARMORS - 8) + (armorLimit * 2);
+        id    = (PDA_STASHEDEQUIPMENT - 8) + (armorLimit * 2);
         width = strLen(localArmorData.name) * 5;
 
         if (!areTheseBoots) {
@@ -132,13 +132,13 @@ for (int armorIndex = 0; armorIndex < DRLA_ARMORMAX; armorIndex++) {
                     PDA_Local.detailFetch[0] = "boots";
                     setupBootsDataOverride(localBootsData.langEntry);
                 }
-                PDA_SetCategory(PDA_ARMOR_DETAIL);
+                PDA_SetCategory(PDA_EQUIPMENT_DETAIL);
                 stopEarly = true;
                 break;
         }
         PDA_ButtonHandler(id, true, 1, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
 
-        if (armorLimit > PDA_MAX_ARMOR_IN_INV + 1) armorLimit = 0;
+        if (armorLimit > PDA_MAX_EQUIPMENT_IN_INV + 1) armorLimit = 0;
         else armorLimit++;
         y += ARM_HEIGHT + ARM_GAP;
     }

@@ -14,20 +14,21 @@ switch (PDA_Local.page) {
         PDA_ButtonHandler(PDA_BEAST_TP, true, 4, strparam("%l:\n", "PDA_DIFFICULTY_TECHNOPHOBIA"), B_FUNCTIONAL, B_NO_CLEAR);
         PDA_ButtonHandler(PDA_BEAST_AG, true, 5, strparam("%l:\n", "PDA_DIFFICULTY_ARMAGEDDON")  , B_FUNCTIONAL, B_NO_CLEAR);
         PDA_ButtonHandler(PDA_BEAST_EX, true, 6, strparam("%l:\n", "PDA_DIFFICULTY_EXTRA")       , B_FUNCTIONAL, B_NO_CLEAR);
-        
         break;
     default:
         beast_info[BEAST__PAGE] = PDA_Local.page - 2;
 
         for (int i = 0; i < DRLA_MONSTER_PAGE_MAX; i++) {
-            const int buttonID = PDA_BEASTS_ID_END - i;
+            localListEnemy[list_kill_count] = StrParam("%s:KillCounter", DRLA_Bestiary[beast_info[BEAST__PAGE]][i][beast_TOKEN]);
+            #define buttonID(a) (PDA_BEASTS_ID_END - (a))
 
             if (localListEnemy[list_name] != " ????") {
-                PDA_ButtonHandler(buttonID, true, 1, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
+                PDA_ButtonHandler(buttonID(i), true, 1, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
 
-                if (PDA_LocalButton[buttonID].state == button_hovered) {
-                    DisplayIcon(
-                        CheckFont(localListEnemy[list_icon]) ? localListEnemy[list_icon] : "EPDAUNK", 
+                if (PDA_LocalButton[buttonID(i)].state == button_hovered) {
+                    DisplayIcon(CheckFont(localListEnemy[list_icon])
+                        ? localListEnemy[list_icon]
+                        : "EPDAUNK",
                         PDA_INFO2ID, PDA_SCREEN_WIDTH - 30.0 + X_LEFT_EDGE, PDA_SCREEN_Y + 100.0 + Y_TOP_EDGE, 0, 
                         0.2 + pulser(2.0, 0.59)
                     );

@@ -1,6 +1,7 @@
 if (PDA_ScrollableNeedsDraw) {
-    PDA_DefaultFont();
     #define defaultY 0.0
+    PDA_DefaultFont();
+
     if (canBeEvil) {
         PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 0.0, defaultY, INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
             l:(!canBeEvil) ?

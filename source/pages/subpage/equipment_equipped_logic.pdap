@@ -1,0 +1,40 @@
+if (PDA_LocalMouse.action == mouse_back) {
+    PDA_SetCategory(PDA_EQUIPMENT);
+    PDA_SetPage(1);
+}
+
+#define EQUIPPED_HEIGHT 16
+#define EQUIPPED_ALPHA 0.7
+
+str equipment_set_name        = "N/A\n",
+    equipment_set_description = "\n\n";
+
+PDA_Local.armorHax = false;
+
+if (localHasArmor) {
+    PDA_LocalButton[PDA_PLAYER_ARMOR_ICON] = PDA_DisplayArmor(PDA_PLAYER_ARMOR_ICON, ARMOR_DATA, playerIconX + 35.0, 20.0, EQUIPPED_HEIGHT, localShowArmor ? pulser(2.0, 0.8) : EQUIPPED_ALPHA);
+}
+
+if (localHasBackpack) {
+    PDA_LocalButton[PDA_PLAYER_BACKPACK_ICON] = PDA_DisplayArmor(PDA_PLAYER_BACKPACK_ICON, BACKPACK_DATA, playerIconX + 33.0, 45.0, EQUIPPED_HEIGHT, localShowBackpack ? pulser(2.0, 0.8) : EQUIPPED_ALPHA);
+}
+
+if (localHasBoots) {
+    PDA_LocalButton[PDA_PLAYER_BOOTS_ICON] = PDA_DisplayArmor(PDA_PLAYER_BOOTS_ICON, BOOTS_DATA, playerIconX + 30.0, 70.0, EQUIPPED_HEIGHT, localShowBoots ? pulser(2.0, 0.8) : EQUIPPED_ALPHA);
+}
+
+for (int setIndex = 0; setIndex < DRLA_EQUIPMENT_SETMAX; setIndex++) {
+    if (CheckInventory(DRLA_Equipment_SetList[setIndex])) {
+        if (CheckInventory("RLEnclaveSetBonusActive") && CheckInventory("RLNuclearWeaponSetBonusActive"))
+            PDA_Local.armorHax = true;
+
+        str trimmedList = strTrim(DRLA_Equipment_SetList[setIndex],2,0);
+
+        equipment_set_name = StrParam("%l:\n\n", (PDA_Local.armorHax)
+            ? "PDA_ARMOR_NuclearWeaponSetBonusActive_equipment_set_name"
+            : StrParam("PDA_ARMOR_%s:_equipment_set_name", trimmedList));
+        equipment_set_description = StrParam("%l:\n\n", (PDA_Local.armorHax)
+            ? "PDA_ARMOR_NuclearWeaponSetBonusActive_equipment_set_description"
+            : StrParam("PDA_ARMOR_%s:_equipment_set_description", trimmedList));
+    }
+}

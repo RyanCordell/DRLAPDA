@@ -4,7 +4,7 @@ fixed initialY   = 30.0;
 const int height = 16;
 int width        = 60;
 
-bool PDA_ManyHax    = false;
+bool PDA_Local.armorHax    = false;
 // int pdaStrTrimValue = 0;
 
 const fixed inAlpha = 0.7;
@@ -62,30 +62,29 @@ if (localHasBoots) {
     }
 }
 
-//armorDesc =  StrParam("PDA_ARMOR_%s:_DESC", StrTrim(GetArmorInfo(ARMORINFO_CLASSNAME),2,pdaStrTrimValue));
 
 str equipment_set_name        = "N/A\n",
     equipment_set_description = "\n\n";
 
 // Armor
-for (int setIndex = 0; setIndex < DRLA_ARMORSETMAX; setIndex++) {
-    if (CheckInventory(DRLA_ArmorSetList[setIndex])) {
+for (int setIndex = 0; setIndex < DRLA_EQUIPMENT_SETMAX; setIndex++) {
+    if (CheckInventory(DRLA_Equipment_SetList[setIndex])) {
         if (CheckInventory("RLEnclaveSetBonusActive") && CheckInventory("RLNuclearWeaponSetBonusActive"))
-            PDA_ManyHax = true;
+            PDA_Local.armorHax = true;
 
-        str trimmedList = strTrim(DRLA_ArmorSetList[setIndex],2,0);
+        str trimmedList = strTrim(DRLA_Equipment_SetList[setIndex],2,0);
 
-        equipment_set_name = StrParam("%l:\n\n", (PDA_ManyHax)
+        equipment_set_name = StrParam("%l:\n\n", (PDA_Local.armorHax)
             ? "PDA_ARMOR_NuclearWeaponSetBonusActive_equipment_set_name"
             : StrParam("PDA_ARMOR_%s:_equipment_set_name", trimmedList));
-        equipment_set_description = StrParam("%l:\n\n", (PDA_ManyHax)
+        equipment_set_description = StrParam("%l:\n\n", (PDA_Local.armorHax)
             ? "PDA_ARMOR_NuclearWeaponSetBonusActive_equipment_set_description"
             : StrParam("PDA_ARMOR_%s:_equipment_set_description", trimmedList));
     }
 }
 
-str enclaveequipment_set_name = (PDA_ManyHax) ? StrParam("%l:\n\n", "PDA_ARMOR_EnclaveSetBonusActive_equipment_set_name") : "";
-str enclaveequipment_set_description = (PDA_ManyHax) ? StrParam("%l:\n\n", "PDA_ARMOR_EnclaveSetBonusActive_equipment_set_description") : "";
+str enclaveequipment_set_name = (PDA_Local.armorHax) ? StrParam("%l:\n\n", "PDA_ARMOR_EnclaveSetBonusActive_equipment_set_name") : "";
+str enclaveequipment_set_description = (PDA_Local.armorHax) ? StrParam("%l:\n\n", "PDA_ARMOR_EnclaveSetBonusActive_equipment_set_description") : "";
 
 SetFont(PDA_FONT[mono_font]);
 

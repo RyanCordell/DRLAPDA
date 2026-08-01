@@ -497,14 +497,14 @@ DRLA_MASTERMAX="{master_max}";
         construct: str = f'''
 #library "PDA_ARM"
 
-#define DRLA_ARMORMAX {equipment['max']}
-#define DRLA_ARMORELEMENTS 2
-#define DRLA_ARMORSETMAX 18
+#define DRLA_EQUIPMENT_MAX {equipment['max']}
+#define DRLA_EQUIPMENT_ELEMENTS 2
+#define DRLA_EQUIPMENT_SETMAX 18
 
 // I am currently unable to be rid of this, so this will stay for now
-str DRLA_ArmorList[DRLA_ARMORMAX][DRLA_ARMORELEMENTS] = {{{equipment['list']}}};
+str DRLA_Equipment_List[DRLA_EQUIPMENT_MAX][DRLA_EQUIPMENT_ELEMENTS] = {{{equipment['list']}}};
 
-str DRLA_ArmorSetList[DRLA_ARMORSETMAX] = {{
+str DRLA_Equipment_SetList[DRLA_EQUIPMENT_SETMAX] = {{
   "RLNuclearWeaponSetBonusActive",
   "RLCerberusSetBonusActive",
   "RLTacticalSetBonusActive",

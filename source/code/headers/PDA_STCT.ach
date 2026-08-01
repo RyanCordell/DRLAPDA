@@ -12,6 +12,8 @@ struct PDAInfo {
 
     bool newEntry[5];
 
+    bool armorHax;
+
     int category;
     int prevCategory;
     int page;

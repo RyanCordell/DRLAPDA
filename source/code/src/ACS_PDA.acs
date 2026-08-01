@@ -20,7 +20,7 @@ function void DebugIDs (void) {
     log("PDA_CURSORID=%d:",PDA_CURSORID);
     log("PDA_PLAYERS_BUTTON=%d:",PDA_PLAYERS_BUTTON);
     log("PDA_WEAPONS_BUTTON=%d:",PDA_WEAPONS_BUTTON);
-    log("PDA_ARMORS_BUTTON=%d:",PDA_ARMORS_BUTTON);
+    log("PDA_EQUIPMENT_BUTTON=%d:",PDA_EQUIPMENT_BUTTON);
     log("PDA_ASSEMBLIES_BUTTON=%d:",PDA_ASSEMBLIES_BUTTON);
     log("PDA_ITEMS_BUTTON=%d:",PDA_ITEMS_BUTTON);
     log("PDA_BESTIARY_BUTTON=%d:",PDA_BESTIARY_BUTTON);
@@ -43,8 +43,8 @@ function void DebugIDs (void) {
     log("PDA_PLAYER_BOOTS_ICON=%d:",PDA_PLAYER_BOOTS_ICON);
     log("PDA_ASSEMBLY_ID_END=%d:",PDA_ASSEMBLY_ID_END);
     log("PDA_BEASTS_ID_END=%d:",PDA_BEASTS_ID_END);
-    log("PDA_WORNARMORS=%d:",PDA_WORNARMORS);
-    log("PDA_STASHEDARMORS=%d:",PDA_STASHEDARMORS);
+    log("PDA_WORN_EQUIPMENT=%d:",PDA_WORN_EQUIPMENT);
+    log("PDA_STASHEDEQUIPMENT=%d:",PDA_STASHEDEQUIPMENT);
     log("PDA_NOEQID=%d:",PDA_NOEQID);
     log("PDA_MODIDRANGE=%d:",PDA_MODIDRANGE);
     log("PDA_INFO4ID=%d:",PDA_INFO4ID);
@@ -67,8 +67,8 @@ function void DebugIDs (void) {
     log("PDA_TAB_BUTTONS_END=%d:",PDA_TAB_BUTTONS_END);
     log("PDA_ID=%d:",PDA_ID);
     log("PDA_REALLYLASTID=%d:",PDA_REALLYLASTID);
-    log("PDA_ARMORINVIDRANGE=%d:",PDA_ARMORINVIDRANGE);
-    log("PDA_ARMORWORNIDRANGE=%d:",PDA_ARMORWORNIDRANGE);
+    log("PDA_EQUIPMENTINVIDRANGE=%d:",PDA_EQUIPMENTINVIDRANGE);
+    log("PDA_EQUIPMENTWORNIDRANGE=%d:",PDA_EQUIPMENTWORNIDRANGE);
     log("PDA_TOOLTIPGFX=%d:",PDA_TOOLTIPGFX);
     log("PDA_TOOLTIPID=%d:",PDA_TOOLTIPID);
     log("PDA_WEAPON_ICON=%d:",PDA_WEAPON_ICON);
@@ -225,6 +225,7 @@ SCRIPT "HeyADollar" enter {
 function void setPDADefaults (int playerNum) {
     PDA_Info[playerNum].active = false;
     PDA_Info[playerNum].pongRunning = false;
+    PDA_Info[playerNum].armorHax = false;
 
     PDA_Info[playerNum].category = 0;
     PDA_Info[playerNum].prevCategory = -1;
@@ -266,12 +267,12 @@ function void setPDADefaults (int playerNum) {
     }
 
     /*
-     PDA_Mouse[playerNum].x = 0;
-     PDA_Mouse[playerNum].y = 0;
-     PDA_Mouse[playerNum].m1 = false;
-     PDA_Mouse[playerNum].m2 = false;
-     PDA_Mouse[playerNum].pollRate = 1;
-     */
+    PDA_Mouse[playerNum].x = 0;
+    PDA_Mouse[playerNum].y = 0;
+    PDA_Mouse[playerNum].m1 = false;
+    PDA_Mouse[playerNum].m2 = false;
+    PDA_Mouse[playerNum].pollRate = 1;
+    */
 }
 
 // [marrub] Static init stuff
@@ -413,8 +414,8 @@ function void page_weapons (void) {
 }
 
 function void page_armors (void) {
-    if (PDA_Local.category != PDA_ARMORS) return;
-   #include "../../pages/armors.pdap"
+    if (PDA_Local.category != PDA_EQUIPMENT) return;
+   #include "../../pages/equipment.pdap"
 }
 
 function void page_assemblies (void) {
@@ -449,24 +450,9 @@ function void page_misc (void) {
     #include "../../pages/misc.pdap"
 }
 
-function void page_pong (void) {
-    if (PDA_Local.category != PDA_PONG) return;
-    #include "../../pages/pong.pdap"
-}
-
 function void page_credits (void) {
     if (PDA_Local.category != PDA_CREDITS) return;
     #include "../../pages/credits.pdap"
-}
-
-function void page_assembly_info (void) {
-    if (PDA_Local.category != PDA_ASSEMBLY_DETAIL) return;
-    #include "../../pages/assemblyinfo.pdap"
-}
-
-function void page_armor_info (void) {
-    if (PDA_Local.category != PDA_ARMOR_DETAIL) return;
-    #include "../../pages/armorinfo.pdap"
 }
 
 function void page_monster_info (void) {
@@ -475,6 +461,21 @@ function void page_monster_info (void) {
     updateOldMonsterKillCount();
     #include "../../pages/beastinfo.pdap"
 }
+
+function void page_assembly_info (void) {
+    if (PDA_Local.category != PDA_ASSEMBLY_DETAIL) return;
+    #include "../../pages/assemblyinfo.pdap"
+}
+
+// function void page_pong (void) {
+//     if (PDA_Local.category != PDA_PONG) return;
+//     #include "../../pages/pong.pdap"
+// }
+
+// function void page_equipment_info (void) {
+//     if (PDA_Local.category != PDA_EQUIPMENT_DETAIL) return;
+//     #include "../../pages/equipmentinfo.pdap"
+// }
 
 function void PDA_OnChange (void) {
     afterPageDefaults("PDA_OnChange");
@@ -532,7 +533,7 @@ SCRIPT "PDA_Core" (void) {
             case PDA_WEAPONS:
                 page_weapons();
                 break;
-            case PDA_ARMORS:
+            case PDA_EQUIPMENT:
                 page_armors();
                 break;
             case PDA_ASSEMBLIES:
@@ -550,18 +551,18 @@ SCRIPT "PDA_Core" (void) {
             case PDA_MISC:
                 page_misc();
                 break;
+            case PDA_CREDITS:
+                page_credits();
+                break;
             
             // case PDA_PONG:
             //     page_menu();
             //     break;
-            case PDA_CREDITS:
-                page_credits();
-                break;
+            // case PDA_EQUIPMENT_DETAIL:
+            //     page_equipment_info();
+                //     break;
             case PDA_ASSEMBLY_DETAIL:
                 page_assembly_info();
-                break;
-            case PDA_ARMOR_DETAIL:
-                page_armor_info();
                 break;
             case PDA_BESTIARY_DETAIL:
                 page_monster_info();

@@ -1,43 +1,30 @@
 if (PDA_LocalMouse.action == mouse_back) {
     PDA_SetCategory(PDA_ASSEMBLIES);
 }
-// str detailedAssemblyStringer;
 
-// if (!PDA_Local.playSoundOnce) {
-//     PDA_PlaySound("UI/PDA/Activate", "pda/soldier", 80);
+#define PDA_LocalAssembly PDA_AssemblyInfo[PlayerNumber()]
 
-//     PDA_Local.playSoundOnce = true;
-// }
+if (!PDA_Local.playSoundOnce) {
+    PDA_PlaySound("UI/PDA/Activate", "pda/soldier", 80);
 
-// if (StrCmp(PDA_Local.detailFetch[0], "null") != 0) {
-//     DisplayArmorIcon(PDA_AssemblyInfo[PlayerNumber()][0], PDA_INFOID, PDA_SCREEN_X + 150.0 + X_LEFT_EDGE, 40.0 + PDA_Local.scrollingY + Y_TOP_EDGE + (20.0 * 1), 1);
+    PDA_Local.playSoundOnce = true;
+}
 
-//     HudMessageScrollable(
-//         StrParam(
-//             "%l:\n"
-//             "%l:\n\n\n"
-//             "%l:\n",
-//             PDA_AssemblyInfo[PlayerNumber()][1],
-//             PDA_AssemblyInfo[PlayerNumber()][2],
-//             PDA_AssemblyInfo[PlayerNumber()][3]
-//         ),
-//         HUDMSG_PLAIN, PDA_INFO2ID, CR_WHITE, 10.0, 50.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE);
-        
-//     if (StrCmp(StrParam("%l:", PDA_AssemblyInfo[PlayerNumber()][4]), PDA_AssemblyInfo[PlayerNumber()][4]) != 0) {
-//         PDA_SetScrollWindow(-1 * batoi(StrParam("%l:", PDA_AssemblyInfo[PlayerNumber()][4])));
-//         PDA_SetScrollArrows(-1 * batoi(StrParam("%l:", PDA_AssemblyInfo[PlayerNumber()][4])), PDA_SCROLL_TOP, 60.0, 90.0);
-//     }
-// } else {
-//     HudMessageScrollable(
-//         StrParam(
-//             "%l:\n"
-//             "%l:\n\n\n"
-//             "%l:\n",
-//             "PDA_ASSEMBLY_NOTFOUND_NAME",
-//             "PDA_ASSEMBLY_NOTFOUND_MODS",
-//             "PDA_ASSEMBLY_NOTFOUND_DESC"
-//         ),
-//         HUDMSG_PLAIN, PDA_INFO2ID, CR_WHITE, 10.0, 50.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE);
-// }
+if (StrCmp(PDA_Local.detailFetch[0], "null") != 0) {
+    // DisplayArmorIcon(PDA_LocalAssembly[0], PDA_INFOID,
+    DisplayIconScrollable(StrParam("%l:", PDA_LocalAssembly[0]), PDA_INFOID,
+                          PDA_SCREEN_X_SCALED + 150.0 + X_LEFT_EDGE,
+                          40.0 + Y_TOP_EDGE + (20.0 * 1), INF_HOLDTIME, OPAQUE);
 
-// PDA_UnsetScrollWindow();
+    PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO2ID, CR_WHITE, 10.0, 50.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
+        l:PDA_LocalAssembly[1],s:"\n",
+        l:PDA_LocalAssembly[2],s:"\n\n\n",
+        l:PDA_LocalAssembly[3],s:"\n"
+    );
+} else {
+    PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO2ID, CR_WHITE, 10.0, 50.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
+        l:"PDA_ASSEMBLY_NOTFOUND_NAME",s:"\n",
+        l:"PDA_ASSEMBLY_NOTFOUND_MODS",s:"\n\n\n",
+        l:"PDA_ASSEMBLY_NOTFOUND_DESC",s:"\n"
+    );
+}

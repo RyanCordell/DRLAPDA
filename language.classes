@@ -69,7 +69,7 @@ PDA_CLASS_DOOMRLTECHNICIAN_STORY =
 	"Advanced assemblies deal \c[Yellow]25%\c- more damage, \n"
 	"and Master assemblies deal a whopping \c[Red]50%\cc additional damage\c- when you wield them.";
 PDA_CLASS_DOOMRLTECHNICIAN_HEIGHT =
-    "60";
+    "90";
 PDA_CLASS_DOOMRLTECHNICIAN_ICON = 
 	"PPDATEC1";
 
@@ -94,7 +94,7 @@ PDA_CLASS_DOOMRLRENEGADE_STORY =
 	"base protection and bonus protection will not exceed \c[Yellow]80%.\c- \n"
 	"Any armor with a base protection stat of \c[Yellow]80%\c- or higher recieves no bonus.";
 PDA_CLASS_DOOMRLRENEGADE_HEIGHT =
-    "60";
+    "70";
 PDA_CLASS_DOOMRLRENEGADE_ICON = 
 	"PPDAREN1";
 
@@ -119,7 +119,7 @@ PDA_CLASS_DOOMRLDEMOLITIONIST_STORY =
 	"Finally, you're well-versed in ammo conservation; with any non-shell weapon that uses more than one ammo unit when "
 	"firing, \c[Green]you expend half the standard amount\c-, rounded down.";
 PDA_CLASS_DOOMRLDEMOLITIONIST_HEIGHT =
-    "50";
+    "60";
 PDA_CLASS_DOOMRLDEMOLITIONIST_ICON = 
 	"PPDADMO1";
 

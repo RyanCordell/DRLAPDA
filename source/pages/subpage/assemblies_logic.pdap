@@ -1,0 +1,54 @@
+fixed paginationY = 35.0 + (6.0 * PDA_Local.maxAssembliesPer);
+
+fixed nextButtonX = 10.0;
+if (PDA_Local.page > 1 && PDA_Local.page < 3) {
+    nextButtonX = PDA_SCREEN_WIDTH_SCALED + PDA_SCREEN_X_SCALED - 82;
+}
+
+PDA_LocalButton[TAB1] = PDA_CreateTab(TAB1, "1", "PTAB", PDA_TAB_START_X  );
+PDA_LocalButton[TAB2] = PDA_CreateTab(TAB2, "2", "PTAB", PDA_TAB_NEXT_X(1));
+PDA_LocalButton[TAB3] = PDA_CreateTab(TAB3, "3", "PTAB", PDA_TAB_NEXT_X(2));
+
+PDA_LocalButton[PDA_PREV_PAGE] = PDA_CreateButton(PDA_PREV_PAGE, "Previous tier", "A_PREV",        10.0, paginationY, 82, 16, 20, 15);
+PDA_LocalButton[PDA_NEXT_PAGE] = PDA_CreateButton(PDA_NEXT_PAGE, "Next tier"    , "A_NEXT", nextButtonX, paginationY, 82, 16, 20, 15);
+
+fixed assemblyX = 20.0,
+      assemblyY;
+const int width = 180,
+          height = 7;
+
+for (int ti = 0, li = 1; ti <= PDA_Local.maxAssembliesPer; ti+=2, li+=2) {
+    int aoff               = (PDA_Local.assemblyOffset - 1 < 0) ? 0 : (PDA_Local.assemblyOffset - 1);
+    str actorToken         = stringArray[ASSEMBLY_DIM][ti + aoff];
+    str languagePointer    = stringArray[ASSEMBLY_DIM][li + aoff];
+    int id                 = PDA_ASSEMBLY_ID_END - (ti - 1); // index - 1 to account for message id
+    assemblyY              = 30.0 + (6.0 * (ti - 1));
+    str icon               = StrParam("%l:",    StrParam("%s:_ICON", languagePointer));
+    str colored_label      = StrParam("%s:%l:\c-", PDA_Local.tierColor, languagePointer);
+    str callback           = languagePointer;
+    str tooltip            = StrParam("%l:\n%l:\n%l:",
+                                      StrParam("%s:%l:\c-", PDA_Local.tierColor, StrParam("%s:_NAME", languagePointer)),
+                                      "PDA_ASSEMBLY_REQUIREMENTS",
+                                      StrParam("%s:_REQ", languagePointer)
+    );
+
+    if (ti + 2 >= advanced_offset && PDA_Local.assemblyOffset < advanced_offset) continue;
+    if (ti + 2 >= master_offset   && PDA_Local.assemblyOffset < master_max     ) continue;
+
+    if (!PDA_CheckPlayer1Inventory(actorToken) || !CheckInventory(actorToken)) {
+        icon = "PDAUNK";
+        colored_label = StrParam(l:"PDA_ASSEMBLY_UNKNOWN");
+        callback = "";
+        tooltip = "???";
+    }
+
+    PDA_LocalButton[id] = PDA_CreateAssemblyButton(id, icon, colored_label, assemblyX, assemblyY, width, height, callback, tooltip);
+}
+
+if (PDA_Local.page > 1) {
+    PDA_LocalButton[PDA_PREV_PAGE] = PDA_CreateButton(PDA_PREV_PAGE, "Previous tier" , "A_PREV", 10.0, paginationY, 82, 16, 20, 15);
+}
+
+if (PDA_Local.page < 3) {
+    PDA_LocalButton[PDA_NEXT_PAGE] = PDA_CreateButton(PDA_NEXT_PAGE, "Next tier" , "A_NEXT", nextButtonX, paginationY, 82, 16, 20, 15);
+}

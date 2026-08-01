@@ -1,9 +1,10 @@
 #define canDisassemble weapon_checks[weapon_checks_disassemblable]
-#define isEvil weapon_checks[weapon_checks_supports_artifacts]
+#define usesArtifacts weapon_checks[weapon_checks_supports_artifacts]
 #define playerWeaponPerk PDA_Class[PlayerNumber()][pda_class_weapon_perk]
 // These offsets should only be used if using the inventory.icon graphic of the weapon, otherwise, replace or null.
 #define gfxOffsetX 120.0
 #define gfyOffsetY 0.0
+// ------
 
 #define weaponName(a) (a) ? weapon_info[weapon_info_dualname] : weapon_info[weapon_info_name]
 #define weaponDesc(a) (a) ? weapon_info[weapon_info_dualdesc] : weapon_info[weapon_info_desc]
@@ -11,20 +12,20 @@
 
 if (PDA_ScrollableNeedsDraw) {
     DisplayIconScrollable(StrParam("%l:", weapon_info[weapon_info_icon]), PDA_INFOID,
-        (int)(10.0) + X_RIGHT_EDGE,
-        20.0,
-        INF_HOLDTIME, 0.6);
+        (int)(PDA_SCREEN_X_SCALED + PDA_SCREEN_WIDTH_SCALED - 12.0) + X_LEFT_EDGE,
+        (int)(PDA_BODY_Y + 8.0),
+        INF_HOLDTIME, 0.65);
 
     PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED,
         0.0, 0.0, INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
-        l:weaponName(isEvil),
+        l:weaponName(usesArtifacts),
         s:" ",
         s:stricmp(playerWeaponPerk, "") != 0 ? StrParam("+ %s:\c-", playerWeaponPerk) : "",
         s:"\n",
         s:(canDisassemble) ? StrParam("\c[Yellow]%s:\c-\n\n", DRLA_WeaponPerkList[PDA_TECHNICIAN_PERK][PDA_PERK_NICE_NAME]) : "",
         s:weapon_info[weapon_info_armor_set_perk],
         s:"\n\n\cj",
-        l:weaponDesc(isEvil),
+        l:weaponDesc(usesArtifacts),
         s:"\c-\n"
     );
 }

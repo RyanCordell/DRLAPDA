@@ -1,0 +1,95 @@
+#define playerIconX (int)(PDA_SCREEN_X_SCALED + 20.0) + X_LEFT_EDGE
+
+#define ARM_X 10.0
+#define ARM_GAP 4
+#define isRenegade (CheckActorClass(0, CheckInventory("DRPGDRLAActive") ? "DoomRLRenegadeRPG" : "DoomRLRenegade") == true)
+
+#define equipmentSet() \
+PDA_Local.equipmentId = (PDA_WORN_EQUIPMENT - 4) + (PDA_Local.equipmentLimit * 4); \
+if (PDA_Local.equipmentLimit > PDA_MAX_EQUIPMENT_IN_INV + 1) PDA_Local.equipmentLimit = 0; \
+else PDA_Local.equipmentLimit++; \
+armorY += ARM_HEIGHT + ARM_GAP; \
+
+bool specialArmorTokens = checkSpecialArmorTokens();
+
+localArmorData          = setupArmorData(specialArmorTokens);
+localBootsData          = setupBootsData();
+localBackpackData       = setupBackpackData();
+
+// Header
+
+PDA_LocalButton[TAB1] = PDA_CreateTab(TAB1, "1", "PTAB", PDA_TAB_START_X  );
+PDA_LocalButton[TAB2] = PDA_CreateTab(TAB2, "2", "PTAB", PDA_TAB_NEXT_X(1));
+
+PDA_LocalButton[PDA_PLAYER_ARMOR_ICON]    = PDA_DisplayArmor(PDA_PLAYER_ARMOR_ICON   , ARMOR_DATA   , playerIconX + 35.0, 20.0, 16, localShowArmor    ? pulser(2.0, 0.8) : 0.7),
+PDA_LocalButton[PDA_PLAYER_BACKPACK_ICON] = PDA_DisplayArmor(PDA_PLAYER_BACKPACK_ICON, BACKPACK_DATA, playerIconX + 33.0, 45.0, 16, localShowBackpack ? pulser(2.0, 0.8) : 0.7),
+PDA_LocalButton[PDA_PLAYER_BOOTS_ICON]    = PDA_DisplayArmor(PDA_PLAYER_BOOTS_ICON   , BOOTS_DATA   , playerIconX + 30.0, 70.0, 16, localShowBoots    ? pulser(2.0, 0.8) : 0.7);
+
+// Body
+fixed armorY = PDA_Local.equipmentBaseY;
+PDA_Local.equipmentId = 0;
+PDA_Local.stopEquipmentEarly = false;
+
+// Note to future self: don't try to merge these first 5 lines for cleanliness sake. Won't work the way you wish it would.
+if (localHasArmor) {
+    equipmentSet();
+    PDA_LocalButton[PDA_Local.equipmentId] = PDA_DisplayArmor(PDA_Local.equipmentId, ARMOR_DATA, ARM_X, armorY, ARM_HEIGHT, 1.0);
+}
+
+if (localHasBoots) {
+    equipmentSet();
+    PDA_LocalButton[PDA_Local.equipmentId] = PDA_DisplayArmor(PDA_Local.equipmentId, BOOTS_DATA, ARM_X, armorY, ARM_HEIGHT, 1.0);
+}
+
+// str armorPickupCheck = "\n";
+
+for (int armorIndex = 0; armorIndex < DRLA_EQUIPMENT_MAX; armorIndex++) {
+    #define _armorToken DRLA_Equipment_List[armorIndex][armor_TOKEN]
+    #define _armorActor DRLA_Equipment_List[armorIndex][armor_ACTOR]
+
+    // armorPickupCheck = StrParam("%s:Pickup", _armorToken);
+
+    if (PDA_Local.stopEquipmentEarly) break;
+
+    if (CheckInventory(StrParam("%s:Pickup", _armorToken))) {
+        PDA_Local.equipmentId = (PDA_STASHEDEQUIPMENT - 8) + (PDA_Local.equipmentLimit * 2);
+        if (PDA_Local.equipmentLimit > PDA_MAX_EQUIPMENT_IN_INV + 1) PDA_Local.equipmentLimit = 0;
+        else PDA_Local.equipmentLimit++;
+        armorY += ARM_HEIGHT + ARM_GAP;
+
+        #define protKey (!isRenegade ? StrParam("%l:_PROT",    localArmorData.langEntry) \
+        : StrParam("%l:_RENPROT", localArmorData.langEntry))
+
+        if (StrCmp(_armorToken, StrParam("%s:Boots", StrTrim(_armorToken,0,5))) != 0) {
+            localArmorData.langEntry = StrParam("PDA_ARMOR_%s:", _armorActor);
+            localArmorData.name      = StrParam("%l:", StrParam("%l:_NAME", localArmorData.langEntry));
+            localArmorData.graphic   = StrParam("%l:", StrParam("%l:_ICON", localArmorData.langEntry));
+            localArmorData.armorAttr = StrParam("%l:", StrParam("%l:_ATTR", localArmorData.langEntry));
+            localArmorData.tooltip   = StrParam(
+                "\cdStats:\c-\n"
+                "%l:\n" // 1*
+                "%l:\n" // 2*
+                "%l:", // 3*
+                protKey,
+                StrParam("%l:_RES", localArmorData.langEntry),  // 2
+                                                localArmorData.armorAttr // 3
+            );
+            // This is set up extremely stupidly.
+            // I THINK my past intend was to assign EquipmentID to the one you clicked on..
+            PDA_LocalButton[PDA_Local.equipmentId] = PDA_DisplayArmorOverride(PDA_Local.equipmentId, localArmorData, ARM_X, armorY, ARM_HEIGHT, 0.6);
+        } else {
+            localBootsData.langEntry = StrParam("PDA_ARMOR_%s:", _armorActor);
+            localBootsData.name      = StrParam("%l:", StrParam("%l:_NAME", localBootsData.langEntry));
+            localBootsData.graphic   = StrParam("%l:", StrParam("%l:_ICON", localBootsData.langEntry));
+            localBootsData.bootsAttr = StrParam("%l:", StrParam("%l:_ATTR", localBootsData.langEntry));
+            localBootsData.tooltip   = StrParam(
+                "\cdStats:\c-\n"
+                "%l:\n\n" // 1*
+                "%l:", // 2*
+                StrParam("%l:_PROT", localBootsData.langEntry), // 1
+                                                localBootsData.bootsAttr // 2
+            );
+            PDA_LocalButton[PDA_Local.equipmentId] = PDA_DisplayBootsOverride(PDA_Local.equipmentId, localBootsData, ARM_X, armorY, ARM_HEIGHT, 0.6);
+        }
+    }
+}

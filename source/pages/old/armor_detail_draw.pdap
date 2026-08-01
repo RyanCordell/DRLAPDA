@@ -1,0 +1,43 @@
+// .. but this is _draw related..
+SetFont(PDA_FONT[mono_font]);
+switch (equipmentType) {
+    case EQUIPMENT_TYPE_ARMOR:
+        DisplayIconScrollable(localArmorData.graphic, PDA_PLAYER_ARMOR_ICON, EQUIPMENT_ICON_X, EQUIPMENT_ICON_Y, INF_HOLDTIME, OPAQUE);
+
+        PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 10.0, EQUIPMENT_TEXT_Y, INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
+            s:"\cgARMOR\c-\n",
+            s:"\crProtection:\c-\n", l:localArmorData.armorVal,
+            s:"\crResistances:\c-\n",l:localArmorData.armorRes, s:"\n",
+            s:"\crAttributes:\c-\n", l:localArmorData.armorAttr,s:"\n\n",
+            s:"\crDescription:\c-\n",l:localArmorData.armorDesc,s:"\n\n",
+            s:"\crSet bonus:\c-\n",
+            l:(PDA_Local.armorHax) ? StrParam("%l:\n\n", "PDA_ARMOR_EnclaveSetBonusActive_equipment_set_name") : "",s:" ",l:(PDA_Local.armorHax) ? StrParam("%l:\n\n", "PDA_ARMOR_EnclaveSetBonusActive_equipment_set_description") : "",
+            l:equipment_set_name,s:" ",l:equipment_set_description
+        );
+        break;
+    case EQUIPMENT_TYPE_BOOTS:
+        SetFont(PDA_FONT[mono_font]);
+        DisplayIconScrollable(localBootsData.graphic, PDA_PLAYER_BOOTS_ICON, EQUIPMENT_ICON_X, EQUIPMENT_ICON_Y, INF_HOLDTIME, OPAQUE);
+
+        PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, EQUIPMENT_TEXT_Y, INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
+            s:"\cgBOOTS\c-\n",
+            s:"\crProtection:\c-\n", l:localBootsData.bootsVal,
+            s:"\crAttributes:\c-\n", l:localBootsData.bootsAttr,s:"\n",
+            s:"\crDescription:\c-\n",l:localBootsData.bootsDesc,s:"\n"
+        );
+        break;
+    default:
+        Log("ERR: Invalid equipment type");
+        break;
+}
+
+// I don't know what's going on here
+if (localHasBackpack) {
+    SetFont(PDA_FONT[mono_font]);
+
+    PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 10.0, 40.0, INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
+                     s:"\cgBACKPACK\c-\n",
+                     s:"\crDescription:\c-\n",
+                     l:localBackpackData.backpackVal
+    );
+}

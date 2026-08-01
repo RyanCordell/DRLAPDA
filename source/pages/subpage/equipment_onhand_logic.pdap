@@ -1,0 +1,56 @@
+#define chekyWecky() \
+PDA_LocalButton[PDA_Local.equipmentId].alpha = pulser(2.0, 0.8); \
+// if (CheckBounds(PDA_LocalButton[PDA_Local.equipmentId]) && StrCmp(PDA_LocalButton[PDA_Local.equipmentId].tooltip, "") != 0 && PDA_Local.page != EQUIPMENT_PAGE_INFO) { \
+//     PDA_SetupFloatingTooltip("PTIP", PDA_LocalButton[PDA_Local.equipmentId].tooltip); \
+//     PDA_LocalButton[PDA_Local.equipmentId].alpha = 1.0; \
+// } \
+
+// Note to future self: don't try to merge these ifs for cleanliness sake. Won't work the way you wish it would.
+if (localHasArmor) {
+    chekyWecky()
+
+    switch (PDA_LocalButton[PDA_Local.equipmentId].state) {
+        case button_clicked:
+            PDA_Local.detailFetch[0] = "armor";
+            setupArmorDataOverride(checkSpecialArmorTokens(), localArmorData.langEntry);
+            PDA_SetCategory(PDA_EQUIPMENT_DETAIL);
+            break;
+    }
+}
+
+if (localHasBoots) {
+    chekyWecky()
+
+    switch (PDA_LocalButton[PDA_Local.equipmentId].state) {
+        case button_clicked:
+            PDA_Local.detailFetch[0] = "boots";
+            setupBootsDataOverride(localBootsData.langEntry);
+            PDA_SetCategory(PDA_EQUIPMENT_DETAIL);
+            break;
+    }
+}
+
+// Stashed armors
+for (int armorIndex = 0; armorIndex < DRLA_EQUIPMENT_MAX; armorIndex++) {
+    #define _armorToken DRLA_Equipment_List[armorIndex][armor_TOKEN]
+
+    if (PDA_Local.stopEquipmentEarly) break;
+
+    if (CheckInventory(StrParam("%s:Pickup", _armorToken))) {
+        deleteNoEquipmentMessage();
+
+        switch (PDA_LocalButton[PDA_Local.equipmentId].state) {
+            case button_clicked:
+                if (StrCmp(_armorToken,StrParam("%s:Boots", StrTrim(_armorToken,0,5))) != 0) {
+                    PDA_Local.detailFetch[0] = "armor";
+                    setupArmorDataOverride(checkSpecialArmorTokens(), localArmorData.langEntry);
+                } else {
+                    PDA_Local.detailFetch[0] = "boots";
+                    setupBootsDataOverride(localBootsData.langEntry);
+                }
+                PDA_SetCategory(PDA_EQUIPMENT_DETAIL);
+                PDA_Local.stopEquipmentEarly = true;
+                break;
+        }
+    }
+}
