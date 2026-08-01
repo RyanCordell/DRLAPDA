@@ -940,20 +940,20 @@ function void PDA_HasEquipment (void) {
 
 // !! When debugging button hitboxes via DrawBorder, remember to multiply X, Y, W, H with matching NEW_RESOLUTION_ variables !!
 
-function PDAButton PDA_CreateMenuButton (int id, str label, str graphic, fixed x, fixed y) {
+function PDAButton PDA_CreateMenuButton (int id, int page, str graphic, fixed x, fixed y) {
     #define thisButton PDA_LocalButton[id]
-    int width        = PDA_MENU_BTN_W;
-    int height       = PDA_MENU_BTN_H;
+    int width  = PDA_MENU_BTN_W;
+    int height = PDA_MENU_BTN_H;
 
-    assignButtonParams(thisButton, label)
-
-    fixed xlabeloff = 0.0;
-    fixed ylabeloff = 0.0;
+    assignButtonParams(thisButton, "")
 
     thisButton.type         = "menu";
     thisButton.graphic      = graphic;
     thisButton.graphicFlags = HUDMSG_ALPHA;
     thisButton.graphicID    = thisButton.id;
+
+    thisButton.actionID     = action_navigate;
+    thisButton.actionParam  = page;
 
     assignButtonPosition(thisButton.gfxPos,
         (int)(thisButton.x * NEW_RESOLUTION_X),
@@ -965,31 +965,31 @@ function PDAButton PDA_CreateMenuButton (int id, str label, str graphic, fixed x
     thisButton.textFlags    = HUDMSG_ALPHA;
     thisButton.textID       = thisButton.graphicID + 1;
     assignButtonPosition(thisButton.textPos,
-        thisButton.gfxPos[TB_X] + (xlabeloff * NEW_RESOLUTION_X),
-        (int)(thisButton.y * NEW_RESOLUTION_Y) + (int)(ylabeloff * NEW_RESOLUTION_Y),
+        thisButton.gfxPos[TB_X],
+        (int)(thisButton.y * NEW_RESOLUTION_Y),
         0.0,
         0.0
     );
-
-    thisButton.actionID = action_navigate;
-    thisButton.actionParam = 1;
 
     TraceLog("PDA_CreateMenuButton");
     return thisButton;
 }
 
-function PDAButton PDA_CreateTab (int id, str label, str graphic, fixed x) {
+function PDAButton PDA_CreateTab (int id, str label, int page, str graphic, fixed x) {
     #define thisButton PDA_LocalButton[id]
     int y      = PDA_TAB_Y;
     int width  = PDA_TAB_W;
     int height = PDA_TAB_H;
     assignButtonParams(thisButton, label)
 
-    thisButton.y       = PDA_SCREEN_Y + y; // Override as this isn't meant to scroll
-    thisButton.alpha   = 0.6;
+    thisButton.y     = PDA_SCREEN_Y + y; // Override as this isn't meant to scroll
+    thisButton.alpha = 0.6;
 
     fixed xlabeloff = 4.0;
     fixed ylabeloff = 4.0;
+
+    thisButton.actionID    = action_navigate;
+    thisButton.actionParam = page;
 
     thisButton.type          = "tab";
     thisButton.graphic       = graphic;
@@ -1142,6 +1142,8 @@ function PDAButton PDA_CreateBeastButton (int id, str label, int color, fixed x,
         }
     }
 
+    thisButton.actionID = action_navigate;
+    thisButton.actionParam = -1;
     thisButton.alpha = (thisButton.state == button_hovered) ? 1 : 0.6;
 
     thisButton.type         = "beast";
@@ -1403,16 +1405,16 @@ function PDAButton PDA_CreateModPackDisplay (int id, str graphic, fixed x, fixed
     return thisButton;
 }
 
-function void PDA_ButtonLogic (int id, int inCategory, int categoryPage, bool onlyVisual) {
+function void PDA_ButtonLogic (int id, bool onlyVisual) {
     #define thisButton PDA_LocalButton[id]
     #define buttonType PDA_LocalButton[id].type
 
     if (buttonType == "tab") {
         PDA_SetupHeaderBounds();
 
-        if (inCategory > 0 && PDA_Local.page == categoryPage) {
+        if (PDA_Local.category != PDA_MENU && PDA_Local.page == thisButton.actionParam) {
             // I wonder why I did this..
-            thisButton.state = button_hovered;
+            // thisButton.state = button_hovered;
             thisButton.alpha = 1;
         }
     }
@@ -1433,6 +1435,7 @@ function void PDA_ButtonLogic (int id, int inCategory, int categoryPage, bool on
                         thisButton.alpha = 1.0;
                     }
                 }
+                break;
             case button_clicked:
                 #include "./PDA_ACT.ach"
 
@@ -1550,8 +1553,8 @@ function void PDA_DrawButton (int id, str message, bool onlyVisual, bool clear) 
     TraceLog("PDA_DrawButton");
 }
 
-function void PDA_ButtonHandler (int id, int inCategory, int categoryPage, str message, bool onlyVisual, bool clear) {
-    PDA_ButtonLogic(id, inCategory, categoryPage, onlyVisual);
+function void PDA_ButtonHandler (int id, str message, bool onlyVisual, bool clear) {
+    PDA_ButtonLogic(id, onlyVisual);
 
     PDA_DrawButton(id, message, onlyVisual, clear);
     TraceLog("PDA_ButtonHandler");

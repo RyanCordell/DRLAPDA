@@ -1,6 +1,6 @@
 // Header
-PDA_ButtonHandler(TAB1, true, 1, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
-PDA_ButtonHandler(TAB2, true, 2, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
+PDA_ButtonHandler(TAB1, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
+PDA_ButtonHandler(TAB2, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
 
 if (PDA_LocalMouse.action == mouse_back) {
     PDA_SetCategory(PDA_MENU);
@@ -10,7 +10,7 @@ if (PDA_LocalMouse.action == mouse_back) {
 // Body
 // belongs to equipment_onhand_draw.pdap
 #define someCheck(eqId) \
-PDA_ButtonHandler(eqId, true, 1, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR); \
+PDA_ButtonHandler(eqId, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR); \
 deleteNoEquipmentMessage(); \
 // if (StrCmp(PDA_LocalButton[eqId].tooltip, "") != 0 && CheckBounds(PDA_LocalButton[eqId]) && PDA_Local.page != EQUIPMENT_PAGE_INFO) { \
 //     PDA_SetupFloatingTooltip("PTIP", PDA_LocalButton[eqId].tooltip); \
@@ -41,7 +41,7 @@ switch(PDA_Local.page) {
                 deleteNoEquipmentMessage();
                 // TODO: Maybe someday I can have this lead to a separate Equipment Detail page
                 // The source seems to say it was kind of already a thing? I have no idea..
-                PDA_ButtonHandler(PDA_Local.equipmentId[eqId], true, 1, NO_TOOLTIP, B_ONLY_VISUAL, B_NO_CLEAR);
+                PDA_ButtonHandler(PDA_Local.equipmentId[eqId], NO_TOOLTIP, B_ONLY_VISUAL, B_NO_CLEAR);
                 eqId++;
             }
         }

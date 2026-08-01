@@ -36,7 +36,7 @@ for (int armorIndex = 0, eqId = stashed_id_1; armorIndex < DRLA_EQUIPMENT_MAX; a
 /*
 #define chekyWecky(eqId) \
 PDA_LocalButton[PDA_Local.equipmentId[eqId]].alpha = pulser(2.0, 0.8); \
-PDA_ButtonHandler(PDA_Local.equipmentId[eqId], true, false, false) \
+PDA_ButtonHandler(PDA_Local.equipmentId[eqId], false, false) \
 // if (CheckBounds(PDA_LocalButton[PDA_Local.equipmentId]) && StrCmp(PDA_LocalButton[PDA_Local.equipmentId].tooltip, "") != 0 && PDA_Local.page != EQUIPMENT_PAGE_INFO) { \
 //     PDA_SetupFloatingTooltip("PTIP", PDA_LocalButton[PDA_Local.equipmentId].tooltip); \
 //     PDA_LocalButton[PDA_Local.equipmentId].alpha = 1.0; \

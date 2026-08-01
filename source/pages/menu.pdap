@@ -1,9 +1,9 @@
-PDA_ButtonHandler(PDA_PLAYERS_BUTTON,    false, PDA_CLASSES,    "Shows all available class information.\n", B_FUNCTIONAL, B_NO_CLEAR);
-PDA_ButtonHandler(PDA_WEAPONS_BUTTON,    false, PDA_WEAPONS,    "Shows all available weapon information.\nWeapon name, available modpack effects and miscellaneous info.\n", B_FUNCTIONAL, B_NO_CLEAR);
-PDA_ButtonHandler(PDA_EQUIPMENT_BUTTON,     false, PDA_EQUIPMENT,     "Shows all available armor information.\nArmor name, resistances and what have you.\n", B_FUNCTIONAL, B_NO_CLEAR);
-PDA_ButtonHandler(PDA_ASSEMBLIES_BUTTON, false, PDA_ASSEMBLIES, "Shows all learned weapon assemblies.\n", B_FUNCTIONAL, B_NO_CLEAR);
-PDA_ButtonHandler(PDA_ITEMS_BUTTON,      false, PDA_ITEMS,      "Shows all in-game items.\n", B_FUNCTIONAL, B_NO_CLEAR);
-PDA_ButtonHandler(PDA_BESTIARY_BUTTON,   false, PDA_BESTIARY,   "Shows all in-game enemies.\n", B_FUNCTIONAL, B_NO_CLEAR);
-PDA_ButtonHandler(PDA_MISC_BUTTON,       false, PDA_MISC,       "Miscellaneous options\n", B_FUNCTIONAL, B_NO_CLEAR);
-PDA_ButtonHandler(PDA_HELP_BUTTON,       false, PDA_HELP,       "Help with PDA or this mod\n", B_FUNCTIONAL, B_NO_CLEAR);
+PDA_ButtonHandler(PDA_PLAYERS_BUTTON,    "Shows all available class information.\n", B_FUNCTIONAL, B_NO_CLEAR);
+PDA_ButtonHandler(PDA_WEAPONS_BUTTON,    "Shows all available weapon information.\nWeapon name, available modpack effects and miscellaneous info.\n", B_FUNCTIONAL, B_NO_CLEAR);
+PDA_ButtonHandler(PDA_EQUIPMENT_BUTTON,  "Shows all available armor information.\nArmor name, resistances and what have you.\n", B_FUNCTIONAL, B_NO_CLEAR);
+PDA_ButtonHandler(PDA_ASSEMBLIES_BUTTON, "Shows all learned weapon assemblies.\n", B_FUNCTIONAL, B_NO_CLEAR);
+PDA_ButtonHandler(PDA_ITEMS_BUTTON,      "Shows all in-game items.\n", B_FUNCTIONAL, B_NO_CLEAR);
+PDA_ButtonHandler(PDA_BESTIARY_BUTTON,   "Shows all in-game enemies.\n", B_FUNCTIONAL, B_NO_CLEAR);
+PDA_ButtonHandler(PDA_MISC_BUTTON,       "Miscellaneous options\n", B_FUNCTIONAL, B_NO_CLEAR);
+PDA_ButtonHandler(PDA_HELP_BUTTON,       "Help with PDA or this mod\n", B_FUNCTIONAL, B_NO_CLEAR);
 

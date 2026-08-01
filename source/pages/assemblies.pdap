@@ -1,7 +1,7 @@
 // header
-PDA_ButtonHandler(TAB1, true, 1, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
-PDA_ButtonHandler(TAB2, true, 2, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
-PDA_ButtonHandler(TAB3, true, 3, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
+PDA_ButtonHandler(TAB1, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
+PDA_ButtonHandler(TAB2, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
+PDA_ButtonHandler(TAB3, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
 
 if (PDA_LocalMouse.action == mouse_back) {
     PDA_SetCategory(PDA_MENU);
@@ -17,19 +17,22 @@ for (int ti = 0, li = 1; ti <= PDA_Local.maxAssembliesPer; ti+=2, li+=2) {
     if (ti + 2 >= advanced_offset && PDA_Local.assemblyOffset < advanced_offset) continue;
     if (ti + 2 >= master_offset   && PDA_Local.assemblyOffset < master_max     ) continue;
 
-    int _incat = false;
+    // int _incat = false;
     int _catpage = PDA_ASSEMBLY_DETAIL;
     if (!PDA_CheckPlayer1Inventory(actorToken) || !CheckInventory(actorToken)) {
-        _incat = true;
+        // _incat = true;
         _catpage = PDA_Local.page;
     }
 
-    PDA_ButtonHandler(id, _incat, _catpage, "", false, false);
+    PDA_LocalButton[id].actionParam = _catpage;
+    PDA_ButtonHandler(id, "", false, false);
 }
 
 if (PDA_Local.page > 1) {
-    PDA_ButtonHandler(PDA_PREV_PAGE, true, PDA_Local.page - 1, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
+    PDA_LocalButton[PDA_PREV_PAGE].actionParam = PDA_Local.page - 1;
+    PDA_ButtonHandler(PDA_PREV_PAGE, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
 }
 if (PDA_Local.page < 3) {
-    PDA_ButtonHandler(PDA_NEXT_PAGE, true, PDA_Local.page + 1, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
+    PDA_LocalButton[PDA_PREV_PAGE].actionParam = PDA_Local.page + 1;
+    PDA_ButtonHandler(PDA_NEXT_PAGE, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
 }

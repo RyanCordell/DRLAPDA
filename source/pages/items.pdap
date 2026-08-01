@@ -1,11 +1,11 @@
 if (GetCvar("DRLA_specialstarts") != 2) {
     PDA_Local.pageMax = DRLA_GROUPQUANTITY;
 
-    PDA_ButtonHandler(TAB1, true, 1, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
-    PDA_ButtonHandler(TAB2, true, 2, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
-    PDA_ButtonHandler(TAB3, true, 3, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
-    PDA_ButtonHandler(TAB4, true, 4, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
-    PDA_ButtonHandler(TAB5, true, 5, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
+    PDA_ButtonHandler(TAB1, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
+    PDA_ButtonHandler(TAB2, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
+    PDA_ButtonHandler(TAB3, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
+    PDA_ButtonHandler(TAB4, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
+    PDA_ButtonHandler(TAB5, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
 }
 
 

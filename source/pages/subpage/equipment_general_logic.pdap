@@ -18,8 +18,8 @@ localBackpackData       = setupBackpackData();
 
 // Header
 
-PDA_LocalButton[TAB1] = PDA_CreateTab(TAB1, "1", "PTAB", PDA_TAB_START_X  );
-PDA_LocalButton[TAB2] = PDA_CreateTab(TAB2, "2", "PTAB", PDA_TAB_NEXT_X(1));
+PDA_LocalButton[TAB1] = PDA_CreateTab(TAB1, "1", 1, "PTAB", PDA_TAB_START_X  );
+PDA_LocalButton[TAB2] = PDA_CreateTab(TAB2, "2", 2, "PTAB", PDA_TAB_NEXT_X(1));
 
 PDA_LocalButton[PDA_PLAYER_ARMOR_ICON]    = PDA_DisplayArmor(PDA_PLAYER_ARMOR_ICON   , ARMOR_DATA   , playerIconX + 35.0, 20.0, 16, localShowArmor    ? pulser(2.0, 0.8) : 0.7),
 PDA_LocalButton[PDA_PLAYER_BACKPACK_ICON] = PDA_DisplayArmor(PDA_PLAYER_BACKPACK_ICON, BACKPACK_DATA, playerIconX + 33.0, 45.0, 16, localShowBackpack ? pulser(2.0, 0.8) : 0.7),
@@ -38,7 +38,7 @@ if (localHasArmor) {
 if (localHasBoots) {
     equipmentSet(worn_boots_id);
     PDA_LocalButton[PDA_Local.equipmentId[worn_boots_id]] = PDA_DisplayArmor(PDA_Local.equipmentId[worn_boots_id], BOOTS_DATA, ARM_X, armorY, ARM_HEIGHT, 1.0);
-    PDA_LocalButton[PDA_Local.equipmentId[worn_boots_id]].actionParam = (PDA_Local.page == EQUIPMENT_PAGE_ONHAND) ? localBootsData.langEntry : 3;
+    // PDA_LocalButton[PDA_Local.equipmentId[worn_boots_id]].actionParam = (PDA_Local.page == EQUIPMENT_PAGE_ONHAND) ? localBootsData.langEntry : 3;
 }
 
 // str armorPickupCheck = "\n";
@@ -77,7 +77,7 @@ for (int armorIndex = 0, eqId = stashed_id_1; armorIndex < DRLA_EQUIPMENT_MAX; a
             // This is set up extremely stupidly.
             // I THINK my past intent was to assign EquipmentID to the one you clicked on..
             PDA_LocalButton[PDA_Local.equipmentId[eqId]] = PDA_DisplayArmorOverride(PDA_Local.equipmentId[eqId], localArmorData, ARM_X, armorY, ARM_HEIGHT, 0.6);
-            PDA_LocalButton[PDA_Local.equipmentId[eqId]].actionParam = (PDA_Local.page == EQUIPMENT_PAGE_ONHAND) ? localArmorData.langEntry : 3;
+            // PDA_LocalButton[PDA_Local.equipmentId[eqId]].actionParam = (PDA_Local.page == EQUIPMENT_PAGE_ONHAND) ? localArmorData.langEntry : 3;
         } else {
             localBootsData.langEntry = StrParam("PDA_ARMOR_%s:", _armorActor);
             localBootsData.name      = StrParam("%l:", StrParam("%l:_NAME", localBootsData.langEntry));
@@ -91,7 +91,7 @@ for (int armorIndex = 0, eqId = stashed_id_1; armorIndex < DRLA_EQUIPMENT_MAX; a
                 localBootsData.bootsAttr // 2
             );
             PDA_LocalButton[PDA_Local.equipmentId[eqId]] = PDA_DisplayBootsOverride(PDA_Local.equipmentId[eqId], localBootsData, ARM_X, armorY, ARM_HEIGHT, 0.6);
-            PDA_LocalButton[PDA_Local.equipmentId[eqId]].actionParam = (PDA_Local.page == EQUIPMENT_PAGE_ONHAND) ? localBootsData.langEntry : 3;
+            // PDA_LocalButton[PDA_Local.equipmentId[eqId]].actionParam = (PDA_Local.page == EQUIPMENT_PAGE_ONHAND) ? localBootsData.langEntry : 3;
         }
         eqId++;
     }

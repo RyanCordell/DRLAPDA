@@ -10,28 +10,28 @@ localShowBoots    = (localEqBoolField & 1<<1);
 localShowBackpack = (localEqBoolField & 1<<2);
 
 if (localHasArmor) {
-    PDA_ButtonHandler(PDA_PLAYER_ARMOR_ICON, true, 2, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
-    if (PDA_LocalButton[PDA_PLAYER_ARMOR_ICON].state == button_clicked) {
-        if (localEqBoolField != 1) localEqBoolField = 1;
-    }
+    PDA_ButtonHandler(PDA_PLAYER_ARMOR_ICON, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
+    // if (PDA_LocalButton[PDA_PLAYER_ARMOR_ICON].state == button_clicked) {
+    //     if (localEqBoolField != 1) localEqBoolField = 1;
+    // }
 
     DisplayIconScrollable("PDAPARM", PDA_PLAYER_BODY_ICON, playerIconX, 40.0, 0.0, show_equipment[equipment_armor][PlayerNumber()] ? 1.0 : 0.5);
 }
 
 if (localHasBackpack) {
-    PDA_ButtonHandler(PDA_PLAYER_BACKPACK_ICON, true, 2, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
-    if (PDA_LocalButton[PDA_PLAYER_BACKPACK_ICON].state == button_clicked) {
-        if (localEqBoolField != 4) localEqBoolField = 4;
-    }
+    PDA_ButtonHandler(PDA_PLAYER_BACKPACK_ICON, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
+    // if (PDA_LocalButton[PDA_PLAYER_BACKPACK_ICON].state == button_clicked) {
+    //     if (localEqBoolField != 4) localEqBoolField = 4;
+    // }
 
     DisplayIconScrollable("PDAPBCK", PDA_PLYR_ICON - 2, playerIconX, 40.0, 0.0, show_equipment[equipment_backpack][PlayerNumber()] ? 1.0 : 0.5);
 }
 
 if (localHasBoots) {
-    PDA_ButtonHandler(PDA_PLAYER_BOOTS_ICON, true, 2, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
-    if (PDA_LocalButton[PDA_PLAYER_BOOTS_ICON].state == button_clicked) {
-        if (localEqBoolField != 2) localEqBoolField = 2;
-    }
+    PDA_ButtonHandler(PDA_PLAYER_BOOTS_ICON, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
+    // if (PDA_LocalButton[PDA_PLAYER_BOOTS_ICON].state == button_clicked) {
+    //     if (localEqBoolField != 2) localEqBoolField = 2;
+    // }
 
     DisplayIconScrollable("PDAPBTS", PDA_PLYR_ICON - 3, playerIconX, 40.0, 0.0, show_equipment[equipment_boots][PlayerNumber()] ? 1.0 : 0.5);
 }

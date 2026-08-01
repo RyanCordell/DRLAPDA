@@ -4,26 +4,26 @@
 switch (PDA_Local.category) {
   case PDA_MENU:
     #define menuButtonY(a) (PDA_BODY_Y) + (20.0 * (a))
-    PDA_LocalButton[PDA_PLAYERS_BUTTON]    = PDA_CreateMenuButton(PDA_PLAYERS_BUTTON,    "", "MPLYICO", 10.0, menuButtonY(0));
-    PDA_LocalButton[PDA_WEAPONS_BUTTON]    = PDA_CreateMenuButton(PDA_WEAPONS_BUTTON,    "", "MWEPICO", 10.0, menuButtonY(1));
-    PDA_LocalButton[PDA_EQUIPMENT_BUTTON]  = PDA_CreateMenuButton(PDA_EQUIPMENT_BUTTON,  "", "MARMICO", 10.0, menuButtonY(2));
-    PDA_LocalButton[PDA_ASSEMBLIES_BUTTON] = PDA_CreateMenuButton(PDA_ASSEMBLIES_BUTTON, "", "MASMICO", 10.0, menuButtonY(3));
-    PDA_LocalButton[PDA_ITEMS_BUTTON]      = PDA_CreateMenuButton(PDA_ITEMS_BUTTON,      "", "MITMICO", 10.0, menuButtonY(4));
-    PDA_LocalButton[PDA_BESTIARY_BUTTON]   = PDA_CreateMenuButton(PDA_BESTIARY_BUTTON,   "", "MBESICO", 10.0, menuButtonY(5));
-    PDA_LocalButton[PDA_MISC_BUTTON]       = PDA_CreateMenuButton(PDA_MISC_BUTTON,       "", "MMSCICO", 10.0, menuButtonY(6));
-    PDA_LocalButton[PDA_HELP_BUTTON]       = PDA_CreateMenuButton(PDA_HELP_BUTTON,       "", "MHLPICO", 10.0, menuButtonY(7));
+    PDA_LocalButton[PDA_PLAYERS_BUTTON]    = PDA_CreateMenuButton(PDA_PLAYERS_BUTTON,    PDA_CLASSES,    "MPLYICO", 10.0, menuButtonY(0));
+    PDA_LocalButton[PDA_WEAPONS_BUTTON]    = PDA_CreateMenuButton(PDA_WEAPONS_BUTTON,    PDA_WEAPONS,    "MWEPICO", 10.0, menuButtonY(1));
+    PDA_LocalButton[PDA_EQUIPMENT_BUTTON]  = PDA_CreateMenuButton(PDA_EQUIPMENT_BUTTON,  PDA_EQUIPMENT,  "MARMICO", 10.0, menuButtonY(2));
+    PDA_LocalButton[PDA_ASSEMBLIES_BUTTON] = PDA_CreateMenuButton(PDA_ASSEMBLIES_BUTTON, PDA_ASSEMBLIES, "MASMICO", 10.0, menuButtonY(3));
+    PDA_LocalButton[PDA_ITEMS_BUTTON]      = PDA_CreateMenuButton(PDA_ITEMS_BUTTON,      PDA_ITEMS,      "MITMICO", 10.0, menuButtonY(4));
+    PDA_LocalButton[PDA_BESTIARY_BUTTON]   = PDA_CreateMenuButton(PDA_BESTIARY_BUTTON,   PDA_BESTIARY,   "MBESICO", 10.0, menuButtonY(5));
+    PDA_LocalButton[PDA_MISC_BUTTON]       = PDA_CreateMenuButton(PDA_MISC_BUTTON,       PDA_MISC,       "MMSCICO", 10.0, menuButtonY(6));
+    PDA_LocalButton[PDA_HELP_BUTTON]       = PDA_CreateMenuButton(PDA_HELP_BUTTON,       PDA_HELP,       "MHLPICO", 10.0, menuButtonY(7));
     break;
 
   case PDA_CLASSES:
-    PDA_LocalButton[TAB1] = PDA_CreateTab(TAB1, "1", "PTAB", PDA_TAB_START_X  );
-    PDA_LocalButton[TAB2] = PDA_CreateTab(TAB2, "2", "PTAB", PDA_TAB_NEXT_X(1));
+    PDA_LocalButton[TAB1] = PDA_CreateTab(TAB1, "1", 1, "PTAB", PDA_TAB_START_X  );
+    PDA_LocalButton[TAB2] = PDA_CreateTab(TAB2, "2", 2, "PTAB", PDA_TAB_NEXT_X(1));
     break;
 
   case PDA_WEAPONS:
-    PDA_LocalButton[TAB1] = PDA_CreateTab(TAB1, "1", "PTAB", PDA_TAB_START_X  );
-    PDA_LocalButton[TAB2] = PDA_CreateTab(TAB2, "2", "PTAB", PDA_TAB_NEXT_X(1));
+    PDA_LocalButton[TAB1] = PDA_CreateTab(TAB1, "1", 1, "PTAB", PDA_TAB_START_X  );
+    PDA_LocalButton[TAB2] = PDA_CreateTab(TAB2, "2", 2, "PTAB", PDA_TAB_NEXT_X(1));
     if (canBeEvil) {
-      PDA_LocalButton[TAB3] = PDA_CreateTab(TAB3, "3", "PTAB", PDA_TAB_NEXT_X(2));
+      PDA_LocalButton[TAB3] = PDA_CreateTab(TAB3, "3", 3, "PTAB", PDA_TAB_NEXT_X(2));
     }
 
     if (PDA_Local.scrollYDelta == -1) {
@@ -91,7 +91,7 @@ switch (PDA_Local.category) {
     #include "../../pages/subpage/equipment_general_logic.pdap"
 
     if (PDA_Local.page == EQUIPMENT_PAGE_ONHAND) {
-        #include "../../pages/subpage/equipment_onhand_logic.pdap"
+      #include "../../pages/subpage/equipment_onhand_logic.pdap"
     }
     break;
 
@@ -124,8 +124,8 @@ switch (PDA_Local.category) {
     break;
 
   case PDA_HELP:
-    PDA_LocalButton[TAB1] = PDA_CreateTab(TAB1, "1", "PTAB", PDA_TAB_START_X  );
-    PDA_LocalButton[TAB2] = PDA_CreateTab(TAB2, "2", "PTAB", PDA_TAB_NEXT_X(1));
+    PDA_LocalButton[TAB1] = PDA_CreateTab(TAB1, "1", 1, "PTAB", PDA_TAB_START_X  );
+    PDA_LocalButton[TAB2] = PDA_CreateTab(TAB2, "2", 1, "PTAB", PDA_TAB_NEXT_X(1));
 
     if (PDA_Local.page == 1) {
       PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
@@ -184,11 +184,11 @@ switch (PDA_Local.category) {
 
 
   case PDA_ITEMS:
-    PDA_LocalButton[TAB1] = PDA_CreateTab(TAB1, "1" , "PTAB", PDA_TAB_START_X  );
-    PDA_LocalButton[TAB2] = PDA_CreateTab(TAB2, "2" , "PTAB", PDA_TAB_NEXT_X(1));
-    PDA_LocalButton[TAB3] = PDA_CreateTab(TAB3, "3" , "PTAB", PDA_TAB_NEXT_X(2));
-    PDA_LocalButton[TAB4] = PDA_CreateTab(TAB4, "4" , "PTAB", PDA_TAB_NEXT_X(3));
-    PDA_LocalButton[TAB5] = PDA_CreateTab(TAB5, "5" , "PTAB", PDA_TAB_NEXT_X(4));
+    PDA_LocalButton[TAB1] = PDA_CreateTab(TAB1, "1", 1, "PTAB", PDA_TAB_START_X  );
+    PDA_LocalButton[TAB2] = PDA_CreateTab(TAB2, "2", 2, "PTAB", PDA_TAB_NEXT_X(1));
+    PDA_LocalButton[TAB3] = PDA_CreateTab(TAB3, "3", 3, "PTAB", PDA_TAB_NEXT_X(2));
+    PDA_LocalButton[TAB4] = PDA_CreateTab(TAB4, "4", 4, "PTAB", PDA_TAB_NEXT_X(3));
+    PDA_LocalButton[TAB5] = PDA_CreateTab(TAB5, "5", 5, "PTAB", PDA_TAB_NEXT_X(4));
     break;
 }
 

@@ -5,9 +5,9 @@ if (PDA_Local.page > 1 && PDA_Local.page < 3) {
     nextButtonX = PDA_SCREEN_WIDTH_SCALED + PDA_SCREEN_X_SCALED - 82;
 }
 
-PDA_LocalButton[TAB1] = PDA_CreateTab(TAB1, "1", "PTAB", PDA_TAB_START_X  );
-PDA_LocalButton[TAB2] = PDA_CreateTab(TAB2, "2", "PTAB", PDA_TAB_NEXT_X(1));
-PDA_LocalButton[TAB3] = PDA_CreateTab(TAB3, "3", "PTAB", PDA_TAB_NEXT_X(2));
+PDA_LocalButton[TAB1] = PDA_CreateTab(TAB1, "1", 1, "PTAB", PDA_TAB_START_X  );
+PDA_LocalButton[TAB2] = PDA_CreateTab(TAB2, "2", 2, "PTAB", PDA_TAB_NEXT_X(1));
+PDA_LocalButton[TAB3] = PDA_CreateTab(TAB3, "3", 3, "PTAB", PDA_TAB_NEXT_X(2));
 
 PDA_LocalButton[PDA_PREV_PAGE] = PDA_CreateButton(PDA_PREV_PAGE, "Previous tier", "A_PREV",        10.0, paginationY, 82, 16, 20, 15);
 PDA_LocalButton[PDA_NEXT_PAGE] = PDA_CreateButton(PDA_NEXT_PAGE, "Next tier"    , "A_NEXT", nextButtonX, paginationY, 82, 16, 20, 15);
