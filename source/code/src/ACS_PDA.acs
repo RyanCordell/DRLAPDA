@@ -14,7 +14,7 @@
 global str 43:weaponval;
 global str 44:armorval;
 
-
+#include "ACS_WRT.acs"
 
 function void DebugIDs (void) {
     log("PDA_CURSORID=%d:",PDA_CURSORID);
@@ -376,6 +376,7 @@ function void PDA_SetDisplay(int state) {
 
             break;
     }
+    ACS_NamedExecuteAlways("DRLA_UpdateINI", 0);
     PDA_SetFullDirty();
 }
 
@@ -586,7 +587,5 @@ SCRIPT "PDA_Core" (void) {
     }
     SetHudClipRect(0,0,0,0,0);
 }
-
-#include "ACS_WRT.acs"
 
 // EOF

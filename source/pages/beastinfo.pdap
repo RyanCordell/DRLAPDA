@@ -1,4 +1,4 @@
-if (PDA_LocalMouse.action == mouse_back) {
+if (userWentBack) {
     PDA_SetCategory(PDA_BESTIARY);
     PDA_SetPage(PDA_Local.prevPage);
 }

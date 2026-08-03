@@ -49,7 +49,7 @@ switch (thisButton.actionID) {
     case action_show_equipment_detail:
         if (localHasArmor || thisButton.actionParam == 1) {
             PDA_Local.detailFetch[0] = "armor";
-            setupArmorDataOverride(checkSpecialArmorTokens(), localArmorData.langEntry);
+            setupArmorData(checkSpecialArmorTokens(), localArmorData.langEntry);
             // PDA_SetCategory(PDA_EQUIPMENT_DETAIL);
         }
 
@@ -61,11 +61,16 @@ switch (thisButton.actionID) {
 
         if (localHasBoots || thisButton.actionParam == 2) {
             PDA_Local.detailFetch[0] = "boots";
-            setupBootsDataOverride(localBootsData.langEntry);
+            setupBootsData(localBootsData.langEntry);
             // PDA_SetCategory(PDA_EQUIPMENT_DETAIL);
         }
 
         PDA_SetCategory(PDA_EQUIPMENT_DETAIL);
         PDA_Local.stopEquipmentEarly = true;
+        break;
+    case action_open_assembly:
+        if (StrCmp(PDA_Local.detailFetch[0], "") != 0) {
+            PDA_SetCategory(PDA_EQUIPMENT_DETAIL);
+        }
         break;
 }

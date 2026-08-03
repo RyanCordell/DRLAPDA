@@ -1,4 +1,4 @@
-if (PDA_LocalMouse.action == mouse_back) {
+if (userWentBack) {
     if (PDA_Local.page > 1) {
         PDA_SetPage(1);
     } else {

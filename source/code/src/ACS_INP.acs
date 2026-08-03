@@ -12,6 +12,8 @@
 #define VMAX (PDA_SCREEN_HEIGHT + PDA_SCREEN_Y - 7)
 
 function void handleClicks (void) {
+    PDA_LocalMouse.action = mouse_none;
+
     if (holdingAction) {
         ++PDA_LocalMouse.mtic;
 
@@ -22,7 +24,6 @@ function void handleClicks (void) {
     }
 
     if (pressedBack) {
-        // if (PDA_LocalMouse.m2) {
         PDA_LocalMouse.state = cursor_default;
         PDA_LocalMouse.action = mouse_back;
         PDA_PlaySound("UI/PDA/Cancel", "pda/soldier", 80);
@@ -31,7 +32,6 @@ function void handleClicks (void) {
     }
 
     if (!PDA_LocalMouse.m1 && !PDA_LocalMouse.m2) {
-        PDA_LocalMouse.action = mouse_none;
         if (PDA_LocalMouse.mtic > 0) PDA_LocalMouse.mtic = 0;
     }
 }

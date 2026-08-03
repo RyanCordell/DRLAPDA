@@ -7,7 +7,7 @@ if (canBeEvil) {
 }
 PDA_SetupScreenBounds();
 
-if (PDA_LocalMouse.action == mouse_back) {
+if (userWentBack) {
     PDA_SetCategory(PDA_MENU);
     PDA_SetPage(1);
 }

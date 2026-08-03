@@ -1,2 +1,56 @@
-PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, 10.0, 40.0, INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
-        s:"\cgOwO\c-\n");
+// Selected armor display
+if (userWentBack) {
+    PDA_SetCategory(PDA_EQUIPMENT);
+}
+
+
+SetFont(PDA_FONT[mono_font]);
+
+#define isEquipment(a) (stricmp(PDA_Local.detailFetch[0], (a)) == 0)
+
+#define detailTX 10.0
+#define detailTY 20.0
+
+#define detailGX (int)((PDA_BODY_X + detailTX + 14.0) * NEW_RESOLUTION_X)
+#define detailGY (int)((detailTY - 5.0) * NEW_RESOLUTION_X)
+
+if (isEquipment("armor")) {
+    DisplayIconScrollable(localArmorData.graphic, PDA_INFO3ID, detailGX, detailGY, 0.0, 1.0);
+
+    PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, detailTX, detailTY, INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
+        s:"\cgARMOR\c-\n",
+        s:"\crProtection:\c-\n",
+        l:localArmorData.armorVal,
+        s:"\crResistances:\c-\n",
+        l:StrParam("%l:\n", localArmorData.armorRes),
+        s:"\crAttributes:\c-\n",
+        l:StrParam("%l:\n\n", localArmorData.armorAttr),
+        s:"\crDescription:\c-\n",
+        s:" ", l:StrParam(" %l:\n\n", localArmorData.armorDesc),
+        s:"\crSet bonus:\c-\n",
+        s:" ", l:(PDA_Local.armorHax) ? StrParam("%l:\n\n", "PDA_ARMOR_EnclaveSetBonusActive_equipment_set_name") : "",
+        s:" ", l:(PDA_Local.armorHax) ? StrParam("%l:\n\n", "PDA_ARMOR_EnclaveSetBonusActive_equipment_set_description") : "",
+        s:" ", l:"N/A\n",
+        s:" ", l:"\n\n"
+    );
+} else if (isEquipment("boots")) {
+    DisplayIconScrollable(localBootsData.graphic, PDA_INFO3ID, detailGX, detailGY, 0.0, 1.0);
+
+    PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, detailTX, detailTY, INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
+        s:"\cgBOOTS\c-\n",
+        s:"\crProtection:\c-\n",
+        l:localBootsData.bootsVal,
+        s:"\crAttributes:\c-\n",
+        l:StrParam("%l:\n", localBootsData.bootsAttr),
+        s:"\crDescription:\c-\n",
+        l:StrParam("%l:\n", localBootsData.bootsDesc)
+    );
+} else if (isEquipment("backpack")) {
+    DisplayIconScrollable(localBackpackData.graphic, PDA_INFO3ID, detailGX, detailGY, 0.0, 1.0);
+
+    PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO2ID, CR_UNTRANSLATED, detailTX, detailTY, INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
+        s:"\cgBACKPACK\c-\n",
+        s:"\crDescription:\c-\n",
+        l:localBackpackData.backpackVal
+    );
+}

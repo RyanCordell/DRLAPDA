@@ -20,6 +20,15 @@
 
 #define pulser(a, b) (b ? b : 0.59) + sin(Timer() * 0.99) / (a)
 
+#define fetchEntry(a, b) StrParam("%l:", StrParam(a, (b)))
+
+
+#define _armorToken DRLA_Equipment_List[armorIndex][armor_TOKEN]
+#define _armorActor DRLA_Equipment_List[armorIndex][armor_ACTOR]
+
+#define equipmentIsBoots \
+    StrCmp(_armorToken, StrParam("%s:Boots", StrTrim(_armorToken,0,5))) == 0 \
+
 #define setAssemblyData() \
     master_max = 0; \
     all_assemblies = StrParam(l:"PDA_ASSEMBLIES"); \
@@ -68,17 +77,26 @@
 #define _ACTION (BT_ATTACK|BT_USE)
 #define _BACK   (BT_ALTATTACK|BT_JUMP)
 
-#define pressedAction \
-    PDA_LocalMouse.m1 && !(PDA_LocalMouse.oldState & _ACTION) \
 
 #define pressedBack \
     PDA_LocalMouse.m2 && !(PDA_LocalMouse.oldState & _BACK) \
+
+#define holdingBack \
+    PDA_LocalMouse.m2 && (PDA_LocalMouse.oldState & _BACK) \
+
+
+#define pressedAction \
+    PDA_LocalMouse.m1 && !(PDA_LocalMouse.oldState & _ACTION) \
 
 #define holdingAction \
     PDA_LocalMouse.m1 && (PDA_LocalMouse.oldState & _ACTION) \
 
 #define notHoldingAction \
     !PDA_LocalMouse.m1 && (PDA_LocalMouse.oldState & _ACTION)\
+
+#define buttonStoppedHovering (thisButton.oldState == button_hovered && thisButton.state != button_hovered)
+
+#define userWentBack (PDA_LocalMouse.action == mouse_back)
 
 #define PDA_SetDirty()          PDA_Local.dirty = true;
 #define PDA_SetScrollDirty()    PDA_Local.scrollDirty = true;
@@ -102,6 +120,7 @@
 #define PDA_NeedsDraw (PDA_Local.dirty)
 #define PDA_ScrollableNeedsDraw (PDA_Local.dirty || PDA_Local.scrollDirty)
 
+// do {} while(0) to help prevent dangling-else and similar stealth problems
 #define TraceLog(message) do { \
 if (TraceDebug) log(s:(message)); \
 } while(0) \
@@ -184,10 +203,11 @@ for (int t = 0; t < DRLA_DIFFICULTYTIERS; t++) { \
 
 #define abs(a) (a < 0 ? -a : a)
 
+
 #define CheckBounds(a) \
 PDA_LocalMouse.x >= (a).x - 1 && PDA_LocalMouse.x <= (a).x + (a).width \
 && \
-PDA_LocalMouse.y >= ((a).y + RAW_SCROLL) - 2 && PDA_LocalMouse.y <= ((a).y + RAW_SCROLL) + (a).height \
+PDA_LocalMouse.y >= ((a).y + ((a).type != "tab" ? RAW_SCROLL : 0)) - 2 && PDA_LocalMouse.y <= ((a).y + ((a).type != "tab" ? RAW_SCROLL : 0)) + (a).height \
 
 #define PDA_PlaySound(PDA_Sound, soldier, volume) \
 LocalAmbientSound(!GetCVar("DRLA_PDA_soldier") ? PDA_Sound : soldier, volume); \

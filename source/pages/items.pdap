@@ -9,7 +9,7 @@ if (GetCvar("DRLA_specialstarts") != 2) {
 }
 
 
-if (PDA_LocalMouse.action == mouse_back) {
+if (userWentBack) {
     PDA_SetCategory(PDA_MENU);
     PDA_SetPage(1);
 }

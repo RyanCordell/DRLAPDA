@@ -24,7 +24,6 @@ print PDA_Hud(
     ACS_PrintPropertyBase()
 );
 
-// do {} while(0) to help prevent dangling-else and similar stealth problems
 
 function int str_find(str haystack, str needle, int index) {
     int i           = index;
@@ -45,7 +44,9 @@ function int str_find(str haystack, str needle, int index) {
                     break;
                 }
             }
-            return (!remaining) ? i : -1;
+            // return (!remaining) ? i : -1;
+            if (!remaining) return i;
+            else break;
         }
         i++;
     }
@@ -425,7 +426,16 @@ function str stringifyButtonState (int state) {
 function void PDA_SetupFloatingTooltip (str graphic, str tooltip) {
     // if (!PDA_ScrollableNeedsDraw) return;
 
-    int _xTemp = (PDA_SCREEN_X_SCALED + PDA_SCREEN_WIDTH_SCALED) / 2;
+    if (StrLen(graphic) == 0 || StrLen(tooltip) == 0) {
+        HudMessage(s:" "; HUDMSG_ALPHA, PDA_TOOLTIPGFX, CR_UNTRANSLATED,
+                   0.0, 0.0, INF_HOLDTIME, 0.0);
+        HudMessage(s:" "; HUDMSG_ALPHA, PDA_TOOLTIPID, CR_UNTRANSLATED,
+                   0.0, 0.0,INF_HOLDTIME, 0.0);
+        PDA_SetupScreenBounds();
+        return;
+    }
+
+    int _xTemp = (PDA_SCREEN_X_SCALED + PDA_SCREEN_WIDTH_SCALED) / 3;
     int _yTemp = (PDA_SCREEN_Y_SCALED + 32);
 
     SetFont(graphic);
@@ -458,20 +468,32 @@ function void PDA_SetScrollArrows (int scrollDownMax, int scrollUpMax) {
 }
 
 
-
-function PDA_ArmorData setupArmorData (int specialArmorTokens) {
+function PDA_ArmorData setupArmorData (int specialArmorTokens, str langEntry) {
     #define armorActor DRLA_Equipment_List[localArmorIndex][armor_ACTOR]
-
+    bool noLangEntry = (StrCmp(langEntry, "") == 0);
+    // feels silly to check explicitly for true
     bool renegade_check = CheckActorClass(0, CheckInventory("DRPGDRLAActive") ? "DoomRLRenegadeRPG" : "DoomRLRenegade") == true;
 
-    if (specialArmorTokens) {
-        if (CheckInventory("RLEnclaveSetBonusActive")) localArmorData.langEntry = StrParam("PDA_ARMOR_%s:COMPLETE", armorActor);
-        else                                           localArmorData.langEntry = StrParam("PDA_ARMOR_BOOSTED_%s:", armorActor);
+    str _le = (noLangEntry ? StrParam("PDA_ARMOR_%s:", armorActor) : langEntry);
 
-        localArmorData.armorRes  = StrParam("%l:", StrParam("%l:_RES", localArmorData.langEntry));
+    if (specialArmorTokens) {
+        if (noLangEntry) {
+            if (CheckInventory("RLEnclaveSetBonusActive")) {
+                _le = StrParam("PDA_ARMOR_%s:COMPLETE", armorActor);
+                localArmorData.langEntry = _le;
+            } else {
+                _le = StrParam("PDA_ARMOR_BOOSTED_%s:", armorActor);
+                localArmorData.langEntry = _le;
+            }
+        }
+        localArmorData.langEntry = _le;
+        localArmorData.armorRes  = StrParam("%l:", StrParam("%l:_RES", _le));
     } else {
-        localArmorData.langEntry = StrParam("PDA_ARMOR_%s:", armorActor);
-        localArmorData.armorRes  = StrParam("%l:", StrParam("%l:_RES", localArmorData.langEntry));
+        if (noLangEntry) {
+            _le = StrParam("PDA_ARMOR_%s:", armorActor);
+        }
+        localArmorData.langEntry = _le;
+        localArmorData.armorRes  = StrParam("%l:", StrParam("%l:_RES", _le));
 
         if (CheckInventory("PowerRLReactiveShieldSystemMelee"))
             localArmorData.armorRes = "PDA_ARMOR_REACTIVESHIELDSYSTEM_MELEE";
@@ -486,167 +508,103 @@ function PDA_ArmorData setupArmorData (int specialArmorTokens) {
             localArmorData.armorRes = "PDA_ARMOR_REACTIVESHIELDSYSTEM_PLASMA";
     }
 
-    if (specialArmorTokens && stricmp(strLeft(DRLA_Equipment_List[localArmorIndex][armor_TOKEN], 17), "RLCyberneticArmor") == 0) {
+    if (specialArmorTokens &&
+        stricmp(strLeft(DRLA_Equipment_List[localArmorIndex][armor_TOKEN], 17), "RLCyberneticArmor") == 0) {
         localArmorData.name      = StrParam("%l:", "PDA_ARMOR_CYBERNETICARMOR_NAME");
         localArmorData.graphic   = StrParam("%l:", "PDA_ARMOR_CYBERNETICARMOR_ICON");
         localArmorData.armorAttr = StrParam("%l:", "PDA_ARMOR_CYBERNETICARMOR_ATTR");
         localArmorData.armorDesc = StrParam("%l:", "PDA_ARMOR_CYBERNETICARMOR_DESC");
         localArmorData.armorVal  = StrParam("%l:\n\n",
-                (!renegade_check) ? "PDA_ARMOR_CYBERNETICARMOR_PROT" : "PDA_ARMOR_CYBERNETICARMOR_RENPROT");
+                                        (!renegade_check) ? "PDA_ARMOR_CYBERNETICARMOR_PROT" : "PDA_ARMOR_CYBERNETICARMOR_RENPROT");
 
-        if (CheckInventory("RLCyberneticArmorModdedToken")) {
-            if (CheckInventory("RLCyberneticArmorBulkToken"))      localArmorData.armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORBULK_RES";
-            if (CheckInventory("RLCyberneticArmorPowerToken"))     localArmorData.armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORPOWER_RES";
-            if (CheckInventory("RLCyberneticArmorAgilityToken"))   localArmorData.armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORAGILITY_RES";
-            if (CheckInventory("RLCyberneticArmorTechnicalToken")) localArmorData.armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORTECHNICAL_RES";
-            if (CheckInventory("RLCyberneticArmorSniperToken"))    localArmorData.armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORSNIPER_RES";
-            if (CheckInventory("RLCyberneticArmorFirestormToken")) localArmorData.armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORFIRESTORM_RES";
-            if (CheckInventory("RLCyberneticArmorNanoToken"))      localArmorData.armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORNANO_RES";
-            if (CheckInventory("RLCyberneticArmorOnyxToken"))      localArmorData.armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORONYX_RES";
+    if (CheckInventory("RLCyberneticArmorModdedToken")) {
+        if (CheckInventory("RLCyberneticArmorBulkToken"))      localArmorData.armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORBULK_RES";
+        if (CheckInventory("RLCyberneticArmorPowerToken"))     localArmorData.armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORPOWER_RES";
+        if (CheckInventory("RLCyberneticArmorAgilityToken"))   localArmorData.armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORAGILITY_RES";
+        if (CheckInventory("RLCyberneticArmorTechnicalToken")) localArmorData.armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORTECHNICAL_RES";
+        if (CheckInventory("RLCyberneticArmorSniperToken"))    localArmorData.armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORSNIPER_RES";
+        if (CheckInventory("RLCyberneticArmorFirestormToken")) localArmorData.armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORFIRESTORM_RES";
+        if (CheckInventory("RLCyberneticArmorNanoToken"))      localArmorData.armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORNANO_RES";
+        if (CheckInventory("RLCyberneticArmorOnyxToken"))      localArmorData.armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORONYX_RES";
+    }
+
+    localArmorData.tooltip   = StrParam("%l:\n%l:\n%l:",
+                                        (!renegade_check) ? "PDA_ARMOR_CYBERNETICARMOR_PROT" : "PDA_ARMOR_CYBERNETICARMOR_RENPROT", localArmorData.armorRes, localArmorData.armorAttr);
+        } else {
+            localArmorData.name      = fetchEntry("%l:_NAME", _le);
+            localArmorData.graphic   = fetchEntry("%l:_ICON", _le);
+            localArmorData.armorAttr = fetchEntry("%l:_ATTR", _le);
+            localArmorData.armorDesc = fetchEntry("%l:_DESC", _le);
+            localArmorData.armorVal  = StrParam("%l:\n\n",
+                                                (!renegade_check) ? StrParam("%l:_PROT", _le)
+                                                : StrParam("%l:_RENPROT", _le));
+            localArmorData.tooltip   = StrParam(
+                "\cdStats:\c-\n"
+                "%l:\n"
+                "%l:\n"
+                "%l:",
+                (!renegade_check) ? StrParam("%l:_PROT", _le)
+                : StrParam("%l:_RENPROT", _le),
+                                                localArmorData.armorRes, localArmorData.armorAttr
+            );
         }
 
-        localArmorData.tooltip   = StrParam("%l:\n%l:\n%l:",
-                (!renegade_check) ? "PDA_ARMOR_CYBERNETICARMOR_PROT" : "PDA_ARMOR_CYBERNETICARMOR_RENPROT", localArmorData.armorRes, localArmorData.armorAttr);
-    } else {
-        localArmorData.name      = StrParam("%l:", StrParam("%l:_NAME", localArmorData.langEntry));
-        localArmorData.graphic   = StrParam("%l:", StrParam("%l:_ICON", localArmorData.langEntry));
-        localArmorData.armorAttr = StrParam("%l:", StrParam("%l:_ATTR", localArmorData.langEntry));
-        localArmorData.armorDesc = StrParam("%l:", StrParam("%l:_DESC", localArmorData.langEntry));
-        localArmorData.armorVal  = StrParam("%l:\n\n",
-                    (!renegade_check) ? StrParam("%l:_PROT", localArmorData.langEntry)
-                                    : StrParam("%l:_RENPROT", localArmorData.langEntry));
-        localArmorData.tooltip   = StrParam(
-            "\cdStats:\c-\n"
-            "%l:\n"
-            "%l:\n"
-            "%l:",
-            (!renegade_check) ? StrParam("%l:_PROT", localArmorData.langEntry)
-                            : StrParam("%l:_RENPROT", localArmorData.langEntry),
-            localArmorData.armorRes, localArmorData.armorAttr
-        );
-    }
-
-    return localArmorData;
-
-    TraceLog("setupArmorData");
+        TraceLog("setupArmorData");
+        return localArmorData;
 }
 
-function PDA_ArmorData setupArmorDataOverride (int specialArmorTokens, str langEntry) {
-    #define armorActor DRLA_Equipment_List[localArmorIndex][armor_ACTOR]
-
-    bool renegade_check = CheckActorClass(0, CheckInventory("DRPGDRLAActive") ? "DoomRLRenegadeRPG" : "DoomRLRenegade") == true;
-
-    if (specialArmorTokens) {
-        localArmorData.armorRes  = StrParam("%l:", StrParam("%l:_RES", langEntry));
-    } else {
-        localArmorData.armorRes  = StrParam("%l:", StrParam("%l:_RES", langEntry));
-
-        if (CheckInventory("PowerRLReactiveShieldSystemMelee"))
-            localArmorData.armorRes = "PDA_ARMOR_REACTIVESHIELDSYSTEM_MELEE";
-
-        if (CheckInventory("PowerRLReactiveShieldSystemBullet"))
-            localArmorData.armorRes = "PDA_ARMOR_REACTIVESHIELDSYSTEM_BULLET";
-
-        if (CheckInventory("PowerRLReactiveShieldSystemFire"))
-            localArmorData.armorRes = "PDA_ARMOR_REACTIVESHIELDSYSTEM_FIRE";
-
-        if (CheckInventory("PowerRLReactiveShieldSystemPlasma"))
-            localArmorData.armorRes = "PDA_ARMOR_REACTIVESHIELDSYSTEM_PLASMA";
-    }
-
-    if (specialArmorTokens && stricmp(strLeft(DRLA_Equipment_List[localArmorIndex][armor_TOKEN], 17), "RLCyberneticArmor") == 0) {
-        localArmorData.name      = StrParam("%l:", "PDA_ARMOR_CYBERNETICARMOR_NAME");
-        localArmorData.graphic   = StrParam("%l:", "PDA_ARMOR_CYBERNETICARMOR_ICON");
-        localArmorData.armorAttr = StrParam("%l:", "PDA_ARMOR_CYBERNETICARMOR_ATTR");
-        localArmorData.armorDesc = StrParam("%l:", "PDA_ARMOR_CYBERNETICARMOR_DESC");
-        localArmorData.armorVal  = StrParam("%l:\n\n",
-                (!renegade_check) ? "PDA_ARMOR_CYBERNETICARMOR_PROT" : "PDA_ARMOR_CYBERNETICARMOR_RENPROT");
-
-        if (CheckInventory("RLCyberneticArmorModdedToken")) {
-            if (CheckInventory("RLCyberneticArmorBulkToken"))      localArmorData.armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORBULK_RES";
-            if (CheckInventory("RLCyberneticArmorPowerToken"))     localArmorData.armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORPOWER_RES";
-            if (CheckInventory("RLCyberneticArmorAgilityToken"))   localArmorData.armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORAGILITY_RES";
-            if (CheckInventory("RLCyberneticArmorTechnicalToken")) localArmorData.armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORTECHNICAL_RES";
-            if (CheckInventory("RLCyberneticArmorSniperToken"))    localArmorData.armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORSNIPER_RES";
-            if (CheckInventory("RLCyberneticArmorFirestormToken")) localArmorData.armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORFIRESTORM_RES";
-            if (CheckInventory("RLCyberneticArmorNanoToken"))      localArmorData.armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORNANO_RES";
-            if (CheckInventory("RLCyberneticArmorOnyxToken"))      localArmorData.armorRes = "PDA_ARMOR_BOOSTED_CYBERNETICARMORONYX_RES";
-        }
-
-        localArmorData.tooltip   = StrParam("%l:\n%l:\n%l:",
-                (!renegade_check) ? "PDA_ARMOR_CYBERNETICARMOR_PROT" : "PDA_ARMOR_CYBERNETICARMOR_RENPROT", localArmorData.armorRes, localArmorData.armorAttr);
-    } else {
-        localArmorData.name      = StrParam("%l:", StrParam("%l:_NAME", langEntry));
-        localArmorData.graphic   = StrParam("%l:", StrParam("%l:_ICON", langEntry));
-        localArmorData.armorAttr = StrParam("%l:", StrParam("%l:_ATTR", langEntry));
-        localArmorData.armorDesc = StrParam("%l:", StrParam("%l:_DESC", langEntry));
-        localArmorData.armorVal  = StrParam("%l:\n\n",
-                    (!renegade_check) ? StrParam("%l:_PROT", langEntry)
-                                    : StrParam("%l:_RENPROT", langEntry));
-        localArmorData.tooltip   = StrParam(
-            "\cdStats:\c-\n"
-            "%l:\n"
-            "%l:\n"
-            "%l:",
-            (!renegade_check) ? StrParam("%l:_PROT", langEntry)
-                            : StrParam("%l:_RENPROT", langEntry),
-            localArmorData.armorRes, localArmorData.armorAttr
-        );
-    }
-
-    TraceLog("setupArmorDataOverride");
-    return localArmorData;
-}
-
-function PDA_BootsData setupBootsData (void) {
+function PDA_BootsData setupBootsData (str langEntry) {
     #define bootsActor DRLA_Equipment_List[localBootsIndex][armor_ACTOR]
 
-    localBootsData.langEntry = StrParam("PDA_ARMOR_%s:", bootsActor);
-    localBootsData.bootsVal  = StrParam("%l:\n\n", StrParam("%l:_PROT", CheckInventory("RLEnclaveSetBonusActive") ? StrParam("PDA_ARMOR_BOOSTED_%s:", bootsActor) : localBootsData.langEntry));
-    localBootsData.name      = StrParam("%l:", StrParam("%l:_NAME", localBootsData.langEntry));
-    localBootsData.graphic   = StrParam("%l:", StrParam("%l:_ICON", localBootsData.langEntry));
-    localBootsData.bootsAttr = StrParam("%l:", StrParam("%l:_ATTR", localBootsData.langEntry));
-    localBootsData.bootsDesc = StrParam("%l:", StrParam("%l:_DESC", localBootsData.langEntry));
-    localBootsData.tooltip   = StrParam(
-        "\cdStats:\c-\n"
-        "%l:\n\n"
-        "%l:",
-        StrParam("%l:_PROT", localBootsData.langEntry),
-        localBootsData.bootsAttr
-    );
+    str _le = (StrLen(langEntry) == 0) ? StrParam("PDA_ARMOR_%s:", bootsActor) : langEntry;
+
+    // GENERICARMOR - aka the default 'null' option, can be technically picked up in the test map, but..
+    // We shouldn't display it, maybe we can return a sort of "error" display instead?
+    // Tis a mystery..
+
+    // TODO: Create unknown equipment icon
+
+    // if (stricmp(bootsActor, "GENERIC") != 0 && stricmp(langEntry, "GENERIC") != 0) {
+    if (str_find(bootsActor, "GENERIC", 0) != -1 && str_find(langEntry, "GENERIC", 0) != -1) {
+        localBootsData.langEntry = "";
+        localBootsData.bootsVal  = "";
+        localBootsData.graphic   = "PDAUNK";
+        localBootsData.name      = StrParam(l:"PDA_ASSEMBLY_UNKNOWN");
+        localBootsData.bootsAttr = "";
+        localBootsData.bootsDesc = "";
+        localBootsData.tooltip   = StrParam(
+            "\cgERROR:\c-\n"
+            "Equipment unknown!"
+        );
+    } else {
+        localBootsData.langEntry = _le;
+        localBootsData.bootsVal  = StrParam("%l:\n\n", StrParam("%l:_PROT", CheckInventory("RLEnclaveSetBonusActive") ? StrParam("PDA_ARMOR_BOOSTED_%s:", bootsActor) : _le));
+        localBootsData.name      = fetchEntry("%l:_NAME", _le);
+        localBootsData.graphic   = fetchEntry("%l:_ICON", _le);
+        localBootsData.bootsAttr = fetchEntry("%l:_ATTR", _le);
+        localBootsData.bootsDesc = fetchEntry("%l:_DESC", _le);
+        localBootsData.tooltip   = StrParam(
+            "\cdStats:\c-\n"
+            "%l:\n\n"
+            "%l:",
+            StrParam("%l:_PROT", _le),
+            localBootsData.bootsAttr
+        );
+    }
 
     TraceLog("setupBootsData");
-    return localBootsData;
-}
 
-function PDA_BootsData setupBootsDataOverride (str langEntry) {
-    #define bootsActor DRLA_Equipment_List[localBootsIndex][armor_ACTOR]
-
-    localBootsData.bootsVal  = StrParam("%l:\n\n", StrParam("%l:_PROT", CheckInventory("RLEnclaveSetBonusActive") ? StrParam("PDA_ARMOR_BOOSTED_%s:", bootsActor) : langEntry));
-    localBootsData.name      = StrParam("%l:", StrParam("%l:_NAME", langEntry));
-    localBootsData.graphic   = StrParam("%l:", StrParam("%l:_ICON", langEntry));
-    localBootsData.bootsAttr = StrParam("%l:", StrParam("%l:_ATTR", langEntry));
-    localBootsData.bootsDesc = StrParam("%l:", StrParam("%l:_DESC", langEntry));
-    localBootsData.tooltip   = StrParam(
-        "\cdStats:\c-\n"
-        "%l:\n\n"
-        "%l:",
-        StrParam("%l:_PROT", langEntry),
-        localBootsData.bootsAttr
-    );
-
-    TraceLog("setupBootsDataOverride");
     return localBootsData;
 }
 
 function PDA_BackpackData setupBackpackData (void) {
     #define backpackIndex DRLA_BackpackList[localBackpackIndex][1]
 
-    localBackpackData.name    = StrParam("%l:", StrParam("PDA_BACKPACK_%s:_NAME", backpackIndex));
-    localBackpackData.graphic = StrParam("%l:", StrParam("PDA_BACKPACK_%s:_ICON", backpackIndex));
+    localBackpackData.name    = fetchEntry("PDA_BACKPACK_%s:_NAME", backpackIndex);
+    localBackpackData.graphic = fetchEntry("PDA_BACKPACK_%s:_ICON", backpackIndex);
     localBackpackData.tooltip = "";
 
-    localBackpackData.backpackVal = StrParam("%l:", StrParam("PDA_BACKPACK_%s:_DESC", backpackIndex));
+    localBackpackData.backpackVal = fetchEntry("PDA_BACKPACK_%s:_DESC", backpackIndex);
 
     TraceLog("setupBackpackData");
     return localBackpackData;
@@ -692,8 +650,8 @@ function void PDA_SetDataPerPage (void) {
             break;
         case PDA_EQUIPMENT:
             bool specialArmorTokens   = checkSpecialArmorTokens();
-            localArmorData            = setupArmorData(specialArmorTokens);
-            localBootsData            = setupBootsData();
+            localArmorData            = setupArmorData(specialArmorTokens, "");
+            localBootsData            = setupBootsData("");
             localBackpackData         = setupBackpackData();
             // bool isRenegade = (CheckActorClass(0, CheckInventory("DRPGDRLAActive") ? "DoomRLRenegadeRPG" : "DoomRLRenegade") == true);
             switch (PDA_Local.page) {
@@ -830,7 +788,18 @@ function void PDA_ChangeScrolling (void) {
             break;
 
         case PDA_ASSEMBLIES:
-            PDA_SetScrollWindow((int)(-8 * PDA_Local.maxAssembliesPer), PDA_SCROLL_TOP);
+            switch (PDA_Local.page) {
+                case ASSEMBLY_PAGE_BASIC:
+                    PDA_SetScrollWindow((int)(-2 * advanced_offset - 1), PDA_SCROLL_TOP);
+                    break;
+                case ASSEMBLY_PAGE_ADVANCED:
+                    PDA_SetScrollWindow((int)(-1 * (master_offset - 1) - advanced_offset), PDA_SCROLL_TOP);
+                    break;
+                case ASSEMBLY_PAGE_MASTER:
+                    PDA_SetScrollWindow((int)(-1 * master_max - master_offset), PDA_SCROLL_TOP);
+                    break;
+            }
+            // PDA_SetScrollWindow((int)(-6 * PDA_Local.maxAssembliesPer), PDA_SCROLL_TOP);
             break;
 
         case PDA_HELP:
@@ -1005,8 +974,8 @@ function PDAButton PDA_CreateTab (int id, str label, int page, str graphic, fixe
     thisButton.textFlags     = HUDMSG_ALPHA;
     thisButton.textID        = thisButton.graphicID + 1;
     assignButtonPosition(thisButton.textPos,
-        (int)thisButton.gfxPos[TB_X] + xlabeloff,
-        (int)thisButton.gfxPos[TB_Y] + ylabeloff,
+        (int)(thisButton.gfxPos[TB_X]) + xlabeloff,
+        (int)(thisButton.gfxPos[TB_Y]) + ylabeloff,
         0.0,
         0.0
     );
@@ -1025,9 +994,15 @@ function PDAButton PDA_CreateButton (int id, str label, str graphic, fixed x, fi
     thisButton.graphic      = graphic;
     thisButton.graphicFlags = HUDMSG_ALPHA;
     thisButton.graphicID    = thisButton.id;
+    // assignButtonPosition(thisButton.gfxPos,
+    //     (int)(thisButton.x * NEW_RESOLUTION_X),
+    //     (int)(PDA_SCREEN_Y + (thisButton.y * NEW_RESOLUTION_Y) - (gh / 2)),
+    //     0.0,
+    //     0.0
+    // );
     assignButtonPosition(thisButton.gfxPos,
         (int)(thisButton.x * NEW_RESOLUTION_X),
-        (int)(PDA_SCREEN_Y + (thisButton.y * NEW_RESOLUTION_Y) - (gh / 2)),
+        (int)(thisButton.y * NEW_RESOLUTION_Y),
         0.0,
         0.0
     );
@@ -1035,11 +1010,17 @@ function PDAButton PDA_CreateButton (int id, str label, str graphic, fixed x, fi
     thisButton.textFlags = HUDMSG_ALPHA;
     thisButton.textID    = thisButton.graphicID + 20;
     assignButtonPosition(thisButton.textPos,
-                         (int)((int)thisButton.gfxPos[TB_X] + (gw + X_MARGIN) * NEW_RESOLUTION_X),
-                         thisButton.gfxPos[TB_Y],
-                         0.0,
-                         0.0
+        (int)(thisButton.gfxPos[TB_X] + (gw + X_MARGIN) * NEW_RESOLUTION_X),
+        (int)(thisButton.gfxPos[TB_Y] + 6.0),
+        0.0,
+        0.0
     );
+    // assignButtonPosition(thisButton.textPos,
+    //     (int)((int)thisButton.gfxPos[TB_X] + (gw + X_MARGIN) * NEW_RESOLUTION_X),
+    //     (int)(thisButton.gfxPos[TB_Y]),
+    //     0.0,
+    //     0.0
+    // );
 
     TraceLog("PDA_CreateButton");
     return thisButton;
@@ -1081,7 +1062,7 @@ function PDAButton PDA_CreateAssemblyButton (int id, str graphic, str label, fix
     #define thisButton PDA_LocalButton[id]
     assignButtonParams(thisButton, label)
 
-    const int X_MARGIN = 12.0;
+    const int X_MARGIN = 24;
 
     thisButton.type         = "assembly";
     thisButton.graphic      = graphic;
@@ -1089,7 +1070,7 @@ function PDAButton PDA_CreateAssemblyButton (int id, str graphic, str label, fix
     thisButton.graphicID    = thisButton.id;
     assignButtonPosition(thisButton.gfxPos,
         (int)(thisButton.x * NEW_RESOLUTION_X),
-        (int)(thisButton.y * NEW_RESOLUTION_Y),
+        (int)((thisButton.y + 5.0) * NEW_RESOLUTION_Y),
         0.0,
         20.0
     );
@@ -1097,27 +1078,30 @@ function PDAButton PDA_CreateAssemblyButton (int id, str graphic, str label, fix
     thisButton.textFlags = HUDMSG_ALPHA;
     thisButton.textID    = thisButton.id + 1;
     assignButtonPosition(thisButton.textPos,
-        (int)(thisButton.gfxPos[TB_X] * NEW_RESOLUTION_X) + X_MARGIN,
-        (int)(thisButton.y * NEW_RESOLUTION_Y) + 4.0,
+        (int)(thisButton.gfxPos[TB_X] + X_MARGIN),
+        (int)((thisButton.y + 0.0) * NEW_RESOLUTION_Y),
         0.0,
         0.0
     );
 
     thisButton.tooltip = tooltip;
-    if (CheckBounds(thisButton)) {
-        if (PDA_LocalMouse.m1 && !(PDA_LocalMouse.oldState & _ACTION)) {
-            if (assembly) PDA_Local.detailFetch[0] = assembly;
-
-            if (StrCmp(PDA_Local.detailFetch[0], "") != 0 ) {
-                PDA_SetCategory(PDA_ASSEMBLY_DETAIL);
-            }
-        }
-
-        // Open tooltip
-        // if (StrCmp(thisButton.tooltip, "") != 0 && StrCmp(assembly, "") != 0) {
-        //     PDA_SetupFloatingTooltip("PTIPM", thisButton.tooltip);
-        // }
-    }
+    thisButton.actionID = action_open_assembly;
+    thisButton.actionParam = PDA_ASSEMBLY_DETAIL;
+    if (assembly) PDA_Local.detailFetch[0] = assembly;
+    // if (CheckBounds(thisButton)) {
+    //     if (PDA_LocalMouse.m1 && !(PDA_LocalMouse.oldState & _ACTION)) {
+    //         if (assembly) PDA_Local.detailFetch[0] = assembly;
+    //
+    //         if (StrCmp(PDA_Local.detailFetch[0], "") != 0 ) {
+    //             PDA_SetCategory(PDA_ASSEMBLY_DETAIL);
+    //         }
+    //     }
+    //
+    //     // Open tooltip
+    //     // if (StrCmp(thisButton.tooltip, "") != 0 && StrCmp(assembly, "") != 0) {
+    //     //     PDA_SetupFloatingTooltip("PTIPM", thisButton.tooltip);
+    //     // }
+    // }
 
     if (debug) {
         // DrawBorder(thisButton.x * NEW_RESOLUTION_X, thisButton.y * NEW_RESOLUTION_Y, width * NEW_RESOLUTION_X, height * NEW_RESOLUTION_Y);
@@ -1212,20 +1196,20 @@ function PDAButton PDA_DisplayArmor (int id, int structType, fixed x, fixed y, i
     int actionParam  = -1;
     int width        = 150;
     bool specialArmorTokens = checkSpecialArmorTokens();
-    assignButtonParams(thisButton, label)
 
     switch (structType) {
         case ARMOR_DATA:
-            localArmorData = setupArmorData(specialArmorTokens);
+            // Commented out as these ended up resetting established data. Wonder if we'll need these here anymore?'
+            // localArmorData = setupArmorData(specialArmorTokens, "");
             label          = localArmorData.name;
             graphic        = localArmorData.graphic;
             width          = StrLen(localArmorData.name) * 5;
             tooltip        = localArmorData.tooltip;
             actionID       = (PDA_Local.page == EQUIPMENT_PAGE_ONHAND) ? action_show_equipment_detail : action_toggle_display;
-            actionParam    = (PDA_Local.page == EQUIPMENT_PAGE_ONHAND) ? checkSpecialArmorTokens() : 1;
+            actionParam    = (PDA_Local.page == EQUIPMENT_PAGE_ONHAND) ? 1 : 1;
             break;
         case BACKPACK_DATA:
-            localBackpackData = setupBackpackData();
+            // localBackpackData = setupBackpackData();
             label             = localBackpackData.name;
             graphic           = localBackpackData.graphic;
             width             = StrLen(localBackpackData.name) * 5;
@@ -1234,15 +1218,18 @@ function PDAButton PDA_DisplayArmor (int id, int structType, fixed x, fixed y, i
             actionParam       = (PDA_Local.page == EQUIPMENT_PAGE_ONHAND) ? -1 : 2;
             break;
         case BOOTS_DATA:
-            localBootsData = setupBootsData();
+            log("name %s: | gfx %s: ", localBootsData.name, localBootsData.graphic);
+            // localBootsData = setupBootsData("");
             label          = localBootsData.name;
             graphic        = localBootsData.graphic;
             width          = StrLen(localBootsData.name) * 5;
             tooltip        = localBootsData.tooltip;
             actionID       = (PDA_Local.page == EQUIPMENT_PAGE_ONHAND) ? action_show_equipment_detail : action_toggle_display;
-            actionParam    = (PDA_Local.page == EQUIPMENT_PAGE_ONHAND) ? -1 : 3;
+            actionParam    = (PDA_Local.page == EQUIPMENT_PAGE_ONHAND) ? 2 : 3;
+            log("name %s: | gfx %s: ", localBootsData.name, localBootsData.graphic);
             break;
     }
+    assignButtonParams(thisButton, label)
 
     thisButton.label       = label;
     thisButton.tooltip     = StrParam("%s:\n%s:", thisButton.label, tooltip);
@@ -1268,7 +1255,7 @@ function PDAButton PDA_DisplayArmor (int id, int structType, fixed x, fixed y, i
     thisButton.textFlags = HUDMSG_ALPHA;
     thisButton.textID    = (thisButton.id) + 1;
     assignButtonPosition(thisButton.textPos,
-        (int)(thisButton.x * NEW_RESOLUTION_X) + 35.0,
+        (int)((thisButton.x + 35.0) * NEW_RESOLUTION_X),
         (int)(thisButton.y * NEW_RESOLUTION_Y) + (height / 2),
         0.0,
         0.0
@@ -1279,94 +1266,101 @@ function PDAButton PDA_DisplayArmor (int id, int structType, fixed x, fixed y, i
     return thisButton;
 }
 
-function PDAButton PDA_DisplayArmorOverride (int id, PDA_ArmorData override, fixed x, fixed y, int height, fixed opacity) {
-    #define thisButton PDA_LocalButton[id]
+// It and BootsOverride appear by default for unworn equipment
+// function PDAButton PDA_DisplayArmorOverride (int id, PDA_ArmorData override, fixed x, fixed y, int height, fixed opacity) {
+//     #define thisButton PDA_LocalButton[id]
+//
+//     str label = override.name;
+//     int width = StrLen(label) * 5;
+//
+//     assignButtonParams(thisButton, thisButton.label)
+//
+//     thisButton.label   = override.name;
+//     thisButton.width   = width;
+//     thisButton.tooltip = StrParam("%s:\n%s:", thisButton.label, override.tooltip);
+//     thisButton.graphic = StrParam("%l:", override.graphic);
+//
+//     // log("PDA_DisplayArmorOverride tooltip %s:", thisButton.tooltip);
+//     // if (CheckBounds(thisButton) && StrCmp(thisButton.tooltip, "") != 0) {
+//     //     PDA_SetupFloatingTooltip("PTIP", thisButton.tooltip);
+//     // }
+//
+//     thisButton.alpha = opacity;
+//
+//     thisButton.type         = "equipment";
+//     thisButton.graphicFlags = HUDMSG_ALPHA;
+//     thisButton.graphicID    = thisButton.id;
+//     assignButtonPosition(thisButton.gfxPos,
+//         (int)(thisButton.x * NEW_RESOLUTION_X),
+//         (int)(thisButton.y * NEW_RESOLUTION_Y),
+//         -5.0,
+//         0.0
+//     );
+//
+//     thisButton.textFont  = PDA_FONT[lower_font];
+//     thisButton.textFlags = HUDMSG_ALPHA;
+//     thisButton.textID    = (thisButton.id) + 1;
+//     assignButtonPosition(thisButton.textPos,
+//         (int)((thisButton.x + 35.0) * NEW_RESOLUTION_X),
+//         (int)(thisButton.y * NEW_RESOLUTION_Y) + (height / 2),
+//         0.0,
+//         0.0
+//     );
+//
+//     thisButton.actionID    = action_show_equipment_detail;
+//     thisButton.actionParam = 1;
+//     thisButton.alpha = opacity;
+//
+//     TraceLog("PDA_DisplayArmorOverride");
+//     return thisButton;
+// }
 
-    str label = override.name;
-    int width = StrLen(label) * 5;
-
-    assignButtonParams(thisButton, thisButton.label)
-
-    thisButton.label   = override.name;
-    thisButton.width   = width;
-    thisButton.tooltip = StrParam("%s:\n%s:", thisButton.label, override.tooltip);
-    thisButton.graphic = StrParam("%l:", override.graphic);
-
-    // log("PDA_DisplayArmorOverride tooltip %s:", thisButton.tooltip);
-    // if (CheckBounds(thisButton) && StrCmp(thisButton.tooltip, "") != 0) {
-    //     PDA_SetupFloatingTooltip("PTIP", thisButton.tooltip);
-    // }
-
-    thisButton.alpha = opacity;
-
-    thisButton.type         = "equipment";
-    thisButton.graphicFlags = HUDMSG_ALPHA;
-    thisButton.graphicID    = thisButton.id;
-    assignButtonPosition(thisButton.gfxPos,
-        (int)(thisButton.x * NEW_RESOLUTION_X),
-        (int)(thisButton.y * NEW_RESOLUTION_Y),
-        -5.0,
-        0.0
-    );
-
-    thisButton.textFont  = PDA_FONT[lower_font];
-    thisButton.textFlags = HUDMSG_ALPHA;
-    thisButton.textID    = (thisButton.id) + 1;
-    assignButtonPosition(thisButton.textPos,
-        (int)(thisButton.x * NEW_RESOLUTION_X) + 35.0,
-        (int)(thisButton.y * NEW_RESOLUTION_Y) + (height / 2),
-        0.0,
-        0.0
-    );
-    thisButton.alpha = opacity;
-
-    TraceLog("PDA_DisplayArmorOverride");
-    return thisButton;
-}
-
-function PDAButton PDA_DisplayBootsOverride (int id, PDA_BootsData override, fixed x, fixed y, int height, fixed opacity) {
-    #define thisButton PDA_LocalButton[id]
-
-    str label = override.name;
-    int width = StrLen(label) * 5;
-
-    assignButtonParams(thisButton, thisButton.label)
-
-    thisButton.label   = override.name;
-    thisButton.width   = width;
-    thisButton.tooltip = StrParam("%s:\n%s:", thisButton.label, override.tooltip);
-    thisButton.graphic = StrParam("%l:", override.graphic);
-
-    // log("PDA_DisplayArmorOverride tooltip %s:", thisButton.tooltip);
-    // if (CheckBounds(thisButton) && StrCmp(thisButton.tooltip, "") != 0) {
-    //     PDA_SetupFloatingTooltip("PTIP", thisButton.tooltip);
-    // }
-
-    thisButton.alpha = opacity;
-
-    thisButton.type         = "equipment";
-    thisButton.graphicFlags = HUDMSG_ALPHA;
-    thisButton.graphicID    = thisButton.id;
-    assignButtonPosition(thisButton.gfxPos,
-        (int)(thisButton.x * NEW_RESOLUTION_X),
-        (int)(thisButton.y * NEW_RESOLUTION_Y),
-        -5.0,
-        0.0
-    );
-    thisButton.textFont  = PDA_FONT[lower_font];
-    thisButton.textFlags = HUDMSG_ALPHA;
-    thisButton.textID    = (thisButton.id) + 1;
-    assignButtonPosition(thisButton.textPos,
-        (int)(thisButton.x * NEW_RESOLUTION_X) + 35.0,
-        (int)(thisButton.y * NEW_RESOLUTION_Y) + (height / 2),
-        0.0,
-        0.0
-    );
-    thisButton.alpha = opacity;
-
-    TraceLog("PDA_DisplayBootsOverride");
-    return thisButton;
-}
+// function PDAButton PDA_DisplayBootsOverride (int id, PDA_BootsData override, fixed x, fixed y, int height, fixed opacity) {
+//     #define thisButton PDA_LocalButton[id]
+//
+//     str label = override.name;
+//     int width = StrLen(label) * 5;
+//
+//     assignButtonParams(thisButton, thisButton.label)
+//
+//     thisButton.label   = override.name;
+//     thisButton.width   = width;
+//     thisButton.tooltip = StrParam("%s:\n%s:", thisButton.label, override.tooltip);
+//     thisButton.graphic = StrParam("%l:", override.graphic);
+//
+//     // log("PDA_DisplayArmorOverride tooltip %s:", thisButton.tooltip);
+//     // if (CheckBounds(thisButton) && StrCmp(thisButton.tooltip, "") != 0) {
+//     //     PDA_SetupFloatingTooltip("PTIP", thisButton.tooltip);
+//     // }
+//
+//     thisButton.alpha = opacity;
+//
+//     thisButton.type         = "equipment";
+//     thisButton.graphicFlags = HUDMSG_ALPHA;
+//     thisButton.graphicID    = thisButton.id;
+//     assignButtonPosition(thisButton.gfxPos,
+//         (int)(thisButton.x * NEW_RESOLUTION_X),
+//         (int)(thisButton.y * NEW_RESOLUTION_Y),
+//         -5.0,
+//         0.0
+//     );
+//     thisButton.textFont  = PDA_FONT[lower_font];
+//     thisButton.textFlags = HUDMSG_ALPHA;
+//     thisButton.textID    = (thisButton.id) + 1;
+//     assignButtonPosition(thisButton.textPos,
+//         (int)((thisButton.x + 35.0) * NEW_RESOLUTION_X),
+//         (int)(thisButton.y * NEW_RESOLUTION_Y) + (height / 2),
+//         0.0,
+//         0.0
+//     );
+//
+//     thisButton.actionID    = action_show_equipment_detail;
+//     thisButton.actionParam = 2;
+//     thisButton.alpha = opacity;
+//
+//     TraceLog("PDA_DisplayBootsOverride");
+//     return thisButton;
+// }
 
 function PDAButton PDA_CreateModPackDisplay (int id, str graphic, fixed x, fixed y, int width, int height, fixed alpha) {
     #define thisButton PDA_LocalButton[id]
@@ -1382,6 +1376,9 @@ function PDAButton PDA_CreateModPackDisplay (int id, str graphic, fixed x, fixed
         10.0,
         0.0
     );
+
+    thisButton.actionID     = action_navigate;
+    thisButton.actionParam  = WEAPON_PAGE_MODPACK_EFFECTS;
 
     thisButton.textFlags    = HUDMSG_ALPHA;
     thisButton.textFont     = PDA_FONT[mono_font];
@@ -1419,6 +1416,11 @@ function void PDA_ButtonLogic (int id, bool onlyVisual) {
         }
     }
 
+    if (buttonType == "" || StrLen(buttonType) == 0) {
+        log("ERROR: Button with ID %d: has no valid type!", thisButton.id);
+        return;
+    }
+
     if (!onlyVisual) {
         buttonBoundsDefault(thisButton);
 
@@ -1429,7 +1431,7 @@ function void PDA_ButtonLogic (int id, bool onlyVisual) {
         switch (thisButton.state) {
             case button_hovered:
                 if (buttonType == "equipment") {
-                    if (StrCmp(thisButton.tooltip, "") != 0 && PDA_Local.page != EQUIPMENT_PAGE_INFO) {
+                    if (StrLen(thisButton.tooltip) != 0 && PDA_Local.page != EQUIPMENT_PAGE_INFO) {
                         PDA_SetupFloatingTooltip("PTIP", thisButton.tooltip);
                         // thisButton.alpha = pulser(2.0, 0.8);
                         thisButton.alpha = 1.0;
@@ -1443,6 +1445,10 @@ function void PDA_ButtonLogic (int id, bool onlyVisual) {
                 PDA_LocalMouse.oldState = PDA_LocalMouse.state;
                 break;
         }
+
+        if (buttonStoppedHovering) {
+            PDA_SetupFloatingTooltip("", "");
+        }
     }
 
     // End
@@ -1450,6 +1456,7 @@ function void PDA_ButtonLogic (int id, bool onlyVisual) {
 
     TraceLog("PDA_ButtonLogic");
 }
+
 
 function void PDA_DrawButton (int id, str message, bool onlyVisual, bool clear) {
     #define thisButton PDA_LocalButton[id]
@@ -1476,7 +1483,7 @@ function void PDA_DrawButton (int id, str message, bool onlyVisual, bool clear) 
             break;
     }
 
-    if (thisButton.oldState == button_hovered && thisButton.state != button_hovered) {
+    if (buttonStoppedHovering) {
         PDA_SetFullDirty();
 
         PDA_DrawTooltipText(HUDMSG_PLAIN, PDA_CAT_DESCRIPTION, CR_UNTRANSLATED,
@@ -1484,26 +1491,48 @@ function void PDA_DrawButton (int id, str message, bool onlyVisual, bool clear) 
             INF_HOLDTIME, 0.0, DEFAULT_ALIGN, DEFAULT_ALIGN, s:"");
     }
 
-    if (buttonType == "" || StrLen(buttonType) == 0) {
-        log("ERROR: Button with ID %d: has no valid type!", thisButton.id);
-        return;
-    }
+    #define defaultHoverPulse() (thisButton.alpha = buttonOnHover ? pulser(2.0, DEFAULT_BUTTON_ALPHA + 0.2) : DEFAULT_BUTTON_ALPHA)
+    #define brightOnHover() (thisButton.alpha = buttonOnHover ? 1.0 : DEFAULT_BUTTON_ALPHA)
 
-    // I hate this condition setup. Dargh.
-    if (buttonType == "assembly") {
+    // think i'll just opt for the if-ladder instead
+    if (buttonType == "menu") {
+        defaultHoverPulse();
+    } else if (buttonType == "tab") {
+        brightOnHover();
+    } else if (buttonType == "generic") {
+        defaultHoverPulse();
+    } else if (buttonType == "fixed") {
+        defaultHoverPulse();
+    } else if (buttonType == "assembly") {
         if (thisButton.tooltip != "???") {
-            thisButton.alpha = buttonOnHover ? pulser(2.0, DEFAULT_BUTTON_ALPHA + 0.2) : DEFAULT_BUTTON_ALPHA;
+            defaultHoverPulse();
         } else {
-            thisButton.alpha = buttonOnHover ? 1.0 : DEFAULT_BUTTON_ALPHA;
+            brightOnHover();
         }
-    } else {
-        if (buttonType != "modpack" && buttonType != "tab" && buttonType != "equipment") {
-            thisButton.alpha = buttonOnHover ? pulser(2.0, DEFAULT_BUTTON_ALPHA + 0.2) : DEFAULT_BUTTON_ALPHA;
-        }
-        if (buttonType == "equipment") {
-            thisButton.alpha = buttonOnHover ? 1.0 : DEFAULT_BUTTON_ALPHA;
-        }
+    } else if (buttonType == "beast") {
+        defaultHoverPulse();
+    } else if (buttonType == "hud") {
+        defaultHoverPulse();
+    } else if (buttonType == "equipment") {
+        brightOnHover();
+    } else if (buttonType == "modpack") {
+
     }
+    // I hate this condition setup. Dargh.
+    // if (buttonType == "assembly") {
+    //     if (thisButton.tooltip != "???") {
+    //         defaultHoverPulse();
+    //     } else {
+    //         brightOnHover();
+    //     }
+    // } else {
+    //     if (buttonType != "modpack" && buttonType != "tab" && buttonType != "equipment") {
+    //         defaultHoverPulse();
+    //     }
+    //     if (buttonType == "equipment") {
+    //         brightOnHover();
+    //     }
+    // }
 
     if (!PDA_ScrollableNeedsDraw) {
         return;

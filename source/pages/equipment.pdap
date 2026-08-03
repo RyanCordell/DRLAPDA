@@ -2,7 +2,7 @@
 PDA_ButtonHandler(TAB1, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
 PDA_ButtonHandler(TAB2, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
 
-if (PDA_LocalMouse.action == mouse_back) {
+if (userWentBack) {
     PDA_SetCategory(PDA_MENU);
     PDA_SetPage(1);
 }
@@ -15,6 +15,8 @@ deleteNoEquipmentMessage(); \
 // if (StrCmp(PDA_LocalButton[eqId].tooltip, "") != 0 && CheckBounds(PDA_LocalButton[eqId]) && PDA_Local.page != EQUIPMENT_PAGE_INFO) { \
 //     PDA_SetupFloatingTooltip("PTIP", PDA_LocalButton[eqId].tooltip); \
 // } \
+
+// TODO: Move the CheckInventory and other expensive calculations into _logic, relying on a resultant bool to handle the buttons instead
 
 switch(PDA_Local.page) {
     case EQUIPMENT_PAGE_ONHAND:
@@ -31,17 +33,14 @@ switch(PDA_Local.page) {
 
         // Stashed armors
         for (int armorIndex = 0, eqId = stashed_id_1; armorIndex < DRLA_EQUIPMENT_MAX; armorIndex++) {
-            #define _armorToken DRLA_Equipment_List[armorIndex][armor_TOKEN]
             if (PDA_Local.stopEquipmentEarly) {
                 break;
             }
 
             if (CheckInventory(StrParam("%s:Pickup", _armorToken))) {
-                log("equipment: %s:", _armorToken);
                 deleteNoEquipmentMessage();
-                // TODO: Maybe someday I can have this lead to a separate Equipment Detail page
-                // The source seems to say it was kind of already a thing? I have no idea..
-                PDA_ButtonHandler(PDA_Local.equipmentId[eqId], NO_TOOLTIP, B_ONLY_VISUAL, B_NO_CLEAR);
+                PDA_ButtonHandler(PDA_Local.equipmentId[eqId], NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
+
                 eqId++;
             }
         }

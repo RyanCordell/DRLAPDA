@@ -4,7 +4,7 @@ PDA_ButtonHandler(TAB2, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
 
 #define PDA_LocalPlayer PDA_Class[PlayerNumber()]
 
-if (PDA_LocalMouse.action == mouse_back) {
+if (userWentBack) {
     PDA_SetCategory(PDA_MENU);
     PDA_SetPage(1);
 }

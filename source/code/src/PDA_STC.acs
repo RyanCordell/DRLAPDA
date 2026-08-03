@@ -26,11 +26,12 @@ switch (PDA_Local.category) {
       PDA_LocalButton[TAB3] = PDA_CreateTab(TAB3, "3", 3, "PTAB", PDA_TAB_NEXT_X(2));
     }
 
-    if (PDA_Local.scrollYDelta == -1) {
-      PDA_LocalButton[PDA_MODS_PAGE] = PDA_CreateFixedButton(PDA_MODS_PAGE, "Modpack Effects" , "MODICON", 10.0, PDA_SCREEN_HEIGHT, 82, 16, 16, 19);
-
-      PDA_LocalButton[PDA_ARTIFACTS_PAGE] = PDA_CreateFixedButton(PDA_ARTIFACTS_PAGE, "Artifact Effects", "DMNAICON",  PDA_SCREEN_WIDTH - 82 - 20, PDA_SCREEN_HEIGHT, 82, 16, 38, 40);
-    }
+    // Will restore when I feel like it
+    // if (PDA_Local.scrollYDelta == -1) {
+    //   PDA_LocalButton[PDA_MODS_PAGE] = PDA_CreateFixedButton(PDA_MODS_PAGE, "Modpack Effects" , "MODICON", 10.0, PDA_SCREEN_HEIGHT, 82, 16, 16, 19);
+    //
+    //   PDA_LocalButton[PDA_ARTIFACTS_PAGE] = PDA_CreateFixedButton(PDA_ARTIFACTS_PAGE, "Artifact Effects", "DMNAICON",  PDA_SCREEN_WIDTH - 82 - 20, PDA_SCREEN_HEIGHT, 82, 16, 38, 40);
+    // }
 
     if (stricmp(player_weapon[player_weapon_current], "None") != 0) {
       switch(PDA_Local.page) {

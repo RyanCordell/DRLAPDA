@@ -198,7 +198,8 @@ enum button_actions {
     action_none,
     action_navigate,
     action_toggle_display, // Equipment page bitmask toggles
-    action_show_equipment_detail
+    action_show_equipment_detail,
+    action_open_assembly
 }
 
 enum bestiary_enum {
