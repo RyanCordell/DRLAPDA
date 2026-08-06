@@ -1,11 +1,9 @@
 // Header
-
 PDA_ButtonHandler(TAB1, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
 PDA_ButtonHandler(TAB2, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
 if (canBeEvil) {
     PDA_ButtonHandler(TAB3, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
 }
-PDA_SetupScreenBounds();
 
 if (userWentBack) {
     PDA_SetCategory(PDA_MENU);
@@ -13,20 +11,17 @@ if (userWentBack) {
 }
 
 // Body
+PDA_SetupScreenBounds();
 
-// I don't think logic needs to be here.. BUT future me will probably correct me.
 if (stricmp(player_weapon[player_weapon_current], "None") != 0) {
     switch (PDA_Local.page) {
         case WEAPON_PAGE_STORY:
-            // #include "../../pages/subpage/weapons_story_logic.pdap"
             #include "../../pages/subpage/weapons_story_draw.pdap"
             break;
         case WEAPON_PAGE_MODPACK_EFFECTS:
-            // #include "../../pages/subpage/weapons_mods_logic.pdap"
             #include "../../pages/subpage/weapons_mods_draw.pdap"
             break;
         case WEAPON_PAGE_ARTIFACT_EFFECTS:
-            // #include "../../pages/subpage/weapons_artifacts_logic.pdap"
             #include "../../pages/subpage/weapons_artifacts_draw.pdap"
             break;
     }

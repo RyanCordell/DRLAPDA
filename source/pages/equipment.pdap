@@ -1,3 +1,5 @@
+// effectively a substitute for equipment_onhand_draw.pdap
+
 // Header
 PDA_ButtonHandler(TAB1, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
 PDA_ButtonHandler(TAB2, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
@@ -8,42 +10,38 @@ if (userWentBack) {
 }
 
 // Body
-// belongs to equipment_onhand_draw.pdap
-#define someCheck(eqId) \
-PDA_ButtonHandler(eqId, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR); \
-deleteNoEquipmentMessage(); \
-// if (StrCmp(PDA_LocalButton[eqId].tooltip, "") != 0 && CheckBounds(PDA_LocalButton[eqId]) && PDA_Local.page != EQUIPMENT_PAGE_INFO) { \
-//     PDA_SetupFloatingTooltip("PTIP", PDA_LocalButton[eqId].tooltip); \
-// } \
-
-// TODO: Move the CheckInventory and other expensive calculations into _logic, relying on a resultant bool to handle the buttons instead
+PDA_SetupScreenBounds();
 
 switch(PDA_Local.page) {
     case EQUIPMENT_PAGE_ONHAND:
-        PDA_DrawBodyText(HUDMSG_PLAIN, PDA_NOEQID, CR_UNTRANSLATED, 10.0, 50.0, INF_HOLDTIME, OPAQUE, B_NOT_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN, s:"No equipment detected");
+        #define armorHandler(eqId) \
+            deleteNoEquipmentMessage(); \
+            PDA_ButtonHandler(eqId, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
+
+        if (PDA_ScrollableNeedsDraw) {
+            SetFont(PDA_FONT[mono_font]);
+            PDA_DrawBodyText(HUDMSG_PLAIN, PDA_NOEQID, CR_UNTRANSLATED, 10.0, 50.0, INF_HOLDTIME, OPAQUE, B_NOT_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN, s:"No equipment detected");
+        }
 
         // Note to future self: don't try to merge these two ifs for cleanliness sake. Won't work the way you wish it would.
-        if (localHasArmor) {
-            someCheck(PDA_Local.equipmentId[worn_armor_id]);
+        if (localHasEquippedArmor) {
+            armorHandler(PDA_Local.equipmentId[EQUIPPED_WORN_ARMOR]);
         }
 
-        if (localHasBoots) {
-            someCheck(PDA_Local.equipmentId[worn_boots_id]);
+        if (localHasEquippedBackpack) {
+            armorHandler(PDA_Local.equipmentId[EQUIPPED_WORN_BACKP]);
         }
 
-        // Stashed armors
-        for (int armorIndex = 0, eqId = stashed_id_1; armorIndex < DRLA_EQUIPMENT_MAX; armorIndex++) {
-            if (PDA_Local.stopEquipmentEarly) {
-                break;
-            }
+        if (localHasEquippedBoots) {
+            armorHandler(PDA_Local.equipmentId[EQUIPPED_WORN_BOOTS]);
+        }
 
-            if (CheckInventory(StrParam("%s:Pickup", _armorToken))) {
-                deleteNoEquipmentMessage();
-                PDA_ButtonHandler(PDA_Local.equipmentId[eqId], NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
-
-                eqId++;
+        for (int stshId = EQUIPPED_WORN_BOOTS + 1; stshId < PDA_EQUIPMENT_TOTAL_MAX; ++stshId) {
+            if (localEquipmentDataStored[stshId].langEntry != "") {
+                armorHandler(PDA_Local.equipmentId[stshId]);
             }
         }
+
         PDA_DefaultFont();
         break;
     case EQUIPMENT_PAGE_INFO:

@@ -11,16 +11,21 @@ str equipment_set_name        = "N/A\n",
 
 PDA_Local.armorHax = false;
 
-if (localHasArmor) {
-    PDA_LocalButton[PDA_PLAYER_ARMOR_ICON] = PDA_DisplayArmor(PDA_PLAYER_ARMOR_ICON, ARMOR_DATA, playerIconX + 35.0, 20.0, EQUIPPED_HEIGHT, localShowArmor ? pulser(2.0, 0.8) : EQUIPPED_ALPHA);
+#define l_playerIconX (int)(PDA_SCREEN_X_SCALED + 20.0) + X_LEFT_EDGE
+
+if (localHasEquippedArmor) {
+    // PDA_LocalButton[PDA_PLAYER_ARMOR_ICON] = PDA_DisplayArmor(PDA_PLAYER_ARMOR_ICON, ARMOR_DATA, 0, l_playerIconX + 35.0, 20.0, EQUIPPED_HEIGHT, localShowArmor ? pulser(2.0, 0.8) : EQUIPPED_ALPHA);
+    PDA_LocalButton[PDA_Local.equipmentId[EQUIPPED_WORN_ARMOR]] = PDA_DisplayArmor(PDA_PLAYER_ARMOR_ICON, ARMOR_DATA, EQUIPPED_WORN_ARMOR, l_playerIconX + 35.0, 20.0, EQUIPPED_HEIGHT, localShowArmor ? pulser(2.0, 0.8) : EQUIPPED_ALPHA);
 }
 
-if (localHasBackpack) {
-    PDA_LocalButton[PDA_PLAYER_BACKPACK_ICON] = PDA_DisplayArmor(PDA_PLAYER_BACKPACK_ICON, BACKPACK_DATA, playerIconX + 33.0, 45.0, EQUIPPED_HEIGHT, localShowBackpack ? pulser(2.0, 0.8) : EQUIPPED_ALPHA);
+if (localHasEquippedBackpack) {
+    // PDA_LocalButton[PDA_PLAYER_BACKPACK_ICON] = PDA_DisplayArmor(PDA_PLAYER_BACKPACK_ICON, BACKPACK_DATA, 0, l_playerIconX + 33.0, 45.0, EQUIPPED_HEIGHT, localShowBackpack ? pulser(2.0, 0.8) : EQUIPPED_ALPHA);
+    PDA_LocalButton[PDA_Local.equipmentId[EQUIPPED_WORN_BACKP]] = PDA_DisplayArmor(PDA_PLAYER_BACKPACK_ICON, BACKPACK_DATA, EQUIPPED_WORN_BACKP, l_playerIconX + 33.0, 45.0, EQUIPPED_HEIGHT, localShowBackpack ? pulser(2.0, 0.8) : EQUIPPED_ALPHA);
 }
 
-if (localHasBoots) {
-    PDA_LocalButton[PDA_PLAYER_BOOTS_ICON] = PDA_DisplayArmor(PDA_PLAYER_BOOTS_ICON, BOOTS_DATA, playerIconX + 30.0, 70.0, EQUIPPED_HEIGHT, localShowBoots ? pulser(2.0, 0.8) : EQUIPPED_ALPHA);
+if (localHasEquippedBoots) {
+    // PDA_LocalButton[PDA_PLAYER_BOOTS_ICON] = PDA_DisplayArmor(PDA_PLAYER_BOOTS_ICON, BOOTS_DATA, 0, l_playerIconX + 30.0, 70.0, EQUIPPED_HEIGHT, localShowBoots ? pulser(2.0, 0.8) : EQUIPPED_ALPHA);
+    PDA_LocalButton[PDA_Local.equipmentId[EQUIPPED_WORN_BOOTS]] = PDA_DisplayArmor(PDA_PLAYER_BOOTS_ICON, BOOTS_DATA, EQUIPPED_WORN_BOOTS, l_playerIconX + 30.0, 70.0, EQUIPPED_HEIGHT, localShowBoots ? pulser(2.0, 0.8) : EQUIPPED_ALPHA);
 }
 
 for (int setIndex = 0; setIndex < DRLA_EQUIPMENT_SETMAX; setIndex++) {
@@ -30,6 +35,7 @@ for (int setIndex = 0; setIndex < DRLA_EQUIPMENT_SETMAX; setIndex++) {
 
         str trimmedList = strTrim(DRLA_Equipment_SetList[setIndex],2,0);
 
+        // TODO: this feels set up weird, look into it
         equipment_set_name = StrParam("%l:\n\n", (PDA_Local.armorHax)
             ? "PDA_ARMOR_NuclearWeaponSetBonusActive_equipment_set_name"
             : StrParam("PDA_ARMOR_%s:_equipment_set_name", trimmedList));

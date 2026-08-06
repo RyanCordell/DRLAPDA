@@ -72,13 +72,13 @@ enum PDA_IDs {
     PDA_PLAYER_BACKPACK_ICON = PDA_PLAYER_ARMOR_ICON + 3,
     PDA_PLAYER_BOOTS_ICON = PDA_PLAYER_BACKPACK_ICON + 3,
 
-    // Various ID ranges
+    // Various ID ranges. We always define the end ID and go backwards from there
     PDA_ASSEMBLY_ID_END = PDA_PLAYER_BOOTS_ICON + 64,
     PDA_BEASTS_ID_END = PDA_ASSEMBLY_ID_END + 32,
-    PDA_WORN_EQUIPMENT = PDA_ASSEMBLY_ID_END + 16,
 
-    PDA_STASHEDEQUIPMENT = PDA_WORN_EQUIPMENT + 8,
-    PDA_NOEQID = PDA_STASHEDEQUIPMENT + 4,
+    PDA_WORN_EQUIPMENT_END = PDA_ASSEMBLY_ID_END + (3*4),
+    PDA_STASHEDEQUIPMENT_END = PDA_WORN_EQUIPMENT_END + (4*4),
+    PDA_NOEQID = PDA_STASHEDEQUIPMENT_END + 4,
     // Modpack ID range
     PDA_MODIDRANGE = PDA_NOEQID + 7, // For the 7 chaos- er, modpacks.
     // Message IDs
@@ -215,18 +215,6 @@ enum weaponmod_enum {
     mi_sniper,
     mi_firestorm,
     mi_nano,
-}
-
-enum equipment_ids {
-    // worn
-    worn_armor_id = 0,
-    worn_boots_id,
-
-    // stashed
-    stashed_id_1,
-    stashed_id_2,
-    stashed_id_3,
-    stashed_id_4,
 }
 
 enum weapon_checks_index {

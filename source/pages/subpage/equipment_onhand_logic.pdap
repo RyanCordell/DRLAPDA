@@ -1,8 +1,8 @@
 // We don't REALLY need these anymore, but..
-if (localHasArmor) {
-    deleteNoEquipmentMessage();
-}
-
-if (localHasBoots) {
-    deleteNoEquipmentMessage();
-}
+// if (localHasEquippedArmor) {
+//     deleteNoEquipmentMessage();
+// }
+//
+// if (localHasEquippedBoots) {
+//     deleteNoEquipmentMessage();
+// }

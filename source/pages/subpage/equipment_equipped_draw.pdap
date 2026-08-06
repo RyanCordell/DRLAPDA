@@ -1,75 +1,69 @@
 // Armor / Boots / Suit display
 // int pdaStrTrimValue = 0;
 
-#define playerIconX (int)(PDA_SCREEN_X_SCALED + 20.0) + X_LEFT_EDGE
+#define d_playerIconX (int)(PDA_SCREEN_X_SCALED + 20.0) + X_LEFT_EDGE
 
-DisplayIconScrollable("PDAPLYR", PDA_PLYR_ICON, playerIconX, 40.0, INF_HOLDTIME, OPAQUE);
+#define equippedArmorHandler(eqId) \
+PDA_ButtonHandler(eqId, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR); \
+
+DisplayIconScrollable("PDAPLYR", PDA_PLAYER_BODY_ICON, d_playerIconX, 40.0, INF_HOLDTIME, OPAQUE);
 
 localShowArmor    = (localEqBoolField & 1);
 localShowBoots    = (localEqBoolField & 1<<1);
 localShowBackpack = (localEqBoolField & 1<<2);
 
-if (localHasArmor) {
-    PDA_ButtonHandler(PDA_PLAYER_ARMOR_ICON, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
-    // if (PDA_LocalButton[PDA_PLAYER_ARMOR_ICON].state == button_clicked) {
-    //     if (localEqBoolField != 1) localEqBoolField = 1;
-    // }
+if (localHasEquippedArmor) {
+    equippedArmorHandler(PDA_Local.equipmentId[EQUIPPED_WORN_ARMOR]);
 
-    DisplayIconScrollable("PDAPARM", PDA_PLAYER_BODY_ICON, playerIconX, 40.0, 0.0, show_equipment[equipment_armor][PlayerNumber()] ? 1.0 : 0.5);
+    DisplayIconScrollable("PDAPARM", PDA_PLAYER_ARMOR_ICON, d_playerIconX, 40.0, 0.0, show_equipment[equipment_armor][PlayerNumber()] ? OPAQUE : 0.5);
 }
 
-if (localHasBackpack) {
-    PDA_ButtonHandler(PDA_PLAYER_BACKPACK_ICON, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
-    // if (PDA_LocalButton[PDA_PLAYER_BACKPACK_ICON].state == button_clicked) {
-    //     if (localEqBoolField != 4) localEqBoolField = 4;
-    // }
+if (localHasEquippedBackpack) {
+    equippedArmorHandler(PDA_Local.equipmentId[EQUIPPED_WORN_BACKP]);
 
-    DisplayIconScrollable("PDAPBCK", PDA_PLYR_ICON - 2, playerIconX, 40.0, 0.0, show_equipment[equipment_backpack][PlayerNumber()] ? 1.0 : 0.5);
+    DisplayIconScrollable("PDAPBCK", PDA_PLAYER_BACKPACK_ICON, d_playerIconX, 40.0, 0.0, show_equipment[equipment_backpack][PlayerNumber()] ? OPAQUE : 0.5);
 }
 
-if (localHasBoots) {
-    PDA_ButtonHandler(PDA_PLAYER_BOOTS_ICON, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
-    // if (PDA_LocalButton[PDA_PLAYER_BOOTS_ICON].state == button_clicked) {
-    //     if (localEqBoolField != 2) localEqBoolField = 2;
-    // }
+if (localHasEquippedBoots) {
+    equippedArmorHandler(PDA_Local.equipmentId[EQUIPPED_WORN_BOOTS]);
 
-    DisplayIconScrollable("PDAPBTS", PDA_PLYR_ICON - 3, playerIconX, 40.0, 0.0, show_equipment[equipment_boots][PlayerNumber()] ? 1.0 : 0.5);
+    DisplayIconScrollable("PDAPBTS", PDA_PLAYER_BOOTS_ICON, d_playerIconX, 40.0, 0.0, show_equipment[equipment_boots][PlayerNumber()] ? OPAQUE : 0.5);
 }
 
 
 SetFont(PDA_FONT[mono_font]);
 
-if (localShowArmor && localHasArmor) {
+if (localShowArmor && localHasEquippedArmor) {
     PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 10.0, 140.0, INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
         s:"\cgARMOR\c-\n",
         s:"\crProtection:\c-\n",
-        l:localArmorData.armorVal,
+        l:localEquipmentDataStored[EQUIPPED_WORN_ARMOR].val,
         s:"\crResistances:\c-\n",
-        l:StrParam("%l:\n", localArmorData.armorRes),
+        l:StrParam("%l:\n", localEquipmentDataStored[EQUIPPED_WORN_ARMOR].res),
         s:"\crAttributes:\c-\n",
-        l:StrParam("%l:\n\n", localArmorData.armorAttr),
+        l:StrParam("%l:\n\n", localEquipmentDataStored[EQUIPPED_WORN_ARMOR].attr),
         s:"\crDescription:\c-\n",
-        s:" ", l:StrParam(" %l:\n\n", localArmorData.armorDesc),
+        s:" ", l:StrParam(" %l:\n\n", localEquipmentDataStored[EQUIPPED_WORN_ARMOR].desc),
         s:"\crSet bonus:\c-\n",
         s:" ", l:(PDA_Local.armorHax) ? StrParam("%l:\n\n", "PDA_ARMOR_EnclaveSetBonusActive_equipment_set_name") : "",
         s:" ", l:(PDA_Local.armorHax) ? StrParam("%l:\n\n", "PDA_ARMOR_EnclaveSetBonusActive_equipment_set_description") : "",
         s:" ", l:"N/A\n",
         s:" ", l:"\n\n"
     );
-} else if (localShowBoots && localHasBoots) {
+} else if (localShowBoots && localHasEquippedBoots) {
     PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 10.0, 140.0, INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
         s:"\cgBOOTS\c-\n",
         s:"\crProtection:\c-\n",
-        l:localBootsData.bootsVal,
+        l:localEquipmentDataStored[EQUIPPED_WORN_BOOTS].val,
         s:"\crAttributes:\c-\n",
-        l:StrParam("%l:\n", localBootsData.bootsAttr),
+        l:StrParam("%l:\n", localEquipmentDataStored[EQUIPPED_WORN_BOOTS].attr),
         s:"\crDescription:\c-\n",
-        l:StrParam("%l:\n", localBootsData.bootsDesc)
+        l:StrParam("%l:\n", localEquipmentDataStored[EQUIPPED_WORN_BOOTS].desc)
     );
-} else if (localShowBackpack && localHasBackpack) {
+} else if (localShowBackpack && localHasEquippedBackpack) {
     PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 10.0, 140.0, INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
         s:"\cgBACKPACK\c-\n",
         s:"\crDescription:\c-\n",
-        l:localBackpackData.backpackVal
+        l:localEquipmentDataStored[EQUIPPED_WORN_BACKP].val
     );
 }

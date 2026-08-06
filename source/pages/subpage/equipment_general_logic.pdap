@@ -1,90 +1,48 @@
-#define playerIconX (int)(PDA_SCREEN_X_SCALED + 20.0) + X_LEFT_EDGE
-
 #define ARM_X 10.0
 #define ARM_GAP 4
-#define isRenegade (CheckActorClass(0, CheckInventory("DRPGDRLAActive") ? "DoomRLRenegadeRPG" : "DoomRLRenegade") == true)
 
-#define equipmentSet(eqId) \
-PDA_Local.equipmentId[eqId] = (PDA_WORN_EQUIPMENT - 4) + (PDA_Local.equipmentLimit * 4); \
-if (PDA_Local.equipmentLimit > PDA_MAX_EQUIPMENT_IN_INV + 1) PDA_Local.equipmentLimit = 0; \
-else PDA_Local.equipmentLimit++; \
-armorY += ARM_HEIGHT + ARM_GAP; \
-
-bool specialArmorTokens = checkSpecialArmorTokens();
-
-localArmorData          = setupArmorData(specialArmorTokens, "");
-localBootsData          = setupBootsData("");
-localBackpackData       = setupBackpackData();
+#define wornEquipmentButton(a) PDA_LocalButton[PDA_Local.equipmentId[(a)]]
 
 // Header
 PDA_LocalButton[TAB1] = PDA_CreateTab(TAB1, "1", 1, "PTAB", PDA_TAB_START_X  );
 PDA_LocalButton[TAB2] = PDA_CreateTab(TAB2, "2", 2, "PTAB", PDA_TAB_NEXT_X(1));
 
-// The three toggleable icons found in page 2
-PDA_LocalButton[PDA_PLAYER_ARMOR_ICON]    = PDA_DisplayArmor(PDA_PLAYER_ARMOR_ICON   , ARMOR_DATA   , playerIconX + 35.0, 20.0, 16, localShowArmor    ? pulser(2.0, 0.8) : 0.7),
-PDA_LocalButton[PDA_PLAYER_BACKPACK_ICON] = PDA_DisplayArmor(PDA_PLAYER_BACKPACK_ICON, BACKPACK_DATA, playerIconX + 33.0, 45.0, 16, localShowBackpack ? pulser(2.0, 0.8) : 0.7),
-PDA_LocalButton[PDA_PLAYER_BOOTS_ICON]    = PDA_DisplayArmor(PDA_PLAYER_BOOTS_ICON   , BOOTS_DATA   , playerIconX + 30.0, 70.0, 16, localShowBoots    ? pulser(2.0, 0.8) : 0.7);
-
 // Body
 fixed armorY = PDA_Local.equipmentBaseY;
 PDA_Local.stopEquipmentEarly = false;
 
-// Note to future self: don't try to merge these first 5 lines for cleanliness sake. Won't work the way you wish it would.
-if (localHasArmor) {
-    equipmentSet(worn_armor_id);
-    PDA_LocalButton[PDA_Local.equipmentId[worn_armor_id]] = PDA_DisplayArmor(PDA_Local.equipmentId[worn_armor_id], ARMOR_DATA, ARM_X, armorY, ARM_HEIGHT, 1.0);
+// Note to future self: don't try to merge these ifs for cleanliness sake. Won't work the way you wish it would.
+// TODO: Do X changes when on page 2
+if (localHasEquippedArmor) {
+    armorY += ARM_HEIGHT + ARM_GAP;
+    wornEquipmentButton(EQUIPPED_WORN_ARMOR) = PDA_DisplayArmor(PDA_Local.equipmentId[EQUIPPED_WORN_ARMOR], ARMOR_DATA, EQUIPPED_WORN_ARMOR, ARM_X, armorY, ARM_HEIGHT, 1.0);
 }
 
-if (localHasBoots) {
-    equipmentSet(worn_boots_id);
-    PDA_LocalButton[PDA_Local.equipmentId[worn_boots_id]] = PDA_DisplayArmor(PDA_Local.equipmentId[worn_boots_id], BOOTS_DATA, ARM_X, armorY, ARM_HEIGHT, 1.0);
-    // PDA_LocalButton[PDA_Local.equipmentId[worn_boots_id]].actionParam = (PDA_Local.page == EQUIPMENT_PAGE_ONHAND) ? localBootsData.langEntry : 3;
+// TODO: fix this not being cleared on scroll
+// if (localHasEquippedBackpack) {
+//     armorY += ARM_HEIGHT + ARM_GAP;
+//     wornEquipmentButton(EQUIPPED_WORN_BACKP) = PDA_DisplayArmor(PDA_Local.equipmentId[EQUIPPED_WORN_BACKP], BACKPACK_DATA, EQUIPPED_WORN_BACKP, ARM_X, armorY, ARM_HEIGHT, 1.0);
+// }
+
+if (localHasEquippedBoots) {
+    armorY += ARM_HEIGHT + ARM_GAP;
+    wornEquipmentButton(EQUIPPED_WORN_BOOTS) = PDA_DisplayArmor(PDA_Local.equipmentId[EQUIPPED_WORN_BOOTS], BOOTS_DATA, EQUIPPED_WORN_BOOTS, ARM_X, armorY, ARM_HEIGHT, 1.0);
 }
 
+for (int stshId = EQUIPPED_WORN_BOOTS + 1; stshId < PDA_EQUIPMENT_TOTAL_MAX; ++stshId) {
+    #define thisStashedButton PDA_LocalButton[PDA_Local.equipmentId[stshId]]
 
-// Page 1
-for (int armorIndex = 0, eqId = stashed_id_1; armorIndex < DRLA_EQUIPMENT_MAX; armorIndex++) {
-    if (PDA_Local.stopEquipmentEarly) break;
+    armorY += ARM_HEIGHT + ARM_GAP;
 
-    if (CheckInventory(StrParam("%s:Pickup", _armorToken))) {
-        PDA_Local.equipmentId[eqId] = (PDA_STASHEDEQUIPMENT - 8) + (PDA_Local.equipmentLimit * 2);
-
-        if (PDA_Local.equipmentLimit > PDA_MAX_EQUIPMENT_IN_INV + 1) PDA_Local.equipmentLimit = 0;
-        else PDA_Local.equipmentLimit++;
-        armorY += ARM_HEIGHT + ARM_GAP;
-
-        #define protKey (!isRenegade ? StrParam("%l:_PROT", localArmorData.langEntry) : StrParam("%l:_RENPROT", localArmorData.langEntry))
-
-        if (!equipmentIsBoots) {
-            localArmorData = setupArmorData(specialArmorTokens, StrParam("PDA_ARMOR_%s:", _armorActor));
-            localArmorData.tooltip   = StrParam(
-                "\cdStats:\c-\n"
-                "%l:\n" // 1*
-                "%l:\n" // 2*
-                "%l:", // 3*
-                protKey, // 1
-                StrParam("%l:_RES", localArmorData.langEntry),  // 2
-                localArmorData.armorAttr // 3
-            );
-            // PDA_LocalButton[PDA_Local.equipmentId[eqId]] = PDA_DisplayArmorOverride(PDA_Local.equipmentId[eqId], localArmorData, ARM_X, armorY, ARM_HEIGHT, 0.6);
-            PDA_LocalButton[PDA_Local.equipmentId[eqId]] = PDA_DisplayArmor(PDA_Local.equipmentId[eqId], ARMOR_DATA, ARM_X, armorY, ARM_HEIGHT, 0.6);
-            // PDA_LocalButton[PDA_Local.equipmentId[eqId]].actionParam = (PDA_Local.page == EQUIPMENT_PAGE_ONHAND) ? localArmorData.langEntry : 3;
-        } else {
-            localBootsData = setupBootsData(StrParam("PDA_ARMOR_%s:", _armorActor));
-            localBootsData.tooltip   = StrParam(
-                "\cdStats:\c-\n"
-                "%l:\n\n" // 1*
-                "%l:", // 2*
-                StrParam("%l:_PROT", localBootsData.langEntry), // 1
-                localBootsData.bootsAttr // 2
-            );
-
-            log("localBootsData %s:", localBootsData.name);
-
-            // PDA_LocalButton[PDA_Local.equipmentId[eqId]] = PDA_DisplayBootsOverride(PDA_Local.equipmentId[eqId], localBootsData, ARM_X, armorY, ARM_HEIGHT, 0.6);
-            PDA_LocalButton[PDA_Local.equipmentId[eqId]] = PDA_DisplayArmor(PDA_Local.equipmentId[eqId], BOOTS_DATA, ARM_X, armorY, ARM_HEIGHT, 0.6);
-            // PDA_LocalButton[PDA_Local.equipmentId[eqId]].actionParam = (PDA_Local.page == EQUIPMENT_PAGE_ONHAND) ? localBootsData.langEntry : 3;
-        }
-        eqId++;
+    switch(localEquipmentDataStored[stshId].type) {
+        case EQUIPPED_WORN_ARMOR:
+            thisStashedButton = PDA_DisplayArmor(PDA_Local.equipmentId[stshId], ARMOR_DATA, stshId, ARM_X, armorY, ARM_HEIGHT, 0.6);
+            break;
+        // case EQUIPPED_WORN_BACKP:
+        //     thisStashedButton = PDA_DisplayArmor(PDA_Local.equipmentId[stshId], BACKPACK_DATA, stshId, ARM_X, armorY, ARM_HEIGHT, 0.6);
+        //     break;
+        case EQUIPPED_WORN_BOOTS:
+            thisStashedButton = PDA_DisplayArmor(PDA_Local.equipmentId[stshId], BOOTS_DATA, stshId, ARM_X, armorY, ARM_HEIGHT, 0.6);
+            break;
     }
 }

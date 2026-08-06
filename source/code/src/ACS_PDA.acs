@@ -43,8 +43,8 @@ function void DebugIDs (void) {
     log("PDA_PLAYER_BOOTS_ICON=%d:",PDA_PLAYER_BOOTS_ICON);
     log("PDA_ASSEMBLY_ID_END=%d:",PDA_ASSEMBLY_ID_END);
     log("PDA_BEASTS_ID_END=%d:",PDA_BEASTS_ID_END);
-    log("PDA_WORN_EQUIPMENT=%d:",PDA_WORN_EQUIPMENT);
-    log("PDA_STASHEDEQUIPMENT=%d:",PDA_STASHEDEQUIPMENT);
+    log("PDA_WORN_EQUIPMENT_END=%d:",PDA_WORN_EQUIPMENT_END);
+    log("PDA_STASHEDEQUIPMENT_END=%d:",PDA_STASHEDEQUIPMENT_END);
     log("PDA_NOEQID=%d:",PDA_NOEQID);
     log("PDA_MODIDRANGE=%d:",PDA_MODIDRANGE);
     log("PDA_INFO4ID=%d:",PDA_INFO4ID);
@@ -255,7 +255,7 @@ function void setPDADefaults (int playerNum) {
     PDA_Info[playerNum].prevScrollingY = PDA_SCROLL_TOP;
 
     PDA_Info[playerNum].equipmentLimit = 0;
-    PDA_Info[playerNum].equipmentBaseY = 30.0;
+    PDA_Info[playerNum].equipmentBaseY = 20.0;
     PDA_Info[playerNum].stopEquipmentEarly = false;
 
     PDA_Info[playerNum].clipRegion = "HEADER"; // Always starts here by default
@@ -314,21 +314,21 @@ function void PDA_SetDisplay(int state) {
             PDA_HasEquipment();
 
             if (!localOneEquipFirst) {
-                if (localHasArmor) {
-                    localEqBoolField = localHasArmor << 0;
+                if (localHasEquippedArmor) {
+                    localEqBoolField = localHasEquippedArmor << 0;
                     localOneEquipFirst = true;
                 }
-                if (localHasBoots) {
-                    localEqBoolField = localHasBoots << 1;
+                if (localHasEquippedBoots) {
+                    localEqBoolField = localHasEquippedBoots << 1;
                     localOneEquipFirst = true;
                 }
-                if (localHasBackpack) {
-                    localEqBoolField = localHasBackpack << 2;
+                if (localHasEquippedBackpack) {
+                    localEqBoolField = localHasEquippedBackpack << 2;
                     localOneEquipFirst = true;
                 }
             }
             else {
-                if (!localHasArmor && !localHasBoots && !localHasBackpack) localOneEquipFirst = false;
+                if (!localHasEquippedArmor && !localHasEquippedBoots && !localHasEquippedBackpack) localOneEquipFirst = false;
             }
 
 
@@ -513,6 +513,7 @@ SCRIPT "PDA_Core" (void) {
         separator_character = StrParam("%l:", "PDA_SEPARATOR_CHARACTER");
     }
 
+    if (debug) DebugIDs();
     while (PDA_Local.active) {
         ++PDA_Local.ptic;
 
@@ -526,7 +527,6 @@ SCRIPT "PDA_Core" (void) {
             PDA_OnChange();
             UndrawTabs();
         }
-        // DebugIDs();
         
         switch (PDA_Local.category) {
             case PDA_MENU:

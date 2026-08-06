@@ -115,33 +115,28 @@ struct PDAButton {
 }
 PDAButton PDA_Button[MAX_PLAYERS][PDA_BUTTON_MAX];
 
-struct PDA_ArmorData {
-    str armorRes;
+// I could expand these so they can hold more data...
+// Theoretically, I could have it such that index 0 is always the current viewed one. Indices 1-6 are then the existing armors stored.
+// Or instead just compress these into one
+
+struct PDA_EquipmentData {
+    int type; // armor, backpack, boots
+    int buttonID;
+
     str langEntry;
     str name;
     str graphic;
-    str armorAttr;
-    str armorDesc;
-    str armorVal;
+    str attr;
+    str desc;
+    str val;
     str tooltip;
-}
-PDA_ArmorData _ad[MAX_PLAYERS][1];
 
-struct PDA_BackpackData {
-    str name;
-    str graphic;
-    str tooltip;
-    str backpackVal;
+    str res;
 }
-PDA_BackpackData _bpd[MAX_PLAYERS][1];
+// 0 - queried item
+// 1 - worn armor
+// 2 - worn backpack
+// 3 - worn boots
+// 4 5 6 7 - stashed
+PDA_EquipmentData _ed[MAX_PLAYERS][PDA_EQUIPMENT_TOTAL_MAX];
 
-struct PDA_BootsData {
-    str name;
-    str graphic;
-    str bootsAttr;
-    str bootsDesc;
-    str bootsVal;
-    str langEntry;
-    str tooltip;
-}
-PDA_BootsData _bd[MAX_PLAYERS][1];

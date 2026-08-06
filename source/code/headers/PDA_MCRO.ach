@@ -23,11 +23,11 @@
 #define fetchEntry(a, b) StrParam("%l:", StrParam(a, (b)))
 
 
-#define _armorToken DRLA_Equipment_List[armorIndex][armor_TOKEN]
-#define _armorActor DRLA_Equipment_List[armorIndex][armor_ACTOR]
-
-#define equipmentIsBoots \
-    StrCmp(_armorToken, StrParam("%s:Boots", StrTrim(_armorToken,0,5))) == 0 \
+// #define _equipmentToken DRLA_Equipment_List[equipmentIndex][armor_TOKEN]
+// #define _equipmentActor DRLA_Equipment_List[equipmentIndex][armor_ACTOR]
+//
+// #define equipmentIsBoots \
+//     StrCmp(_equipmentToken, StrParam("%s:Boots", StrTrim(_equipmentToken,0,5))) == 0 \
 
 #define setAssemblyData() \
     master_max = 0; \
@@ -327,17 +327,15 @@ if (PDA_LocalMouse.y > VMAX) { \
 #define localShowBoots     show_equipment[equipment_boots][PlayerNumber()]
 #define localShowBackpack  show_equipment[equipment_backpack][PlayerNumber()]
 
-#define localHasArmor      has_equipment[equipment_armor][PlayerNumber()]
-#define localHasBoots      has_equipment[equipment_boots][PlayerNumber()]
-#define localHasBackpack   has_equipment[equipment_backpack][PlayerNumber()]
+#define localHasEquippedArmor      has_equipment[equipment_armor][PlayerNumber()]
+#define localHasEquippedBoots      has_equipment[equipment_boots][PlayerNumber()]
+#define localHasEquippedBackpack   has_equipment[equipment_backpack][PlayerNumber()]
 
 #define PDA_Local       PDA_Info[PlayerNumber()]
 #define PDA_LocalMouse  PDA_Mouse[PlayerNumber()]
 #define PDA_LocalButton PDA_Button[PlayerNumber()]
 
-#define localArmorData    _ad[PlayerNumber()][0]
-#define localBackpackData _bpd[PlayerNumber()][0]
-#define localBootsData    _bd[PlayerNumber()][0]
+#define localEquipmentDataStored _ed[PlayerNumber()]
 
 #define localModData    PDA_ModData[PlayerNumber()]
 #define basic_offset    localModData[mod_data_basic_offset]

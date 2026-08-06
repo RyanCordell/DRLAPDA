@@ -47,30 +47,45 @@ switch (thisButton.actionID) {
         }
         break;
     case action_show_equipment_detail:
-        if (localHasArmor || thisButton.actionParam == 1) {
+        // Lead param dictates the equipment type..
+        // Stored param dictates the index to use
+        int leadParam = extractDigit(thisButton.actionParam, 2);
+        int storedParam = extractDigit(thisButton.actionParam, 1);
+
+        if (localHasEquippedArmor) {
             PDA_Local.detailFetch[0] = "armor";
-            setupArmorData(checkSpecialArmorTokens(), localArmorData.langEntry);
-            // PDA_SetCategory(PDA_EQUIPMENT_DETAIL);
+            localEquipmentDataStored[EQUIPPED_QUERY] = setupArmorData(checkSpecialArmorTokens(), localEquipmentDataStored[EQUIPPED_WORN_ARMOR].langEntry);
         }
 
-        // if (localHasBackpack) {
+        if (localHasEquippedBoots) {
+            PDA_Local.detailFetch[0] = "boots";
+            localEquipmentDataStored[EQUIPPED_QUERY] = setupBootsData(localEquipmentDataStored[EQUIPPED_WORN_BOOTS].langEntry);
+        }
+
+        switch(leadParam) {
+            case 1:
+                PDA_Local.detailFetch[0] = "armor";
+                localEquipmentDataStored[EQUIPPED_QUERY] = localEquipmentDataStored[storedParam];
+                break;
+            case 3:
+                PDA_Local.detailFetch[0] = "boots";
+                localEquipmentDataStored[EQUIPPED_QUERY] = localEquipmentDataStored[storedParam];
+                break;
+        }
+
+
+        // if (localHasEquippedBackpack) {
         //     PDA_Local.detailFetch[0] = "armor";
-        //     setupBackupDataOverride(thisButton.actionParam, localArmorData.langEntry);
+        //     setupBackupDataOverride(thisButton.actionParam, localEquipmentDataStored[EQUIPPED_WORN_ARMOR].langEntry);
         //     PDA_SetCategory(PDA_EQUIPMENT_DETAIL);
         // }
-
-        if (localHasBoots || thisButton.actionParam == 2) {
-            PDA_Local.detailFetch[0] = "boots";
-            setupBootsData(localBootsData.langEntry);
-            // PDA_SetCategory(PDA_EQUIPMENT_DETAIL);
-        }
 
         PDA_SetCategory(PDA_EQUIPMENT_DETAIL);
         PDA_Local.stopEquipmentEarly = true;
         break;
     case action_open_assembly:
         if (StrCmp(PDA_Local.detailFetch[0], "") != 0) {
-            PDA_SetCategory(PDA_EQUIPMENT_DETAIL);
+            PDA_SetCategory(PDA_ASSEMBLY_DETAIL);
         }
         break;
 }
