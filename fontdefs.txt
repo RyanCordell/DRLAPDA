@@ -47,7 +47,7 @@ PDAFONT
     ~ PFONTILD
     ":" PFONCOLN
     ";" PFONSCOL
-    ' PFONAPO
+    "'" PFONAPO
     "\"" PFONQOT
     0 PFON0
     1 PFON1
@@ -59,4 +59,7 @@ PDAFONT
     7 PFON7
     8 PFON8
     9 PFON9
+
+    // Used as a line-height modifier
+    ` PFONLH
 }

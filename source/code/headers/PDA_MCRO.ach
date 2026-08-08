@@ -1,3 +1,12 @@
+#define STRINGIFY_IMPL(X) #X
+#define STRINGIFY(X) STRINGIFY_IMPL(X)
+
+#define CONCAT_IMPL(x, y) x##y
+#define CONCAT(x, y) CONCAT_IMPL(x, y)
+
+#define CONCAT3_IMPL(a,b,c) a##b##c
+#define CONCAT3(a,b,c) CONCAT3_IMPL(a,b,c)
+
 // functions
 #define PDA_TAB_NEXT_X(a) \
     (PDA_TAB_START_X + (PDA_TAB_W * (a)) + (PDA_TAB_MARGIN * (a)))
@@ -201,15 +210,13 @@ int floaty[5] = { \
     (a).height = height; \
     (a).label = (b);
 
-#define STRINGIFY_IMPL(X) #X
-#define STRINGIFY(X) STRINGIFY_IMPL(X)
-
-#define CONCAT_IMPL(x, y) x##y
-#define CONCAT(x, y) CONCAT_IMPL(x, y)
-
 #define TAB_CREATE(b, c) \
     PDA_LocalButton[CONCAT(TAB, b)] = PDA_CreateTab(CONCAT(TAB, b), STRINGIFY(b), (b), "PTAB", (c));
     // PDA_LocalButton[(a)] = PDA_CreateTab((a), STRINGIFY(b), (b), "PTAB", (c));
+
+#define MENU_CREATE(name, page, icon, n) \
+    PDA_LocalButton[CONCAT3(PDA_,name,_BUTTON)] = \
+        PDA_CreateMenuButton(CONCAT3(PDA_,name,_BUTTON), (page), (icon), 10.0, (PDA_BODY_Y) + (20.0 * (n)));
 
 #define CheckBounds(a) \
     PDA_LocalMouse.x >= (a).x - 1 && PDA_LocalMouse.x <= (a).x + (a).width \

@@ -3,16 +3,14 @@
 
 switch (PDA_Local.category) {
   case PDA_MENU:
-    #define menuButtonY(a) (PDA_BODY_Y) + (20.0 * (a))
-    PDA_LocalButton[PDA_PLAYERS_BUTTON]    = PDA_CreateMenuButton(PDA_PLAYERS_BUTTON,    PDA_CLASSES,    "MPLYICO", 10.0, menuButtonY(0));
-    PDA_LocalButton[PDA_WEAPONS_BUTTON]    = PDA_CreateMenuButton(PDA_WEAPONS_BUTTON,    PDA_WEAPONS,    "MWEPICO", 10.0, menuButtonY(1));
-    PDA_LocalButton[PDA_EQUIPMENT_BUTTON]  = PDA_CreateMenuButton(PDA_EQUIPMENT_BUTTON,  PDA_EQUIPMENT,  "MARMICO", 10.0, menuButtonY(2));
-    PDA_LocalButton[PDA_ASSEMBLIES_BUTTON] = PDA_CreateMenuButton(PDA_ASSEMBLIES_BUTTON, PDA_ASSEMBLIES, "MASMICO", 10.0, menuButtonY(3));
-    PDA_LocalButton[PDA_ITEMS_BUTTON]      = PDA_CreateMenuButton(PDA_ITEMS_BUTTON,      PDA_ITEMS,      "MITMICO", 10.0, menuButtonY(4));
-    PDA_LocalButton[PDA_BESTIARY_BUTTON]   = PDA_CreateMenuButton(PDA_BESTIARY_BUTTON,   PDA_BESTIARY,   "MBESICO", 10.0, menuButtonY(5));
-    PDA_LocalButton[PDA_MISC_BUTTON]       = PDA_CreateMenuButton(PDA_MISC_BUTTON,       PDA_MISC,       "MMSCICO", 10.0, menuButtonY(6));
-    PDA_LocalButton[PDA_HELP_BUTTON]       = PDA_CreateMenuButton(PDA_HELP_BUTTON,       PDA_HELP,       "MHLPICO", 10.0, menuButtonY(7));
-
+    MENU_CREATE(PLAYERS,    PDA_CLASSES,    "MPLYICO", 0);
+    MENU_CREATE(WEAPONS,    PDA_WEAPONS,    "MWEPICO", 1);
+    MENU_CREATE(EQUIPMENT,  PDA_EQUIPMENT,  "MARMICO", 2);
+    MENU_CREATE(ASSEMBLIES, PDA_ASSEMBLIES, "MASMICO", 3);
+    MENU_CREATE(ITEMS,      PDA_ITEMS,      "MITMICO", 4);
+    MENU_CREATE(BESTIARY,   PDA_BESTIARY,   "MBESICO", 5);
+    MENU_CREATE(MISC,       PDA_MISC,       "MMSCICO", 6);
+    MENU_CREATE(HELP,       PDA_HELP,       "MHLPICO", 7);
     break;
 
   case PDA_CLASSES:
@@ -134,21 +132,6 @@ switch (PDA_Local.category) {
     TAB_CREATE(2, PDA_TAB_NEXT_X(1));
     TAB_CREATE(3, PDA_TAB_NEXT_X(2));
     break;
-
-  // case PDA_WINFO:
-  //   PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 10.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
-  //   s:"Damage formulas explained:\n",
-  //   s:"(XdN) = Random value of 1 to X multiplied by N.\n",
-  //   s:"(X~Y) = Random value between X and Y. Used when the minimum value X is not 1, and thus cannot\nbe represented with the above formula.\n",
-  //   s:"((X~Y)*N) = Effectively a combination of the two formulas above.\n",
-  //   s:"<X> = Splash damage of X value.\n",
-  //   s:"<X...Y> = Splash damage of minimum X value, all the way up to Y.\n",
-  //   s:"(X) = Non-random damage value.\n",
-  //   s:"(X)! = Non-random damage value on a Ripper projectile.\n",
-  //   s:"(X) - N = X damage value with N subtracted from the final result.\n",
-  //   s:"Y x (N) = Y amount of bullets dealing N damage.\n",
-  //   s:"Y? x (N) = Y amount of bullets dealing N damage with dual wielded weapons.\n");
-  //   break;
 
   case PDA_MISC:
     PDA_LocalButton[49] = PDA_CreateButton(49, "Credits", "PLON",      PDA_SCREEN_X + 10.0, 30.0 + (14.0 * 1), 32, 8, -3.0, 0);
