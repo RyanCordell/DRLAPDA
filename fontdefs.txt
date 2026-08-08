@@ -34,6 +34,21 @@ PDAFONT
     + PFONPLS
     * PFONSTR
     % PFONPRC
+    ( PFONLRB
+    ) PFONRRB
+    [ PFONLSB
+    ] PFONRSB
+    / PFONFSL
+    \ PFONBSL
+    "-{" PFONLBB
+    "-}" PFONRBB
+    < PFONLAB
+    > PFONRAB
+    ~ PFONTILD
+    ":" PFONCOLN
+    ";" PFONSCOL
+    ' PFONAPO
+    "\"" PFONQOT
     0 PFON0
     1 PFON1
     2 PFON2
