@@ -63,7 +63,6 @@ function void DebugIDs (void) {
     log("PDA_PONG_PLAYERSCORE=%d:",PDA_PONG_PLAYERSCORE);
     log("PDA_PONG_AISCORE=%d:",PDA_PONG_AISCORE);
     log("PDA_INFOTOPID=%d:",PDA_INFOTOPID);
-    log("PDA_TAB_BUTTONS_START=%d:",PDA_TAB_BUTTONS_START);
     log("PDA_TAB_BUTTONS_END=%d:",PDA_TAB_BUTTONS_END);
     log("PDA_ID=%d:",PDA_ID);
     log("PDA_REALLYLASTID=%d:",PDA_REALLYLASTID);
@@ -254,7 +253,7 @@ function void setPDADefaults (int playerNum) {
     PDA_Info[playerNum].scrollDirty = true;
     PDA_Info[playerNum].prevScrollingY = PDA_SCROLL_TOP;
 
-    PDA_Info[playerNum].equipmentLimit = 0;
+    PDA_Info[playerNum].hasEquipment = false;
     PDA_Info[playerNum].equipmentBaseY = 20.0;
     PDA_Info[playerNum].stopEquipmentEarly = false;
 
@@ -318,19 +317,20 @@ function void PDA_SetDisplay(int state) {
                     localEqBoolField = localHasEquippedArmor << 0;
                     localOneEquipFirst = true;
                 }
-                if (localHasEquippedBoots) {
-                    localEqBoolField = localHasEquippedBoots << 1;
+                if (localHasEquippedBackpack) {
+                    localEqBoolField = localHasEquippedBackpack << 1;
                     localOneEquipFirst = true;
                 }
-                if (localHasEquippedBackpack) {
-                    localEqBoolField = localHasEquippedBackpack << 2;
+                if (localHasEquippedBoots) {
+                    localEqBoolField = localHasEquippedBoots << 2;
                     localOneEquipFirst = true;
                 }
             }
             else {
-                if (!localHasEquippedArmor && !localHasEquippedBoots && !localHasEquippedBackpack) localOneEquipFirst = false;
+                if (!localHasEquippedArmor && !localHasEquippedBoots && !localHasEquippedBackpack) {
+                    localOneEquipFirst = false;
+                }
             }
-
 
             PDA_UnsetScrollArrows();
 

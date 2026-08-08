@@ -13,6 +13,7 @@ struct PDAInfo {
     bool newEntry[5];
 
     bool armorHax;
+    bool hasEquipment;
 
     int category;
     int prevCategory;
@@ -29,7 +30,6 @@ struct PDAInfo {
     int maxModLimit;
     int scrollYDelta;
 
-    int equipmentLimit;
     int equipmentId[PDA_EQUIPMENT_TOTAL_MAX];
 
     fixed textY;

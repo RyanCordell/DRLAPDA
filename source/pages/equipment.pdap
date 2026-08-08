@@ -15,15 +15,18 @@ PDA_SetupScreenBounds();
 switch(PDA_Local.page) {
     case EQUIPMENT_PAGE_ONHAND:
         #define armorHandler(eqId) \
-            deleteNoEquipmentMessage(); \
             PDA_ButtonHandler(eqId, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
 
         if (PDA_ScrollableNeedsDraw) {
             SetFont(PDA_FONT[mono_font]);
-            PDA_DrawBodyText(HUDMSG_PLAIN, PDA_NOEQID, CR_UNTRANSLATED, 10.0, 50.0, INF_HOLDTIME, OPAQUE, B_NOT_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN, s:"No equipment detected");
+            if (!PDA_Local.hasEquipment) {
+                PDA_DrawBodyText(HUDMSG_PLAIN, PDA_NOEQID, CR_UNTRANSLATED, 10.0, 50.0, INF_HOLDTIME, OPAQUE, B_NOT_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN, s:"No equipment detected");
+            } else {
+                deleteNoEquipmentMessage();
+            }
         }
 
-        // Note to future self: don't try to merge these two ifs for cleanliness sake. Won't work the way you wish it would.
+        // All handled separately for a good reason
         if (localHasEquippedArmor) {
             armorHandler(PDA_Local.equipmentId[EQUIPPED_WORN_ARMOR]);
         }
@@ -36,6 +39,7 @@ switch(PDA_Local.page) {
             armorHandler(PDA_Local.equipmentId[EQUIPPED_WORN_BOOTS]);
         }
 
+        // Afterwards, all the stashed ones/in inventory
         for (int stshId = EQUIPPED_WORN_BOOTS + 1; stshId < PDA_EQUIPMENT_TOTAL_MAX; ++stshId) {
             if (localEquipmentDataStored[stshId].langEntry != "") {
                 armorHandler(PDA_Local.equipmentId[stshId]);

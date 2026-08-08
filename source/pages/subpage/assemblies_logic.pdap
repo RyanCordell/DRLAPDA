@@ -4,9 +4,6 @@ if (PDA_Local.page > 1 && PDA_Local.page < 3) {
     nextButtonX = PDA_SCREEN_WIDTH_SCALED + PDA_SCREEN_X_SCALED - 82;
 }
 
-PDA_LocalButton[TAB1] = PDA_CreateTab(TAB1, "1", 1, "PTAB", PDA_TAB_START_X  );
-PDA_LocalButton[TAB2] = PDA_CreateTab(TAB2, "2", 2, "PTAB", PDA_TAB_NEXT_X(1));
-PDA_LocalButton[TAB3] = PDA_CreateTab(TAB3, "3", 3, "PTAB", PDA_TAB_NEXT_X(2));
 
 fixed assemblyX = PDA_BODY_X,
       assemblyY;
@@ -47,8 +44,8 @@ for (int ti = 0, li = 1; ti <= PDA_Local.maxAssembliesPer; ti+=2, li+=2) {
 
 fixed paginationY = (assemblyYOffset - 8.0) + (6.0 * PDA_Local.maxAssembliesPer);
 
-#define prevNextWidth 82
-#define prevNextHeight 12
+#define prevNextWidth  (82)
+#define prevNextHeight (12)
 #define nextY (int)(PDA_BODY_Y - 6.0)
 
 if (PDA_Local.page < 3) {

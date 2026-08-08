@@ -89,18 +89,26 @@ switch (PDA_Local.category) {
     break;
     
   case PDA_EQUIPMENT:
+    PDA_LocalButton[TAB1] = PDA_CreateTab(TAB1, "1", 1, "PTAB", PDA_TAB_START_X  );
+    PDA_LocalButton[TAB2] = PDA_CreateTab(TAB2, "2", 2, "PTAB", PDA_TAB_NEXT_X(1));
+
     #include "../../pages/subpage/equipment_general_logic.pdap"
 
-    if (PDA_Local.page == EQUIPMENT_PAGE_ONHAND) {
-      #include "../../pages/subpage/equipment_onhand_logic.pdap"
-    }
+    // if (PDA_Local.page == EQUIPMENT_PAGE_ONHAND) {
+    //   #include "../../pages/subpage/equipment_onhand_logic.pdap"
+    // }
     break;
 
   case PDA_EQUIPMENT_DETAIL:
-    #include "../../pages/subpage/equipment_equipped_logic.pdap"
+    // Tied to PDA_Equipment, so no need for tabs here.
+    #include "../../pages/subpage/equipment_queried_logic.pdap"
     break;
 
   case PDA_ASSEMBLIES:
+    PDA_LocalButton[TAB1] = PDA_CreateTab(TAB1, "1", 1, "PTAB", PDA_TAB_START_X  );
+    PDA_LocalButton[TAB2] = PDA_CreateTab(TAB2, "2", 2, "PTAB", PDA_TAB_NEXT_X(1));
+    PDA_LocalButton[TAB3] = PDA_CreateTab(TAB3, "3", 3, "PTAB", PDA_TAB_NEXT_X(2));
+
     #include "../../pages/subpage/assemblies_logic.pdap"
     break;
 
@@ -185,6 +193,7 @@ switch (PDA_Local.category) {
 
 
   case PDA_ITEMS:
+    // wonder if I can make a macro-loop that creates the buttons I need?
     PDA_LocalButton[TAB1] = PDA_CreateTab(TAB1, "1", 1, "PTAB", PDA_TAB_START_X  );
     PDA_LocalButton[TAB2] = PDA_CreateTab(TAB2, "2", 2, "PTAB", PDA_TAB_NEXT_X(1));
     PDA_LocalButton[TAB3] = PDA_CreateTab(TAB3, "3", 3, "PTAB", PDA_TAB_NEXT_X(2));

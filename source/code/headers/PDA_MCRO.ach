@@ -41,10 +41,10 @@
         } \
     } \
     stringArrayIndex = 0; \
-    master_max -= 1; \
+    master_max -= 1;
 
 #define deleteNoEquipmentMessage() \
-    HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_NOEQID, CR_UNTRANSLATED, 0, 0, 0); \
+    HudMessage(s:"\n"; HUDMSG_PLAIN, PDA_NOEQID, CR_UNTRANSLATED, 0, 0, 0);
 
 #define setMaxModLimit() \
     if (CheckInventory("RLStandardWeaponToken") || CheckInventory("RLExoticWeaponToken")) { \
@@ -61,7 +61,7 @@
     } \
     if (CheckInventory("RLMasterAssemblyTypeWeapon") || CheckInventory("RLSuperiorAssembledWeaponToken")) { \
         PDA_Local.maxModLimit = 0; \
-    } \
+    }
 
 // Checks for player perks that influence weapons
 #define checkPlayerWeaponPerk() \
@@ -71,7 +71,7 @@
         } else { \
             PDA_Class[PlayerNumber()][pda_class_weapon_perk] = ""; \
         } \
-    } \
+    }
     // PDA_Class[PlayerNumber()][pda_class_weapon_perk]   = StrParam("\c[Yellow]%l:", "PDA_WEAPON_PERKUNAVAILABLE"); \
 
 #define _ACTION (BT_ATTACK|BT_USE)
@@ -79,20 +79,20 @@
 
 
 #define pressedBack \
-    PDA_LocalMouse.m2 && !(PDA_LocalMouse.oldState & _BACK) \
+    PDA_LocalMouse.m2 && !(PDA_LocalMouse.oldState & _BACK)
 
 #define holdingBack \
-    PDA_LocalMouse.m2 && (PDA_LocalMouse.oldState & _BACK) \
+    PDA_LocalMouse.m2 && (PDA_LocalMouse.oldState & _BACK)
 
 
 #define pressedAction \
-    PDA_LocalMouse.m1 && !(PDA_LocalMouse.oldState & _ACTION) \
+    PDA_LocalMouse.m1 && !(PDA_LocalMouse.oldState & _ACTION)
 
 #define holdingAction \
-    PDA_LocalMouse.m1 && (PDA_LocalMouse.oldState & _ACTION) \
+    PDA_LocalMouse.m1 && (PDA_LocalMouse.oldState & _ACTION)
 
 #define notHoldingAction \
-    !PDA_LocalMouse.m1 && (PDA_LocalMouse.oldState & _ACTION)\
+    !PDA_LocalMouse.m1 && (PDA_LocalMouse.oldState & _ACTION)
 
 #define buttonStoppedHovering (thisButton.oldState == button_hovered && thisButton.state != button_hovered)
 
@@ -104,13 +104,13 @@
 #define PDA_ClearDirty()        PDA_Local.dirty = false; PDA_Local.scrollDirty = false;
 
 #define PDA_CategoryChanged \
-    (PDA_Local.category != PDA_Local.prevCategory) \
+    (PDA_Local.category != PDA_Local.prevCategory)
 
 #define PDA_PageChanged \
-    (PDA_Local.page != PDA_Local.prevPage) \
+    (PDA_Local.page != PDA_Local.prevPage)
 
 #define PDA_ScrollMoved \
-    (PDA_Local.scrollingY != PDA_Local.prevScrollingY) \
+    (PDA_Local.scrollingY != PDA_Local.prevScrollingY)
 
 #define RAW_SCROLL (PDA_Local.scrollingY - PDA_SCROLL_TOP)
 #define SCALED_SCROLL (RAW_SCROLL * NEW_RESOLUTION_Y)
@@ -122,18 +122,18 @@
 
 // do {} while(0) to help prevent dangling-else and similar stealth problems
 #define TraceLog(message) do { \
-if (TraceDebug) log(s:(message)); \
-} while(0) \
+    if (TraceDebug) log(s:(message)); \
+} while(0)
 
 
 #define clearStringArray(dim) \
-for (int i = 0; i < STRING_ARRAY_MAX; i++) stringArray[dim][i] = ""; \
+    for (int i = 0; i < STRING_ARRAY_MAX; i++) stringArray[dim][i] = "";
 
 #define afterPageDefaults(a) \
-PDA_Wipe((a)); \
-PDA_DefaultFont(); \
-PDA_UnsetScrollWindow(); \
-TraceLog("afterPageDefaults"); \
+    PDA_Wipe((a)); \
+    PDA_DefaultFont(); \
+    PDA_UnsetScrollWindow(); \
+    TraceLog("afterPageDefaults");
 
 
 #define HEADER_BOUNDS() \
@@ -141,76 +141,76 @@ int head[5] = { \
     PDA_HEADER_X, PDA_HEADER_Y, \
     PDA_SCREEN_WIDTH_SCALED, PDA_HEADER_HEIGHT, \
     PDA_SCREEN_WIDTH_SCALED - PDA_SCREEN_X \
-}; \
+};
 
 #define BODY_BOUNDS() \
 int body[5] = { \
     PDA_SCREEN_X + 4, PDA_SCROLLABLE_BODY_Y, \
     PDA_SCREEN_WIDTH_SCALED, PDA_SCROLLABLE_BODY_HEIGHT, \
     PDA_SCREEN_WIDTH_SCALED - (PDA_SCREEN_X * 3) \
-}; \
+};
 
 #define TOOLTIP_BOUNDS() \
 int tip[5] = { \
     PDA_MENU_TOOLTIP_X, PDA_MENU_TOOLTIP_Y, \
     (PDA_MENU_TOOLTIP_WIDTH * NEW_RESOLUTION_X), PDA_MENU_TOOLTIP_HEIGHT, \
     (PDA_MENU_TOOLTIP_WIDTH * NEW_RESOLUTION_X) - 10 \
-}; \
+};
 
 #define FLOATING_BOUNDS() \
 int floaty[5] = { \
     PDA_SCREEN_X_SCALED + 4, PDA_SCROLLABLE_BODY_Y, \
     (PDA_SCREEN_WIDTH * NEW_RESOLUTION_X), PDA_SCROLLABLE_BODY_HEIGHT, \
     PDA_FLOATING_TOOLTIP_WRAP \
-}; \
+};
 
 #define PDA_DrawBodyText(type, id, color, x, y, hold, alpha, scrollable, x_al, y_al, ...) do { \
     PDA_DrawBodyText_Set(type, id, color, x, y, hold, alpha, scrollable, x_al, y_al); \
     PDA_Hud(__VA_ARGS__); \
-} while(0) \
+} while(0)
 
 #define PDA_DrawTooltipText(type, id, color, x, y, hold, alpha, x_al, y_al, ...) do { \
     PDA_DrawTooltipText_Set(type, id, color, x, y, hold, alpha, x_al, y_al); \
     PDA_Hud(__VA_ARGS__); \
     PDA_SetupScreenBounds(); \
-} while(0) \
+} while(0)
 
 #define checkMonsterKillCount() \
-for (int t = 0; t < DRLA_DIFFICULTYTIERS; t++) { \
-    for (int m = 0; m < DRLA_MONSTER_PAGE_MAX; m++) { \
-        monsterCheck[t][m] = CheckInventory(StrParam(s:DRLA_Bestiary[t][m][beast_TOKEN],s:"KillCounter")); \
-        if (oldCheck[t][m] != monsterCheck[t][m] && oldCheck[t][m] < 2 && monsterCheck[t][m] < 2) { \
-            PDA_Local.newEntry[t] = true; \
+    for (int t = 0; t < DRLA_DIFFICULTYTIERS; t++) { \
+        for (int m = 0; m < DRLA_MONSTER_PAGE_MAX; m++) { \
+            monsterCheck[t][m] = CheckInventory(StrParam(s:DRLA_Bestiary[t][m][beast_TOKEN],s:"KillCounter")); \
+            if (oldCheck[t][m] != monsterCheck[t][m] && oldCheck[t][m] < 2 && monsterCheck[t][m] < 2) { \
+                PDA_Local.newEntry[t] = true; \
+            } \
         } \
-    } \
-} \
+    }
 
 #define updateOldMonsterKillCount() \
-for (int t = 0; t < DRLA_DIFFICULTYTIERS; t++) { \
-    for (int m = 0; m < DRLA_MONSTER_PAGE_MAX; m++) { \
-        oldCheck[t][m] = monsterCheck[t][m]; \
-    } \
-} \
+    for (int t = 0; t < DRLA_DIFFICULTYTIERS; t++) { \
+        for (int m = 0; m < DRLA_MONSTER_PAGE_MAX; m++) { \
+            oldCheck[t][m] = monsterCheck[t][m]; \
+        } \
+    }
 
 #define assignButtonParams(a, b) \
-(a).id = id; \
-(a).x = (int)(PDA_BODY_X + x); \
-(a).y = (int)(y); \
-(a).rawY = (int)(y); \
-(a).width = width; \
-(a).height = height; \
-(a).label = (b); \
+    (a).id = id; \
+    (a).x = (int)(PDA_BODY_X + x); \
+    (a).y = (int)(y); \
+    (a).rawY = (int)(y); \
+    (a).width = width; \
+    (a).height = height; \
+    (a).label = (b);
 
 #define abs(a) (a < 0 ? -a : a)
 
 
 #define CheckBounds(a) \
-PDA_LocalMouse.x >= (a).x - 1 && PDA_LocalMouse.x <= (a).x + (a).width \
-&& \
-PDA_LocalMouse.y >= ((a).y + ((a).type != "tab" ? RAW_SCROLL : 0)) - 2 && PDA_LocalMouse.y <= ((a).y + ((a).type != "tab" ? RAW_SCROLL : 0)) + (a).height \
+    PDA_LocalMouse.x >= (a).x - 1 && PDA_LocalMouse.x <= (a).x + (a).width \
+    && \
+    PDA_LocalMouse.y >= ((a).y + ((a).type != "tab" ? RAW_SCROLL : 0)) - 2 && PDA_LocalMouse.y <= ((a).y + ((a).type != "tab" ? RAW_SCROLL : 0)) + (a).height
 
 #define PDA_PlaySound(PDA_Sound, soldier, volume) \
-LocalAmbientSound(!GetCVar("DRLA_PDA_soldier") ? PDA_Sound : soldier, volume); \
+    LocalAmbientSound(!GetCVar("DRLA_PDA_soldier") ? PDA_Sound : soldier, volume);
 
 #define buttonBoundsDefault(button) \
 if (CheckBounds(button)) { \
@@ -233,50 +233,50 @@ if (CheckBounds(button)) { \
         if (PDA_LocalMouse.mtic > 1) return; \
         PDA_LocalMouse.state = cursor_default; \
     } \
-} \
+}
 
 #define PDA_NOPONG() \
 for (int wipeIndex = PDA_PONG_LEFTPADDLE; wipeIndex <= PDA_PONG_AISCORE; wipeIndex++) { \
     HudMessage(s:"\n"; HUDMSG_PLAIN, wipeIndex, CR_UNTRANSLATED, 0, 0, 0, 0); \
 } \
-TraceLog("PDA_NOPONG"); \
+TraceLog("PDA_NOPONG");
 
 #define PDA_SetScrollWindow(a,b)   \
     PDA_Local.maxTextY = (a); \
     PDA_SetScrollArrows((a), (b)); \
-    TraceLog("PDA_SetScrollWindow"); \
+    TraceLog("PDA_SetScrollWindow");
 
 #define PDA_ResetScroll()       PDA_Local.scrollingY = PDA_SCROLL_TOP;
 
 
 #define PDA_UnsetScrollArrows() \
-DisplayIcon("RLZARU", PDA_SCROLLUPID, PDA_SCREEN_WIDTH + X_LEFT_EDGE, PDA_SCREEN_Y + 10.0 + Y_TOP_EDGE, INF_HOLDTIME, 0); \
-DisplayIcon("RLZARD", PDA_SCROLLDNID, PDA_SCREEN_WIDTH + X_LEFT_EDGE, PDA_SCREEN_HEIGHT + 0.0 + Y_TOP_EDGE, INF_HOLDTIME, 0); \
-TraceLog("PDA_UnsetScrollArrows"); \
+    DisplayIcon("RLZARU", PDA_SCROLLUPID, PDA_SCREEN_WIDTH + X_LEFT_EDGE, PDA_SCREEN_Y + 10.0 + Y_TOP_EDGE, INF_HOLDTIME, 0); \
+    DisplayIcon("RLZARD", PDA_SCROLLDNID, PDA_SCREEN_WIDTH + X_LEFT_EDGE, PDA_SCREEN_HEIGHT + 0.0 + Y_TOP_EDGE, INF_HOLDTIME, 0); \
+    TraceLog("PDA_UnsetScrollArrows");
 
 
 #define PDA_HudSet(type, id, color, x, y, hold, alpha, x_al, y_al) \
-_pda_hm_i[0] = (type);  \
-_pda_hm_i[1] = (id);    \
-_pda_hm_i[2] = (color); \
-_pda_hm_f[0] = (int)(x) + (x_al != DEFAULT_ALIGN ? x_al : X_LEFT_EDGE); \
-_pda_hm_f[1] = (int)(y) + (y_al != DEFAULT_ALIGN ? y_al : Y_TOP_EDGE);  \
-_pda_hm_f[2] = (hold);  \
-_pda_hm_f[3] = (alpha); \
+    _pda_hm_i[0] = (type);  \
+    _pda_hm_i[1] = (id);    \
+    _pda_hm_i[2] = (color); \
+    _pda_hm_f[0] = (int)(x) + (x_al != DEFAULT_ALIGN ? x_al : X_LEFT_EDGE); \
+    _pda_hm_f[1] = (int)(y) + (y_al != DEFAULT_ALIGN ? y_al : Y_TOP_EDGE);  \
+    _pda_hm_f[2] = (hold);  \
+    _pda_hm_f[3] = (alpha);
 
 #define assignButtonPosition(arr, x, y, xoff, yoff) \
-(arr)[TB_X] = (x); \
-(arr)[TB_Y] = (y); \
-(arr)[TB_X_OFF] = (xoff); \
-(arr)[TB_Y_OFF] = (yoff); \
+    (arr)[TB_X] = (x); \
+    (arr)[TB_Y] = (y); \
+    (arr)[TB_X_OFF] = (xoff); \
+    (arr)[TB_Y_OFF] = (yoff);
 
 // Used for DrawButton text
 #define PDA_HudDirty(type, id, color, x, y, hold, alpha, x_al, y_al, ...) do { \
-if (PDA_NeedsDraw) { \
-    PDA_HudSet(type, id, color, x, y, hold, alpha, x_al, y_al); \
-    PDA_Hud(__VA_ARGS__); \
-} \
-} while(0) \
+    if (PDA_NeedsDraw) { \
+        PDA_HudSet(type, id, color, x, y, hold, alpha, x_al, y_al); \
+        PDA_Hud(__VA_ARGS__); \
+    } \
+} while(0)
 
 // TODO: Phase out for DrawBodyText calls instead
 
@@ -298,7 +298,7 @@ if (PDA_NeedsDraw) { \
         if (CheckInventory("RLCerberusSetBonusActive")      && (player_weapon[player_weapon_current] == DRLA_TristarCheckList[setPerkIndex])) { \
             weapon_info[weapon_info_armor_set_perk] = StrParam("\czSet Bonus!\c- \c[Yellow]%s:", DRLA_WeaponSetList[tristarWeaponPerk][perkMessage]); \
         } \
-    } \
+    }
 
 #define handleMouseVMIN() \
 if (PDA_LocalMouse.y < VMIN) { \
@@ -307,7 +307,7 @@ if (PDA_LocalMouse.y < VMIN) { \
         PDA_Local.scrollingY += 2.0 * yScale; \
         PDA_Local.scrollYDelta = setScrollDelta(); \
     } \
-} \
+}
 
 #define handleMouseVMAX() \
 if (PDA_LocalMouse.y > VMAX) { \
@@ -316,16 +316,40 @@ if (PDA_LocalMouse.y > VMAX) { \
         PDA_Local.scrollingY -= 2.0 * yScale; \
         PDA_Local.scrollYDelta = setScrollDelta(); \
     } \
-} \
+}
+
+
+#define PDA_UnsetScrollWindow() \
+    PDA_SetupScreenBounds(); \
+    TraceLog("PDA_UnsetScrollWindow");
+
+#define checkTextBounds(a, b) \
+if (PDA_Local.scrollingY >= PDA_SCROLL_TOP) { \
+    if (finalX < (a)[0] || finalX > (a)[0] + (a)[2]) { \
+        if (debug) log("%s: text outside horizontal clipping bounds", (b)); \
+    } \
+    if (finalY < (a)[1] || finalY > (a)[1] + (a)[3]) { \
+        if (debug) log("%s: text outside vertical clipping bounds", (b)); \
+    } \
+}
+
+
+#define hoverPulse(a) ((a.state == button_hovered) ? pulser(OVERBRIGHT, DEFAULT_BUTTON_ALPHA + 0.2) : DEFAULT_BUTTON_ALPHA)
+#define defaultHoverPulse(a) (thisButton.alpha = hoverPulse(a))
+#define brightOnHover(a) (thisButton.alpha = (a.state == button_hovered) ? OPAQUE : DEFAULT_BUTTON_ALPHA)
+
+#define equipmentButton(a) PDA_LocalButton[PDA_Local.equipmentId[(a)]]
+
+#define wornEquipmentActive(a) show_equipment[(a)][PlayerNumber()]
 
 // shortening array calls
 #define localArmorIndex    global_equipment_index[equipment_armor][PlayerNumber()]
 #define localBootsIndex    global_equipment_index[equipment_boots][PlayerNumber()]
 #define localBackpackIndex global_equipment_index[equipment_backpack][PlayerNumber()]
 
-#define localShowArmor     show_equipment[equipment_armor][PlayerNumber()]
-#define localShowBoots     show_equipment[equipment_boots][PlayerNumber()]
-#define localShowBackpack  show_equipment[equipment_backpack][PlayerNumber()]
+#define localShowArmor     wornEquipmentActive(equipment_armor)
+#define localShowBackpack  wornEquipmentActive(equipment_backpack)
+#define localShowBoots     wornEquipmentActive(equipment_boots)
 
 #define localHasEquippedArmor      has_equipment[equipment_armor][PlayerNumber()]
 #define localHasEquippedBoots      has_equipment[equipment_boots][PlayerNumber()]

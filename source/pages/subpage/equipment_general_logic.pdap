@@ -1,48 +1,56 @@
-#define ARM_X 10.0
+// Shared logic between OnHand and Equipped pages
+
+#define isWearingPage (PDA_Local.page == 2)
 #define ARM_GAP 4
 
-#define wornEquipmentButton(a) PDA_LocalButton[PDA_Local.equipmentId[(a)]]
+#define ARM_X (isWearingPage ? 60.0 : 10.0)
+#define BCK_X (isWearingPage ? 45.0 : 10.0)
+#define BOT_X (isWearingPage ? 55.0 : 10.0)
 
 // Header
-PDA_LocalButton[TAB1] = PDA_CreateTab(TAB1, "1", 1, "PTAB", PDA_TAB_START_X  );
-PDA_LocalButton[TAB2] = PDA_CreateTab(TAB2, "2", 2, "PTAB", PDA_TAB_NEXT_X(1));
 
 // Body
 fixed armorY = PDA_Local.equipmentBaseY;
 PDA_Local.stopEquipmentEarly = false;
+PDA_Local.armorHax = false;
 
 // Note to future self: don't try to merge these ifs for cleanliness sake. Won't work the way you wish it would.
-// TODO: Do X changes when on page 2
 if (localHasEquippedArmor) {
-    armorY += ARM_HEIGHT + ARM_GAP;
-    wornEquipmentButton(EQUIPPED_WORN_ARMOR) = PDA_DisplayArmor(PDA_Local.equipmentId[EQUIPPED_WORN_ARMOR], ARMOR_DATA, EQUIPPED_WORN_ARMOR, ARM_X, armorY, ARM_HEIGHT, 1.0);
+    if (isWearingPage) armorY = PDA_Local.equipmentBaseY + ((ARM_HEIGHT + ARM_GAP) * 1);
+    else armorY += ARM_HEIGHT + ARM_GAP;
+    equipmentButton(EQUIPPED_WORN_ARMOR) = PDA_DisplayArmor(PDA_Local.equipmentId[EQUIPPED_WORN_ARMOR], ARMOR_DATA, EQUIPPED_WORN_ARMOR, ARM_X, armorY, ARM_HEIGHT);
 }
 
-// TODO: fix this not being cleared on scroll
-// if (localHasEquippedBackpack) {
-//     armorY += ARM_HEIGHT + ARM_GAP;
-//     wornEquipmentButton(EQUIPPED_WORN_BACKP) = PDA_DisplayArmor(PDA_Local.equipmentId[EQUIPPED_WORN_BACKP], BACKPACK_DATA, EQUIPPED_WORN_BACKP, ARM_X, armorY, ARM_HEIGHT, 1.0);
-// }
+if (localHasEquippedBackpack) {
+    if (isWearingPage) armorY = PDA_Local.equipmentBaseY + ((ARM_HEIGHT + ARM_GAP) * 2);
+    else armorY += ARM_HEIGHT + ARM_GAP;
+    equipmentButton(EQUIPPED_WORN_BACKP) = PDA_DisplayArmor(PDA_Local.equipmentId[EQUIPPED_WORN_BACKP], BACKPACK_DATA, EQUIPPED_WORN_BACKP, ARM_X, armorY, ARM_HEIGHT);
+}
 
 if (localHasEquippedBoots) {
-    armorY += ARM_HEIGHT + ARM_GAP;
-    wornEquipmentButton(EQUIPPED_WORN_BOOTS) = PDA_DisplayArmor(PDA_Local.equipmentId[EQUIPPED_WORN_BOOTS], BOOTS_DATA, EQUIPPED_WORN_BOOTS, ARM_X, armorY, ARM_HEIGHT, 1.0);
+    if (isWearingPage) armorY = PDA_Local.equipmentBaseY + ((ARM_HEIGHT + ARM_GAP) * 3);
+    else armorY += ARM_HEIGHT + ARM_GAP;
+    #define BOT_Y (isWearingPage ? armorY + 0.0 : armorY)
+    equipmentButton(EQUIPPED_WORN_BOOTS) = PDA_DisplayArmor(PDA_Local.equipmentId[EQUIPPED_WORN_BOOTS], BOOTS_DATA, EQUIPPED_WORN_BOOTS, BOT_X, BOT_Y, ARM_HEIGHT);
+}
+
+for (int setIndex = 0; setIndex < DRLA_EQUIPMENT_SETMAX; setIndex++) {
+    if (CheckInventory(DRLA_Equipment_SetList[setIndex])) {
+        if (CheckInventory("RLEnclaveSetBonusActive") && CheckInventory("RLNuclearWeaponSetBonusActive"))
+            PDA_Local.armorHax = true;
+    }
 }
 
 for (int stshId = EQUIPPED_WORN_BOOTS + 1; stshId < PDA_EQUIPMENT_TOTAL_MAX; ++stshId) {
-    #define thisStashedButton PDA_LocalButton[PDA_Local.equipmentId[stshId]]
-
     armorY += ARM_HEIGHT + ARM_GAP;
 
     switch(localEquipmentDataStored[stshId].type) {
-        case EQUIPPED_WORN_ARMOR:
-            thisStashedButton = PDA_DisplayArmor(PDA_Local.equipmentId[stshId], ARMOR_DATA, stshId, ARM_X, armorY, ARM_HEIGHT, 0.6);
+        case EQUIPPED_WORN_ARMOR: // Technically true but false nomenclature here..
+            equipmentButton(stshId) = PDA_DisplayArmor(PDA_Local.equipmentId[stshId], ARMOR_DATA, stshId, ARM_X, armorY, ARM_HEIGHT);
             break;
-        // case EQUIPPED_WORN_BACKP:
-        //     thisStashedButton = PDA_DisplayArmor(PDA_Local.equipmentId[stshId], BACKPACK_DATA, stshId, ARM_X, armorY, ARM_HEIGHT, 0.6);
-        //     break;
+        // Backpacks cannot be stashed, so they won't appear here.'
         case EQUIPPED_WORN_BOOTS:
-            thisStashedButton = PDA_DisplayArmor(PDA_Local.equipmentId[stshId], BOOTS_DATA, stshId, ARM_X, armorY, ARM_HEIGHT, 0.6);
+            equipmentButton(stshId) = PDA_DisplayArmor(PDA_Local.equipmentId[stshId], BOOTS_DATA, stshId, ARM_X, armorY, ARM_HEIGHT);
             break;
     }
 }

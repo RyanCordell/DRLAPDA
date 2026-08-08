@@ -1,41 +1,64 @@
 // Armor / Boots / Suit display
 // int pdaStrTrimValue = 0;
 
-#define d_playerIconX (int)(PDA_SCREEN_X_SCALED + 20.0) + X_LEFT_EDGE
+#define equippedArmorHandler(eqId, eqType) \
+    PDA_ButtonHandler(eqId, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
+    // PDA_LocalButton[eqId].alpha = wornEquipmentActive(eqType) ? OPAQUE : DEFAULT_BUTTON_ALPHA;
 
-#define equippedArmorHandler(eqId) \
-PDA_ButtonHandler(eqId, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR); \
 
-DisplayIconScrollable("PDAPLYR", PDA_PLAYER_BODY_ICON, d_playerIconX, 40.0, INF_HOLDTIME, OPAQUE);
+#define equippedArmorLogic(eqId) \
+    PDA_ButtonLogic(eqId, B_FUNCTIONAL);
 
-localShowArmor    = (localEqBoolField & 1);
-localShowBoots    = (localEqBoolField & 1<<1);
-localShowBackpack = (localEqBoolField & 1<<2);
+#define equippedArmorDraw(eqId) \
+    PDA_DrawButton(eqId, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
 
+#define EQUIPPED_TEXT_X 0.0
+#define EQUIPPED_TEXT_Y 80.0
+#define FAINT_EQUIPMENT 0.25
+
+DisplayIconScrollable("PDAPLYR", PDA_PLAYER_BODY_ICON, PDA_EQUIPMENT_PLAYER_X, 40.0, INF_HOLDTIME, 0.45);
+
+// These handle the button collision checking + the branch lines that point to the three buttons
 if (localHasEquippedArmor) {
-    equippedArmorHandler(PDA_Local.equipmentId[EQUIPPED_WORN_ARMOR]);
-
-    DisplayIconScrollable("PDAPARM", PDA_PLAYER_ARMOR_ICON, d_playerIconX, 40.0, 0.0, show_equipment[equipment_armor][PlayerNumber()] ? OPAQUE : 0.5);
+    equippedArmorLogic(PDA_Local.equipmentId[EQUIPPED_WORN_ARMOR]);
 }
 
 if (localHasEquippedBackpack) {
-    equippedArmorHandler(PDA_Local.equipmentId[EQUIPPED_WORN_BACKP]);
-
-    DisplayIconScrollable("PDAPBCK", PDA_PLAYER_BACKPACK_ICON, d_playerIconX, 40.0, 0.0, show_equipment[equipment_backpack][PlayerNumber()] ? OPAQUE : 0.5);
+    equippedArmorLogic(PDA_Local.equipmentId[EQUIPPED_WORN_BACKP]);
 }
 
 if (localHasEquippedBoots) {
-    equippedArmorHandler(PDA_Local.equipmentId[EQUIPPED_WORN_BOOTS]);
-
-    DisplayIconScrollable("PDAPBTS", PDA_PLAYER_BOOTS_ICON, d_playerIconX, 40.0, 0.0, show_equipment[equipment_boots][PlayerNumber()] ? OPAQUE : 0.5);
+    equippedArmorLogic(PDA_Local.equipmentId[EQUIPPED_WORN_BOOTS]);
 }
 
+localShowArmor    = (localEqBoolField & 1);
+localShowBackpack = (localEqBoolField & 1<<1);
+localShowBoots    = (localEqBoolField & 1<<2);
+
+if (localHasEquippedArmor) {
+    equippedArmorDraw(PDA_Local.equipmentId[EQUIPPED_WORN_ARMOR]);
+
+    DisplayIconScrollable("PDAPARM", PDA_PLAYER_ARMOR_ICON, PDA_EQUIPMENT_PLAYER_X, 40.0, 0.0, wornEquipmentActive(equipment_armor) ? OPAQUE : FAINT_EQUIPMENT);
+}
+
+if (localHasEquippedBackpack) {
+    equippedArmorDraw(PDA_Local.equipmentId[EQUIPPED_WORN_BACKP]);
+
+    DisplayIconScrollable("PDAPBCK", PDA_PLAYER_BACKPACK_ICON, PDA_EQUIPMENT_PLAYER_X, 40.0, 0.0, wornEquipmentActive(equipment_backpack) ? OPAQUE : FAINT_EQUIPMENT);
+}
+
+if (localHasEquippedBoots) {
+    equippedArmorDraw(PDA_Local.equipmentId[EQUIPPED_WORN_BOOTS]);
+
+    DisplayIconScrollable("PDAPBTS", PDA_PLAYER_BOOTS_ICON, PDA_EQUIPMENT_PLAYER_X, 40.0, 0.0, wornEquipmentActive(equipment_boots) ? OPAQUE : FAINT_EQUIPMENT);
+}
 
 SetFont(PDA_FONT[mono_font]);
 
 if (localShowArmor && localHasEquippedArmor) {
-    PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 10.0, 140.0, INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
-        s:"\cgARMOR\c-\n",
+    PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, EQUIPPED_TEXT_X, EQUIPPED_TEXT_Y, INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
+        s:localEquipmentDataStored[EQUIPPED_WORN_ARMOR].name,
+        s:" \cg(ARMOR)\c-\n",
         s:"\crProtection:\c-\n",
         l:localEquipmentDataStored[EQUIPPED_WORN_ARMOR].val,
         s:"\crResistances:\c-\n",
@@ -50,20 +73,22 @@ if (localShowArmor && localHasEquippedArmor) {
         s:" ", l:"N/A\n",
         s:" ", l:"\n\n"
     );
+} else if (localShowBackpack && localHasEquippedBackpack) {
+    PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, EQUIPPED_TEXT_X, EQUIPPED_TEXT_Y, INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
+        s:localEquipmentDataStored[EQUIPPED_WORN_BACKP].name,
+        s:" \cg(BACKPACK)\c-\n",
+        s:"\crDescription:\c-\n",
+        l:localEquipmentDataStored[EQUIPPED_WORN_BACKP].val
+    );
 } else if (localShowBoots && localHasEquippedBoots) {
-    PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 10.0, 140.0, INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
-        s:"\cgBOOTS\c-\n",
+    PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, EQUIPPED_TEXT_X, EQUIPPED_TEXT_Y, INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
+        s:localEquipmentDataStored[EQUIPPED_WORN_BOOTS].name,
+        s:" \cg(BOOTS)\c-\n",
         s:"\crProtection:\c-\n",
         l:localEquipmentDataStored[EQUIPPED_WORN_BOOTS].val,
         s:"\crAttributes:\c-\n",
         l:StrParam("%l:\n", localEquipmentDataStored[EQUIPPED_WORN_BOOTS].attr),
         s:"\crDescription:\c-\n",
         l:StrParam("%l:\n", localEquipmentDataStored[EQUIPPED_WORN_BOOTS].desc)
-    );
-} else if (localShowBackpack && localHasEquippedBackpack) {
-    PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 10.0, 140.0, INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
-        s:"\cgBACKPACK\c-\n",
-        s:"\crDescription:\c-\n",
-        l:localEquipmentDataStored[EQUIPPED_WORN_BACKP].val
     );
 }

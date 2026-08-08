@@ -39,12 +39,16 @@ switch (thisButton.actionID) {
                 if (localEqBoolField != 1) localEqBoolField = 1;
                 break;
             case 2: // backpack
-                if (localEqBoolField != 4) localEqBoolField = 4;
-                break;
-            case 3: // boots
                 if (localEqBoolField != 2) localEqBoolField = 2;
                 break;
+            case 3: // boots
+                if (localEqBoolField != 4) localEqBoolField = 4;
+                break;
         }
+
+        localShowArmor    = (localEqBoolField & 1);
+        localShowBackpack = (localEqBoolField & 1<<1);
+        localShowBoots    = (localEqBoolField & 1<<2);
         break;
     case action_show_equipment_detail:
         // Lead param dictates the equipment type..
@@ -57,6 +61,11 @@ switch (thisButton.actionID) {
             localEquipmentDataStored[EQUIPPED_QUERY] = setupArmorData(checkSpecialArmorTokens(), localEquipmentDataStored[EQUIPPED_WORN_ARMOR].langEntry);
         }
 
+        if (localHasEquippedBackpack) {
+            PDA_Local.detailFetch[0] = "backpack";
+            localEquipmentDataStored[EQUIPPED_QUERY] = setupBackpackData();
+        }
+
         if (localHasEquippedBoots) {
             PDA_Local.detailFetch[0] = "boots";
             localEquipmentDataStored[EQUIPPED_QUERY] = setupBootsData(localEquipmentDataStored[EQUIPPED_WORN_BOOTS].langEntry);
@@ -67,18 +76,15 @@ switch (thisButton.actionID) {
                 PDA_Local.detailFetch[0] = "armor";
                 localEquipmentDataStored[EQUIPPED_QUERY] = localEquipmentDataStored[storedParam];
                 break;
+            case 2:
+                PDA_Local.detailFetch[0] = "backpack";
+                localEquipmentDataStored[EQUIPPED_QUERY] = localEquipmentDataStored[storedParam];
+                break;
             case 3:
                 PDA_Local.detailFetch[0] = "boots";
                 localEquipmentDataStored[EQUIPPED_QUERY] = localEquipmentDataStored[storedParam];
                 break;
         }
-
-
-        // if (localHasEquippedBackpack) {
-        //     PDA_Local.detailFetch[0] = "armor";
-        //     setupBackupDataOverride(thisButton.actionParam, localEquipmentDataStored[EQUIPPED_WORN_ARMOR].langEntry);
-        //     PDA_SetCategory(PDA_EQUIPMENT_DETAIL);
-        // }
 
         PDA_SetCategory(PDA_EQUIPMENT_DETAIL);
         PDA_Local.stopEquipmentEarly = true;

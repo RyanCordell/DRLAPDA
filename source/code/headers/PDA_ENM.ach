@@ -48,7 +48,7 @@ enum PDA_IDs {
     PDA_HELP_BUTTON = PDA_MISC_BUTTON + 3,
     PDA_WINFO_BUTTON = PDA_HELP_BUTTON + 3,
 
-    // Bestiary
+    // Bestiary.. ranges I think? Not sure
     PDA_BEAST_UV = PDA_WINFO_BUTTON + 40,
     PDA_BEAST_NM,
     PDA_BEAST_TP,
@@ -101,8 +101,7 @@ enum PDA_IDs {
     PDA_PONG_AISCORE,
     // Anything that *must* stay in the PDA header range
     PDA_INFOTOPID,
-    PDA_TAB_BUTTONS_START = PDA_INFOTOPID + 5,
-    PDA_TAB_BUTTONS_END = PDA_TAB_BUTTONS_START + 25,
+    PDA_TAB_BUTTONS_END = PDA_INFOTOPID + (5*2),
     // PDA display
     PDA_ID,
     PDA_REALLYLASTID,

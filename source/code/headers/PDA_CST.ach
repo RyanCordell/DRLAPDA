@@ -31,11 +31,11 @@
 
 #define BEAST_INFO_MAX 5
 
-#define TAB1  PDA_TAB_BUTTONS_START
-#define TAB2  PDA_TAB_BUTTONS_START + 2
-#define TAB3  PDA_TAB_BUTTONS_START + 4
-#define TAB4  PDA_TAB_BUTTONS_START + 6
-#define TAB5  PDA_TAB_BUTTONS_START + 8
+#define TAB1  PDA_TAB_BUTTONS_END - 2
+#define TAB2  PDA_TAB_BUTTONS_END - 4
+#define TAB3  PDA_TAB_BUTTONS_END - 6
+#define TAB4  PDA_TAB_BUTTONS_END - 8
+#define TAB5  PDA_TAB_BUTTONS_END - 10
 
 #define DEFAULT_ALIGN            -9999.0
 #define X_CENTER                 0.0
@@ -105,6 +105,8 @@
 #define TEXT_OFFSET 13 // "PDA_ASSEMBLY_" string length
 
 #define INF_HOLDTIME 0.0
+
+#define OVERBRIGHT   2.0
 #define OPAQUE       1.0
 
 #define ARM_HEIGHT        (int)(34 / NEW_RESOLUTION_Y)
@@ -176,6 +178,8 @@
 #define PDA_EQUIPMENT_TOTAL_MAX   (PDA_MAX_EQUIPMENT_WORN + PDA_MAX_EQUIPMENT_IN_INV + PDA_EQUIPMENT_QUERY_SLOT + PDA_BACKPACK_WORN)
 #define PDA_EQUIPMENT_ARR_MAX 6 // 0 - current/query, 1 - worn, 2 3 4 5 - stashed
 
+#define PDA_EQUIPMENT_PLAYER_X (int)(PDA_SCREEN_X_SCALED + (10.0 * NEW_RESOLUTION_X)) + X_LEFT_EDGE
+
 #define EQUIPPED_QUERY       0
 #define EQUIPPED_WORN_ARMOR  1
 #define EQUIPPED_WORN_BACKP  2
@@ -192,12 +196,12 @@
 
 #define PDA_NormalY  (fixed)(PDA_SCREEN_Y)
 
-#define PDA_TAB_START_X    5.0
-#define PDA_TAB_Y          5.0
-#define PDA_TAB_W          12
-#define PDA_TAB_H          7
-#define PDA_TAB_MARGIN     2.0
+#define PDA_TAB_START_X    (5.0)
+#define PDA_TAB_Y          (5.0)
+#define PDA_TAB_W          (12)
+#define PDA_TAB_H          (7)
+#define PDA_TAB_MARGIN     (2.0)
 
-#define DEFAULT_BUTTON_ALPHA  0.6
+#define DEFAULT_BUTTON_ALPHA  (0.6)
 
 // EOF

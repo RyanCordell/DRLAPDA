@@ -115,7 +115,7 @@ function void PrintSprite (str Sprite, int ID, fixed X, fixed Y, fixed HoldTime,
 function void PrintSpriteAlpha (str Sprite, int ID, fixed X, fixed Y, fixed HoldTime, fixed Alpha, bool blank) {
     if (CheckFont(Sprite)) {
         SetFont(Sprite);
-        HudMessage(s:blank ? "" : "A\n"; HUDMSG_ALPHA, ID, CR_UNTRANSLATED, X, Y, HoldTime, Alpha);
+        HudMessage(s:blank ? "" : "A\n"; HUDMSG_ALPHA, ID, CR_UNTRANSLATED, X, Y, HoldTime, blank ? 0.0 : Alpha);
         TraceLog("PrintSpriteAlpha");
     }
 }
@@ -240,19 +240,6 @@ function void PDA_ClearHeader (void) {
     TraceLog("PDA_ClearHeader");
 }
 
-#define PDA_UnsetScrollWindow() \
-    PDA_SetupScreenBounds(); \
-    TraceLog("PDA_UnsetScrollWindow"); \
-
-#define checkTextBounds(a, b) \
-    if (PDA_Local.scrollingY >= PDA_SCROLL_TOP) { \
-        if (finalX < (a)[0] || finalX > (a)[0] + (a)[2]) { \
-            if (debug) log("%s: text outside horizontal clipping bounds", (b)); \
-        } \
-        if (finalY < (a)[1] || finalY > (a)[1] + (a)[3]) { \
-            if (debug) log("%s: text outside vertical clipping bounds", (b)); \
-        } \
-    } \
 
 // Text drawing functions w/ built in bounds checking
 // I should have done this many years ago.. x.x
@@ -308,7 +295,7 @@ function void PDA_DrawTooltipText_Set (int type, int id, int color, fixed x, fix
     fixed finalX = (int)((PDA_MENU_TOOLTIP_X - PDA_SCREEN_X + x) * NEW_RESOLUTION_X);
     fixed finalY = (int)((PDA_MENU_TOOLTIP_Y                + y) * NEW_RESOLUTION_Y);
 
-    if (debug) {
+    if (debug && PDA_ScrollableNeedsDraw) {
         log("tipW[%d: > (%f:) < %d:] || tipH[%d: > (%f:) < %d:]", tip[0], finalX, tip[0] + tip[2], tip[1], finalY, tip[1] + tip[3]);
     }
 
@@ -542,11 +529,16 @@ function PDA_EquipmentData setupBackpackData (void) {
     _backpack.name    = fetchEntry("PDA_BACKPACK_%s:_NAME", backpackIndex);
     _backpack.graphic = fetchEntry("PDA_BACKPACK_%s:_ICON", backpackIndex);
     _backpack.val     = fetchEntry("PDA_BACKPACK_%s:_DESC", backpackIndex);
-    _backpack.tooltip = "";
+    _backpack.tooltip = StrParam(
+        s:"\cdDescription:\c-\n",
+        l:_backpack.val
+    );
 
     TraceLog("setupBackpackData");
     return _backpack;
 }
+
+// theoretically i could merge these three setup functions into one but eh
 
 function PDA_EquipmentData setupBootsData (str langEntry) {
     #define bootsActor DRLA_Equipment_List[localBootsIndex][armor_ACTOR]
@@ -768,7 +760,13 @@ function void PDA_ChangeScrolling (void) {
         case PDA_EQUIPMENT:
             switch (PDA_Local.page) {
                 case EQUIPMENT_PAGE_ONHAND:
-                    PDA_SetScrollWindow(0, PDA_SCROLL_TOP);
+                    if (!PDA_Local.hasEquipment) {
+                        // If blank
+                        PDA_SetScrollWindow(40, PDA_SCROLL_TOP);
+                    } else {
+                        // If there's actual equipment
+                        PDA_SetScrollWindow(-40, PDA_SCROLL_TOP);
+                    }
                     break;
                 case EQUIPMENT_PAGE_INFO:
                     PDA_SetScrollWindow(-160, PDA_SCROLL_TOP);
@@ -866,6 +864,8 @@ function void PDA_HasEquipment (void) {
     #define equipmentSet(a) \
         PDA_Local.equipmentId[a] = (PDA_WORN_EQUIPMENT_END - (a * 2));
 
+    PDA_Local.hasEquipment = false;
+
     for (int bp_i = 0; bp_i < DRLA_BACKPACKMAX; bp_i++) {
         if (CheckInventory(DRLA_BackpackList[bp_i][0])) {
             clearEquipmentData(EQUIPPED_WORN_BACKP);
@@ -876,6 +876,7 @@ function void PDA_HasEquipment (void) {
             equipmentSet(eqId);
 
             localEquipmentDataStored[EQUIPPED_WORN_BACKP] = setupBackpackData();
+            PDA_Local.hasEquipment = true;
         } else if (!CheckInventory(DRLA_BackpackList[localBackpackIndex][0])) {
             clearEquipmentData(EQUIPPED_WORN_BACKP);
             localHasEquippedBackpack = false;
@@ -890,7 +891,6 @@ function void PDA_HasEquipment (void) {
 
         // Tokens are used if the character is wearing armor
         if (CheckInventory(StrParam("%s:Token", _equipmentToken))) {
-            log("token: %s:", _equipmentToken);
             if (StrCmp(
                 _equipmentToken,
                 StrParam("%s:Boots", StrTrim(_equipmentToken,0,5))
@@ -903,6 +903,7 @@ function void PDA_HasEquipment (void) {
                 equipmentSet(eqId);
 
                 localEquipmentDataStored[EQUIPPED_WORN_ARMOR] = setupArmorData(specialArmorTokens, "");
+                PDA_Local.hasEquipment = true;
             } else {
                 clearEquipmentData(EQUIPPED_WORN_BOOTS);
                 eqId = EQUIPPED_WORN_BOOTS;
@@ -912,6 +913,7 @@ function void PDA_HasEquipment (void) {
                 equipmentSet(eqId);
 
                 localEquipmentDataStored[EQUIPPED_WORN_BOOTS] = setupBootsData("");
+                PDA_Local.hasEquipment = true;
             }
         }
         // Do another check then, if it turns out these tokens are missing..
@@ -967,6 +969,7 @@ function void PDA_HasEquipment (void) {
             localEquipmentDataStored[stshId].buttonID = PDA_Local.equipmentId[stshId];
 
             if (stshId < PDA_EQUIPMENT_TOTAL_MAX) stshId++;
+            PDA_Local.hasEquipment = true;
         }
     }
 
@@ -986,8 +989,6 @@ function void PDA_HasEquipment (void) {
 * @param: int width  Button width
 * @param: int height  Button height
 */
-
-// !! When debugging button hitboxes via DrawBorder, remember to multiply X, Y, W, H with matching NEW_RESOLUTION_ variables !!
 
 function PDAButton PDA_CreateMenuButton (int id, int page, str graphic, fixed x, fixed y) {
     #define thisButton PDA_LocalButton[id]
@@ -1032,13 +1033,7 @@ function PDAButton PDA_CreateTab (int id, str label, int page, str graphic, fixe
     assignButtonParams(thisButton, label)
 
     thisButton.y     = PDA_SCREEN_Y + y; // Override as this isn't meant to scroll
-    thisButton.alpha = 0.6;
-
-    fixed xlabeloff = 4.0;
-    fixed ylabeloff = 4.0;
-
-    thisButton.actionID    = action_navigate;
-    thisButton.actionParam = page;
+    thisButton.alpha = DEFAULT_BUTTON_ALPHA;
 
     thisButton.type          = "tab";
     thisButton.graphic       = graphic;
@@ -1054,11 +1049,14 @@ function PDAButton PDA_CreateTab (int id, str label, int page, str graphic, fixe
     thisButton.textFlags     = HUDMSG_ALPHA;
     thisButton.textID        = thisButton.graphicID + 1;
     assignButtonPosition(thisButton.textPos,
-        (int)(thisButton.gfxPos[TB_X]) + xlabeloff,
-        (int)(thisButton.gfxPos[TB_Y]) + ylabeloff,
+        (int)(thisButton.gfxPos[TB_X]) + 4.0,
+        (int)(thisButton.gfxPos[TB_Y]) + 4.0,
         0.0,
         0.0
     );
+
+    thisButton.actionID    = action_navigate;
+    thisButton.actionParam = page;
 
     TraceLog("PDA_CreateTab");
     return thisButton;
@@ -1279,7 +1277,7 @@ function int extractDigit (int number, int digit) {
     return result;
 }
 
-function PDAButton PDA_DisplayArmor (int id, int structType, int storedIndex, fixed x, fixed y, int height, fixed opacity) {
+function PDAButton PDA_DisplayArmor (int id, int structType, int storedIndex, fixed x, fixed y, int height) {
     #define thisButton PDA_LocalButton[id]
     #define onEquipmentListing (PDA_Local.page == EQUIPMENT_PAGE_ONHAND)
     #define leDS localEquipmentDataStored[storedIndex]
@@ -1289,7 +1287,8 @@ function PDAButton PDA_DisplayArmor (int id, int structType, int storedIndex, fi
     int actionParam  = -1;
     int width        = StrLen(leDS.name) * 5;
 
-    if (storedIndex == 1 || storedIndex == 2 || storedIndex == 3) {
+    // Prefix only for Equipment first page
+    if (PDA_Local.category == PDA_EQUIPMENT && PDA_Local.page == 1 && (storedIndex == 1 || storedIndex == 2 || storedIndex == 3)) {
         label = StrParam("E: %s:", label);
     }
 
@@ -1313,7 +1312,7 @@ function PDAButton PDA_DisplayArmor (int id, int structType, int storedIndex, fi
     assignButtonParams(thisButton, label)
 
     thisButton.graphic      = leDS.graphic;
-    thisButton.tooltip      = StrParam("%s:\n%s:", label, leDS.tooltip);
+    thisButton.tooltip      = StrParam("%s:\n%s:", leDS.name, leDS.tooltip);
 
     thisButton.type         = "equipment";
     thisButton.graphicFlags = HUDMSG_ALPHA;
@@ -1336,7 +1335,8 @@ function PDAButton PDA_DisplayArmor (int id, int structType, int storedIndex, fi
 
     thisButton.actionParam = actionParam;
     thisButton.actionID    = onEquipmentListing ? action_show_equipment_detail : action_toggle_display;
-    thisButton.alpha       = opacity;
+    // Declaring alpha here has no effect for this particular button.
+    // thisButton.alpha       = alpha;
 
     TraceLog("PDA_DisplayArmor");
     return thisButton;
@@ -1390,12 +1390,12 @@ function void PDA_ButtonLogic (int id, bool onlyVisual) {
 
     if (buttonType == "tab") {
         PDA_SetupHeaderBounds();
-
+        /*
         if (PDA_Local.category != PDA_MENU && PDA_Local.page == thisButton.actionParam) {
             // I wonder why I did this..
             // thisButton.state = button_hovered;
             thisButton.alpha = 1;
-        }
+        }*/
     }
 
     if (buttonType == "" || StrLen(buttonType) == 0) {
@@ -1412,6 +1412,7 @@ function void PDA_ButtonLogic (int id, bool onlyVisual) {
 
         switch (thisButton.state) {
             case button_hovered:
+                PDA_SetFullDirty();
                 if (buttonType == "equipment") {
                     if (StrLen(thisButton.tooltip) != 0 && PDA_Local.page != EQUIPMENT_PAGE_INFO) {
                         PDA_SetupFloatingTooltip("PTIP", thisButton.tooltip);
@@ -1428,7 +1429,8 @@ function void PDA_ButtonLogic (int id, bool onlyVisual) {
                 break;
         }
 
-        if (buttonStoppedHovering) {
+        if (buttonStoppedHovering && buttonType == "equipment") {
+            PDA_SetFullDirty();
             PDA_SetupFloatingTooltip("", "");
         }
     }
@@ -1443,8 +1445,7 @@ function void PDA_ButtonLogic (int id, bool onlyVisual) {
 function void PDA_DrawButton (int id, str message, bool onlyVisual, bool clear) {
     #define thisButton PDA_LocalButton[id]
     #define buttonType PDA_LocalButton[id].type
-    #define buttonOnHover PDA_LocalButton[id].state == button_hovered
-    #define ifGraphicPTAB StrCmp(PDA_LocalButton[id].graphic, "PTAB") == 0
+    #define SCROLL_OFFSET ((buttonType != "tab" && buttonType != "fixed") ? SCALED_SCROLL : 0.0)
 
     int warningID = id - 50;
     int newColor = CR_UNTRANSLATED;
@@ -1454,9 +1455,9 @@ function void PDA_DrawButton (int id, str message, bool onlyVisual, bool clear) 
 
     switch (thisButton.state) {
         case button_hovered:
-            PDA_SetFullDirty();
+            if (StrLen(message) != 0 && (buttonType == "menu" || buttonType == "beast")) {
+                PDA_SetFullDirty();
 
-            if (StrCmp(message, "") != 0) {
                 // Avoid adding text alignment modifiers to PDA_Draw text functions
                 PDA_DrawTooltipText(HUDMSG_PLAIN, PDA_CAT_DESCRIPTION, CR_UNTRANSLATED,
                     -10.0, 0.0,
@@ -1465,7 +1466,7 @@ function void PDA_DrawButton (int id, str message, bool onlyVisual, bool clear) 
             break;
     }
 
-    if (buttonStoppedHovering) {
+    if (buttonStoppedHovering && (buttonType == "menu" || buttonType == "beast")) {
         PDA_SetFullDirty();
 
         PDA_DrawTooltipText(HUDMSG_PLAIN, PDA_CAT_DESCRIPTION, CR_UNTRANSLATED,
@@ -1473,58 +1474,68 @@ function void PDA_DrawButton (int id, str message, bool onlyVisual, bool clear) 
             INF_HOLDTIME, 0.0, DEFAULT_ALIGN, DEFAULT_ALIGN, s:"");
     }
 
-    #define defaultHoverPulse() (thisButton.alpha = buttonOnHover ? pulser(2.0, DEFAULT_BUTTON_ALPHA + 0.2) : DEFAULT_BUTTON_ALPHA)
-    #define brightOnHover() (thisButton.alpha = buttonOnHover ? 1.0 : DEFAULT_BUTTON_ALPHA)
-
-    // think i'll just opt for the if-ladder instead
-    if (buttonType == "menu") {
-        defaultHoverPulse();
-    } else if (buttonType == "tab") {
-        brightOnHover();
-    } else if (buttonType == "generic") {
-        defaultHoverPulse();
-    } else if (buttonType == "fixed") {
-        defaultHoverPulse();
-    } else if (buttonType == "assembly") {
-        if (thisButton.tooltip != "???") {
-            defaultHoverPulse();
-        } else {
-            brightOnHover();
-        }
-    } else if (buttonType == "beast") {
-        defaultHoverPulse();
-    } else if (buttonType == "hud") {
-        defaultHoverPulse();
-    } else if (buttonType == "equipment") {
-        brightOnHover();
-    } else if (buttonType == "modpack") {
-
-    }
-    // I hate this condition setup. Dargh.
-    // if (buttonType == "assembly") {
-    //     if (thisButton.tooltip != "???") {
-    //         defaultHoverPulse();
-    //     } else {
-    //         brightOnHover();
-    //     }
-    // } else {
-    //     if (buttonType != "modpack" && buttonType != "tab" && buttonType != "equipment") {
-    //         defaultHoverPulse();
-    //     }
-    //     if (buttonType == "equipment") {
-    //         brightOnHover();
-    //     }
-    // }
-
     if (!PDA_ScrollableNeedsDraw) {
         return;
     }
 
+    // think i'll just opt for the if-ladder instead
+    if (buttonType == "menu") {
+        defaultHoverPulse(thisButton);
+    } else if (buttonType == "tab") {
+        brightOnHover(thisButton);
+    } else if (buttonType == "generic") {
+        defaultHoverPulse(thisButton);
+    } else if (buttonType == "fixed") {
+        defaultHoverPulse(thisButton);
+    } else if (buttonType == "assembly") {
+        if (thisButton.tooltip != "???") {
+            defaultHoverPulse(thisButton);
+        } else {
+            brightOnHover(thisButton);
+        }
+    } else if (buttonType == "beast") {
+        defaultHoverPulse(thisButton);
+    } else if (buttonType == "hud") {
+        defaultHoverPulse(thisButton);
+    } else if (buttonType == "equipment") {
+        if (PDA_Local.page == 1) {
+            if (StrLeft(thisButton.label, 3) == "E: ") {
+                thisButton.alpha = OPAQUE;
+            } else {
+                defaultHoverPulse(thisButton);
+            }
+        }
+        if (PDA_Local.page == 2) {
+            if (thisButton.id == PDA_Local.equipmentId[EQUIPPED_WORN_ARMOR]) {
+                if (localShowArmor) {
+                    thisButton.alpha = OPAQUE;
+                } else {
+                    thisButton.alpha = hoverPulse(thisButton);
+                }
+
+            } else if (thisButton.id == PDA_Local.equipmentId[EQUIPPED_WORN_BACKP]) {
+                if (localShowBackpack) {
+                    thisButton.alpha = OPAQUE;
+                } else {
+                    thisButton.alpha = hoverPulse(thisButton);
+                }
+
+            } else if (thisButton.id == PDA_Local.equipmentId[EQUIPPED_WORN_BOOTS]) {
+                if (localShowBoots) {
+                    thisButton.alpha = OPAQUE;
+                } else {
+                    thisButton.alpha = hoverPulse(thisButton);
+                }
+
+            }
+        }
+    } else if (buttonType == "modpack") {
+
+    }
+
     // Button graphic
-    #define SCROLL_OFFSET ((buttonType != "tab" && buttonType != "fixed") ? SCALED_SCROLL : 0.0)
 
     PrintSpriteAlpha(thisButton.graphic, thisButton.graphicID, (int)(thisButton.gfxPos[TB_X]) + X_LEFT_EDGE, (int)(thisButton.gfxPos[TB_Y] + SCROLL_OFFSET) + Y_TOP_EDGE, INF_HOLDTIME, thisButton.alpha, false);
-
 
     if (buttonType == "beast") {
         newColor = thisButton.textColor;
@@ -1534,6 +1545,7 @@ function void PDA_DrawButton (int id, str message, bool onlyVisual, bool clear) 
 
             if (PDA_Local.page == 1) {
                 HudMessage(s:"New entry!\n";
+                    // honestly, i should re-locate these into separate IDs
                     HUDMSG_ALPHA, id + 5, CR_GREEN, thisButton.textPos[TB_X] + thisButton.width - 10.0, (int)(thisButton.textPos[TB_Y] - 6.0 + SCROLL_OFFSET), 0.0, pulser(2.0, DEFAULT_BUTTON_ALPHA + 0.2)
                 );
             }
@@ -1549,18 +1561,18 @@ function void PDA_DrawButton (int id, str message, bool onlyVisual, bool clear) 
 
     if (clear) {
         // Button graphic
-        PrintSpriteAlpha("TNT1A0", thisButton.graphicID, thisButton.gfxPos[TB_X], thisButton.gfxPos[TB_Y], INF_HOLDTIME, 0.0, B_CLEAR);
+        PrintSpriteAlpha("TNT1A0", thisButton.graphicID, 0.0, 0.0, INF_HOLDTIME, 0.0, B_CLEAR);
 
         PDA_DefaultFont();
         // Button text
-        PDA_HudDirty(thisButton.textFlags, thisButton.textID, newColor, thisButton.textPos[TB_X], thisButton.textPos[TB_Y], INF_HOLDTIME, 0.0, DEFAULT_ALIGN, DEFAULT_ALIGN, s:" ");
+        PDA_HudDirty(thisButton.textFlags, thisButton.textID, newColor, 0.0, 0.0, INF_HOLDTIME, 0.0, DEFAULT_ALIGN, DEFAULT_ALIGN, s:" ");
 
-        PDA_TooltipDirty(HUDMSG_PLAIN, PDA_CAT_DESCRIPTION, CR_UNTRANSLATED, PDA_MENU_TOOLTIP_X, PDA_MENU_TOOLTIP_Y, INF_HOLDTIME, 0.0, DEFAULT_ALIGN, DEFAULT_ALIGN, s:" ");
-
-        // HudMessage(s:" "; thisButton.textFlags, thisButton.textID, newColor, thisButton.textPos[TB_X], thisButton.textPos[TB_Y], 1.0, 0.0);
-        //
-        // HudMessage(s:" "; HUDMSG_ALPHA, id + 5, CR_GREEN, thisButton.textPos[TB_X] + thisButton.width - 10.0, thisButton.textPos[TB_Y] - 6.0, 0.0, 0.0);
+        // Page-wide tooltip
+        if (buttonType == "menu") {
+            PDA_TooltipDirty(HUDMSG_PLAIN, PDA_CAT_DESCRIPTION, CR_UNTRANSLATED, 0.0, 0.0, INF_HOLDTIME, 0.0, DEFAULT_ALIGN, DEFAULT_ALIGN, s:" ");
+        }
     }
+
     TraceLog("PDA_DrawButton");
 }
 

@@ -1,0 +1,45 @@
+// if (userWentBack) {
+//     PDA_SetCategory(PDA_EQUIPMENT);
+//     PDA_SetPage(1);
+// }
+//
+// #define EQUIPPED_HEIGHT 16
+// #define EQUIPPED_ALPHA 0.0
+//
+// // str equipment_set_name        = "N/A\n",
+// //     equipment_set_description = "\n\n";
+//
+// PDA_Local.armorHax = false;
+//
+//
+// if (localHasEquippedArmor) {
+//     // The IDs feel weird here.. hm
+//     equipmentButton(EQUIPPED_WORN_ARMOR) = PDA_DisplayArmor(PDA_PLAYER_ARMOR_ICON, ARMOR_DATA, EQUIPPED_WORN_ARMOR, PDA_EQUIPMENT_PLAYER_X + 35.0, 20.0, EQUIPPED_HEIGHT);
+// }
+//
+// if (localHasEquippedBackpack) {
+//     equipmentButton(EQUIPPED_WORN_BACKP) = PDA_DisplayArmor(PDA_PLAYER_BACKPACK_ICON, BACKPACK_DATA, EQUIPPED_WORN_BACKP, PDA_EQUIPMENT_PLAYER_X + 33.0, 45.0, EQUIPPED_HEIGHT);
+// }
+//
+// if (localHasEquippedBoots) {
+//     equipmentButton(EQUIPPED_WORN_BOOTS) = PDA_DisplayArmor(PDA_PLAYER_BOOTS_ICON, BOOTS_DATA, EQUIPPED_WORN_BOOTS, PDA_EQUIPMENT_PLAYER_X + 30.0, 70.0, EQUIPPED_HEIGHT);
+// }
+//
+// // for (int setIndex = 0; setIndex < DRLA_EQUIPMENT_SETMAX; setIndex++) {
+// //     if (CheckInventory(DRLA_Equipment_SetList[setIndex])) {
+// //         if (CheckInventory("RLEnclaveSetBonusActive") && CheckInventory("RLNuclearWeaponSetBonusActive"))
+// //             PDA_Local.armorHax = true;
+// //
+// //         str trimmedList = strTrim(DRLA_Equipment_SetList[setIndex],2,0);
+//
+//         // TODO: this feels set up weird, look into it
+//         // in that we only declare and initialize the values here, but where are they used?
+//         // find-in-files reveals nothing, so...
+//         // equipment_set_name = StrParam("%l:\n\n", (PDA_Local.armorHax)
+//         //     ? "PDA_ARMOR_NuclearWeaponSetBonusActive_equipment_set_name"
+//         //     : StrParam("PDA_ARMOR_%s:_equipment_set_name", trimmedList));
+//         // equipment_set_description = StrParam("%l:\n\n", (PDA_Local.armorHax)
+//         //     ? "PDA_ARMOR_NuclearWeaponSetBonusActive_equipment_set_description"
+//         //     : StrParam("PDA_ARMOR_%s:_equipment_set_description", trimmedList));
+// //     }
+// // }
