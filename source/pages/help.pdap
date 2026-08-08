@@ -1,15 +1,59 @@
-// PDA_LocalButton[PDA_TAB_BUTTONS_START    ] = PDA_CreateTab(PDA_TAB_BUTTONS_START    , "1", "PTAB", PDA_TAB_START_X  );
+// Head
 PDA_ButtonHandler(TAB1, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
-
-// PDA_LocalButton[PDA_TAB_BUTTONS_START + 1] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 1, "2", "PTAB", PDA_TAB_NEXT_X(1));
 PDA_ButtonHandler(TAB2, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
-
-// PDA_LocalButton[PDA_TAB_BUTTONS_START + 2] = PDA_CreateTab(PDA_TAB_BUTTONS_START + 2, "3", "PTAB", PDA_TAB_NEXT_X(2));
 PDA_ButtonHandler(TAB3, NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
-
 
 if (userWentBack) {
     SetUserCVar(PlayerNumber(), "DRLA_PDA_firsttime", false);
     PDA_SetCategory(PDA_MENU);
     PDA_SetPage(1);
+}
+
+PDA_SetupScreenBounds();
+
+// Body
+if (PDA_Local.page == 1) {
+    PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 0.0, 0.0, INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
+        l:(GetUserCvar(PlayerNumber(), "DRLA_PDA_firsttime") ? "PDA_PDAHELP_FIRSTTIME" : "PDA_BLANK"),s:"\n",
+        l:"PDA_PDAHELP_CONTROLS",s:"\n",
+        s:"(\cd",k:"+attack",s:" / ",k:"+use",s:"\c-) \n",
+        s:"\n",
+        l:"PDA_PDAHELP_MOUSE1",s:"\n",
+        s:"(\cd",k:"+altattack",s:" / ",k:"+jump",s:"\c-) \n",
+        l:"PDA_PDAHELP_MOUSE2",
+        s:"\n\cgIf mouse look is disabled..\c-\n",
+        s:"(\cd", k:"+forward",s:" / ",k:"+back",s:"\c-) ",
+        l:"PDA_PDAHELP_YAXIS",
+        s:"\n",
+        s:"(\cd",k:"+moveleft",s:" / ",k:"+moveright",s:"\c-) ",
+        l:"PDA_PDAHELP_XAXIS",
+        s:"\n"
+    );
+}
+if (PDA_Local.page == 2) {
+    PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 0.0, 0.0, INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
+        s:"\cd(",k:"invuse",s:"\c-, \cd",k:"+zoom",s:")\c- ",
+        l:"PDA_DRLAHELP_DROPITEM",
+        s:"\cd(",k:"+use",s:")\c- ",
+        l:"PDA_DRLAHELP_BACKPACK",
+        l:"PDA_DRLAHELP_CRATE"
+    );
+}
+if (PDA_Local.page == 3) {
+    PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 0.0, 0.0, INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
+        s:"\cc",l:"PDA_DRLAHELP_DMG",s:"\c-"
+    );
+
+    // PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFOID, CR_UNTRANSLATED, 0.0, 0.0, INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
+    //     s:"Damage formulas explained:\n",
+    //     s:"(XdN) = Random value of 1 to X multiplied by N.\n",
+    //     s:"(X~Y) = Random value between X and Y. Used when the minimum value X is not 1, and thus cannot\nbe represented with the above formula.\n",
+    //     s:"((X~Y)*N) = Effectively a combination of the two formulas above.\n",
+    //     s:"<X> = Splash damage of X value.\n",
+    //     s:"<X...Y> = Splash damage of minimum X value, all the way up to Y.\n",
+    //     s:"(X) = Non-random damage value.\n",
+    //     s:"(X)! = Non-random damage value on a Ripper projectile.\n",
+    //     s:"(X) - N = X damage value with N subtracted from the final result.\n",
+    //     s:"Y x (N) = Y amount of bullets dealing N damage.\n",
+    //     s:"Y? x (N) = Y amount of bullets dealing N damage with dual wielded weapons.\n");
 }

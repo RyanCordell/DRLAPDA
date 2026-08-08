@@ -107,8 +107,6 @@ enum PDA_IDs {
     PDA_REALLYLASTID,
 
     // Shared IDs go down here
-    PDA_EQUIPMENTINVIDRANGE = PDA_MODIDRANGE,
-    PDA_EQUIPMENTWORNIDRANGE = PDA_ASSEMBLY_ID_END,
     PDA_TOOLTIPGFX = PDA_CAT_DESCRIPTION,
     PDA_TOOLTIPID = PDA_TOOLTIPGFX - 5,
     PDA_WEAPON_ICON = PDA_CAT_DESCRIPTION,
@@ -127,7 +125,6 @@ enum PDA_Categories {
 	PDA_HELP,
 	PDA_ITEMS,
 	PDA_MISC,
-    PDA_WINFO,
 	PDA_MENUMAX, // Always keep this as the last element in the accessible areas
 
 	// Unaccessible through menu, but possible in the respective parent pages
@@ -138,7 +135,6 @@ enum PDA_Categories {
 	// Accessible through Misc
 	PDA_PONG,
 	PDA_CREDITS,
-	PDA_HUDSWITCH,
 }
 
 enum PDA_WeaponPerkList_Class {

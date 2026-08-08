@@ -1591,15 +1591,15 @@ function void PDA_HandleHeader(void) {
             case PDA_MENU:
                 PDA_Local.pageMax = 1;
 
-                PDA_Local.heading = "PDA_MENU_HEADER"; PDA_HEADING_X_OFFSET = 0;
+                PDA_Local.heading = "PDA_MENU_HEADER";
                 break;
 
             case PDA_CLASSES:
                 PDA_Local.pageMax = 2;
 
                 switch(PDA_Local.page) {
-                    case CLASSES_PAGE_PERKS: PDA_Local.heading = "PDA_CLASS_HEADER1"; PDA_HEADING_X_OFFSET = 5; break;
-                    case CLASSES_PAGE_STORY: PDA_Local.heading = "PDA_CLASS_HEADER2"; PDA_HEADING_X_OFFSET = 0; break;
+                    case CLASSES_PAGE_PERKS: PDA_Local.heading = "PDA_CLASS_HEADER1"; break;
+                    case CLASSES_PAGE_STORY: PDA_Local.heading = "PDA_CLASS_HEADER2"; break;
                 }
                 break;
 
@@ -1608,13 +1608,13 @@ function void PDA_HandleHeader(void) {
 
                 switch (PDA_Local.page) {
                     case WEAPON_PAGE_STORY:
-                        PDA_Local.heading = "PDA_WEAPON_HEADER"; PDA_HEADING_X_OFFSET = 0;
+                        PDA_Local.heading = "PDA_WEAPON_HEADER";
                         break;
                     case WEAPON_PAGE_MODPACK_EFFECTS:
-                        PDA_Local.heading = "PDA_MODPACK_HEADER"; PDA_HEADING_X_OFFSET = -10;
+                        PDA_Local.heading = "PDA_MODPACK_HEADER";
                         break;
                     case WEAPON_PAGE_ARTIFACT_EFFECTS:
-                        PDA_Local.heading = "PDA_DEMONARTIFACT_HEADER"; PDA_HEADING_X_OFFSET = -20;
+                        PDA_Local.heading = "PDA_DEMONARTIFACT_HEADER";
                         break;
                 }
                 break;
@@ -1623,12 +1623,17 @@ function void PDA_HandleHeader(void) {
                 PDA_Local.pageMax = 6;
 
                 switch (PDA_Local.page) {
-                    case 1: PDA_Local.heading = "PDA_BESTIARY_HEADER";    PDA_HEADING_X_OFFSET =   0;                               break;
-                    case 2: PDA_Local.heading = "PDA_BESTIARY_HEADER_UV"; PDA_HEADING_X_OFFSET = -40; beast_info[BEAST__LV_COLOR] = CR_WHITE;     break;
-                    case 3: PDA_Local.heading = "PDA_BESTIARY_HEADER_NM"; PDA_HEADING_X_OFFSET = -30; beast_info[BEAST__LV_COLOR] = CR_BRICK;     break;
-                    case 4: PDA_Local.heading = "PDA_BESTIARY_HEADER_TP"; PDA_HEADING_X_OFFSET = -50; beast_info[BEAST__LV_COLOR] = CR_LIGHTBLUE; break;
-                    case 5: PDA_Local.heading = "PDA_BESTIARY_HEADER_AR"; PDA_HEADING_X_OFFSET = -40; beast_info[BEAST__LV_COLOR] = CR_GOLD;      break;
-                    case 6: PDA_Local.heading = "PDA_BESTIARY_HEADER_SP"; PDA_HEADING_X_OFFSET = -20; beast_info[BEAST__LV_COLOR] = CR_PURPLE;    break;
+                    case 1: PDA_Local.heading = "PDA_BESTIARY_HEADER"; break;
+                    case 2: PDA_Local.heading = "PDA_BESTIARY_HEADER_UV";
+                    beast_info[BEAST__LV_COLOR] = CR_WHITE;     break;
+                    case 3: PDA_Local.heading = "PDA_BESTIARY_HEADER_NM";
+                    beast_info[BEAST__LV_COLOR] = CR_BRICK;     break;
+                    case 4: PDA_Local.heading = "PDA_BESTIARY_HEADER_TP";
+                    beast_info[BEAST__LV_COLOR] = CR_LIGHTBLUE; break;
+                    case 5: PDA_Local.heading = "PDA_BESTIARY_HEADER_AR";
+                    beast_info[BEAST__LV_COLOR] = CR_GOLD;      break;
+                    case 6: PDA_Local.heading = "PDA_BESTIARY_HEADER_SP";
+                    beast_info[BEAST__LV_COLOR] = CR_PURPLE;    break;
                 }
                 break;
             case PDA_EQUIPMENT:
@@ -1636,10 +1641,10 @@ function void PDA_HandleHeader(void) {
 
                 switch (PDA_Local.page) {
                     case EQUIPMENT_PAGE_ONHAND:
-                        PDA_Local.heading = "PDA_ARMOR_HEADER1"; PDA_HEADING_X_OFFSET = -20;
+                        PDA_Local.heading = "PDA_ARMOR_HEADER1";
                         break;
                     case EQUIPMENT_PAGE_INFO:
-                        PDA_Local.heading = "PDA_ARMOR_HEADER2"; PDA_HEADING_X_OFFSET = -15;
+                        PDA_Local.heading = "PDA_ARMOR_HEADER2";
                         break;
                 }
                 break;
@@ -1648,13 +1653,13 @@ function void PDA_HandleHeader(void) {
                 PDA_Local.pageMax = 3;
                 switch (PDA_Local.page) {
                     case ASSEMBLY_PAGE_BASIC:
-                        PDA_Local.heading = "PDA_ASSEMBLY_BASIC_NAME"; PDA_HEADING_X_OFFSET = -30;
+                        PDA_Local.heading = "PDA_ASSEMBLY_BASIC_NAME";
                         break;
                     case ASSEMBLY_PAGE_ADVANCED:
-                        PDA_Local.heading = "PDA_ASSEMBLY_ADVANCED_NAME"; PDA_HEADING_X_OFFSET = -30;
+                        PDA_Local.heading = "PDA_ASSEMBLY_ADVANCED_NAME";
                         break;
                     case ASSEMBLY_PAGE_MASTER:
-                        PDA_Local.heading = "PDA_ASSEMBLY_MASTER_NAME"; PDA_HEADING_X_OFFSET = -30;
+                        PDA_Local.heading = "PDA_ASSEMBLY_MASTER_NAME";
                         break;
                 }
                 break;
@@ -1663,15 +1668,15 @@ function void PDA_HandleHeader(void) {
                 PDA_Local.pageMax = 2;
 
                 switch(PDA_Local.page) {
-                    case 1: PDA_Local.heading = "PDA_PDAHELP_HEADER"; PDA_HEADING_X_OFFSET = -10; break;
-                    case 2: PDA_Local.heading = "PDA_DRLAHELP_HEADER"; PDA_HEADING_X_OFFSET = -40; break;
-                    case 3: PDA_Local.heading = "PDA_DMGHELP_HEADER"; PDA_HEADING_X_OFFSET = -40; break;
+                    case 1: PDA_Local.heading = "PDA_PDAHELP_HEADER"; break;
+                    case 2: PDA_Local.heading = "PDA_DRLAHELP_HEADER"; break;
+                    case 3: PDA_Local.heading = "PDA_DMGHELP_HEADER"; break;
                 }
                 break;
             case PDA_MISC:
                 PDA_Local.pageMax = 1;
 
-                PDA_Local.heading = "PDA_MISC_HEADER"; PDA_HEADING_X_OFFSET = 10;
+                PDA_Local.heading = "PDA_MISC_HEADER";
                 break;
 
             case PDA_ITEMS:
@@ -1679,23 +1684,22 @@ function void PDA_HandleHeader(void) {
             case PDA_EQUIPMENT_DETAIL:
                 PDA_Local.pageMax = 1;
 
-                PDA_Local.heading = "PDA_DETAILEDARMOR_HEADER"; PDA_HEADING_X_OFFSET = -60;
+                PDA_Local.heading = "PDA_DETAILEDARMOR_HEADER";
                 break;
             case PDA_ASSEMBLY_DETAIL:
                 PDA_Local.pageMax = 1;
 
-                PDA_Local.heading = "PDA_DETAILEDASSEMBLY_HEADER"; PDA_HEADING_X_OFFSET = -30;
+                PDA_Local.heading = "PDA_DETAILEDASSEMBLY_HEADER";
                 break;
             case PDA_BESTIARY_DETAIL:
                 PDA_Local.pageMax = 1;
 
-                PDA_Local.heading = "PDA_DETAILEDBEAST_HEADER"; PDA_HEADING_X_OFFSET = -30;
+                PDA_Local.heading = "PDA_DETAILEDBEAST_HEADER";
                 break;
             case PDA_CREDITS:
                 PDA_Local.pageMax = 1;
 
-                PDA_Local.heading = "PDA_CREDITS_HEADER"; PDA_HEADING_X_OFFSET = 0;
-                break;
+                PDA_Local.heading = "PDA_CREDITS_HEADER";
         }
     }
 

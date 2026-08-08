@@ -51,7 +51,6 @@
 
 #define MAX_PLAYERS        8
 #define PDA_RESPONSIVENESS 1
-#define PDA_HISTORYMAX     16
 
 #define PDA_BUTTON_MAX 256
 
@@ -64,8 +63,6 @@
 
 #define PDA_MENU_BTN_W 88
 #define PDA_MENU_BTN_H 16
-
-#define AVAILABLE_HUDS 13
 
 #define PDA_MODMIN  0
 #define PDA_MODMAX  8
@@ -187,12 +184,6 @@
 
 
 #define PDA_MAX_MOD_PACKS     7
-
-#define PDA_MENU_ICON_LEFT_X   (fixed)(20.0  + X_LEFT_EDGE)
-#define PDA_MENU_ICON_RIGHT_X  (fixed)(140.0 + X_LEFT_EDGE)
-
-#define PDA_MENU_TEXT_LEFT_X   (fixed)(PDA_MENU_ICON_LEFT_X  + 30.0)
-#define PDA_MENU_TEXT_RIGHT_X  (fixed)(PDA_MENU_ICON_RIGHT_X + 30.0)
 
 #define PDA_NormalY  (fixed)(PDA_SCREEN_Y)
 

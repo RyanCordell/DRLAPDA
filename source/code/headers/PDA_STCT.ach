@@ -3,7 +3,6 @@ struct PDAInfo {
     bool active;
     bool pongRunning;
 
-    bool clicked;
     bool playSoundOnce;
 
     bool stopEquipmentEarly;
@@ -35,7 +34,6 @@ struct PDAInfo {
     fixed textY;
     fixed maxTextY;
     fixed scrollingY;
-    fixed oldScrollingY; // Deprecated
     fixed creditsroll;
     fixed equipmentBaseY;
     fixed prevScrollingY;
@@ -95,12 +93,8 @@ struct PDAButton {
 
     fixed alpha;
 
-    fixed textX;
-    fixed textY;
-
     fixed finalX;
     fixed finalY;
-    fixed scrollY;
 
     fixed gfxPos[4]; // Contains gfxX, gfxY, xOffset, yOffset
     fixed textPos[4]; // Contains text X, Y, xOffset, yOffset

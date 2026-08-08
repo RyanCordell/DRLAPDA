@@ -6,4 +6,4 @@ PDA_ButtonHandler(PDA_ITEMS_BUTTON,      "Shows all in-game items.\n", B_FUNCTIO
 PDA_ButtonHandler(PDA_BESTIARY_BUTTON,   "Shows all in-game enemies.\n", B_FUNCTIONAL, B_NO_CLEAR);
 PDA_ButtonHandler(PDA_MISC_BUTTON,       "Miscellaneous options\n", B_FUNCTIONAL, B_NO_CLEAR);
 PDA_ButtonHandler(PDA_HELP_BUTTON,       "Help with PDA or this mod\n", B_FUNCTIONAL, B_NO_CLEAR);
-
+// PDA_ButtonHandler(PDA_WINFO_BUTTON,      "Weapon Formula information\n", B_FUNCTIONAL, B_NO_CLEAR);

@@ -201,8 +201,15 @@ int floaty[5] = { \
     (a).height = height; \
     (a).label = (b);
 
-#define abs(a) (a < 0 ? -a : a)
+#define STRINGIFY_IMPL(X) #X
+#define STRINGIFY(X) STRINGIFY_IMPL(X)
 
+#define CONCAT_IMPL(x, y) x##y
+#define CONCAT(x, y) CONCAT_IMPL(x, y)
+
+#define TAB_CREATE(b, c) \
+    PDA_LocalButton[CONCAT(TAB, b)] = PDA_CreateTab(CONCAT(TAB, b), STRINGIFY(b), (b), "PTAB", (c));
+    // PDA_LocalButton[(a)] = PDA_CreateTab((a), STRINGIFY(b), (b), "PTAB", (c));
 
 #define CheckBounds(a) \
     PDA_LocalMouse.x >= (a).x - 1 && PDA_LocalMouse.x <= (a).x + (a).width \

@@ -12,8 +12,6 @@
 
 str PDA_FONT[3] = {"STAT_MNO", "STAT_LWR", "PDAFONT"};
 
-int PDA_HEADING_X_OFFSET   = 0;
-
 // is demonic, disassemble-able, supports artifacts
 // 1 and 3 are kinda redundant.. outside of the Unmaker
 bool weapon_checks[3] = {false, false, false};

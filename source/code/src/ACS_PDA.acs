@@ -66,8 +66,6 @@ function void DebugIDs (void) {
     log("PDA_TAB_BUTTONS_END=%d:",PDA_TAB_BUTTONS_END);
     log("PDA_ID=%d:",PDA_ID);
     log("PDA_REALLYLASTID=%d:",PDA_REALLYLASTID);
-    log("PDA_EQUIPMENTINVIDRANGE=%d:",PDA_EQUIPMENTINVIDRANGE);
-    log("PDA_EQUIPMENTWORNIDRANGE=%d:",PDA_EQUIPMENTWORNIDRANGE);
     log("PDA_TOOLTIPGFX=%d:",PDA_TOOLTIPGFX);
     log("PDA_TOOLTIPID=%d:",PDA_TOOLTIPID);
     log("PDA_WEAPON_ICON=%d:",PDA_WEAPON_ICON);
@@ -237,7 +235,6 @@ function void setPDADefaults (int playerNum) {
     PDA_Info[playerNum].scrollingY = PDA_SCROLL_TOP;
     PDA_Info[playerNum].scrollYDelta = 0;
 
-    PDA_Info[playerNum].clicked = false;
     PDA_Info[playerNum].newEntry[0] = false;
 
     PDA_Info[playerNum].assemblyOffset = 0;
@@ -443,11 +440,6 @@ function void page_items (void) {
 function void page_help (void) {
     if (PDA_Local.category != PDA_HELP) return;
     #include "../../pages/help.pdap"
-}
-
-function void page_info (void) {
-    if (PDA_Local.category != PDA_WINFO) return;
-    #include "../../pages/info.pdap"
 }
 
 function void page_misc (void) {
