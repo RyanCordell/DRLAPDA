@@ -32,10 +32,16 @@ if (GetCvar("DRLA_specialstarts") == 2)
 }
 if (GetCvar("DRLA_specialstarts") != 2)
 {
+    PDA_SetupScreenBounds();
     int ItemLimit = 0;
 
     int DRLA_PageOffset;
 
+    #define itemsGfxY 40.0
+    #define itemsYOffset (itemsGfxY - itemsGfxY)
+    #define itemsSpacing 40.0
+
+    // Ideally, the items here would be set up much like the element Flexbox system works on the internet..
     for (int itemIndex = 0; itemIndex < DRLA_ITEMSMAX; itemIndex++)
     {
         if (ItemLimit < 8)
@@ -47,10 +53,10 @@ if (GetCvar("DRLA_specialstarts") != 2)
             DisplayIconScrollable(
                 StrParam("%l:", DRLA_ItemInfo[itemIndex + DRLA_PageOffset][0]), 
                 PDA_ITEMS_END - (ItemLimit+1), 
-                PDA_SCREEN_X_SCALED + 30.0 + X_LEFT_EDGE, 50.0 + (50.0 * ItemLimit), INF_HOLDTIME, OPAQUE);
+                PDA_SCREEN_X_SCALED + 55.0 + X_LEFT_EDGE, itemsGfxY + (itemsSpacing * ItemLimit), INF_HOLDTIME, OPAQUE);
 
             // Item name + desc
-            PDA_DrawBodyText(HUDMSG_PLAIN, PDA_ITEMS_END - (ItemLimit+9), CR_UNTRANSLATED, 40.0, 40.0 + (50.0 * ItemLimit), INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
+            PDA_DrawBodyText(HUDMSG_PLAIN, PDA_ITEMS_END - (ItemLimit+9), CR_UNTRANSLATED, 35.0, itemsYOffset + (itemsSpacing * ItemLimit), INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
                 l:DRLA_ItemInfo[itemIndex + DRLA_PageOffset][1],
                 l:DRLA_ItemInfo[itemIndex + DRLA_PageOffset][2],
                 s:"\n"

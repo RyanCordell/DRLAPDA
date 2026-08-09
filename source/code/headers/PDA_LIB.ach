@@ -68,7 +68,7 @@ int PDA_ModData[MAX_PLAYERS][4] = { 0, 0, 0, 0 }; // By default: 0, 33, 65, and 
 // similar to above, but for monster list page
 str PDA_ListEnemy[MAX_PLAYERS][4] = {" ", " ", " ", ""};
 
-str PDA_AssemblyInfo[MAX_PLAYERS][5] = {" ", " ", " ", " ", "1"};
+str PDA_AssemblyInfo[MAX_PLAYERS][5] = {" ", " ", " ", " ", " "};
 
 str weapon_mods[7] = { "b", "p", "a", "t", "s", "f", "n" };
 

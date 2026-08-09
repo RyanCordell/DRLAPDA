@@ -8,18 +8,19 @@ if (PDA_Local.page > 1 && PDA_Local.page < 3) {
 fixed assemblyX = PDA_BODY_X,
       assemblyY;
 #define assemblyYOffset (PDA_BODY_Y + 8.0)
-const int width = 140,
-          height = 7;
+#define width 140
+#define height 7
 
 for (int ti = 0, li = 1; ti <= PDA_Local.maxAssembliesPer; ti+=2, li+=2) {
     int aoff            = (PDA_Local.assemblyOffset - 1 < 0) ? 0 : (PDA_Local.assemblyOffset - 1);
+
     str actorToken      = stringArray[ASSEMBLY_DIM][ti + aoff];
     str languagePointer = stringArray[ASSEMBLY_DIM][li + aoff];
     int id              = PDA_ASSEMBLY_ID_END - (ti - 1); // index - 1 to account for message id
     assemblyY           = (int)(6.0 * (ti - 1));
     str icon            = StrParam("%l:",    StrParam("%s:_ICON", languagePointer));
     str colored_label   = StrParam("%s:%l:\c-", PDA_Local.tierColor, languagePointer);
-    str callback        = languagePointer;
+    int param           = li + aoff;
     str tooltip         = StrParam("%l:\n%l:\n%l:",
                           StrParam("%s:%l:\c-", PDA_Local.tierColor, StrParam("%s:_NAME", languagePointer)),
                           "PDA_ASSEMBLY_REQUIREMENTS",
@@ -32,11 +33,11 @@ for (int ti = 0, li = 1; ti <= PDA_Local.maxAssembliesPer; ti+=2, li+=2) {
     if (!PDA_CheckPlayer1Inventory(actorToken) || !CheckInventory(actorToken)) {
         icon = "PDAUNK";
         colored_label = StrParam(l:"PDA_ASSEMBLY_UNKNOWN");
-        callback = "";
+        param = -1;
         tooltip = "???";
     }
 
-    PDA_LocalButton[id] = PDA_CreateAssemblyButton(id, icon, colored_label, assemblyX, assemblyYOffset + assemblyY, width, height, callback, tooltip);
+    PDA_LocalButton[id] = PDA_CreateAssemblyButton(id, icon, colored_label, assemblyX, assemblyYOffset + assemblyY, width, height, param, tooltip);
 }
 
 // PDA_LocalButton[PDA_PREV_PAGE] = PDA_CreateButton(PDA_PREV_PAGE, "Previous tier", "A_PREV",        10.0, paginationY, 82, 16, 20, 15);

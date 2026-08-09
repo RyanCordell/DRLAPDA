@@ -214,6 +214,8 @@ int floaty[5] = { \
     PDA_LocalButton[CONCAT(TAB, b)] = PDA_CreateTab(CONCAT(TAB, b), STRINGIFY(b), (b), "PTAB", (c));
     // PDA_LocalButton[(a)] = PDA_CreateTab((a), STRINGIFY(b), (b), "PTAB", (c));
 
+// i could have something similar for buttonhandler
+
 #define MENU_CREATE(name, page, icon, n) \
     PDA_LocalButton[CONCAT3(PDA_,name,_BUTTON)] = \
         PDA_CreateMenuButton(CONCAT3(PDA_,name,_BUTTON), (page), (icon), 10.0, (PDA_BODY_Y) + (20.0 * (n)));

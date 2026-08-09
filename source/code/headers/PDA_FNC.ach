@@ -792,6 +792,7 @@ function void PDA_ChangeScrolling (void) {
             // PDA_SetScrollWindow((int)(-6 * PDA_Local.maxAssembliesPer), PDA_SCROLL_TOP);
             break;
         case PDA_ASSEMBLY_DETAIL:
+            // Ideally this is based off a defined 'height' as per player class
             PDA_SetScrollWindow(-100, PDA_SCROLL_TOP);
             break;
 
@@ -803,7 +804,7 @@ function void PDA_ChangeScrolling (void) {
             break;
 
         case PDA_ITEMS:
-            PDA_SetScrollWindow(-200, PDA_SCROLL_TOP);
+            PDA_SetScrollWindow(-230, PDA_SCROLL_TOP);
             break;
         case PDA_CREDITS:
             PDA_SetScrollWindow(0, PDA_SCROLL_TOP);
@@ -1136,7 +1137,7 @@ function PDAButton PDA_CreateFixedButton (int id, str label, str graphic, fixed 
     return thisButton;
 }
 
-function PDAButton PDA_CreateAssemblyButton (int id, str graphic, str label, fixed x, fixed y, int width, int height, str assembly, str tooltip) {
+function PDAButton PDA_CreateAssemblyButton (int id, str graphic, str label, fixed x, fixed y, int width, int height, int assembly, str tooltip) {
     #define thisButton PDA_LocalButton[id]
     assignButtonParams(thisButton, label)
 
@@ -1164,8 +1165,8 @@ function PDAButton PDA_CreateAssemblyButton (int id, str graphic, str label, fix
 
     thisButton.tooltip = tooltip;
     thisButton.actionID = action_open_assembly;
-    thisButton.actionParam = PDA_ASSEMBLY_DETAIL;
-    if (assembly) PDA_Local.detailFetch[0] = assembly;
+    thisButton.actionParam = assembly;
+    // if (assembly) PDA_Local.detailFetch[0] = assembly;
     // if (CheckBounds(thisButton)) {
     //     if (PDA_LocalMouse.m1 && !(PDA_LocalMouse.oldState & _ACTION)) {
     //         if (assembly) PDA_Local.detailFetch[0] = assembly;
@@ -1181,9 +1182,6 @@ function PDAButton PDA_CreateAssemblyButton (int id, str graphic, str label, fix
     //     // }
     // }
 
-    if (debug) {
-        // DrawBorder(thisButton.x * NEW_RESOLUTION_X, thisButton.y * NEW_RESOLUTION_Y, width * NEW_RESOLUTION_X, height * NEW_RESOLUTION_Y);
-    }
     TraceLog("PDA_CreateAssemblyButton");
     return thisButton;
 }
@@ -1191,22 +1189,19 @@ function PDAButton PDA_CreateAssemblyButton (int id, str graphic, str label, fix
 function PDAButton PDA_CreateBeastButton (int id, str label, int color, fixed x, fixed y, int width, int height, fixed xoff, fixed yoff, str beast, str unatcokillphrase) {
     #define thisButton PDA_LocalButton[id]
     assignButtonParams(thisButton, label)
-    thisButton.graphic = "";
 
-    if (CheckBounds(thisButton)) {
-        if (PDA_LocalMouse.m1 && !(PDA_LocalMouse.oldState & _ACTION)) {
-            if (StrCmp(beast, "") != 0 && PDA_Local.page < 6) {
-                PDA_Local.detailFetch[0] = beast;
-                PDA_Local.detailFetch[1] = unatcokillphrase;
+    // if (CheckBounds(thisButton)) {
+    //     if (PDA_LocalMouse.m1 && !(PDA_LocalMouse.oldState & _ACTION)) {
+    //         if (StrCmp(beast, "") != 0 && PDA_Local.page < 6) {
+    //             PDA_Local.detailFetch[0] = beast;
+    //             PDA_Local.detailFetch[1] = unatcokillphrase;
+    //
+    //             PDA_SetCategory(PDA_BESTIARY_DETAIL);
+    //         }
+    //     }
+    // }
 
-                PDA_SetCategory(PDA_BESTIARY_DETAIL);
-            }
-        }
-    }
-
-    thisButton.actionID = action_navigate;
-    thisButton.actionParam = -1;
-    thisButton.alpha = (thisButton.state == button_hovered) ? 1 : 0.6;
+    thisButton.actionParam = -1; // Should get overwritten by bestiary_general_logic
 
     thisButton.type         = "beast";
     thisButton.graphic      = "PLON";
@@ -1221,13 +1216,22 @@ function PDAButton PDA_CreateBeastButton (int id, str label, int color, fixed x,
     thisButton.textFont  = PDA_FONT[mono_font];
     thisButton.textFlags = HUDMSG_ALPHA | HUDMSG_COLORSTRING;
     thisButton.textColor = color;
-    thisButton.textID    = (thisButton.id) + 20;
+    thisButton.textID    = thisButton.id + 1;
     assignButtonPosition(thisButton.textPos,
-        (int)(thisButton.x * NEW_RESOLUTION_X) + 10.0,
-        (int)(thisButton.y * NEW_RESOLUTION_Y) + 2.0,
+        (int)((thisButton.x + 8.0) * NEW_RESOLUTION_X),
+        (int)((thisButton.y + 4.0) * NEW_RESOLUTION_Y),
         0.0,
         0.0
     );
+    thisButton.alpha = (thisButton.state == button_hovered) ? 1 : 0.6;
+
+    if (StrLen(beast) == 0 && PDA_Local.page < 6) {
+        thisButton.actionID = action_navigate;
+    } else {
+        // intentionally making use of ZDoom strings being indices to a table
+        thisButton.actionID = action_open_monster_page;
+        thisButton.actionParam = (int)(beast);
+    }
 
     TraceLog("PDA_CreateBeastButton");
     return thisButton;

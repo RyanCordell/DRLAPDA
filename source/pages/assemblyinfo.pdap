@@ -4,25 +4,28 @@ if (userWentBack) {
 
 #define PDA_LocalAssembly PDA_AssemblyInfo[PlayerNumber()]
 
-if (!PDA_Local.playSoundOnce) {
-    PDA_PlaySound("UI/PDA/Activate", "pda/soldier", 80);
+// if (!PDA_Local.playSoundOnce) {
+//     PDA_PlaySound("UI/PDA/Activate", "pda/soldier", 80);
+//
+//     PDA_Local.playSoundOnce = true;
+// }
 
-    PDA_Local.playSoundOnce = true;
-}
+#define assemblyTextX 0.0
+#define assemblyTextY 20.0
 
+// Null is very specifically used for unknown assemblies
 if (StrCmp(PDA_Local.detailFetch[0], "null") != 0) {
-    // DisplayArmorIcon(PDA_LocalAssembly[0], PDA_INFOID,
     DisplayIconScrollable(StrParam("%l:", PDA_LocalAssembly[0]), PDA_INFOID,
-                          PDA_SCREEN_X_SCALED + 150.0 + X_LEFT_EDGE,
-                          40.0 + Y_TOP_EDGE + (20.0 * 1), INF_HOLDTIME, OPAQUE);
+        PDA_SCREEN_X_SCALED + 65.0 + X_LEFT_EDGE,
+        35.0, INF_HOLDTIME, OPAQUE);
 
-    PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO2ID, CR_WHITE, 10.0, 50.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
+    PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO2ID, CR_WHITE, assemblyTextX, assemblyTextY, INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
         l:PDA_LocalAssembly[1],s:"\n",
         l:PDA_LocalAssembly[2],s:"\n\n\n",
         l:PDA_LocalAssembly[3],s:"\n"
     );
 } else {
-    PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO2ID, CR_WHITE, 10.0, 50.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
+    PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO2ID, CR_WHITE, assemblyTextX, assemblyTextY, INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
         l:"PDA_ASSEMBLY_NOTFOUND_NAME",s:"\n",
         l:"PDA_ASSEMBLY_NOTFOUND_MODS",s:"\n\n\n",
         l:"PDA_ASSEMBLY_NOTFOUND_DESC",s:"\n"

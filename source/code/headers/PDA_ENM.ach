@@ -49,11 +49,11 @@ enum PDA_IDs {
     PDA_WINFO_BUTTON = PDA_HELP_BUTTON + 3,
 
     // Bestiary.. ranges I think? Not sure
-    PDA_BEAST_UV = PDA_WINFO_BUTTON + 40,
-    PDA_BEAST_NM,
-    PDA_BEAST_TP,
-    PDA_BEAST_AG,
-    PDA_BEAST_EX,
+    PDA_BEAST_UV = PDA_WINFO_BUTTON + 2,
+    PDA_BEAST_NM = PDA_BEAST_UV + 2,
+    PDA_BEAST_TP = PDA_BEAST_NM + 2,
+    PDA_BEAST_AG = PDA_BEAST_TP + 2,
+    PDA_BEAST_EX = PDA_BEAST_AG + 2,
 
     // Navigation for any page
     PDA_PREV_PAGE = PDA_BEAST_EX + 50,
@@ -74,7 +74,7 @@ enum PDA_IDs {
 
     // Various ID ranges. We always define the end ID and go backwards from there
     PDA_ASSEMBLY_ID_END = PDA_PLAYER_BOOTS_ICON + 64,
-    PDA_BEASTS_ID_END = PDA_ASSEMBLY_ID_END + 32,
+    PDA_BEASTS_ID_END = PDA_ASSEMBLY_ID_END + 64,
 
     PDA_WORN_EQUIPMENT_END = PDA_ASSEMBLY_ID_END + (3*4),
     PDA_STASHEDEQUIPMENT_END = PDA_WORN_EQUIPMENT_END + (4*4),
@@ -194,7 +194,8 @@ enum button_actions {
     action_navigate,
     action_toggle_display, // Equipment page bitmask toggles
     action_show_equipment_detail,
-    action_open_assembly
+    action_open_assembly,
+    action_open_monster_page
 }
 
 enum bestiary_enum {

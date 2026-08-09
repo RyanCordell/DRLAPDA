@@ -58,17 +58,21 @@ switch (thisButton.actionID) {
 
         if (localHasEquippedArmor) {
             PDA_Local.detailFetch[0] = "armor";
-            localEquipmentDataStored[EQUIPPED_QUERY] = setupArmorData(checkSpecialArmorTokens(), localEquipmentDataStored[EQUIPPED_WORN_ARMOR].langEntry);
+            // why am I not just assigning the worn_armor directly to query?
+            // localEquipmentDataStored[EQUIPPED_QUERY] = setupArmorData(checkSpecialArmorTokens(), localEquipmentDataStored[EQUIPPED_WORN_ARMOR].langEntry);
+            localEquipmentDataStored[EQUIPPED_QUERY] = localEquipmentDataStored[EQUIPPED_WORN_ARMOR];
         }
 
         if (localHasEquippedBackpack) {
             PDA_Local.detailFetch[0] = "backpack";
-            localEquipmentDataStored[EQUIPPED_QUERY] = setupBackpackData();
+            // localEquipmentDataStored[EQUIPPED_QUERY] = setupBackpackData();
+            localEquipmentDataStored[EQUIPPED_QUERY] = localEquipmentDataStored[EQUIPPED_WORN_BACKP];
         }
 
         if (localHasEquippedBoots) {
             PDA_Local.detailFetch[0] = "boots";
-            localEquipmentDataStored[EQUIPPED_QUERY] = setupBootsData(localEquipmentDataStored[EQUIPPED_WORN_BOOTS].langEntry);
+            // localEquipmentDataStored[EQUIPPED_QUERY] = setupBootsData(localEquipmentDataStored[EQUIPPED_WORN_BOOTS].langEntry);
+            localEquipmentDataStored[EQUIPPED_QUERY] = localEquipmentDataStored[EQUIPPED_WORN_BOOTS];
         }
 
         switch(leadParam) {
@@ -90,8 +94,18 @@ switch (thisButton.actionID) {
         PDA_Local.stopEquipmentEarly = true;
         break;
     case action_open_assembly:
-        if (StrCmp(PDA_Local.detailFetch[0], "") != 0) {
-            PDA_SetCategory(PDA_ASSEMBLY_DETAIL);
+        if (thisButton.actionParam != -1) {
+            PDA_Local.detailFetch[0] = stringArray[ASSEMBLY_DIM][thisButton.actionParam];
+            if (StrCmp(PDA_Local.detailFetch[0], "") != 0) {
+                PDA_SetCategory(PDA_ASSEMBLY_DETAIL);
+            }
         }
+        break;
+    case action_open_monster_page:
+        log("%d: -> %s:", thisButton.actionParam, thisButton.actionParam);
+        PDA_Local.detailFetch[0] = (str)(thisButton.actionParam);
+        // I don't know how to handle this one yet'
+        // PDA_Local.detailFetch[1] = unatcokillphrase;
+        PDA_SetCategory(PDA_BESTIARY_DETAIL);
         break;
 }
