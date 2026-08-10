@@ -65,16 +65,16 @@ switch (PDA_Local.category) {
     SetFont(PDA_FONT[mono_font]);
     if (StrCmp(PDA_Local.detailFetch[0], "null") != 0) {
         // Monster icon
-        DisplayIcon(StrParam("%l:", LocalEnemy[enemy_icon]), PDA_INFO2ID,
+        DisplayIcon(StrParam("%l:", bestiaryInfo.icon), PDA_INFO2ID,
                     PDA_SCREEN_WIDTH_SCALED - 50.0 + X_LEFT_EDGE,
                     110.0 + Y_TOP_EDGE, 0, 0.8);
 
         PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 5.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,
-          s:"\cdName:\c- ",l:LocalEnemy[enemy_name],s:"\n",
-          s:"\cdNo. of Kills:\c- ",i:beast_info[BEAST__E_COUNT],s:"\n",
-          s:"\cdHealth:\c- ",l:LocalEnemy[enemy_health],s:"\n",
-          s:"\cdResistances:\c- \n",l:LocalEnemy[enemy_resistance],s:"\n",
-          s:"\cdDrops and misc info:\c- \n",l:LocalEnemy[enemy_misc],s:"\n"
+          s:"\cdName:\c- ",l:bestiaryInfo.name,s:"\n",
+          s:"\cdNo. of Kills:\c- ",i:bestiaryInfo.count,s:"\n",
+          s:"\cdHealth:\c- ",l:bestiaryInfo.health,s:"\n",
+          s:"\cdResistances:\c- \n",l:bestiaryInfo.resistances,s:"\n",
+          s:"\cdDrops and misc info:\c- \n",l:bestiaryInfo.misc,s:"\n"
         );
     } else {
         PDA_DrawBodyText(HUDMSG_PLAIN, PDA_INFO3ID, CR_UNTRANSLATED, 5.0, 20.0 + (20.0 * 1), INF_HOLDTIME, OPAQUE, B_IS_SCROLLABLE, DEFAULT_ALIGN, DEFAULT_ALIGN,

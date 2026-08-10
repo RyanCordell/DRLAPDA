@@ -109,10 +109,6 @@ struct PDAButton {
 }
 PDAButton PDA_Button[MAX_PLAYERS][PDA_BUTTON_MAX];
 
-// I could expand these so they can hold more data...
-// Theoretically, I could have it such that index 0 is always the current viewed one. Indices 1-6 are then the existing armors stored.
-// Or instead just compress these into one
-
 struct PDA_EquipmentData {
     int type; // armor, backpack, boots
     int buttonID;
@@ -134,3 +130,28 @@ struct PDA_EquipmentData {
 // 4 5 6 7 - stashed
 PDA_EquipmentData _ed[MAX_PLAYERS][PDA_EQUIPMENT_TOTAL_MAX];
 
+
+struct PDA_BestiaryData {
+    int page;
+    int width;
+    int color;
+    int count; // I'm not sure we need separate enemy and player kill count
+
+    str actor;
+    str token;
+    str killtoken;
+    str name;
+    str icon;
+    str health;
+    str resistances;
+    str misc;
+
+    str list_actor;
+    str list_token;
+    str list_name;
+    str list_icon;
+    int list_count;
+}
+PDA_BestiaryData _bed[MAX_PLAYERS];
+
+// I wonder if we need another dimension for this array?

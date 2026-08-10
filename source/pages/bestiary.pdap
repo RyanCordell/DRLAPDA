@@ -16,18 +16,15 @@ switch (PDA_Local.page) {
         PDA_ButtonHandler(PDA_BEAST_EX, strparam("%l:\n", "PDA_DIFFICULTY_EXTRA")       , B_FUNCTIONAL, B_NO_CLEAR);
         break;
     default:
-        beast_info[BEAST__PAGE] = PDA_Local.page - 2;
-
         for (int i = 0; i < DRLA_MONSTER_PAGE_MAX; i++) {
-            localListEnemy[list_kill_count] = StrParam("%s:KillCounter", DRLA_Bestiary[beast_info[BEAST__PAGE]][i][beast_TOKEN]);
             #define buttonID(a) (PDA_BEASTS_ID_END - (a))
 
-            if (localListEnemy[list_name] != " ????") {
+            if (bestiaryInfo.name != " ????") {
                 PDA_ButtonHandler(buttonID(i), NO_TOOLTIP, B_FUNCTIONAL, B_NO_CLEAR);
 
                 if (PDA_LocalButton[buttonID(i)].state == button_hovered) {
-                    DisplayIcon(CheckFont(localListEnemy[list_icon])
-                        ? localListEnemy[list_icon]
+                    DisplayIcon(CheckFont(bestiaryInfo.icon)
+                        ? bestiaryInfo.icon
                         : "EPDAUNK",
                         PDA_INFO2ID, PDA_SCREEN_WIDTH - 30.0 + X_LEFT_EDGE, PDA_SCREEN_Y + 100.0 + Y_TOP_EDGE, 0, 
                         0.2 + pulser(2.0, 0.59)
@@ -35,6 +32,6 @@ switch (PDA_Local.page) {
                 }
             }
         }
-        PDA_Local.newEntry[beast_info[BEAST__PAGE]] = false;
+        PDA_Local.newEntry[bestiaryInfo.page] = false;
         break;
 }

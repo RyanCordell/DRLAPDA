@@ -683,22 +683,23 @@ function void PDA_SetDataPerPage (void) {
             break;
         case PDA_ASSEMBLY_DETAIL:
             if (stricmp(PDA_Local.detailFetch[0], "null") != 0) {
-                PDA_AssemblyInfo[PlayerNumber()][0] = StrParam("%s:_ICON",   PDA_Local.detailFetch[0]);
-                PDA_AssemblyInfo[PlayerNumber()][1] = StrParam("%s:_NAME",   PDA_Local.detailFetch[0]);
-                PDA_AssemblyInfo[PlayerNumber()][2] = StrParam("%s:_MODS",   PDA_Local.detailFetch[0]);
-                PDA_AssemblyInfo[PlayerNumber()][3] = StrParam("%s:_DESC",   PDA_Local.detailFetch[0]);
-                PDA_AssemblyInfo[PlayerNumber()][4] = StrParam("%s:_HEIGHT", PDA_Local.detailFetch[0]);
+                PDA_AssemblyDetailInfo[PlayerNumber()][0] = StrParam("%s:_ICON",   PDA_Local.detailFetch[0]);
+                PDA_AssemblyDetailInfo[PlayerNumber()][1] = StrParam("%s:_NAME",   PDA_Local.detailFetch[0]);
+                PDA_AssemblyDetailInfo[PlayerNumber()][2] = StrParam("%s:_MODS",   PDA_Local.detailFetch[0]);
+                PDA_AssemblyDetailInfo[PlayerNumber()][3] = StrParam("%s:_DESC",   PDA_Local.detailFetch[0]);
+                PDA_AssemblyDetailInfo[PlayerNumber()][4] = StrParam("%s:_HEIGHT", PDA_Local.detailFetch[0]);
             }
             break;
         case PDA_BESTIARY_DETAIL:
-            if (stricmp(PDA_Local.detailFetch[0], "null") != 0) {
-                beast_info[BEAST__E_COUNT]                                 = PDA_Local.detailFetch[1];
-                PDA_Enemy[PlayerNumber()][enemy_name]       = StrParam("%s:_NAME",       PDA_Local.detailFetch[0]);
-                PDA_Enemy[PlayerNumber()][enemy_icon]       = StrParam("%s:_ICON",       PDA_Local.detailFetch[0]);
-                PDA_Enemy[PlayerNumber()][enemy_health]     = StrParam("%s:_HEALTH",     PDA_Local.detailFetch[0]);
-                PDA_Enemy[PlayerNumber()][enemy_resistance] = StrParam("%s:_RESISTANCE", PDA_Local.detailFetch[0]);
-                PDA_Enemy[PlayerNumber()][enemy_misc]       = StrParam("%s:_MISC",       PDA_Local.detailFetch[0]);
-            }
+            // if (stricmp(PDA_Local.detailFetch[0], "null") != 0) {
+                // beast_info[BEAST__E_COUNT]                  = PDA_Local.detailFetch[1];
+                // bestiaryInfo                  = PDA_Local.detailFetch[1];
+                // bestiaryInfo.name        = StrParam("%s:_NAME",       PDA_Local.detailFetch[0]);
+                // bestiaryInfo.icon        = StrParam("%s:_ICON",       PDA_Local.detailFetch[0]);
+                // bestiaryInfo.health      = StrParam("%s:_HEALTH",     PDA_Local.detailFetch[0]);
+                // bestiaryInfo.resistances = StrParam("%s:_RESISTANCE", PDA_Local.detailFetch[0]);
+                // bestiaryInfo.misc        = StrParam("%s:_MISC",       PDA_Local.detailFetch[0]);
+            // }
             break;
         case PDA_CREDITS:
             break;
@@ -1186,20 +1187,9 @@ function PDAButton PDA_CreateAssemblyButton (int id, str graphic, str label, fix
     return thisButton;
 }
 
-function PDAButton PDA_CreateBeastButton (int id, str label, int color, fixed x, fixed y, int width, int height, fixed xoff, fixed yoff, str beast, str unatcokillphrase) {
+function PDAButton PDA_CreateBeastButton (int id, str label, int color, fixed x, fixed y, int width, int height, fixed xoff, fixed yoff, int beastIndex) {
     #define thisButton PDA_LocalButton[id]
     assignButtonParams(thisButton, label)
-
-    // if (CheckBounds(thisButton)) {
-    //     if (PDA_LocalMouse.m1 && !(PDA_LocalMouse.oldState & _ACTION)) {
-    //         if (StrCmp(beast, "") != 0 && PDA_Local.page < 6) {
-    //             PDA_Local.detailFetch[0] = beast;
-    //             PDA_Local.detailFetch[1] = unatcokillphrase;
-    //
-    //             PDA_SetCategory(PDA_BESTIARY_DETAIL);
-    //         }
-    //     }
-    // }
 
     thisButton.actionParam = -1; // Should get overwritten by bestiary_general_logic
 
@@ -1225,12 +1215,11 @@ function PDAButton PDA_CreateBeastButton (int id, str label, int color, fixed x,
     );
     thisButton.alpha = (thisButton.state == button_hovered) ? 1 : 0.6;
 
-    if (StrLen(beast) == 0 && PDA_Local.page < 6) {
+    if (PDA_Local.page == BESTIARY_PAGE_DIFFICULTIES) {
         thisButton.actionID = action_navigate;
     } else {
-        // intentionally making use of ZDoom strings being indices to a table
         thisButton.actionID = action_open_monster_page;
-        thisButton.actionParam = (int)(beast);
+        thisButton.actionParam = beastIndex;
     }
 
     TraceLog("PDA_CreateBeastButton");
@@ -1629,15 +1618,15 @@ function void PDA_HandleHeader(void) {
                 switch (PDA_Local.page) {
                     case 1: PDA_Local.heading = "PDA_BESTIARY_HEADER"; break;
                     case 2: PDA_Local.heading = "PDA_BESTIARY_HEADER_UV";
-                    beast_info[BEAST__LV_COLOR] = CR_WHITE;     break;
+                    bestiaryInfo.color = CR_WHITE;     break;
                     case 3: PDA_Local.heading = "PDA_BESTIARY_HEADER_NM";
-                    beast_info[BEAST__LV_COLOR] = CR_BRICK;     break;
+                    bestiaryInfo.color = CR_BRICK;     break;
                     case 4: PDA_Local.heading = "PDA_BESTIARY_HEADER_TP";
-                    beast_info[BEAST__LV_COLOR] = CR_LIGHTBLUE; break;
+                    bestiaryInfo.color = CR_LIGHTBLUE; break;
                     case 5: PDA_Local.heading = "PDA_BESTIARY_HEADER_AR";
-                    beast_info[BEAST__LV_COLOR] = CR_GOLD;      break;
+                    bestiaryInfo.color = CR_GOLD;      break;
                     case 6: PDA_Local.heading = "PDA_BESTIARY_HEADER_SP";
-                    beast_info[BEAST__LV_COLOR] = CR_PURPLE;    break;
+                    bestiaryInfo.color = CR_PURPLE;    break;
                 }
                 break;
             case PDA_EQUIPMENT:

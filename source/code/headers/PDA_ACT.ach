@@ -102,10 +102,28 @@ switch (thisButton.actionID) {
         }
         break;
     case action_open_monster_page:
-        log("%d: -> %s:", thisButton.actionParam, thisButton.actionParam);
-        PDA_Local.detailFetch[0] = (str)(thisButton.actionParam);
-        // I don't know how to handle this one yet'
-        // PDA_Local.detailFetch[1] = unatcokillphrase;
+        if (thisButton.actionParam >= 1000) {
+            int difficultyTier = extractDigit(thisButton.actionParam, 4) - 1;
+            // Currently a safe enough bet since DRLA monsters are in the double digit range
+            int bestiaryIndex = thisButton.actionParam % 10;
+
+            str beastActor = DRLA_Bestiary[difficultyTier][bestiaryIndex][beast_ACTOR_NAME];
+            str beastLang  = DRLA_Bestiary[difficultyTier][bestiaryIndex][beast_LANG_POINTER];
+
+            bestiaryInfo.actor       = beastActor;
+            bestiaryInfo.token       = beastLang;
+            bestiaryInfo.name        = StrParam("%s:_NAME",       beastLang);
+            bestiaryInfo.icon        = StrParam("%s:_ICON",       beastLang);
+            bestiaryInfo.health      = StrParam("%s:_HEALTH",     beastLang);
+            bestiaryInfo.resistances = StrParam("%s:_RESISTANCE", beastLang);
+            bestiaryInfo.misc        = StrParam("%s:_MISC",       beastLang);
+            bestiaryInfo.killtoken   = StrParam("%s:KillCounter", beastActor);
+            bestiaryInfo.count       = CheckPointerInventory(bestiaryInfo.killtoken, PlayerNumber());
+
+            PDA_Local.detailFetch[0] = bestiaryInfo.actor;
+        } else {
+            PDA_Local.detailFetch[0] = "null";
+        }
         PDA_SetCategory(PDA_BESTIARY_DETAIL);
         break;
 }

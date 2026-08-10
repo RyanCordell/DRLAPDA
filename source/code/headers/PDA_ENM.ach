@@ -199,8 +199,8 @@ enum button_actions {
 }
 
 enum bestiary_enum {
-    beast_TOKEN = 0,
-    beast_ACTOR,
+    beast_ACTOR_NAME = 0,
+    beast_LANG_POINTER,
 }
 
 enum weaponmod_enum {

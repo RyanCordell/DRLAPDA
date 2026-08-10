@@ -1,6 +1,6 @@
 // Header
 #define CREATE_BEAST_TIER(id, name, color, n) \
-    PDA_LocalButton[CONCAT(PDA_BEAST_,id)] = PDA_CreateBeastButton(CONCAT(PDA_BEAST_,id), name, color, 10.0, 40.0 + (15.0 * n), BEAST_DIFFICULTY_WIDTH, BEAST_DIFFICULTY_HEIGHT, -4.0, -3.0, "", ""); \
+    PDA_LocalButton[CONCAT(PDA_BEAST_,id)] = PDA_CreateBeastButton(CONCAT(PDA_BEAST_,id), name, color, 10.0, 40.0 + (15.0 * n), BEAST_DIFFICULTY_WIDTH, BEAST_DIFFICULTY_HEIGHT, -4.0, -3.0, ""); \
     PDA_LocalButton[CONCAT(PDA_BEAST_,id)].actionParam = n + 2;
 
 // TODO: pretty little icons to the left
@@ -11,39 +11,43 @@ CREATE_BEAST_TIER(AG, "Armageddon",   CR_GOLD, 3);
 CREATE_BEAST_TIER(EX, "Extra",        CR_PURPLE, 4);
 
 // I'm unsure why I did this..
-beast_info[BEAST__PAGE] = PDA_Local.page - 2;
+bestiaryInfo.page = PDA_Local.page - 2;
 
 // Body
 if (PDA_Local.page != BESTIARY_PAGE_DIFFICULTIES) {
     for (int i = 0; i < DRLA_MONSTER_PAGE_MAX; i++) {
-        #define localEnemyActor localListEnemy[list_actor]
-        #define localEnemyName localListEnemy[list_name]
-        #define beastCount beast_info[BEAST__P_K_COUNT]
-        #define killCount localListEnemy[list_kill_count]
+        #define thisMonster DRLA_Bestiary[bestiaryInfo.page][i]
+        int beastIndex = 0;
+        bestiaryInfo.killtoken = StrParam("%s:KillCounter", thisMonster[beast_ACTOR_NAME]);
 
-        killCount = StrParam("%s:KillCounter", DRLA_Bestiary[beast_info[BEAST__PAGE]][i][beast_TOKEN]);
-        monsterCheck[beast_info[BEAST__PAGE]][i]  = CheckInventory(killCount);
+        // Used for the "New Entry!" notification on the bestiary difficulty page
+        monsterCheck[bestiaryInfo.page][i] = CheckInventory(bestiaryInfo.killtoken);
 
-        if (CheckInventory(killCount) > 0) {
-            localEnemyActor           = DRLA_Bestiary[beast_info[BEAST__PAGE]][i][beast_ACTOR];
-            localEnemyName            = StrParam("%l:", StrParam("%l:_name", localEnemyActor));
-            localListEnemy[list_icon] = StrParam("%l:", StrParam("%l:_icon", localEnemyActor));
-            beastCount                = CheckPointerInventory(killCount, PlayerNumber());
-            beast_info[BEAST__WIDTH]  = (StrLen(localEnemyName) * 10) / 2;
+        if (CheckInventory(bestiaryInfo.killtoken) > 0) {
+            // Realistically I should be able to encode bestiaryInfo.page + i into...
+            bestiaryInfo.list_actor = thisMonster[beast_ACTOR_NAME];
+            bestiaryInfo.list_token = thisMonster[beast_LANG_POINTER];
+            bestiaryInfo.list_name  = StrParam("%l:", StrParam("%l:_name", bestiaryInfo.list_token));
+            bestiaryInfo.list_icon  = StrParam("%l:", StrParam("%l:_icon", bestiaryInfo.list_token));
+            bestiaryInfo.list_count = CheckPointerInventory(bestiaryInfo.killtoken, PlayerNumber());
+            beastIndex = ((bestiaryInfo.page + 1) * 1000) + i;
         } else {
-            localEnemyActor = "null";
-            beastCount      = 0;
-            localEnemyName  = " ????";
+            bestiaryInfo.list_actor = "";
+            bestiaryInfo.list_token = "null";
+            bestiaryInfo.list_name  = " ????";
+            bestiaryInfo.list_icon  = "TNT1A0";
+            bestiaryInfo.list_count = 0;
         }
 
         #define beast_x     (4.0)
         #define beast_y(a)  (50.0 + (16.0 * (a)))
         #define beast_ID(a) (PDA_BEASTS_ID_END - ((a) * 2))
 
-        PDA_LocalButton[beast_ID(i)] = PDA_CreateBeastButton(beast_ID(i), localEnemyName, beast_info[BEAST__LV_COLOR],
+        PDA_LocalButton[beast_ID(i)] = PDA_CreateBeastButton(beast_ID(i), bestiaryInfo.list_name,
+            bestiaryInfo.color,
             beast_x, beast_y(i),
-            beast_info[BEAST__WIDTH], 10,
+            StrLen(bestiaryInfo.list_name) * 5, 10,
             3.0, -3.0,
-            localEnemyActor, beastCount);
+            beastIndex);
     }
 }

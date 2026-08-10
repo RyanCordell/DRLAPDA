@@ -192,11 +192,11 @@ script "DRLA_HUDStyleChanger" (void) {
 function void doPDASync (void) {
     for (int page = 0; page < DRLA_DIFFICULTYTIERS; page++) {
         for (int m = 0; m < DRLA_MONSTER_PAGE_MAX; m++) {
-            localListEnemy[list_kill_count] = StrParam("%s:KillCounter", DRLA_Bestiary[page][m][beast_TOKEN]);
-            monsterCheck[page][m]  = CheckInventory(localListEnemy[list_kill_count]);
+            bestiaryInfo.killtoken = StrParam("%s:KillCounter", DRLA_Bestiary[page][m][beast_ACTOR_NAME]);
+            monsterCheck[page][m]  = CheckInventory(bestiaryInfo.killtoken);
 
-            if (CheckPointerInventory(localListEnemy[list_kill_count], PlayerNumber()) > 0) {
-                PDA_SetEveryoneInventory(localListEnemy[list_kill_count]);
+            if (CheckPointerInventory(bestiaryInfo.killtoken, PlayerNumber()) > 0) {
+                PDA_SetEveryoneInventory(bestiaryInfo.killtoken);
             }
         }
     }

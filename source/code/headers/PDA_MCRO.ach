@@ -187,7 +187,7 @@ int floaty[5] = { \
 #define checkMonsterKillCount() \
     for (int t = 0; t < DRLA_DIFFICULTYTIERS; t++) { \
         for (int m = 0; m < DRLA_MONSTER_PAGE_MAX; m++) { \
-            monsterCheck[t][m] = CheckInventory(StrParam(s:DRLA_Bestiary[t][m][beast_TOKEN],s:"KillCounter")); \
+            monsterCheck[t][m] = CheckInventory(StrParam(s:DRLA_Bestiary[t][m][beast_ACTOR_NAME],s:"KillCounter")); \
             if (oldCheck[t][m] != monsterCheck[t][m] && oldCheck[t][m] < 2 && monsterCheck[t][m] < 2) { \
                 PDA_Local.newEntry[t] = true; \
             } \
@@ -384,4 +384,6 @@ if (PDA_Local.scrollingY >= PDA_SCROLL_TOP) { \
 #define master_max      localModData[mod_data_master_max]
 
 #define localListEnemy PDA_ListEnemy[PlayerNumber()]
+#define bestiaryInfo _bed[PlayerNumber()]
+
 // EOF

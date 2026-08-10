@@ -2,7 +2,7 @@ if (userWentBack) {
     PDA_SetCategory(PDA_ASSEMBLIES);
 }
 
-#define PDA_LocalAssembly PDA_AssemblyInfo[PlayerNumber()]
+#define PDA_LocalAssembly PDA_AssemblyDetailInfo[PlayerNumber()]
 
 // if (!PDA_Local.playSoundOnce) {
 //     PDA_PlaySound("UI/PDA/Activate", "pda/soldier", 80);
